@@ -1,0 +1,77 @@
+onLoadMarkers({"type":"FeatureCollection","features":[ 
+  {
+  "id":"101037",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-122.026088,36.975102]
+    },
+  "properties": {
+      "longitude" : -122.026088,
+      "latitude" : 36.975102,
+      "Type" : "Play",
+      "Title" : "Play Name 101037"
+      }
+  },
+ 
+  {
+  "id":"94166",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-122.089509,37.042111]
+    },
+  "properties": {
+      "longitude" : -122.089509,
+      "latitude" : 37.042111,
+      "Type" : "Play",
+      "Title" : "Play Name 94166"
+      }
+  },
+ 
+  {
+  "id":"1448",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-122.0252757,36.9716204]
+    },
+  "properties": {
+      "longitude" : -122.0252757,
+      "latitude" : 36.9716204,
+      "Type" : "Play",
+      "Title" : "Play Name 1448"
+      }
+  },
+ 
+  {
+  "id":"94873",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-122.026293,36.973724]
+    },
+  "properties": {
+      "longitude" : -122.026293,
+      "latitude" : 36.973724,
+      "Type" : "Play",
+      "Title" : "Play Name 94873"
+      }
+  },
+ 
+  {
+  "id":"100354",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-122.021332,36.98593]
+    },
+  "properties": {
+      "longitude" : -122.021332,
+      "latitude" : 36.98593,
+      "Type" : "Play",
+      "Title" : "Play Name 100354"
+      }
+  },
+  ]
+})

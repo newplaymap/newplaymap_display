@@ -1,0 +1,43 @@
+## Export
+Export data from drupal to JSON using views datasource.
+
+### What to export
+===Views to export===
+
+
+As much as we can export (until related data breaks it)
+Content Feeds
+- Events (300 recent events.)
+- Plays 
+- Organizations
+- Artists
+
+Content Feeds filtered:
+- Today
+
+
+Export all fields for each of these content types so we can load data into the interface
+Include everything we need to rebuild the interface (label, hover, popup, panel)
+- Play (includes social media, permalink, title, content, related aggregated feed markup, edit link, related plays, etc (everything))
+- Event
+- Organization
+- Artist
+
+- All (??)
+
+
+
+* Don't know yet - - What is the eventual data structure?
+
+### Clean Up Data
+Use google refine to template the data to geojson 
+-- load csv or json or whatever is easier, export as many fields as possible, 
+-- save CSV of all data to reinterpret into various formats while we figure out what is best (google refine can reload the data from the CSV easily)
+-- geojson template
+
+
+
+
+
+
+

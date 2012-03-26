@@ -1,0 +1,34 @@
+ 
+  {
+  "id":"{{jsonize(cells["Business Num"].value)}}",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [{{jsonize(cells["longitude"].value)}},{{jsonize(cells["latitude"].value)}}]
+    },
+  "properties": {
+      "Business Num" : {{jsonize(cells["Business Num"].value)}},
+      "Company Name" : {{jsonize(cells["Company Name"].value)}},
+      "Location Addr Line 1" : {{jsonize(cells["Location Addr Line 1"].value)}},
+      "address" : {{jsonize(cells["address"].value)}},
+      "longitude" : {{jsonize(cells["longitude"].value)}},
+      "latitude" : {{jsonize(cells["latitude"].value)}},
+      "Location Addr Line 2" : {{jsonize(cells["Location Addr Line 2"].value)}},
+      "Location City" : {{jsonize(cells["Location City"].value)}},
+      "Location State" : {{jsonize(cells["Location State"].value)}},
+      "Location Zip" : {{jsonize(cells["Location Zip"].value)}},
+      "Mail Addr Line 1" : {{jsonize(cells["Mail Addr Line 1"].value)}},
+      "Maiil Addr Line 2" : {{jsonize(cells["Maiil Addr Line 2"].value)}},
+      "Mail City" : {{jsonize(cells["Mail City"].value)}},
+      "Mail State" : {{jsonize(cells["Mail State"].value)}},
+      "Mail Zip" : {{jsonize(cells["Mail Zip"].value)}},
+      "Owner Name" : {{jsonize(cells["Owner Name"].value)}},
+      "Co-Owner Name" : {{jsonize(cells["Co-Owner Name"].value)}},
+      "Attn To" : {{jsonize(cells["Attn To"].value)}},
+      "Start Date" : {{jsonize(cells["Start Date"].value)}},
+      "Employee Count" : {{jsonize(cells["Employee Count"].value)}},
+      "BIA Type" : {{jsonize(cells["BIA Type"].value)}},
+      "BIA Zone" : {{jsonize(cells["BIA Zone"].value)}},
+      "Business Type" : {{jsonize(cells["Business Type"].value)}}
+      }
+  }
