@@ -6,8 +6,8 @@ var map,
 function initMap() {
     var provider = new MM.TemplatedLayer("http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m", [0,1,2,3,4,5,6,7]);
     map = new MM.Map("map", provider);
-    map.setCenterZoom(new MM.Location(36.9818, -121.9575), 12);
-    // Oh yeah, in other words, Alissa is going DOWN!!
+    map.setCenterZoom(new MM.Location(36.9818, -121.9575), 10);
+
     spotlight = new SpotlightLayer();
     map.addLayer(spotlight);
 
@@ -20,7 +20,7 @@ function initMap() {
 // ghetto JSON-P
 function loadMarkers() {
     var script = document.createElement("script");
-    script.src = "data/events_300.json";
+    script.src = "data/events_5.json";
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
@@ -34,7 +34,7 @@ function onLoadMarkers(collection) {
     // to the markers layer
     for (var i = 0; i < len; i++) {
         var feature = features[i],
-            type = feature.properties["Type"],
+            type = feature.properties["Title"],
             marker = document.createElement("a");
 
         marker.feature = feature;
@@ -47,13 +47,13 @@ function onLoadMarkers(collection) {
         // add a class
         marker.setAttribute("class", "report");
         // set the href to link to crimespotting's crime page
-        marker.setAttribute("href", "data/events_300.json");
+        marker.setAttribute("href", "data/events_5.json");
 
         // create an image icon
         var img = marker.appendChild(document.createElement("img"));
         // originals: http://prag.ma/code/modestmaps-js/examples/geojson/icons/
 /*         img.setAttribute("src", "icons/" + type.replace(/ /g, "_") + ".png"); */
-        img.setAttribute("src", "icons/play.png");
+        img.setAttribute("src", "icons/event.png");
         
         markers.addMarker(marker, feature);
         // add the marker's location to the extent list
