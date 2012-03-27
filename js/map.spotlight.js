@@ -14,17 +14,17 @@ function initMap() {
     markers = new MM.MarkerLayer();
     map.addLayer(markers);
 
-    loadMarkers();
+    loadEventMarkers();
 }
 
 // ghetto JSON-P
-function loadMarkers() {
+function loadEventMarkers() {
     var script = document.createElement("script");
-    script.src = "data/events_5.json";
+    script.src = "data/events_300.json";
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-function onLoadMarkers(collection) {
+function onLoadEventMarkers(collection) {
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
     var features = collection.features,
@@ -34,7 +34,7 @@ function onLoadMarkers(collection) {
     // to the markers layer
     for (var i = 0; i < len; i++) {
         var feature = features[i],
-            type = feature.properties["Title"],
+            type = feature.properties["related_play_id"],
             marker = document.createElement("a");
 
         marker.feature = feature;
@@ -47,7 +47,7 @@ function onLoadMarkers(collection) {
         // add a class
         marker.setAttribute("class", "report");
         // set the href to link to crimespotting's crime page
-        marker.setAttribute("href", "data/events_5.json");
+        marker.setAttribute("href", "data/events_300.json");
 
         // create an image icon
         var img = marker.appendChild(document.createElement("img"));

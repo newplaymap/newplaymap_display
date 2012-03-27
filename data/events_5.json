@@ -1,4 +1,4 @@
-onLoadMarkers({"type":"FeatureCollection","features":[ 
+onLoadEventMarkers({"type":"FeatureCollection","features":[ 
   {
   "id":"101037",
   "type":"Feature",
