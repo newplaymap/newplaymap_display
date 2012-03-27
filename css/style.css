@@ -48,23 +48,3 @@ dd {
   padding: 0;
   margin: 5px 0 1em 0;
 }
-
-#map-controls {
-  position: fixed;
-  top: 48px;
-  left: 50px;
-  z-index: 2000;
-  background: rgba(256,256,256, 0.5);
-  color: #fff;
-}
-
-#map-controls .button {
-  padding: 10px;
-  background: rgba(0,0,0, 0.7);
-  display: inline;
-  float: left;
-}
-
-#map-controls .button:hover {
-  background: rgba(0,0,0, 1);  
-}

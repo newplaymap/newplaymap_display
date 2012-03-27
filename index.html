@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/newplay_theme.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link href="http://a.tiles.mapbox.com/lib/mm/embed.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -117,13 +119,20 @@
               </div>
             </div>
    
+<!--    <iframe width='500' height='300' frameBorder='0' src='http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.html#4/33.831/-87.284'></iframe> -->
             <div id="map-container">
-<!--               <div id="map-controls"><div title="Zoom In" class="zoom-in button">+</div> <div title="Zoom Out" class="zoom-out button">-</div></div> -->
-              <div id="map"></div>
-              <div id="map-legend">Map Legend</div>
-              <div id="map-help">?</div>
-            </div>
-            
+              <div class="ts-map mm zoompan zoomwheel streetlevel zoombox attribution watermark" id="map">
+                <a href="http://mapbox.com" target="_blank" class="mapbox-watermark">MapBox</a>
+                <a href="#" class="zoomer zoomin">+</a><a href="#" class="zoomer zoomout">-</a>
+                <div id="map-zoombox-box" class="zoombox-box"></div>
+  
+                <div class="wax-attribution wax-mm">© <a href="http://www.mapquest.com">MapQuest</a>. Map data © <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a></div></div>      
+  
+                <div id="map-legend">Map Legend</div>
+                <div id="map-help">?</div>
+              </div>
+     
+     
 
         </div><!--/span-->
       </div><!--/row-->
