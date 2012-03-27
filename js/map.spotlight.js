@@ -16,27 +16,28 @@ window.onload = function() {
   $('div#panel-container div#panel').hide();
   
   newPlayMap.loadWax();
-  //newPlayMap.mapCustomizations();  
-  //newPlayMap.mapButtons();
 };
 
-newPlayMap.mapCustomizations = function () {
+newPlayMap.mapCustomizations = function (map) {
   map.setZoomRange(0, 7);
+
+  $("a.zoomer.zoomin").click(function() {
+    map.zoomBy(1);
+  });
+
+  $("a.zoomer.zoomout").click(function() {
+    map.zoomBy(-1);
+  });
 };
 
 
 newPlayMap.loadWax = function() {
-
- 
-    
-    // Syntax example. Seeing if Wax works.
-    var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
-    wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
-
+  // Syntax example. Seeing if Wax works.
+  var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+  wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
 };
 
 newPlayMap.initMap = function(tj) {
-
   map = new com.modestmaps.Map('map',
     new wax.mm.connector(tj), null, [
         new easey.DragHandler(),
@@ -53,7 +54,8 @@ newPlayMap.initMap = function(tj) {
   map.addLayer(markers);
 
   newPlayMap.loadEventMarkers();
-
+  
+  newPlayMap.mapCustomizations(map);  
 };
 
 // ghetto JSON-P
@@ -228,12 +230,3 @@ newPlayMap.panelTemplate = function(data, type) {
     .appendTo(container); 
 }
 
-newPlayMap.mapButtons = function() {
-  $(".zoom-in").click(function() {
-    map.zoomBy(1);
-  });
-
-  $(".zoom-out").click(function() {
-    map.zoomBy(-2);
-  });
-};

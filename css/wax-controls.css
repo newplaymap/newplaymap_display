@@ -155,3 +155,10 @@ div.wax-attribution {
   border:1px solid #75c1d0;
   border-radius:3px;
 }
+
+
+
+.ts-map .zoomout,
+.ts-map .zoomin {
+  top: 60px;
+}
