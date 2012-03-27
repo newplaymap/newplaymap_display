@@ -19,15 +19,36 @@ window.onload = function() {
 };
 
 newPlayMap.mapCustomizations = function (map) {
-  map.setZoomRange(0, 7);
+/*   map.setZoomRange(0, 18); */
 
-  $("a.zoomer.zoomin").click(function() {
-    map.zoomBy(1);
-  });
+  // Custom map steps?
+  // Zoom out faster
+/*
+  $("a.zoomer.zoomin").bind('click', function(e) {
 
-  $("a.zoomer.zoomout").click(function() {
-    map.zoomBy(-1);
+                easey.slow(map, {
+                    zoom: map.getZoom() + 2,
+                    about: MM.getMousePoint(e, map),
+                    time: 500
+                });
+
   });
+*/
+
+/*
+  $("a.zoomer.zoomout").bind('click', function(e) {
+                easey.slow(map, {
+                    zoom: map.getZoom() - 2,
+                    about: MM.getMousePoint(e, map),
+                    time: 500
+                });
+  });
+*/
+/*
+  $("a.zoomer.zoomout").click( function(e) {
+    map.zoomBy(-2);
+  });
+*/
 };
 
 
@@ -185,7 +206,7 @@ newPlayMap.onMarkerClickOut = function(e) {
 };
 
 newPlayMap.updatePanel = function(marker, relatedData) {
-console.log(relatedData);
+
   // @TOOD Right now this will just load events.
   var event_id = marker.getAttribute("event_id");
   feature = newPlayMap.loadDataObject(data.eventData, event_id);
@@ -230,3 +251,128 @@ newPlayMap.panelTemplate = function(data, type) {
     .appendTo(container); 
 }
 
+// Change Double Click easing.
+
+easey.DoubleClickHandler.prototype = {
+
+    init: function(map) {
+        this.map = map;
+        MM.addEvent(map.parent, 'dblclick', this.getDoubleClick());
+    },
+
+    doubleClickHandler: null,
+
+    getDoubleClick: function() {
+
+
+        // Ensure that this handler is attached once.
+        if (!this.doubleClickHandler) {
+            var theHandler = this;
+            this.doubleClickHandler = function(e) {
+                var map = theHandler.map,
+                point = MM.getMousePoint(e, map),
+                z = map.getZoom() + (e.shiftKey ? -2 : 2);
+
+                easey.slow(map, {
+                    zoom: z,
+                    about: point,
+                    time: 500
+                });
+
+                return MM.cancelEvent(e);
+            };
+        }
+        return this.doubleClickHandler;
+    }
+};
+
+/*
+// Restrict Extent.
+http://bl.ocks.org/1248897
+
+    var minZoom = 0;
+    var maxZoom = 18;
+    var topLeft = new MM.Location(51.4, -131.8);
+    var bottomRight = new MM.Location(21.5, -50.5);
+
+    provider.bottomRightInnerLimit = provider.locationCoordinate(bottomRight).zoomTo(maxZoom);
+    provider.topLeftOuterLimit = provider.locationCoordinate(topLeft).zoomTo(minZoom);
+
+   // override sourceCoordinate so that it doesn't use coord limits to wrap tiles
+    // but so that it rejects any tile coordinates that lie outside the limits
+    provider.sourceCoordinate = function(coord) {
+        // don't need .container() stuff here but it means *something* will get loaded at low zoom levels
+        // e.g. at level 0 the base tile could contain the entire extent
+        // skip the .container() stuff if you don't want to load/render tiles outside the extent *at all*
+        var TL = this.topLeftOuterLimit.zoomTo(coord.zoom).container();
+        var BR = this.bottomRightInnerLimit.zoomTo(coord.zoom).container().right().down();
+        if (coord.row < TL.row || coord.row >= BR.row || coord.column < TL.column || coord.column >= BR.column) {
+            // it's too high or too low or too lefty or too righty:
+            return null;
+        }
+        // otherwise it's cool, let it through
+        return coord;
+    }
+
+
+
+
+    // override enforceLimits so that you can't pan outside the given limits
+    // Prevent the user from navigating the map outside the `outerLimits`
+    // of the map's provider.
+    map.enforceLimits = function(coord) {
+        coord = coord.copy();
+        var limits = this.provider.outerLimits();
+        if (limits) {
+            var minZoom = limits[0].zoom;
+            var maxZoom = limits[1].zoom;
+            if (coord.zoom < minZoom) {
+                coord = coord.zoomTo(minZoom);
+            }
+            else if (coord.zoom > maxZoom) {
+                coord = coord.zoomTo(maxZoom);
+            }
+    
+            // this generally does the *intended* thing,
+            // but it's not always desired behavior so it's disabled for now
+    
+            var topLeftLimit = limits[0].zoomTo(coord.zoom);
+            var bottomRightLimit = limits[1].zoomTo(coord.zoom);
+            var currentTopLeft = this.pointCoordinate(new MM.Point(0,0));
+            var currentBottomRight = this.pointCoordinate(this.dimensions);
+    
+            if (bottomRightLimit.row - topLeftLimit.row < currentBottomRight.row - currentTopLeft.row) {
+                // if the limit is smaller than the current view center it
+                coord.row = (bottomRightLimit.row + topLeftLimit.row) / 2;
+            }
+            else {
+                if (currentTopLeft.row < topLeftLimit.row) {
+                    coord.row += topLeftLimit.row - currentTopLeft.row;
+                }
+                else if (currentBottomRight.row > bottomRightLimit.row) {
+                    coord.row -= currentBottomRight.row - bottomRightLimit.row;
+                }
+            }
+            if (bottomRightLimit.column - topLeftLimit.column < currentBottomRight.column - currentTopLeft.column) {
+                // if the limit is smaller than the current view, center it
+                coord.column = (bottomRightLimit.column + topLeftLimit.column) / 2;                    
+            }
+            else {
+                if (currentTopLeft.column < topLeftLimit.column) {
+                    coord.column += topLeftLimit.column - currentTopLeft.column;
+                }
+                else if (currentBottomRight.column > bottomRightLimit.column) {
+                    coord.column -= currentBottomRight.column - bottomRightLimit.column;
+                }
+            }
+    
+        }
+        return coord;
+    }    
+
+
+
+
+
+
+*/
