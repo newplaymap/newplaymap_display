@@ -3,11 +3,13 @@ var map,
     spotlight,
     locationsByType = {};
 
+
+var newPlayMap = {};
 $(document).ready(function(){
-  initMap();
+  newPlayMap.initMap();
 });
 
-function initMap() {
+newPlayMap.initMap = function() {
     var provider = new MM.TemplatedLayer("http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m", [0,1,2,3,4,5,6,7]);
     map = new MM.Map("map", provider);
     map.setCenterZoom(new MM.Location(36.9818, -121.9575), 10);
@@ -18,17 +20,17 @@ function initMap() {
     markers = new MM.MarkerLayer();
     map.addLayer(markers);
 
-    loadEventMarkers();
+    newPlayMap.loadEventMarkers();
 }
 
 // ghetto JSON-P
-function loadEventMarkers() {
+newPlayMap.loadEventMarkers = function() {
     var script = document.createElement("script");
     script.src = "data/events_300.json?cache=" + Math.floor(Math.random()*11);
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-function onLoadEventMarkers(collection) {
+newPlayMap.onLoadEventMarkers= function(collection) {
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
     var features = collection.features,
@@ -70,15 +72,15 @@ function onLoadEventMarkers(collection) {
         }
 
         // listen for mouseover & mouseout events
-        MM.addEvent(marker, "mouseover", onMarkerOver);
-        MM.addEvent(marker, "mouseout", onMarkerOut);
+        MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
+        MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
     }
 
     // tell the map to fit all of the locations in the available space
     map.setExtent(locations);
 }
 
-function getMarker(target) {
+newPlayMap.getMarker = function(target) {
     var marker = target;
     while (marker && marker.className != "report") {
         marker = marker.parentNode;
@@ -86,8 +88,8 @@ function getMarker(target) {
     return marker;
 }
 
-function onMarkerOver(e) {
-    var marker = getMarker(e.target);
+newPlayMap.onMarkerOver = function(e) {
+    var marker = newPlayMap.getMarker(e.target);
     if (marker) {
         var type = marker.type;
         // console.log("over:", type);
@@ -100,8 +102,8 @@ function onMarkerOver(e) {
     }
 }
 
-function onMarkerOut(e) {
-    var marker = getMarker(e.target);
+newPlayMap.onMarkerOut = function(e) {
+    var marker = newPlayMap.getMarker(e.target);
     if (marker) {
         var type = marker.type;
         // console.log("out:", type);
@@ -110,7 +112,7 @@ function onMarkerOut(e) {
     }
 }
 
-function updatePanel(data) {
+newPlayMap.updatePanel = function(data) {
   var output = data;
   //$('#panel-container).html(data);
 }

@@ -1,4 +1,4 @@
-onLoadEventMarkers({"type":"FeatureCollection","features":[ 
+newPlayMap.onLoadEventMarkers({"type":"FeatureCollection","features":[ 
 {
   "id":"48437",
   "type":"Feature",
