@@ -3,6 +3,10 @@ var map,
     spotlight,
     locationsByType = {};
 
+$(document).ready(function(){
+  initMap();
+});
+
 function initMap() {
     var provider = new MM.TemplatedLayer("http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m", [0,1,2,3,4,5,6,7]);
     map = new MM.Map("map", provider);
@@ -20,7 +24,7 @@ function initMap() {
 // ghetto JSON-P
 function loadEventMarkers() {
     var script = document.createElement("script");
-    script.src = "data/events_300.json";
+    script.src = "data/events_300.json?cache=" + Math.floor(Math.random()*11);
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
@@ -86,7 +90,7 @@ function onMarkerOver(e) {
     var marker = getMarker(e.target);
     if (marker) {
         var type = marker.type;
-        console.log("over:", type);
+        // console.log("over:", type);
         if (type in locationsByType) {
             spotlight.addLocations(locationsByType[type] || []);
             spotlight.parent.className = "active";
@@ -100,8 +104,13 @@ function onMarkerOut(e) {
     var marker = getMarker(e.target);
     if (marker) {
         var type = marker.type;
-        console.log("out:", type);
+        // console.log("out:", type);
         spotlight.removeAllLocations();
         spotlight.parent.className = "inactive";
     }
+}
+
+function updatePanel(data) {
+  var output = data;
+  //$('#panel-container).html(data);
 }
