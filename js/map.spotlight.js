@@ -1,5 +1,4 @@
-var map,
-    markers,
+var markers,
     spotlight,
     locationsByType = {};
 
@@ -7,6 +6,7 @@ var map,
 
 var newPlayMap = {};
 var mm = com.modestmaps;
+var map;
 
 var data = {};
 var panelMarkup = {};
@@ -15,66 +15,45 @@ window.onload = function() {
   
   $('div#panel-container div#panel').hide();
   
-  newPlayMap.initMap();
-  newPlayMap.mapCustomizations();  
-  newPlayMap.mapButtons();
+  newPlayMap.loadWax();
+  //newPlayMap.mapCustomizations();  
+  //newPlayMap.mapButtons();
 };
 
 newPlayMap.mapCustomizations = function () {
   map.setZoomRange(0, 7);
 };
 
-newPlayMap.initMap = function() {
-    var provider = new MM.TemplatedLayer("http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m", [0,1,2,3,4,5,6,7]);    
-    map = new MM.Map("map", provider, null, [
-                new easey.DragHandler(),
-                new easey.TouchHandler(),
-                new easey.DoubleClickHandler(),
-                new easey.MouseWheelHandler()
-            ]);
-    map.setCenterZoom(new MM.Location(36.9818, -121.9575), 10);
-    // 3000 views per month free mapbox account
- 
-/*
-var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
 
-wax.tilejson(url, function(tilejson) {
-  var m = new MM.Map('map',
-    new wax.mm.connector(tilejson),
-    new MM.Point(700,400));
+newPlayMap.loadWax = function() {
 
-  m.setCenterZoom(new MM.Location(tilejson.center[1],
-    tilejson.center[0]),
-    tilejson.center[2] - 3);
-
-  wax.mm.zoomer(m).appendTo(m.parent);
-  wax.mm.interaction(m);
-});
-*/
  
     
     // Syntax example. Seeing if Wax works.
-/*
-    wax.tilejson('http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp',
-        function(tj) {
-        map = new com.modestmaps.Map('map',
-            new wax.mm.connector(tj), null, [
-                new easey.DragHandler(),
-                new easey.TouchHandler(),
-                new easey.DoubleClickHandler(),
-                new easey.MouseWheelHandler()
-            ]);
-       map.setCenterZoom(new com.modestmaps.Location(30, -90), 4);
-    });
-*/
+    var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+    wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
 
-    spotlight = new SpotlightLayer();
-    map.addLayer(spotlight);
+};
 
-    markers = new MM.MarkerLayer();
-    map.addLayer(markers);
+newPlayMap.initMap = function(tj) {
 
-    newPlayMap.loadEventMarkers();
+  map = new com.modestmaps.Map('map',
+    new wax.mm.connector(tj), null, [
+        new easey.DragHandler(),
+        new easey.TouchHandler(),
+        new easey.DoubleClickHandler(),
+        new easey.MouseWheelHandler()
+    ]);
+  map.setCenterZoom(new com.modestmaps.Location(30, -90), 4);
+
+  spotlight = new SpotlightLayer();
+  map.addLayer(spotlight);
+
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
+
+  newPlayMap.loadEventMarkers();
+
 };
 
 // ghetto JSON-P
