@@ -18,3 +18,32 @@ body {
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.ttf') format('truetype'),
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
 }
+
+/* @TODO load newplay map v1 css, or change it. */
+#panel-container {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0,0,0, 0.7);
+  width: 350px;
+  height: 100%;
+  padding: 10px;
+  color: #fff;
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+dt {
+  text-transform: uppercase;
+  padding: 0;
+  margin: 5px 0 5px 0;
+}
+
+dd {
+  padding: 0;
+  margin: 5px 0 5px 0;
+}

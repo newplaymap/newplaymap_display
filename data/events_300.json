@@ -5575,31 +5575,6 @@ newPlayMap.onLoadEventMarkers({"type":"FeatureCollection","features":[
       }
   },
   {
-  "id":"36042",
-  "type":"Feature",
-  "geometry": {
-    "type":"Point",
-    "coordinates": [0,0]
-    },
-  "properties": {
-      "longitude" : 0,
-      "latitude" : 0,
-      "event_id" : 36042,
-      "event_type" : "Workshop",
-      "event_to_date" : "August 24, 2011",
-      "event_date" : "August 21, 2011",
-      "content_type" : "Event",
-      "related_theater" : "Berkshire Playwrights Lab",
-      "related_theater_id" : 36041,
-      "artist_id" : 15681,
-      "play_title" : "An Incident",
-      "related_play_id" : 34133,
-      "generative_artist" : "Anna Ziegler",
-      "event_description" : "Workshop of AN INCIDENT, directed by Bob Jaffe, presented at the Mahaiwe Theater",
-      "synopsis" : "3M, 2W\r\nAn Incident follows the Nadelman family as parents Philip and Lillian visit Joey, their puzzling, hard- to-handle son at summer camp in Maine. After greeting his parents with even more hostility than usual, Joey disappears. In the search for their son, Philip and Lillian expose the truth of their own relationship and the full Nadelman family portrait becomes developed. A play about marriage and family and coming to accept what we can\u2019t fix or don\u2019t understand. \r\n\r\nAN INCIDENT had a New Play Workshop at the Chautauqua Theatre Company in 2010, directed by Vivienne Benesch, and, in 2011, was selected for inclusion in the O\u2019Neill Playwrights Conference, with Giovanna Sardelli directing.",
-      }
-  },
-  {
   "id":"34048",
   "type":"Feature",
   "geometry": {
