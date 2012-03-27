@@ -91,18 +91,17 @@
                   <a href="#panel" type="organization" load_id="${related_theater_id}">${related_theater}</a>
                   {{/if}}
                   
-                  {{if event_type}}
+                  <p>{{if event_type}}
                     ${event_type}
                   {{/if}}
-
-
-                  {{if event_type}}
-                    ${event_type}
-                  {{/if}}
-
-
+                  </p>
 
                   <dl>
+
+                  {{if event_description}}
+                    <dd>{{html event_description}}</dd>
+                  {{/if}}
+
                   {{if synopsis}}     
                     <dt>Synopsis</dt>
                     <dd>{{html synopsis}}</dd>
@@ -119,7 +118,10 @@
             </div>
    
             <div id="map-container">
+              <div id="map-controls"><div title="Zoom In" class="zoom-in button">+</div> <div title="Zoom Out" class="zoom-out button">-</div></div>
               <div id="map"></div>
+              <div id="map-legend">Map Legend</div>
+              <div id="map-help">?</div>
             </div>
             
 
