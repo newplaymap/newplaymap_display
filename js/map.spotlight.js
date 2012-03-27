@@ -18,8 +18,47 @@ window.onload = function() {
   newPlayMap.loadWax();
 };
 
-newPlayMap.mapCustomizations = function (map) {
+newPlayMap.mapCustomizations = function (map, markers) {
 /*   map.setZoomRange(0, 18); */
+
+
+/*
+    var minZoom = 2;
+    var maxZoom = 18;
+    var topLeft = new MM.Location(70.4, -80.8);
+    var bottomRight = new MM.Location(21.5, -90.3);
+
+    // override map limits so that panning and zooming are constrained within these bounds:
+    map.coordLimits = [
+      map.locationCoordinate(topLeft).zoomTo(minZoom),
+      map.locationCoordinate(bottomRight).zoomTo(maxZoom)
+    ];
+
+    // override provider limits so that tiles are not loaded unless they are inside these bounds:
+    markers.tileLimits = [
+      map.locationCoordinate(topLeft).zoomTo(minZoom),
+      map.locationCoordinate(bottomRight).zoomTo(maxZoom)
+   ];
+
+    // override sourceCoordinate so that it doesn't use coord limits to wrap tiles
+    // but so that it rejects any tile coordinates that lie outside the limits
+    markers.sourceCoordinate = function(coord) {
+        // don't need .container() stuff here but it means *something* will get loaded at low zoom levels
+        // e.g. at level 0 the base tile could contain the entire extent
+        // skip the .container() stuff if you don't want to load/render tiles outside the extent *at all*
+        var TL = this.tileLimits[0].zoomTo(coord.zoom).container();
+        var BR = this.tileLimits[1].zoomTo(coord.zoom).container().right().down();
+        if (coord.row < TL.row || coord.row >= BR.row || coord.column < TL.column || coord.column >= BR.column) {
+            // it's too high or too low or too lefty or too righty:
+            //console.log(coord.toString() + " is outside bounds");
+            return null;
+        }
+        // otherwise it's cool, let it through
+        return coord;
+    }
+*/
+
+
 
   // Custom map steps?
   // Zoom out faster
@@ -66,7 +105,8 @@ newPlayMap.initMap = function(tj) {
         new easey.DoubleClickHandler(),
         new easey.MouseWheelHandler()
     ]);
-  map.setCenterZoom(new com.modestmaps.Location(30, -90), 4);
+
+/*   map.setCenterZoom(new com.modestmaps.Location(30, -90), 4); */
 
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
@@ -76,7 +116,7 @@ newPlayMap.initMap = function(tj) {
 
   newPlayMap.loadEventMarkers();
   
-  newPlayMap.mapCustomizations(map);  
+  newPlayMap.mapCustomizations(map, markers);  
 };
 
 // ghetto JSON-P
@@ -140,6 +180,7 @@ newPlayMap.onLoadEventMarkers = function(collection) {
     // tell the map to fit all of the locations in the available space
     map.setExtent(locations);
 };
+
 
 newPlayMap.getMarker = function(target) {
     var marker = target;
@@ -285,94 +326,3 @@ easey.DoubleClickHandler.prototype = {
         return this.doubleClickHandler;
     }
 };
-
-/*
-// Restrict Extent.
-http://bl.ocks.org/1248897
-
-    var minZoom = 0;
-    var maxZoom = 18;
-    var topLeft = new MM.Location(51.4, -131.8);
-    var bottomRight = new MM.Location(21.5, -50.5);
-
-    provider.bottomRightInnerLimit = provider.locationCoordinate(bottomRight).zoomTo(maxZoom);
-    provider.topLeftOuterLimit = provider.locationCoordinate(topLeft).zoomTo(minZoom);
-
-   // override sourceCoordinate so that it doesn't use coord limits to wrap tiles
-    // but so that it rejects any tile coordinates that lie outside the limits
-    provider.sourceCoordinate = function(coord) {
-        // don't need .container() stuff here but it means *something* will get loaded at low zoom levels
-        // e.g. at level 0 the base tile could contain the entire extent
-        // skip the .container() stuff if you don't want to load/render tiles outside the extent *at all*
-        var TL = this.topLeftOuterLimit.zoomTo(coord.zoom).container();
-        var BR = this.bottomRightInnerLimit.zoomTo(coord.zoom).container().right().down();
-        if (coord.row < TL.row || coord.row >= BR.row || coord.column < TL.column || coord.column >= BR.column) {
-            // it's too high or too low or too lefty or too righty:
-            return null;
-        }
-        // otherwise it's cool, let it through
-        return coord;
-    }
-
-
-
-
-    // override enforceLimits so that you can't pan outside the given limits
-    // Prevent the user from navigating the map outside the `outerLimits`
-    // of the map's provider.
-    map.enforceLimits = function(coord) {
-        coord = coord.copy();
-        var limits = this.provider.outerLimits();
-        if (limits) {
-            var minZoom = limits[0].zoom;
-            var maxZoom = limits[1].zoom;
-            if (coord.zoom < minZoom) {
-                coord = coord.zoomTo(minZoom);
-            }
-            else if (coord.zoom > maxZoom) {
-                coord = coord.zoomTo(maxZoom);
-            }
-    
-            // this generally does the *intended* thing,
-            // but it's not always desired behavior so it's disabled for now
-    
-            var topLeftLimit = limits[0].zoomTo(coord.zoom);
-            var bottomRightLimit = limits[1].zoomTo(coord.zoom);
-            var currentTopLeft = this.pointCoordinate(new MM.Point(0,0));
-            var currentBottomRight = this.pointCoordinate(this.dimensions);
-    
-            if (bottomRightLimit.row - topLeftLimit.row < currentBottomRight.row - currentTopLeft.row) {
-                // if the limit is smaller than the current view center it
-                coord.row = (bottomRightLimit.row + topLeftLimit.row) / 2;
-            }
-            else {
-                if (currentTopLeft.row < topLeftLimit.row) {
-                    coord.row += topLeftLimit.row - currentTopLeft.row;
-                }
-                else if (currentBottomRight.row > bottomRightLimit.row) {
-                    coord.row -= currentBottomRight.row - bottomRightLimit.row;
-                }
-            }
-            if (bottomRightLimit.column - topLeftLimit.column < currentBottomRight.column - currentTopLeft.column) {
-                // if the limit is smaller than the current view, center it
-                coord.column = (bottomRightLimit.column + topLeftLimit.column) / 2;                    
-            }
-            else {
-                if (currentTopLeft.column < topLeftLimit.column) {
-                    coord.column += topLeftLimit.column - currentTopLeft.column;
-                }
-                else if (currentBottomRight.column > bottomRightLimit.column) {
-                    coord.column -= currentBottomRight.column - bottomRightLimit.column;
-                }
-            }
-    
-        }
-        return coord;
-    }    
-
-
-
-
-
-
-*/
