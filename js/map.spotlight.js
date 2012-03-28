@@ -146,7 +146,7 @@ newPlayMap.onLoadEventMarkers = function(collection) {
 
         // give it a title
         marker.setAttribute("title", [
-            type, "on", feature.properties["Title"]
+            feature.properties["play_title"], "at", feature.properties["related_theater"]
         ].join(" "));
         // add a class
         marker.setAttribute("class", "marker");
