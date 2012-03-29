@@ -115,6 +115,8 @@ newPlayMap.initMap = function(tj) {
   map.addLayer(markers);
 
   newPlayMap.loadEventMarkers();
+  newPlayMap.loadArtistMarkers();
+  newPlayMap.loadOrgMarkers();
   
   newPlayMap.mapCustomizations(map, markers);  
 };
@@ -123,6 +125,18 @@ newPlayMap.initMap = function(tj) {
 newPlayMap.loadEventMarkers = function() {
     var script = document.createElement("script");
     script.src = "data/events_300.json";
+    document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+newPlayMap.loadArtistMarkers = function() {
+    var script = document.createElement("script");
+    script.src = "data/artists_300.json";
+    document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+newPlayMap.loadOrgMarkers = function() {
+    var script = document.createElement("script");
+    script.src = "data/orgs_300.json";
     document.getElementsByTagName("head")[0].appendChild(script);
 };
 
@@ -181,6 +195,115 @@ newPlayMap.onLoadEventMarkers = function(collection) {
     map.setExtent(locations);
 };
 
+newPlayMap.onLoadArtistMarkers = function(collection) {
+    data.artistData = collection;
+
+    // onLoadMarkers() gets a GeoJSON FeatureCollection:
+    // http://geojson.org/geojson-spec.html#feature-collection-objects
+    var features = collection.features,
+        len = features.length,
+        locations = [];
+    // for each feature in the collection, create a marker and add it
+    // to the markers layer
+    for (var i = 0; i < len; i++) {
+        var feature = features[i],
+            type = feature.properties["artist_id"],
+            marker = document.createElement("div");
+
+        marker.feature = feature;
+        marker.type = type;
+
+        // give it a title
+        marker.setAttribute("title", [
+            feature.properties["play_title"], "at", feature.properties["related_theater"]
+        ].join(" "));
+        // add a class
+        marker.setAttribute("class", "marker");
+        marker.setAttribute("href", "data/artists_300.json");
+        
+        marker.setAttribute("artist_id", feature.properties["artist_id"]);
+
+/*         marker.setAttribute("href", "data/artists_300.json"); */
+
+        // create an image icon
+        var img = marker.appendChild(document.createElement("img"));
+/*         img.setAttribute("src", "icons/" + type.replace(/ /g, "_") + ".png"); */
+        img.setAttribute("src", "icons/artist.png");
+        
+        markers.addMarker(marker, feature);
+        // add the marker's location to the extent list
+        locations.push(marker.location);
+
+        if (type in locationsByType) {
+            locationsByType[type].push(marker.location);
+        } else {
+            locationsByType[type] = [marker.location];
+        }
+
+        // listen for mouseover & mouseout events
+        MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
+        MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
+        MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
+    }
+
+    // tell the map to fit all of the locations in the available space
+    map.setExtent(locations);
+};
+
+newPlayMap.onLoadOrgMarkers = function(collection) {
+    data.orgData = collection;
+
+    // onLoadMarkers() gets a GeoJSON FeatureCollection:
+    // http://geojson.org/geojson-spec.html#feature-collection-objects
+    var features = collection.features,
+        len = features.length,
+        locations = [];
+    // for each feature in the collection, create a marker and add it
+    // to the markers layer
+    for (var i = 0; i < len; i++) {
+        var feature = features[i],
+            type = feature.properties["org_id"],
+            marker = document.createElement("div");
+
+        marker.feature = feature;
+        marker.type = type;
+
+        // give it a title
+        marker.setAttribute("title", [
+            feature.properties["play_title"], "at", feature.properties["related_theater"]
+        ].join(" "));
+        // add a class
+        marker.setAttribute("class", "marker");
+        marker.setAttribute("href", "data/orgs_300.json");
+        
+        marker.setAttribute("org_id", feature.properties["org_id"]);
+
+/*         marker.setAttribute("href", "data/orgs_300.json"); */
+
+        // create an image icon
+        var img = marker.appendChild(document.createElement("img"));
+/*         img.setAttribute("src", "icons/" + type.replace(/ /g, "_") + ".png"); */
+        img.setAttribute("src", "icons/organization.png");
+        
+        markers.addMarker(marker, feature);
+        // add the marker's location to the extent list
+        locations.push(marker.location);
+
+        if (type in locationsByType) {
+            locationsByType[type].push(marker.location);
+        } else {
+            locationsByType[type] = [marker.location];
+        }
+
+        // listen for mouseover & mouseout events
+        MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
+        MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
+        MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
+    }
+
+    // tell the map to fit all of the locations in the available space
+    map.setExtent(locations);
+};
 
 newPlayMap.getMarker = function(target) {
     var marker = target;
@@ -195,7 +318,6 @@ newPlayMap.onMarkerOver = function(e) {
 
   if (marker) {
       var type = marker.type;
-
       if (type in locationsByType) {
           spotlight.addLocations(locationsByType[type] || []);
           spotlight.parent.className = "active";
@@ -254,7 +376,7 @@ newPlayMap.updatePanel = function(marker, relatedData) {
   var panelData = document;
   
   // Load event data into the event template.
-  newPlayMap.panelTemplate(feature, "event")
+  newPlayMap.panelTemplate(feature, "event");
 };
 
 newPlayMap.loadDataObject = function(collection, id) {
