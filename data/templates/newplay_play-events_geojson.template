@@ -1,0 +1,46 @@
+-----------------start
+
+  {
+  "id":"{{jsonize(cells["node - Event ID"].value)}}",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [{{jsonize(cells["node - Longitude"].value)}},{{jsonize(cells["node - Latitude"].value)}}]
+    },
+  "properties": {
+      "longitude" : {{jsonize(cells["node - Longitude"].value)}},
+      "latitude" : {{jsonize(cells["node - Latitude"].value)}},
+      "event_id" : {{jsonize(cells["node - Event ID"].value)}},
+      "event_type" : {{jsonize(cells["node - Event type"].value)}},
+      "event_to_date" : {{jsonize(cells["node - To Date"].value)}},
+      "event_date" : {{jsonize(cells["node - Date"].value)}},
+      "content_type" : {{jsonize(cells["node - Content Type"].value)}},
+      "related_theater" : {{jsonize(cells["node - Related Theater"].value)}},
+      "related_theater_id" : {{jsonize(cells["node - Related Theater ID"].value)}},
+      "artist_id" : {{jsonize(cells["node - Artist ID"].value)}},
+      "play_title" : {{jsonize(cells["node - Play title"].value)}},
+      "related_play_id" : {{jsonize(cells["node - Related Play ID"].value)}},
+      "generative_artist" : {{jsonize(cells["node - Generative Artist"].value)}},
+      "event_description" : {{jsonize(cells["node - Event description"].value)}},
+      "synopsis" : {{jsonize(cells["node - Synopsis"].value)}},
+      }
+  }
+  
+-----------------end  
+  
+  
+  
+-----------------start 
+  {"type":"FeatureCollection","features":[ 
+
+-----------------end
+  
+  
+  
+-----------------start  
+  
+    ]
+})
+
+
+-----------------end
