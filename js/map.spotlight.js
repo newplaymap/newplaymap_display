@@ -115,11 +115,10 @@ newPlayMap.initMap = function(tj) {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
 
-/*   newPlayMap.loadEventMarkers(); */
-
+  newPlayMap.loadEventMarkers();
   newPlayMap.loadArtistMarkers();
-/*  newPlayMap.loadOrgMarkers();
-*/
+  newPlayMap.loadOrgMarkers();
+
   
   newPlayMap.mapCustomizations(map, markers);  
 };
@@ -324,10 +323,12 @@ newPlayMap.onMarkerOver = function(e) {
   var marker = newPlayMap.getMarker(e.target);
 
   if (marker) {
-      var type = marker.type;
-      console.log(marker);
-      if (type in locationsByID) {
-          spotlight.addLocations(locationsByID[type] || []);
+      var id = marker.id;
+
+      var type = marker.getAttribute("type");
+
+      if (id in locationsByID) {
+          spotlight.addLocations(locationsByID[id] || []);
           spotlight.parent.className = "active";
 
           $('div#panel-container div#panel').show();
@@ -335,7 +336,7 @@ newPlayMap.onMarkerOver = function(e) {
 
                       
           // Update the panel data.
-          newPlayMap.updatePanel(marker, locationsByID[type], type);
+          newPlayMap.updatePanel(marker, locationsByID[id], type);
 
  
 
@@ -351,7 +352,7 @@ newPlayMap.onMarkerOut = function(e) {
 
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
-      var type = marker.type;
+      var id = marker.id;
 
       spotlight.removeAllLocations();
       
@@ -429,7 +430,7 @@ newPlayMap.loadDataObject = function(collection, id) {
 };
 
 newPlayMap.panelTemplate = function(data, type) {
-  var type = type;
+  var id = type;
   var container = $('#panel-container .' + type);
 
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
@@ -449,7 +450,7 @@ newPlayMap.panelTemplate = function(data, type) {
 // @TODO we might want to refactor to combine these functions into one.
 newPlayMap.popupTemplate = function(data) {
 
-  var type = 'popup';
+  var id = 'popup';
   var container = $('#popup-container');
   if (popupMarkup[type] === null || popupMarkup[type] === undefined) {
     popupMarkup[type] = container.html();
@@ -460,15 +461,11 @@ newPlayMap.popupTemplate = function(data) {
   // http://api.jquery.com/jquery.tmpl/
 
   // @TODO Data may need some escaping.
-/*   if(data["properties"] !== undefined && data["properties"] !== null) { */
-  console.log(data);
-  
-/*
-  $.template( type + "Template", popupMarkup[type]);        
-  $.tmpl(type + "Template", data["properties"])
-    .appendTo(container); 
-*/
-/*   } */
+  if(data["properties"] !== undefined && data["properties"] !== null) {  
+    $.template( type + "Template", popupMarkup[type]);        
+    $.tmpl(type + "Template", data["properties"])
+      .appendTo(container); 
+  }
 };
 
 newPlayMap.loadRelatedPlay = function(data) {
