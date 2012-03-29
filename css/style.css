@@ -48,3 +48,15 @@ dd {
   padding: 0;
   margin: 5px 0 1em 0;
 }
+
+
+#popup-container {
+  position: fixed;
+  top: 48px;
+  left: 0;
+  z-index: 2000;
+  background: rgba(0,0,0, 0.7);
+  width: 350px;
+  color: #fff;
+  margin: 50px;  
+}

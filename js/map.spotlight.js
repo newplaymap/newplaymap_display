@@ -1,6 +1,6 @@
 var markers,
     spotlight,
-    locationsByType = {};
+    locationsByID = {};
 
 // originals: http://prag.ma/code/modestmaps-js/examples/geojson/icons/
 
@@ -10,6 +10,7 @@ var map;
 
 var data = {};
 var panelMarkup = {};
+var popupMarkup = {};
 
 window.onload = function() {
   
@@ -114,9 +115,11 @@ newPlayMap.initMap = function(tj) {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
 
-  newPlayMap.loadEventMarkers();
+/*   newPlayMap.loadEventMarkers(); */
+
   newPlayMap.loadArtistMarkers();
-  newPlayMap.loadOrgMarkers();
+/*  newPlayMap.loadOrgMarkers();
+*/
   
   newPlayMap.mapCustomizations(map, markers);  
 };
@@ -152,11 +155,11 @@ newPlayMap.onLoadEventMarkers = function(collection) {
     // to the markers layer
     for (var i = 0; i < len; i++) {
         var feature = features[i],
-            type = feature.properties["related_play_id"],
+            id = feature.properties["related_play_id"],
             marker = document.createElement("div");
 
         marker.feature = feature;
-        marker.type = type;
+        marker.id = id;
 
         // give it a title
         marker.setAttribute("title", [
@@ -164,6 +167,7 @@ newPlayMap.onLoadEventMarkers = function(collection) {
         ].join(" "));
         // add a class
         marker.setAttribute("class", "marker");
+        marker.setAttribute("type", "event");
         marker.setAttribute("href", "data/events_300.json");
         
         marker.setAttribute("event_id", feature.properties["event_id"]);
@@ -179,10 +183,10 @@ newPlayMap.onLoadEventMarkers = function(collection) {
         // add the marker's location to the extent list
         locations.push(marker.location);
 
-        if (type in locationsByType) {
-            locationsByType[type].push(marker.location);
+        if (id in locationsByID) {
+            locationsByID[id].push(marker.location);
         } else {
-            locationsByType[type] = [marker.location];
+            locationsByID[id] = [marker.location];
         }
 
         // listen for mouseover & mouseout events
@@ -207,11 +211,11 @@ newPlayMap.onLoadArtistMarkers = function(collection) {
     // to the markers layer
     for (var i = 0; i < len; i++) {
         var feature = features[i],
-            type = feature.properties["artist_id"],
+            id = feature.properties["artist_id"],
             marker = document.createElement("div");
 
         marker.feature = feature;
-        marker.type = type;
+        marker.id = id;
 
         // give it a title
         marker.setAttribute("title", [
@@ -219,6 +223,7 @@ newPlayMap.onLoadArtistMarkers = function(collection) {
         ].join(" "));
         // add a class
         marker.setAttribute("class", "marker");
+        marker.setAttribute("type", "artist");
         marker.setAttribute("href", "data/artists_300.json");
         
         marker.setAttribute("artist_id", feature.properties["artist_id"]);
@@ -234,10 +239,10 @@ newPlayMap.onLoadArtistMarkers = function(collection) {
         // add the marker's location to the extent list
         locations.push(marker.location);
 
-        if (type in locationsByType) {
-            locationsByType[type].push(marker.location);
+        if (id in locationsByID) {
+            locationsByID[id].push(marker.location);
         } else {
-            locationsByType[type] = [marker.location];
+            locationsByID[id] = [marker.location];
         }
 
         // listen for mouseover & mouseout events
@@ -247,6 +252,7 @@ newPlayMap.onLoadArtistMarkers = function(collection) {
     }
 
     // tell the map to fit all of the locations in the available space
+    // @TODO Change this latere
     map.setExtent(locations);
 };
 
@@ -262,11 +268,11 @@ newPlayMap.onLoadOrgMarkers = function(collection) {
     // to the markers layer
     for (var i = 0; i < len; i++) {
         var feature = features[i],
-            type = feature.properties["org_id"],
+            id = feature.properties["org_id"],
             marker = document.createElement("div");
 
         marker.feature = feature;
-        marker.type = type;
+        marker.id = id;
 
         // give it a title
         marker.setAttribute("title", [
@@ -274,6 +280,7 @@ newPlayMap.onLoadOrgMarkers = function(collection) {
         ].join(" "));
         // add a class
         marker.setAttribute("class", "marker");
+        marker.setAttribute("type", "organization");
         marker.setAttribute("href", "data/orgs_300.json");
         
         marker.setAttribute("org_id", feature.properties["org_id"]);
@@ -289,10 +296,10 @@ newPlayMap.onLoadOrgMarkers = function(collection) {
         // add the marker's location to the extent list
         locations.push(marker.location);
 
-        if (type in locationsByType) {
-            locationsByType[type].push(marker.location);
+        if (id in locationsByID) {
+            locationsByID[id].push(marker.location);
         } else {
-            locationsByType[type] = [marker.location];
+            locationsByID[id] = [marker.location];
         }
 
         // listen for mouseover & mouseout events
@@ -318,14 +325,20 @@ newPlayMap.onMarkerOver = function(e) {
 
   if (marker) {
       var type = marker.type;
-      if (type in locationsByType) {
-          spotlight.addLocations(locationsByType[type] || []);
+      console.log(marker);
+      if (type in locationsByID) {
+          spotlight.addLocations(locationsByID[type] || []);
           spotlight.parent.className = "active";
 
           $('div#panel-container div#panel').show();
+ 
+
                       
           // Update the panel data.
-          newPlayMap.updatePanel(marker, locationsByType[type]);
+          newPlayMap.updatePanel(marker, locationsByID[type], type);
+
+ 
+
 
           
       } else {
@@ -368,15 +381,33 @@ newPlayMap.onMarkerClickOut = function(e) {
 
 };
 
-newPlayMap.updatePanel = function(marker, relatedData) {
+newPlayMap.updatePanel = function(marker, relatedData, type) {
+console.log(type);
+  switch(type) {
+    case 'event_id':
+      // @TOOD Right now this will just load events.
+/*
+      var event_id = marker.getAttribute("event_id");
+      feature = newPlayMap.loadDataObject(data.eventData, event_id);
+      var panelData = document;
+      
+      // Load event data into the event template.
+      // newPlayMap.panelTemplate(feature, "event");
+      
+      newPlayMap.popupTemplate(feature);   
+*/ 
+    
+    break;
+    
+    default:
+    
+      break;
+  }
 
-  // @TOOD Right now this will just load events.
-  var event_id = marker.getAttribute("event_id");
-  feature = newPlayMap.loadDataObject(data.eventData, event_id);
-  var panelData = document;
+
   
-  // Load event data into the event template.
-  newPlayMap.panelTemplate(feature, "event");
+  // @TODO Do all of the panels as necessary.
+  
 };
 
 newPlayMap.loadDataObject = function(collection, id) {
@@ -400,6 +431,7 @@ newPlayMap.loadDataObject = function(collection, id) {
 newPlayMap.panelTemplate = function(data, type) {
   var type = type;
   var container = $('#panel-container .' + type);
+
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
     panelMarkup[type] = container.html();
   }
@@ -412,7 +444,40 @@ newPlayMap.panelTemplate = function(data, type) {
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", data["properties"])
     .appendTo(container); 
-}
+};
+
+// @TODO we might want to refactor to combine these functions into one.
+newPlayMap.popupTemplate = function(data) {
+
+  var type = 'popup';
+  var container = $('#popup-container');
+  if (popupMarkup[type] === null || popupMarkup[type] === undefined) {
+    popupMarkup[type] = container.html();
+  }
+
+  var content = {};
+  container.empty();
+  // http://api.jquery.com/jquery.tmpl/
+
+  // @TODO Data may need some escaping.
+/*   if(data["properties"] !== undefined && data["properties"] !== null) { */
+  console.log(data);
+  
+/*
+  $.template( type + "Template", popupMarkup[type]);        
+  $.tmpl(type + "Template", data["properties"])
+    .appendTo(container); 
+*/
+/*   } */
+};
+
+newPlayMap.loadRelatedPlay = function(data) {
+  play_id = data;
+
+
+
+
+};
 
 // Change Double Click easing.
 
