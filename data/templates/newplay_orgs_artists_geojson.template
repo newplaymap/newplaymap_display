@@ -1,0 +1,90 @@
+{
+  "node - Path" : {{jsonize(cells["node - Path"].value)}},
+  "node - Photo" : {{jsonize(cells["node - Photo"].value)}},
+  "node - Latitude" : {{jsonize(cells["node - Latitude"].value)}},
+  "node - Artist ID" : {{jsonize(cells["node - Artist ID"].value)}},
+  "node - Longitude" : {{jsonize(cells["node - Longitude"].value)}},
+  "node - Content Type" : {{jsonize(cells["node - Content Type"].value)}},
+  "node - Generative artist" : {{jsonize(cells["node - Generative artist"].value)}},
+  "node - ensemble_collective" : {{jsonize(cells["node - ensemble_collective"].value)}}
+}
+
+
+
+=======_=====_=====
+
+
+{
+  "id":"{{jsonize(cells["node - Artist ID"].value)}}",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [{{jsonize(cells["node - Longitude"].value)}},{{jsonize(cells["node - Latitude"].value)}}]
+    },
+  "properties": {
+      "longitude" : {{jsonize(cells["node - Longitude"].value)}},
+      "latitude" : {{jsonize(cells["node - Latitude"].value)}},
+      "artist_id" : {{jsonize(cells["node - Artist ID"].value)}},
+      "artist_name" : {{jsonize(cells["node - Generative artist"].value)}},
+      "artist_photo" : {{jsonize(cells["node - Photo"].value)}},
+      "ensemble_collective" : {{jsonize(cells["node - ensemble_collective"].value)}},
+      "path" : {{jsonize(cells["node - Path"].value)}},
+      "content_type" : {{jsonize(cells["node - Content Type"].value)}}
+      }
+  }
+  
+  
+=====+++===+++=++++
+
+
+{
+  "node - Logo" : {{jsonize(cells["node - Logo"].value)}},
+  "node - Path" : {{jsonize(cells["node - Path"].value)}},
+  "node - Org ID" : {{jsonize(cells["node - Org ID"].value)}},
+  "node - Org name" : {{jsonize(cells["node - Org name"].value)}},
+  "node - Latitude" : {{jsonize(cells["node - Latitude"].value)}},
+  "node - Longitude" : {{jsonize(cells["node - Longitude"].value)}},
+  "node - Mission statement" : {{jsonize(cells["node - Mission statement"].value)}},
+  "node - Ensemble collective" : {{jsonize(cells["node - Ensemble collective"].value)}},
+  "node - Founding date" : {{jsonize(cells["node - Founding date"].value)}},
+  "node - Organization type" : {{jsonize(cells["node - Organization type"].value)}},
+  "node - Organization type - 2" : {{jsonize(cells["node - Organization type - 2"].value)}},
+  "node - Organization type - 1" : {{jsonize(cells["node - Organization type - 1"].value)}},
+  "node - Organization type - 3" : {{jsonize(cells["node - Organization type - 3"].value)}},
+  "node - Organization type - 4" : {{jsonize(cells["node - Organization type - 4"].value)}},
+  "node - Organization type - 5" : {{jsonize(cells["node - Organization type - 5"].value)}}
+}
+
+
+
++++++++++++__+_+_+_+_+_+
+
+
+{
+  "id":"{{jsonize(cells["node - Org"].value)}}",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [{{jsonize(cells["node - Longitude"].value)}},{{jsonize(cells["node - Latitude"].value)}}]
+    },
+  "properties": {
+      "longitude" : {{jsonize(cells["node - Longitude"].value)}},
+      "latitude" : {{jsonize(cells["node - Latitude"].value)}},
+      "org_id" : {{jsonize(cells["node - Org ID"].value)}},
+      "org_name" : {{jsonize(cells["node - Org name"].value)}},
+      "logo" : {{jsonize(cells["node - Logo"].value)}},
+      "ensemble_collective" : {{jsonize(cells["node - ensemble_collective"].value)}},
+      "mission" : {{jsonize(cells["node - Mission statement"].value)}},
+      "path" : {{jsonize(cells["node - Path"].value)}},
+      "content_type" : {{jsonize(cells["node - Content Type"].value)}}
+      "founding_date" : {{jsonize(cells["node - Founding date"].value)}},
+      "org_type" : [
+        {{jsonize(cells["node - Organization type"].value)}},
+        {{jsonize(cells["node - Organization type - 1"].value)}},
+        {{jsonize(cells["node - Organization type - 2"].value)}},
+        {{jsonize(cells["node - Organization type - 3"].value)}},
+        {{jsonize(cells["node - Organization type - 4"].value)}},
+        {{jsonize(cells["node - Organization type - 5"].value)}},
+      ]      
+      }
+  }

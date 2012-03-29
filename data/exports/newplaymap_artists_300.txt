@@ -1,0 +1,3498 @@
+{"type":"FeatureCollection","features":[
+  {
+    "id":"52027",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.722179,30.268023]
+      },
+    "properties": {
+        "longitude" : -97.722179,
+        "latitude" : 30.268023,
+        "artist_id" : 52027,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"51365",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.948234,40.764308]
+      },
+    "properties": {
+        "longitude" : -73.948234,
+        "latitude" : 40.764308,
+        "artist_id" : 51365,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"50734",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.342558,47.660009]
+      },
+    "properties": {
+        "longitude" : -122.342558,
+        "latitude" : 47.660009,
+        "artist_id" : 50734,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"50681",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-81.554158,41.505099]
+      },
+    "properties": {
+        "longitude" : -81.554158,
+        "latitude" : 41.505099,
+        "artist_id" : 50681,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"50318",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.663045,41.990126]
+      },
+    "properties": {
+        "longitude" : -87.663045,
+        "latitude" : 41.990126,
+        "artist_id" : 50318,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"49539",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.162676,42.34635]
+      },
+    "properties": {
+        "longitude" : -71.162676,
+        "latitude" : 42.34635,
+        "artist_id" : 49539,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"48950",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.076519,42.353068]
+      },
+    "properties": {
+        "longitude" : -71.076519,
+        "latitude" : 42.353068,
+        "artist_id" : 48950,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"48945",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.06996,42.292992]
+      },
+    "properties": {
+        "longitude" : -71.06996,
+        "latitude" : 42.292992,
+        "artist_id" : 48945,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"48586",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-76.311997,40.041325]
+      },
+    "properties": {
+        "longitude" : -76.311997,
+        "latitude" : 40.041325,
+        "artist_id" : 48586,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"48519",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.000664,40.730166]
+      },
+    "properties": {
+        "longitude" : -74.000664,
+        "latitude" : 40.730166,
+        "artist_id" : 48519,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"29553",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.293589,34.122055]
+      },
+    "properties": {
+        "longitude" : -118.293589,
+        "latitude" : 34.122055,
+        "artist_id" : 29553,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"48188",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.370562,42.243397]
+      },
+    "properties": {
+        "longitude" : -71.370562,
+        "latitude" : 42.243397,
+        "artist_id" : 48188,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"47359",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [24.029717,49.839683]
+      },
+    "properties": {
+        "longitude" : 24.029717,
+        "latitude" : 49.839683,
+        "artist_id" : 47359,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"46465",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.124056,42.399172]
+      },
+    "properties": {
+        "longitude" : -71.124056,
+        "latitude" : 42.399172,
+        "artist_id" : 46465,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"42981",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.985941,40.71351]
+      },
+    "properties": {
+        "longitude" : -73.985941,
+        "latitude" : 40.71351,
+        "artist_id" : 42981,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"45826",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.597527,45.516241]
+      },
+    "properties": {
+        "longitude" : -122.597527,
+        "latitude" : 45.516241,
+        "artist_id" : 45826,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"45415",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.418411,37.748582]
+      },
+    "properties": {
+        "longitude" : -122.418411,
+        "latitude" : 37.748582,
+        "artist_id" : 45415,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"44981",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-84.512845,39.100293]
+      },
+    "properties": {
+        "longitude" : -84.512845,
+        "latitude" : 39.100293,
+        "artist_id" : 44981,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"44306",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.702482,41.99092]
+      },
+    "properties": {
+        "longitude" : -87.702482,
+        "latitude" : 41.99092,
+        "artist_id" : 44306,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"44282",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-92.037116,30.154741]
+      },
+    "properties": {
+        "longitude" : -92.037116,
+        "latitude" : 30.154741,
+        "artist_id" : 44282,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"44128",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.098437,41.310778]
+      },
+    "properties": {
+        "longitude" : -72.098437,
+        "latitude" : 41.310778,
+        "artist_id" : 44128,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43757",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.625912,41.872837]
+      },
+    "properties": {
+        "longitude" : -87.625912,
+        "latitude" : 41.872837,
+        "artist_id" : 43757,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"43688",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-90.351302,38.584264]
+      },
+    "properties": {
+        "longitude" : -90.351302,
+        "latitude" : 38.584264,
+        "artist_id" : 43688,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43464",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.404352,37.762961]
+      },
+    "properties": {
+        "longitude" : -122.404352,
+        "latitude" : 37.762961,
+        "artist_id" : 43464,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43264",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.965746,40.690297]
+      },
+    "properties": {
+        "longitude" : -73.965746,
+        "latitude" : 40.690297,
+        "artist_id" : 43264,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43231",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.707409,41.946428]
+      },
+    "properties": {
+        "longitude" : -87.707409,
+        "latitude" : 41.946428,
+        "artist_id" : 43231,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43218",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-119.278077,47.130142]
+      },
+    "properties": {
+        "longitude" : -119.278077,
+        "latitude" : 47.130142,
+        "artist_id" : 43218,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43164",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.725376,30.305571]
+      },
+    "properties": {
+        "longitude" : -97.725376,
+        "latitude" : 30.305571,
+        "artist_id" : 43164,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"43115",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-111.898592,40.756393]
+      },
+    "properties": {
+        "longitude" : -111.898592,
+        "latitude" : 40.756393,
+        "artist_id" : 43115,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"42507",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.697934,30.261902]
+      },
+    "properties": {
+        "longitude" : -97.697934,
+        "latitude" : 30.261902,
+        "artist_id" : 42507,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"42101",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-92.334072,38.951705]
+      },
+    "properties": {
+        "longitude" : -92.334072,
+        "latitude" : 38.951705,
+        "artist_id" : 42101,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"42024",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.045456,38.918297]
+      },
+    "properties": {
+        "longitude" : -77.045456,
+        "latitude" : 38.918297,
+        "artist_id" : 42024,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"40519",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-96.776169,32.822517]
+      },
+    "properties": {
+        "longitude" : -96.776169,
+        "latitude" : 32.822517,
+        "artist_id" : 40519,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"40423",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.796012,30.215387]
+      },
+    "properties": {
+        "longitude" : -97.796012,
+        "latitude" : 30.215387,
+        "artist_id" : 40423,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"31675",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.768836,30.291533]
+      },
+    "properties": {
+        "longitude" : -97.768836,
+        "latitude" : 30.291533,
+        "artist_id" : 31675,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"40232",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.768836,30.291533]
+      },
+    "properties": {
+        "longitude" : -97.768836,
+        "latitude" : 30.291533,
+        "artist_id" : 40232,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"38038",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.725376,30.305571]
+      },
+    "properties": {
+        "longitude" : -97.725376,
+        "latitude" : 30.305571,
+        "artist_id" : 38038,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"37800",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.450715,41.818869]
+      },
+    "properties": {
+        "longitude" : -71.450715,
+        "latitude" : 41.818869,
+        "artist_id" : 37800,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"37649",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.722179,30.268023]
+      },
+    "properties": {
+        "longitude" : -97.722179,
+        "latitude" : 30.268023,
+        "artist_id" : 37649,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"37321",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-90.023321,29.96827]
+      },
+    "properties": {
+        "longitude" : -90.023321,
+        "latitude" : 29.96827,
+        "artist_id" : 37321,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"37253",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.686073,30.292433]
+      },
+    "properties": {
+        "longitude" : -97.686073,
+        "latitude" : 30.292433,
+        "artist_id" : 37253,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"37237",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.703656,30.387069]
+      },
+    "properties": {
+        "longitude" : -97.703656,
+        "latitude" : 30.387069,
+        "artist_id" : 37237,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"36618",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.96831,40.799921]
+      },
+    "properties": {
+        "longitude" : -73.96831,
+        "latitude" : 40.799921,
+        "artist_id" : 36618,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"36593",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.293589,34.122055]
+      },
+    "properties": {
+        "longitude" : -118.293589,
+        "latitude" : 34.122055,
+        "artist_id" : 36593,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"36545",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.944799,40.855777]
+      },
+    "properties": {
+        "longitude" : -73.944799,
+        "latitude" : 40.855777,
+        "artist_id" : 36545,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34939",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-82.106068,39.322184]
+      },
+    "properties": {
+        "longitude" : -82.106068,
+        "latitude" : 39.322184,
+        "artist_id" : 34939,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34471",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-78.962762,35.937482]
+      },
+    "properties": {
+        "longitude" : -78.962762,
+        "latitude" : 35.937482,
+        "artist_id" : 34471,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34467",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.126898,34.140543]
+      },
+    "properties": {
+        "longitude" : -118.126898,
+        "latitude" : 34.140543,
+        "artist_id" : 34467,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34466",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.575843,45.522569]
+      },
+    "properties": {
+        "longitude" : -73.575843,
+        "latitude" : 45.522569,
+        "artist_id" : 34466,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34454",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.009447,40.746497]
+      },
+    "properties": {
+        "longitude" : -74.009447,
+        "latitude" : 40.746497,
+        "artist_id" : 34454,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34451",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.962433,40.680503]
+      },
+    "properties": {
+        "longitude" : -73.962433,
+        "latitude" : 40.680503,
+        "artist_id" : 34451,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34445",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.426742,37.804406]
+      },
+    "properties": {
+        "longitude" : -122.426742,
+        "latitude" : 37.804406,
+        "artist_id" : 34445,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34432",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.996226,40.763149]
+      },
+    "properties": {
+        "longitude" : -73.996226,
+        "latitude" : 40.763149,
+        "artist_id" : 34432,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34425",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.927164,40.759504]
+      },
+    "properties": {
+        "longitude" : -73.927164,
+        "latitude" : 40.759504,
+        "artist_id" : 34425,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34418",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.388375,41.849286]
+      },
+    "properties": {
+        "longitude" : -71.388375,
+        "latitude" : 41.849286,
+        "artist_id" : 34418,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34389",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.760447,48.117039]
+      },
+    "properties": {
+        "longitude" : -122.760447,
+        "latitude" : 48.117039,
+        "artist_id" : 34389,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34372",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-121.770834,37.331583]
+      },
+    "properties": {
+        "longitude" : -121.770834,
+        "latitude" : 37.331583,
+        "artist_id" : 34372,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34339",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-96.786879,32.799475]
+      },
+    "properties": {
+        "longitude" : -96.786879,
+        "latitude" : 32.799475,
+        "artist_id" : 34339,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34333",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.96831,40.799921]
+      },
+    "properties": {
+        "longitude" : -73.96831,
+        "latitude" : 40.799921,
+        "artist_id" : 34333,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34192",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.124056,42.342161]
+      },
+    "properties": {
+        "longitude" : -71.124056,
+        "latitude" : 42.342161,
+        "artist_id" : 34192,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34138",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.913937,40.763792]
+      },
+    "properties": {
+        "longitude" : -73.913937,
+        "latitude" : 40.763792,
+        "artist_id" : 34138,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"34051",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.987411,40.732254]
+      },
+    "properties": {
+        "longitude" : -73.987411,
+        "latitude" : 40.732254,
+        "artist_id" : 34051,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"33873",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-95.61609,36.312596]
+      },
+    "properties": {
+        "longitude" : -95.61609,
+        "latitude" : 36.312596,
+        "artist_id" : 33873,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"33857",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-81.378435,28.544737]
+      },
+    "properties": {
+        "longitude" : -81.378435,
+        "latitude" : 28.544737,
+        "artist_id" : 33857,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"33830",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.475029,37.759748]
+      },
+    "properties": {
+        "longitude" : -122.475029,
+        "latitude" : 37.759748,
+        "artist_id" : 33830,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"33421",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.123505,37.45613]
+      },
+    "properties": {
+        "longitude" : -122.123505,
+        "latitude" : 37.45613,
+        "artist_id" : 33421,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"33223",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.48,48.75]
+      },
+    "properties": {
+        "longitude" : -122.48,
+        "latitude" : 48.75,
+        "artist_id" : 33223,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"32846",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.378335,34.09316]
+      },
+    "properties": {
+        "longitude" : -118.378335,
+        "latitude" : 34.09316,
+        "artist_id" : 32846,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"32746",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-119.702061,34.420117]
+      },
+    "properties": {
+        "longitude" : -119.702061,
+        "latitude" : 34.420117,
+        "artist_id" : 32746,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"32728",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.980065,40.668167]
+      },
+    "properties": {
+        "longitude" : -73.980065,
+        "latitude" : 40.668167,
+        "artist_id" : 32728,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"32261",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-76.612388,39.364133]
+      },
+    "properties": {
+        "longitude" : -76.612388,
+        "latitude" : 39.364133,
+        "artist_id" : 32261,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"31823",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.596327,38.937084]
+      },
+    "properties": {
+        "longitude" : -77.596327,
+        "latitude" : 38.937084,
+        "artist_id" : 31823,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"31668",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-80.610489,39.989135]
+      },
+    "properties": {
+        "longitude" : -80.610489,
+        "latitude" : 39.989135,
+        "artist_id" : 31668,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"31536",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.928339,41.321291]
+      },
+    "properties": {
+        "longitude" : -72.928339,
+        "latitude" : 41.321291,
+        "artist_id" : 31536,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"31273",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.464461,37.546426]
+      },
+    "properties": {
+        "longitude" : -77.464461,
+        "latitude" : 37.546426,
+        "artist_id" : 31273,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"31050",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.867,41.0391]
+      },
+    "properties": {
+        "longitude" : -73.867,
+        "latitude" : 41.0391,
+        "artist_id" : 31050,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"30845",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-95.93,41.25]
+      },
+    "properties": {
+        "longitude" : -95.93,
+        "latitude" : 41.25,
+        "artist_id" : 30845,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"30843",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.889928,40.748842]
+      },
+    "properties": {
+        "longitude" : -73.889928,
+        "latitude" : 40.748842,
+        "artist_id" : 30843,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29949",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.725376,30.305571]
+      },
+    "properties": {
+        "longitude" : -97.725376,
+        "latitude" : 30.305571,
+        "artist_id" : 29949,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29919",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-115.295612,36.085358]
+      },
+    "properties": {
+        "longitude" : -115.295612,
+        "latitude" : 36.085358,
+        "artist_id" : 29919,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29894",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.25851,34.079617]
+      },
+    "properties": {
+        "longitude" : -118.25851,
+        "latitude" : 34.079617,
+        "artist_id" : 29894,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29857",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.974187,40.64754]
+      },
+    "properties": {
+        "longitude" : -73.974187,
+        "latitude" : 40.64754,
+        "artist_id" : 29857,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29742",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-70.11041,44.620277]
+      },
+    "properties": {
+        "longitude" : -70.11041,
+        "latitude" : 44.620277,
+        "artist_id" : 29742,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29133",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.268465,47.335566]
+      },
+    "properties": {
+        "longitude" : -122.268465,
+        "latitude" : 47.335566,
+        "artist_id" : 29133,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29110",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.379416,37.574103]
+      },
+    "properties": {
+        "longitude" : -122.379416,
+        "latitude" : 37.574103,
+        "artist_id" : 29110,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"29033",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.208735,47.681488]
+      },
+    "properties": {
+        "longitude" : -122.208735,
+        "latitude" : 47.681488,
+        "artist_id" : 29033,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"28986",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.367408,47.638459]
+      },
+    "properties": {
+        "longitude" : -122.367408,
+        "latitude" : 47.638459,
+        "artist_id" : 28986,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"28985",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.358026,47.62669]
+      },
+    "properties": {
+        "longitude" : -122.358026,
+        "latitude" : 47.62669,
+        "artist_id" : 28985,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"28909",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-80.720915,40.063962]
+      },
+    "properties": {
+        "longitude" : -80.720915,
+        "latitude" : 40.063962,
+        "artist_id" : 28909,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"28744",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.241151,42.061294]
+      },
+    "properties": {
+        "longitude" : -73.241151,
+        "latitude" : 42.061294,
+        "artist_id" : 28744,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"28552",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-81.572455,41.506288]
+      },
+    "properties": {
+        "longitude" : -81.572455,
+        "latitude" : 41.506288,
+        "artist_id" : 28552,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"28507",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.463708,37.782289]
+      },
+    "properties": {
+        "longitude" : -122.463708,
+        "latitude" : 37.782289,
+        "artist_id" : 28507,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"27774",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-86.843612,34.174821]
+      },
+    "properties": {
+        "longitude" : -86.843612,
+        "latitude" : 34.174821,
+        "artist_id" : 27774,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"27437",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.987411,40.732254]
+      },
+    "properties": {
+        "longitude" : -73.987411,
+        "latitude" : 40.732254,
+        "artist_id" : 27437,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"27390",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.690059,42.041141]
+      },
+    "properties": {
+        "longitude" : -87.690059,
+        "latitude" : 42.041141,
+        "artist_id" : 27390,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"27379",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.987411,40.732254]
+      },
+    "properties": {
+        "longitude" : -73.987411,
+        "latitude" : 40.732254,
+        "artist_id" : 27379,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"27354",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.009067,40.885408]
+      },
+    "properties": {
+        "longitude" : -74.009067,
+        "latitude" : 40.885408,
+        "artist_id" : 27354,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"27107",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-86.771802,36.100349]
+      },
+    "properties": {
+        "longitude" : -86.771802,
+        "latitude" : 36.100349,
+        "artist_id" : 27107,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"26990",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.25851,34.110341]
+      },
+    "properties": {
+        "longitude" : -118.25851,
+        "latitude" : 34.110341,
+        "artist_id" : 26990,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26961",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.702482,41.921542]
+      },
+    "properties": {
+        "longitude" : -87.702482,
+        "latitude" : 41.921542,
+        "artist_id" : 26961,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26546",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.418411,37.748582]
+      },
+    "properties": {
+        "longitude" : -122.418411,
+        "latitude" : 37.748582,
+        "artist_id" : 26546,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26489",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.293589,34.122055]
+      },
+    "properties": {
+        "longitude" : -118.293589,
+        "latitude" : 34.122055,
+        "artist_id" : 26489,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26488",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.293589,34.122055]
+      },
+    "properties": {
+        "longitude" : -118.293589,
+        "latitude" : 34.122055,
+        "artist_id" : 26488,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26484",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.293589,34.122055]
+      },
+    "properties": {
+        "longitude" : -118.293589,
+        "latitude" : 34.122055,
+        "artist_id" : 26484,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26480",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.293589,34.122055]
+      },
+    "properties": {
+        "longitude" : -118.293589,
+        "latitude" : 34.122055,
+        "artist_id" : 26480,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26453",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.638672,45.576736]
+      },
+    "properties": {
+        "longitude" : -122.638672,
+        "latitude" : 45.576736,
+        "artist_id" : 26453,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"26173",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-82.106068,39.322184]
+      },
+    "properties": {
+        "longitude" : -82.106068,
+        "latitude" : 39.322184,
+        "artist_id" : 26173,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"25677",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.44925,34.307779]
+      },
+    "properties": {
+        "longitude" : -118.44925,
+        "latitude" : 34.307779,
+        "artist_id" : 25677,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"25675",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.59147,34.440029]
+      },
+    "properties": {
+        "longitude" : -118.59147,
+        "latitude" : 34.440029,
+        "artist_id" : 25675,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"24599",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-93.261672,44.96055]
+      },
+    "properties": {
+        "longitude" : -93.261672,
+        "latitude" : 44.96055,
+        "artist_id" : 24599,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"23818",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.672907,41.990326]
+      },
+    "properties": {
+        "longitude" : -87.672907,
+        "latitude" : 41.990326,
+        "artist_id" : 23818,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"21416",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.408499,37.790943]
+      },
+    "properties": {
+        "longitude" : -122.408499,
+        "latitude" : 37.790943,
+        "artist_id" : 21416,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"21384",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.980065,40.776906]
+      },
+    "properties": {
+        "longitude" : -73.980065,
+        "latitude" : 40.776906,
+        "artist_id" : 21384,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"18780",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-85.686485,38.221878]
+      },
+    "properties": {
+        "longitude" : -85.686485,
+        "latitude" : 38.221878,
+        "artist_id" : 18780,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"18702",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.599419,45.575314]
+      },
+    "properties": {
+        "longitude" : -122.599419,
+        "latitude" : 45.575314,
+        "artist_id" : 18702,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"18220",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.116402,42.388523]
+      },
+    "properties": {
+        "longitude" : -71.116402,
+        "latitude" : 42.388523,
+        "artist_id" : 18220,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"17954",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.978905,40.744595]
+      },
+    "properties": {
+        "longitude" : -73.978905,
+        "latitude" : 40.744595,
+        "artist_id" : 17954,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"17890",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.011543,38.858044]
+      },
+    "properties": {
+        "longitude" : -77.011543,
+        "latitude" : 38.858044,
+        "artist_id" : 17890,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"17889",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.011543,38.858044]
+      },
+    "properties": {
+        "longitude" : -77.011543,
+        "latitude" : 38.858044,
+        "artist_id" : 17889,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"15681",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.015373,40.690229]
+      },
+    "properties": {
+        "longitude" : -74.015373,
+        "latitude" : 40.690229,
+        "artist_id" : 15681,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"15674",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.154268,38.821845]
+      },
+    "properties": {
+        "longitude" : -77.154268,
+        "latitude" : 38.821845,
+        "artist_id" : 15674,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"15364",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.753696,42.412048]
+      },
+    "properties": {
+        "longitude" : -72.753696,
+        "latitude" : 42.412048,
+        "artist_id" : 15364,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"15311",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-75.125581,39.983402]
+      },
+    "properties": {
+        "longitude" : -75.125581,
+        "latitude" : 39.983402,
+        "artist_id" : 15311,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"15219",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.205643,42.374935]
+      },
+    "properties": {
+        "longitude" : -71.205643,
+        "latitude" : 42.374935,
+        "artist_id" : 15219,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"14726",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.220021,37.788096]
+      },
+    "properties": {
+        "longitude" : -122.220021,
+        "latitude" : 37.788096,
+        "artist_id" : 14726,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"14319",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-82.690731,27.748547]
+      },
+    "properties": {
+        "longitude" : -82.690731,
+        "latitude" : 27.748547,
+        "artist_id" : 14319,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"14287",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.257156,37.842896]
+      },
+    "properties": {
+        "longitude" : -122.257156,
+        "latitude" : 37.842896,
+        "artist_id" : 14287,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"13622",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.645065,45.514217]
+      },
+    "properties": {
+        "longitude" : -122.645065,
+        "latitude" : 45.514217,
+        "artist_id" : 13622,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"13601",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.396915,33.995865]
+      },
+    "properties": {
+        "longitude" : -118.396915,
+        "latitude" : 33.995865,
+        "artist_id" : 13601,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"13478",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.66898,42.266757]
+      },
+    "properties": {
+        "longitude" : -72.66898,
+        "latitude" : 42.266757,
+        "artist_id" : 13478,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"13331",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.386822,34.052254]
+      },
+    "properties": {
+        "longitude" : -118.386822,
+        "latitude" : 34.052254,
+        "artist_id" : 13331,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"13003",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.40889,47.673096]
+      },
+    "properties": {
+        "longitude" : -122.40889,
+        "latitude" : 47.673096,
+        "artist_id" : 13003,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12974",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.33625,47.609917]
+      },
+    "properties": {
+        "longitude" : -122.33625,
+        "latitude" : 47.609917,
+        "artist_id" : 12974,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12893",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.953045,40.800907]
+      },
+    "properties": {
+        "longitude" : -73.953045,
+        "latitude" : 40.800907,
+        "artist_id" : 12893,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12711",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.091648,38.936787]
+      },
+    "properties": {
+        "longitude" : -77.091648,
+        "latitude" : 38.936787,
+        "artist_id" : 12711,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12682",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.157144,38.860739]
+      },
+    "properties": {
+        "longitude" : -77.157144,
+        "latitude" : 38.860739,
+        "artist_id" : 12682,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12673",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.041504,38.88718]
+      },
+    "properties": {
+        "longitude" : -77.041504,
+        "latitude" : 38.88718,
+        "artist_id" : 12673,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12647",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.460751,41.798595]
+      },
+    "properties": {
+        "longitude" : -71.460751,
+        "latitude" : 41.798595,
+        "artist_id" : 12647,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12572",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-79.931559,40.429833]
+      },
+    "properties": {
+        "longitude" : -79.931559,
+        "latitude" : 40.429833,
+        "artist_id" : 12572,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12543",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-111.8949,40.76291]
+      },
+    "properties": {
+        "longitude" : -111.8949,
+        "latitude" : 40.76291,
+        "artist_id" : 12543,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12106",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-75.639538,41.407169]
+      },
+    "properties": {
+        "longitude" : -75.639538,
+        "latitude" : 41.407169,
+        "artist_id" : 12106,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12093",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.024719,40.616501]
+      },
+    "properties": {
+        "longitude" : -74.024719,
+        "latitude" : 40.616501,
+        "artist_id" : 12093,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"12032",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-70.222492,43.663483]
+      },
+    "properties": {
+        "longitude" : -70.222492,
+        "latitude" : 43.663483,
+        "artist_id" : 12032,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"11958",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.218372,37.779251]
+      },
+    "properties": {
+        "longitude" : -122.218372,
+        "latitude" : 37.779251,
+        "artist_id" : 11958,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11946",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.509219,37.754675]
+      },
+    "properties": {
+        "longitude" : -122.509219,
+        "latitude" : 37.754675,
+        "artist_id" : 11946,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11932",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.980065,40.668167]
+      },
+    "properties": {
+        "longitude" : -73.980065,
+        "latitude" : 40.668167,
+        "artist_id" : 11932,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11907",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-70.072182,44.383909]
+      },
+    "properties": {
+        "longitude" : -70.072182,
+        "latitude" : 44.383909,
+        "artist_id" : 11907,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11904",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.135909,37.351587]
+      },
+    "properties": {
+        "longitude" : -122.135909,
+        "latitude" : 37.351587,
+        "artist_id" : 11904,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11896",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.444688,37.756499]
+      },
+    "properties": {
+        "longitude" : -122.444688,
+        "latitude" : 37.756499,
+        "artist_id" : 11896,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11889",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.928634,40.773294]
+      },
+    "properties": {
+        "longitude" : -73.928634,
+        "latitude" : 40.773294,
+        "artist_id" : 11889,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11887",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.914654,40.760954]
+      },
+    "properties": {
+        "longitude" : -73.914654,
+        "latitude" : 40.760954,
+        "artist_id" : 11887,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11836",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.092789,42.342663]
+      },
+    "properties": {
+        "longitude" : -71.092789,
+        "latitude" : 42.342663,
+        "artist_id" : 11836,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11775",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.958741,40.671167]
+      },
+    "properties": {
+        "longitude" : -73.958741,
+        "latitude" : 40.671167,
+        "artist_id" : 11775,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11708",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-84.296312,33.774828]
+      },
+    "properties": {
+        "longitude" : -84.296312,
+        "latitude" : 33.774828,
+        "artist_id" : 11708,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11684",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.997932,40.725868]
+      },
+    "properties": {
+        "longitude" : -73.997932,
+        "latitude" : 40.725868,
+        "artist_id" : 11684,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11681",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.9104,40.875271]
+      },
+    "properties": {
+        "longitude" : -73.9104,
+        "latitude" : 40.875271,
+        "artist_id" : 11681,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11451",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.003432,40.726695]
+      },
+    "properties": {
+        "longitude" : -74.003432,
+        "latitude" : 40.726695,
+        "artist_id" : 11451,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11430",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.768836,30.291533]
+      },
+    "properties": {
+        "longitude" : -97.768836,
+        "latitude" : 30.291533,
+        "artist_id" : 11430,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11357",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.420086,37.735451]
+      },
+    "properties": {
+        "longitude" : -122.420086,
+        "latitude" : 37.735451,
+        "artist_id" : 11357,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11268",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.702335,41.947506]
+      },
+    "properties": {
+        "longitude" : -87.702335,
+        "latitude" : 41.947506,
+        "artist_id" : 11268,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11200",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.205322,40.801691]
+      },
+    "properties": {
+        "longitude" : -74.205322,
+        "latitude" : 40.801691,
+        "artist_id" : 11200,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11191",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-85.752033,38.25795]
+      },
+    "properties": {
+        "longitude" : -85.752033,
+        "latitude" : 38.25795,
+        "artist_id" : 11191,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11171",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.789429,41.872562]
+      },
+    "properties": {
+        "longitude" : -87.789429,
+        "latitude" : 41.872562,
+        "artist_id" : 11171,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11120",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.879932,41.315407]
+      },
+    "properties": {
+        "longitude" : -72.879932,
+        "latitude" : 41.315407,
+        "artist_id" : 11120,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11106",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.425613,41.801466]
+      },
+    "properties": {
+        "longitude" : -71.425613,
+        "latitude" : 41.801466,
+        "artist_id" : 11106,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11065",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.02766,38.869373]
+      },
+    "properties": {
+        "longitude" : -77.02766,
+        "latitude" : 38.869373,
+        "artist_id" : 11065,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11060",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.150871,47.552677]
+      },
+    "properties": {
+        "longitude" : -122.150871,
+        "latitude" : 47.552677,
+        "artist_id" : 11060,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11054",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.002361,40.765102]
+      },
+    "properties": {
+        "longitude" : -74.002361,
+        "latitude" : 40.765102,
+        "artist_id" : 11054,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11049",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.333332,47.607388]
+      },
+    "properties": {
+        "longitude" : -122.333332,
+        "latitude" : 47.607388,
+        "artist_id" : 11049,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11046",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.485706,37.744198]
+      },
+    "properties": {
+        "longitude" : -122.485706,
+        "latitude" : 37.744198,
+        "artist_id" : 11046,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11036",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.002361,40.765102]
+      },
+    "properties": {
+        "longitude" : -74.002361,
+        "latitude" : 40.765102,
+        "artist_id" : 11036,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"11011",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.242233,34.067827]
+      },
+    "properties": {
+        "longitude" : -118.242233,
+        "latitude" : 34.067827,
+        "artist_id" : 11011,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10978",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.653545,41.922115]
+      },
+    "properties": {
+        "longitude" : -87.653545,
+        "latitude" : 41.922115,
+        "artist_id" : 10978,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10926",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.266079,34.052891]
+      },
+    "properties": {
+        "longitude" : -118.266079,
+        "latitude" : 34.052891,
+        "artist_id" : 10926,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10906",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.116428,42.310284]
+      },
+    "properties": {
+        "longitude" : -71.116428,
+        "latitude" : 42.310284,
+        "artist_id" : 10906,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10877",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.658993,41.943581]
+      },
+    "properties": {
+        "longitude" : -87.658993,
+        "latitude" : 41.943581,
+        "artist_id" : 10877,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10859",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.226841,34.147297]
+      },
+    "properties": {
+        "longitude" : -118.226841,
+        "latitude" : 34.147297,
+        "artist_id" : 10859,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10770",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-76.991501,38.877728]
+      },
+    "properties": {
+        "longitude" : -76.991501,
+        "latitude" : 38.877728,
+        "artist_id" : 10770,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10718",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.977272,40.643444]
+      },
+    "properties": {
+        "longitude" : -73.977272,
+        "latitude" : 40.643444,
+        "artist_id" : 10718,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10712",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.908894,40.88007]
+      },
+    "properties": {
+        "longitude" : -73.908894,
+        "latitude" : 40.88007,
+        "artist_id" : 10712,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10674",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.448949,37.773844]
+      },
+    "properties": {
+        "longitude" : -122.448949,
+        "latitude" : 37.773844,
+        "artist_id" : 10674,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10646",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.335789,47.602315]
+      },
+    "properties": {
+        "longitude" : -122.335789,
+        "latitude" : 47.602315,
+        "artist_id" : 10646,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10546",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.015373,40.690229]
+      },
+    "properties": {
+        "longitude" : -74.015373,
+        "latitude" : 40.690229,
+        "artist_id" : 10546,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10534",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.015373,40.690229]
+      },
+    "properties": {
+        "longitude" : -74.015373,
+        "latitude" : 40.690229,
+        "artist_id" : 10534,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10387",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.101563,42.382889]
+      },
+    "properties": {
+        "longitude" : -71.101563,
+        "latitude" : 42.382889,
+        "artist_id" : 10387,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10368",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-97.715199,30.263887]
+      },
+    "properties": {
+        "longitude" : -97.715199,
+        "latitude" : 30.263887,
+        "artist_id" : 10368,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"10250",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.98457,40.766979]
+      },
+    "properties": {
+        "longitude" : -73.98457,
+        "latitude" : 40.766979,
+        "artist_id" : 10250,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10172",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.465439,34.147938]
+      },
+    "properties": {
+        "longitude" : -118.465439,
+        "latitude" : 34.147938,
+        "artist_id" : 10172,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10104",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-90.799847,38.761967]
+      },
+    "properties": {
+        "longitude" : -90.799847,
+        "latitude" : 38.761967,
+        "artist_id" : 10104,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10027",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-81.556235,41.520052]
+      },
+    "properties": {
+        "longitude" : -81.556235,
+        "latitude" : 41.520052,
+        "artist_id" : 10027,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10045",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-89.713104,39.809954]
+      },
+    "properties": {
+        "longitude" : -89.713104,
+        "latitude" : 39.809954,
+        "artist_id" : 10045,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10044",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.274658,37.860962]
+      },
+    "properties": {
+        "longitude" : -122.274658,
+        "latitude" : 37.860962,
+        "artist_id" : 10044,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10041",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-76.615146,39.327323]
+      },
+    "properties": {
+        "longitude" : -76.615146,
+        "latitude" : 39.327323,
+        "artist_id" : 10041,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"10031",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-121.483808,38.570566]
+      },
+    "properties": {
+        "longitude" : -121.483808,
+        "latitude" : 38.570566,
+        "artist_id" : 10031,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9983",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.003432,40.726695]
+      },
+    "properties": {
+        "longitude" : -74.003432,
+        "latitude" : 40.726695,
+        "artist_id" : 9983,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9962",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.256542,47.879284]
+      },
+    "properties": {
+        "longitude" : -122.256542,
+        "latitude" : 47.879284,
+        "artist_id" : 9962,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9931",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-88.014511,43.03335]
+      },
+    "properties": {
+        "longitude" : -88.014511,
+        "latitude" : 43.03335,
+        "artist_id" : 9931,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9928",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.405487,37.743488]
+      },
+    "properties": {
+        "longitude" : -122.405487,
+        "latitude" : 37.743488,
+        "artist_id" : 9928,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"8820",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-78.863846,36.051014]
+      },
+    "properties": {
+        "longitude" : -78.863846,
+        "latitude" : 36.051014,
+        "artist_id" : 8820,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9846",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.603298,41.802299]
+      },
+    "properties": {
+        "longitude" : -87.603298,
+        "latitude" : 41.802299,
+        "artist_id" : 9846,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9836",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.927164,40.690321]
+      },
+    "properties": {
+        "longitude" : -73.927164,
+        "latitude" : 40.690321,
+        "artist_id" : 9836,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9832",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-85.752033,38.25795]
+      },
+    "properties": {
+        "longitude" : -85.752033,
+        "latitude" : 38.25795,
+        "artist_id" : 9832,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9826",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-85.751283,38.255693]
+      },
+    "properties": {
+        "longitude" : -85.751283,
+        "latitude" : 38.255693,
+        "artist_id" : 9826,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9759",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.336578,41.547001]
+      },
+    "properties": {
+        "longitude" : -72.336578,
+        "latitude" : 41.547001,
+        "artist_id" : 9759,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9735",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.988419,40.730938]
+      },
+    "properties": {
+        "longitude" : -73.988419,
+        "latitude" : 40.730938,
+        "artist_id" : 9735,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9730",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-84.454926,33.448726]
+      },
+    "properties": {
+        "longitude" : -84.454926,
+        "latitude" : 33.448726,
+        "artist_id" : 9730,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9726",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-81.556235,41.520052]
+      },
+    "properties": {
+        "longitude" : -81.556235,
+        "latitude" : 41.520052,
+        "artist_id" : 9726,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9711",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.658067,41.981594]
+      },
+    "properties": {
+        "longitude" : -87.658067,
+        "latitude" : 41.981594,
+        "artist_id" : 9711,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9661",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-87.701275,41.921043]
+      },
+    "properties": {
+        "longitude" : -87.701275,
+        "latitude" : 41.921043,
+        "artist_id" : 9661,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9655",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.409138,37.791412]
+      },
+    "properties": {
+        "longitude" : -122.409138,
+        "latitude" : 37.791412,
+        "artist_id" : 9655,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9652",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-118.438988,34.13467]
+      },
+    "properties": {
+        "longitude" : -118.438988,
+        "latitude" : 34.13467,
+        "artist_id" : 9652,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9617",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-71.130886,42.323269]
+      },
+    "properties": {
+        "longitude" : -71.130886,
+        "latitude" : 42.323269,
+        "artist_id" : 9617,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9610",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.975389,40.791069]
+      },
+    "properties": {
+        "longitude" : -73.975389,
+        "latitude" : 40.791069,
+        "artist_id" : 9610,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9553",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-123.081104,44.067722]
+      },
+    "properties": {
+        "longitude" : -123.081104,
+        "latitude" : 44.067722,
+        "artist_id" : 9553,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9514",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-116.154495,43.700256]
+      },
+    "properties": {
+        "longitude" : -116.154495,
+        "latitude" : 43.700256,
+        "artist_id" : 9514,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"9418",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-72.641192,42.325049]
+      },
+    "properties": {
+        "longitude" : -72.641192,
+        "latitude" : 42.325049,
+        "artist_id" : 9418,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9366",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.458313,37.7369]
+      },
+    "properties": {
+        "longitude" : -122.458313,
+        "latitude" : 37.7369,
+        "artist_id" : 9366,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9343",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-93.268227,44.936863]
+      },
+    "properties": {
+        "longitude" : -93.268227,
+        "latitude" : 44.936863,
+        "artist_id" : 9343,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"9325",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.099319,39.107815]
+      },
+    "properties": {
+        "longitude" : -77.099319,
+        "latitude" : 39.107815,
+        "artist_id" : 9325,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"9294",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.990594,40.76756]
+      },
+    "properties": {
+        "longitude" : -73.990594,
+        "latitude" : 40.76756,
+        "artist_id" : 9294,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8918",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.274921,37.87373]
+      },
+    "properties": {
+        "longitude" : -122.274921,
+        "latitude" : 37.87373,
+        "artist_id" : 8918,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8786",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.958263,40.711887]
+      },
+    "properties": {
+        "longitude" : -73.958263,
+        "latitude" : 40.711887,
+        "artist_id" : 8786,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8781",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.5359,37.897308]
+      },
+    "properties": {
+        "longitude" : -122.5359,
+        "latitude" : 37.897308,
+        "artist_id" : 8781,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8765",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.988419,40.730938]
+      },
+    "properties": {
+        "longitude" : -73.988419,
+        "latitude" : 40.730938,
+        "artist_id" : 8765,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8685",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.099319,39.107815]
+      },
+    "properties": {
+        "longitude" : -77.099319,
+        "latitude" : 39.107815,
+        "artist_id" : 8685,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8678",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-73.963181,40.680141]
+      },
+    "properties": {
+        "longitude" : -73.963181,
+        "latitude" : 40.680141,
+        "artist_id" : 8678,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8664",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.003432,40.726695]
+      },
+    "properties": {
+        "longitude" : -74.003432,
+        "latitude" : 40.726695,
+        "artist_id" : 8664,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8637",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.34182,47.657295]
+      },
+    "properties": {
+        "longitude" : -122.34182,
+        "latitude" : 47.657295,
+        "artist_id" : 8637,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8633",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-74.003432,40.726695]
+      },
+    "properties": {
+        "longitude" : -74.003432,
+        "latitude" : 40.726695,
+        "artist_id" : 8633,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8626",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-77.099319,39.107815]
+      },
+    "properties": {
+        "longitude" : -77.099319,
+        "latitude" : 39.107815,
+        "artist_id" : 8626,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Ensemble / Collective"
+        }
+    },
+  {
+    "id":"8532",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.400551,37.798546]
+      },
+    "properties": {
+        "longitude" : -122.400551,
+        "latitude" : 37.798546,
+        "artist_id" : 8532,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8270",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-85.473571,38.714226]
+      },
+    "properties": {
+        "longitude" : -85.473571,
+        "latitude" : 38.714226,
+        "artist_id" : 8270,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    },
+  {
+    "id":"8262",
+    "type":"Feature",
+    "geometry": {
+      "type":"Point",
+      "coordinates": [-122.026589,36.969335]
+      },
+    "properties": {
+        "longitude" : -122.026589,
+        "latitude" : 36.969335,
+        "artist_id" : 8262,
+        "content_type" : "Generative Artist",
+        "ensemble_collective" : "Single Entity"
+        }
+    }
+  ]
+}
