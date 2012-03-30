@@ -83,31 +83,34 @@
                   <div class="popup_content">
 
                     {{if play_title}}
-                      <h3>${play_title}</h3>
-                      {{if generative_artist}}
-                      <h4>By ${generative_artist}</h4>
-                      {{/if}}
-  
-                      <p>{{if event_type}}
-                        ${event_type}
-                      {{/if}}
-                      </p>
-                      
-                      {{if related_theater}}
-                        <a href="#panel" type="organization" load_id="${related_theater_id}">${related_theater}</a>
-                      {{/if}}
-                      
-                      {{if event_date}}
-                        <br />{{html event_date}}
-                      {{/if}}
-                      
-                      {{if event_to_date}}
-                        - {{html event_to_date}}
-                      {{/if}}
+                      <div class="play" play_id="${play_id}">
+                        <h3>${play_title}</h3>
+                        {{if generative_artist}}
+                        <h4>By ${generative_artist}</h4>
+                        {{/if}}
+    
+                        <p>{{if event_type}}
+                          ${event_type}
+                        {{/if}}
+                        </p>
+                        
+                        {{if related_theater}}
+                          <a href="#panel" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                        {{/if}}
+                        
+                        {{if event_date}}
+                          <br />{{html event_date}}
+                        {{/if}}
+                        
+                        {{if event_to_date}}
+                          - {{html event_to_date}}
+                        {{/if}}
+                      </div>
                     {{/if}}
 
 
                     {{if artist_name}}
+                      <div class="artist">
                       <h3>${artist_name}</h3>
                       
                       {{if artist_photo}}
@@ -115,11 +118,12 @@
                           <img src="${artist_photo}" alt="${artist_name}" />
                         </a>
                       {{/if}}
-
+                      </div>
                     {{/if}}
 
 
                     {{if organization_name}}
+                      <div class="organization">
                       <h3>${org_name}</h3>
                       
                       {{if logo}}
@@ -127,7 +131,7 @@
                           <img src="${logo}" alt="${org_name}" />
                         </a>
                       {{/if}}
-
+                      </div>
                     {{/if}}
 
 

@@ -338,9 +338,6 @@ newPlayMap.onMarkerOver = function(e) {
           // Update the panel data.
           newPlayMap.updatePanel(marker, locationsByID[id], type);
 
- 
-
-
           
       } else {
           spotlight.parent.className = "inactive";
@@ -369,8 +366,13 @@ newPlayMap.onMarkerClick = function(e) {
   // Set URL
   
   console.log("click");
-    
+  var marker = $(this);
 
+  var type = $(marker).attr('type');
+  var id =  $(marker).attr('id');
+  
+  newPlayMap.loadPlay(id);
+      
   return false;
 };
 
@@ -395,7 +397,8 @@ newPlayMap.updatePanel = function(marker, relatedData, type) {
       // newPlayMap.panelTemplate(feature, "event");
       
       newPlayMap.popupTemplate(feature);    
-    
+
+
     break;
  
     case 'artist': 
@@ -411,11 +414,13 @@ newPlayMap.updatePanel = function(marker, relatedData, type) {
     case 'organization':
 
       var marker_id = marker.getAttribute(type + "_id");
+
+
       feature = newPlayMap.loadDataObject(data.organizationData, marker_id);
 
       var panelData = document;
       
-      newPlayMap.popupTemplate(feature);    
+//      newPlayMap.popupTemplate(feature);    
     
       break;
 
@@ -434,6 +439,7 @@ newPlayMap.updatePanel = function(marker, relatedData, type) {
 newPlayMap.loadDataObject = function(collection, id) {
   // @TODO only one result?
     var featureSet = [];
+    
     var features = collection.features,
         len = features.length,
         locations = [];
@@ -445,8 +451,6 @@ newPlayMap.loadDataObject = function(collection, id) {
           return feature;
         }
     }
-
-
 };
 
 newPlayMap.panelTemplate = function(data, type) {
@@ -525,4 +529,12 @@ easey.DoubleClickHandler.prototype = {
         }
         return this.doubleClickHandler;
     }
+};
+
+newPlayMap.loadPlay = function(data) {
+  console.log(data);
+  console.log("play clicked");
+
+  // Load data by play id here.
+
 };
