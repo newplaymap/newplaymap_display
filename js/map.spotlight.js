@@ -548,11 +548,6 @@ newPlayMap.loadPlay = function(data) {
     success: newPlayMap.loadPlayMarkers,
     error: newPlayMap.loadDataError
   });
- 
-/*
-  markers = new MM.MarkerLayer();
-  map.addLayer(markers); 
-*/
 
 };
 
@@ -564,13 +559,6 @@ newPlayMap.loadDataError = function(data) {
 
 newPlayMap.loadPlayMarkers = function(data){
     collection = data;
-console.log(data);
-
-    // data needs to be converted to geoJSON
-
-    data.playData = collection;
-
-
 
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
@@ -604,7 +592,7 @@ console.log(data);
         // create an image icon
         var img = marker.appendChild(document.createElement("img"));
 /*         img.setAttribute("src", "icons/" + type.replace(/ /g, "_") + ".png"); */
-        img.setAttribute("src", "icons/artist.png");
+        img.setAttribute("src", "icons/play_highlighted.png");
         
         markers.addMarker(marker, feature);
         // add the marker's location to the extent list
@@ -615,6 +603,12 @@ console.log(data);
         } else {
             locationsByID[id] = [marker.location];
         }
+
+
+ 
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers); 
+
 
         // listen for mouseover & mouseout events
 /*
