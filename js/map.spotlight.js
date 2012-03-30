@@ -383,22 +383,42 @@ newPlayMap.onMarkerClickOut = function(e) {
 };
 
 newPlayMap.updatePanel = function(marker, relatedData, type) {
-console.log(type);
+
   switch(type) {
-    case 'event_id':
+    case 'event':
       // @TOOD Right now this will just load events.
-/*
-      var event_id = marker.getAttribute("event_id");
-      feature = newPlayMap.loadDataObject(data.eventData, event_id);
+      var marker_id = marker.getAttribute(type + "_id");
+      feature = newPlayMap.loadDataObject(data.eventData, marker_id);
       var panelData = document;
       
       // Load event data into the event template.
       // newPlayMap.panelTemplate(feature, "event");
       
-      newPlayMap.popupTemplate(feature);   
-*/ 
+      newPlayMap.popupTemplate(feature);    
     
     break;
+ 
+    case 'artist': 
+      var marker_id = marker.getAttribute(type + "_id");
+      feature = newPlayMap.loadDataObject(data.artistData, marker_id);
+
+      var panelData = document;
+      
+      newPlayMap.popupTemplate(feature);    
+    
+      break;
+
+    case 'organization':
+
+      var marker_id = marker.getAttribute(type + "_id");
+      feature = newPlayMap.loadDataObject(data.orgData, marker_id);
+
+      var panelData = document;
+      
+      newPlayMap.popupTemplate(feature);    
+    
+      break;
+
     
     default:
     
@@ -452,8 +472,8 @@ newPlayMap.popupTemplate = function(data) {
 
   var id = 'popup';
   var container = $('#popup-container');
-  if (popupMarkup[type] === null || popupMarkup[type] === undefined) {
-    popupMarkup[type] = container.html();
+  if (popupMarkup[id] === null || popupMarkup[id] === undefined) {
+    popupMarkup[id] = container.html();
   }
 
   var content = {};
@@ -462,18 +482,14 @@ newPlayMap.popupTemplate = function(data) {
 
   // @TODO Data may need some escaping.
   if(data["properties"] !== undefined && data["properties"] !== null) {  
-    $.template( type + "Template", popupMarkup[type]);        
-    $.tmpl(type + "Template", data["properties"])
+    $.template( id + "Template", popupMarkup[id]);        
+    $.tmpl(id + "Template", data["properties"])
       .appendTo(container); 
   }
 };
 
 newPlayMap.loadRelatedPlay = function(data) {
   play_id = data;
-
-
-
-
 };
 
 // Change Double Click easing.

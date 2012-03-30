@@ -79,10 +79,58 @@
       <div class="row-fluid">
             <div id="popup-container">
               <div id="popup">
-                  <div class="popup_close">x</div>
+                  <div class="close-btn">x</div>
                   <div class="popup_content">
-                    <h2>${title}</h2>
-                    <p>${content}</p>
+
+                    {{if play_title}}
+                      <h3>${play_title}</h3>
+                      {{if generative_artist}}
+                      <h4>By ${generative_artist}</h4>
+                      {{/if}}
+  
+                      <p>{{if event_type}}
+                        ${event_type}
+                      {{/if}}
+                      </p>
+                      
+                      {{if related_theater}}
+                        <a href="#panel" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                      {{/if}}
+                      
+                      {{if event_date}}
+                        <br />{{html event_date}}
+                      {{/if}}
+                      
+                      {{if event_to_date}}
+                        - {{html event_to_date}}
+                      {{/if}}
+                    {{/if}}
+
+
+                    {{if artist_name}}
+                      <h3>${artist_name}</h3>
+                      
+                      {{if artist_photo}}
+                        <a href="#panel" type="artist" load_id="${artist_id}">
+                          <img src="${artist_photo}" alt="${artist_name}" />
+                        </a>
+                      {{/if}}
+
+                    {{/if}}
+
+
+                    {{if organization_name}}
+                      <h3>${org_name}</h3>
+                      
+                      {{if logo}}
+                        <a href="#panel" type="organization" load_id="${org_id}">
+                          <img src="${logo}" alt="${org_name}" />
+                        </a>
+                      {{/if}}
+
+                    {{/if}}
+
+
                   </div>
               </div>
             </div>
@@ -117,9 +165,6 @@
                     <dt>Synopsis</dt>
                     <dd>{{html synopsis}}</dd>
                   {{/if}}
-
-
-
                   </dl>
                 </div>
 
