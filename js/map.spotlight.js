@@ -275,7 +275,7 @@ newPlayMap.onLoadOrganizationMarkers = function(collection) {
 
         // give it a title
         marker.setAttribute("title", [
-            feature.properties["play_title"], "at", feature.properties["related_theater"]
+            feature.properties["organization_name"]
         ].join(" "));
         // add a class
         marker.setAttribute("class", "marker");
@@ -370,8 +370,9 @@ newPlayMap.onMarkerClick = function(e) {
 
   var type = $(marker).attr('type');
   var id =  $(marker).attr('id');
-  
-  newPlayMap.loadPlay(id);
+  if(type === 'play') {
+    newPlayMap.loadPlay(id);
+  }
       
   return false;
 };
@@ -606,8 +607,10 @@ newPlayMap.loadPlayMarkers = function(data){
 
 
  
+/*
   markers = new MM.MarkerLayer();
   map.addLayer(markers); 
+*/
 
 
         // listen for mouseover & mouseout events
