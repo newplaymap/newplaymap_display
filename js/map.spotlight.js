@@ -537,4 +537,91 @@ newPlayMap.loadPlay = function(data) {
 
   // Load data by play id here.
 
+
+  var contentData = "data/plays/10986.json";
+  var data = "";
+
+  $.ajax({
+    url:  contentData,
+    dataType: 'json',
+    data: data,
+    success: newPlayMap.loadPlayMarkers,
+    error: newPlayMap.loadDataError
+  });
+ 
+/*
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers); 
+*/
+
+};
+
+
+newPlayMap.loadDataError = function(data) {
+  console.log(data);
+  return false;
+};
+
+newPlayMap.loadPlayMarkers = function(data){
+    collection = data;
+console.log(data);
+
+    // data needs to be converted to geoJSON
+
+    data.playData = collection;
+
+
+
+    // onLoadMarkers() gets a GeoJSON FeatureCollection:
+    // http://geojson.org/geojson-spec.html#feature-collection-objects
+    var features = collection.features,
+        len = features.length,
+        locations = [];
+
+    // for each feature in the collection, create a marker and add it
+    // to the markers layer
+    for (var i = 0; i < len; i++) {
+        var feature = features[i],
+            id = feature.properties["artist_id"],
+            marker = document.createElement("div");
+
+        marker.feature = feature;
+        marker.id = id;
+
+        // give it a title
+        marker.setAttribute("title", [
+            feature.properties["play_title"], "at", feature.properties["related_theater"]
+        ].join(" "));
+        // add a class
+        marker.setAttribute("class", "marker");
+        marker.setAttribute("type", "artist");
+        marker.setAttribute("href", "data/plays/10986.json");
+        
+        marker.setAttribute("artist_id", feature.properties["artist_id"]);
+
+/*         marker.setAttribute("href", "data/artists_300.json"); */
+
+        // create an image icon
+        var img = marker.appendChild(document.createElement("img"));
+/*         img.setAttribute("src", "icons/" + type.replace(/ /g, "_") + ".png"); */
+        img.setAttribute("src", "icons/artist.png");
+        
+        markers.addMarker(marker, feature);
+        // add the marker's location to the extent list
+        locations.push(marker.location);
+
+        if (id in locationsByID) {
+            locationsByID[id].push(marker.location);
+        } else {
+            locationsByID[id] = [marker.location];
+        }
+
+        // listen for mouseover & mouseout events
+/*
+        MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
+        MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
+        MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
+*/
+    }
+
 };
