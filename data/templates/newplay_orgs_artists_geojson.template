@@ -82,7 +82,7 @@ newPlayMap.onLoadOrganizationMarkers({"type":"FeatureCollection","features":[{
       "ensemble_collective" : {{jsonize(cells["node - ensemble_collective"].value)}},
       "mission" : {{jsonize(cells["node - Mission statement"].value)}},
       "path" : {{jsonize(cells["node - Path"].value)}},
-      "content_type" : {{jsonize(cells["node - Content Type"].value)}}
+      "content_type" : {{jsonize(cells["node - Content Type"].value)}},
       "founding_date" : {{jsonize(cells["node - Founding date"].value)}},
       "org_type" : [
         {{jsonize(cells["node - Organization type"].value)}},
