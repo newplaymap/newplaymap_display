@@ -1,3 +1,9 @@
+newPlayMap.onLoadOrganizationMarkers({"type":"FeatureCollection","features":[{
+
+
++++++======+++++++=====++++
+
+
 {
   "node - Path" : {{jsonize(cells["node - Path"].value)}},
   "node - Photo" : {{jsonize(cells["node - Photo"].value)}},
@@ -61,7 +67,7 @@
 
 
 {
-  "id":"{{jsonize(cells["node - Org"].value)}}",
+  "id":"{{jsonize(cells["node - Org ID"].value)}}",
   "type":"Feature",
   "geometry": {
     "type":"Point",
@@ -85,6 +91,8 @@
         {{jsonize(cells["node - Organization type - 3"].value)}},
         {{jsonize(cells["node - Organization type - 4"].value)}},
         {{jsonize(cells["node - Organization type - 5"].value)}},
-      ]      
+      ],
+      "local_networks" : [{{jsonize(cells["node - Local networks"].value)}}],
+      "national_networks" : [{{jsonize(cells["node - National networks"].value)}}]
       }
   }
