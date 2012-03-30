@@ -117,7 +117,7 @@ newPlayMap.initMap = function(tj) {
 
   newPlayMap.loadEventMarkers();
   newPlayMap.loadArtistMarkers();
-  newPlayMap.loadOrgMarkers();
+  newPlayMap.loadOrganizationMarkers();
 
   
   newPlayMap.mapCustomizations(map, markers);  
@@ -136,9 +136,9 @@ newPlayMap.loadArtistMarkers = function() {
     document.getElementsByTagName("head")[0].appendChild(script);
 };
 
-newPlayMap.loadOrgMarkers = function() {
+newPlayMap.loadOrganizationMarkers = function() {
     var script = document.createElement("script");
-    script.src = "data/orgs_300.json";
+    script.src = "data/organizations_300.json";
     document.getElementsByTagName("head")[0].appendChild(script);
 };
 
@@ -255,8 +255,8 @@ newPlayMap.onLoadArtistMarkers = function(collection) {
     map.setExtent(locations);
 };
 
-newPlayMap.onLoadOrgMarkers = function(collection) {
-    data.orgData = collection;
+newPlayMap.onLoadOrganizationMarkers = function(collection) {
+    data.organizationData = collection;
 
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
@@ -267,7 +267,7 @@ newPlayMap.onLoadOrgMarkers = function(collection) {
     // to the markers layer
     for (var i = 0; i < len; i++) {
         var feature = features[i],
-            id = feature.properties["org_id"],
+            id = feature.properties["organization_id"],
             marker = document.createElement("div");
 
         marker.feature = feature;
@@ -280,9 +280,9 @@ newPlayMap.onLoadOrgMarkers = function(collection) {
         // add a class
         marker.setAttribute("class", "marker");
         marker.setAttribute("type", "organization");
-        marker.setAttribute("href", "data/orgs_300.json");
+        marker.setAttribute("href", "data/organizations_300.json");
         
-        marker.setAttribute("org_id", feature.properties["org_id"]);
+        marker.setAttribute("organization_id", feature.properties["organization_id"]);
 
 /*         marker.setAttribute("href", "data/orgs_300.json"); */
 
@@ -411,7 +411,7 @@ newPlayMap.updatePanel = function(marker, relatedData, type) {
     case 'organization':
 
       var marker_id = marker.getAttribute(type + "_id");
-      feature = newPlayMap.loadDataObject(data.orgData, marker_id);
+      feature = newPlayMap.loadDataObject(data.organizationData, marker_id);
 
       var panelData = document;
       
