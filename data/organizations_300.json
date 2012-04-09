@@ -1,4 +1,4 @@
-newPlayMap.onLoadOrganizationMarkers(  {"type":"FeatureCollection","features":[   {
+{"type":"FeatureCollection","features":[   {
   "id":"23668",
   "type":"Feature",
   "geometry": {
@@ -8099,4 +8099,4 @@ newPlayMap.onLoadOrganizationMarkers(  {"type":"FeatureCollection","features":[ 
   }
     
     ]
-})
+}
