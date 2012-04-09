@@ -4,6 +4,9 @@ var markers,
 
 var    locationsByID = {};
 
+  
+var loaded = false;
+
 // originals: http://prag.ma/code/modestmaps-js/examples/geojson/icons/
 
 var newPlayMap = {};
@@ -18,7 +21,7 @@ window.onload = function() {
   $('div#panel-container div#panel').hide();
   
   newPlayMap.loadWax();
-  routing.load();
+
 };
 
 newPlayMap.mapCustomizations = function (map, markers) {
@@ -117,11 +120,16 @@ newPlayMap.initMap = function(tj) {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
 
+  
   newPlayMap.loadEventMarkers();
   newPlayMap.loadArtistMarkers();
   newPlayMap.loadOrganizationMarkers();
   
   newPlayMap.mapCustomizations(map, markers);  
+
+
+
+
 };
 
 // ghetto JSON-P
@@ -138,10 +146,32 @@ newPlayMap.loadArtistMarkers = function() {
 };
 
 newPlayMap.loadOrganizationMarkers = function() {
+/*
     var script = document.createElement("script");
     script.src = "data/organizations_300.json";
     document.getElementsByTagName("head")[0].appendChild(script);
+*/
+
+  var path = "data/organizations_300.json";
+  var contentData = path + "?cache=" + Math.floor(Math.random()*11);
+
+  var data = "";
+
+  $.ajax({
+    url:  contentData,
+    dataType: 'json',
+    data: data,
+    success: newPlayMap.onLoadOrganizationMarkers,
+    error: newPlayMap.loadDataError
+  });
+
+
 };
+
+newPlayMap.loadDataError = function() {
+  console.log("err");
+}
+
 
 newPlayMap.onLoadEventMarkers = function(collection) {
     data.eventData = collection;
@@ -266,8 +296,6 @@ newPlayMap.onLoadOrganizationMarkers = function(collection) {
     // for each feature in the collection, create a marker and add it
     // to the markers layer
     for (var i = 0; i < len; i++) {
-          console.log(features[i]);  
-    
         var feature = features[i],
             id = feature.properties["organization_id"],
             marker = document.createElement("div");
@@ -310,6 +338,11 @@ newPlayMap.onLoadOrganizationMarkers = function(collection) {
 
     // tell the map to fit all of the locations in the available space
     map.setExtent(locations);
+ 
+ 
+    routing.load();   
+    
+    loaded = true;
 };
 
 newPlayMap.getMarker = function(target) {
