@@ -1,13 +1,12 @@
 
-newPlayMap.updatePanel = function(marker) {
+newPlayMap.updatePanel = function(marker, data) {
+  // data is extra, we might use it...
   var feature = {};
   feature.markup = marker;
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
-console.log(marker);
   featureData = newPlayMap.loadDataObject(feature);
-  console.log(featureData);
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 };
@@ -32,14 +31,50 @@ newPlayMap.loadDataObject = function(featureLookup) {
     }
 };
 
-newPlayMap.panelTemplate = function(feature) {
-  var type = feature.type;
-  var container = $('#panel-container .' + type);
+newPlayMap.panelTemplates = function() {
+
+  // setupPanelTemplates on load. 
+  // do this once only.
+  // Loads the markup from when the page loads before it is overwritten.
+  var container;
+  var type = "event";
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
+    container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
   }
 
-  var content = {};
+  type = "organization";
+  if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
+    container = $('#panel-container .' + type);
+    panelMarkup[type] = container.html();
+  }
+
+  type = "artist";
+  if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
+    container = $('#panel-container .' + type);
+    panelMarkup[type] = container.html();
+  }
+
+  type = "play";
+  if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
+    container = $('#panel-container .' + type);
+    panelMarkup[type] = container.html();
+  }
+  
+  containerEmpty = $('#panel-container .content').empty();
+
+};
+
+newPlayMap.panelTemplate = function(feature) {
+
+  newPlayMap.panelTemplates();
+  
+  var type = feature.type;
+  var container, containerEmpty;
+  containerEmpty = $('#panel-container .content');
+  containerEmpty.empty();
+
+  container = $('#panel-container .' + type);
   container.empty();
   // http://api.jquery.com/jquery.tmpl/
 

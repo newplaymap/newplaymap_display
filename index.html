@@ -94,7 +94,8 @@
               <div id="panel">
               
                 <!--               Templates -->
-                <div class="play">
+                <div class="play content">
+                (testing: play)
                   <h2><a href="#${path}?event_id=${related_event_id}">${play_title}</a></h2>
                   {{if generative_artist}}
                   <h3>By ${generative_artist}</h3>
@@ -121,7 +122,28 @@
                     <dd>{{html synopsis}}</dd>
                   {{/if}}
                   </dl>
-                </div>
+                </div><!--   end play -->
+                
+                
+<!--                   artist -->
+                  <div class="artist content">
+                (testing: artist)
+                  <h2><a href="#${path}?artist_id=${artist_id}">${artist_name}</a></h2>
+                  </div><!--  end artist -->
+    
+ <!--                   organization -->
+                  <div class="organization content">
+                (testing: organization)
+                  <h2><a href="#${path}">${name}</a></h2>
+                  </div><!--  end organization -->
+ 
+ 
+ <!--                   event -->
+                  <div class="event content">
+                (testing: event)
+                  <h2><a href="#${path}">${name}</a></h2>
+                  </div><!--  end event -->               
+                
               </div>
             </div>
    
