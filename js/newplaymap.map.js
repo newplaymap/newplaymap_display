@@ -1,9 +1,3 @@
-newPlayMap.loadWax = function() {
-  // Syntax example. Seeing if Wax works.
-  var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
-  wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
-};
-
 newPlayMap.mapCustomizations = function (map, markers) {
 /*   map.setZoomRange(0, 18); */
 

@@ -16,14 +16,14 @@ var loaded = 0;
 window.onload = function() {
   //@TODO load once?
   // Change basic layout of page.
-    newPlayMap.alterHomepage();
+  newPlayMap.alterHomepage();
     
-    newPlayMap.loadPageRouter();
-  
-    newPlayMap.loadData();
-    
-    newPlayMap.loadMap();
+  newPlayMap.loadPageRouter();
 
+  // Load the map after all the data is loaded and available.
+  newPlayMap.loadData();
+    
+  newPlayMap.loadMap()
 };
 
 newPlayMap.alterHomepage = function() {
@@ -40,7 +40,6 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({path: "data/artists_300.json"});
   newPlayMap.loadJSONFile({path: "data/related_events.json"});
 
-  console.log(jsonData);
   return false;
 };
 
@@ -49,8 +48,15 @@ newPlayMap.loadMap = function(){
   newPlayMap.loadWax();
 };
 
+newPlayMap.loadWax = function() {
+  // Syntax example. Seeing if Wax works.
+  var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+  wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
+};
+
 // Wax calls this and the map variable is relevant to what Wax loads
 newPlayMap.initMap = function(tj) {
+
   map = new com.modestmaps.Map('map',
     new wax.mm.connector(tj), null, [
         new easey.DragHandler(),
@@ -67,7 +73,7 @@ newPlayMap.initMap = function(tj) {
   // Load map marker layers.
   newPlayMap.loadMapLayers();
 
-  //newPlayMap.mapCustomizations(map, markers);  
+  newPlayMap.mapCustomizations(map, markers);  
 };
 
 
@@ -75,53 +81,62 @@ newPlayMap.loadMapLayers = function() {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
  
-/*
-  newPlayMap.loadEventMarkers();
-  newPlayMap.loadArtistMarkers();
-  newPlayMap.loadOrganizationMarkers();
-*/
+ 
+ if(jsonData.events !== undefined) {
+    // Load Event Markers
+    var eventMarkerData = {
+      type: "event",
+      id: "related_play_id",
+      title: "play_title",
+      dataName: "events",
+      dataPath: "data/events_300.json",
+      icon: "icons/event.png",
+      embedData : ["event_id"] 
+    };
+    newPlayMap.onLoadDataMarkers(eventMarkerData);
+  }
 
-  // Load Event Markers
-  var eventMarkerData = {
-    id: "related_play_id",
-    title: "play_title",
-    dataName: "events_300.json",
-    dataPath: "data/events_300.json",
-    icon: "icons/event.png"
-    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
-  };
-  newPlayMap.onLoadDataMarkers(eventMarkerData);
-
+ if(jsonData.organizations !== undefined) {
   // Load Organization Markers
   var organizationMarkerData = {
+    type: "organization",
     id: "organization_id",
     title: "name",
-    dataName: "organizations_300.json",
+    dataName: "organizations",
     dataPath: "data/organizations_300.json",
-    icon: "icons/organization.png"
-    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
+    icon: "icons/organization.png",
+/*     embedData : [organizationMarkerData.id] */
   };
   newPlayMap.onLoadDataMarkers(organizationMarkerData);
+  }
 
+ if(jsonData.artists !== undefined) {
   // Load Artist Markers
   var artistMarkerData = {
+    type: "artist",
     id: "artist_id",
     title: "name",
-    dataName: "artists_300.json",
+    dataName: "artists",
     dataPath: "data/artists_300.json",
-    icon: "icons/artist.png"
-    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
+    icon: "icons/artist.png",
+/*     embedData : [artistMarkerData.id] */
   };
   newPlayMap.onLoadDataMarkers(artistMarkerData);
+  }
 
+  // We treat related event as it's own separate type so there are no conflicts with identical events.
+  // This information will be on its own special layer, and cross linking identical markers is too complex for what we are doing right now.
+ if(jsonData.related_events !== undefined) {  
   // Load Related Play Markers
   var relatedEventMarkerData = {
-    id: "Title",
+    type: "related_event",
+    id: "related_event_id",
     title: "Title",
-    dataName: "related_events.json",
+    dataName: "related_events",
     dataPath: "data/related_events.json",
-    icon: "icons/play.png"
-    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
+    icon: "icons/play.png",
+/*     embedData : [relatedEventMarkerData.id] */
   };
   newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
+  }
 };

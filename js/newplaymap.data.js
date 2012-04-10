@@ -26,12 +26,12 @@ newPlayMap.loadDataError = function(data) {
 
 
 newPlayMap.onLoadDataMarkers = function(vars) {
-  var vars = vars;
-  var data = jsonData[vars.dataName];
-/*   console.log(vars); */
+    var vars = vars;
+  
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
-    var features = data.features,
+    
+    var features = jsonData[vars.dataName].features,
         len = features.length,
         locations = [];  
 
@@ -43,18 +43,22 @@ newPlayMap.onLoadDataMarkers = function(vars) {
             marker = document.createElement("div");
 
         marker.feature = feature;
-        marker.id = id;
+        // Unique hash marker id for link
+        marker.id = "marker-" + vars.type + "-" + id;
 
         marker.setAttribute("class", "marker");
-        // Link to the name of the data path @TODO test this
         marker.setAttribute("href", vars.dataPath);
+        marker.setAttribute("type", vars.type);
 
-/*
+        // Specially set value for loading data.
+        marker.setAttribute("marker_id", id);
+
         // Embed extra data in the marker.
-        for (var i = 0; i < embedData.length; i++) {
-
-          marker.setAttribute(embedData[i]["key"], embedData[i]["value"]);
-
+/*
+        if(vars.embedData !== undefined) {  
+          if(vars.embedData.length > 0){
+            marker.setAttribute(vars.embedData[i], marker[vars.embedData[i]]);
+          }
         }
 */
 /*
@@ -66,7 +70,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         // add a class
 
        
-        marker.setAttribute("event_id", feature.properties["event_id"]);
 */
 
         // create an image icon
