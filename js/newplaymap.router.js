@@ -1,26 +1,35 @@
-var routing = {};
+newPlayMap.routing = {};
 
 // @TODO routing will be loaded everytime a dataset is loaded, it should be called.
 
 /* Upgrade to address 1.4, which MIGHT work with regular jquery, otherwise go back to jquery 1.4.2
  * Whenever the address changes, trigger popup markers & load node.
  */
+ 
+//http://www.asual.com/jquery/address/docs/ 
 newPlayMap.loadAddress = function() {
   $.address.change(function(event) {
+  console.log("change");
+  console.log(event);
     var path = event.value;
     if(path !== undefined && path !== '/') {
-      newPlayMap.loadMapNodePopup(path);
+/*       newPlayMap.loadMapNodePopup(path); */
+      newPlayMap.routePath(path);
     }
+    else {
+      console.log("no path");
+    }
+    
+
     return false;
   });
+
+  // bind address to all a links.
+  $('a').address();
 };
 
-newPlayMap.lookupAddress = function() {
-
-};
-
-newPlayMap.routePath = function() {
-
+newPlayMap.routePath = function(path) {
+  console.log(path);
 };
 
 
@@ -198,7 +207,6 @@ newPlayMap.nonLocatedFeaturePopup = function(path) {
   // else {
   //   newPlayMap.clearAddress();
   // }
-*/
 
 };
 
