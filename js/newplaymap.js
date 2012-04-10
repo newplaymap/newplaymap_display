@@ -36,7 +36,7 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({path: 'data/organizations_300.json'});
   newPlayMap.loadJSONFile({path: 'data/events_300.json'});
   newPlayMap.loadJSONFile({path: "data/artists_300.json"});
-  newPlayMap.loadJSONFile({path: "data/related_events.json"});
+  newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
 
   return false;
 };
@@ -49,12 +49,15 @@ newPlayMap.loadMap = function(){
 newPlayMap.loadWax = function() {
   // Syntax example. Seeing if Wax works.
   // Custom tiles
-  var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+  // var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
 
+// @BUG -- map tiles not loading upon page refresh
+// @NOTE seems to need to refresh map so then can trigger loading the rest of the map info
 //http://support.mapbox.com/discussions/general-questions/1175-wax-doesnt-load-my-maps-from-tilesmapboxcom-does-load-other-maps
 // @TODO redownload wax
 
 // @TODO using simpler map for debugging.
+
 // These work:
 var url = 'http://api.tiles.mapbox.com/v3/mapbox.world-light.jsonp';
 //var url = 'http://a.tiles.mapbox.com/v3/bclc-apec.map-rslgvy56.jsonp';
@@ -140,12 +143,12 @@ newPlayMap.loadMapLayers = function() {
  if(jsonData.related_events !== undefined) {  
   // Load Related Play Markers
   var relatedEventMarkerData = {
-    type: "related_event",
+    type: "play",
     id: "related_event_id",
     label: "related_theater",
     title: "play_title",
-    dataName: "related_events",
-    dataPath: "data/related_events.json",
+    dataName: "plays/9344", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+    dataPath: "data/plays/9344.json",
     icon: "icons/play.png",
     grouping_field: "related_play_id"
   };

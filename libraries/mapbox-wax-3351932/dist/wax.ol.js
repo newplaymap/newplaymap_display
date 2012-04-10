@@ -1872,7 +1872,28 @@ var Mustache = function() {
   * https://github.com/ded/reqwest
   * license MIT
   */
-!function(context,win){function serial(a){var b=a.name;if(a.disabled||!b)return"";b=enc(b);switch(a.tagName.toLowerCase()){case"input":switch(a.type){case"reset":case"button":case"image":case"file":return"";case"checkbox":case"radio":return a.checked?b+"="+(a.value?enc(a.value):!0)+"&":"";default:return b+"="+(a.value?enc(a.value):"")+"&"}break;case"textarea":return b+"="+enc(a.value)+"&";case"select":return b+"="+enc(a.options[a.selectedIndex].value)+"&"}return""}function enc(a){return encodeURIComponent(a)}function reqwest(a,b){return new Reqwest(a,b)}function init(o,fn){function error(a){o.error&&o.error(a),complete(a)}function success(resp){o.timeout&&clearTimeout(self.timeout)&&(self.timeout=null);var r=resp.responseText;if(r)switch(type){case"json":resp=win.JSON?win.JSON.parse(r):eval("("+r+")");break;case"js":resp=eval(r);break;case"html":resp=r}fn(resp),o.success&&o.success(resp),complete(resp)}function complete(a){o.complete&&o.complete(a)}this.url=typeof o=="string"?o:o.url,this.timeout=null;var type=o.type||setType(this.url),self=this;fn=fn||function(){},o.timeout&&(this.timeout=setTimeout(function(){self.abort(),error()},o.timeout)),this.request=getRequest(o,success,error)}function setType(a){if(/\.json$/.test(a))return"json";if(/\.jsonp$/.test(a))return"jsonp";if(/\.js$/.test(a))return"js";if(/\.html?$/.test(a))return"html";if(/\.xml$/.test(a))return"xml";return"js"}function Reqwest(a,b){this.o=a,this.fn=b,init.apply(this,arguments)}function getRequest(a,b,c){if(a.type!="jsonp"){var f=xhr();f.open(a.method||"GET",typeof a=="string"?a:a.url,!0),setHeaders(f,a),f.onreadystatechange=handleReadyState(f,b,c),a.before&&a.before(f),f.send(a.data||null);return f}var d=doc.createElement("script"),e=0;win[getCallbackName(a)]=generalCallback,d.type="text/javascript",d.src=a.url,d.async=!0,d.onload=d.onreadystatechange=function(){if(d[readyState]&&d[readyState]!=="complete"&&d[readyState]!=="loaded"||e)return!1;d.onload=d.onreadystatechange=null,a.success&&a.success(lastValue),lastValue=undefined,head.removeChild(d),e=1},head.appendChild(d)}function generalCallback(a){lastValue=a}function getCallbackName(a){var b=a.jsonpCallback||"callback";if(a.url.slice(-(b.length+2))==b+"=?"){var c="reqwest_"+uniqid++;a.url=a.url.substr(0,a.url.length-1)+c;return c}var d=new RegExp(b+"=([\\w]+)");return a.url.match(d)[1]}function setHeaders(a,b){var c=b.headers||{};c.Accept=c.Accept||"text/javascript, text/html, application/xml, text/xml, */*",b.crossOrigin||(c["X-Requested-With"]=c["X-Requested-With"]||"XMLHttpRequest"),c[contentType]=c[contentType]||"application/x-www-form-urlencoded";for(var d in c)c.hasOwnProperty(d)&&a.setRequestHeader(d,c[d],!1)}function handleReadyState(a,b,c){return function(){a&&a[readyState]==4&&(twoHundo.test(a.status)?b(a):c(a))}}var twoHundo=/^20\d$/,doc=document,byTag="getElementsByTagName",readyState="readyState",contentType="Content-Type",head=doc[byTag]("head")[0],uniqid=0,lastValue,xhr="XMLHttpRequest"in win?function(){return new XMLHttpRequest}:function(){return new ActiveXObject("Microsoft.XMLHTTP")};Reqwest.prototype={abort:function(){this.request.abort()},retry:function(){init.call(this,this.o,this.fn)}},reqwest.serialize=function(a){var b=[a[byTag]("input"),a[byTag]("select"),a[byTag]("textarea")],c=[],d,e;for(d=0,l=b.length;d<l;++d)for(e=0,l2=b[d].length;e<l2;++e)c.push(serial(b[d][e]));return c.join("").replace(/&$/,"")},reqwest.serializeArray=function(a){for(var b=this.serialize(a).split("&"),c=0,d=b.length,e=[],f;c<d;c++)b[c]&&(f=b[c].split("="))&&e.push({name:f[0],value:f[1]});return e};var old=context.reqwest;reqwest.noConflict=function(){context.reqwest=old;return this},typeof module!="undefined"?module.exports=reqwest:context.reqwest=reqwest}(this,window);wax = wax || {};
+!function(context,win){function serial(a){var b=a.name;if(a.disabled||!b)return"";b=enc(b);switch(a.tagName.toLowerCase()){case"input":switch(a.type){case"reset":case"button":case"image":case"file":return"";case"checkbox":case"radio":return a.checked?b+"="+(a.value?enc(a.value):!0)+"&":"";default:return b+"="+(a.value?enc(a.value):"")+"&"}break;case"textarea":return b+"="+enc(a.value)+"&";case"select":return b+"="+enc(a.options[a.selectedIndex].value)+"&"}return""}function enc(a){return encodeURIComponent(a)}function reqwest(a,b){return new Reqwest(a,b)}function init(o,fn){function error(a){o.error&&o.error(a),complete(a)}function success(resp){o.timeout&&clearTimeout(self.timeout)&&(self.timeout=null);var r=resp.responseText;if(r)switch(type){case"json":resp=win.JSON?win.JSON.parse(r):eval("("+r+")");break;case"js":resp=eval(r);break;case"html":resp=r}fn(resp),o.success&&o.success(resp),complete(resp)}function complete(a){o.complete&&o.complete(a)}this.url=typeof o=="string"?o:o.url,this.timeout=null;var type=o.type||setType(this.url),self=this;fn=fn||function(){},o.timeout&&(this.timeout=setTimeout(function(){self.abort(),error()},o.timeout)),this.request=getRequest(o,success,error)}function setType(a){if(/\.json$/.test(a))return"json";if(/\.jsonp$/.test(a))return"jsonp";if(/\.js$/.test(a))return"js";if(/\.html?$/.test(a))return"html";if(/\.xml$/.test(a))return"xml";return"js"}function Reqwest(a,b){this.o=a,this.fn=b,init.apply(this,arguments)}function getRequest(a,b,c){if(a.type!="jsonp"){var f=xhr();f.open(a.method||"GET",typeof a=="string"?a:a.url,!0),setHeaders(f,a),f.onreadystatechange=handleReadyState(f,b,c),a.before&&a.before(f),f.send(a.data||null);return f}var d=doc.createElement("script"),e=0;win[getCallbackName(a)]=generalCallback,d.type="text/javascript",d.src=a.url,d.async=!0,d.onload=d.onreadystatechange=function(){if(d[readyState]&&d[readyState]!=="complete"&&d[readyState]!=="loaded"||e)return!1;d.onload=d.onreadystatechange=null,a.success&&a.success(lastValue),lastValue=undefined,head.removeChild(d),e=1},head.appendChild(d)}function generalCallback(a){lastValue=a}function getCallbackName(a){var b=a.jsonpCallback||"callback";if(a.url.slice(-(b.length+2))==b+"=?"){var c="reqwest_"+uniqid++;a.url=a.url.substr(0,a.url.length-1)+c;return c}var d=new RegExp(b+"=([\\w]+)");return a.url.match(d)[1]}function setHeaders(a,b){var c=b.headers||{};c.Accept=c.Accept||"text/javascript, text/html, application/xml, text/xml, */*",b.crossOrigin||(c["X-Requested-With"]=c["X-Requested-With"]||"XMLHttpRequest"),c[contentType]=c[contentType]||"application/x-www-form-urlencoded";for(var d in c)c.hasOwnProperty(d)&&a.setRequestHeader(d,c[d],!1)}function handleReadyState(a,b,c){return function(){a&&a[readyState]==4&&(twoHundo.test(a.status)?b(a):c(a))}}var twoHundo=/^20\d$/,doc=document,byTag="getElementsByTagName",readyState="readyState",contentType="Content-Type",head=doc[byTag]("head")[0],uniqid=0,lastValue,xhr="XMLHttpRequest"in win?function(){return new XMLHttpRequest}:function(){return new ActiveXObject("Microsoft.XMLHTTP")};Reqwest.prototype={abort:function(){this.request.abort()},retry:function(){init.call(this,this.o,this.fn)}},reqwest.serialize=function(a){var b=[a[byTag]("input"),a[byTag]("select"),a[byTag]("textarea")],c=[],d,e;for(d=0,l=b.length;d<l;++d)for(e=0,l2=b[d].length;e<l2;++e)c.push(serial(b[d][e]));return c.join("").replace(/&$/,"")},reqwest.serializeArray=function(a){for(var b=this.serialize(a).split("&"),c=0,d=b.length,e=[],f;c<d;c++)b[c]&&(f=b[c].split("="))&&e.push({name:f[0],value:f[1]});return e};var old=context.reqwest;reqwest.noConflict=function(){context.reqwest=old;return this},typeof module!="undefined"?module.exports=reqwest:context.reqwest=reqwest}(this,window);var wax = wax || {};
+wax.ol = wax.ol || {};
+
+wax.ol.connector = function(tilejson) {
+    for (var i = 0; i < tilejson.tiles.length; i++) {
+        tilejson.tiles[i] = tilejson.tiles[i]
+            .replace('{z}', '${z}')
+            .replace('{x}', '${x}')
+            .replace('{y}', '${y}');
+    }
+    var l = new OpenLayers.Layer.XYZ(
+        tilejson.name,
+        tilejson.tiles, {
+            sphericalMercator: true,
+            zoomOffset: tilejson.minzoom,
+            numZoomLevels: tilejson.maxzoom - tilejson.minzoom,
+            attribution: tilejson.attribution
+        });
+    l.CLASS_NAME = 'Wax.Layer';
+    return l;
+};
+;wax = wax || {};
 
 // Attribution
 // -----------
@@ -2987,775 +3008,115 @@ wax.u = {
     }
 };
 wax = wax || {};
-wax.mm = wax.mm || {};
+wax.ol = wax.ol || {};
 
-// Attribution
-// -----------
-// Attribution wrapper for Modest Maps.
-wax.mm.attribution = function(map, tilejson) {
-    tilejson = tilejson || {};
-    var a, // internal attribution control
-        attribution = {};
-
-    attribution.element = function() {
-        return a.element();
-    };
-
-    attribution.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(a.element());
-        return this;
-    };
-
-    attribution.init = function() {
-        a = wax.attribution();
-        a.content(tilejson.attribution);
-        a.element().className = 'wax-attribution wax-mm';
-        return this;
-    };
-
-    return attribution.init();
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Box Selector
-// ------------
-wax.mm.boxselector = function(map, tilejson, opts) {
-    var mouseDownPoint = null,
-        callback = ((typeof opts === 'function') ?
-            opts :
-            opts.callback),
-        boxDiv,
-        addEvent = MM.addEvent,
-        removeEvent = MM.removeEvent,
-        box,
-        boxselector = {};
-
-    function getMousePoint(e) {
-        // start with just the mouse (x, y)
-        var point = new MM.Point(e.clientX, e.clientY);
-        // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
-
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    function mouseDown(e) {
-        if (!e.shiftKey) return;
-
-        mouseDownPoint = getMousePoint(e);
-
-        boxDiv.style.left = mouseDownPoint.x + 'px';
-        boxDiv.style.top = mouseDownPoint.y + 'px';
-
-        addEvent(map.parent, 'mousemove', mouseMove);
-        addEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'crosshair';
-        return MM.cancelEvent(e);
-    }
-
-
-    function mouseMove(e) {
-        var point = getMousePoint(e),
-            style = boxDiv.style;
-        style.display = 'block';
-        if (point.x < mouseDownPoint.x) {
-            style.left = point.x + 'px';
-        } else {
-            style.left = mouseDownPoint.x + 'px';
-        }
-        if (point.y < mouseDownPoint.y) {
-            style.top = point.y + 'px';
-        } else {
-            style.top = mouseDownPoint.y + 'px';
-        }
-        style.width = Math.abs(point.x - mouseDownPoint.x) + 'px';
-        style.height = Math.abs(point.y - mouseDownPoint.y) + 'px';
-        return MM.cancelEvent(e);
-    }
-
-    function mouseUp(e) {
-        var point = getMousePoint(e),
-            l1 = map.pointLocation(point),
-            l2 = map.pointLocation(mouseDownPoint);
-
-        // Format coordinates like mm.map.getExtent().
-        boxselector.extent([
-            new MM.Location(
-                Math.max(l1.lat, l2.lat),
-                Math.min(l1.lon, l2.lon)),
-            new MM.Location(
-                Math.min(l1.lat, l2.lat),
-                Math.max(l1.lon, l2.lon))
-        ]);
-
-        removeEvent(map.parent, 'mousemove', mouseMove);
-        removeEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'auto';
-    }
-
-    function drawbox(map, e) {
-        if (!boxDiv || !box) return;
-        var br = map.locationPoint(box[1]),
-            tl = map.locationPoint(box[0]),
-            style = boxDiv.style;
-
-        style.display = 'block';
-        style.height = 'auto';
-        style.width = 'auto';
-        style.left = Math.max(0, tl.x) + 'px';
-        style.top = Math.max(0, tl.y) + 'px';
-        style.right = Math.max(0, map.dimensions.x - br.x) + 'px';
-        style.bottom = Math.max(0, map.dimensions.y - br.y) + 'px';
-    }
-
-    boxselector.extent = function(x, silent) {
-        if (!x) return box;
-
-        box = [
-            new MM.Location(
-                Math.max(x[0].lat, x[1].lat),
-                Math.min(x[0].lon, x[1].lon)),
-            new MM.Location(
-                Math.min(x[0].lat, x[1].lat),
-                Math.max(x[0].lon, x[1].lon))
-        ];
-
-        drawbox(map);
-
-        if (!silent) callback(box);
-    };
-
-    boxselector.add = function(map) {
-        boxDiv = boxDiv || document.createElement('div');
-        boxDiv.id = map.parent.id + '-boxselector-box';
-        boxDiv.className = 'boxselector-box';
-        map.parent.appendChild(boxDiv);
-
-        addEvent(map.parent, 'mousedown', mouseDown);
-        map.addCallback('drawn', drawbox);
-        return this;
-    };
-
-    boxselector.remove = function() {
-        map.parent.removeChild(boxDiv);
-        removeEvent(map.parent, 'mousedown', mouseDown);
-        map.removeCallback('drawn', drawbox);
-    };
-
-    return boxselector.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-wax._ = {};
-
-// Bandwidth Detection
-// ------------------
-wax.mm.bwdetect = function(map, options) {
-    options = options || {};
-    var lowpng = options.png || '.png128',
-        lowjpg = options.jpg || '.jpg70',
-        bw = false;
-
-    wax._.bw_png = lowpng;
-    wax._.bw_jpg = lowjpg;
-
-    return wax.bwdetect(options, function(x) {
-        wax._.bw = !x;
-        for (var i = 0; i < map.layers.length; i++) {
-            if (map.getLayerAt(i).provider instanceof wax.mm.connector) {
-                map.getLayerAt(i).setProvider(map.getLayerAt(i).provider);
-            }
-        }
-    });
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Fullscreen
-// ----------
-// A simple fullscreen control for Modest Maps
-
-// Add zoom links, which can be styled as buttons, to a `modestmaps.Map`
-// control. This function can be used chaining-style with other
-// chaining-style controls.
-wax.mm.fullscreen = function(map) {
-    // true: fullscreen
-    // false: minimized
-    var fullscreened = false,
-        fullscreen = {},
-        a,
-        body = document.body,
-        smallSize;
-
-    function click(e) {
-        if (e) e.stop();
-        if (fullscreened) {
-            fullscreen.original();
-        } else {
-            fullscreen.full();
-        }
-    }
-
-    function ss(w, h) {
-        map.dimensions = new MM.Point(w, h);
-        map.parent.style.width = Math.round(map.dimensions.x) + 'px';
-        map.parent.style.height = Math.round(map.dimensions.y) + 'px';
-        map.dispatchCallback('resized', map.dimensions);
-    }
-
-    // Modest Maps demands an absolute height & width, and doesn't auto-correct
-    // for changes, so here we save the original size of the element and
-    // restore to that size on exit from fullscreen.
-    fullscreen.add = function(map) {
-        a = document.createElement('a');
-        a.className = 'wax-fullscreen';
-        a.href = '#fullscreen';
-        a.innerHTML = 'fullscreen';
-        bean.add(a, 'click', click);
-        return this;
-    };
-    fullscreen.full = function() {
-        if (fullscreened) { return; } else { fullscreened = true; }
-        smallSize = [map.parent.offsetWidth, map.parent.offsetHeight];
-        map.parent.className += ' wax-fullscreen-map';
-        body.className += ' wax-fullscreen-view';
-        ss(map.parent.offsetWidth, map.parent.offsetHeight);
-    };
-    fullscreen.original = function() {
-        if (!fullscreened) { return; } else { fullscreened = false; }
-        map.parent.className = map.parent.className.replace(' wax-fullscreen-map', '');
-        body.className = body.className.replace(' wax-fullscreen-view', '');
-        ss(smallSize[0], smallSize[1]);
-    };
-    fullscreen.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(a);
-        return this;
-    };
-
-    return fullscreen.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-wax.mm.interaction = function() {
+wax.ol.interaction = function() {
     var dirty = false, _grid;
 
+    function setdirty() { dirty = true; }
+
+    function getlayers() {
+        var l = [];
+        for (var i in map.layers) {
+            // TODO: make better indication of whether
+            // this is an interactive layer
+            if ((map.layers[i].visibility === true) &&
+                (map.layers[i].CLASS_NAME === 'Wax.Layer')) {
+              l.push(map.layers[i]);
+            }
+        }
+        return l;
+    }
+
     function grid() {
-        var zoomLayer = map.getLayerAt(0)
-            .levels[Math.round(map.getZoom())];
-        if (!dirty && _grid !== undefined && _grid.length) {
+        if (!dirty && _grid) {
             return _grid;
         } else {
-            _grid = (function(t) {
-                var o = [];
-                for (var key in t) {
-                    if (t[key].parentNode === zoomLayer) {
-                        var offset = wax.u.offset(t[key]);
-                        o.push([
-                            offset.top,
-                            offset.left,
-                            t[key]
-                        ]);
+            _grid = [];
+            var layers = getlayers();
+            for (var j = 0; j < layers.length; j++) {
+                for (var x = 0; x < layers[j].grid.length; x++) {
+                    for (var y = 0; y < layers[j].grid[x].length; y++) {
+                        var divpos;
+                        if (layers[j].grid[x][y].imgDiv) {
+                            divpos = wax.u.offset(layers[j].grid[x][y].imgDiv);
+                        } else {
+                            divpos = wax.u.offset(layers[j].grid[x][y].frame);
+                        }
+                        if (divpos &&
+                            ((divpos.top < pos.y) &&
+                             ((divpos.top + 256) > pos.y) &&
+                             (divpos.left < pos.x) &&
+                             ((divpos.left + 256) > pos.x))) {
+                            tiles.push(layers[j].grid[x][y]);
+                        }
                     }
                 }
-                return o;
-            })(map.getLayerAt(0).tiles);
-            return _grid;
+            }
+            return tiles;
         }
     }
 
     function attach(x) {
         if (!arguments.length) return map;
         map = x;
-        function setdirty() { dirty = true; }
-        var clearingEvents = ['zoomed', 'panned', 'centered',
-            'extentset', 'resized', 'drawn'];
-        for (var i = 0; i < clearingEvents.length; i++) {
-            map.addCallback(clearingEvents[i], setdirty);
-        }
+        map.events.on({
+            addlayer: setdirty,
+            changelayer: setdirty,
+            removelayer: setdirty,
+            changebaselayer: setdirty
+        });
     }
 
     return wax.interaction()
         .attach(attach)
         .parent(function() {
-          return map.parent;
+          return map.div;
         })
         .grid(grid);
 };
-wax = wax || {};
-wax.mm = wax.mm || {};
 
-// LatLng
-// ------
-// Show the current cursor position in
-// lat/long
-wax.mm.latlngtooltip = function(map) {
-    var tt, // tooltip
-        _down = false,
-        latlng = {};
+// Wax: Legend Control
+// -------------------
 
-    function getMousePoint(e) {
-        // start with just the mouse (x, y)
-        var point = new MM.Point(e.clientX, e.clientY);
-        // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
+;var wax = wax || {};
+wax.ol = wax.ol || {};
 
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
+wax.ol.Legend = OpenLayers.Class(OpenLayers.Control, {
+    CLASS_NAME: 'wax.ol.Legend',
+    legend: null,
+    options: null,
 
-    function onDown(e) {
-        console.log('here');
-        _down = true;
-    }
-
-    function onUp(e) {
-        _down = false;
-    }
-
-    function onMove(e) {
-        if (!e.shiftKey || _down) {
-            if (tt.parentNode === map.parent) {
-                map.parent.removeChild(tt);
-            }
-            return;
-        }
-
-        var pt = getMousePoint(e),
-            ll = map.pointLocation(pt),
-            fmt = ll.lat.toFixed(2) + ', ' + ll.lon.toFixed(2);
-
-        tt.innerHTML = fmt;
-        pt.scale = pt.width = pt.height = 1;
-        pt.x += 10;
-        MM.moveElement(tt, pt);
-        map.parent.appendChild(tt);
-    }
-
-    latlng.add = function() {
-        MM.addEvent(map.parent, 'mousemove', onMove);
-        MM.addEvent(map.parent, 'mousedown', onDown);
-        MM.addEvent(map.parent, 'mouseup', onUp);
-        tt = document.createElement('div');
-        tt.className = 'wax-latlngtooltip';
-        return this;
-    };
-
-    latlng.remove = function() {
-        MM.removeEvent(map.parent, 'mousemove', onMove);
-        MM.removeEvent(map.parent, 'mousedown', onDown);
-        MM.removeEvent(map.parent, 'mouseup', onUp);
-        return this;
-    };
-
-    return latlng.add();
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Legend Control
-// --------------
-// The Modest Maps version of this control is a very, very
-// light wrapper around the `/lib` code for legends.
-wax.mm.legend = function(map, tilejson) {
-    tilejson = tilejson || {};
-    var l, // parent legend
-        legend = {};
-
-    legend.add = function() {
-        l = wax.legend()
-            .content(tilejson.legend || '');
-        return this;
-    };
-
-    legend.content = function(x) {
-        if (x) l.content(x.legend || '');
-    };
-
-    legend.element = function() {
-        return l.element();
-    };
-
-    legend.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(l.element());
-        return this;
-    };
-
-    return legend.add();
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Point Selector
-// --------------
-//
-// This takes an object of options:
-//
-// * `callback`: a function called with an array of `com.modestmaps.Location`
-//   objects when the map is edited
-//
-// It also exposes a public API function: `addLocation`, which adds a point
-// to the map as if added by the user.
-wax.mm.pointselector = function(map, tilejson, opts) {
-    var mouseDownPoint = null,
-        mouseUpPoint = null,
-        tolerance = 5,
-        overlayDiv,
-        pointselector = {},
-        locations = [];
-
-    var callback = (typeof opts === 'function') ?
-        opts :
-        opts.callback;
-
-    // Create a `com.modestmaps.Point` from a screen event, like a click.
-    function makePoint(e) {
-        var coords = wax.u.eventoffset(e);
-        var point = new MM.Point(coords.x, coords.y);
-        // correct for scrolled document
-
-        // and for the document
-        var body = {
-            x: parseFloat(MM.getStyle(document.documentElement, 'margin-left')),
-            y: parseFloat(MM.getStyle(document.documentElement, 'margin-top'))
-        };
-
-        if (!isNaN(body.x)) point.x -= body.x;
-        if (!isNaN(body.y)) point.y -= body.y;
-
-        // TODO: use wax.util.offset
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    // Currently locations in this control contain circular references to elements.
-    // These can't be JSON encoded, so here's a utility to clean the data that's
-    // spit back.
-    function cleanLocations(locations) {
-        var o = [];
-        for (var i = 0; i < locations.length; i++) {
-            o.push(new MM.Location(locations[i].lat, locations[i].lon));
-        }
-        return o;
-    }
-
-    // Attach this control to a map by registering callbacks
-    // and adding the overlay
-
-    // Redraw the points when the map is moved, so that they stay in the
-    // correct geographic locations.
-    function drawPoints() {
-        var offset = new MM.Point(0, 0);
-        for (var i = 0; i < locations.length; i++) {
-            var point = map.locationPoint(locations[i]);
-            if (!locations[i].pointDiv) {
-                locations[i].pointDiv = document.createElement('div');
-                locations[i].pointDiv.className = 'wax-point-div';
-                locations[i].pointDiv.style.position = 'absolute';
-                locations[i].pointDiv.style.display = 'block';
-                // TODO: avoid circular reference
-                locations[i].pointDiv.location = locations[i];
-                // Create this closure once per point
-                bean.add(locations[i].pointDiv, 'mouseup',
-                    (function selectPointWrap(e) {
-                    var l = locations[i];
-                    return function(e) {
-                        MM.removeEvent(map.parent, 'mouseup', mouseUp);
-                        pointselector.deleteLocation(l, e);
-                    };
-                })());
-                map.parent.appendChild(locations[i].pointDiv);
-            }
-            locations[i].pointDiv.style.left = point.x + 'px';
-            locations[i].pointDiv.style.top = point.y + 'px';
-        }
-    }
-
-    function mouseDown(e) {
-        mouseDownPoint = makePoint(e);
-        bean.add(map.parent, 'mouseup', mouseUp);
-    }
-
-    // Remove the awful circular reference from locations.
-    // TODO: This function should be made unnecessary by not having it.
-    function mouseUp(e) {
-        if (!mouseDownPoint) return;
-        mouseUpPoint = makePoint(e);
-        if (MM.Point.distance(mouseDownPoint, mouseUpPoint) < tolerance) {
-            pointselector.addLocation(map.pointLocation(mouseDownPoint));
-            callback(cleanLocations(locations));
-        }
-        mouseDownPoint = null;
-    }
-
-    // API for programmatically adding points to the map - this
-    // calls the callback for ever point added, so it can be symmetrical.
-    // Useful for initializing the map when it's a part of a form.
-    pointselector.addLocation = function(location) {
-        locations.push(location);
-        drawPoints();
-        callback(cleanLocations(locations));
-    };
-
-    pointselector.locations = function(x) {
-        return locations;
-    };
-
-    pointselector.add = function(map) {
-        bean.add(map.parent, 'mousedown', mouseDown);
-        map.addCallback('drawn', drawPoints);
-        return this;
-    };
-
-    pointselector.remove = function(map) {
-        bean.remove(map.parent, 'mousedown', mouseDown);
-        map.removeCallback('drawn', drawPoints);
-        for (var i = locations.length - 1; i > -1; i--) {
-            pointselector.deleteLocation(locations[i]);
-        }
-        return this;
-    };
-
-    pointselector.deleteLocation = function(location, e) {
-        if (!e || confirm('Delete this point?')) {
-            location.pointDiv.parentNode.removeChild(location.pointDiv);
-            locations.splice(wax.u.indexOf(locations, location), 1);
-            callback(cleanLocations(locations));
-        }
-    };
-
-    return pointselector.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// ZoomBox
-// -------
-// An OL-style ZoomBox control, from the Modest Maps example.
-wax.mm.zoombox = function(map) {
-    // TODO: respond to resize
-    var zoombox = {},
-        drawing = false,
-        box,
-        mouseDownPoint = null;
-
-    function getMousePoint(e) {
-        // start with just the mouse (x, y)
-        var point = new MM.Point(e.clientX, e.clientY);
-        // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
-
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    function mouseUp(e) {
-        if (!drawing) return;
-
-        drawing = false;
-        var point = getMousePoint(e);
-
-        var l1 = map.pointLocation(point),
-            l2 = map.pointLocation(mouseDownPoint);
-
-        map.setExtent([l1, l2]);
-
-        box.style.display = 'none';
-        MM.removeEvent(map.parent, 'mousemove', mouseMove);
-        MM.removeEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'auto';
-    }
-
-    function mouseDown(e) {
-        if (!(e.shiftKey && !this.drawing)) return;
-
-        drawing = true;
-        mouseDownPoint = getMousePoint(e);
-
-        box.style.left = mouseDownPoint.x + 'px';
-        box.style.top = mouseDownPoint.y + 'px';
-
-        MM.addEvent(map.parent, 'mousemove', mouseMove);
-        MM.addEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'crosshair';
-        return MM.cancelEvent(e);
-    }
-
-    function mouseMove(e) {
-        if (!drawing) return;
-
-        var point = getMousePoint(e);
-        box.style.display = 'block';
-        if (point.x < mouseDownPoint.x) {
-            box.style.left = point.x + 'px';
-        } else {
-            box.style.left = mouseDownPoint.x + 'px';
-        }
-        box.style.width = Math.abs(point.x - mouseDownPoint.x) + 'px';
-        if (point.y < mouseDownPoint.y) {
-            box.style.top = point.y + 'px';
-        } else {
-            box.style.top = mouseDownPoint.y + 'px';
-        }
-        box.style.height = Math.abs(point.y - mouseDownPoint.y) + 'px';
-        return MM.cancelEvent(e);
-    }
-
-    zoombox.add = function(map) {
-        // Use a flag to determine whether the zoombox is currently being
-        // drawn. Necessary only for IE because `mousedown` is triggered
-        // twice.
-        box = box || document.createElement('div');
-        box.id = map.parent.id + '-zoombox-box';
-        box.className = 'zoombox-box';
-        map.parent.appendChild(box);
-        MM.addEvent(map.parent, 'mousedown', mouseDown);
-        return this;
-    };
-
-    zoombox.remove = function() {
-        map.parent.removeChild(box);
-        MM.removeEvent(map.parent, 'mousedown', mouseDown);
-    };
-
-    return zoombox.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Zoomer
-// ------
-// Add zoom links, which can be styled as buttons, to a `modestmaps.Map`
-// control. This function can be used chaining-style with other
-// chaining-style controls.
-wax.mm.zoomer = function(map) {
-    var zoomin = document.createElement('a');
-    zoomin.innerHTML = '+';
-    zoomin.href = '#';
-    zoomin.className = 'zoomer zoomin';
-    bean.add(zoomin, 'mousedown dblclick', function(e) {
-        e.stop();
-    });
-    bean.add(zoomin, 'click', function(e) {
-        e.stop();
-        map.zoomIn();
-    }, false);
-
-    var zoomout = document.createElement('a');
-    zoomout.innerHTML = '-';
-    zoomout.href = '#';
-    zoomout.className = 'zoomer zoomout';
-    bean.add(zoomout, 'mousedown dblclick', function(e) {
-        e.stop();
-    });
-    bean.add(zoomout, 'click', function(e) {
-        e.stop();
-        map.zoomOut();
-    });
-
-    var zoomer = {
-        add: function(map) {
-            map.addCallback('drawn', function(map, e) {
-                if (map.coordinate.zoom === map.coordLimits[0].zoom) {
-                    zoomout.className = 'zoomer zoomout zoomdisabled';
-                } else if (map.coordinate.zoom === map.coordLimits[1].zoom) {
-                    zoomin.className = 'zoomer zoomin zoomdisabled';
-                } else {
-                    zoomin.className = 'zoomer zoomin';
-                    zoomout.className = 'zoomer zoomout';
-                }
-            });
-            return this;
-        },
-        appendTo: function(elem) {
-            wax.u.$(elem).appendChild(zoomin);
-            wax.u.$(elem).appendChild(zoomout);
-            return this;
-        }
-    };
-    return zoomer.add(map);
-};
-var wax = wax || {};
-wax.mm = wax.mm || {};
-
-// A layer connector for Modest Maps conformant to TileJSON
-// https://github.com/mapbox/tilejson
-wax.mm._provider = function(options) {
-    this.options = {
-        tiles: options.tiles,
-        scheme: options.scheme || 'xyz',
-        minzoom: options.minzoom || 0,
-        maxzoom: options.maxzoom || 22,
-        bounds: options.bounds || [-180, -90, 180, 90]
-    };
-};
-
-wax.mm._provider.prototype = {
-    outerLimits: function() {
-        return [
-            this.locationCoordinate(
-                new MM.Location(
-                    this.options.bounds[0],
-                    this.options.bounds[1])).zoomTo(this.options.minzoom),
-            this.locationCoordinate(
-                new MM.Location(
-                    this.options.bounds[2],
-                    this.options.bounds[3])).zoomTo(this.options.maxzoom)
-        ];
+    initialize: function(options) {
+        this.options = options || {};
+        OpenLayers.Control.prototype.initialize.apply(this, [options || {}]);
     },
-    getTile: function(c) {
-        if (!(coord = this.sourceCoordinate(c))) return null;
-        if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
 
-        coord.row = (this.options.scheme === 'tms') ?
-            Math.pow(2, coord.zoom) - coord.row - 1 :
-            coord.row;
+    activate: function() {
+        this.legend = new wax.legend(this.map.viewPortDiv, this.options.container);
+        return OpenLayers.Control.prototype.activate.apply(this, arguments);
+    },
 
-        var u = this.options.tiles[parseInt(Math.pow(2, coord.zoom) * coord.row + coord.column, 10) %
-            this.options.tiles.length]
-            .replace('{z}', coord.zoom.toFixed(0))
-            .replace('{x}', coord.column.toFixed(0))
-            .replace('{y}', coord.row.toFixed(0));
+    setMap: function(map) {
+        OpenLayers.Control.prototype.setMap.apply(this, arguments);
+        this.activate();
+        this.map.events.on({
+            'addlayer': this.setLegend,
+            'changelayer': this.setLegend,
+            'removelayer': this.setLegend,
+            'changebaselayer': this.setLegend,
+            scope: this
+        });
+    },
 
-        if (wax._ && wax._.bw) {
-            u = u.replace('.png', wax._.bw_png)
-                .replace('.jpg', wax._.bw_jpg);
+    setLegend: function() {
+        var urls = [];
+        for (var i = 0; i < this.map.layers.length; i++) {
+            var layer = this.map.layers[i];
+            if (layer && layer.getURL && layer.visibility) {
+                urls.push(layer.getURL(new OpenLayers.Bounds()));
+            }
         }
-
-        return u;
+        this.legend.render(urls);
     }
-};
-
-if (MM) {
-    MM.extend(wax.mm._provider, MM.MapProvider);
-}
-
-wax.mm.connector = function(options) {
-    var x = new wax.mm._provider(options);
-    return new MM.Layer(x);
-};
+});
