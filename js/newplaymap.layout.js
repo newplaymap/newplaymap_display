@@ -5,8 +5,9 @@ newPlayMap.updatePanel = function(marker) {
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
-
+console.log(marker);
   featureData = newPlayMap.loadDataObject(feature);
+  console.log(featureData);
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 };

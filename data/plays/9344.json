@@ -8,7 +8,7 @@
   "properties": {
       "longitude" : -110.971909,
       "latitude" : 32.220585,
-      "event_id" : 10972,
+      "related_event_id" : 10972,
       "event_type" : "Rolling Premiere",
       "event_date" : "January 3, 2012",
       "event_to_date" : "January 30, 2012",
@@ -35,7 +35,7 @@
   "properties": {
       "longitude" : -72.920621,
       "latitude" : 41.293108,
-      "event_id" : 9351,
+      "related_event_id" : 9351,
       "event_type" : "Rolling Premiere",
       "event_date" : "March 2, 2011",
       "event_to_date" : "April 3, 2011",
@@ -63,7 +63,7 @@
   "properties": {
       "longitude" : -93.249161,
       "latitude" : 44.97101,
-      "event_id" : 9348,
+      "related_event_id" : 9348,
       "event_type" : "Rolling Premiere",
       "event_date" : "February 18, 2011",
       "event_to_date" : "March 6, 2011",
@@ -91,7 +91,7 @@
   "properties": {
       "longitude" : -77.020721,
       "latitude" : 38.877536,
-      "event_id" : 9352,
+      "related_event_id" : 9352,
       "event_type" : "Reading",
       "event_date" : "January 22, 2011",
       "event_to_date" : "January 23, 2011",
@@ -119,7 +119,7 @@
   "properties": {
       "longitude" : -93.238971,
       "latitude" : 44.962414,
-      "event_id" : 11110,
+      "related_event_id" : 11110,
       "event_type" : "Workshop",
       "event_date" : "December 13, 2010",
       "event_to_date" : "December 17, 2010",
@@ -147,7 +147,7 @@
   "properties": {
       "longitude" : -73.990152,
       "latitude" : 40.758343,
-      "event_id" : 11372,
+      "related_event_id" : 11372,
       "event_type" : "Workshop",
       "event_date" : "October 26, 2009",
       "event_to_date" : "October 30, 2009",
@@ -175,7 +175,7 @@
   "properties": {
       "longitude" : -73.990152,
       "latitude" : 40.758343,
-      "event_id" : 33902,
+      "related_event_id" : 33902,
       "event_type" : "Reading",
       "event_date" : "September 29, 2009",
       "event_to_date" : "September 30, 2009",
@@ -203,7 +203,7 @@
   "properties": {
       "longitude" : null,
       "latitude" : null,
-      "event_id" : 11378,
+      "related_event_id" : 11378,
       "event_type" : "Residency",
       "event_date" : "July 5, 2009",
       "event_to_date" : "August 2, 2009",
@@ -231,7 +231,7 @@
   "properties": {
       "longitude" : -75.174646,
       "latitude" : 39.951438,
-      "event_id" : 11174,
+      "related_event_id" : 11174,
       "event_type" : "Workshop",
       "event_date" : "April 26, 2009",
       "event_to_date" : "April 26, 2009",
@@ -259,7 +259,7 @@
   "properties": {
       "longitude" : -93.238971,
       "latitude" : 44.962414,
-      "event_id" : 11283,
+      "related_event_id" : 11283,
       "event_type" : "Workshop",
       "event_date" : "January 30, 2009",
       "event_to_date" : "February 2, 2009",
@@ -287,7 +287,7 @@
   "properties": {
       "longitude" : -73.990152,
       "latitude" : 40.758343,
-      "event_id" : 11109,
+      "related_event_id" : 11109,
       "event_type" : "Reading",
       "event_date" : "December 11, 2008",
       "event_to_date" : "December 11, 2008",
@@ -315,7 +315,7 @@
   "properties": {
       "longitude" : -91.791349,
       "latitude" : 47.926314,
-      "event_id" : 18550,
+      "related_event_id" : 18550,
       "event_type" : "Residency",
       "event_date" : "June 9, 2008",
       "event_to_date" : "June 13, 2008",

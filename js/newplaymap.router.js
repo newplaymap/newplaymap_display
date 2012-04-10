@@ -84,7 +84,6 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
     console.log("parts" + parts[0]);
       feature = newPlayMap.lookupFeatureByPath(parts[0], "play", "play_path");
       // Spelling this out to be extra super clear
-console.log(feature);
       newPlayMap.loadRelatedEvents(rawPath);
 
     break;
@@ -93,11 +92,9 @@ console.log(feature);
 
 
 newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path) {
-console.log(jsonData);
 if(jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
     loadedFeatures = [];
-    console.log(features);
     for (var i = 0; i < features.length; i++) {
         var feature = features[i];
         var pathKey;
@@ -115,8 +112,6 @@ if(jsonData[dataName] !== undefined){
         }
         
     }
-    console.log("lf");
-    console.log(loadedFeatures);
     return loadedFeatures
    } 
 };

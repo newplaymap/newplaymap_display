@@ -140,14 +140,14 @@ newPlayMap.loadMapLayers = function() {
 
   // We treat related event as it's own separate type so there are no conflicts with identical events.
   // This information will be on its own special layer, and cross linking identical markers is too complex for what we are doing right now.
- if(jsonData.related_events !== undefined) {  
+ if(jsonData.play !== undefined) {  
   // Load Related Play Markers
   var relatedEventMarkerData = {
     type: "play",
     id: "related_event_id",
     label: "related_theater",
     title: "play_title",
-    dataName: "plays/9344", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+    dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
     dataPath: "data/plays/9344.json",
     icon: "icons/play.png",
     grouping_field: "related_play_id"
