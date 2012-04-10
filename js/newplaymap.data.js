@@ -25,9 +25,8 @@ newPlayMap.loadDataError = function(data) {
 };
 
 
-
-
-newPlayMap.onLoadDataMarkers = function(data, vars) {
+newPlayMap.onLoadDataMarkers = function(vars) {
+  var data = jsonData[vars.dataName];
   var vars = vars;
 
     // onLoadMarkers() gets a GeoJSON FeatureCollection:

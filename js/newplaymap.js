@@ -14,16 +14,16 @@ var map;
 var loaded = 0;
 
 window.onload = function() {
-  if(loaded === 0) {
+  //@TODO load once?
   // Change basic layout of page.
     newPlayMap.alterHomepage();
     
     newPlayMap.loadPageRouter();
   
     newPlayMap.loadData();
-  }
-  loaded++;
-/*   newPlayMap.loadMap(); */
+    
+    newPlayMap.loadMap();
+
 };
 
 newPlayMap.alterHomepage = function() {
@@ -47,7 +47,6 @@ newPlayMap.loadData = function() {
 newPlayMap.loadMap = function(){
   // Load map tiles.
   newPlayMap.loadWax();
-
 };
 
 // Wax calls this and the map variable is relevant to what Wax loads
@@ -81,15 +80,50 @@ newPlayMap.loadMapLayers = function() {
   newPlayMap.loadArtistMarkers();
   newPlayMap.loadOrganizationMarkers();
 */
-/*
 
-  // Load Event Maarkers
-  newPlayMap.onLoadDataMarkers(data.eventData, {
+  // Load Event Markers
+  var eventMarkerData = {
     id: "related_play_id",
     title: "play_title",
+    dataName: "events_300.json",
     dataPath: "data/events_300.json",
     icon: "icons/event.png"
     //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
-  });
+  };
+  newPlayMap.onLoadDataMarkers(eventMarkerData);
+
+  // Load Organization Markers
+  var organizationMarkerData = {
+    id: "organization_id",
+    title: "name",
+    dataName: "organizations_300.json",
+    dataPath: "data/organizations_300.json",
+    icon: "icons/organization.png"
+    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
+  };
+  newPlayMap.onLoadDataMarkers(organizationMarkerData);
+
+  // Load Artist Markers
+  var artistMarkerData = {
+    id: "artist_id",
+    title: "name",
+    dataName: "artists_300.json",
+    dataPath: "data/artists_300.json",
+    icon: "icons/artist.png"
+    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
+  };
+  newPlayMap.onLoadDataMarkers(artistMarkerData);
+
+  // Load Related Play Markers
+/*
+  var organizationMarkerData = {
+    id: "organization_id",
+    title: "name",
+    dataName: "organizations_300.json",
+    dataPath: "data/organizations_300.json",
+    icon: "icons/organization.png"
+    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
+  };
+  newPlayMap.onLoadDataMarkers(organizationMarkerData);
 */
 };
