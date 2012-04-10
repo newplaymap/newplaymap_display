@@ -9,15 +9,17 @@ newPlayMap.routing = {};
 //http://www.asual.com/jquery/address/docs/ 
 newPlayMap.loadAddress = function() {
   $.address.change(function(event) {
+/*
   console.log("change");
   console.log(event);
+*/
     var path = event.value;
     if(path !== undefined && path !== '/') {
 /*       newPlayMap.loadMapNodePopup(path); */
       newPlayMap.routePath(path);
     }
     else {
-      console.log("no path");
+/*       console.log("no path"); */
     }
     
 
@@ -29,7 +31,7 @@ newPlayMap.loadAddress = function() {
 };
 
 newPlayMap.routePath = function(path) {
-  console.log(path);
+/*   console.log(path); */
   var rawPath = newPlayMap.jqueryAddressHashPath(path);
   console.log("raw" + rawPath);
     var dir, parts, filters = "";
@@ -41,16 +43,16 @@ newPlayMap.routePath = function(path) {
 
     // @TODO add filters.
 
-    if(dir !== undefined && dir.length > 0) {
-      parts =  dir[dir.length].split("?");
-    }
 
+
+      parts =  rawPath.split("?");
+
+/*
     if(parts !== undefined && parts.length > 0) {
       filters = parts[parts.length].split("&");
     }
-    newPlayMap.lookupRoute(rawPath, dir, filters);
-
-
+*/
+    newPlayMap.lookupRoute(rawPath, dir, parts, filters);
   }
 
   // Ignore certain links & force them to open in Drupal
@@ -58,31 +60,66 @@ newPlayMap.routePath = function(path) {
   
 };
 
-newPlayMap.lookupRoute = function(rawPath, dir, filters) {
+newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
 
+/* console.log(parts[0]); */
 
   switch(dir[1]) {
     case "event":
-      feature = newPlayMap.lookupFeatureByPath(rawPath, "events");
-      newPlayMap.loadPlay(feature);
+      feature = newPlayMap.lookupFeatureByPath(parts[0], "events");
+      newPlayMap.loadEvent(feature);
     break;
 
     case "artist":
-      feature = newPlayMap.lookupFeatureByPath(rawPath, "artists");
-      loadArtist(rawPath);
+      feature = newPlayMap.lookupFeatureByPath(parts[0], "artists");
+      newPlayMap.loadArtist(rawPath);
     break;
 
     case "organization":
-      feature = newPlayMap.lookupFeatureByPath(rawPath, "organizations");
-      loadOrganization(rawPath);
+      feature = newPlayMap.lookupFeatureByPath(parts[0], "organizations");
+      newPlayMap.loadOrganization(rawPath);
     break;
 
     case "play":
-      feature = newPlayMap.lookupFeatureByPath(rawPath, "related_events");
-      loadPlay(rawPath);
+    console.log("parts" + parts[0]);
+      feature = newPlayMap.lookupFeatureByPath(parts[0], "play", "play_path");
+      // Spelling this out to be extra super clear
+console.log(feature);
+      newPlayMap.loadRelatedEvents(rawPath);
+
     break;
   }
 }
+
+
+newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path) {
+console.log(jsonData);
+if(jsonData[dataName] !== undefined){
+    features = jsonData[dataName].features;
+    loadedFeatures = [];
+    console.log(features);
+    for (var i = 0; i < features.length; i++) {
+        var feature = features[i];
+        var pathKey;
+        if(alt_path !== undefined) {
+          pathKey = alt_path
+        }
+        else {
+          pathKey = "path";
+        }
+        console.log(pathKey);
+        pathFound = feature.properties[pathKey] = path;
+        if(pathFound !== undefined){
+          console.log(pathFound);
+          loadedFeatures += feature;
+        }
+        
+    }
+    console.log("lf");
+    console.log(loadedFeatures);
+    return loadedFeatures
+   } 
+};
 
 
 newPlayMap.loadPlay = function(feature) {
@@ -90,27 +127,33 @@ newPlayMap.loadPlay = function(feature) {
 
 };
 
-newPlayMap.loadPlay = function(path) {
+newPlayMap.loadArtist = function(path) {
   console.log(path);
 };
 
-newPlayMap.loadPlay = function(path) {
+newPlayMap.loadOrganization = function(path) {
   console.log(path);
 };
 
-newPlayMap.loadPlay = function(path) {
-  console.log(path);
+newPlayMap.loadPlay = function(feature) {
+  console.log(feature);
+  //get id, 
+  // find $(a id)
+  // trigger mouse over.
+
 };
 
-newPlayMap.lookupFeatureByPath = function(path, type) {
-    features = jsonData[type].features;
-    for (var i = 0; i < features.length; i++) {
-        var feature = features[i];
+newPlayMap.loadRelatedEvents = function(feature) {
+  console.log(feature);
+  //get id, 
+  // find $(a id)
+  // trigger mouse over.
+newPlayMap.loadPlayData();
+};
 
-        pathFound = feature.properties[path];
-        console.log(pathFound );
-    }
-
+newPlayMap.loadPlayData = function(feature) {
+  // load play path (but would be better to have it in json
+  
 };
 
 

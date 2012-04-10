@@ -2987,12 +2987,12 @@ wax.u = {
     }
 };
 wax = wax || {};
-wax.mm = wax.mm || {};
+wax.g = wax.g || {};
 
 // Attribution
 // -----------
-// Attribution wrapper for Modest Maps.
-wax.mm.attribution = function(map, tilejson) {
+// Attribution wrapper for Google Maps.
+wax.g.attribution = function(map, tilejson) {
     tilejson = tilejson || {};
     var a, // internal attribution control
         attribution = {};
@@ -3008,370 +3008,133 @@ wax.mm.attribution = function(map, tilejson) {
 
     attribution.init = function() {
         a = wax.attribution();
-        a.content(tilejson.attribution);
-        a.element().className = 'wax-attribution wax-mm';
+        a.set(tilejson.attribution);
+        a.element().className = 'wax-attribution wax-g';
         return this;
     };
 
     return attribution.init();
 };
 wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Box Selector
-// ------------
-wax.mm.boxselector = function(map, tilejson, opts) {
-    var mouseDownPoint = null,
-        callback = ((typeof opts === 'function') ?
-            opts :
-            opts.callback),
-        boxDiv,
-        addEvent = MM.addEvent,
-        removeEvent = MM.removeEvent,
-        box,
-        boxselector = {};
-
-    function getMousePoint(e) {
-        // start with just the mouse (x, y)
-        var point = new MM.Point(e.clientX, e.clientY);
-        // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
-
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    function mouseDown(e) {
-        if (!e.shiftKey) return;
-
-        mouseDownPoint = getMousePoint(e);
-
-        boxDiv.style.left = mouseDownPoint.x + 'px';
-        boxDiv.style.top = mouseDownPoint.y + 'px';
-
-        addEvent(map.parent, 'mousemove', mouseMove);
-        addEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'crosshair';
-        return MM.cancelEvent(e);
-    }
-
-
-    function mouseMove(e) {
-        var point = getMousePoint(e),
-            style = boxDiv.style;
-        style.display = 'block';
-        if (point.x < mouseDownPoint.x) {
-            style.left = point.x + 'px';
-        } else {
-            style.left = mouseDownPoint.x + 'px';
-        }
-        if (point.y < mouseDownPoint.y) {
-            style.top = point.y + 'px';
-        } else {
-            style.top = mouseDownPoint.y + 'px';
-        }
-        style.width = Math.abs(point.x - mouseDownPoint.x) + 'px';
-        style.height = Math.abs(point.y - mouseDownPoint.y) + 'px';
-        return MM.cancelEvent(e);
-    }
-
-    function mouseUp(e) {
-        var point = getMousePoint(e),
-            l1 = map.pointLocation(point),
-            l2 = map.pointLocation(mouseDownPoint);
-
-        // Format coordinates like mm.map.getExtent().
-        boxselector.extent([
-            new MM.Location(
-                Math.max(l1.lat, l2.lat),
-                Math.min(l1.lon, l2.lon)),
-            new MM.Location(
-                Math.min(l1.lat, l2.lat),
-                Math.max(l1.lon, l2.lon))
-        ]);
-
-        removeEvent(map.parent, 'mousemove', mouseMove);
-        removeEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'auto';
-    }
-
-    function drawbox(map, e) {
-        if (!boxDiv || !box) return;
-        var br = map.locationPoint(box[1]),
-            tl = map.locationPoint(box[0]),
-            style = boxDiv.style;
-
-        style.display = 'block';
-        style.height = 'auto';
-        style.width = 'auto';
-        style.left = Math.max(0, tl.x) + 'px';
-        style.top = Math.max(0, tl.y) + 'px';
-        style.right = Math.max(0, map.dimensions.x - br.x) + 'px';
-        style.bottom = Math.max(0, map.dimensions.y - br.y) + 'px';
-    }
-
-    boxselector.extent = function(x, silent) {
-        if (!x) return box;
-
-        box = [
-            new MM.Location(
-                Math.max(x[0].lat, x[1].lat),
-                Math.min(x[0].lon, x[1].lon)),
-            new MM.Location(
-                Math.min(x[0].lat, x[1].lat),
-                Math.max(x[0].lon, x[1].lon))
-        ];
-
-        drawbox(map);
-
-        if (!silent) callback(box);
-    };
-
-    boxselector.add = function(map) {
-        boxDiv = boxDiv || document.createElement('div');
-        boxDiv.id = map.parent.id + '-boxselector-box';
-        boxDiv.className = 'boxselector-box';
-        map.parent.appendChild(boxDiv);
-
-        addEvent(map.parent, 'mousedown', mouseDown);
-        map.addCallback('drawn', drawbox);
-        return this;
-    };
-
-    boxselector.remove = function() {
-        map.parent.removeChild(boxDiv);
-        removeEvent(map.parent, 'mousedown', mouseDown);
-        map.removeCallback('drawn', drawbox);
-    };
-
-    return boxselector.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-wax._ = {};
+wax.g = wax.g || {};
 
 // Bandwidth Detection
 // ------------------
-wax.mm.bwdetect = function(map, options) {
+wax.g.bwdetect = function(map, options) {
     options = options || {};
     var lowpng = options.png || '.png128',
-        lowjpg = options.jpg || '.jpg70',
-        bw = false;
+        lowjpg = options.jpg || '.jpg70';
 
-    wax._.bw_png = lowpng;
-    wax._.bw_jpg = lowjpg;
+    // Create a low-bandwidth map type.
+    if (!map.mapTypes['mb-low']) {
+        var mb = map.mapTypes.mb;
+        var tilejson = {
+            tiles: [],
+            scheme: mb.options.scheme,
+            blankImage: mb.options.blankImage,
+            minzoom: mb.minZoom,
+            maxzoom: mb.maxZoom,
+            name: mb.name,
+            description: mb.description
+        };
+        for (var i = 0; i < mb.options.tiles.length; i++) {
+            tilejson.tiles.push(mb.options.tiles[i]
+                .replace('.png', lowpng)
+                .replace('.jpg', lowjpg));
+        }
+        m.mapTypes.set('mb-low', new wax.g.connector(tilejson));
+    }
 
-    return wax.bwdetect(options, function(x) {
-        wax._.bw = !x;
-        for (var i = 0; i < map.layers.length; i++) {
-            if (map.getLayerAt(i).provider instanceof wax.mm.connector) {
-                map.getLayerAt(i).setProvider(map.getLayerAt(i).provider);
-            }
+    return wax.bwdetect(options, function(bw) {
+      map.setMapTypeId(bw ? 'mb' : 'mb-low');
+    });
+};
+wax = wax || {};
+wax.g = wax.g || {};
+
+wax.g.hash = function(map) {
+    return wax.hash({
+        getCenterZoom: function() {
+            var center = map.getCenter(),
+                zoom = map.getZoom(),
+                precision = Math.max(
+                    0,
+                    Math.ceil(Math.log(zoom) / Math.LN2));
+            return [zoom.toFixed(2),
+                center.lat().toFixed(precision),
+                center.lng().toFixed(precision)
+            ].join('/');
+        },
+        setCenterZoom: function setCenterZoom(args) {
+            map.setCenter(new google.maps.LatLng(args[1], args[2]));
+            map.setZoom(args[0]);
+        },
+        bindChange: function(fn) {
+            google.maps.event.addListener(map, 'idle', fn);
+        },
+        unbindChange: function(fn) {
+            google.maps.event.removeListener(map, 'idle', fn);
         }
     });
 };
 wax = wax || {};
-wax.mm = wax.mm || {};
+wax.g = wax.g || {};
 
-// Fullscreen
-// ----------
-// A simple fullscreen control for Modest Maps
-
-// Add zoom links, which can be styled as buttons, to a `modestmaps.Map`
-// control. This function can be used chaining-style with other
-// chaining-style controls.
-wax.mm.fullscreen = function(map) {
-    // true: fullscreen
-    // false: minimized
-    var fullscreened = false,
-        fullscreen = {},
-        a,
-        body = document.body,
-        smallSize;
-
-    function click(e) {
-        if (e) e.stop();
-        if (fullscreened) {
-            fullscreen.original();
-        } else {
-            fullscreen.full();
-        }
-    }
-
-    function ss(w, h) {
-        map.dimensions = new MM.Point(w, h);
-        map.parent.style.width = Math.round(map.dimensions.x) + 'px';
-        map.parent.style.height = Math.round(map.dimensions.y) + 'px';
-        map.dispatchCallback('resized', map.dimensions);
-    }
-
-    // Modest Maps demands an absolute height & width, and doesn't auto-correct
-    // for changes, so here we save the original size of the element and
-    // restore to that size on exit from fullscreen.
-    fullscreen.add = function(map) {
-        a = document.createElement('a');
-        a.className = 'wax-fullscreen';
-        a.href = '#fullscreen';
-        a.innerHTML = 'fullscreen';
-        bean.add(a, 'click', click);
-        return this;
-    };
-    fullscreen.full = function() {
-        if (fullscreened) { return; } else { fullscreened = true; }
-        smallSize = [map.parent.offsetWidth, map.parent.offsetHeight];
-        map.parent.className += ' wax-fullscreen-map';
-        body.className += ' wax-fullscreen-view';
-        ss(map.parent.offsetWidth, map.parent.offsetHeight);
-    };
-    fullscreen.original = function() {
-        if (!fullscreened) { return; } else { fullscreened = false; }
-        map.parent.className = map.parent.className.replace(' wax-fullscreen-map', '');
-        body.className = body.className.replace(' wax-fullscreen-view', '');
-        ss(smallSize[0], smallSize[1]);
-    };
-    fullscreen.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(a);
-        return this;
-    };
-
-    return fullscreen.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-wax.mm.interaction = function() {
+wax.g.interaction = function() {
     var dirty = false, _grid;
 
+    function setdirty() { dirty = true; }
+
     function grid() {
-        var zoomLayer = map.getLayerAt(0)
-            .levels[Math.round(map.getZoom())];
-        if (!dirty && _grid !== undefined && _grid.length) {
+
+        if (!dirty && _grid) {
             return _grid;
         } else {
-            _grid = (function(t) {
-                var o = [];
-                for (var key in t) {
-                    if (t[key].parentNode === zoomLayer) {
-                        var offset = wax.u.offset(t[key]);
-                        o.push([
-                            offset.top,
-                            offset.left,
-                            t[key]
-                        ]);
-                    }
+            _grid = [];
+            var zoom = map.getZoom();
+            var mapOffset = wax.u.offset(map.getDiv());
+            var get = function(mapType) {
+                if (!mapType.interactive) return;
+                for (var key in mapType.cache) {
+                    if (key.split('/')[0] != zoom) continue;
+                    var tileOffset = wax.u.offset(mapType.cache[key]);
+                    _grid.push([
+                        tileOffset.top - mapOffset.top,
+                        tileOffset.left - mapOffset.left,
+                        mapType.cache[key]
+                    ]);
                 }
-                return o;
-            })(map.getLayerAt(0).tiles);
-            return _grid;
+            };
+            // Iterate over base mapTypes and overlayMapTypes.
+            for (var i in map.mapTypes) get(map.mapTypes[i]);
+            map.overlayMapTypes.forEach(get);
         }
+        return _grid;
     }
 
     function attach(x) {
         if (!arguments.length) return map;
         map = x;
-        function setdirty() { dirty = true; }
-        var clearingEvents = ['zoomed', 'panned', 'centered',
-            'extentset', 'resized', 'drawn'];
-        for (var i = 0; i < clearingEvents.length; i++) {
-            map.addCallback(clearingEvents[i], setdirty);
-        }
+        google.maps.event.addListener(map, 'tileloaded',
+            setdirty);
+        google.maps.event.addListener(map, 'idle',
+            setdirty);
     }
 
     return wax.interaction()
         .attach(attach)
         .parent(function() {
-          return map.parent;
+          return map.getDiv();
         })
         .grid(grid);
 };
 wax = wax || {};
-wax.mm = wax.mm || {};
-
-// LatLng
-// ------
-// Show the current cursor position in
-// lat/long
-wax.mm.latlngtooltip = function(map) {
-    var tt, // tooltip
-        _down = false,
-        latlng = {};
-
-    function getMousePoint(e) {
-        // start with just the mouse (x, y)
-        var point = new MM.Point(e.clientX, e.clientY);
-        // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
-
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    function onDown(e) {
-        console.log('here');
-        _down = true;
-    }
-
-    function onUp(e) {
-        _down = false;
-    }
-
-    function onMove(e) {
-        if (!e.shiftKey || _down) {
-            if (tt.parentNode === map.parent) {
-                map.parent.removeChild(tt);
-            }
-            return;
-        }
-
-        var pt = getMousePoint(e),
-            ll = map.pointLocation(pt),
-            fmt = ll.lat.toFixed(2) + ', ' + ll.lon.toFixed(2);
-
-        tt.innerHTML = fmt;
-        pt.scale = pt.width = pt.height = 1;
-        pt.x += 10;
-        MM.moveElement(tt, pt);
-        map.parent.appendChild(tt);
-    }
-
-    latlng.add = function() {
-        MM.addEvent(map.parent, 'mousemove', onMove);
-        MM.addEvent(map.parent, 'mousedown', onDown);
-        MM.addEvent(map.parent, 'mouseup', onUp);
-        tt = document.createElement('div');
-        tt.className = 'wax-latlngtooltip';
-        return this;
-    };
-
-    latlng.remove = function() {
-        MM.removeEvent(map.parent, 'mousemove', onMove);
-        MM.removeEvent(map.parent, 'mousedown', onDown);
-        MM.removeEvent(map.parent, 'mouseup', onUp);
-        return this;
-    };
-
-    return latlng.add();
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
+wax.g = wax.g || {};
 
 // Legend Control
 // --------------
-// The Modest Maps version of this control is a very, very
-// light wrapper around the `/lib` code for legends.
-wax.mm.legend = function(map, tilejson) {
+// Adds legends to a google Map object.
+wax.g.legend = function(map, tilejson) {
     tilejson = tilejson || {};
     var l, // parent legend
         legend = {};
@@ -3380,10 +3143,6 @@ wax.mm.legend = function(map, tilejson) {
         l = wax.legend()
             .content(tilejson.legend || '');
         return this;
-    };
-
-    legend.content = function(x) {
-        if (x) l.content(x.legend || '');
     };
 
     legend.element = function() {
@@ -3397,365 +3156,84 @@ wax.mm.legend = function(map, tilejson) {
 
     return legend.add();
 };
-wax = wax || {};
-wax.mm = wax.mm || {};
+// Wax for Google Maps API v3
+// --------------------------
 
-// Point Selector
-// --------------
-//
-// This takes an object of options:
-//
-// * `callback`: a function called with an array of `com.modestmaps.Location`
-//   objects when the map is edited
-//
-// It also exposes a public API function: `addLocation`, which adds a point
-// to the map as if added by the user.
-wax.mm.pointselector = function(map, tilejson, opts) {
-    var mouseDownPoint = null,
-        mouseUpPoint = null,
-        tolerance = 5,
-        overlayDiv,
-        pointselector = {},
-        locations = [];
-
-    var callback = (typeof opts === 'function') ?
-        opts :
-        opts.callback;
-
-    // Create a `com.modestmaps.Point` from a screen event, like a click.
-    function makePoint(e) {
-        var coords = wax.u.eventoffset(e);
-        var point = new MM.Point(coords.x, coords.y);
-        // correct for scrolled document
-
-        // and for the document
-        var body = {
-            x: parseFloat(MM.getStyle(document.documentElement, 'margin-left')),
-            y: parseFloat(MM.getStyle(document.documentElement, 'margin-top'))
-        };
-
-        if (!isNaN(body.x)) point.x -= body.x;
-        if (!isNaN(body.y)) point.y -= body.y;
-
-        // TODO: use wax.util.offset
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    // Currently locations in this control contain circular references to elements.
-    // These can't be JSON encoded, so here's a utility to clean the data that's
-    // spit back.
-    function cleanLocations(locations) {
-        var o = [];
-        for (var i = 0; i < locations.length; i++) {
-            o.push(new MM.Location(locations[i].lat, locations[i].lon));
-        }
-        return o;
-    }
-
-    // Attach this control to a map by registering callbacks
-    // and adding the overlay
-
-    // Redraw the points when the map is moved, so that they stay in the
-    // correct geographic locations.
-    function drawPoints() {
-        var offset = new MM.Point(0, 0);
-        for (var i = 0; i < locations.length; i++) {
-            var point = map.locationPoint(locations[i]);
-            if (!locations[i].pointDiv) {
-                locations[i].pointDiv = document.createElement('div');
-                locations[i].pointDiv.className = 'wax-point-div';
-                locations[i].pointDiv.style.position = 'absolute';
-                locations[i].pointDiv.style.display = 'block';
-                // TODO: avoid circular reference
-                locations[i].pointDiv.location = locations[i];
-                // Create this closure once per point
-                bean.add(locations[i].pointDiv, 'mouseup',
-                    (function selectPointWrap(e) {
-                    var l = locations[i];
-                    return function(e) {
-                        MM.removeEvent(map.parent, 'mouseup', mouseUp);
-                        pointselector.deleteLocation(l, e);
-                    };
-                })());
-                map.parent.appendChild(locations[i].pointDiv);
-            }
-            locations[i].pointDiv.style.left = point.x + 'px';
-            locations[i].pointDiv.style.top = point.y + 'px';
-        }
-    }
-
-    function mouseDown(e) {
-        mouseDownPoint = makePoint(e);
-        bean.add(map.parent, 'mouseup', mouseUp);
-    }
-
-    // Remove the awful circular reference from locations.
-    // TODO: This function should be made unnecessary by not having it.
-    function mouseUp(e) {
-        if (!mouseDownPoint) return;
-        mouseUpPoint = makePoint(e);
-        if (MM.Point.distance(mouseDownPoint, mouseUpPoint) < tolerance) {
-            pointselector.addLocation(map.pointLocation(mouseDownPoint));
-            callback(cleanLocations(locations));
-        }
-        mouseDownPoint = null;
-    }
-
-    // API for programmatically adding points to the map - this
-    // calls the callback for ever point added, so it can be symmetrical.
-    // Useful for initializing the map when it's a part of a form.
-    pointselector.addLocation = function(location) {
-        locations.push(location);
-        drawPoints();
-        callback(cleanLocations(locations));
-    };
-
-    pointselector.locations = function(x) {
-        return locations;
-    };
-
-    pointselector.add = function(map) {
-        bean.add(map.parent, 'mousedown', mouseDown);
-        map.addCallback('drawn', drawPoints);
-        return this;
-    };
-
-    pointselector.remove = function(map) {
-        bean.remove(map.parent, 'mousedown', mouseDown);
-        map.removeCallback('drawn', drawPoints);
-        for (var i = locations.length - 1; i > -1; i--) {
-            pointselector.deleteLocation(locations[i]);
-        }
-        return this;
-    };
-
-    pointselector.deleteLocation = function(location, e) {
-        if (!e || confirm('Delete this point?')) {
-            location.pointDiv.parentNode.removeChild(location.pointDiv);
-            locations.splice(wax.u.indexOf(locations, location), 1);
-            callback(cleanLocations(locations));
-        }
-    };
-
-    return pointselector.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// ZoomBox
-// -------
-// An OL-style ZoomBox control, from the Modest Maps example.
-wax.mm.zoombox = function(map) {
-    // TODO: respond to resize
-    var zoombox = {},
-        drawing = false,
-        box,
-        mouseDownPoint = null;
-
-    function getMousePoint(e) {
-        // start with just the mouse (x, y)
-        var point = new MM.Point(e.clientX, e.clientY);
-        // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
-
-        // correct for nested offsets in DOM
-        for (var node = map.parent; node; node = node.offsetParent) {
-            point.x -= node.offsetLeft;
-            point.y -= node.offsetTop;
-        }
-        return point;
-    }
-
-    function mouseUp(e) {
-        if (!drawing) return;
-
-        drawing = false;
-        var point = getMousePoint(e);
-
-        var l1 = map.pointLocation(point),
-            l2 = map.pointLocation(mouseDownPoint);
-
-        map.setExtent([l1, l2]);
-
-        box.style.display = 'none';
-        MM.removeEvent(map.parent, 'mousemove', mouseMove);
-        MM.removeEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'auto';
-    }
-
-    function mouseDown(e) {
-        if (!(e.shiftKey && !this.drawing)) return;
-
-        drawing = true;
-        mouseDownPoint = getMousePoint(e);
-
-        box.style.left = mouseDownPoint.x + 'px';
-        box.style.top = mouseDownPoint.y + 'px';
-
-        MM.addEvent(map.parent, 'mousemove', mouseMove);
-        MM.addEvent(map.parent, 'mouseup', mouseUp);
-
-        map.parent.style.cursor = 'crosshair';
-        return MM.cancelEvent(e);
-    }
-
-    function mouseMove(e) {
-        if (!drawing) return;
-
-        var point = getMousePoint(e);
-        box.style.display = 'block';
-        if (point.x < mouseDownPoint.x) {
-            box.style.left = point.x + 'px';
-        } else {
-            box.style.left = mouseDownPoint.x + 'px';
-        }
-        box.style.width = Math.abs(point.x - mouseDownPoint.x) + 'px';
-        if (point.y < mouseDownPoint.y) {
-            box.style.top = point.y + 'px';
-        } else {
-            box.style.top = mouseDownPoint.y + 'px';
-        }
-        box.style.height = Math.abs(point.y - mouseDownPoint.y) + 'px';
-        return MM.cancelEvent(e);
-    }
-
-    zoombox.add = function(map) {
-        // Use a flag to determine whether the zoombox is currently being
-        // drawn. Necessary only for IE because `mousedown` is triggered
-        // twice.
-        box = box || document.createElement('div');
-        box.id = map.parent.id + '-zoombox-box';
-        box.className = 'zoombox-box';
-        map.parent.appendChild(box);
-        MM.addEvent(map.parent, 'mousedown', mouseDown);
-        return this;
-    };
-
-    zoombox.remove = function() {
-        map.parent.removeChild(box);
-        MM.removeEvent(map.parent, 'mousedown', mouseDown);
-    };
-
-    return zoombox.add(map);
-};
-wax = wax || {};
-wax.mm = wax.mm || {};
-
-// Zoomer
-// ------
-// Add zoom links, which can be styled as buttons, to a `modestmaps.Map`
-// control. This function can be used chaining-style with other
-// chaining-style controls.
-wax.mm.zoomer = function(map) {
-    var zoomin = document.createElement('a');
-    zoomin.innerHTML = '+';
-    zoomin.href = '#';
-    zoomin.className = 'zoomer zoomin';
-    bean.add(zoomin, 'mousedown dblclick', function(e) {
-        e.stop();
-    });
-    bean.add(zoomin, 'click', function(e) {
-        e.stop();
-        map.zoomIn();
-    }, false);
-
-    var zoomout = document.createElement('a');
-    zoomout.innerHTML = '-';
-    zoomout.href = '#';
-    zoomout.className = 'zoomer zoomout';
-    bean.add(zoomout, 'mousedown dblclick', function(e) {
-        e.stop();
-    });
-    bean.add(zoomout, 'click', function(e) {
-        e.stop();
-        map.zoomOut();
-    });
-
-    var zoomer = {
-        add: function(map) {
-            map.addCallback('drawn', function(map, e) {
-                if (map.coordinate.zoom === map.coordLimits[0].zoom) {
-                    zoomout.className = 'zoomer zoomout zoomdisabled';
-                } else if (map.coordinate.zoom === map.coordLimits[1].zoom) {
-                    zoomin.className = 'zoomer zoomin zoomdisabled';
-                } else {
-                    zoomin.className = 'zoomer zoomin';
-                    zoomout.className = 'zoomer zoomout';
-                }
-            });
-            return this;
-        },
-        appendTo: function(elem) {
-            wax.u.$(elem).appendChild(zoomin);
-            wax.u.$(elem).appendChild(zoomout);
-            return this;
-        }
-    };
-    return zoomer.add(map);
-};
+// Wax header
 var wax = wax || {};
-wax.mm = wax.mm || {};
+wax.g = wax.g || {};
 
-// A layer connector for Modest Maps conformant to TileJSON
-// https://github.com/mapbox/tilejson
-wax.mm._provider = function(options) {
+// Wax Google Maps MapType: takes an object of options in the form
+//
+//     {
+//       name: '',
+//       filetype: '.png',
+//       layerName: 'world-light',
+//       alt: '',
+//       zoomRange: [0, 18],
+//       baseUrl: 'a url',
+//     }
+wax.g.connector = function(options) {
+    options = options || {};
+
     this.options = {
         tiles: options.tiles,
         scheme: options.scheme || 'xyz',
-        minzoom: options.minzoom || 0,
-        maxzoom: options.maxzoom || 22,
-        bounds: options.bounds || [-180, -90, 180, 90]
+        blankImage: options.blankImage || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
     };
+
+    this.minZoom = options.minzoom || 0;
+    this.maxZoom = options.maxzoom || 22;
+
+    this.name = options.name || '';
+    this.description = options.description || '';
+
+    // non-configurable options
+    this.interactive = true;
+    this.tileSize = new google.maps.Size(256, 256);
+
+    // DOM element cache
+    this.cache = {};
 };
 
-wax.mm._provider.prototype = {
-    outerLimits: function() {
-        return [
-            this.locationCoordinate(
-                new MM.Location(
-                    this.options.bounds[0],
-                    this.options.bounds[1])).zoomTo(this.options.minzoom),
-            this.locationCoordinate(
-                new MM.Location(
-                    this.options.bounds[2],
-                    this.options.bounds[3])).zoomTo(this.options.maxzoom)
-        ];
-    },
-    getTile: function(c) {
-        if (!(coord = this.sourceCoordinate(c))) return null;
-        if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
-
-        coord.row = (this.options.scheme === 'tms') ?
-            Math.pow(2, coord.zoom) - coord.row - 1 :
-            coord.row;
-
-        var u = this.options.tiles[parseInt(Math.pow(2, coord.zoom) * coord.row + coord.column, 10) %
-            this.options.tiles.length]
-            .replace('{z}', coord.zoom.toFixed(0))
-            .replace('{x}', coord.column.toFixed(0))
-            .replace('{y}', coord.row.toFixed(0));
-
-        if (wax._ && wax._.bw) {
-            u = u.replace('.png', wax._.bw_png)
-                .replace('.jpg', wax._.bw_jpg);
-        }
-
-        return u;
+// Get a tile element from a coordinate, zoom level, and an ownerDocument.
+wax.g.connector.prototype.getTile = function(coord, zoom, ownerDocument) {
+    var key = zoom + '/' + coord.x + '/' + coord.y;
+    if (!this.cache[key]) {
+        var img = this.cache[key] = new Image(256, 256);
+        this.cache[key].src = this.getTileUrl(coord, zoom);
+        this.cache[key].setAttribute('gTileKey', key);
+        this.cache[key].onerror = function() { img.style.display = 'none'; };
     }
+    return this.cache[key];
 };
 
-if (MM) {
-    MM.extend(wax.mm._provider, MM.MapProvider);
-}
+// Remove a tile that has fallen out of the map's viewport.
+//
+// TODO: expire cache data in the gridmanager.
+wax.g.connector.prototype.releaseTile = function(tile) {
+    var key = tile.getAttribute('gTileKey');
+    if (this.cache[key]) delete this.cache[key];
+    if (tile.parentNode) tile.parentNode.removeChild(tile);
+};
 
-wax.mm.connector = function(options) {
-    var x = new wax.mm._provider(options);
-    return new MM.Layer(x);
+// Get a tile url, based on x, y coordinates and a z value.
+wax.g.connector.prototype.getTileUrl = function(coord, z) {
+    // Y coordinate is flipped in Mapbox, compared to Google
+    var mod = Math.pow(2, z),
+        y = (this.options.scheme === 'tms') ?
+            (mod - 1) - coord.y :
+            coord.y,
+        x = (coord.x % mod);
+
+    x = (x < 0) ? (coord.x % mod) + mod : x;
+
+    if (y < 0) return this.options.blankImage;
+
+    return this.options.tiles
+        [parseInt(x + y, 10) %
+            this.options.tiles.length]
+                .replace('{z}', z)
+                .replace('{x}', x)
+                .replace('{y}', y);
 };
