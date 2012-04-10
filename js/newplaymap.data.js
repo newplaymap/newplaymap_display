@@ -72,7 +72,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
           marker.setAttribute("grouping_field", vars.grouping_field);
           marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
 
-          if (vars.grouping_field in locationsByID) {
+          if (feature.properties[vars.grouping_field] in locationsByID) {
             locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
           } else {
             locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
