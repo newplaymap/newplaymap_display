@@ -30,6 +30,87 @@ newPlayMap.loadAddress = function() {
 
 newPlayMap.routePath = function(path) {
   console.log(path);
+  var rawPath = newPlayMap.jqueryAddressHashPath(path);
+  console.log("raw" + rawPath);
+    var dir, parts, filters = "";
+  if(rawPath !== false) {
+    // Split path into components
+    dir = rawPath.split("/");
+    // handle url params.
+    // test if starts with /
+
+    // @TODO add filters.
+
+    if(dir !== undefined && dir.length > 0) {
+      parts =  dir[dir.length].split("?");
+    }
+
+    if(parts !== undefined && parts.length > 0) {
+      filters = parts[parts.length].split("&");
+    }
+    newPlayMap.lookupRoute(rawPath, dir, filters);
+
+
+  }
+
+  // Ignore certain links & force them to open in Drupal
+  // newPlayMap.ajaxLinks();  
+  
+};
+
+newPlayMap.lookupRoute = function(rawPath, dir, filters) {
+
+
+  switch(dir[1]) {
+    case "event":
+      feature = newPlayMap.lookupFeatureByPath(rawPath, "events");
+      newPlayMap.loadPlay(feature);
+    break;
+
+    case "artist":
+      feature = newPlayMap.lookupFeatureByPath(rawPath, "artists");
+      loadArtist(rawPath);
+    break;
+
+    case "organization":
+      feature = newPlayMap.lookupFeatureByPath(rawPath, "organizations");
+      loadOrganization(rawPath);
+    break;
+
+    case "play":
+      feature = newPlayMap.lookupFeatureByPath(rawPath, "related_events");
+      loadPlay(rawPath);
+    break;
+  }
+}
+
+
+newPlayMap.loadPlay = function(feature) {
+  console.log(path);
+
+};
+
+newPlayMap.loadPlay = function(path) {
+  console.log(path);
+};
+
+newPlayMap.loadPlay = function(path) {
+  console.log(path);
+};
+
+newPlayMap.loadPlay = function(path) {
+  console.log(path);
+};
+
+newPlayMap.lookupFeatureByPath = function(path, type) {
+    features = jsonData[type].features;
+    for (var i = 0; i < features.length; i++) {
+        var feature = features[i];
+
+        pathFound = feature.properties[path];
+        console.log(pathFound );
+    }
+
 };
 
 
