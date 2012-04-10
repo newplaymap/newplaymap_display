@@ -1,4 +1,4 @@
-newPlayMap.onLoadArtistMarkers({"type":"FeatureCollection","features":[
+{"name": "artists_300.json","type":"FeatureCollection","features":[
 {
   "id":"52027",
   "type":"Feature",
@@ -4194,4 +4194,4 @@ newPlayMap.onLoadArtistMarkers({"type":"FeatureCollection","features":[
       }
   }
   ]
-})
+}

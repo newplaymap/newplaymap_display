@@ -1,6 +1,6 @@
 // Establish namespaces.
 var newPlayMap = {};
-var data = {};
+var jsonData = {};
 
 var panelMarkup,
     markers,
@@ -11,17 +11,19 @@ var panelMarkup,
 // Estalbish namespace for map.
 var mm = com.modestmaps;
 var map;
+var loaded = 0;
 
 window.onload = function() {
-
+  if(loaded === 0) {
   // Change basic layout of page.
-  newPlayMap.alterHomepage();
+    newPlayMap.alterHomepage();
+    
+    newPlayMap.loadPageRouter();
   
-  newPlayMap.loadPageRouter();
-
-  newPlayMap.loadData();
-
-  newPlayMap.loadMap();
+    newPlayMap.loadData();
+  }
+  loaded++;
+/*   newPlayMap.loadMap(); */
 };
 
 newPlayMap.alterHomepage = function() {
@@ -33,7 +35,13 @@ newPlayMap.loadPageRouter = function() {
 };
 
 newPlayMap.loadData = function() {
+  newPlayMap.loadJSONFile({path: 'data/organizations_300.json'});
+  newPlayMap.loadJSONFile({path: 'data/events_300.json'});
+  newPlayMap.loadJSONFile({path: "data/artists_300.json"});
+  newPlayMap.loadJSONFile({path: "data/related_events.json"});
 
+  console.log(jsonData);
+  return false;
 };
 
 newPlayMap.loadMap = function(){
@@ -71,15 +79,17 @@ newPlayMap.loadMapLayers = function() {
 /*
   newPlayMap.loadEventMarkers();
   newPlayMap.loadArtistMarkers();
-  */
   newPlayMap.loadOrganizationMarkers();
+*/
+/*
 
-
+  // Load Event Maarkers
   newPlayMap.onLoadDataMarkers(data.eventData, {
     id: "related_play_id",
     title: "play_title",
     dataPath: "data/events_300.json",
     icon: "icons/event.png"
-  /*   embedData : [{"key": "event_id", "value": feature.properties["event_id"]] */
+    //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
   });
+*/
 };
