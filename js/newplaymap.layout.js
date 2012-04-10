@@ -30,6 +30,21 @@ newPlayMap.loadDataObject = function(featureLookup) {
     }
 };
 
+
+newPlayMap.popupMarker = function(marker) {
+  feature.markup = marker;
+  feature.type = marker.getAttribute("type");
+  feature.marker_id = marker.getAttribute("marker_id");
+  feature.dataName = marker.getAttribute("dataName");
+  featureData = newPlayMap.loadDataObject(feature);
+  // Load event data into the template.
+  newPlayMap.popupPanelTemplate(featureData);
+};
+
+newPlayMap.popupPanelTemplate = function(feature){
+  $('div#popup-placeholder').html(feature.marker_id);
+};
+
 newPlayMap.panelTemplates = function() {
 
   // setupPanelTemplates on load. 
