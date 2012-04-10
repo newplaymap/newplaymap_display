@@ -2,8 +2,8 @@
 newPlayMap.updatePanel = function(marker, relatedData) {
 
   // @TOOD Right now this will just load events.
-  var event_id = marker.getAttribute("event_id");
-  feature = newPlayMap.loadDataObject(jsonData.eventData, event_id);
+  var type = marker.getAttribute("type");
+  feature = newPlayMap.loadDataObject(jsonData.events, type);
   var panelData = document;
   
   // Load event data into the event template.

@@ -1,4 +1,4 @@
-{"name": "related_events.json","type":"FeatureCollection","features":[ 
+{"name": "related_events","type":"FeatureCollection","features":[ 
 {  "id":"48437",
   "type":"Feature",
   "geometry": {
@@ -8,7 +8,7 @@
   "properties": {
       "longitude" : -87.661314,
       "latitude" : 41.952868,
-      "event_id" : 48437,
+      "related_event_id" : 48437,
       "event_type" : "Reading",
       "event_to_date" : "March 26, 2012",
       "event_date" : "March 26, 2012",
@@ -33,7 +33,7 @@
   "properties": {
       "longitude" : -105.28138,
       "latitude" : 39.997865,
-      "event_id" : 49648,
+      "related_event_id" : 49648,
       "event_type" : "Reading",
       "event_to_date" : "March 23, 2012",
       "event_date" : "March 23, 2012",
@@ -58,7 +58,7 @@
   "properties": {
       "longitude" : -80.13976,
       "latitude" : 25.790424,
-      "event_id" : 52135,
+      "related_event_id" : 52135,
       "event_type" : "Presented Performance",
       "event_to_date" : "March 24, 2012",
       "event_date" : "March 23, 2012",
@@ -83,7 +83,7 @@
   "properties": {
       "longitude" : -77.411882,
       "latitude" : 39.414295,
-      "event_id" : 34226,
+      "related_event_id" : 34226,
       "event_type" : "Production",
       "event_to_date" : "April 15, 2012",
       "event_date" : "March 22, 2012",

@@ -1,5 +1,5 @@
 h1, h2, h3, h4 {
-  font-family: 'Museo Slab 500', Helvetica, Arial, sans-serif;;
+/*   font-family: 'Museo Slab 500', Helvetica, Arial, sans-serif;; */
 }
 
 body {
@@ -10,6 +10,7 @@ body {
   padding: 9px 0;
 }
 
+/*
 @font-face{ 
 	font-family: 'Museo Slab 500';
 	src: url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.eot');
@@ -18,6 +19,7 @@ body {
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.ttf') format('truetype'),
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
 }
+*/
 
 /* @TODO load newplay map v1 css, or change it. */
 #panel-container {
