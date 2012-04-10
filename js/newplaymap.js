@@ -94,8 +94,10 @@ newPlayMap.initMap = function(tj) {
 newPlayMap.loadMapLayers = function() {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
- 
- 
+  newPlayMap.loadMapData();
+};
+
+newPlayMap.loadMapData = function() {
  if(jsonData.events !== undefined) {
     // Load Event Markers
     var eventMarkerData = {

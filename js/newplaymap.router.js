@@ -30,34 +30,79 @@ newPlayMap.loadAddress = function() {
   $('a').address();
 };
 
+/**
+ * Get path from the hash path generaged by jQueryAddress
+ */
+newPlayMap.jqueryAddressHashPath = function() {
+  if (window.location.hash) {
+    var hash = window.location.hash;
+    var hashSplit = hash.split("/");
+    if(hashSplit[0] == '#') {
+      hashSplit.shift();
+      var path = '/' + hashSplit.join("/");
+    }
+    return path;
+  }
+  return false;
+};
+
+
 newPlayMap.routePath = function(path) {
 /*   console.log(path); */
   var rawPath = newPlayMap.jqueryAddressHashPath(path);
+
   console.log("raw" + rawPath);
-    var dir, parts, filters = "";
+
+  // @TODO this doesn't work yet. We need to be able to get the url parameters as an object.
+  
+  var params = newPlayMap.urlParameters();
+  console.log(params);
+
+  var dir, parts, filters = [];
   if(rawPath !== false) {
     // Split path into components
     dir = rawPath.split("/");
     // handle url params.
     // test if starts with /
 
-    // @TODO add filters.
+    // @TODO add filters handling
 
 
 
-      parts =  rawPath.split("?");
+    parts =  path.split("?");
 
-/*
-    if(parts !== undefined && parts.length > 0) {
-      filters = parts[parts.length].split("&");
+
+
+    if(parts !== undefined) {
+
+    var filterString = parts.pop();
+       console.log(filters);
+       filters = filterString.split("&");
+       if(filters ===undefined){
+        var keys = filters.split("=");
+        console.log(keys);
+       }
+       console.log(filters);
     }
-*/
     newPlayMap.lookupRoute(rawPath, dir, parts, filters);
   }
 
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
   
+};
+
+newPlayMap.urlParameters = function(){
+    var urlParameters = {};
+
+    var e,
+        a = /\+/g,  // Regex for replacing addition symbol with a space
+        r = /([^&=]+)=?([^&]*)/g,
+        d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+        q = window.location.search.substring(1);
+
+    while (e = r.exec(q))
+       urlParams[d(e[1])] = d(e[2]);
 };
 
 newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
@@ -72,19 +117,20 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
 
     case "artist":
       feature = newPlayMap.lookupFeatureByPath(parts[0], "artists");
-      newPlayMap.loadArtist(rawPath);
+      newPlayMap.loadArtist(feature);
     break;
 
     case "organization":
       feature = newPlayMap.lookupFeatureByPath(parts[0], "organizations");
-      newPlayMap.loadOrganization(rawPath);
+      newPlayMap.loadOrganization(feature);
     break;
 
     case "play":
     console.log("parts" + parts[0]);
+    console.log("play loaded");
       feature = newPlayMap.lookupFeatureByPath(parts[0], "play", "play_path");
       // Spelling this out to be extra super clear
-      newPlayMap.loadRelatedEvents(rawPath);
+      newPlayMap.loadRelatedEvents(feature);
 
     break;
   }
@@ -108,7 +154,7 @@ if(jsonData[dataName] !== undefined){
         pathFound = feature.properties[pathKey] = path;
         if(pathFound !== undefined){
           console.log(pathFound);
-          loadedFeatures += feature;
+          loadedFeatures.push(feature);
         }
         
     }
@@ -205,23 +251,6 @@ newPlayMap.ajaxLinks = function(className, target) {
   });
   return true;
 };
-
-/**
- * Get path from the hash path generaged by jQueryAddress
- */
-newPlayMap.jqueryAddressHashPath = function() {
-  if (window.location.hash) {
-    var hash = window.location.hash;
-    var hashSplit = hash.split("/");
-    if(hashSplit[0] == '#') {
-      hashSplit.shift();
-      var path = '/' + hashSplit.join("/");
-    }
-    return path;
-  }
-  return false;
-};
-
 
 /**
  * Remove extra callback arguments from the destination query for edit links
