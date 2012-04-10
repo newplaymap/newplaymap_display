@@ -86,12 +86,12 @@ newPlayMap.loadMapLayers = function() {
     // Load Event Markers
     var eventMarkerData = {
       type: "event",
-      id: "related_play_id",
+      id: "event_id",
+      label: "related_theater", // field which will be used in label
       title: "play_title",
       dataName: "events",
       dataPath: "data/events_300.json",
-      icon: "icons/event.png",
-      embedData : ["event_id"] 
+      icon: "icons/event.png"
     };
     newPlayMap.onLoadDataMarkers(eventMarkerData);
   }
@@ -100,12 +100,12 @@ newPlayMap.loadMapLayers = function() {
   // Load Organization Markers
   var organizationMarkerData = {
     type: "organization",
+    label: "org_type",
     id: "organization_id",
     title: "name",
     dataName: "organizations",
     dataPath: "data/organizations_300.json",
     icon: "icons/organization.png",
-/*     embedData : [organizationMarkerData.id] */
   };
   newPlayMap.onLoadDataMarkers(organizationMarkerData);
   }
@@ -115,11 +115,11 @@ newPlayMap.loadMapLayers = function() {
   var artistMarkerData = {
     type: "artist",
     id: "artist_id",
-    title: "name",
+    label: "ensemble_collective",
+    title: "artist_name",
     dataName: "artists",
     dataPath: "data/artists_300.json",
     icon: "icons/artist.png",
-/*     embedData : [artistMarkerData.id] */
   };
   newPlayMap.onLoadDataMarkers(artistMarkerData);
   }
@@ -131,11 +131,12 @@ newPlayMap.loadMapLayers = function() {
   var relatedEventMarkerData = {
     type: "related_event",
     id: "related_event_id",
-    title: "Title",
+    label: "related_theater",
+    title: "play_title",
     dataName: "related_events",
     dataPath: "data/related_events.json",
     icon: "icons/play.png",
-/*     embedData : [relatedEventMarkerData.id] */
+    grouping_field: "related_play_id"
   };
   newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
   }

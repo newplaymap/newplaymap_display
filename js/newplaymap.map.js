@@ -87,15 +87,18 @@ newPlayMap.onMarkerOver = function(e) {
   var marker = newPlayMap.getMarker(e.target);
 
   if (marker) {
-      var type = marker.type;
-      if (type in locationsByID) {
-          spotlight.addLocations(locationsByID[type] || []);
+      var grouping_field = marker.getAttribute("grouping_field");
+      console.log(locationsByID);
+      
+      if (grouping_field in locationsByID) {
+
+          spotlight.addLocations(locationsByID[grouping_field] || []);
           spotlight.parent.className = "active";
 
           $('div#panel-container div#panel').show();
                       
           // Update the panel data.
-          newPlayMap.updatePanel(marker, locationsByID[type]);
+          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
 
           
       } else {

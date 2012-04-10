@@ -2,12 +2,12 @@
 newPlayMap.updatePanel = function(marker, relatedData) {
 
   // @TOOD Right now this will just load events.
-  var type = marker.getAttribute("type");
-  feature = newPlayMap.loadDataObject(jsonData.events, type);
-  var panelData = document;
+/*   var type = marker.getAttribute("grouping_field"); */
+/*   feature = newPlayMap.loadDataObject(jsonData.events, type); */
+/*   var panelData = document; */
   
   // Load event data into the event template.
-  newPlayMap.panelTemplate(feature, "event");
+/*   newPlayMap.panelTemplate(feature, "event"); */
 };
 
 newPlayMap.loadDataObject = function(collection, id) {
