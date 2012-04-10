@@ -114,7 +114,7 @@ newPlayMap.onMarkerOut = function(e) {
 
       spotlight.removeAllLocations();
       
-      $('div#panel-container div#panel').hide();
+/*       $('div#panel-container div#panel').hide(); */
       
       spotlight.parent.className = "inactive";
   }
@@ -126,7 +126,7 @@ newPlayMap.onMarkerClick = function(e) {
   // Address History
   // Set URL
   
-  console.log("click");
+  console.log(e);
     
 
   return false;
@@ -136,7 +136,7 @@ newPlayMap.onMarkerClick = function(e) {
 // Maybe we do not need something like this. will think about it.
 newPlayMap.onMarkerClickOut = function(e) {
 
-  console.log("click out");
+  console.log(e);
 
 };
 

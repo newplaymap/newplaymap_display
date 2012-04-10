@@ -30,8 +30,6 @@ newPlayMap.alterHomepage = function() {
 
 newPlayMap.loadPageRouter = function() {
   newPlayMap.loadAddress();
-  newPlayMap.lookupAddress();
-  newPlayMap.routePath();
 };
 
 newPlayMap.loadData = function() {
@@ -50,7 +48,20 @@ newPlayMap.loadMap = function(){
 
 newPlayMap.loadWax = function() {
   // Syntax example. Seeing if Wax works.
+  // Custom tiles
   var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+
+//http://support.mapbox.com/discussions/general-questions/1175-wax-doesnt-load-my-maps-from-tilesmapboxcom-does-load-other-maps
+// @TODO redownload wax
+
+// @TODO using simpler map for debugging.
+// These work:
+var url = 'http://api.tiles.mapbox.com/v3/mapbox.world-light.jsonp';
+//var url = 'http://a.tiles.mapbox.com/v3/bclc-apec.map-rslgvy56.jsonp';
+
+// This doesn't work:
+//var url = 'http://a.tiles.mapbox.com/v3/evand.blossoms.jsonp'; 
+
   wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
 };
 
