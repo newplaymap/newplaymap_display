@@ -7,13 +7,11 @@ routing.load = function() {
 
 filters.organizations();
 
-/*
 $('.typeahead').typeahead(
   {
-  source: data.organizationData.title
+  source: data.organizationData.name
   }
 );
-*/
 };
 
 
@@ -23,22 +21,23 @@ filters.data = {};
 filters.data.organizations = {};
 
 filters.organizations = function() {
-console.log(data.organizationData);
+
     var features = data.organizationData.features,
         len = features.length,
         locations = [];
 
-filters.data.organizations.titles = {};
+filters.data.organizations.names = {};
 
     for (var i = 0; i < len; i++) {
             var feature = features[i],
             id = feature.properties["organization_id"];
-
-/* filters.data.organizations.titles += {feature.title: id};     */
-console.log(feature.properties.name);
+      
+      /* filters.data.organizations.titles += {feature.title: id};     */
+/*       filters.data.organizations.titles += {feature.properties.name: id}; */
 
 
     }
-/* console.log(filters.data.plays.titles); */
+
+/* console.log(filters.data.organizations.titles); */
 
 };
