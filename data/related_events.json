@@ -67,7 +67,7 @@
       "related_theater_id" : 23668,
       "artist_id" : 52127,
       "play_title" : "Chekhov Lizardbrain",
-      "related_play_id" : 33842,
+      "related_play_id" : 52128,
       "generative_artist" : "Pig Iron Theatre Company with text by Robert Quillen Camp",
       "event_description" : "Pig Iron's OBIE-winning blend of vaudeville, neuroscience, and fractured storytelling comes to MDC Live! in Miami for a one-week-only run.\nA lonely botanist conjures up a parade of his memories. He dresses them up like characters from a Chekhov play and has them speak as they never did, and before long he's made them into a circus of comforting fiction.\nMDC Live at The Colony Theater\n1040 Lincoln Road\nMiami Beach, FL 33139s.",
       "synopsis" : null
@@ -92,9 +92,59 @@
       "related_theater_id" : 22113,
       "artist_id" : 34224,
       "play_title" : "Antigone",
-      "related_play_id" : 34225,
+      "related_play_id" : 48685,
       "generative_artist" : "Adapted by Reiner Prochaska",
       "event_description" : "Directed by Julie Herber\nIn a war-torn society Antigone defies the male leaders and the laws of her society by securing a proper burial for her brother.  Maryland Ensemble Theatre (MET) puts their own spin on a timeless classic in this new adaptation of Sophocles' tale by resident playwright Reiner Prochaska.",
+      "synopsis" : null
+      }
+  },
+  {
+  "id":"49919",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-71.063712,42.349888]
+    },
+  "properties": {
+      "longitude" : -71.063712,
+      "latitude" : 42.349888,
+      "related_event_id" : 49919,
+      "event_type" : "First Production",
+      "event_to_date" : "March 25, 2012",
+      "event_date" : "March 22, 2012",
+      "content_type" : "Event",
+      "related_theater" : "Emerson Stage",
+      "related_theater_id" : 49818,
+      "artist_id" : 49917,
+      "play_title" : "NewFest 2012: Rough and Tumble",
+      "related_play_id" : 48685,
+      "generative_artist" : "Patrick McDonald",
+      "event_description" : "By Patrick McDonald, Winner of the Rod Parker Playwright Fellowship*\nDirected by Joe Antoun\nWhen the charismatic host of TV survival show Rough &amp; Tumble suddenly becomes \u2018unavailable\u2019 while on location the Amazon, the remaining six person crew becomes subjected to jungle law. In this comedy, the crew comes dangerously close to behaving like the animals that prowl the rainforest around them as their TV cameras are abandoned for more primal and carnal weapons.",
+      "synopsis" : "By Patrick McDonald, Winner of the Rod Parker Playwright Fellowship\r\nDirected by Joe Antoun\r\n\r\nWhen the charismatic host of TV survival show Rough &amp; Tumble suddenly becomes \u2018unavailable\u2019 while on location the Amazon, the remaining six person crew becomes subjected to jungle law. In this comedy, the crew comes dangerously close to behaving like the animals that prowl the rainforest around them as their TV cameras are abandoned for more primal and carnal weapons.\r\n\r\nMore information &amp; tickets: http://www.emerson.edu/academics/departments/performing-arts/emerson-stage/2011-2012-season/newfest-2012"
+      }
+  },
+  {
+  "id":"48686",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [-73.991876,40.75462]
+    },
+  "properties": {
+      "longitude" : -73.991876,
+      "latitude" : 40.75462,
+      "related_event_id" : 48686,
+      "event_type" : "First Production",
+      "event_to_date" : "April 15, 2012",
+      "event_date" : "March 16, 2012",
+      "content_type" : "Event",
+      "related_theater" : "Urban Stages",
+      "related_theater_id" : 24574,
+      "artist_id" : 48684,
+      "play_title" : "My Occasion of Sin",
+      "related_play_id" : 48685,
+      "generative_artist" : "Monica Bauer",
+      "event_description" : "World premiere Off Broadway production of \"My Occasion of Sin\", which won two awards as a nonprofessional workshop production at the Shelterbelt Theater in Omaha, Nebraska: Theater Arts Guild Award, and Omaha Arts and Entertainment Award, both for Best New Script. Previously workshopped at Nebraska Repertory Theater, the Sewanee Writer's Conference, with staged readings at Penguin Rep and Urban Stages. Production directed by the Artistic Director of Urban Stages, Frances Hill. Playwright Monica Bauer is a graduate of the BU playwriting program, and teaches at Quinnipiac University in Connecticut. A play inspired by one of the worst race riots in American history.",
       "synopsis" : null
       }
   }
