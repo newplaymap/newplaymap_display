@@ -67,7 +67,7 @@ newPlayMap.initMap = function(tj) {
   // Load map marker layers.
   newPlayMap.loadMapLayers();
 
-  newPlayMap.mapCustomizations(map, markers);  
+  //newPlayMap.mapCustomizations(map, markers);  
 };
 
 
@@ -115,15 +115,13 @@ newPlayMap.loadMapLayers = function() {
   newPlayMap.onLoadDataMarkers(artistMarkerData);
 
   // Load Related Play Markers
-/*
-  var organizationMarkerData = {
-    id: "organization_id",
-    title: "name",
-    dataName: "organizations_300.json",
-    dataPath: "data/organizations_300.json",
-    icon: "icons/organization.png"
+  var relatedEventMarkerData = {
+    id: "Title",
+    title: "Title",
+    dataName: "related_events.json",
+    dataPath: "data/related_events.json",
+    icon: "icons/play.png"
     //  embedData : [{"key": "event_id", "value": feature.properties["event_id"]] 
   };
-  newPlayMap.onLoadDataMarkers(organizationMarkerData);
-*/
+  newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
 };

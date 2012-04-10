@@ -1,107 +1,102 @@
 {"name": "related_events.json","type":"FeatureCollection","features":[ 
-  {
-  "id":"101037",
+{  "id":"48437",
   "type":"Feature",
   "geometry": {
     "type":"Point",
-    "coordinates": [-122.026088,36.975102]
+    "coordinates": [-87.661314,41.952868]
     },
   "properties": {
-      "longitude" : -122.026088,
-      "latitude" : 36.975102,
-      "Type" : "Play",
-      "Title" : "Play Name 101037"
+      "longitude" : -87.661314,
+      "latitude" : 41.952868,
+      "event_id" : 48437,
+      "event_type" : "Reading",
+      "event_to_date" : "March 26, 2012",
+      "event_date" : "March 26, 2012",
+      "content_type" : "Event",
+      "related_theater" : "Teatro Luna",
+      "related_theater_id" : 48436,
+      "artist_id" : 28507,
+      "play_title" : "Woman on Fire",
+      "related_play_id" : 33842,
+      "generative_artist" : "Marisela Trevi√±o Orta",
+      "event_description" : "Teatro Luna's Lunadas Reading Series presents staging readings featuring great Latina voices from across the nation and provides the participating playwrights with the opportunity, resources, and space to develop their script.\nPlay synopsis:\nSet in 2002 under the specter of the 9/11 terror attacks, WOMAN ON FIRE is a re-imagining of Sophocles' Antigone set along the Arizona/Mexico border. The ghost of a woman who died while crossing the border haunts the unwilling heroine Juanita, the wife of a U.S. Border Patrolman. Juanita finds herself torn between the law of man and a higher law when she must decide whether or not to put her husband's career and their marriage at risk in order to give the restless spirit the proper burial it demands.",
+      "synopsis" : "Set in 2002 under the specter of the 9/11 terror attacks, WOMAN ON FIRE is a re-imagining of Sophocles&#039; Antigone set along the Arizona/Mexico border. The ghost of a woman who died while crossing the border haunts the unwilling heroine Juanita, the wife of a U.S. Border Patrolman. Juanita finds herself torn between the law of man and a higher law when she must decide whether or not to put her husband&#039;s career and their marriage at risk in order to give the restless spirit the proper burial it demands."
       }
   },
- 
   {
-  "id":"94166",
+  "id":"49648",
   "type":"Feature",
   "geometry": {
     "type":"Point",
-    "coordinates": [-122.089509,37.042111]
+    "coordinates": [-105.28138,39.997865]
     },
   "properties": {
-      "longitude" : -122.089509,
-      "latitude" : 37.042111,
-      "Type" : "Play",
-      "Title" : "Play Name 94166"
+      "longitude" : -105.28138,
+      "latitude" : 39.997865,
+      "event_id" : 49648,
+      "event_type" : "Reading",
+      "event_to_date" : "March 23, 2012",
+      "event_date" : "March 23, 2012",
+      "content_type" : "Event",
+      "related_theater" : "Local Theatre Company",
+      "related_theater_id" : 49647,
+      "artist_id" : 32746,
+      "play_title" : "100 Planes",
+      "related_play_id" : 32747,
+      "generative_artist" : "Lila Rose Kaplan",
+      "event_description" : "Part of the Local Lab New Play Festival.  http://www.localtheatercompany.org//",
+      "synopsis" : null
       }
   },
- 
   {
-  "id":"1448",
+  "id":"52135",
   "type":"Feature",
   "geometry": {
     "type":"Point",
-    "coordinates": [-122.0252757,36.9716204]
+    "coordinates": [-80.13976,25.790424]
     },
   "properties": {
-      "longitude" : -122.0252757,
-      "latitude" : 36.9716204,
-      "Type" : "Play",
-      "Title" : "Play Name 1448"
-      }
-  },  
-
-  {
-  "id":"1449",
-  "type":"Feature",
-  "geometry": {
-    "type":"Point",
-    "coordinates": [-122.0251757,36.9718204]
-    },
-  "properties": {
-      "longitude" : -122.0251757,
-      "latitude" : 36.9718204,
-      "Type" : "Play",
-      "Title" : "Play Name 1448"
-      }
-  },  
-
-  {
-  "id":"1450",
-  "type":"Feature",
-  "geometry": {
-    "type":"Point",
-    "coordinates": [-122.0151757,36.9718204]
-    },
-  "properties": {
-      "longitude" : -122.0151757,
-      "latitude" : 36.9718204,
-      "Type" : "Play",
-      "Title" : "Play Name 1448"
-      }
-  }, 
- 
-  {
-  "id":"94873",
-  "type":"Feature",
-  "geometry": {
-    "type":"Point",
-    "coordinates": [-122.026293,36.973724]
-    },
-  "properties": {
-      "longitude" : -122.026293,
-      "latitude" : 36.973724,
-      "Type" : "Play",
-      "Title" : "Play Name 94873"
+      "longitude" : -80.13976,
+      "latitude" : 25.790424,
+      "event_id" : 52135,
+      "event_type" : "Presented Performance",
+      "event_to_date" : "March 24, 2012",
+      "event_date" : "March 23, 2012",
+      "content_type" : "Event",
+      "related_theater" : "Pig Iron Theatre Company",
+      "related_theater_id" : 23668,
+      "artist_id" : 52127,
+      "play_title" : "Chekhov Lizardbrain",
+      "related_play_id" : 52128,
+      "generative_artist" : "Pig Iron Theatre Company with text by Robert Quillen Camp",
+      "event_description" : "Pig Iron's OBIE-winning blend of vaudeville, neuroscience, and fractured storytelling comes to MDC Live! in Miami for a one-week-only run.\nA lonely botanist conjures up a parade of his memories. He dresses them up like characters from a Chekhov play and has them speak as they never did, and before long he's made them into a circus of comforting fiction.\nMDC Live at The Colony Theater\n1040 Lincoln Road\nMiami Beach, FL 33139s.",
+      "synopsis" : null
       }
   },
- 
   {
-  "id":"100354",
+  "id":"34226",
   "type":"Feature",
   "geometry": {
     "type":"Point",
-    "coordinates": [-122.021332,36.98593]
+    "coordinates": [-77.411882,39.414295]
     },
   "properties": {
-      "longitude" : -122.021332,
-      "latitude" : 36.98593,
-      "Type" : "Play",
-      "Title" : "Play Name 100354"
+      "longitude" : -77.411882,
+      "latitude" : 39.414295,
+      "event_id" : 34226,
+      "event_type" : "Production",
+      "event_to_date" : "April 15, 2012",
+      "event_date" : "March 22, 2012",
+      "content_type" : "Event",
+      "related_theater" : "Maryland Ensemble Theatre",
+      "related_theater_id" : 22113,
+      "artist_id" : 34224,
+      "play_title" : "Antigone",
+      "related_play_id" : 34225,
+      "generative_artist" : "Adapted by Reiner Prochaska",
+      "event_description" : "Directed by Julie Herber\nIn a war-torn society Antigone defies the male leaders and the laws of her society by securing a proper burial for her brother.  Maryland Ensemble Theatre (MET) puts their own spin on a timeless classic in this new adaptation of Sophocles' tale by resident playwright Reiner Prochaska.",
+      "synopsis" : null
       }
   }
-  ]
+      ]
 }

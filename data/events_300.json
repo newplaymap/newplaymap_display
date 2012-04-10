@@ -1,4 +1,5 @@
-{"name": "events_300.json","type":"FeatureCollection","features":[ {  "id":"48437",
+{"name": "events_300.json","type":"FeatureCollection","features":[ 
+{  "id":"48437",
   "type":"Feature",
   "geometry": {
     "type":"Point",
