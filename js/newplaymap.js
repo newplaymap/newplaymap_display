@@ -3,9 +3,7 @@ var newPlayMap = {};
 var jsonData = {};
 var panelMarkup = {};
 var spotlight = {};
-var 
-    markers,
-    routing,
+var markers,
     locationsByID = {};
 
 // Estalbish namespace for map.
@@ -31,7 +29,9 @@ newPlayMap.alterHomepage = function() {
 };
 
 newPlayMap.loadPageRouter = function() {
-
+  newPlayMap.loadAddress();
+  newPlayMap.lookupAddress();
+  newPlayMap.routePath();
 };
 
 newPlayMap.loadData = function() {
