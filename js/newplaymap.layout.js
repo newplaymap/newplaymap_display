@@ -25,7 +25,6 @@ newPlayMap.loadDataObject = function(featureLookup) {
         feature.dataName = featureLookup.dataName;
         feature.type = featureLookup.type;
         if(feature.id == featureLookup.marker_id) {
-          console.log(feature);
           return feature;
         }
     }

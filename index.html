@@ -96,14 +96,14 @@
                 <!--               Templates -->
                 <div class="play content">
                 (testing: play)
-                  <h2><a href="#${path}?event_id=${related_event_id}">${play_title}</a></h2>
+                  <h2><a href="#/${play_path}?event_id=${related_event_id}">${play_title}</a></h2>
                   {{if generative_artist}}
                   <h3>By ${generative_artist}</h3>
                   {{/if}}
                   
                   {{if related_theater}}
 <!--                  @TODO  This will need some work -->
-                  <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                  <a href="#/${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
                   {{/if}}
                   
                   <p>{{if event_type}}
@@ -128,20 +128,20 @@
 <!--                   artist -->
                   <div class="artist content">
                 (testing: artist)
-                  <h2><a href="#${path}?artist_id=${artist_id}">${artist_name}</a></h2>
+                  <h2><a href="#/${path}?artist_id=${artist_id}">${artist_name}</a></h2>
                   </div><!--  end artist -->
     
  <!--                   organization -->
                   <div class="organization content">
                 (testing: organization)
-                  <h2><a href="#${path}">${name}</a></h2>
+                  <h2><a href="#/${path}">${name}</a></h2>
                   </div><!--  end organization -->
  
  
  <!--                   event -->
                   <div class="event content">
                 (testing: event)
-                  <h2><a href="#${path}">${name}</a></h2>
+                  <h2><a href="#/${path}">${play_title}</a> at ${related_theater}</h2>
                   </div><!--  end event -->               
                 
               </div>
