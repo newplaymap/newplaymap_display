@@ -1,10 +1,10 @@
 // Establish namespaces.
 var newPlayMap = {};
 var jsonData = {};
-
-var panelMarkup,
+var panelMarkup = {};
+var spotlight = {};
+var 
     markers,
-    spotlight,
     routing,
     locationsByID = {};
 
