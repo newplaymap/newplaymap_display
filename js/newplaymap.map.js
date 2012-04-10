@@ -88,8 +88,7 @@ newPlayMap.onMarkerOver = function(e) {
 
   if (marker) {
       var grouping_field = marker.getAttribute("grouping_value");
-            console.log( locationsByID);
-            console.log(grouping_field);
+
       if (grouping_field in locationsByID) {
 
           spotlight.addLocations(locationsByID[grouping_field] || []);
