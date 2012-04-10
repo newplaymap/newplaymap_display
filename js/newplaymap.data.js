@@ -89,5 +89,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // Tell the map to fit all of the locations in the available space
 
     // @TODO this will run on the last loaded item, which may make behavior strange.
+    // Actually no it is probably fine so long as locations is global.
     map.setExtent(locations);
 };

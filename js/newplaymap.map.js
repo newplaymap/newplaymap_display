@@ -88,6 +88,7 @@ newPlayMap.onMarkerOver = function(e) {
 
   if (marker) {
       var grouping_field = marker.getAttribute("grouping_value");
+      var marker_id = marker.getAttribute("marker_id");
 
       if (grouping_field in locationsByID) {
 
@@ -100,7 +101,17 @@ newPlayMap.onMarkerOver = function(e) {
           newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
 
           
-      } else {
+      } 
+      else if(marker_id) {  // single item
+          spotlight.parent.className = "active";
+
+          $('div#panel-container div#panel').show();
+                      
+          // Update the panel data.
+          newPlayMap.updatePanel(marker);
+      }
+      
+      else {
           spotlight.parent.className = "inactive";
       }
   }
