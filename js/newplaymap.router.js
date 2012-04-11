@@ -75,12 +75,16 @@ newPlayMap.routePath = function(path) {
     if(parts !== undefined) {
 
     var filterString = parts.pop();
-       filters = filterString.split("&");
-       if(filters === undefined){
-        var keys = filters.split("=");
-        console.log(keys);
+       filterList = filterString.split("&");
+       if(filterList !== undefined){
+         // Format into a nicer object
+         for (singleFilter in filterList) {
+           singleFilterObject = filterList[singleFilter].split('=');
+           filters[singleFilterObject[0]] = singleFilterObject[1];
+         }
        }
-       console.log(filters);
+
+       // console.log(filters);
     }
     newPlayMap.lookupRoute(rawPath, dir, parts, filters);
   }
