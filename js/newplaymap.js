@@ -21,7 +21,7 @@ window.onload = function() {
   // Load the map after all the data is loaded and available.
   newPlayMap.loadData();
     
-  newPlayMap.loadMap()
+  newPlayMap.loadMap();
 };
 
 newPlayMap.alterHomepage = function() {
