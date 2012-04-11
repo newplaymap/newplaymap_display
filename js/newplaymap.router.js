@@ -48,7 +48,7 @@ newPlayMap.jqueryAddressHashPath = function() {
 
 
 newPlayMap.routePath = function(path) {
-/*   console.log(path); */
+  // console.log(path); 
   var rawPath = newPlayMap.jqueryAddressHashPath(path);
 
   console.log("raw path: " + rawPath);
@@ -59,12 +59,18 @@ newPlayMap.routePath = function(path) {
 
   var dir, parts, filters = [];
   if(rawPath !== false) {
-    // Split path into components
-    dir = rawPath.split("/");
-    // handle url params.
-    // test if starts with /
+    
+    // Strip off starting slash
+    path = path.replace(/^\//, '');
 
-    parts =  path.split("?");
+    parts = path.split("?");
+    console.log('parts');
+    console.log(parts);
+
+    // Split path into components
+    dir = parts[0].split("/");
+    console.log('dir');
+    console.log(dir);
 
     if(parts !== undefined) {
 
@@ -80,6 +86,7 @@ newPlayMap.routePath = function(path) {
 
        // console.log(filters);
     }
+    console.log('parts');
     console.log(parts);
     newPlayMap.lookupRoute(rawPath, dir, parts, filters);
   }
@@ -113,9 +120,7 @@ newPlayMap.urlParameters = function(){
 
 newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
 
-/* console.log(parts[0]); */
-
-  switch(dir[1]) {
+  switch(dir[0]) {
     case "event":
       feature = newPlayMap.lookupFeatureByPath(parts[0], "events");
       newPlayMap.loadEvent(feature);
@@ -132,9 +137,10 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
     break;
 
     case "play":
-    console.log(parts);
-    console.log("play loaded");
+      console.log(dir);
+      console.log("play loaded");
       feature = newPlayMap.lookupFeatureByPath(dir[1], "play", "play_path");
+      // console.log(feature);
       // Spelling this out to be extra super clear
       newPlayMap.loadRelatedEvents(feature);
 
@@ -147,6 +153,7 @@ newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path) {
 if(jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
     loadedFeatures = [];
+    console.log(features);
     for (var i = 0; i < features.length; i++) {
         var feature = features[i];
         var pathKey;
@@ -156,6 +163,7 @@ if(jsonData[dataName] !== undefined){
         else {
           pathKey = "path";
         }
+        console.log('pathKey');
         console.log(pathKey);
         pathFound = feature.properties[pathKey] = path;
         if(pathFound !== undefined){
