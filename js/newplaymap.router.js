@@ -139,6 +139,8 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
     case "play":
       console.log(dir);
       console.log("play loaded");
+      console.log('jsonData');
+      console.log(jsonData);
       feature = newPlayMap.lookupFeatureByPath(dir[1], "play", "play_path");
       // console.log(feature);
       // Spelling this out to be extra super clear
