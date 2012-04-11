@@ -1,3 +1,5 @@
+newPlayMap.routing = newPlayMap.routing || {};
+
 newPlayMap.loadJSONFile = function(vars) {
   var vars = vars;
   var contentData = vars.path + "?cache=" + Math.floor(Math.random()*11);
@@ -15,6 +17,9 @@ newPlayMap.loadJSONFile = function(vars) {
 
 newPlayMap.setData = function(data) {
   jsonData[data.name] = data;
+  if (newPlayMap.routing.dataName && data.name == newPlayMap.routing.dataName) {
+    newPlayMap.lookupFeatureByPath(newPlayMap.routing.path, newPlayMap.routing.dataName, newPlayMap.routing.alt_path);
+  }
   return false;
 };
 
