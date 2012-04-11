@@ -15,12 +15,14 @@ window.onload = function() {
   //@TODO load once?
   // Change basic layout of page.
   newPlayMap.alterHomepage();
-    
+
+  // @TODO: loadPageRouter needs jsonData set up which doesn't happen until loadData().
+  //        Changing order of functions doesn't help. Probably waiting for json files to load.
   newPlayMap.loadPageRouter();
 
   // Load the map after all the data is loaded and available.
   newPlayMap.loadData();
-    
+
   newPlayMap.loadMap();
 };
 
