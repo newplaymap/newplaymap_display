@@ -64,28 +64,23 @@ newPlayMap.routePath = function(path) {
     // handle url params.
     // test if starts with /
 
-    // @TODO add filters handling
-
-
-
     parts =  path.split("?");
-
-
 
     if(parts !== undefined) {
 
-    var filterString = parts.pop();
-       filterList = filterString.split("&");
-       if(filterList !== undefined){
-         // Format into a nicer object
-         for (singleFilter in filterList) {
-           singleFilterObject = filterList[singleFilter].split('=');
-           filters[singleFilterObject[0]] = singleFilterObject[1];
-         }
+      var filterString = parts.pop();
+      filterList = filterString.split("&");
+      if(filterList !== undefined){
+       // Format into a nicer object
+       for (singleFilter in filterList) {
+         singleFilterObject = filterList[singleFilter].split('=');
+         filters[singleFilterObject[0]] = singleFilterObject[1];
        }
+      }
 
        // console.log(filters);
     }
+    console.log(parts);
     newPlayMap.lookupRoute(rawPath, dir, parts, filters);
   }
 
@@ -137,9 +132,9 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
     break;
 
     case "play":
-    console.log("parts" + parts[0]);
+    console.log(parts);
     console.log("play loaded");
-      feature = newPlayMap.lookupFeatureByPath(parts[0], "play", "play_path");
+      feature = newPlayMap.lookupFeatureByPath(dir[1], "play", "play_path");
       // Spelling this out to be extra super clear
       newPlayMap.loadRelatedEvents(feature);
 
