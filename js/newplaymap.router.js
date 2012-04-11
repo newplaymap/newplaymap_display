@@ -1,4 +1,4 @@
-newPlayMap.routing = {};
+newPlayMap.routing = newPlayMap.routing || {};
 
 // @TODO routing will be loaded everytime a dataset is loaded, it should be called.
 
@@ -47,9 +47,9 @@ newPlayMap.jqueryAddressHashPath = function() {
 };
 
 
-newPlayMap.routePath = function(path) {
-  // console.log(path); 
-  var rawPath = newPlayMap.jqueryAddressHashPath(path);
+newPlayMap.routePath = function(uri) {
+  // console.log(uri); 
+  var rawPath = newPlayMap.jqueryAddressHashPath(uri);
 
   console.log("raw path: " + rawPath);
 
@@ -57,20 +57,20 @@ newPlayMap.routePath = function(path) {
   
   var params = newPlayMap.urlParameters();
 
-  var dir, parts, filters = [];
+  var path, parts, filters = [];
   if(rawPath !== false) {
     
     // Strip off starting slash
-    path = path.replace(/^\//, '');
+    uri = uri.replace(/^\//, '');
 
-    parts = path.split("?");
+    parts = uri.split("?");
     console.log('parts');
     console.log(parts);
 
     // Split path into components
-    dir = parts[0].split("/");
-    console.log('dir');
-    console.log(dir);
+    path = parts[0].split("/");
+    console.log('path');
+    console.log(path);
 
     if(parts !== undefined) {
 
@@ -88,7 +88,7 @@ newPlayMap.routePath = function(path) {
     }
     console.log('parts');
     console.log(parts);
-    newPlayMap.lookupRoute(rawPath, dir, parts, filters);
+    newPlayMap.lookupRoute(rawPath, path, parts, filters);
   }
 
   // Ignore certain links & force them to open in Drupal
@@ -118,9 +118,9 @@ newPlayMap.urlParameters = function(){
     return urlParameters;
 };
 
-newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
+newPlayMap.lookupRoute = function(rawPath, path, parts, filters) {
 
-  switch(dir[0]) {
+  switch(path[0]) {
     case "event":
       feature = newPlayMap.lookupFeatureByPath(parts[0], "events");
       newPlayMap.loadEvent(feature);
@@ -137,11 +137,11 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
     break;
 
     case "play":
-      console.log(dir);
+      console.log(path);
       console.log("play loaded");
       console.log('jsonData');
       console.log(jsonData);
-      feature = newPlayMap.lookupFeatureByPath(dir[1], "play", "play_path");
+      feature = newPlayMap.lookupFeatureByPath(path[1], "play", "play_path");
       // console.log(feature);
       // Spelling this out to be extra super clear
       newPlayMap.loadRelatedEvents(feature);
@@ -153,6 +153,9 @@ newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
 
 newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path) {
 if(jsonData[dataName] !== undefined){
+    // Clear out saved routing info
+    newPlayMap.routing = {};
+
     features = jsonData[dataName].features;
     loadedFeatures = [];
     console.log(features);
@@ -175,6 +178,16 @@ if(jsonData[dataName] !== undefined){
         
     }
     return loadedFeatures
+   }
+   else {
+     // If jsonData isn't set up yet, stick the route somewhere to load later
+     newPlayMap.routing = {
+      path: path,
+      dataName: dataName,
+      alt_path: alt_path
+     };
+     
+     console.log(newPlayMap.routing);
    } 
 };
 
