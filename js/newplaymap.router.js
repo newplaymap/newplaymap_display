@@ -86,8 +86,8 @@ newPlayMap.routePath = function(uri) {
 
        // console.log(filters);
     }
-    console.log('parts');
-    console.log(parts);
+    // console.log('parts');
+    // console.log(parts);
     newPlayMap.lookupRoute(rawPath, path, parts, filters);
   }
 
@@ -137,11 +137,11 @@ newPlayMap.lookupRoute = function(rawPath, path, parts, filters) {
     break;
 
     case "play":
-      console.log(path);
-      console.log("play loaded");
-      console.log('jsonData');
-      console.log(jsonData);
-      feature = newPlayMap.lookupFeatureByPath(path[1], "play", "play_path");
+      // console.log(path);
+      // console.log("play loaded");
+      // console.log('jsonData');
+      // console.log(jsonData);
+      feature = newPlayMap.lookupFeatureByPath(parts[0], "play", "play_path");
       // console.log(feature);
       // Spelling this out to be extra super clear
       newPlayMap.loadRelatedEvents(feature);
@@ -152,13 +152,15 @@ newPlayMap.lookupRoute = function(rawPath, path, parts, filters) {
 
 
 newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path) {
+  console.log(path);
+  console.log(dataName);
+  console.log(alt_path);
 if(jsonData[dataName] !== undefined){
     // Clear out saved routing info
     newPlayMap.routing = {};
 
     features = jsonData[dataName].features;
     loadedFeatures = [];
-    console.log(features);
     for (var i = 0; i < features.length; i++) {
         var feature = features[i];
         var pathKey;
@@ -168,15 +170,20 @@ if(jsonData[dataName] !== undefined){
         else {
           pathKey = "path";
         }
-        console.log('pathKey');
-        console.log(pathKey);
-        pathFound = feature.properties[pathKey] = path;
-        if(pathFound !== undefined){
-          console.log(pathFound);
+        // console.log('pathKey');
+        // console.log(pathKey);
+        // pathFound = feature.properties[pathKey] = path;
+        // if(pathFound !== undefined){
+        console.log(feature);
+        console.log(path);
+        if(feature.properties[pathKey] == path){
+          // console.log(pathFound);
           loadedFeatures.push(feature);
         }
         
     }
+    console.log(loadedFeatures.length);
+    console.log(loadedFeatures);
     return loadedFeatures
    }
    else {
@@ -187,7 +194,7 @@ if(jsonData[dataName] !== undefined){
       alt_path: alt_path
      };
      
-     console.log(newPlayMap.routing);
+     // console.log(newPlayMap.routing);
    } 
 };
 
