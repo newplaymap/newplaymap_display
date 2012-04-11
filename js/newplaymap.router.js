@@ -163,11 +163,6 @@ if(jsonData[dataName] !== undefined){
 };
 
 
-newPlayMap.loadPlay = function(feature) {
-  console.log(path);
-
-};
-
 newPlayMap.loadArtist = function(path) {
   console.log(path);
 };
