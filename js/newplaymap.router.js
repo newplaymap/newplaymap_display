@@ -51,12 +51,11 @@ newPlayMap.routePath = function(path) {
 /*   console.log(path); */
   var rawPath = newPlayMap.jqueryAddressHashPath(path);
 
-  console.log("raw" + rawPath);
+  console.log("raw path: " + rawPath);
 
   // @TODO this doesn't work yet. We need to be able to get the url parameters as an object.
   
   var params = newPlayMap.urlParameters();
-  console.log(params);
 
   var dir, parts, filters = [];
   if(rawPath !== false) {
@@ -76,9 +75,8 @@ newPlayMap.routePath = function(path) {
     if(parts !== undefined) {
 
     var filterString = parts.pop();
-       console.log(filters);
        filters = filterString.split("&");
-       if(filters ===undefined){
+       if(filters === undefined){
         var keys = filters.split("=");
         console.log(keys);
        }
@@ -95,14 +93,23 @@ newPlayMap.routePath = function(path) {
 newPlayMap.urlParameters = function(){
     var urlParameters = {};
 
+    /*
+    // I don't understand why all this is needed. I assume it's useful but it's broken so I'm making it simpler
     var e,
         a = /\+/g,  // Regex for replacing addition symbol with a space
         r = /([^&=]+)=?([^&]*)/g,
         d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-        q = window.location.search.substring(1);
+        q = window.location;
 
-    while (e = r.exec(q))
-       urlParams[d(e[1])] = d(e[2]);
+    while (e = r.exec(q)) {
+     urlParameters[d(e[1])] = d(e[2]);
+    }
+    */
+
+    for (urlComponent in window.location) {
+      urlParameters[urlComponent] = window.location[urlComponent];
+    }
+    return urlParameters;
 };
 
 newPlayMap.lookupRoute = function(rawPath, dir, parts, filters) {
