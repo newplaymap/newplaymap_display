@@ -51,7 +51,7 @@ newPlayMap.loadMap = function(){
 newPlayMap.loadWax = function() {
   // Syntax example. Seeing if Wax works.
   // Custom tiles
-  // var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+   var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
 
 // @BUG -- map tiles not loading upon page refresh
 // @NOTE seems to need to refresh map so then can trigger loading the rest of the map info
@@ -61,12 +61,13 @@ newPlayMap.loadWax = function() {
 // @TODO using simpler map for debugging.
 
 // These work:
-var url = 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp';
+/* var url = 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp'; */
 /* var url = 'http://api.tiles.mapbox.com/v3/mapbox.world-light.jsonp'; */
 //var url = 'http://a.tiles.mapbox.com/v3/bclc-apec.map-rslgvy56.jsonp';
 
 // This doesn't work:
-//var url = 'http://a.tiles.mapbox.com/v3/evand.blossoms.jsonp'; 
+/* var url = 'http://a.tiles.mapbox.com/v3/evand.blossoms.jsonp';  */
+
   console.log(wax);
   wax.tilejson(url, function(tj) {
     newPlayMap.initMap(tj);
