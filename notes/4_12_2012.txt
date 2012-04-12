@@ -1,0 +1,52 @@
+new play map things to do
+
+
+popup info
+interactions all layers
+no bugs
+map loading cache issue
+loading path
+consolidate load path object
+trigger callback on load data based on route --> print to screen the action when page is loaded
+
+___
+
+
+unload data / unload layer / unload play
+look up play based on a db of all plays/events (search)
+draw lines
+draw lines w/ opacity
+spotlight
+
+templating -> all info loading in panel
+links in the template work
+make sure event id is parsed
+
+
+
+loading information that is not in the map -- ex. a play organization that is not loaded
+hover try to find in the jsonObject - if not search database - and insert it -- into a temporary information layer that we can unlaod if it gets too big
+
+-- on mouse interaction of a differnet/new play
+-- look up path in ALL of the jsonData based on the type
+-- if it exists based on that type, load it, if NOT then go look in special bigger database( search) - if found, go load that record and append it to the jsonData in a special information layer such as
+
+jsonData.play (play journey, object of related events)
+if more than 50 items are loaded, garbage collection - bump old ones off the end
+jsonData.organization
+jsonData.event
+jsonData.artist
+
+the data stays, so after searching primary data sources, search secondary ones, if not then load them into the secondary one
+
+
+___ these currently exist:
+these are basically a pre-search -- for convenience/presentation are loaded
+jsonData.play
+jsonData.organizations
+jsonData.events
+jsonData.artists
+___
+
+
+

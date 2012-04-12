@@ -32,6 +32,7 @@ newPlayMap.loadDataObject = function(featureLookup) {
 
 
 newPlayMap.popupMarker = function(marker) {
+  var feature = {};
   feature.markup = marker;
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
