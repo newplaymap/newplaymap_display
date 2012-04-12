@@ -144,6 +144,8 @@ console.log(e);
   // Load marker (is parent of image if clicked. 
   // @TODO be careful that click is not actually on a.
   var marker = e.target.offsetParent;
+
+  console.log(marker);
   newPlayMap.popupMarker(marker);
 
   return false;
