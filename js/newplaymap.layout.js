@@ -12,7 +12,7 @@ newPlayMap.updatePanel = function(marker, data) {
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
-
+console.log(featureLookup);
     var featureSet = [];
     var features = jsonData[featureLookup.dataName].features,
         len = features.length,
@@ -24,6 +24,7 @@ newPlayMap.loadDataObject = function(featureLookup) {
         feature = features[i];
         feature.dataName = featureLookup.dataName;
         feature.type = featureLookup.type;
+        feature.marker_id = featureLookup.marker_id;
         if(feature.id == featureLookup.marker_id) {
           return feature;
         }
@@ -43,6 +44,7 @@ newPlayMap.popupMarker = function(marker) {
 };
 
 newPlayMap.popupPanelTemplate = function(feature){
+
   $('div#popup-placeholder').html(feature.marker_id);
 };
 
@@ -75,7 +77,7 @@ newPlayMap.panelTemplates = function() {
     container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
   }
-  
+  console.log(panelMarkup);
   containerEmpty = $('#panel-container .content').empty();
 
 };
@@ -83,7 +85,7 @@ newPlayMap.panelTemplates = function() {
 newPlayMap.panelTemplate = function(feature) {
 
   newPlayMap.panelTemplates();
-  
+  console.log(feature);
   var type = feature.type;
   var container, containerEmpty;
   containerEmpty = $('#panel-container .content');

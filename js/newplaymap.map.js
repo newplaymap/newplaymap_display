@@ -85,32 +85,20 @@ newPlayMap.getMarker = function(target) {
 
 newPlayMap.onMarkerOver = function(e) {
   var marker = newPlayMap.getMarker(e.target);
-
   if (marker) {
       var grouping_field = marker.getAttribute("grouping_value");
-      var id = marker.getAttribute("id");
       if(grouping_field !== undefined){
         if (grouping_field in locationsByID) {
   
-            spotlight.addLocations(locationsByID[grouping_field] || []);
-            spotlight.parent.className = "active";
-  
-            $('div#panel-container div#panel').show();
-                        
-            // Update the panel data.
-            newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-  
-            
-        } 
-      }
-      else if(id) {  // single item
-          spotlight.addLocations(locationsByID[marker_id] || []);
+          spotlight.addLocations(locationsByID[grouping_field] || []);
           spotlight.parent.className = "active";
 
           $('div#panel-container div#panel').show();
                       
           // Update the panel data.
-          newPlayMap.updatePanel(marker);
+          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+            
+        } 
       }
       
       else {
@@ -136,9 +124,6 @@ newPlayMap.onMarkerOut = function(e) {
 };
 
 newPlayMap.onMarkerClick = function(e) {
-
-console.log("clicked");
-console.log(e);
   // Address History
   // Set URL
   // Load marker (is parent of image if clicked. 
@@ -155,8 +140,6 @@ console.log(e);
 // @TODO This doesn't seem to connect to any modest map click functions.
 // Maybe we do not need something like this. will think about it.
 newPlayMap.onMarkerClickOut = function(e) {
-
-  console.log(e);
 
 };
 

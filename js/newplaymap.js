@@ -51,7 +51,7 @@ newPlayMap.loadMap = function(){
 newPlayMap.loadWax = function() {
   // Syntax example. Seeing if Wax works.
   // Custom tiles
-   var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp';
+   var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp' + '?cache=' + Math.floor(Math.random()*11);
 
 // @BUG -- map tiles not loading upon page refresh
 // @NOTE seems to need to refresh map so then can trigger loading the rest of the map info
@@ -73,6 +73,9 @@ newPlayMap.loadWax = function() {
     newPlayMap.initMap(tj);
     }
   );
+  
+
+
 };
 
 // Wax calls this and the map variable is relevant to what Wax loads
@@ -114,7 +117,8 @@ newPlayMap.loadMapData = function() {
       title: "play_title",
       dataName: "events",
       dataPath: "data/events_300.json",
-      icon: "icons/event.png"
+      icon: "icons/event.png",
+      grouping_field: "event_id"
     };
     newPlayMap.onLoadDataMarkers(eventMarkerData);
   }
@@ -129,6 +133,7 @@ newPlayMap.loadMapData = function() {
     dataName: "organizations",
     dataPath: "data/organizations_300.json",
     icon: "icons/organization.png",
+    grouping_field: "organization_id"
   };
   newPlayMap.onLoadDataMarkers(organizationMarkerData);
   }
@@ -143,6 +148,7 @@ newPlayMap.loadMapData = function() {
     dataName: "artists",
     dataPath: "data/artists_300.json",
     icon: "icons/artist.png",
+    grouping_field: "artist_id"
   };
   newPlayMap.onLoadDataMarkers(artistMarkerData);
   }
