@@ -8,7 +8,7 @@ var markers,
 
 // Estalbish namespace for map.
 var mm = com.modestmaps;
-var map;
+var map = map || {};
 var loaded = 0;
 
 window.onload = function() {
@@ -61,13 +61,17 @@ newPlayMap.loadWax = function() {
 // @TODO using simpler map for debugging.
 
 // These work:
-var url = 'http://api.tiles.mapbox.com/v3/mapbox.world-light.jsonp';
+var url = 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp';
+/* var url = 'http://api.tiles.mapbox.com/v3/mapbox.world-light.jsonp'; */
 //var url = 'http://a.tiles.mapbox.com/v3/bclc-apec.map-rslgvy56.jsonp';
 
 // This doesn't work:
 //var url = 'http://a.tiles.mapbox.com/v3/evand.blossoms.jsonp'; 
-
-  wax.tilejson(url, function(tj) {newPlayMap.initMap(tj)});
+  console.log(wax);
+  wax.tilejson(url, function(tj) {
+    newPlayMap.initMap(tj);
+    }
+  );
 };
 
 // Wax calls this and the map variable is relevant to what Wax loads
