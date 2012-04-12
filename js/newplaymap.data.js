@@ -47,7 +47,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
         marker.feature = feature;
         // Unique hash marker id for link
-        marker.id = "marker-" + vars.type + "-" + id;
+/*         marker.id = "marker-" + vars.type + "-" + id; */
+        marker.setAttribute("id", "marker-" + vars.type + "-" + id);
         marker.setAttribute("dataName", vars.dataName);
         marker.setAttribute("class", "marker");
         marker.setAttribute("href", vars.dataPath);
