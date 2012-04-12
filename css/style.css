@@ -20,13 +20,13 @@ body {
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
 }
 */
-#popup-placeholder {
+#popup {
   position: fixed;
-  top: 300px;
-  left: 300px;
+  bottom: 0px;
+  left: 0px;
   z-index: 1000;
   background: rgba(0,0,0, 0.5);
-  width: 350px;
+  width: 100px;
   height: 200px;
   padding: 10px;
   color: #fff;

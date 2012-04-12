@@ -12,7 +12,7 @@ newPlayMap.updatePanel = function(marker, data) {
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
-console.log(featureLookup);
+
     var featureSet = [];
     var features = jsonData[featureLookup.dataName].features,
         len = features.length,
@@ -21,8 +21,12 @@ console.log(featureLookup);
     // for each feature in the collection, get feature data and add it.
 
     for (var i = 0; i < len; i++) {
+
         feature = features[i];
+
         feature.dataName = featureLookup.dataName;
+/*         feature.path = featureLookup.properties.path; */
+        feature.title = featureLookup.title;
         feature.type = featureLookup.type;
         feature.marker_id = featureLookup.marker_id;
         if(feature.id == featureLookup.marker_id) {
@@ -33,20 +37,35 @@ console.log(featureLookup);
 
 
 newPlayMap.popupMarker = function(marker) {
+  newPlayMap.panelTemplates();
+
+  
   var feature = {};
   feature.markup = marker;
+  var type = "popup";
+  var container;
+  container = $('#popup .content');
+  container.empty();
+
+
+
   feature.type = marker.getAttribute("type");
+
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
+  
   featureData = newPlayMap.loadDataObject(feature);
-  // Load event data into the template.
-  newPlayMap.popupPanelTemplate(featureData);
+
+  featureData.properties.title = marker.getAttribute("title");
+console.log(marker);
+
+console.log(featureData);
+  $.template( type + "Template", panelMarkup[type]);        
+  $.tmpl(type + "Template", featureData["properties"])
+    .appendTo(container); 
 };
 
-newPlayMap.popupPanelTemplate = function(feature){
 
-  $('div#popup-placeholder').html(feature.marker_id);
-};
 
 newPlayMap.panelTemplates = function() {
 
@@ -54,6 +73,14 @@ newPlayMap.panelTemplates = function() {
   // do this once only.
   // Loads the markup from when the page loads before it is overwritten.
   var container;
+
+
+  var type = "popup";
+  if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
+    container = $('#popup .content');
+    panelMarkup[type] = container.html();
+  }
+
   var type = "event";
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
     container = $('#panel-container .' + type);
@@ -77,7 +104,7 @@ newPlayMap.panelTemplates = function() {
     container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
   }
-  console.log(panelMarkup);
+
   containerEmpty = $('#panel-container .content').empty();
 
 };
@@ -85,7 +112,6 @@ newPlayMap.panelTemplates = function() {
 newPlayMap.panelTemplate = function(feature) {
 
   newPlayMap.panelTemplates();
-  console.log(feature);
   var type = feature.type;
   var container, containerEmpty;
   containerEmpty = $('#panel-container .content');
