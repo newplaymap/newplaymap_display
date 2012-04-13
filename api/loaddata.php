@@ -6,7 +6,7 @@ connectMongo(true);
 $output = "";
 loadOrganizations($m, $output);
 loadArtists($m, $output);
-
+loadEvents($m, $output);
 function loadOrganizations($m, $output) {
 
   $organizations = $m->newplaymap->organizations;
@@ -110,6 +110,65 @@ function loadArtists($m) {
   }
   $output .= "<p>Loaded " + $count + " Artists</p>";
 }
+
+
+
+
+
+
+function loadEvents($m, $output) {
+  
+  $events = $m->newplaymap->events;
+  $events->drop();
+  $events_path = '../data/push/events-all.json';
+  
+  $file_data = file_get_contents($events_path);
+  $collection = $events;
+  
+  $json = json_decode($file_data);
+  
+  $objects = $json->nodes;
+  
+  $count = 0;
+  $insert = array();
+  foreach ($objects as $obj_load) {
+  //print "<pre>";
+  $node = (array) $obj_load->node;
+  
+  $newObj = array(
+    "id" => $node["Event ID"],
+    "type" => "Feature",
+    "geometry" => array( 
+      "type" => "Point",
+      "coordinates"=> array($node["Longitude"], $node["Latitude"])
+      ),
+    "properties" => array(
+      "longitude"  => $node["Longitude"],
+      "latitude"  => $node["Latitude"],
+      "event_id"  => $node["Event ID"],
+      "event_type"  => $node["Event type"],
+      "event_to_date"  => $node["To Date"],
+      "event_date"  => $node["Date"],
+      "content_type"  => $node["Content Type"],
+      "related_theater"  => $node["Related Theater"],
+      "related_theater_id"  => $node["Related Theater ID"],
+      "artist_id"  => $node["Artist ID"],
+      "play_title"  => $node["Play title"],
+      "related_play_id"  => $node["Related Play ID"],
+      "generative_artist"  => $node["Generative Artist"],
+      "event_description"  => $node["Event description"],
+      "synopsis"  => $node["Synopsis"],
+      "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
+  )
+  );
+    // This will completely replace the record.
+    $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
+    $count++;
+  }
+  $output .= "<p>Loaded " + $count + " Events</p>";
+}
+
+
 
 
 /*
