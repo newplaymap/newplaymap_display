@@ -69,6 +69,7 @@ $plays = $m->newplaymap->plays;
 $artists_path = '../data/push/artists-all.json';
 $events_path = '../data/push/events-all.json';
 */
+/*
 
 $cursor = $m->newplaymap->organizations->find()->limit(10);
 
@@ -98,6 +99,8 @@ foreach ($cursor as $obj) {
 }
 
 $json .= ']}';
+*/
 
-echo $json;
+/* echo $json; */
+echo "done";
 ?>
