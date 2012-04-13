@@ -32,6 +32,7 @@ body {
   color: #fff;
 }
 
+
 /* @TODO load newplay map v1 css, or change it. */
 #panel-container {
   position: fixed;
@@ -72,4 +73,21 @@ dt {
 dd {
   padding: 0;
   margin: 5px 0 1em 0;
+}
+
+#play-journey {
+  z-index: 100;
+  pointer-events:none;
+}
+#play-markers {
+  z-index: 400;
+}
+#artist-markers {
+  z-index: 80;
+}
+#organization-markers {
+  z-index: 60;
+}
+#events-markers {
+  z-index: 90;
 }

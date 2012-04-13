@@ -107,6 +107,7 @@ com.modestmaps.PolygonMarker.prototype = {
             this.div.style.left = point.x + this.offset.x + 'px';
             this.div.style.top = point.y + this.offset.y + 'px';
         } */
+        this.div.id = "play-journey";
         
         this.div.style.display = 'block';
         this.div.style.left = point.x + 'px';
@@ -142,7 +143,7 @@ com.modestmaps.PolygonMarker.prototype = {
 
 
             var fadeValue = Math.round((1/(this.coords.length-3))*100)/100;
-            var widthValue = Math.round((8/this.coords.length-3)*100)/100;
+            var widthValue = Math.round((5/this.coords.length-3)*100)/100;
                       var pathParams = {};
 
             if (this.fillStyle) {
@@ -150,14 +151,15 @@ com.modestmaps.PolygonMarker.prototype = {
                 pathParams['fill-opacity'] = this.fillAlpha;
             }
             if (this.strokeStyle) pathParams['stroke'] = this.strokeStyle;
-            pathParams['stroke-linejoinstring'] = 'round';
+            pathParams['stroke-linejoin'] = 'round';
+            pathParams['stroke-linecap'] = 'round';
             var path = this.canvas.path(pathParams);
 
 
             for (var i = 0; i < points.length-1; i++) {
                 path = this.canvas.path(pathParams);
                 pathParams['stroke-opacity'] = 1 - (fadeValue * (i+1));
-                pathParams['stroke-width'] = 10 - (widthValue * (i+1));
+                pathParams['stroke-width'] = 6 - (widthValue * (i+1));
                 path.moveTo(points[i].x, points[i].y);
                 path.lineTo(points[i+1].x, points[i+1].y);
                 path.andClose();

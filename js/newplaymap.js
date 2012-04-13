@@ -110,13 +110,14 @@ newPlayMap.initMap = function(tj) {
 
 
 newPlayMap.loadMapLayers = function() {
-  markers = new MM.MarkerLayer();
-  map.addLayer(markers);
   newPlayMap.loadMapData();
 };
 
 newPlayMap.loadMapData = function() {
  if(jsonData.events !== undefined) {
+    markers = new MM.MarkerLayer();
+     markers.parent.id = "events-markers";
+    map.addLayer(markers);
     // Load Event Markers
     var eventMarkerData = {
       type: "event",
@@ -133,6 +134,9 @@ newPlayMap.loadMapData = function() {
   }
 
  if(jsonData.organizations !== undefined) {
+    markers = new MM.MarkerLayer();
+     markers.parent.id = "organizations-markers";
+    map.addLayer(markers);
   // Load Organization Markers
   var organizationMarkerData = {
     type: "organization",
@@ -148,6 +152,10 @@ newPlayMap.loadMapData = function() {
   }
 
  if(jsonData.artists !== undefined) {
+
+  markers = new MM.MarkerLayer();
+     markers.parent.id = "artists-markers";
+  map.addLayer(markers);
   // Load Artist Markers
   var artistMarkerData = {
     type: "artist",
@@ -165,6 +173,10 @@ newPlayMap.loadMapData = function() {
   // We treat related event as it's own separate type so there are no conflicts with identical events.
   // This information will be on its own special layer, and cross linking identical markers is too complex for what we are doing right now.
  if(jsonData.play !== undefined) {  
+    markers = new MM.MarkerLayer();
+    markers.parent.id = "play-markers";
+    map.addLayer(markers);
+ 
   // Load Related Play Markers
   var relatedEventMarkerData = {
     type: "play",

@@ -21,7 +21,7 @@
 }
 
 .marker:hover {
-    z-index: 1000;
+    z-index: 8000;
 }
 
 #map canvas {
