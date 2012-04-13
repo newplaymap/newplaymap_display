@@ -1,3 +1,127 @@
+newPlayMap.getMarker = function(target) {
+    var marker = target;
+    while (marker && marker.className != "marker") {
+        marker = marker.parentNode;
+    }
+    return marker;
+};
+
+newPlayMap.onMarkerOver = function(e) {
+  var marker = newPlayMap.getMarker(e.target);
+  if (marker) {
+      var grouping_field = marker.getAttribute("grouping_value");
+      if(grouping_field !== undefined){
+        if (grouping_field in locationsByID) {
+  
+          spotlight.addLocations(locationsByID[grouping_field] || []);
+          spotlight.parent.className = "active";
+
+          $('div#panel-container div#panel').show();
+                      
+          // Update the panel data.
+          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+            
+        } 
+      }
+      
+      else {
+          spotlight.parent.className = "inactive";
+      }
+  }
+};
+
+newPlayMap.onMarkerOut = function(e) {
+
+  var marker = newPlayMap.getMarker(e.target);
+  if (marker) {
+      var type = marker.type;
+
+      spotlight.removeAllLocations();
+      // keep last option visible.
+/*       $('div#panel-container div#panel').hide(); */
+      
+      spotlight.parent.className = "inactive";
+  }
+
+  return false;
+};
+
+newPlayMap.onMarkerClick = function(e) {
+  // Address History
+  // Set URL
+  // Load marker (is parent of image if clicked. 
+  // @TODO be careful that click is not actually on a.
+  var marker = e.target.offsetParent;
+
+  newPlayMap.popupMarker(marker);
+
+  var marker = newPlayMap.getMarker(e.target);
+  if (marker) {
+      var grouping_field = marker.getAttribute("grouping_value");
+      if(grouping_field !== undefined){
+        if (grouping_field in locationsByID) {
+  
+          spotlight.addLocations(locationsByID[grouping_field] || []);
+          spotlight.parent.className = "active";
+
+          $('div#panel-container div#panel').show();
+                      
+          // Update the panel data.
+          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+            
+        } 
+      }
+      
+      else {
+          spotlight.parent.className = "inactive";
+      }
+  }
+
+
+  return false;
+};
+
+
+// @TODO This doesn't seem to connect to any modest map click functions.
+// Maybe we do not need something like this. will think about it.
+newPlayMap.onMarkerClickOut = function(e) {
+
+};
+
+
+// Change Double Click easing.
+
+easey.DoubleClickHandler.prototype = {
+
+    init: function(map) {
+        this.map = map;
+        MM.addEvent(map.parent, 'dblclick', this.getDoubleClick());
+    },
+
+    doubleClickHandler: null,
+
+    getDoubleClick: function() {
+        // Ensure that this handler is attached once.
+        if (!this.doubleClickHandler) {
+            var theHandler = this;
+            this.doubleClickHandler = function(e) {
+                var map = theHandler.map,
+                point = MM.getMousePoint(e, map),
+                z = map.getZoom() + (e.shiftKey ? -2 : 2);
+
+                easey.slow(map, {
+                    zoom: z,
+                    about: point,
+                    time: 500
+                });
+
+                return MM.cancelEvent(e);
+            };
+        }
+        return this.doubleClickHandler;
+    }
+};
+
 newPlayMap.mapCustomizations = function (map, markers) {
 /*   map.setZoomRange(0, 18); */
 
@@ -68,110 +192,4 @@ newPlayMap.mapCustomizations = function (map, markers) {
     map.zoomBy(-2);
   });
 */
-};
-
-
-
-
-
-
-newPlayMap.getMarker = function(target) {
-    var marker = target;
-    while (marker && marker.className != "marker") {
-        marker = marker.parentNode;
-    }
-    return marker;
-};
-
-newPlayMap.onMarkerOver = function(e) {
-  var marker = newPlayMap.getMarker(e.target);
-  if (marker) {
-      var grouping_field = marker.getAttribute("grouping_value");
-      if(grouping_field !== undefined){
-        if (grouping_field in locationsByID) {
-  
-          spotlight.addLocations(locationsByID[grouping_field] || []);
-          spotlight.parent.className = "active";
-
-          $('div#panel-container div#panel').show();
-                      
-          // Update the panel data.
-          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-            
-        } 
-      }
-      
-      else {
-          spotlight.parent.className = "inactive";
-      }
-  }
-};
-
-newPlayMap.onMarkerOut = function(e) {
-
-  var marker = newPlayMap.getMarker(e.target);
-  if (marker) {
-      var type = marker.type;
-
-      spotlight.removeAllLocations();
-      // keep last option visible.
-/*       $('div#panel-container div#panel').hide(); */
-      
-      spotlight.parent.className = "inactive";
-  }
-
-  return false;
-};
-
-newPlayMap.onMarkerClick = function(e) {
-  // Address History
-  // Set URL
-  // Load marker (is parent of image if clicked. 
-  // @TODO be careful that click is not actually on a.
-  var marker = e.target.offsetParent;
-
-  newPlayMap.popupMarker(marker);
-
-  return false;
-};
-
-
-// @TODO This doesn't seem to connect to any modest map click functions.
-// Maybe we do not need something like this. will think about it.
-newPlayMap.onMarkerClickOut = function(e) {
-
-};
-
-
-// Change Double Click easing.
-
-easey.DoubleClickHandler.prototype = {
-
-    init: function(map) {
-        this.map = map;
-        MM.addEvent(map.parent, 'dblclick', this.getDoubleClick());
-    },
-
-    doubleClickHandler: null,
-
-    getDoubleClick: function() {
-        // Ensure that this handler is attached once.
-        if (!this.doubleClickHandler) {
-            var theHandler = this;
-            this.doubleClickHandler = function(e) {
-                var map = theHandler.map,
-                point = MM.getMousePoint(e, map),
-                z = map.getZoom() + (e.shiftKey ? -2 : 2);
-
-                easey.slow(map, {
-                    zoom: z,
-                    about: point,
-                    time: 500
-                });
-
-                return MM.cancelEvent(e);
-            };
-        }
-        return this.doubleClickHandler;
-    }
 };

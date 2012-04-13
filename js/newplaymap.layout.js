@@ -9,10 +9,10 @@ newPlayMap.updatePanel = function(marker, data) {
   featureData = newPlayMap.loadDataObject(feature);
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
+
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
-
     var featureSet = [];
     var features = jsonData[featureLookup.dataName].features,
         len = features.length,
