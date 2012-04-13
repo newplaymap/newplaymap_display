@@ -35,9 +35,9 @@ newPlayMap.loadPageRouter = function() {
 };
 
 newPlayMap.loadData = function() {
-  newPlayMap.loadJSONFile({path: 'data/organizations.json'});
-  newPlayMap.loadJSONFile({path: 'data/events.json'});
-  newPlayMap.loadJSONFile({path: "data/artists.json"});
+  newPlayMap.loadJSONFile({path: 'data/organizations_300.json'});
+  newPlayMap.loadJSONFile({path: 'data/events_300.json'});
+  newPlayMap.loadJSONFile({path: "data/artists_300.json"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
 
 /*
@@ -99,10 +99,9 @@ newPlayMap.initMap = function(tj) {
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
 
-    // Load map marker layers.
-    newPlayMap.loadMapLayers();
-
-    newPlayMap.mapCustomizations(map, markers);  
+  // Load map marker layers.
+  newPlayMap.loadMapLayers();
+  newPlayMap.mapCustomizations(map, markers);  
 
 
 };
@@ -112,7 +111,6 @@ newPlayMap.loadMapLayers = function() {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
   newPlayMap.loadMapData();
-  // Waits for all data to load completely before getting markers.
 };
 
 newPlayMap.loadMapData = function() {
@@ -124,7 +122,7 @@ newPlayMap.loadMapData = function() {
       label: "related_theater", // field which will be used in label
       title: "play_title",
       dataName: "events",
-      dataPath: "data/events.json",
+      dataPath: "data/events_300.json",
       icon: "icons/event.png",
       grouping_field: "event_id",
       path: ""
@@ -140,7 +138,7 @@ newPlayMap.loadMapData = function() {
     id: "organization_id",
     title: "name",
     dataName: "organizations",
-    dataPath: "data/organizations.json",
+    dataPath: "data/organizations_300.json",
     icon: "icons/organization.png",
     grouping_field: "organization_id"
   };
@@ -155,7 +153,7 @@ newPlayMap.loadMapData = function() {
     label: "ensemble_collective",
     title: "generative_artist",
     dataName: "artists",
-    dataPath: "data/artists.json",
+    dataPath: "data/artists_300.json",
     icon: "icons/artist.png",
     grouping_field: "artist_id"
   };
