@@ -46,6 +46,9 @@ newPlayMap.onLoadDataMarkers = function(vars) {
             marker = document.createElement("div");
 
         marker.feature = feature;
+       
+        markers.addMarker(marker, feature);
+
         // Unique hash marker id for link
 /*         marker.id = "marker-" + vars.type + "-" + id; */
         marker.setAttribute("id", "marker-" + vars.type + "-" + id);
@@ -66,9 +69,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         // create an image icon
         var img = marker.appendChild(document.createElement("img"));
         img.setAttribute("src", vars.icon);
-        
-        markers.addMarker(marker, feature);
-
+ 
 
         // Determine placement of highlighting by geocoordinates.
         if(vars.grouping_field !== undefined) {
@@ -102,7 +103,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     }
 
     // Tell the map to fit all of the locations in the available space
-
+    
     // @TODO this will run on the last loaded item, which may make behavior strange.
     // Actually no it is probably fine so long as locations is global.
     map.setExtent(locations);
