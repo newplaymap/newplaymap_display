@@ -32,10 +32,10 @@ newPlayMap.loadDataComplete = function() {
 };
 
 newPlayMap.loadFeatureAction = function() {
-console.log(newPlayMap.routing.route);
+/* console.log(newPlayMap.routing.route); */
   if(newPlayMap.routing.route !== undefined && newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
     $(newPlayMap.routing.route.callback);
-    console.log(newPlayMap.routing);
+/*     console.log(newPlayMap.routing); */
   }
 }
 

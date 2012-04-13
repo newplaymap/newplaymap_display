@@ -130,7 +130,6 @@ newPlayMap.onMarkerClick = function(e) {
   // @TODO be careful that click is not actually on a.
   var marker = e.target.offsetParent;
 
-  console.log(marker);
   newPlayMap.popupMarker(marker);
 
   return false;
