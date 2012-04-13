@@ -5,25 +5,21 @@ var panelMarkup = {};
 var spotlight = {};
 var markers,
     locationsByID = {};
-
+var dfd = $.Deferred();
 // Estalbish namespace for map.
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
 
 window.onload = function() {
-  //@TODO load once?
-  // Change basic layout of page.
-  newPlayMap.alterHomepage();
+  newPlayMap.alterHomepage();   // Change basic layout of page.
+  newPlayMap.loadPageRouter();  // Read address and store parsed address in an object.
+  newPlayMap.loadData();        // Load up Data via JSON.
+  newPlayMap.loadMap();         // Load map tiles.
+  newPlayMap.loadMarkers();     // Load and insert map markers.
+ // newPlayMap.loadBehaviors();   // Load marker actions and events.
 
-  // @TODO: loadPageRouter needs jsonData set up which doesn't happen until loadData().
-  //        Changing order of functions doesn't help. Probably waiting for json files to load.
-  newPlayMap.loadPageRouter();
 
-  // Load the map after all the data is loaded and available.
-  newPlayMap.loadData();
-
-  newPlayMap.loadMap();
 };
 
 newPlayMap.alterHomepage = function() {
@@ -31,7 +27,27 @@ newPlayMap.alterHomepage = function() {
 };
 
 newPlayMap.loadPageRouter = function() {
-  newPlayMap.loadAddress();
+
+  // Address always loads on every page interaction.
+  $.address.change(function(event) {
+    newPlayMap.buildRoutePath(event);
+
+    // Call functions everytime page changes.
+
+    var jsonLength = Object.keys(jsonData).length;
+    
+    if (jsonLength >= 4) {
+      newPlayMap.lookupRoute();
+    }
+    if (jsonLength >= 4 && newPlayMap.routing.path !== undefined && newPlayMap.routing.route !== undefined) {
+      
+      // newPlayMap.loadFeatureAction();
+    };
+    return false;
+  });
+
+  // bind address to all a links.
+  $('a').address();
 };
 
 newPlayMap.loadData = function() {
@@ -40,43 +56,34 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({path: "data/artists_300.json"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
 
-/*
-  newPlayMap.loadJSONFile({path: 'api/organizations.php'});
-  newPlayMap.loadJSONFile({path: 'api/events.php'});
-  newPlayMap.loadJSONFile({path: "api/artists.php"});
-  newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
-*/
-
-
   return false;
 };
 
 newPlayMap.loadMap = function(){
   // Load map tiles.
   newPlayMap.loadWax();
+  console.log("map");
+  //newPlayMap.initMapSimple();
 };
 
+newPlayMap.loadMarkers = function() {
+  newPlayMap.testDataLoaded(newPlayMap.loadMapData);
+};
+
+newPlayMap.loadBehaviors = function() {
+  // load functions / trigger behaviors.
+  newPlayMap.testDataLoaded(newPlayMap.lookupRoute);
+  
+  if (newPlayMap.routing.path !== undefined) {
+    newPlayMap.testDataLoaded(newPlayMap.loadFeatureAction);
+  }
+};
+
+
 newPlayMap.loadWax = function() {
-  // Syntax example. Seeing if Wax works.
   // Custom tiles
-   var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp' + '?cache=' + Math.floor(Math.random()*11);
+  var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp' + '?cache=' + Math.floor(Math.random()*11);
 
-// @BUG -- map tiles not loading upon page refresh
-// @NOTE seems to need to refresh map so then can trigger loading the rest of the map info
-//http://support.mapbox.com/discussions/general-questions/1175-wax-doesnt-load-my-maps-from-tilesmapboxcom-does-load-other-maps
-// @TODO redownload wax
-
-// @TODO using simpler map for debugging.
-
-// These work:
-/* var url = 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp'; */
-/* var url = 'http://api.tiles.mapbox.com/v3/mapbox.world-light.jsonp'; */
-//var url = 'http://a.tiles.mapbox.com/v3/bclc-apec.map-rslgvy56.jsonp';
-
-// This doesn't work:
-/* var url = 'http://a.tiles.mapbox.com/v3/evand.blossoms.jsonp';  */
-
-  // console.log(wax);
   wax.tilejson(url, function(tj) {
     newPlayMap.initMap(tj);
     }
@@ -95,23 +102,50 @@ newPlayMap.initMap = function(tj) {
         new easey.MouseWheelHandler()
     ]);
 
+  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
+
   // Load interactive behavior.
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
 
   // Load map marker layers.
   newPlayMap.loadMapLayers();
-  newPlayMap.mapCustomizations(map, markers);  
-
-
 };
 
+newPlayMap.initMapSimple = function() {
+
+  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"))
+  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
+
+  // Load interactive behavior.
+/*
+  spotlight = new SpotlightLayer();
+  map.addLayer(spotlight);
+*/
+
+  // Load map marker layers.
+  newPlayMap.loadMapLayers();
+
+};
 
 newPlayMap.loadMapLayers = function() {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
-  newPlayMap.loadMapData();
 };
+
+
+newPlayMap.testDataLoaded = function(callback) {
+  (function wait() {
+      if (Object.keys(jsonData).length >= 4) {
+        console.log("All data is loaded");
+        $(callback);
+      } else {
+        console.log("waiting");
+          setTimeout( wait, 500 );
+      }
+  })();
+};
+
 
 newPlayMap.loadMapData = function() {
  if(jsonData.events !== undefined) {
@@ -176,5 +210,4 @@ newPlayMap.loadMapData = function() {
   };
   newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
   }
-
 };

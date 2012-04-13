@@ -7,25 +7,6 @@ var canvas = {}
  */
 
 //http://www.asual.com/jquery/address/docs/ 
-newPlayMap.loadAddress = function() {
-  newPlayMap.buildRoutePath();
-
-  $.address.change(function(event) {
-    console.log("address change");
-    
-    newPlayMap.buildRoutePath(event);
-    newPlayMap.lookupRoute();
-    console.log(newPlayMap.routing.route);
-    var jsonLength = Object.keys(jsonData).length;
-    if (jsonLength >= 4 && newPlayMap.routing.path !== undefined && newPlayMap.routing.route !== undefined) {
-      newPlayMap.loadFeatureAction();
-    };
-    return false;
-  });
-
-  // bind address to all a links.
-  $('a').address();
-};
 
 newPlayMap.buildRoutePath = function(event) {
   newPlayMap.routing.path = newPlayMap.splitPath(event);

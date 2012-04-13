@@ -29,6 +29,18 @@ next week
  -- tried adding random number
  -- problem still exists
  -- can switch to mapbox - perhaps with no wax - not sure we're really using wax (tilejson) for all it does
+-- 
+//http://support.mapbox.com/discussions/general-questions/1175-wax-doesnt-load-my-maps-from-tilesmapboxcom-does-load-other-maps
+
+
+/*
+  Mongo paths. Also change in marker setup or make a function to load them.
+  newPlayMap.loadJSONFile({path: 'api/organizations.php'});
+  newPlayMap.loadJSONFile({path: 'api/events.php'});
+  newPlayMap.loadJSONFile({path: "api/artists.php"});
+  newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
+*/
+
 
 * address tests
 homepage -- load filtered data (next week)
