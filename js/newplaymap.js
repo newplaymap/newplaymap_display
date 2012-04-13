@@ -68,7 +68,7 @@ newPlayMap.loadWax = function() {
 // This doesn't work:
 /* var url = 'http://a.tiles.mapbox.com/v3/evand.blossoms.jsonp';  */
 
-  console.log(wax);
+  // console.log(wax);
   wax.tilejson(url, function(tj) {
     newPlayMap.initMap(tj);
     }
@@ -118,7 +118,8 @@ newPlayMap.loadMapData = function() {
       dataName: "events",
       dataPath: "data/events_300.json",
       icon: "icons/event.png",
-      grouping_field: "event_id"
+      grouping_field: "event_id",
+      path: ""
     };
     newPlayMap.onLoadDataMarkers(eventMarkerData);
   }
