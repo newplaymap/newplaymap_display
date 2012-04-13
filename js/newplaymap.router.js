@@ -225,12 +225,12 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
               }
           }
         }
-        
+//      http://raphaeljs.com/reference.html  
       
         if (locations.length > 0) {
-            var fillStyle = 'rgba(0,0,0,0.3)';
-            var fillAlpha = 1.0;
-            var strokeStyle = '#ffcc00';
+            var fillStyle = 'transparent';
+            var fillAlpha = 0;
+            var strokeStyle = '#000';
 /*
             if (swath.nodeName == 'PastWindSwath') {
                 fillStyle = '#630';

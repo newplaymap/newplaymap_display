@@ -126,15 +126,13 @@ com.modestmaps.PolygonMarker.prototype = {
             }
 
             this.canvas = Raphael(this.div, canvasWidth, canvasHeight);
-            var pathParams = {};       
+     
             var points = [];
             
-            var fade = Math.round((1/this.coords.length)*1000)/1000
-            console.log(fade);
+
+
             for (var i = 0; i < this.coords.length; i++) {
                 var point = map.coordinatePoint(this.coords[i]);
-                pathParams['stroke-opacity'] = 1 - fade(i);            
-
                 point.x -= topLeftPoint.x;
                 point.y -= topLeftPoint.y;
                 points.push(point);
@@ -142,21 +140,29 @@ com.modestmaps.PolygonMarker.prototype = {
 
 
 
+
+            var fadeValue = Math.round((1/(this.coords.length-3))*100)/100;
+            var widthValue = Math.round((8/this.coords.length-3)*100)/100;
+                      var pathParams = {};
+
             if (this.fillStyle) {
                 pathParams['fill'] = this.fillStyle;
                 pathParams['fill-opacity'] = this.fillAlpha;
             }
             if (this.strokeStyle) pathParams['stroke'] = this.strokeStyle;
-
-
+            pathParams['stroke-linejoinstring'] = 'round';
             var path = this.canvas.path(pathParams);
 
-            path.moveTo(points[0].x, points[0].y);
-            for (var i = 1; i < points.length; i++) {
-                path.lineTo(points[i].x, points[i].y);
+
+            for (var i = 0; i < points.length-1; i++) {
+                path = this.canvas.path(pathParams);
+                pathParams['stroke-opacity'] = 1 - (fadeValue * (i+1));
+                pathParams['stroke-width'] = 10 - (widthValue * (i+1));
+                path.moveTo(points[i].x, points[i].y);
+                path.lineTo(points[i+1].x, points[i+1].y);
+                path.andClose();
             }
-            path.andClose();
-            
+
             this.drawZoom = map.getZoom();
         }        
         
