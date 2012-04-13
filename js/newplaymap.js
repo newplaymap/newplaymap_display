@@ -35,10 +35,18 @@ newPlayMap.loadPageRouter = function() {
 };
 
 newPlayMap.loadData = function() {
+  newPlayMap.loadJSONFile({path: 'data/organizations.json'});
+  newPlayMap.loadJSONFile({path: 'data/events.json'});
+  newPlayMap.loadJSONFile({path: "data/artists.json"});
+  newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
+
+/*
   newPlayMap.loadJSONFile({path: 'api/organizations.php'});
   newPlayMap.loadJSONFile({path: 'api/events.php'});
   newPlayMap.loadJSONFile({path: "api/artists.php"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
+*/
+
 
   return false;
 };
@@ -116,7 +124,7 @@ newPlayMap.loadMapData = function() {
       label: "related_theater", // field which will be used in label
       title: "play_title",
       dataName: "events",
-      dataPath: "api/events.php",
+      dataPath: "data/events.json",
       icon: "icons/event.png",
       grouping_field: "event_id",
       path: ""
@@ -132,7 +140,7 @@ newPlayMap.loadMapData = function() {
     id: "organization_id",
     title: "name",
     dataName: "organizations",
-    dataPath: "api/organizations.php",
+    dataPath: "data/organizations.json",
     icon: "icons/organization.png",
     grouping_field: "organization_id"
   };
@@ -147,7 +155,7 @@ newPlayMap.loadMapData = function() {
     label: "ensemble_collective",
     title: "generative_artist",
     dataName: "artists",
-    dataPath: "api/artists.php",
+    dataPath: "data/artists.json",
     icon: "icons/artist.png",
     grouping_field: "artist_id"
   };
