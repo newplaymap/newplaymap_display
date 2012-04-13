@@ -18,6 +18,18 @@ newPlayMap.loadJSONFile = function(vars) {
 
 newPlayMap.setData = function(data) {
   jsonData[data.name] = data;
+
+
+  
+  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
+
+  var jsonLength = Object.keys(jsonData).length;
+  console.log( "test");
+  
+
+
+  };
+
   return false;
 };
 
@@ -28,28 +40,16 @@ newPlayMap.loadDataError = function(data) {
 };
 
 newPlayMap.loadDataComplete = function() {
-  var jsonLength = Object.keys(jsonData).length
+  var jsonLength = Object.keys(jsonData).length;
+  console.log( Object.keys(jsonData).length);
   if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
-
-    // Load map marker layers.
-    newPlayMap.loadMapLayers();
-
-    newPlayMap.mapCustomizations(map, markers);  
-
-
-    console.log("routing");
+  console.log(jsonLength + "complete");
+      console.log("routing hello");
     newPlayMap.lookupRoute();
     newPlayMap.loadFeatureAction();
   };
 };
 
-newPlayMap.loadFeatureAction = function() {
-/* console.log(newPlayMap.routing.route); */
-  if(newPlayMap.routing.route !== undefined && newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
-    $(newPlayMap.routing.route.callback);
-/*     console.log(newPlayMap.routing); */
-  }
-}
 
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;

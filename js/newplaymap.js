@@ -73,8 +73,6 @@ newPlayMap.loadWax = function() {
     newPlayMap.initMap(tj);
     }
   );
-  
-
 
 };
 
@@ -92,9 +90,11 @@ newPlayMap.initMap = function(tj) {
   // Load interactive behavior.
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
-/*   map.setCenterZoom(new com.modestmaps.Location(30, -90), 4); */
 
+    // Load map marker layers.
+    newPlayMap.loadMapLayers();
 
+    newPlayMap.mapCustomizations(map, markers);  
 
 
 };
@@ -104,6 +104,7 @@ newPlayMap.loadMapLayers = function() {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
   newPlayMap.loadMapData();
+  // Waits for all data to load completely before getting markers.
 };
 
 newPlayMap.loadMapData = function() {
