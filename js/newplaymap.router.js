@@ -226,35 +226,19 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
           }
         }
 //      http://raphaeljs.com/reference.html  
+      // line style in function
       
         if (locations.length > 0) {
             var fillStyle = 'transparent';
             var fillAlpha = 0;
             var strokeStyle = '#000';
-/*
-            if (swath.nodeName == 'PastWindSwath') {
-                fillStyle = '#630';
-                fillAlpha = 0.5;
-                strokeStyle = null;
-            }
-            else if (swath.nodeName == 'CurrentWindRing') {
-                fillStyle = '#f00';
-                fillAlpha = 0.5;
-                strokeStyle = 'white';
-            }
-            else if (swath.nodeName == 'ForecastWindSwath') {
-                fillStyle = '#f63';
-                fillAlpha = 0.25;
-                strokeStyle = null;
-            }
-            else if (swath.nodeName == 'ForecastErrorSwath') {
-                fillStyle = null;
-                strokeStyle = 'rgb(80,80,80)';
-            }
-*/
             var polygon = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
         }
-
+      $("div#play-markers").css("z-index", 700);
+      $("div#play-journey").css("z-index", 600);
+      $("div#artists-markers").css("z-index", 500);
+      $("div#organizations-markers").css("z-index", 400);
+      $("div#events-markers").css("z-index", 300);
 }
 
 
