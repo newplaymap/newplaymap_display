@@ -170,4 +170,5 @@ newPlayMap.loadMapData = function() {
   };
   newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
   }
+
 };

@@ -9,6 +9,7 @@ newPlayMap.loadJSONFile = function(vars) {
     url:  contentData,
     dataType: 'json',
     data: data,
+    complete: newPlayMap.loadDataComplete,
     success: newPlayMap.setData,
     error: newPlayMap.loadDataError
   });
@@ -17,9 +18,6 @@ newPlayMap.loadJSONFile = function(vars) {
 
 newPlayMap.setData = function(data) {
   jsonData[data.name] = data;
-  if (newPlayMap.routing.dataName && data.name == newPlayMap.routing.dataName) {
-    newPlayMap.lookupFeatureByPath(newPlayMap.routing.path, newPlayMap.routing.dataName, newPlayMap.routing.alt_path);
-  }
   return false;
 };
 
@@ -29,6 +27,13 @@ newPlayMap.loadDataError = function(data) {
   return false;
 };
 
+newPlayMap.loadDataComplete = function() {
+  var jsonLength = Object.keys(jsonData).length
+  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
+    console.log("routing");
+    newPlayMap.lookupRoute();
+  };
+};
 
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;

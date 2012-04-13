@@ -5,19 +5,15 @@ newPlayMap.routing = newPlayMap.routing || {};
 /* Upgrade to address 1.4, which MIGHT work with regular jquery, otherwise go back to jquery 1.4.2
  * Whenever the address changes, trigger popup markers & load node.
  */
- 
+
 //http://www.asual.com/jquery/address/docs/ 
 newPlayMap.loadAddress = function() {
+  newPlayMap.buildRoutePath();
+
   $.address.change(function(event) {
-
-    var path = event.value;
-    if(path !== undefined && path !== '/') {
-      newPlayMap.routePath(path);
-    }
-    else {
-      console.log("no path");
-    }
-
+    // Clear out saved routing info
+/*     newPlayMap.routing = {}; */
+    newPlayMap.buildRoutePath();
     return false;
   });
 
@@ -25,31 +21,23 @@ newPlayMap.loadAddress = function() {
   $('a').address();
 };
 
-newPlayMap.routePath = function(uri) {
-  // console.log(uri); 
-
-
-  // @TODO this doesn't work yet. We need to be able to get the url parameters as an object.
-  var path = newPlayMap.splitPath(uri);
-  console.log(path);
-  newPlayMap.routing = newPlayMap.lookupRoute(path);
-  console.log(newPlayMap.routing);
-  // Ignore certain links & force them to open in Drupal
-  // newPlayMap.ajaxLinks();  
-  
-  
+newPlayMap.buildRoutePath = function() {
+  newPlayMap.routing.path = newPlayMap.splitPath();
 };
 
 newPlayMap.splitPath = function(uri) {
   var path = {};
-  path.rawPath = newPlayMap.jqueryAddressHashPath(uri);
-  if(path.rawPath !== false) {
+  path.params = newPlayMap.urlParameters();
+  path.rawPath = newPlayMap.jqueryAddressHashPath(path.params.hash);
+  console.log(path.rawPath);
+
+  if(path.rawPath !== undefined) {
     // Clean up path.
-    path.params = newPlayMap.urlParameters();
     path.uriStripped = path.rawPath.replace(/^\//, '');
     path.args = path.uriStripped.split("/");
+    console.log(path.args);
      // Split path into components
-    path.parts = path.uriStripped.split("?");
+    path.parts = path.rawPath.split("?");
     path.base = path.parts[0];
     path.vars = path.parts[1].split("&");
     path.filters = {};
@@ -57,8 +45,7 @@ newPlayMap.splitPath = function(uri) {
       var filter = path.vars[singleFilter].split('=');
       path.filters[filter[0]] = filter[1];
     }
-  } 
-  
+  }
   return path;
 };
 
@@ -88,49 +75,47 @@ newPlayMap.urlParameters = function(){
     return urlParameters;
 };
 
-newPlayMap.lookupRoute = function(path) {
-  var path = path;
-  var route = {};
-  var arg = path.args[0];
+newPlayMap.lookupRoute = function() {
 
-  // Clear out saved routing info
-  newPlayMap.routing = {};
+  // Ignore certain links & force them to open in Drupal
+  // newPlayMap.ajaxLinks();  
+  
+  if(newPlayMap.routing.path !== undefined) {
+      var route = {};
 
-  if(arg !== undefined) {
-    switch(arg) {
-      case "event":
-        feature = newPlayMap.lookupFeatureByPath(path.base, "events");
-        route.feature = feature;
-        route.callback = newPlayMap.loadEvent;
-      break;
-  
-      case "artist":
-        feature = newPlayMap.lookupFeatureByPath(path.base, "artists");
-        route.feature = feature;
-        route.callback = newPlayMap.loadArtist;
-      break;
-  
-      case "organization":
-        feature = newPlayMap.lookupFeatureByPath(path.base, "organizations");
-        route.feature = feature;
-        route.callback = newPlayMap.loadOrganization;
-      break;
-  
-      case "play":
-        feature = newPlayMap.lookupFeatureByPath(path.base, "play", "play_path", "event_id", path.filters.event_id);
-        // Spelling this out to be extra super clear
-        route.feature = feature;
-        route.callback = newPlayMap.loadRelatedEvents;
-      break;
+      switch(newPlayMap.routing.path.args[0]) {
+        case "event":
+          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "events");
+          route.feature = feature;
+          route.callback = newPlayMap.loadEvent;
+        break;
+    
+        case "artist":
+          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "artists");
+          route.feature = feature;
+          route.callback = newPlayMap.loadArtist;
+        break;
+    
+        case "organization":
+          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "organizations");
+          route.feature = feature;
+          route.callback = newPlayMap.loadOrganization;
+        break;
+    
+        case "play":
+          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "play", "play_path", "event_id", newPlayMap.routing.path.filters.event_id);
+          // Spelling this out to be extra super clear
+          route.feature = feature;
+          route.callback = newPlayMap.loadRelatedEvents;
+        break;
+     }
     }
-  }
-  return route;
+    return route;
 }
 
 
 newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path, id_key, id_value) {
-
-  if(jsonData !== undefined && jsonData[dataName] !== undefined){
+  if(jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
     loadedFeatures = [];
     for (var i = 0; i < features.length; i++) {
@@ -142,11 +127,13 @@ newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path, id_key, id_v
         else {
           pathKey = "path";
         }
+        console.log(feature);
+console.log(feature.properties[pathKey]);
+console.log(path);
+        if(feature.properties[pathKey] == "/" + path){
 
-        if(feature.properties[pathKey] == path){
 
-
-          console.log(feature.properties[id_key] );
+          console.log(feature.properties);
           if(id_value !== undefined && feature.properties[id_key] == id_value){
             loadedFeatures.push(feature);
           }
