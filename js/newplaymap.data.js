@@ -35,7 +35,6 @@ newPlayMap.loadDataComplete = function() {
 
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;
-  
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
     var features = jsonData[vars.dataName].features,

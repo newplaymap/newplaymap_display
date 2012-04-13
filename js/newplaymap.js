@@ -17,6 +17,7 @@ window.onload = function() {
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
   newPlayMap.loadMarkers();     // Load and insert map markers.
+  newPlayMap.loadRouteInfo();   // Load route object.
   newPlayMap.loadBehaviors();   // Load marker actions and events.
 };
 
@@ -57,18 +58,17 @@ newPlayMap.loadMap = function(){
 };
 
 newPlayMap.loadMarkers = function() {
-  newPlayMap.testDataLoaded(newPlayMap.loadMapData);
+  newPlayMap.testMapLoaded(newPlayMap.testDataLoaded(newPlayMap.loadMapData));
+};
+
+newPlayMap.loadRouteInfo = function() {
+  newPlayMap.testDataLoaded(newPlayMap.lookupRoute);
 };
 
 newPlayMap.loadBehaviors = function() {
-  // load functions / trigger behaviors.
-  newPlayMap.testDataLoaded(newPlayMap.lookupRoute);
-  
-  if (newPlayMap.routing.path !== undefined) {
-    newPlayMap.testDataLoaded(newPlayMap.loadFeatureAction);
-  }
+  // Load functions / trigger behaviors.
+  newPlayMap.testDataLoaded(newPlayMap.testRouteLoaded(newPlayMap.testMapLoaded(newPlayMap.loadFeatureAction)));
 };
-
 
 newPlayMap.loadWax = function() {
   // Custom tiles
@@ -78,12 +78,10 @@ newPlayMap.loadWax = function() {
     newPlayMap.initMap(tj);
     }
   );
-
 };
 
 // Wax calls this and the map variable is relevant to what Wax loads
 newPlayMap.initMap = function(tj) {
-
   map = new com.modestmaps.Map('map',
     new wax.mm.connector(tj), null, [
         new easey.DragHandler(),
@@ -92,7 +90,7 @@ newPlayMap.initMap = function(tj) {
         new easey.MouseWheelHandler()
     ]);
 
-  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
+  map.setCenterZoom(new MM.Location(28.811530, -122.2666097), 4);
 
   // Load interactive behavior.
   spotlight = new SpotlightLayer();
@@ -108,14 +106,11 @@ newPlayMap.initMapSimple = function() {
   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
   // Load interactive behavior.
-/*
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
-*/
 
   // Load map marker layers.
   newPlayMap.loadMapLayers();
-
 };
 
 newPlayMap.loadMapLayers = function() {
@@ -123,19 +118,43 @@ newPlayMap.loadMapLayers = function() {
   map.addLayer(markers);
 };
 
-
-newPlayMap.testDataLoaded = function(callback) {
+// Wait until Map is loaded
+newPlayMap.testMapLoaded = function(callback) {
   (function wait() {
-      if (Object.keys(jsonData).length >= 4) {
-        console.log("All data is loaded");
-        $(callback);
-      } else {
-        console.log("waiting");
-          setTimeout( wait, 500 );
-      }
+    if (map !== undefined) {
+      console.log("Map is loaded");
+      $(callback);
+    } else {
+      console.log("waiting for map");
+        setTimeout( wait, 100 );
+    }
   })();
 };
 
+// Wait until Data is loaded
+newPlayMap.testDataLoaded = function(callback) {
+  (function wait() {
+    if (Object.keys(jsonData).length >= 4) {
+      console.log("All data is loaded");
+      $(callback);
+    } else {
+      console.log("waiting");
+        setTimeout( wait, 100 );
+    }
+  })();
+};
+// Wait until Route is loaded (which might depend on data)
+newPlayMap.testRouteLoaded = function(callback) {
+  (function wait() {
+    if (newPlayMap.routing.route === undefined) {
+      console.log("Route is loaded.");
+      $(callback);
+    } else {
+      console.log("Waiting for route");
+      setTimeout( wait, 100 );
+    }
+  })();
+};
 
 newPlayMap.loadMapData = function() {
  if(jsonData.events !== undefined) {
