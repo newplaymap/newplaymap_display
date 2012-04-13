@@ -126,11 +126,10 @@ com.modestmaps.PolygonMarker.prototype = {
                 // TODO: resize?
             }
 
-            this.canvas = Raphael(this.div, canvasWidth, canvasHeight);
-     
-            var points = [];
-            
 
+            // Styles for lines
+            this.canvas = Raphael(this.div, canvasWidth, canvasHeight);     
+            var points = [];
 
             for (var i = 0; i < this.coords.length; i++) {
                 var point = map.coordinatePoint(this.coords[i]);
@@ -139,28 +138,26 @@ com.modestmaps.PolygonMarker.prototype = {
                 points.push(point);
             }
 
-
-
-
-            var fadeValue = Math.round((1/(this.coords.length-1))*100)/100;
+            var fadeValue = Math.round((0.5/(this.coords.length-1))*100)/100;
             var widthValue = Math.round((4/this.coords.length-1)*100)/100;
-                      var pathParams = {};
+            
+            var pathParams = {};
 
             if (this.fillStyle) {
                 pathParams['fill'] = this.fillStyle;
                 pathParams['fill-opacity'] = this.fillAlpha;
             }
             if (this.strokeStyle) pathParams['stroke'] = this.strokeStyle;
+            
             pathParams['stroke-linejoin'] = 'round';
             pathParams['stroke-linecap'] = 'round';
-            var path = this.canvas.path(pathParams);
 
+            var path;
 
             for (var i = 0; i < points.length-1; i++) {
+                pathParams['stroke-opacity'] = 0.75 - (fadeValue * (i+1));
+                pathParams['stroke-width'] = 4;
                 path = this.canvas.path(pathParams);
-                pathParams['stroke-opacity'] = 1 - (fadeValue * (i+1));
-/*                 pathParams['stroke-width'] = 3 + (widthValue * (i+1)); */
-                pathParams['stroke-width'] = 2;
                 path.moveTo(points[i].x, points[i].y);
                 path.lineTo(points[i+1].x, points[i+1].y);
                 path.andClose();
