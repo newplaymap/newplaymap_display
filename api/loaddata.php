@@ -73,7 +73,7 @@ $events_path = '../data/push/events-all.json';
 $cursor = $m->newplaymap->organizations->find()->limit(10);
 
 // Print data
-header('Access-Control-Allow-Origin: *.newplaymap.org');
+header('Access-Control-Allow-Origin: *.newplaymap.org | *.chachaville.com');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
 header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
 header("Cache-Control: no-cache, must-revalidate"); 
