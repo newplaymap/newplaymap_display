@@ -159,7 +159,7 @@ com.modestmaps.PolygonMarker.prototype = {
             for (var i = 0; i < points.length-1; i++) {
                 path = this.canvas.path(pathParams);
                 pathParams['stroke-opacity'] = 1 - (fadeValue * (i+1));
-                pathParams['stroke-width'] = 3 - (widthValue * (i+1));
+                pathParams['stroke-width'] = 3 + (widthValue * (i+1));
                 path.moveTo(points[i].x, points[i].y);
                 path.lineTo(points[i+1].x, points[i+1].y);
                 path.andClose();

@@ -240,15 +240,15 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
       $("div#organizations-markers").css("z-index", 400);
       $("div#events-markers").css("z-index", 300);
       
-      $("div#play-markers .marker").bind('mouseover'), function() {
-        console.log("fade");
+     // $("div#play-markers .marker").bind('mouseover'), function() {
+       // console.log("fade");
 /*
       $("div#artists-markers").fadeOut(2000);
       $("div#organizations-markers").fadeOut(2000);
       $("div#events-markers").fadeOut(2000);
 */
         
-      }
+     // }
 }
 
 

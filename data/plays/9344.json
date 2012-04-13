@@ -198,11 +198,11 @@
   "type":"Feature",
   "geometry": {
     "type":"Point",
-    "coordinates": [null,null]
+    "coordinates": [-73.990152,40.758343]
     },
   "properties": {
-      "longitude" : null,
-      "latitude" : null,
+      "longitude" : -73.990152,
+      "latitude" : 40.758343,
       "related_event_id" : 11378,
       "event_type" : "Residency",
       "event_date" : "July 5, 2009",

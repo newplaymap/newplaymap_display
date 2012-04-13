@@ -76,11 +76,21 @@ dd {
 }
 
 #play-journey {
-  z-index: 100;
-  pointer-events:none;
+/*
+  z-index: 0;
+  display: none;
+*/
 }
+
+#play-journey svg {
+/* pointer-events:  none; */
+}
+/*
+
 #play-markers {
+  display: none;
   z-index: 400;
+  
 }
 #artist-markers {
   z-index: 80;
@@ -91,3 +101,4 @@ dd {
 #events-markers {
   z-index: 90;
 }
+*/
