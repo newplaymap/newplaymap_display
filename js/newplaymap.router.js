@@ -231,7 +231,7 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
         if (locations.length > 0) {
             var fillStyle = 'transparent';
             var fillAlpha = 0;
-            var strokeStyle = '#000';
+            var strokeStyle = '#fff';
             var polygon = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
         }
       $("div#play-markers").css("z-index", 700);
@@ -239,6 +239,16 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
       $("div#artists-markers").css("z-index", 500);
       $("div#organizations-markers").css("z-index", 400);
       $("div#events-markers").css("z-index", 300);
+      
+      $("div#play-markers .marker").bind('mouseover'), function() {
+        console.log("fade");
+/*
+      $("div#artists-markers").fadeOut(2000);
+      $("div#organizations-markers").fadeOut(2000);
+      $("div#events-markers").fadeOut(2000);
+*/
+        
+      }
 }
 
 
