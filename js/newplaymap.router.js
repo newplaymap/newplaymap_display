@@ -39,6 +39,8 @@ newPlayMap.splitPath = function(uri) {
      // Split path into components
     path.parts = path.rawPath.split("?");
     path.base = path.parts[0];
+    path.partsStripped = path.uriStripped.split("?");
+    path.baseStripped = path.partsStripped[0];
     path.vars = path.parts[1].split("&");
     path.filters = {};
     for (var singleFilter in path.vars) {
@@ -85,25 +87,27 @@ newPlayMap.lookupRoute = function() {
 
       switch(newPlayMap.routing.path.args[0]) {
         case "event":
-          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "events");
+          feature = newPlayMap.lookupFeatureByPath("events");
           route.feature = feature;
           route.callback = newPlayMap.loadEvent;
         break;
     
         case "artist":
-          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "artists");
+          feature = newPlayMap.lookupFeatureByPath("artists");
           route.feature = feature;
           route.callback = newPlayMap.loadArtist;
         break;
     
         case "organization":
-          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "organizations");
+          feature = newPlayMap.lookupFeatureByPath("organizations");
           route.feature = feature;
           route.callback = newPlayMap.loadOrganization;
         break;
     
         case "play":
-          feature = newPlayMap.lookupFeatureByPath(newPlayMap.routing.path.base, "play", "play_path", "event_id", newPlayMap.routing.path.filters.event_id);
+          // we will load the record, then find the exact match.
+        
+          feature = newPlayMap.lookupFeatureByPath("play", "play_path", "related_event_id", newPlayMap.routing.path.filters.event_id);
           // Spelling this out to be extra super clear
           route.feature = feature;
           route.callback = newPlayMap.loadRelatedEvents;
@@ -114,7 +118,8 @@ newPlayMap.lookupRoute = function() {
 }
 
 
-newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path, id_key, id_value) {
+newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) {
+  var path = newPlayMap.routing.path.baseStripped;
   if(jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
     loadedFeatures = [];
@@ -127,31 +132,24 @@ newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path, id_key, id_v
         else {
           pathKey = "path";
         }
-        console.log(feature);
-console.log(feature.properties[pathKey]);
-console.log(path);
-        if(feature.properties[pathKey] == "/" + path){
-
-
-          console.log(feature.properties);
+        if(feature.properties[pathKey] == path){
           if(id_value !== undefined && feature.properties[id_key] == id_value){
             loadedFeatures.push(feature);
+            return loadedFeatures;
           }
-        }
-        
+        }        
     }
-    console.log(loadedFeatures);
     return loadedFeatures
    }
    else {
      // If jsonData isn't set up yet, stick the route somewhere to load later
      newPlayMap.routing = {
-      path: path,
+      path: newPlayMap.routing.path,
       dataName: dataName,
       alt_path: alt_path
      };
      
-     // console.log(newPlayMap.routing);
+     console.log(newPlayMap.routing);
    } 
 
 };
