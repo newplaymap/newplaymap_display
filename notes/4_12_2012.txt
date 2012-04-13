@@ -1,4 +1,27 @@
-new play map things to do
+new play map
+
+
+priorities
+-- map loading cache
+-- trigger play load event
+-- make callback order more stable
+-- test addresses
+
+
+next week
+-- load a particular play into data layer
+-- filters / facets/search & triggering
+-- load data in all panels and test all links
+-- styled
+-- test in front of drupal on a dev site
+-- play lines clear canvas
+-- layer order & hiding interactivity
+-- see which address clearing functions we will need from the old site
+-- finish mongo & write update script
+
+
+
+ things to do
 
 -- goal: no bugs
 
