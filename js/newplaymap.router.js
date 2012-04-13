@@ -47,7 +47,7 @@ newPlayMap.splitPath = function(event) {
       path.filters[filter[0]] = filter[1];
     }
   }
-  console.log(path);
+/*   console.log(path); */
   return path;
 };
 
@@ -179,7 +179,7 @@ newPlayMap.loadOrganization = function() {
 };
 
 newPlayMap.loadPlay = function() {
-  console.log(newPlayMap.routing);
+/*   console.log(newPlayMap.routing); */
   //get id, 
   // find $(a id)
   // trigger mouse over.
@@ -187,14 +187,17 @@ newPlayMap.loadPlay = function() {
 };
 
 newPlayMap.loadRelatedEvents = function() {
-  console.log(newPlayMap.routing);
   var feature = newPlayMap.routing.route.feature;
   newPlayMap.loadPlayData(feature);
 };
 
 newPlayMap.loadPlayData = function(feature) {
   // trigger mouse over.
+  // MM uses addEventListener to call onMarkerOver -- can't trigger the event...
   $('div#marker-play-' +  feature[0]["id"]).trigger("click");
+  
+  newPlayMap.drawPlayJourneyLines(feature);
+  
   
 /*
   
@@ -205,6 +208,54 @@ newPlayMap.loadPlayData = function(feature) {
         //  MM.addEventListener("triggerLoad", newPlayMap.onMarkerOver, false);
   
 };
+
+newPlayMap.drawPlayJourneyLines = function(feature) {
+
+        var locations = [];
+        for (var i = 0; i < jsonData.play.features.length; i++) {
+            var pair = jsonData.play.features[i]["geometry"]["coordinates"];
+            
+              console.log(pair);
+            
+
+          if (pair && pair.length == 2) {
+              var location = new MM.Location(pair[1], pair[0]);
+              if (!isNaN(location.lat) && !isNaN(location.lon)) {
+                  locations.push(location);
+              }
+          }
+        }
+        
+      
+        if (locations.length > 0) {
+            var fillStyle = 'rgba(0,0,0,0.3)';
+            var fillAlpha = 1.0;
+            var strokeStyle = '#ffcc00';
+/*
+            if (swath.nodeName == 'PastWindSwath') {
+                fillStyle = '#630';
+                fillAlpha = 0.5;
+                strokeStyle = null;
+            }
+            else if (swath.nodeName == 'CurrentWindRing') {
+                fillStyle = '#f00';
+                fillAlpha = 0.5;
+                strokeStyle = 'white';
+            }
+            else if (swath.nodeName == 'ForecastWindSwath') {
+                fillStyle = '#f63';
+                fillAlpha = 0.25;
+                strokeStyle = null;
+            }
+            else if (swath.nodeName == 'ForecastErrorSwath') {
+                fillStyle = null;
+                strokeStyle = 'rgb(80,80,80)';
+            }
+*/
+            var polygon = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
+        }
+
+}
 
 
 /**

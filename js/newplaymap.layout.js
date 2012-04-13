@@ -57,9 +57,7 @@ newPlayMap.popupMarker = function(marker) {
   featureData = newPlayMap.loadDataObject(feature);
 
   featureData.properties.title = marker.getAttribute("title");
-console.log(marker);
 
-console.log(featureData);
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", featureData["properties"])
     .appendTo(container); 
