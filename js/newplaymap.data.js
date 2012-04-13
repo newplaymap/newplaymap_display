@@ -17,7 +17,6 @@ newPlayMap.loadJSONFile = function(vars) {
 };
 
 newPlayMap.setData = function(data) {
-console.log(data);
   jsonData[data.name] = data;
   return false;
 };
@@ -29,7 +28,19 @@ newPlayMap.loadDataError = function(data) {
 };
 
 newPlayMap.loadDataComplete = function() {
+  var jsonLength = Object.keys(jsonData).length
+  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
 
+    // Load map marker layers.
+    newPlayMap.loadMapLayers();
+
+    newPlayMap.mapCustomizations(map, markers);  
+
+
+    console.log("routing");
+    newPlayMap.lookupRoute();
+    newPlayMap.loadFeatureAction();
+  };
 };
 
 newPlayMap.loadFeatureAction = function() {

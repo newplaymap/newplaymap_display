@@ -8,7 +8,7 @@ if(!empty($_GET['page'])){
 else{
   $page = 0;
 }
-$page_items = 500;
+$page_items = 250;
 
 $collection = $m->newplaymap->organizations;
 
@@ -16,7 +16,7 @@ $collection = $m->newplaymap->organizations;
 $cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("name" => 1));
 $count = $cursor->count();
 
-header('Access-Control-Allow-Origin: *.newplaymap.org');
+header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
 header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
 header("Cache-Control: no-cache, must-revalidate"); 
