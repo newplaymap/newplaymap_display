@@ -14,9 +14,10 @@ newPlayMap.loadAddress = function() {
     console.log("address change");
     
     newPlayMap.buildRoutePath(event);
+    newPlayMap.lookupRoute();
+    
     var jsonLength = Object.keys(jsonData).length;
     if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
-      newPlayMap.lookupRoute();
       newPlayMap.loadFeatureAction();
     };
     return false;
