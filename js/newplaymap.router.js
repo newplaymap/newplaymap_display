@@ -29,13 +29,12 @@ newPlayMap.splitPath = function(uri) {
   var path = {};
   path.params = newPlayMap.urlParameters();
   path.rawPath = newPlayMap.jqueryAddressHashPath(path.params.hash);
-  console.log(path.rawPath);
 
   if(path.rawPath !== undefined) {
     // Clean up path.
     path.uriStripped = path.rawPath.replace(/^\//, '');
     path.args = path.uriStripped.split("/");
-    console.log(path.args);
+
      // Split path into components
     path.parts = path.rawPath.split("?");
     path.base = path.parts[0];
@@ -83,39 +82,44 @@ newPlayMap.lookupRoute = function() {
   // newPlayMap.ajaxLinks();  
   
   if(newPlayMap.routing.path !== undefined) {
-      var route = {};
+    var route = {};
 
-      switch(newPlayMap.routing.path.args[0]) {
-        case "event":
-          feature = newPlayMap.lookupFeatureByPath("events");
-          route.feature = feature;
-          route.callback = newPlayMap.loadEvent;
-        break;
-    
-        case "artist":
-          feature = newPlayMap.lookupFeatureByPath("artists");
-          route.feature = feature;
-          route.callback = newPlayMap.loadArtist;
-        break;
-    
-        case "organization":
-          feature = newPlayMap.lookupFeatureByPath("organizations");
-          route.feature = feature;
-          route.callback = newPlayMap.loadOrganization;
-        break;
-    
-        case "play":
-          // we will load the record, then find the exact match.
-        
-          feature = newPlayMap.lookupFeatureByPath("play", "play_path", "related_event_id", newPlayMap.routing.path.filters.event_id);
-          // Spelling this out to be extra super clear
-          route.feature = feature;
-          route.callback = newPlayMap.loadRelatedEvents;
-        break;
-     }
-    }
-    return route;
-}
+    switch(newPlayMap.routing.path.args[0]) {
+      case "event":
+        feature = newPlayMap.lookupFeatureByPath("events");
+        route.feature = feature;
+        route.callback = newPlayMap.loadEvent;
+        newPlayMap.routing.route = route;
+      break;
+  
+      case "artist":
+        feature = newPlayMap.lookupFeatureByPath("artists");
+        route.feature = feature;
+        route.callback = newPlayMap.loadArtist;
+        newPlayMap.routing.route = route;
+      break;
+  
+      case "organization":
+        feature = newPlayMap.lookupFeatureByPath("organizations");
+        route.feature = feature;
+        route.callback = newPlayMap.loadOrganization;
+        newPlayMap.routing.route = route;
+      break;
+  
+      case "play":
+        // we will load the record, then find the exact match.
+      
+        feature = newPlayMap.lookupFeatureByPath("play", "play_path", "related_event_id", newPlayMap.routing.path.filters.event_id);
+        // Spelling this out to be extra super clear
+        route.feature = feature;
+        route.callback = newPlayMap.loadRelatedEvents;
+        newPlayMap.routing.route = route;
+      break;
+   }
+  }
+
+
+};
 
 
 newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) {
@@ -139,7 +143,7 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
           }
         }        
     }
-    return loadedFeatures
+    return loadedFeatures;
    }
    else {
      // If jsonData isn't set up yet, stick the route somewhere to load later
@@ -148,40 +152,39 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
       dataName: dataName,
       alt_path: alt_path
      };
-     
-     console.log(newPlayMap.routing);
    } 
 
 };
 
 
-newPlayMap.loadArtist = function(path) {
-  console.log(path);
+newPlayMap.loadArtist = function() {
+  console.log(newPlayMap.routing);
 };
 
-newPlayMap.loadOrganization = function(path) {
-  console.log(path);
+newPlayMap.loadOrganization = function() {
+  console.log(newPlayMap.routing);
 };
 
-newPlayMap.loadPlay = function(feature) {
-  console.log(feature);
+newPlayMap.loadPlay = function() {
+  console.log(newPlayMap.routing);
   //get id, 
   // find $(a id)
   // trigger mouse over.
 
 };
 
-newPlayMap.loadRelatedEvents = function(feature) {
-  console.log(feature);
+newPlayMap.loadRelatedEvents = function() {
+  console.log(newPlayMap.routing);
   //get id, 
   // find $(a id)
   // trigger mouse over.
-newPlayMap.loadPlayData();
+  var feature = newPlayMap.routing.route.feature;
+  newPlayMap.loadPlayData(feature);
 };
 
 newPlayMap.loadPlayData = function(feature) {
   // load play path (but would be better to have it in json
-  
+  $('div#marker-play-' +  feature[0]["id"]).trigger('mouseover');
 };
 
 

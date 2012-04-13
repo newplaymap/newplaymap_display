@@ -28,12 +28,16 @@ newPlayMap.loadDataError = function(data) {
 };
 
 newPlayMap.loadDataComplete = function() {
-  var jsonLength = Object.keys(jsonData).length
-  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
-    console.log("routing");
-    newPlayMap.lookupRoute();
-  };
+
 };
+
+newPlayMap.loadFeatureAction = function() {
+
+  if(newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
+    $(newPlayMap.routing.route.callback);
+  console.log(newPlayMap.routing);
+  }
+}
 
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;

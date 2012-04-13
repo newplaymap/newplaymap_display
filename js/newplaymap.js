@@ -98,6 +98,14 @@ newPlayMap.initMap = function(tj) {
   newPlayMap.loadMapLayers();
 
   newPlayMap.mapCustomizations(map, markers);  
+
+  var jsonLength = Object.keys(jsonData).length
+  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
+    console.log("routing");
+    newPlayMap.lookupRoute();
+    newPlayMap.loadFeatureAction();
+  };
+
 };
 
 
