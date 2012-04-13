@@ -35,7 +35,7 @@ newPlayMap.loadPageRouter = function() {
 };
 
 newPlayMap.loadData = function() {
-  newPlayMap.loadJSONFile({path: 'data/organizations_300.json'});
+  newPlayMap.loadJSONFile({path: 'http://localhost/newplay/display/api/organizations.php'});
   newPlayMap.loadJSONFile({path: 'data/events_300.json'});
   newPlayMap.loadJSONFile({path: "data/artists_300.json"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
