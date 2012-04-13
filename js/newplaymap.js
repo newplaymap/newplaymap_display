@@ -36,7 +36,7 @@ newPlayMap.loadPageRouter = function() {
 
 newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({path: 'api/organizations.php'});
-  newPlayMap.loadJSONFile({path: 'data/events_300.json'});
+  newPlayMap.loadJSONFile({path: 'api/events.php'});
   newPlayMap.loadJSONFile({path: "api/artists.php"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
 
@@ -94,17 +94,8 @@ newPlayMap.initMap = function(tj) {
   map.addLayer(spotlight);
 /*   map.setCenterZoom(new com.modestmaps.Location(30, -90), 4); */
 
-  // Load map marker layers.
-  newPlayMap.loadMapLayers();
 
-  newPlayMap.mapCustomizations(map, markers);  
 
-  var jsonLength = Object.keys(jsonData).length
-  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
-    console.log("routing");
-    newPlayMap.lookupRoute();
-    newPlayMap.loadFeatureAction();
-  };
 
 };
 
@@ -124,7 +115,7 @@ newPlayMap.loadMapData = function() {
       label: "related_theater", // field which will be used in label
       title: "play_title",
       dataName: "events",
-      dataPath: "data/events_300.json",
+      dataPath: "api/events.php",
       icon: "icons/event.png",
       grouping_field: "event_id",
       path: ""
