@@ -17,9 +17,7 @@ window.onload = function() {
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
   newPlayMap.loadMarkers();     // Load and insert map markers.
- // newPlayMap.loadBehaviors();   // Load marker actions and events.
-
-
+  newPlayMap.loadBehaviors();   // Load marker actions and events.
 };
 
 newPlayMap.alterHomepage = function() {
@@ -27,21 +25,13 @@ newPlayMap.alterHomepage = function() {
 };
 
 newPlayMap.loadPageRouter = function() {
-
   // Address always loads on every page interaction.
   $.address.change(function(event) {
-    newPlayMap.buildRoutePath(event);
+    newPlayMap.buildRoutePath(event); 
+    newPlayMap.testDataLoaded(newPlayMap.lookupRoute);
 
-    // Call functions everytime page changes.
-
-    var jsonLength = Object.keys(jsonData).length;
-    
-    if (jsonLength >= 4) {
-      newPlayMap.lookupRoute();
-    }
-    if (jsonLength >= 4 && newPlayMap.routing.path !== undefined && newPlayMap.routing.route !== undefined) {
-      
-      // newPlayMap.loadFeatureAction();
+    if (newPlayMap.routing.path !== undefined && newPlayMap.routing.route !== undefined) {
+      newPlayMap.testDataLoaded(newPlayMap.loadFeatureAction);
     };
     return false;
   });
