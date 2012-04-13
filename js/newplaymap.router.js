@@ -32,12 +32,11 @@ newPlayMap.routePath = function(uri) {
   // @TODO this doesn't work yet. We need to be able to get the url parameters as an object.
   var path = newPlayMap.splitPath(uri);
   console.log(path);
-
-
-  newPlayMap.lookupRoute(path);
-  
+  newPlayMap.routing = newPlayMap.lookupRoute(path);
+  console.log(newPlayMap.routing);
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
+  
   
 };
 
@@ -50,7 +49,8 @@ newPlayMap.splitPath = function(uri) {
     path.uriStripped = path.rawPath.replace(/^\//, '');
     path.args = path.uriStripped.split("/");
      // Split path into components
-    path.parts = path.rawPath.split("?");
+    path.parts = path.uriStripped.split("?");
+    path.base = path.parts[0];
     path.vars = path.parts[1].split("&");
     path.filters = {};
     for (var singleFilter in path.vars) {
@@ -89,46 +89,48 @@ newPlayMap.urlParameters = function(){
 };
 
 newPlayMap.lookupRoute = function(path) {
+  var path = path;
+  var route = {};
+  var arg = path.args[0];
 
-  switch(path.args[0]) {
-    case "event":
-      feature = newPlayMap.lookupFeatureByPath(parts[0], "events");
-      newPlayMap.loadEvent(feature);
-    break;
+  // Clear out saved routing info
+  newPlayMap.routing = {};
 
-    case "artist":
-      feature = newPlayMap.lookupFeatureByPath(parts[0], "artists");
-      newPlayMap.loadArtist(feature);
-    break;
-
-    case "organization":
-      feature = newPlayMap.lookupFeatureByPath(parts[0], "organizations");
-      newPlayMap.loadOrganization(feature);
-    break;
-
-    case "play":
-      // console.log(path);
-      // console.log("play loaded");
-      // console.log('jsonData');
-      // console.log(jsonData);
-      feature = newPlayMap.lookupFeatureByPath(parts[0], "play", "play_path");
-      // console.log(feature);
-      // Spelling this out to be extra super clear
-      newPlayMap.loadRelatedEvents(feature);
-
-    break;
+  if(arg !== undefined) {
+    switch(arg) {
+      case "event":
+        feature = newPlayMap.lookupFeatureByPath(path.base, "events");
+        route.feature = feature;
+        route.callback = newPlayMap.loadEvent;
+      break;
+  
+      case "artist":
+        feature = newPlayMap.lookupFeatureByPath(path.base, "artists");
+        route.feature = feature;
+        route.callback = newPlayMap.loadArtist;
+      break;
+  
+      case "organization":
+        feature = newPlayMap.lookupFeatureByPath(path.base, "organizations");
+        route.feature = feature;
+        route.callback = newPlayMap.loadOrganization;
+      break;
+  
+      case "play":
+        feature = newPlayMap.lookupFeatureByPath(path.base, "play", "play_path", "event_id", path.filters.event_id);
+        // Spelling this out to be extra super clear
+        route.feature = feature;
+        route.callback = newPlayMap.loadRelatedEvents;
+      break;
+    }
   }
+  return route;
 }
 
 
-newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path) {
-  console.log(path);
-  console.log(dataName);
-  console.log(alt_path);
-if(jsonData[dataName] !== undefined){
-    // Clear out saved routing info
-    newPlayMap.routing = {};
+newPlayMap.lookupFeatureByPath = function(path, dataName, alt_path, id_key, id_value) {
 
+  if(jsonData !== undefined && jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
     loadedFeatures = [];
     for (var i = 0; i < features.length; i++) {
@@ -140,19 +142,17 @@ if(jsonData[dataName] !== undefined){
         else {
           pathKey = "path";
         }
-        // console.log('pathKey');
-        // console.log(pathKey);
-        // pathFound = feature.properties[pathKey] = path;
-        // if(pathFound !== undefined){
-        console.log(feature);
-        console.log(path);
+
         if(feature.properties[pathKey] == path){
-          // console.log(pathFound);
-          loadedFeatures.push(feature);
+
+
+          console.log(feature.properties[id_key] );
+          if(id_value !== undefined && feature.properties[id_key] == id_value){
+            loadedFeatures.push(feature);
+          }
         }
         
     }
-    console.log(loadedFeatures.length);
     console.log(loadedFeatures);
     return loadedFeatures
    }
@@ -166,6 +166,7 @@ if(jsonData[dataName] !== undefined){
      
      // console.log(newPlayMap.routing);
    } 
+
 };
 
 
