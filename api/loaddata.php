@@ -1,13 +1,17 @@
 <?php
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(true);
-loadOrganizations($m);
 
-function loadOrganizations($m) {
-  
+
+$output = "";
+loadOrganizations($m, $output);
+loadArtists($m, $output);
+
+function loadOrganizations($m, $output) {
+
   $organizations = $m->newplaymap->organizations;
   // find everything in the collection
-  $cursor = $organizations->find();
+  $organizations->drop();
   $organization_path = '../data/push/orgs-all.json';
   
   $file_data = file_get_contents($organization_path);
@@ -33,7 +37,7 @@ function loadOrganizations($m) {
       ),
     "properties" => array(
         "logo" => $node["Logo"],
-        "path" => $node["Path"],
+        "path" =>  str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
         "organization_id" => $node["Org ID"],
         "name" => $node["Org name"],
         "latitude" => $node["Latitude"],
@@ -41,14 +45,7 @@ function loadOrganizations($m) {
         "mission_statement" => $node["Mission statement"],
         "ensemble_collective" => $node["Ensemble collective"],
 /*         "founding_date" => $node["Founding date"] == $node["Founding date"] ? "", */
-        "organization_type" => $node["Organization type"] /*
- ,
-        "organization_type_2" => $node["Organization type - 2"],
-        "organization_type_1" => $node["Organization type - 1"],
-        "organization_type_3" => $node["Organization type - 3"],
-        "organization_type_4" => $node["Organization type - 4"],
-        "organization_type_5" => $node["Organization type - 5"]
-*/
+        "organization_type" => $node["Organization type"]
  
   )
   );
@@ -56,17 +53,71 @@ function loadOrganizations($m) {
     $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
     $count++;
   }
-
+  $output .= "<p>Loaded " + $count + " Organizations</p>";
 }
+
+
+
+
+
+
+function loadArtists($m) {
+  
+  $artists = $m->newplaymap->artists;
+
+  // find everything in the collection
+  $cursor =  $artists->find();
+  $artists->drop();
+  $artists_path = '../data/push/artists-all.json';
+  
+  $file_data = file_get_contents($artists_path);
+  $collection = $artists;
+  /* var_dump($file_data); */
+  
+  $json = json_decode($file_data);
+  
+  $objects = $json->nodes;
+  
+  $count = 0;
+  $insert = array();
+  foreach ($objects as $obj_load) {
+  //print "<pre>";
+  $node = (array) $obj_load->node;
+  
+  $newObj = array(
+    "id" => $node["Artist ID"],
+    "type" => "Feature",
+    "geometry" => array( 
+      "type" => "Point",
+      "coordinates"=> array($node["Longitude"], $node["Latitude"])
+      ),
+    "properties" => array(
+        "latitude" => $node["Latitude"],
+        "longitude" => $node["Longitude"],
+        "artist_photo" => $node["Photo"],
+        "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+        "artist_id" => $node["Artist ID"],
+        "content_type" => $node["Content Type"],
+        "generative_artist" => $node["Generative artist"],
+        "artist_name" => $node["Generative artist"],
+        "mission_statement" => $node["Mission statement"],
+        "ensemble_collective" => $node["Ensemble collective"] 
+  )
+  );
+    // This will completely replace the record.
+    $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj), true);
+    $count++;
+  }
+  $output .= "<p>Loaded " + $count + " Artists</p>";
+}
+
 
 /*
 
-$artists = $m->newplaymap->artists;
+
 $events = $m->newplaymap->events;
 $plays = $m->newplaymap->plays;
 
-
-$artists_path = '../data/push/artists-all.json';
 $events_path = '../data/push/events-all.json';
 */
 /*

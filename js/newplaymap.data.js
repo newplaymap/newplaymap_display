@@ -17,6 +17,7 @@ newPlayMap.loadJSONFile = function(vars) {
 };
 
 newPlayMap.setData = function(data) {
+console.log(data);
   jsonData[data.name] = data;
   return false;
 };

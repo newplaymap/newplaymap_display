@@ -35,9 +35,9 @@ newPlayMap.loadPageRouter = function() {
 };
 
 newPlayMap.loadData = function() {
-  newPlayMap.loadJSONFile({path: 'data/organizations_300.json'});
+  newPlayMap.loadJSONFile({path: 'api/organizations.php'});
   newPlayMap.loadJSONFile({path: 'data/events_300.json'});
-  newPlayMap.loadJSONFile({path: "data/artists_300.json"});
+  newPlayMap.loadJSONFile({path: "api/artists.php"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
 
   return false;
@@ -140,7 +140,7 @@ newPlayMap.loadMapData = function() {
     id: "organization_id",
     title: "name",
     dataName: "organizations",
-    dataPath: "data/organizations_300.json",
+    dataPath: "api/organizations.php",
     icon: "icons/organization.png",
     grouping_field: "organization_id"
   };
@@ -153,9 +153,9 @@ newPlayMap.loadMapData = function() {
     type: "artist",
     id: "artist_id",
     label: "ensemble_collective",
-    title: "artist_name",
+    title: "generative_artist",
     dataName: "artists",
-    dataPath: "data/artists_300.json",
+    dataPath: "api/artists.php",
     icon: "icons/artist.png",
     grouping_field: "artist_id"
   };
