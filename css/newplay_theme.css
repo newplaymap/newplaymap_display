@@ -14,7 +14,7 @@
   }
 
   a {
-    color: #6f84c2;
+    color: red;
   }
 
 /* Header */
@@ -229,13 +229,33 @@
     margin-top: 1.5em;
   }
   
-  #header {
+  #header,
+  .navbar-inner {
     height: 60px;
     position: absolute;
     top: 0;
     left: 28px;
     right: 28px;
-    background: url(../images/header-bg.png) 78% 0 no-repeat;
+    background-color: red;
+    background-image: none;
+    color: #fff;
+  }
+  
+  .navbar a,
+  .navbar .nav > li > a {
+    text-decoration: underline;
+    color: #fff;
+  }
+  
+  .navbar .nav .active > a  {
+    background-color: transparent;
+    color: #000;
+  }
+  
+  .navbar .nav .active > a:hover,
+  .navbar .nav > li > a:hover {
+    color: #EEE;
+    text-decoration: underline;
   }
   
   #page {
