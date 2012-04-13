@@ -12,7 +12,13 @@ newPlayMap.loadAddress = function() {
 
   $.address.change(function(event) {
     console.log("address change");
+    
     newPlayMap.buildRoutePath(event);
+    var jsonLength = Object.keys(jsonData).length;
+    if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
+      newPlayMap.lookupRoute();
+      newPlayMap.loadFeatureAction();
+    };
     return false;
   });
 
@@ -47,7 +53,6 @@ newPlayMap.splitPath = function(event) {
       path.filters[filter[0]] = filter[1];
     }
   }
-/*   console.log(path); */
   return path;
 };
 
@@ -84,7 +89,7 @@ newPlayMap.urlParameters = function(){
 };
 
 newPlayMap.lookupRoute = function() {
-console.log(newPlayMap.routing);
+  // Make sure Drupal does redirects properly too.
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
   
@@ -133,20 +138,15 @@ console.log(newPlayMap.routing);
       break;
    }
   }
-
-
 };
 
 
 newPlayMap.loadFeatureAction = function() {
-
   if(newPlayMap.routing.route !== undefined && newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
-
-    console.log(newPlayMap.routing.route.callback);
+    // Execute callback function.
     $(newPlayMap.routing.route.callback);
-
   }
-}
+};
 
 newPlayMap.doNothing = function() {
   console.log("doing nothing");
