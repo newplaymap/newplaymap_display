@@ -84,7 +84,7 @@ newPlayMap.urlParameters = function(){
 };
 
 newPlayMap.lookupRoute = function() {
-
+console.log(newPlayMap.routing);
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
   
@@ -97,6 +97,7 @@ newPlayMap.lookupRoute = function() {
         route.feature = feature;
         route.callback = newPlayMap.loadEvent;
         newPlayMap.routing.route = route;
+
       break;
   
       case "artist":
@@ -104,6 +105,7 @@ newPlayMap.lookupRoute = function() {
         route.feature = feature;
         route.callback = newPlayMap.loadArtist;
         newPlayMap.routing.route = route;
+
       break;
   
       case "organization":
@@ -111,6 +113,7 @@ newPlayMap.lookupRoute = function() {
         route.feature = feature;
         route.callback = newPlayMap.loadOrganization;
         newPlayMap.routing.route = route;
+
       break;
   
       case "play":
@@ -121,6 +124,8 @@ newPlayMap.lookupRoute = function() {
         route.feature = feature;
         route.callback = newPlayMap.loadRelatedEvents;
         newPlayMap.routing.route = route;
+        console.log("play");
+
       break;
       
       default:
@@ -131,6 +136,18 @@ newPlayMap.lookupRoute = function() {
 
 
 };
+
+
+newPlayMap.loadFeatureAction = function() {
+
+  if(newPlayMap.routing.route !== undefined && newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
+
+    console.log(newPlayMap.routing.route.callback);
+    $(newPlayMap.routing.route.callback);
+
+  }
+}
+
 newPlayMap.doNothing = function() {
   console.log("doing nothing");
 };
@@ -231,14 +248,16 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
         if (locations.length > 0) {
             var fillStyle = 'transparent';
             var fillAlpha = 0;
-            var strokeStyle = '#fff';
+            var strokeStyle = '#BF202E';
             var polygon = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
         }
+/*
       $("div#play-markers").css("z-index", 700);
       $("div#play-journey").css("z-index", 600);
       $("div#artists-markers").css("z-index", 500);
       $("div#organizations-markers").css("z-index", 400);
       $("div#events-markers").css("z-index", 300);
+*/
       
      // $("div#play-markers .marker").bind('mouseover'), function() {
        // console.log("fade");
