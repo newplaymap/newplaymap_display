@@ -193,6 +193,7 @@ newPlayMap.loadRelatedEvents = function() {
 newPlayMap.loadPlayData = function(feature) {
   // trigger mouse over.
   // MM uses addEventListener to call onMarkerOver -- can't trigger the event...
+
   $('div#marker-play-' +  feature[0]["id"]).trigger("click");
   
   newPlayMap.drawPlayJourneyLines(feature);

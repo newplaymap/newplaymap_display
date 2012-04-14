@@ -6,40 +6,42 @@ newPlayMap.updatePanel = function(marker, data) {
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
-  featureData = newPlayMap.loadDataObject(feature);
+  feature.type = marker.getAttribute("type");
+  feature.id =  marker.getAttribute("id");
+
+  featureData = newPlayMap.testDataLoaded(newPlayMap.loadDataObject(feature));
   // Load event data into the template.
-  newPlayMap.panelTemplate(featureData);
+  newPlayMap.testDataLoaded(newPlayMap.panelTemplate(featureData));
 
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
-    var featureSet = [];
-    var features = jsonData[featureLookup.dataName].features,
-        len = features.length,
-        locations = [];
+  var featureSet = [];
+  var features = jsonData[featureLookup.dataName].features,
+      len = features.length,
+      locations = [];
 
-    // for each feature in the collection, get feature data and add it.
+  // for each feature in the collection, get feature data and add it.
 
-    for (var i = 0; i < len; i++) {
+  for (var i = 0; i < len; i++) {
 
-        feature = features[i];
+      feature = features[i];
 
-        feature.dataName = featureLookup.dataName;
+      feature.dataName = featureLookup.dataName;
 /*         feature.path = featureLookup.properties.path; */
-        feature.title = featureLookup.title;
-        feature.type = featureLookup.type;
-        feature.marker_id = featureLookup.marker_id;
-        if(feature.id == featureLookup.marker_id) {
-          return feature;
-        }
-    }
+      feature.title = featureLookup.title;
+      feature.type = featureLookup.type;
+      feature.marker_id = featureLookup.marker_id;
+      if(feature.id == featureLookup.marker_id) {
+        return feature;
+      }
+  }
 };
 
 
 newPlayMap.popupMarker = function(marker) {
   newPlayMap.panelTemplates();
 
-  
   var feature = {};
   feature.markup = marker;
   var type = "popup";

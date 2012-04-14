@@ -3,13 +3,13 @@ var newPlayMap = {};
 var jsonData = {};
 var panelMarkup = {};
 var spotlight = {};
-var markers,
-    locationsByID = {};
+var locationsByID = {};
 var dfd = $.Deferred();
 // Estalbish namespace for map.
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
+var markers = {};
 
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
@@ -58,7 +58,7 @@ newPlayMap.loadMap = function(){
 };
 
 newPlayMap.loadMarkers = function() {
-  newPlayMap.testMapLoaded(newPlayMap.testDataLoaded(newPlayMap.loadMapData));
+  newPlayMap.testDataLoaded(newPlayMap.loadMapData);
 };
 
 newPlayMap.loadRouteInfo = function() {
@@ -120,6 +120,7 @@ newPlayMap.loadMapLayers = function() {
 
 // Wait until Map is loaded
 newPlayMap.testMapLoaded = function(callback) {
+
   (function wait() {
     if (map !== undefined) {
       console.log("Map is loaded");
@@ -130,6 +131,20 @@ newPlayMap.testMapLoaded = function(callback) {
     }
   })();
 };
+
+newPlayMap.testMarkersLoaded = function(callback) {
+
+  (function wait() {
+    if (markers !== undefined) {
+      console.log("Markers are loaded");
+      $(callback);
+    } else {
+      console.log("waiting for markers");
+        setTimeout( wait, 100 );
+    }
+  })();
+};
+
 
 // Wait until Data is loaded
 newPlayMap.testDataLoaded = function(callback) {
@@ -143,6 +158,7 @@ newPlayMap.testDataLoaded = function(callback) {
     }
   })();
 };
+
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testRouteLoaded = function(callback) {
   (function wait() {
@@ -170,7 +186,7 @@ newPlayMap.loadMapData = function() {
       grouping_field: "event_id",
       path: ""
     };
-    newPlayMap.onLoadDataMarkers(eventMarkerData);
+    newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(eventMarkerData)));
   }
 
  if(jsonData.organizations !== undefined) {
@@ -185,7 +201,7 @@ newPlayMap.loadMapData = function() {
     icon: "icons/organization.png",
     grouping_field: "organization_id"
   };
-  newPlayMap.onLoadDataMarkers(organizationMarkerData);
+  newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(organizationMarkerData)));
   }
 
  if(jsonData.artists !== undefined) {
@@ -200,7 +216,7 @@ newPlayMap.loadMapData = function() {
     icon: "icons/artist.png",
     grouping_field: "artist_id"
   };
-  newPlayMap.onLoadDataMarkers(artistMarkerData);
+  newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(artistMarkerData)));
   }
 
   // We treat related event as it's own separate type so there are no conflicts with identical events.
@@ -217,6 +233,6 @@ newPlayMap.loadMapData = function() {
     icon: "icons/play.png",
     grouping_field: "related_play_id"
   };
-  newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
+  newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(relatedEventMarkerData)));
   }
 };
