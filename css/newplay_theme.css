@@ -14,7 +14,7 @@
   }
 
   a {
-    color: red;
+    color: #BF202E;
   }
 
 /* Header */
@@ -235,7 +235,7 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: red;
+    background-color: #BF202E;
     background-image: none;
     color: #fff;
   }
@@ -683,12 +683,12 @@
         
       .additional-info .view-events ol li {
         margin-bottom: 10px;
+        padding: 10px;
       }
         
         .additional-info .view-events ol li.active {
           background-color: #fff;
           border-radius: 5px 5px 5px 5px;
-          padding: 10px;
         }
 
   /* Feeds */
