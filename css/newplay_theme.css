@@ -62,15 +62,15 @@
 /* Header Add Buttons */
   
   /* Hide when javascript is available */
-  .js #block-add_button-0 {
+  #block-add_button-0 {
     display: none;
   }
   
-  .js #block-views--exp-organizations-panel_pane_1 {
+  #block-views--exp-organizations-panel_pane_1 {
     display: none;
   }
   
-  .js #block-invite-0 {
+  #block-invite-0 {
     display: none;
   }
 
@@ -148,8 +148,8 @@
   }
 
   /* Hide when javascript is available */
-  .js #embed-badge-block form,
-  .js #share-link-block form {
+  #embed-badge-block form,
+  #share-link-block form {
     display: none;
   }
   
@@ -158,13 +158,13 @@
     font-size: 0.8em;
   }
   
-  .js #embed-badge-block form input,
-  .js #share-link-block form input {
+  #embed-badge-block form input,
+  #share-link-block form input {
     width: 100%;
   }
 
 /* Invite System */
-  .js #edit-contact-email-wrapper {
+  #edit-contact-email-wrapper {
     display: none;
   }
   
@@ -182,7 +182,6 @@
   }
       
 /* Related Events */
-
   .views-field-field-partner-org-nid {
     font-size: 0.9em;
   }
@@ -234,8 +233,8 @@
     height: 60px;
     position: absolute;
     top: 0;
-    left: 28px;
-    right: 28px;
+    left: 0;
+    right: 0;
     background-color: red;
     background-image: none;
     color: #fff;
@@ -302,12 +301,12 @@
   
   /* New throbber on title autocomplete fields */
   /* Overrides system.css */
-  html.js input#edit-title.form-autocomplete {
+  htmlinput#edit-title.form-autocomplete {
     background-image: url(../images/spinner-32x32-on-white.gif);
     background-position: 100% -100px;
   }
   
-    html.js input#edit-title.form-autocomplete.throbbing {
+    htmlinput#edit-title.form-autocomplete.throbbing {
       background-position: 99% 2px;
     }
 
@@ -321,8 +320,8 @@
   .popup-container .overlay .pane-edit-link ul li a,
   .popup-container .overlay .pane-event ul li a,
   .popup-container .overlay #feed_button,
-  .js #explore-filters form input#edit-submit-organizations,
-  .js #explore-filters form a#filter_reset {
+  #explore-filters form input#edit-submit-organizations,
+  #explore-filters form a#filter_reset {
     color: #FFFFFF;
     padding: 8px 18px;
     border-radius: 5px;
@@ -341,8 +340,8 @@
       .popup-container .overlay .pane-edit-link ul li a:hover,
       .popup-container .overlay .pane-event ul li a:hover,
       .popup-container .overlay #feed_button:hover,
-      .js #explore-filters form input#edit-submit-organizations:hover,
-      .js #explore-filters form a#filter_reset:hover {
+      #explore-filters form input#edit-submit-organizations:hover,
+      #explore-filters form a#filter_reset:hover {
         background-position: -217px 0;
         text-decoration: none;
       }
@@ -356,8 +355,8 @@
       .popup-container .overlay .pane-edit-link ul li a:active,
       .popup-container .overlay .pane-event ul li a:active,
       .popup-container .overlay #feed_button:active,
-      .js #explore-filters form input#edit-submit-organizations:active
-      .js #explore-filters form a#filter_reset:active {
+      #explore-filters form input#edit-submit-organizations:active
+      #explore-filters form a#filter_reset:active {
         background-position: -434px 0;
         text-decoration: none;
       }
@@ -376,22 +375,22 @@
   /* Edit custom title autocomplete */
   
   /* Make the autocomplete references inline */
-  .js #edit-title-custom-autocomplete .reference-autocomplete {
+  #edit-title-custom-autocomplete .reference-autocomplete {
     display: inline;
   }
   
-  .js #edit-title-custom-autocomplete ul {
+  #edit-title-custom-autocomplete ul {
     padding-left: 0; /* override html-reset.css */
   }
   
   /* Don't need bullets when we got buttons */
-  .js #edit-title-custom-autocomplete ul,
-  .js #edit-title-custom-autocomplete ul li {
+  #edit-title-custom-autocomplete ul,
+  #edit-title-custom-autocomplete ul li {
     list-style: none;
   }
     
     /* Put in some padding to give this list some breathing room */
-    .js #edit-title-custom-autocomplete ul li {
+    #edit-title-custom-autocomplete ul li {
       margin-bottom: 7px;
     }
 
@@ -444,12 +443,12 @@
   
   /* Messages close box */
   
-  .js .messages {
+  .messages {
     position: relative;
     padding-right: 25px; /* override messages.css */
   }
   
-  .js a.newplay-close-box {
+  a.newplay-close-box {
     position: absolute;
     top: 5px;
     right: 10px;
@@ -461,23 +460,23 @@
   }
   
     /* Active state */
-    .js a.newplay-close-box:active {
+    a.newplay-close-box:active {
       background-image: url(../images/ui/close-red-active.png);
     }
     
   /* Credit */
   
-  .js .olControlAttribution,
-  .js .front #footer-message {
+  .olControlAttribution,
+  .front #footer-message {
     font-size: 12px;
     color: #666;
   }
   
-  .js .olControlScaleLine {
+  .olControlScaleLine {
     bottom: 28px;
   }
   
-  .js .front #footer {
+  .front #footer {
     position: absolute;
     bottom: 5px;
     left: 8px;
@@ -512,20 +511,20 @@
   }
   
   /* @TODO: find the module where this layout code should go and put this there */
-  .js body.admin-menu.front .openlayers_map_fullscreen {
+  body.admin-menu.front .openlayers_map_fullscreen {
     top: 81px;
   }
   
   /* @TODO: find the module where this layout code should go and put this there */
-  .js body .openlayers_map_fullscreen {
+  body .openlayers_map_fullscreen {
     border-top: 1px solid #DFE2F5;
   }
   
       
 
   
-  .js body.admin-menu.front #panel-default-overlay,
-  .js body.admin-menu.front .popup-container {
+  body.admin-menu.front #panel-default-overlay,
+  body.admin-menu.front .popup-container {
     top: 81px;
   }
 
@@ -575,12 +574,12 @@
 
   /* General styles */
   
-  .js .overlay {
+  .overlay {
     height: auto !important;
   }
   
   .panel-overlay {
-    overflow: hidden;
+/*    overflow: hidden;*/
   }
   
   .panel-overlay.clear-block::after {
@@ -648,7 +647,11 @@
   
     
   /* Content Sections */
-  .js .panel-overlay .additional-info {
+  #panel-container {
+    overflow: auto;
+  }
+  
+  .panel-overlay .additional-info {
     display: none; /* prevent flash on page load */
     clear: both; /* make sure it clears any evil floats */
   }
@@ -656,41 +659,56 @@
   .panel-overlay .additional-info h2.additional-info-title {
     font-size: 1.3em;
     font-weight: bold;
-    background-color: #000000;
+    background-color: #E7E3DC;
     background-image: none;
-    color: #FFFFFF;
-  }
-  
-  .js .panel-overlay .additional-info .ui-icon {
-    float: left;
-  }
-  
-  .js .panel-overlay .additional-info {
+    color: #000000;
+    width: 350px;
+    margin-left: -10px;
+    padding-left: 20px;
     
   }
   
-    .js .panel-overlay .additional-info .ui-accordion-header {
+  .panel-overlay .additional-info .ui-icon {
+    float: left;
+  }
+  
+  .panel-overlay .additional-info {
+    
+  }
+  
+    .panel-overlay .additional-info .ui-accordion-header {
       cursor: pointer;
+      margin-bottom: 20px;
     }
+        
+      .additional-info .view-events ol li {
+        margin-bottom: 10px;
+      }
+        
+        .additional-info .view-events ol li.active {
+          background-color: #fff;
+          border-radius: 5px 5px 5px 5px;
+          padding: 10px;
+        }
 
   /* Feeds */
   
-  .js .panel-overlay #pane-feeds-video.pane-feeds-panel-pane {
+  .panel-overlay #pane-feeds-video.pane-feeds-panel-pane {
     height: 320px;
   }
   
-  .js .panel-overlay #pane-feeds-photo.pane-feeds-panel-pane {
+  .panel-overlay #pane-feeds-photo.pane-feeds-panel-pane {
     height: 320px;
   }
   
-  .js .panel-overlay #pane-feeds-blog-twitter.pane-feeds-panel-pane {
+  .panel-overlay #pane-feeds-blog-twitter.pane-feeds-panel-pane {
     height: 150px;
   }
 
 
 
   /* Ensemble flag */
-  .js .panel-overlay .views-field-field-ensemble-value {
+  .panel-overlay .views-field-field-ensemble-value {
     font-style: italic;
     font-size: 13px;
     padding: 7px 0 0 0;
@@ -705,31 +723,31 @@
   
 /* Links in Overlays & Bubble */
 
-.js #panel-default-overlay a,
-.js .popup-container-bubble a,
-.js #explore-filters a {
+#panel-default-overlay a,
+.popup-container-bubble a,
+#explore-filters a {
   color: #B4C0F0;
 }
 
 /* Bubble */
 
-.js .popup-container-bubble {
+.popup-container-bubble {
   color: #D0D4D3;
   padding-right: 12px;
 }
 
   /* title more prominent */
-  .js .popup-container-bubble .openlayers-popup-name {
+  .popup-container-bubble .openlayers-popup-name {
     font-size: 16px;
     font-weight: bold;
     line-height: 1.2em;
   }
     
   /* date styled to fade backward a bit */
-  .js .popup-container-bubble .date-display-start,
-  .js .popup-container-bubble .date-display-separator,
-  .js .popup-container-bubble .date-display-end,
-  .js .popup-container-bubble .date-display-single {
+  .popup-container-bubble .date-display-start,
+  .popup-container-bubble .date-display-separator,
+  .popup-container-bubble .date-display-end,
+  .popup-container-bubble .date-display-single {
     text-transform: uppercase;
     font-size: 10px;
     letter-spacing: 0.1em;
@@ -742,7 +760,7 @@
 /* Overlay title */
 /* @TODO: move this someplace more generic after overlay titles have been refactored to be consistent */
 
-.js h2.overlay-title {
+h2.overlay-title {
   margin: 0 0 15px 0;
   font-size: 26px;
   color: #FFFFFF;
@@ -751,28 +769,28 @@
 
 
 /* hide org and artist listings at first */
-.js #panel-default-overlay #today-organizations,
-.js #panel-default-overlay #today-artists {
+#panel-default-overlay #today-organizations,
+#panel-default-overlay #today-artists {
   display: none;
 }
 
 /* Chooser */
 
-.js #panel-default-overlay ul.overlay-filter-headers {
+#panel-default-overlay ul.overlay-filter-headers {
   list-style: none;
   margin: 0;
   padding: 0 0 30px 0;
   background: transparent url(../images/showtoday-divider.png) 50% 100% no-repeat;
 }
 
-.js #panel-default-overlay ul.overlay-filter-headers li {
+#panel-default-overlay ul.overlay-filter-headers li {
   list-style: none;
   padding-bottom: 5px;
   cursor: pointer; 
   font-size: 18px;
 }
 
-.js #panel-default-overlay ul.overlay-filter-headers li a {
+#panel-default-overlay ul.overlay-filter-headers li a {
   display: block;
   padding: 10px 30px 10px 48px;
   border-radius: 5px;
@@ -783,37 +801,37 @@
 }
   
   /* hover state */
-  .js #panel-default-overlay ul.overlay-filter-headers li a:hover {
+  #panel-default-overlay ul.overlay-filter-headers li a:hover {
     background-color: #393E56;
     color: #FFFFFF;
   }
   
   /* selected state */
-  .js #panel-default-overlay ul.overlay-filter-headers li.active a,
-  .js #panel-default-overlay ul.overlay-filter-headers li.active a:hover,
-  .js #panel-default-overlay ul.overlay-filter-headers li a:active {
+  #panel-default-overlay ul.overlay-filter-headers li.active a,
+  #panel-default-overlay ul.overlay-filter-headers li.active a:hover,
+  #panel-default-overlay ul.overlay-filter-headers li a:active {
     background-color: #6f84c2;
     color: #FFFFFF;
   }
   
 
   /* events icon */
-  .js #panel-default-overlay ul.overlay-filter-headers li#filter-results-events-title a {
+  #panel-default-overlay ul.overlay-filter-headers li#filter-results-events-title a {
     background-image: url(../images/explore-icon-event.png);
   }
 
   /* orgs icon */
-  .js #panel-default-overlay ul.overlay-filter-headers li#filter-results-organizations-title a {
+  #panel-default-overlay ul.overlay-filter-headers li#filter-results-organizations-title a {
     background-image: url(../images/explore-icon-org.png);
   }
   
   /* artists icon */
-  .js #panel-default-overlay ul.overlay-filter-headers li#filter-results-artists-title a {
+  #panel-default-overlay ul.overlay-filter-headers li#filter-results-artists-title a {
     background-image: url(../images/explore-icon-artist.png);
   }
   
   /* play icon */
-  .js #panel-default-overlay ul.overlay-filter-headers li#filter-results-plays-title a {
+  #panel-default-overlay ul.overlay-filter-headers li#filter-results-plays-title a {
     background-image: url(../images/explore-icon-play.png);
   }
   
@@ -821,72 +839,72 @@
   /* Show Today: General Listings */
     
     /* RSS feed icon */
-    .js #panel-default-overlay .feed-icon {
+    #panel-default-overlay .feed-icon {
       float: right;
     }
   
     /* padding on all "today" listings */
-    .js #panel-default-overlay .today-listing .item-list ul li,
-    .js #panel-default-overlay .filter-results-listing .item-list ul li {
+    #panel-default-overlay .today-listing .item-list ul li,
+    #panel-default-overlay .filter-results-listing .item-list ul li {
       padding-left: 48px;
       overflow: auto;
       width: inherit;
     }
     
      /* more prominent title */
-    .js #panel-default-overlay #today-events .views-field-field-related-play-nid .field-content,
-    .js #panel-default-overlay #filter-results-events .views-field-field-related-play-nid .field-content,
-    .js #panel-default-overlay #filter-results-plays .views-field-field-related-play-nid .field-content,
-    .js #panel-default-overlay .views-field-title {
+    #panel-default-overlay #today-events .views-field-field-related-play-nid .field-content,
+    #panel-default-overlay #filter-results-events .views-field-field-related-play-nid .field-content,
+    #panel-default-overlay #filter-results-plays .views-field-field-related-play-nid .field-content,
+    #panel-default-overlay .views-field-title {
       font-size: 18px;
       font-weight: bold;
       overflow: hidden;
     }
     
     /* position avatar */
-    .js #panel-default-overlay #today-organizations .views-field-field-org-logo-fid,
-    .js #panel-default-overlay #filter-results-organizations .views-field-field-org-logo-fid,
-    .js #panel-default-overlay #today-artists .views-field-field-artist-photo-fid,
-    .js #panel-default-overlay #filter-results-artists .views-field-field-artist-photo-fid {
+    #panel-default-overlay #today-organizations .views-field-field-org-logo-fid,
+    #panel-default-overlay #filter-results-organizations .views-field-field-org-logo-fid,
+    #panel-default-overlay #today-artists .views-field-field-artist-photo-fid,
+    #panel-default-overlay #filter-results-artists .views-field-field-artist-photo-fid {
       float: left;
       margin-left: -45px;
       padding-top: 3px;
     }
     
     /* hide listings by default */
-    .js #panel-default-overlay .filter-results-listing {
+    #panel-default-overlay .filter-results-listing {
       display: none;
     }
   
     /* Show Today: Events Listing */
     
       /* inject icon to the left of event listing */
-      .js #panel-default-overlay #today-events .item-list ul li,
-      .js #panel-default-overlay #filter-results-events .item-list ul li {
+      #panel-default-overlay #today-events .item-list ul li,
+      #panel-default-overlay #filter-results-events .item-list ul li {
         background: transparent url(../images/icon-listing-event.png) 10px 5px no-repeat;
       }
       
       /* byline and artist name on same line */
-      .js #panel-default-overlay #today-events .views-field-field-artist-nid label,
-      .js #panel-default-overlay #filter-results-events .views-field-field-artist-nid label,
-      .js #panel-default-overlay #filter-results-plays .views-field-field-artist-nid label,
-      .js #panel-default-overlay #today-events .views-field-field-artist-nid .field-content,
-      .js #panel-default-overlay #filter-results-events .views-field-field-artist-nid .field-content,
-      .js #panel-default-overlay #filter-results-plays .views-field-field-artist-nid .field-content {
+      #panel-default-overlay #today-events .views-field-field-artist-nid label,
+      #panel-default-overlay #filter-results-events .views-field-field-artist-nid label,
+      #panel-default-overlay #filter-results-plays .views-field-field-artist-nid label,
+      #panel-default-overlay #today-events .views-field-field-artist-nid .field-content,
+      #panel-default-overlay #filter-results-events .views-field-field-artist-nid .field-content,
+      #panel-default-overlay #filter-results-plays .views-field-field-artist-nid .field-content {
         display: inline;
       }
       
       /* City and state on the same line */
-      .js #panel-default-overlay #today-events .views-field-city,
-      .js #panel-default-overlay #today-events .views-field-province,
-      .js #panel-default-overlay #filter-results-events .views-field-city,
-      .js #panel-default-overlay #filter-results-events .views-field-province {
+      #panel-default-overlay #today-events .views-field-city,
+      #panel-default-overlay #today-events .views-field-province,
+      #panel-default-overlay #filter-results-events .views-field-city,
+      #panel-default-overlay #filter-results-events .views-field-province {
         display: inline;
       }
      
       /* Date styled to fade backward a bit */
-      .js #panel-default-overlay #today-events .views-field-field-event-date-value .field-content,
-      .js #panel-default-overlay #filter-results-events .views-field-field-event-date-value .field-content {
+      #panel-default-overlay #today-events .views-field-field-event-date-value .field-content,
+      #panel-default-overlay #filter-results-events .views-field-field-event-date-value .field-content {
         text-transform: uppercase;
         font-size: 10px;
         letter-spacing: 0.1em;
@@ -896,16 +914,16 @@
     /* Show Today: Org listings */
     
       /* org type label on the same line as list */
-      .js #panel-default-overlay #today-organizations .views-field-field-org-type-nid div.field-content,
-      .js #panel-default-overlay #filter-results-organizations .views-field-field-org-type-nid div.field-content {
+      #panel-default-overlay #today-organizations .views-field-field-org-type-nid div.field-content,
+      #panel-default-overlay #filter-results-organizations .views-field-field-org-type-nid div.field-content {
         display: inline;
       }
 
     /* Show Today: Play listings */
       
       /* inject icon to the left of play listing */
-      .js #panel-default-overlay #today-plays .item-list ul li,
-      .js #panel-default-overlay #filter-results-plays .item-list ul li {
+      #panel-default-overlay #today-plays .item-list ul li,
+      #panel-default-overlay #filter-results-plays .item-list ul li {
         background: transparent url(../images/icon-listing-play.png) 10px 2px no-repeat;
       }
       
@@ -914,7 +932,7 @@
 
 /* Open Layers */
 /* @TODO: Review this entire block and integrate with Overlay section above */
-/* @TODO: Consider adding .js to all of these styles */
+/* @TODO: Consider adding to all of these styles */
 
 .openlayers-blockswitcher .base .layers-content label {
   display: none;
@@ -963,8 +981,8 @@
  with transparency, the two competing backgrounds look funny
 */
 .additional-info {
-  color: #FFFFFF;
-  background: rgba(0, 0 ,0, 1);
+  color: #000000;
+  background: transparent;
   }
 
 /* custom close box */
@@ -1106,7 +1124,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
 /* Node Forms */
 
   /* Event form */
-    .js #edit-value-wrapper {
+    #edit-value-wrapper {
       display: none;
     }
 
@@ -1254,7 +1272,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
     }
 
     
-    .js #explore-filters form input#edit-submit-organizations {
+    #explore-filters form input#edit-submit-organizations {
       margin-top: 0;
       font-size: 14px;
       font-weight: bold;
