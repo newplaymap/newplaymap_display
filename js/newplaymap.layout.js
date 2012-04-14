@@ -122,5 +122,18 @@ newPlayMap.panelTemplate = function(feature) {
   // @TODO Data may need some escaping.
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", feature["properties"])
-    .appendTo(container); 
+    .appendTo(container);
+    
+  newPlayMap.eventListProcess(container);
 }
+
+newPlayMap.eventListProcess = function(container) {
+  $(container).find('.additional-info .view-events ol li').hoverIntent({
+    over: function() {
+      $(this).addClass('active');
+    },
+    out: function() {
+      $(this).removeClass('active');
+    }
+  });
+};
