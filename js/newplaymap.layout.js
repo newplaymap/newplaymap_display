@@ -10,6 +10,22 @@ newPlayMap.updatePanel = function(marker, data) {
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 
+  // If it's an event, load journey into overlay
+  // @TODO: Right now this is just the journey that's already loaded. 
+  //        Make it work with plain events (type == event)
+  // console.log(feature.marker_id);
+  // console.log(jsonData[feature.marker_id]);
+  if (feature.type == 'play') {
+    for (singleFeature in jsonData.play.features) {
+      newPlayMap.loadPlayJourney(jsonData.play.features[singleFeature]);
+    }
+  }
+
+  // Add interaction to event listings in the new content
+  // @TODO: Not only plays use this template. 
+  //        Either be more specific or make sure it applies universally
+  var container = $('#panel-container .play');
+  newPlayMap.eventListProcess(container);
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
@@ -123,20 +139,21 @@ newPlayMap.panelTemplate = function(feature) {
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", feature["properties"])
     .appendTo(container);
-
-  newPlayMap.eventListProcess(container);
 }
 
 newPlayMap.eventListProcess = function(container) {
-  $(container).find('.additional-info .view-events ol li').hoverIntent({
+  // console.log($(container).find('ol.journey li'));
+  $(container).find('ol.journey li').hoverIntent({
     over: function() {
       $(this).addClass('active');
 
       // Highlight pin on the map
         // @TODO: Set the event id dynamically. Make sure events are in the locationsByID object
         // @TODO: Once this is working, turn off highlight on hover/click
-      console.log('highlight');
-      var eventId = '9344';
+
+
+      var eventId = $(this).attr('listing_id');
+
       spotlight.addLocations(locationsByID[eventId]);
       spotlight.parent.className = "active";
 
@@ -145,6 +162,20 @@ newPlayMap.eventListProcess = function(container) {
     out: function() {
       $(this).removeClass('active');
       spotlight.parent.className = "inactive";
+      spotlight.removeAllLocations();
     }
   });
 };
+
+newPlayMap.loadPlayJourney = function(feature) {
+  var type = 'play';
+  var container = $('#panel-container .' + type);
+  
+  // @TODO: Put this in a template
+  if ($('ol.journey').length == 0) {
+    $('<h2></h2>').addClass('journey-header').text('Journey').appendTo(container);
+    $('<ol></ol>').addClass('journey').appendTo(container);
+  }
+  // console.log(feature);
+  $('<li></li>').attr('listing_id', feature.id).text(feature.properties.event_type).appendTo('ol.journey');
+}
