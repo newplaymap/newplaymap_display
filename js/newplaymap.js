@@ -44,16 +44,15 @@ newPlayMap.alterHomepage = function() {
 };
 
 newPlayMap.loadPageRouter = function() {
-    // Make sure data is loaded.
-    newPlayMap.buildRoutePath();
-    // Loading data on complete will load the lookup Route function.
+  // Make sure data is loaded.
+  newPlayMap.buildRoutePath();
+  // Loading data on complete will load the lookup Route function.
 
-    // bind address to all a links.
-    $('a').address();
+  // bind address to all a links.
+  $('a').address();
 
   // Address always loads on every page interaction.
   $.address.change(function(event) {
-    console.log(event);
     // Reset status check variables. 
     newPlayMap.status.routerPathLoaded = false;
     newPlayMap.status.routerRouteLoaded = false;
@@ -62,15 +61,10 @@ newPlayMap.loadPageRouter = function() {
     
     // Make sure data is loaded.
     newPlayMap.buildRoutePath(event);
-    newPlayMap.testPathLoaded(newPlayMap.lookupRoute);
+    newPlayMap.testPathLoaded(newPlayMap.lookupRoute); // @TODO This is possibly executing twice.
     newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
-
-    // bind address to all new links.
-    $('a').address();
-    console.log( newPlayMap.browserEvents);
     return false;
   });
-
 
   return false;
 };
@@ -87,7 +81,6 @@ newPlayMap.loadData = function() {
 newPlayMap.loadMap = function(){
   // Load map tiles.
   newPlayMap.loadWax();
-  console.log("map");
   // for map debugging: newPlayMap.initMapSimple();
 };
 
@@ -236,7 +229,9 @@ newPlayMap.testMapAndDataLoaded = function(callback) {
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testEverythingLoaded = function(callback) {
   (function waitEverything() {
-    if (newPlayMap.status.routerPathLoaded === true && newPlayMap.status.routerRouteLoaded === true && newPlayMap.status.dataLoaded === true 
+    if (newPlayMap.status.routerPathLoaded === true 
+      && newPlayMap.status.routerRouteLoaded === true 
+      && newPlayMap.status.dataLoaded === true 
       && newPlayMap.status.mapLoaded === true) {
       
       // test each marker layer is loaded
@@ -252,7 +247,7 @@ newPlayMap.testEverythingLoaded = function(callback) {
       }
     } else {
       console.log("Waiting for everything to load.");
-      setTimeout( waitEverything, 1000 );
+      setTimeout( waitEverything, 100 );
     }
   })();
 };
