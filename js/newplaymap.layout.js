@@ -29,6 +29,9 @@ newPlayMap.updatePanel = function(marker, data) {
   //        Either be more specific or make sure it applies universally
   var container = $('#panel-container .play');
   newPlayMap.eventListProcess(container);
+  
+  // Make all links listen for address changes.
+  $('a').address();
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
@@ -82,7 +85,12 @@ newPlayMap.popupMarker = function(marker) {
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", featureData["properties"])
     .appendTo(container); 
-*/
+
+
+  // Make all links listen for address changes.
+  $('a').address();
+  
+*/  
 };
 
 
