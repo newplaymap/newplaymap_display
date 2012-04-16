@@ -12,6 +12,7 @@ newPlayMap.buildRoutePath = function(event) {
 };
 
 newPlayMap.splitPath = function(event) {
+
   var path = {};
   path.rawPath = newPlayMap.jqueryAddressHashPath(event);
   path.params = newPlayMap.urlParameters();
@@ -73,21 +74,32 @@ newPlayMap.lookupRoute = function() {
   // Make sure Drupal does redirects properly too.
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
+console.log(newPlayMap.routing.path);
+console.log("looking up");
   if(newPlayMap.routing.path !== undefined && newPlayMap.routing.path.rawPath !== false) {
     switch(newPlayMap.routing.path.args[0]) {
       case "event":
         newPlayMap.routing.route.feature = newPlayMap.lookupFeatureByPath("events");
         newPlayMap.routing.route.callback = newPlayMap.loadEvent;
+        if(newPlayMap.routing.route.feature !== undefined && newPlayMap.routing.route.callback !== undefined) {
+          newPlayMap.status.routerRouteLoaded = true;
+        }
       break;
   
       case "artist":
         newPlayMap.routing.route.feature = newPlayMap.lookupFeatureByPath("artists");
         newPlayMap.routing.route.callback = newPlayMap.loadArtist;
+        if(newPlayMap.routing.route.feature !== undefined && newPlayMap.routing.route.callback !== undefined) {
+          newPlayMap.status.routerRouteLoaded = true;
+        }
       break;
   
       case "organization":
         newPlayMap.routing.route.feature = newPlayMap.lookupFeatureByPath("organizations");
         newPlayMap.routing.route.callback = newPlayMap.loadOrganization;
+        if(newPlayMap.routing.route.feature !== undefined && newPlayMap.routing.route.callback !== undefined) {
+          newPlayMap.status.routerRouteLoaded = true;
+        }
       break;
   
       case "play":
@@ -96,12 +108,23 @@ newPlayMap.lookupRoute = function() {
         // Spelling this out to be extra super clear
         newPlayMap.routing.route.feature = newPlayMap.lookupFeatureByPath("play", "play_path", "related_event_id", newPlayMap.routing.path.filters.event_id);
         newPlayMap.routing.route.callback = newPlayMap.loadRelatedEvents;
+
+        if(newPlayMap.routing.route.feature !== undefined && newPlayMap.routing.route.callback !== undefined) {
+          newPlayMap.status.routerRouteLoaded = true;
+        }
       break;
       
       default:
           newPlayMap.routing.route.callback = newPlayMap.doNothing;
+          newPlayMap.status.routerRouteLoaded = true;
       break;
    }
+  }
+  else {
+    console.log("in else");
+      newPlayMap.routing.route.feature = "doNothing";
+      newPlayMap.routing.route.callback = newPlayMap.doNothing;
+      newPlayMap.status.routerRouteLoaded = true;
   }
 };
 
