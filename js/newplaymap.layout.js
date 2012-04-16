@@ -123,7 +123,7 @@ newPlayMap.panelTemplate = function(feature) {
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", feature["properties"])
     .appendTo(container);
-    
+
   newPlayMap.eventListProcess(container);
 }
 
@@ -131,9 +131,19 @@ newPlayMap.eventListProcess = function(container) {
   $(container).find('.additional-info .view-events ol li').hoverIntent({
     over: function() {
       $(this).addClass('active');
+
+      // Highlight pin on the map
+        // @TODO: Set the event id dynamically. Make sure events are in the locationsByID object
+      console.log('highlight');
+      var eventId = '9344';
+      spotlight.addLocations(locationsByID[eventId]);
+      spotlight.parent.className = "active";
+
+      $('div#panel-container div#panel').show();
     },
     out: function() {
       $(this).removeClass('active');
+      spotlight.parent.className = "inactive";
     }
   });
 };
