@@ -12,7 +12,8 @@ newPlayMap.onMarkerOver = function(e) {
       var grouping_field = marker.getAttribute("grouping_value");
       if(grouping_field !== undefined){
         if (grouping_field in locationsByID) {
-  
+
+          // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
           spotlight.addLocations(locationsByID[grouping_field] || []);
           spotlight.parent.className = "active";
 
@@ -36,6 +37,7 @@ newPlayMap.onMarkerOut = function(e) {
   if (marker) {
       var type = marker.type;
 
+      // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
       spotlight.removeAllLocations();
       // keep last option visible.
 /*       $('div#panel-container div#panel').hide(); */
@@ -60,7 +62,8 @@ newPlayMap.onMarkerClick = function(e) {
       var grouping_field = marker.getAttribute("grouping_value");
       if(grouping_field !== undefined){
         if (grouping_field in locationsByID) {
-  
+
+          // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
           spotlight.addLocations(locationsByID[grouping_field] || []);
           spotlight.parent.className = "active";
 
