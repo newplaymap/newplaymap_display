@@ -8,13 +8,10 @@ var canvas = {}
 
 
 newPlayMap.buildRoutePath = function(event) {
-console.log("building");
-console.log(event);
   newPlayMap.routing.path = newPlayMap.splitPath(event);
 };
 
 newPlayMap.splitPath = function(event) {
-
   var path = {};
   path.rawPath = newPlayMap.jqueryAddressHashPath(event);
   path.params = newPlayMap.urlParameters();
@@ -36,9 +33,7 @@ newPlayMap.splitPath = function(event) {
       path.filters[filter[0]] = filter[1];
     }
   }
-  if(path !== undefined) {
-    newPlayMap.status.routerPathLoaded = true;
-  }
+  newPlayMap.status.routerPathLoaded = true;  
   return path;
 };
 
@@ -52,6 +47,7 @@ newPlayMap.jqueryAddressHashPath = function(event) {
   
   if (window.location.hash) {
     var hash = window.location.hash;
+
     var hashSplit = hash.split("/");
     if(hashSplit[0] == '#') {
       hashSplit.shift();
@@ -75,9 +71,9 @@ newPlayMap.urlParameters = function(){
 newPlayMap.lookupRoute = function() {
   // Make sure Drupal does redirects properly too.
   // Ignore certain links & force them to open in Drupal
+
   // newPlayMap.ajaxLinks();  
-  console.log("-----");
-  console.log(newPlayMap.routing.path);
+
   if(newPlayMap.routing.path !== undefined && newPlayMap.routing.path.rawPath !== false) {
     switch(newPlayMap.routing.path.args[0]) {
       case "event":
@@ -117,22 +113,24 @@ newPlayMap.lookupRoute = function() {
       break;
       
       default:
+          newPlayMap.routing.route.feature = [];
           newPlayMap.routing.route.callback = newPlayMap.doNothing;
           newPlayMap.status.routerRouteLoaded = true;
       break;
    }
   }
   else {
-    console.log("in else");
+
+      newPlayMap.status.routerRouteLoaded = true;
       newPlayMap.routing.route.feature = [];
       newPlayMap.routing.route.callback = newPlayMap.doNothing;
-      newPlayMap.status.routerRouteLoaded = true;
+    console.log("in else");
   }
 };
 
 
 newPlayMap.loadFeatureAction = function() {
-  if(newPlayMap.routing.route !== undefined && newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
+  if(newPlayMap.status.routerRouteLoaded === true) {
     // Execute callback function.
     $(newPlayMap.routing.route.callback);
   }
@@ -140,9 +138,6 @@ newPlayMap.loadFeatureAction = function() {
 
 newPlayMap.doNothing = function() {
   console.log("doing nothing");
-      // bind address to all a links.
-
-
 };
 
 newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) {
