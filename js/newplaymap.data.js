@@ -42,7 +42,6 @@ newPlayMap.loadDataComplete = function() {
 };
 
 newPlayMap.onLoadDataMarkers = function(vars) {
-console.log(vars);
     var vars = vars;
   
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
@@ -117,6 +116,7 @@ console.log(vars);
     // @TODO this will run on the last loaded item, which may make behavior strange.
     // Actually no it is probably fine so long as locations is global.
     map.setExtent(locations);
+
+    // Set that each marker layer was loaded.
     newPlayMap.status.markersLoaded[vars.type] = true;
-    console.log(newPlayMap.status.markersLoaded);
 };

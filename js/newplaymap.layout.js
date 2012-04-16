@@ -3,9 +3,12 @@ newPlayMap.updatePanel = function(marker, data) {
   // data is extra, we might use it...
   var feature = {};
   feature.markup = marker;
+
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
+  // Error in here somewhere.
+
   featureData = newPlayMap.loadDataObject(feature);
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
@@ -30,6 +33,7 @@ newPlayMap.updatePanel = function(marker, data) {
 
 newPlayMap.loadDataObject = function(featureLookup) {
     var featureSet = [];
+  //  console.log(featureLookup);
     var features = jsonData[featureLookup.dataName].features,
         len = features.length,
         locations = [];
@@ -53,6 +57,7 @@ newPlayMap.loadDataObject = function(featureLookup) {
 
 
 newPlayMap.popupMarker = function(marker) {
+/*
   newPlayMap.panelTemplates();
 
   
@@ -77,6 +82,7 @@ newPlayMap.popupMarker = function(marker) {
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", featureData["properties"])
     .appendTo(container); 
+*/
 };
 
 
