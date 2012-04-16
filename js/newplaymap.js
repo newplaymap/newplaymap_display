@@ -15,6 +15,7 @@ newPlayMap.routing.route = {};
 newPlayMap.status = {
   pageAltered: false,
   routerPathLoaded: false,
+  routerRouteLoaded: false,
   dataLoaded: false,
   mapLoaded: false,
   markersLoaded: {},
@@ -30,7 +31,7 @@ window.onload = function() {
 };
 
 newPlayMap.loadInteractivity = function() {
-  newPlayMap.loadRouteInfo();   // Load route object.
+  newPlayMap.loadRouteInfo();     // Load route info (lookup route, get features).  
   newPlayMap.loadBehaviors() ;  // Load marker actions and events.
 };
 
@@ -47,10 +48,14 @@ newPlayMap.loadPageRouter = function() {
 
   // Address always loads on every page interaction.
   $.address.change(function(event) {
+    console.log(event);
 
-
+    // Reset status check variables. 
+    newPlayMap.status.routerPathLoaded = false;
+    newPlayMap.status.routerRouteLoaded = false;
     // Make sure data is loaded.
     newPlayMap.buildRoutePath();
+    newPlayMap.lookupRoute();
     newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 
     return false;
@@ -179,14 +184,27 @@ newPlayMap.testDataLoaded = function(callback) {
   })();
 };
 
+// Wait until Path is loaded (which might depend on data)
+newPlayMap.testPathLoaded = function(callback) {
+  (function waitPath() {
+    if (newPlayMap.status.routerPathLoaded !== false) {
+      console.log("Path is loaded.");
+      $(callback);
+    } else {
+      console.log("Waiting for path to load");
+      setTimeout( waitPath, 100 );
+    }
+  })();
+};
+
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testRouteLoaded = function(callback) {
   (function waitRoute() {
-    if (newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
-      console.log("Route is loaded.");
+    if (newPlayMap.status.routerRouteLoaded !== false) {
+      console.log("Routes are loaded.");
       $(callback);
     } else {
-      console.log("Waiting for route");
+      console.log("Waiting for routes");
       setTimeout( waitRoute, 100 );
     }
   })();
@@ -209,7 +227,9 @@ newPlayMap.testMapAndDataLoaded = function(callback) {
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testEverythingLoaded = function(callback) {
   (function waitEverything() {
-    if (newPlayMap.status.routerPathLoaded === true && newPlayMap.status.dataLoaded === true 
+
+    console.log(newPlayMap.status);
+    if (newPlayMap.status.routerPathLoaded === true && newPlayMap.status.routerRouteLoaded === true && newPlayMap.status.dataLoaded === true 
       && newPlayMap.status.mapLoaded === true) {
       
       // test each marker layer is loaded
@@ -225,7 +245,7 @@ newPlayMap.testEverythingLoaded = function(callback) {
       }
     } else {
       console.log("Waiting for everything to load.");
-      setTimeout( waitEverything, 100 );
+      setTimeout( waitEverything, 1000 );
     }
   })();
 };
