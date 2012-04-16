@@ -7,6 +7,7 @@ $output = "";
 loadOrganizations($m, $output);
 loadArtists($m, $output);
 loadEvents($m, $output);
+
 function loadOrganizations($m, $output) {
 
   $organizations = $m->newplaymap->organizations;
