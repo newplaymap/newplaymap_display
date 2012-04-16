@@ -134,6 +134,7 @@ newPlayMap.eventListProcess = function(container) {
 
       // Highlight pin on the map
         // @TODO: Set the event id dynamically. Make sure events are in the locationsByID object
+        // @TODO: Once this is working, turn off highlight on hover/click
       console.log('highlight');
       var eventId = '9344';
       spotlight.addLocations(locationsByID[eventId]);
