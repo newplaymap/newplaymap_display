@@ -656,7 +656,8 @@
     clear: both; /* make sure it clears any evil floats */
   }
   
-  .panel-overlay .additional-info h2.additional-info-title {
+  .panel-overlay .additional-info h2.additional-info-title,
+  h2.journey-header {
     font-size: 1.3em;
     font-weight: bold;
     background-color: #E7E3DC;
@@ -681,12 +682,14 @@
       margin-bottom: 20px;
     }
         
-      .additional-info .view-events ol li {
+      .additional-info .view-events ol li,
+      ol.journey li {
         margin-bottom: 10px;
         padding: 10px;
       }
         
-        .additional-info .view-events ol li.active {
+        .additional-info .view-events ol li.active,
+        ol.journey li.active {
           background-color: #fff;
           border-radius: 5px 5px 5px 5px;
         }
