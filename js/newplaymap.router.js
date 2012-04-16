@@ -11,8 +11,6 @@ newPlayMap.buildRoutePath = function(event) {
   newPlayMap.routing.path = newPlayMap.splitPath(event);
 };
 
-
-
 newPlayMap.splitPath = function(event) {
   var path = {};
   path.rawPath = newPlayMap.jqueryAddressHashPath(event);
@@ -34,6 +32,9 @@ newPlayMap.splitPath = function(event) {
       var filter = path.vars[singleFilter].split('=');
       path.filters[filter[0]] = filter[1];
     }
+  }
+  if(path !== undefined) {
+    newPlayMap.status.routerPathLoaded = true;
   }
   return path;
 };
