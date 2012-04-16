@@ -105,7 +105,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
           }
         // }
 
-
         // add the marker's location to the extent list
         locations.push(marker.location);
 
