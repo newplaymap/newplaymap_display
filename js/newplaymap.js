@@ -11,6 +11,7 @@ var loaded = 0;
 var markers = {};
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
+newPlayMap.browserEvents = [];
 
 newPlayMap.status = {
   pageAltered: false,
@@ -45,24 +46,30 @@ newPlayMap.alterHomepage = function() {
 newPlayMap.loadPageRouter = function() {
     // Make sure data is loaded.
     newPlayMap.buildRoutePath();
+    // Loading data on complete will load the lookup Route function.
+
+    // bind address to all a links.
+    $('a').address();
 
   // Address always loads on every page interaction.
   $.address.change(function(event) {
     console.log(event);
-
+    newPlayMap.browserEvents.push(event);
     // Reset status check variables. 
     newPlayMap.status.routerPathLoaded = false;
     newPlayMap.status.routerRouteLoaded = false;
     // Make sure data is loaded.
     newPlayMap.buildRoutePath();
-    newPlayMap.lookupRoute();
+    newPlayMap.testPathLoaded(newPlayMap.lookupRoute);
     newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 
+    // bind address to all new links.
+    $('a').address();
+    console.log( newPlayMap.browserEvents);
     return false;
   });
 
-  // bind address to all a links.
-  $('a').address();
+
   return false;
 };
 
@@ -227,8 +234,6 @@ newPlayMap.testMapAndDataLoaded = function(callback) {
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testEverythingLoaded = function(callback) {
   (function waitEverything() {
-
-    console.log(newPlayMap.status);
     if (newPlayMap.status.routerPathLoaded === true && newPlayMap.status.routerRouteLoaded === true && newPlayMap.status.dataLoaded === true 
       && newPlayMap.status.mapLoaded === true) {
       

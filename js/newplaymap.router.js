@@ -74,8 +74,6 @@ newPlayMap.lookupRoute = function() {
   // Make sure Drupal does redirects properly too.
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
-console.log(newPlayMap.routing.path);
-console.log("looking up");
   if(newPlayMap.routing.path !== undefined && newPlayMap.routing.path.rawPath !== false) {
     switch(newPlayMap.routing.path.args[0]) {
       case "event":
@@ -122,7 +120,7 @@ console.log("looking up");
   }
   else {
     console.log("in else");
-      newPlayMap.routing.route.feature = "doNothing";
+      newPlayMap.routing.route.feature = [];
       newPlayMap.routing.route.callback = newPlayMap.doNothing;
       newPlayMap.status.routerRouteLoaded = true;
   }
