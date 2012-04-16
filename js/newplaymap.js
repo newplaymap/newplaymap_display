@@ -54,12 +54,14 @@ newPlayMap.loadPageRouter = function() {
   // Address always loads on every page interaction.
   $.address.change(function(event) {
     console.log(event);
-    newPlayMap.browserEvents.push(event);
     // Reset status check variables. 
     newPlayMap.status.routerPathLoaded = false;
     newPlayMap.status.routerRouteLoaded = false;
+
+    newPlayMap.browserEvents.push(event);
+    
     // Make sure data is loaded.
-    newPlayMap.buildRoutePath();
+    newPlayMap.buildRoutePath(event);
     newPlayMap.testPathLoaded(newPlayMap.lookupRoute);
     newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 

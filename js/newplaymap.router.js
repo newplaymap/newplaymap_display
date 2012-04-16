@@ -8,6 +8,8 @@ var canvas = {}
 
 
 newPlayMap.buildRoutePath = function(event) {
+console.log("building");
+console.log(event);
   newPlayMap.routing.path = newPlayMap.splitPath(event);
 };
 
@@ -74,6 +76,8 @@ newPlayMap.lookupRoute = function() {
   // Make sure Drupal does redirects properly too.
   // Ignore certain links & force them to open in Drupal
   // newPlayMap.ajaxLinks();  
+  console.log("-----");
+  console.log(newPlayMap.routing.path);
   if(newPlayMap.routing.path !== undefined && newPlayMap.routing.path.rawPath !== false) {
     switch(newPlayMap.routing.path.args[0]) {
       case "event":
@@ -136,6 +140,9 @@ newPlayMap.loadFeatureAction = function() {
 
 newPlayMap.doNothing = function() {
   console.log("doing nothing");
+      // bind address to all a links.
+
+
 };
 
 newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) {
