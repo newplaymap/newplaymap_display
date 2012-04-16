@@ -14,8 +14,8 @@ newPlayMap.onMarkerOver = function(e) {
         if (grouping_field in locationsByID) {
 
           // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
-          spotlight.addLocations(locationsByID[grouping_field] || []);
-          spotlight.parent.className = "active";
+          // spotlight.addLocations(locationsByID[grouping_field] || []);
+          // spotlight.parent.className = "active";
 
           $('div#panel-container div#panel').show();
                       
@@ -26,7 +26,7 @@ newPlayMap.onMarkerOver = function(e) {
       }
       
       else {
-          spotlight.parent.className = "inactive";
+          // spotlight.parent.className = "inactive";
       }
   }
 };
@@ -38,11 +38,11 @@ newPlayMap.onMarkerOut = function(e) {
       var type = marker.type;
 
       // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
-      spotlight.removeAllLocations();
+      // spotlight.removeAllLocations();
       // keep last option visible.
 /*       $('div#panel-container div#panel').hide(); */
       
-      spotlight.parent.className = "inactive";
+      // spotlight.parent.className = "inactive";
   }
 
   return false;
@@ -64,8 +64,8 @@ newPlayMap.onMarkerClick = function(e) {
         if (grouping_field in locationsByID) {
 
           // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
-          spotlight.addLocations(locationsByID[grouping_field] || []);
-          spotlight.parent.className = "active";
+          // spotlight.addLocations(locationsByID[grouping_field] || []);
+          // spotlight.parent.className = "active";
 
           $('div#panel-container div#panel').show();
                       
@@ -76,7 +76,7 @@ newPlayMap.onMarkerClick = function(e) {
       }
       
       else {
-          spotlight.parent.className = "inactive";
+          // spotlight.parent.className = "inactive";
       }
   }
 
