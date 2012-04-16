@@ -1,4 +1,3 @@
-newPlayMap.routing = newPlayMap.routing || {};
 
 newPlayMap.loadJSONFile = function(vars) {
   var vars = vars;
@@ -41,7 +40,6 @@ newPlayMap.loadDataComplete = function() {
    newPlayMap.loadFeatureAction();
   };
 };
-
 
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;
