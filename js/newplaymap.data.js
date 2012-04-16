@@ -85,25 +85,25 @@ newPlayMap.onLoadDataMarkers = function(vars) {
  
 
         // Determine placement of highlighting by geocoordinates.
-        if(vars.grouping_field !== undefined) {
-
+        // if(vars.grouping_field !== undefined) {
+        // 
           marker.setAttribute("grouping_field", vars.grouping_field);
           marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
-
+        
           if (feature.properties[vars.grouping_field] in locationsByID) {
             locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
           } else {
             locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
           }
-        }
-        else {
+        // }
+        // else {
           // Add all of the locations to the array. making them unique for all layers
           if (feature.properties[vars.id] in locationsByID) {
             locationsByID[feature.properties[vars.id]].push(marker.location);
           } else {
             locationsByID[feature.properties[vars.id]] = [marker.location];
           }
-        }
+        // }
 
 
         // add the marker's location to the extent list
