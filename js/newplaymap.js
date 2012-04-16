@@ -17,7 +17,7 @@ newPlayMap.status = {
   routerPathLoaded: false,
   dataLoaded: false,
   mapLoaded: false,
-  markersLoaded: false,
+  markersLoaded: {},
 };
 
 window.onload = function() {
@@ -26,11 +26,10 @@ window.onload = function() {
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
   newPlayMap.testMapAndDataLoaded(newPlayMap.loadMapDataMarkers);     // Load and insert map markers.
- // newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
+  newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 };
 
 newPlayMap.loadInteractivity = function() {
-console.log("int");
   newPlayMap.loadRouteInfo();   // Load route object.
   newPlayMap.loadBehaviors() ;  // Load marker actions and events.
 };
@@ -51,8 +50,8 @@ newPlayMap.loadPageRouter = function() {
 
 
     // Make sure data is loaded.
-    // newPlayMap.buildRoutePath();
-
+    newPlayMap.buildRoutePath();
+    newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 
     return false;
   });
@@ -209,12 +208,21 @@ newPlayMap.testMapAndDataLoaded = function(callback) {
 
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testEverythingLoaded = function(callback) {
-
   (function waitEverything() {
     if (newPlayMap.status.routerPathLoaded === true && newPlayMap.status.dataLoaded === true 
-      && newPlayMap.status.mapLoaded === true && newPlayMap.status.markersLoaded === true) {
+      && newPlayMap.status.mapLoaded === true) {
+      
+      // test each marker layer is loaded
+      /// hackish but should work
+     if (newPlayMap.status.markersLoaded.artist === true 
+      && newPlayMap.status.markersLoaded.event === true
+      && newPlayMap.status.markersLoaded.organization === true 
+      && newPlayMap.status.markersLoaded.play === true 
+      ) {
+      
       console.log("Everything is loaded.");
       $(callback);
+      }
     } else {
       console.log("Waiting for everything to load.");
       setTimeout( waitEverything, 100 );
@@ -224,8 +232,7 @@ newPlayMap.testEverythingLoaded = function(callback) {
 
 
 newPlayMap.loadMapDataMarkers = function() {
-console.log(newPlayMap.status);
-console.log(jsonData["events"]);
+
  if(jsonData.events !== undefined) {
     // Load Event Markers
     var eventMarkerData = {
