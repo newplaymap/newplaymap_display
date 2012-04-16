@@ -8,40 +8,58 @@ var locationsByID = {};
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
-var markers;
+var markers = {};
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
+
+newPlayMap.status = {
+  pageAltered: false,
+  routerPathLoaded: false,
+  dataLoaded: false,
+  mapLoaded: false,
+  markersLoaded: false,
+};
 
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
   newPlayMap.loadPageRouter();  // Read address and store parsed address in an object.
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
-  newPlayMap.loadMarkers();     // Load and insert map markers.
+  newPlayMap.testMapAndDataLoaded(newPlayMap.loadMapDataMarkers);     // Load and insert map markers.
+ // newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
+};
+
+newPlayMap.loadInteractivity = function() {
+console.log("int");
   newPlayMap.loadRouteInfo();   // Load route object.
-  // newPlayMap.loadBehaviors();   // Load marker actions and events.
+  newPlayMap.loadBehaviors() ;  // Load marker actions and events.
 };
 
 newPlayMap.alterHomepage = function() {
   $('div#panel-container div#panel').hide();
+  newPlayMap.status.pageAltered = true;
+  
+  return false;
 };
 
 newPlayMap.loadPageRouter = function() {
-  newPlayMap.buildRoutePath();
+    // Make sure data is loaded.
+    newPlayMap.buildRoutePath();
 
   // Address always loads on every page interaction.
-/*
   $.address.change(function(event) {
 
+
     // Make sure data is loaded.
-    // newPlayMap.loadAction(event);
-    
+    // newPlayMap.buildRoutePath();
+
+
     return false;
   });
-*/
 
   // bind address to all a links.
-//  $('a').address();
+  $('a').address();
+  return false;
 };
 
 newPlayMap.loadData = function() {
@@ -49,7 +67,7 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({path: 'data/events_300.json'});
   newPlayMap.loadJSONFile({path: "data/artists_300.json"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
-
+  newPlayMap.testDataLoaded(newPlayMap.status.dataLoaded = true);
   return false;
 };
 
@@ -57,20 +75,16 @@ newPlayMap.loadMap = function(){
   // Load map tiles.
   newPlayMap.loadWax();
   console.log("map");
-  //newPlayMap.initMapSimple();
-};
-
-newPlayMap.loadMarkers = function() {
-  newPlayMap.testDataLoaded(newPlayMap.testMapLoaded(newPlayMap.loadMapData));
+  // for map debugging: newPlayMap.initMapSimple();
 };
 
 newPlayMap.loadRouteInfo = function() {
-  newPlayMap.testDataLoaded(newPlayMap.lookupRoute);
+  newPlayMap.lookupRoute();
 };
 
 newPlayMap.loadBehaviors = function() {
   // Load functions / trigger behaviors.
-//  newPlayMap.testDataLoaded(newPlayMap.testRouteLoaded(newPlayMap.testMapLoaded(newPlayMap.loadFeatureAction)));
+  newPlayMap.loadFeatureAction();
 };
 
 newPlayMap.loadWax = function() {
@@ -119,31 +133,35 @@ newPlayMap.initMapSimple = function() {
 newPlayMap.loadMapLayers = function() {
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
+
+  if(markers !== undefined) {
+    newPlayMap.status.mapLoaded = true;
+  }
 };
 
 // Wait until Map is loaded
 newPlayMap.testMapLoaded = function(callback) {
 
-  (function wait() {
-    if (map !== undefined) {
-      console.log("Map is loaded");
+  (function waitMap() {
+    if (map !== undefined && markers !== undefined) {
+      console.log("Map & Marker Layer is loaded");
       $(callback);
     } else {
       console.log("waiting for map");
-        setTimeout( wait, 100 );
+        setTimeout( waitMap, 100 );
     }
   })();
 };
 
 newPlayMap.testMarkersLoaded = function(callback) {
 
-  (function wait() {
+  (function waitMarkers() {
     if (markers !== undefined) {
       console.log("Markers are loaded");
       $(callback);
     } else {
       console.log("waiting for markers");
-        setTimeout( wait, 100 );
+        setTimeout( waitMarkers, 100 );
     }
   })();
 };
@@ -151,31 +169,63 @@ newPlayMap.testMarkersLoaded = function(callback) {
 
 // Wait until Data is loaded
 newPlayMap.testDataLoaded = function(callback) {
-  (function wait() {
+  (function waitData() {
     if (Object.keys(jsonData).length >= 4) {
       console.log("All data is loaded");
       $(callback);
     } else {
       console.log("waiting");
-        setTimeout( wait, 100 );
+        setTimeout( waitData, 100 );
     }
   })();
 };
 
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testRouteLoaded = function(callback) {
-  (function wait() {
+  (function waitRoute() {
     if (newPlayMap.routing.route.callback !== undefined && newPlayMap.routing.route.feature !== undefined) {
       console.log("Route is loaded.");
       $(callback);
     } else {
       console.log("Waiting for route");
-      setTimeout( wait, 1000 );
+      setTimeout( waitRoute, 100 );
     }
   })();
 };
 
-newPlayMap.loadMapData = function() {
+// Wait until Route is loaded (which might depend on data)
+newPlayMap.testMapAndDataLoaded = function(callback) {
+  (function waitMapData() {
+    if (newPlayMap.status.dataLoaded === true && newPlayMap.status.mapLoaded === true ) {
+      console.log("Map & Data is loaded.");
+      $(callback);
+    } else {
+      console.log("Waiting for map and data everything to load.");
+      setTimeout( waitMapData, 100 );
+    }
+  })();
+};
+
+
+// Wait until Route is loaded (which might depend on data)
+newPlayMap.testEverythingLoaded = function(callback) {
+
+  (function waitEverything() {
+    if (newPlayMap.status.routerPathLoaded === true && newPlayMap.status.dataLoaded === true 
+      && newPlayMap.status.mapLoaded === true && newPlayMap.status.markersLoaded === true) {
+      console.log("Everything is loaded.");
+      $(callback);
+    } else {
+      console.log("Waiting for everything to load.");
+      setTimeout( waitEverything, 100 );
+    }
+  })();
+};
+
+
+newPlayMap.loadMapDataMarkers = function() {
+console.log(newPlayMap.status);
+console.log(jsonData["events"]);
  if(jsonData.events !== undefined) {
     // Load Event Markers
     var eventMarkerData = {
@@ -189,7 +239,7 @@ newPlayMap.loadMapData = function() {
       grouping_field: "event_id",
       path: ""
     };
-    newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(eventMarkerData)));
+    newPlayMap.onLoadDataMarkers(eventMarkerData);
   }
 
  if(jsonData.organizations !== undefined) {
@@ -204,7 +254,7 @@ newPlayMap.loadMapData = function() {
     icon: "icons/organization.png",
     grouping_field: "organization_id"
   };
-  newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(organizationMarkerData)));
+  newPlayMap.onLoadDataMarkers(organizationMarkerData);
   }
 
  if(jsonData.artists !== undefined) {
@@ -219,7 +269,7 @@ newPlayMap.loadMapData = function() {
     icon: "icons/artist.png",
     grouping_field: "artist_id"
   };
-  newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(artistMarkerData)));
+    newPlayMap.onLoadDataMarkers(artistMarkerData);
   }
 
   // We treat related event as it's own separate type so there are no conflicts with identical events.
@@ -236,6 +286,7 @@ newPlayMap.loadMapData = function() {
     icon: "icons/play.png",
     grouping_field: "related_play_id"
   };
-  newPlayMap.testMapLoaded(newPlayMap.testMarkersLoaded(newPlayMap.onLoadDataMarkers(relatedEventMarkerData)));
+  console.log("in play");
+  newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
   }
 };
