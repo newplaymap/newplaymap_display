@@ -21,7 +21,6 @@ newPlayMap.setData = function(data) {
   if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
 
   var jsonLength = Object.keys(jsonData).length;
-    console.log("routing hello");
     newPlayMap.lookupRoute();
   };
 

@@ -104,7 +104,9 @@ newPlayMap.lookupRoute = function() {
         console.log("play");
         // We will load the record, then find the exact match.
         // Spelling this out to be extra super clear
-        newPlayMap.routing.route.feature = newPlayMap.lookupFeatureByPath("play", "play_path", "related_event_id", newPlayMap.routing.path.filters.event_id);
+        var feature = newPlayMap.lookupFeatureByPath("play", "play_path", "related_event_id", newPlayMap.routing.path.filters.event_id);
+        console.log(feature);
+        newPlayMap.routing.route.feature = feature;
         newPlayMap.routing.route.callback = newPlayMap.loadRelatedEvents;
 
         if(newPlayMap.routing.route.feature !== undefined && newPlayMap.routing.route.callback !== undefined) {
@@ -125,6 +127,7 @@ newPlayMap.lookupRoute = function() {
       newPlayMap.routing.route.feature = [];
       newPlayMap.routing.route.callback = newPlayMap.doNothing;
     console.log("in else");
+    console.log(newPlayMap.routing.route);
   }
 };
 
@@ -142,7 +145,7 @@ newPlayMap.doNothing = function() {
 
 newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) {
   var path = newPlayMap.routing.path.baseStripped;
-
+console.log(dataName);
   if(jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
 
@@ -166,13 +169,16 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
     return loadedFeatures;
    }
    else {
-    console.log("in else");
+    console.log("in else in lookup");
      // If jsonData isn't set up yet, stick the route somewhere to load later
+/*
      newPlayMap.routing = {
       path: newPlayMap.routing.path,
+      route: newPlayMap.routing.route,
       dataName: dataName,
       alt_path: alt_path
      };
+*/
    } 
 
 };
