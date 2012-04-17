@@ -29,6 +29,7 @@ window.onload = function() {
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
   newPlayMap.testMapAndDataLoaded(newPlayMap.loadMapDataMarkers);
+  newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 };
 
 newPlayMap.loadInteractivity = function() {
