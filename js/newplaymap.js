@@ -236,15 +236,17 @@ newPlayMap.testEverythingLoaded = function(callback) {
       
       // test each marker layer is loaded
       /// hackish but should work
+/*
      if (newPlayMap.status.markersLoaded.artist === true 
       && newPlayMap.status.markersLoaded.event === true
       && newPlayMap.status.markersLoaded.organization === true 
       && newPlayMap.status.markersLoaded.play === true 
       ) {
+*/
       
       console.log("Everything is loaded.");
       $(callback);
-      }
+     // }
     } else {
       console.log("waiting for everything to load");
       setTimeout( waitEverything, 100 );
