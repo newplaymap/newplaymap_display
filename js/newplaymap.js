@@ -47,8 +47,8 @@ newPlayMap.loadPageRouter = function() {
   // Listen for address.
   $.address.change(function(event) {
     // Reset status check variables. 
-    newPlayMap.status.routerPathLoaded = false;
-    newPlayMap.status.routerRouteLoaded = false;
+/*     newPlayMap.status.routerPathLoaded = false; */
+/*     newPlayMap.status.routerRouteLoaded = false; */
 
     newPlayMap.browserEvents.push(event);
 
