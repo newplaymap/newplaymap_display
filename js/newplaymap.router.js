@@ -171,14 +171,12 @@ console.log(dataName);
    else {
     console.log("in else in lookup");
      // If jsonData isn't set up yet, stick the route somewhere to load later
-/*
      newPlayMap.routing = {
       path: newPlayMap.routing.path,
-      route: newPlayMap.routing.route,
+      route: newPlayMap.routing.route || {},
       dataName: dataName,
       alt_path: alt_path
      };
-*/
    } 
 
 };
