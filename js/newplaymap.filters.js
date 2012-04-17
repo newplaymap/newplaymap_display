@@ -15,7 +15,14 @@ newPlayMap.filters.getOrganizationsIndex = function() {
 
 
 newPlayMap.filters.setOrganizationsIndex = function(data) {
-  jsonDataSearch.organizationsIndex = data;
+  // jsonDataSearch.organizationsIndex = data;
+  
+    $('.typeahead').typeahead(
+      {
+        source: data,
+        items: 10
+      }
+    );
 }
 
 newPlayMap.filters.getOrgnanizationsIndexError = function(data) {
@@ -24,15 +31,20 @@ newPlayMap.filters.getOrgnanizationsIndexError = function(data) {
   // @TODO: Maybe remove / gray out the search filter if the index is not available?
 }
 
-$(document).ready(function() {
-  
-});
+newPlayMap.filters.organizationName = function(searchString) {
+  console.log(searchString);
+  // @TODO: Make it do something with the search
+}
 
-$('.typeahead').typeahead(
-  {
-  source: data.organizationData.name
-  }
-);
+$(document).ready(function() {
+  newPlayMap.filters.getOrganizationsIndex();
+  
+  $('#filters form').submit(function(event) {
+    event.preventDefault();
+    var filterValue = $('#filters input').val();
+    newPlayMap.filters.organizationName(filterValue);
+  });
+});
 
 // 
 // 
