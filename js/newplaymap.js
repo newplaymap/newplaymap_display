@@ -54,15 +54,14 @@ newPlayMap.loadPageRouter = function() {
   // Address always loads on every page interaction.
   $.address.change(function(event) {
     // Reset status check variables. 
-    newPlayMap.status.routerPathLoaded = false;
-    newPlayMap.status.routerRouteLoaded = false;
+    //newPlayMap.status.routerPathLoaded = false;
+    //newPlayMap.status.routerRouteLoaded = false;
 
-    newPlayMap.browserEvents.push(event);
-    
+    //newPlayMap.browserEvents.push(event);
+    //console.log(newPlayMap.browserEvents);
     // Make sure data is loaded.
-    newPlayMap.buildRoutePath(event);
-    newPlayMap.testPathLoaded(newPlayMap.lookupRoute); // @TODO This is possibly executing twice.
-    newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
+    //newPlayMap.buildRoutePath(event);
+   // newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
     return false;
   });
 
@@ -315,7 +314,6 @@ newPlayMap.loadMapDataMarkers = function() {
     icon: "icons/play.png",
     grouping_field: "related_play_id"
   };
-  console.log("in play");
   newPlayMap.onLoadDataMarkers(relatedEventMarkerData);
   }
 };
