@@ -4,7 +4,6 @@ var jsonData = {};
 var panelMarkup = {};
 var spotlight = {};
 var locationsByID = {};
-// Estalbish namespace for map.
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
@@ -24,11 +23,11 @@ newPlayMap.status = {
 
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
+  
+  // These three functions should be able to load independently.
   newPlayMap.loadPageRouter();  // Read address and store parsed address in an object.
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
-  newPlayMap.testMapAndDataLoaded(newPlayMap.loadMapDataMarkers);     // Load and insert map markers.
-  newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
 };
 
 newPlayMap.loadInteractivity = function() {
@@ -43,29 +42,28 @@ newPlayMap.alterHomepage = function() {
   return false;
 };
 
-newPlayMap.loadPageRouter = function() {
-  // Make sure data is loaded.
-  newPlayMap.buildRoutePath();
-  // Loading data on complete will load the lookup Route function.
-
-  // bind address to all a links.
-  $('a').address();
-
-  // Address always loads on every page interaction.
+newPlayMap.loadPageRouter = function() { 
+  // Listen for address.
   $.address.change(function(event) {
     // Reset status check variables. 
-    //newPlayMap.status.routerPathLoaded = false;
-    //newPlayMap.status.routerRouteLoaded = false;
+    newPlayMap.status.routerPathLoaded = false;
+    newPlayMap.status.routerRouteLoaded = false;
 
-    //newPlayMap.browserEvents.push(event);
-    //console.log(newPlayMap.browserEvents);
-    // Make sure data is loaded.
-    //newPlayMap.buildRoutePath(event);
-   // newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
+    newPlayMap.browserEvents.push(event);
+
+    // Do all of the map and data contingent functions only through this function (to make it simpler.)
+    newPlayMap.buildRoutePath(event);
+    newPlayMap.testEverythingLoaded(newPlayMap.loadInteractivity);
     return false;
   });
 
-  return false;
+  // bind address to all a links (@TODO may also need divs)
+  $('a').address();
+
+  // Force address to update on page load.
+  // Note: there are multiple conditions to test:
+  // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
+  $.address.update();
 };
 
 newPlayMap.loadData = function() {
@@ -73,6 +71,8 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({path: 'data/events_300.json'});
   newPlayMap.loadJSONFile({path: "data/artists_300.json"});
   newPlayMap.loadJSONFile({path: "data/plays/9344.json"});
+
+  // Keep checking until all of the data is set.
   newPlayMap.testDataLoaded(newPlayMap.status.dataLoaded = true);
   return false;
 };
@@ -80,7 +80,8 @@ newPlayMap.loadData = function() {
 newPlayMap.loadMap = function(){
   // Load map tiles.
   newPlayMap.loadWax();
-  // for map debugging: newPlayMap.initMapSimple();
+  // for map debugging: 
+  // newPlayMap.initMapSimple();
 };
 
 newPlayMap.loadRouteInfo = function() {
@@ -123,7 +124,6 @@ newPlayMap.initMap = function(tj) {
 };
 
 newPlayMap.initMapSimple = function() {
-
   map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"))
   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
@@ -146,7 +146,6 @@ newPlayMap.loadMapLayers = function() {
 
 // Wait until Map is loaded
 newPlayMap.testMapLoaded = function(callback) {
-
   (function waitMap() {
     if (map !== undefined && markers !== undefined) {
       console.log("Map & Marker Layer is loaded");
@@ -159,7 +158,6 @@ newPlayMap.testMapLoaded = function(callback) {
 };
 
 newPlayMap.testMarkersLoaded = function(callback) {
-
   (function waitMarkers() {
     if (markers !== undefined) {
       console.log("Markers are loaded");
@@ -179,7 +177,7 @@ newPlayMap.testDataLoaded = function(callback) {
       console.log("All data is loaded");
       $(callback);
     } else {
-      console.log("waiting");
+      console.log("waiting for data");
         setTimeout( waitData, 100 );
     }
   })();
@@ -192,7 +190,7 @@ newPlayMap.testPathLoaded = function(callback) {
       console.log("Path is loaded.");
       $(callback);
     } else {
-      console.log("Waiting for path to load");
+      console.log("waiting for path");
       setTimeout( waitPath, 100 );
     }
   })();
@@ -202,10 +200,10 @@ newPlayMap.testPathLoaded = function(callback) {
 newPlayMap.testRouteLoaded = function(callback) {
   (function waitRoute() {
     if (newPlayMap.status.routerRouteLoaded !== false) {
-      console.log("Routes are loaded.");
+      console.log("Route loaded.");
       $(callback);
     } else {
-      console.log("Waiting for routes");
+      console.log("waiting for route");
       setTimeout( waitRoute, 100 );
     }
   })();
@@ -218,18 +216,19 @@ newPlayMap.testMapAndDataLoaded = function(callback) {
       console.log("Map & Data is loaded.");
       $(callback);
     } else {
-      console.log("Waiting for map and data everything to load.");
+      console.log("waiting for map and data everything to load");
       setTimeout( waitMapData, 100 );
     }
   })();
 };
 
-
 // Wait until Route is loaded (which might depend on data)
 newPlayMap.testEverythingLoaded = function(callback) {
   (function waitEverything() {
     if (newPlayMap.status.routerPathLoaded === true 
-      && newPlayMap.status.routerRouteLoaded === true 
+    // @TODO This is not being set but it is supposed to be.
+
+/*       && newPlayMap.status.routerRouteLoaded === true  */
       && newPlayMap.status.dataLoaded === true 
       && newPlayMap.status.mapLoaded === true) {
       
@@ -245,7 +244,7 @@ newPlayMap.testEverythingLoaded = function(callback) {
       $(callback);
       }
     } else {
-      console.log("Waiting for everything to load.");
+      console.log("waiting for everything to load");
       setTimeout( waitEverything, 100 );
     }
   })();
