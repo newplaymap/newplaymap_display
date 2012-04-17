@@ -23,7 +23,7 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 header("Content-type: application/json");
  $page;
-$json = '{"organizations":[ ' ;
+$json = '[ ' ;
 
 $i = 0;
 
@@ -34,17 +34,14 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    $json .= json_encode(array(
-      'id' => $obj['id'],
-      'name' => $obj['properties']['name'],
-    ));
+    $json .= json_encode($obj['properties']['name']);
   
     $i++;
   }
 }
 /* $json .= "," . json_encode(array('count' => $collection->count())); */
 
-$json .= '], "count" : ' . $count . '}';
+$json .= ']';
 
 echo $json;
 
