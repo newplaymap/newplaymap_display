@@ -28,6 +28,7 @@ window.onload = function() {
   newPlayMap.loadPageRouter();  // Read address and store parsed address in an object.
   newPlayMap.loadData();        // Load up Data via JSON.
   newPlayMap.loadMap();         // Load map tiles.
+  newPlayMap.testMapAndDataLoaded(newPlayMap.loadMapDataMarkers);
 };
 
 newPlayMap.loadInteractivity = function() {
