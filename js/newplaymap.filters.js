@@ -60,12 +60,42 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   );
 }
 
+/*
+ * Organization type
+ */
+newPlayMap.filters.organizationType = function(searchString) {
+ console.log('searchString');
+ console.log(searchString);
+
+ $.ajax({
+   url:  'api/organization_type_filter.php',
+   dataType: 'json',
+   data: {
+     organization_type: searchString
+   },
+   success: newPlayMap.filters.setOrganizationTypeMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
+  // Success
+  console.log(data);
+}
+
+/*
+ * Utility function shared by multiple ajax calls
+ */
 newPlayMap.filters.error = function(data) {
   console.log('error');
 
   // @TODO: Maybe remove / gray out the search filter if the index is not available?
 }
 
+/*
+ * Function to find organization feature from the name.
+ * Used when submitting the filter form
+ */
 newPlayMap.filters.organizationName = function(searchString) {
   console.log('searchString');
   console.log(searchString);
