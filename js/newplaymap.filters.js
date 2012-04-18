@@ -4,12 +4,38 @@ var newPlayMap = newPlayMap || {};
 newPlayMap.filters = {};
 var jsonDataSearch = {};
 
+/*
+ * Event type
+ */
+newPlayMap.filters.eventType = function(searchString) {
+ console.log('searchString');
+ console.log(searchString);
+
+ $.ajax({
+   url:  'api/event_type_filter.php',
+   dataType: 'json',
+   data: {
+     event_type: searchString
+   },
+   success: newPlayMap.filters.setEventTypeMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setEventTypeMarkers = function(data) {
+  // Success
+  console.log(data);
+}
+
+/*
+ * Organizations
+ */
 newPlayMap.filters.getOrganizationsIndex = function() {
   $.ajax({
     url:  'api/organizations_index.php',
     dataType: 'json',
     success: newPlayMap.filters.setOrganizationsIndex,
-    error: newPlayMap.filters.getOrgnanizationsIndexError
+    error: newPlayMap.filters.error
   });
 }
 
@@ -34,7 +60,7 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   );
 }
 
-newPlayMap.filters.getOrgnanizationsIndexError = function(data) {
+newPlayMap.filters.error = function(data) {
   console.log('error');
 
   // @TODO: Maybe remove / gray out the search filter if the index is not available?
@@ -58,7 +84,7 @@ newPlayMap.filters.organizationName = function(searchString) {
       organization_name: searchString
     },
     success: newPlayMap.filters.setOrganizationMarkers,
-    error: newPlayMap.filters.setOrganizationMarkersError
+    error: newPlayMap.filters.error
   });
 }
 
@@ -66,10 +92,6 @@ newPlayMap.filters.setOrganizationMarkers = function(data) {
   // Successfully retrieved organizations from search
   // console.log(data);
   newPlayMap.filters.onLoadDataMarkers('vars', data.features);
-}
-
-newPlayMap.filters.setOrganizationMarkersError = function() {
-  // Failed to retrieve organizations from search
 }
 
 /* 
@@ -103,7 +125,7 @@ newPlayMap.filters.onLoadDataMarkers = function(vars, features) {
         // marker.setAttribute("type", vars.type);
 
         // Specially set value for loading data.
-        marker.setAttribute("marker_id", id);
+        // marker.setAttribute("marker_id", id);
 
         // @TODO add popup tooltip here
         // give it a title
