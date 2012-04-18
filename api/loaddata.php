@@ -25,35 +25,48 @@ function loadOrganizations($m, $output) {
   
   $count = 0;
   $insert = array();
+  // print "<pre>";
   foreach ($objects as $obj_load) {
-  //print "<pre>";
-  $node = (array) $obj_load->node;
+    $node = (array) $obj_load->node;
   
-  $newObj = array(
-    "id" => $node["Org ID"],
-    "type" => "Feature",
-    "geometry" => array( 
-      "type" => "Point",
-      "coordinates"=> array($node["Longitude"], $node["Latitude"])
-      ),
-    "properties" => array(
-        "logo" => $node["Logo"],
-        "path" =>  str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
-        "organization_id" => $node["Org ID"],
-        "name" => $node["Org name"],
-        "latitude" => $node["Latitude"],
-        "longitude" => $node["Longitude"],
-        "mission_statement" => $node["Mission statement"],
-        "ensemble_collective" => $node["Ensemble collective"],
-/*         "founding_date" => $node["Founding date"] == $node["Founding date"] ? "", */
-        "organization_type" => $node["Organization type"]
+    // Set up proper keys for Org type
+    $org_list = array();
+    if (is_object($node["Organization type"])) {
+      foreach ($node["Organization type"] as $type) {
+        $org_list[] = array('type' => $type);
+      }
+    } else {
+      $org_list[] = array('type' => $node["Organization type"]);
+    }
+
+    $newObj = array(
+      "id" => $node["Org ID"],
+      "type" => "Feature",
+      "geometry" => array( 
+        "type" => "Point",
+        "coordinates"=> array($node["Longitude"], $node["Latitude"])
+        ),
+      "properties" => array(
+          "logo" => $node["Logo"],
+          "path" =>  str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+          "organization_id" => $node["Org ID"],
+          "name" => $node["Org name"],
+          "latitude" => $node["Latitude"],
+          "longitude" => $node["Longitude"],
+          "mission_statement" => $node["Mission statement"],
+          "ensemble_collective" => $node["Ensemble collective"],
+  /*         "founding_date" => $node["Founding date"] == $node["Founding date"] ? "", */
+          // "organization_type" => implode(',', get_object_vars($node["Organization type"])),
+          "organization_type" => $org_list,
  
-  )
-  );
+      )
+    );
     // This will completely replace the record.
     $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
     $count++;
+    // print_r($newObj);
   }
+  // print "</pre>";
   $output .= "<p>Loaded " + $count + " Organizations</p>";
 }
 
