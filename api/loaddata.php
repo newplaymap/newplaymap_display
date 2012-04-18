@@ -28,6 +28,7 @@ function loadOrganizations($m, $output) {
   // print "<pre>";
   foreach ($objects as $obj_load) {
     $node = (array) $obj_load->node;
+    // print_r($node);
   
     // Set up proper keys for Org type
     $org_list = array();
@@ -37,6 +38,22 @@ function loadOrganizations($m, $output) {
       }
     } else {
       $org_list[] = array('type' => $node["Organization type"]);
+    }
+    
+    // Set up proper array for Special Interests
+    if (!empty($node['Special interests'])) {
+     $special_interests = explode(', ', $node['Special interests']); 
+    } else {
+     $special_interests = ''; 
+    }
+    
+    $special_interests_list = array();
+    if (is_array($special_interests)) {
+      foreach ($special_interests as $interest) {
+        $special_interests_list[] = array('interest' => $interest);
+      }
+    } else {
+      $special_interests_list = '';
     }
 
     $newObj = array(
@@ -58,6 +75,7 @@ function loadOrganizations($m, $output) {
   /*         "founding_date" => $node["Founding date"] == $node["Founding date"] ? "", */
           // "organization_type" => implode(',', get_object_vars($node["Organization type"])),
           "organization_type" => $org_list,
+          "special_interests" => $special_interests_list,
  
       )
     );
