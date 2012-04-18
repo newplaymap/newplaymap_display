@@ -124,17 +124,17 @@ newPlayMap.filters.onLoadDataMarkers = function(vars, features) {
         
           // if (feature.properties[vars.grouping_field] in locationsByID) {
             // locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
-          } else {
+          // } else {
             // locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
-          }
+          // }
         // }
         // else {
           // Add all of the locations to the array. making them unique for all layers
           // if (feature.properties[vars.id] in locationsByID) {
             // locationsByID[feature.properties[vars.id]].push(marker.location);
-          } else {
+          // } else {
             // locationsByID[feature.properties[vars.id]] = [marker.location];
-          }
+          // }
         // }
 
         // add the marker's location to the extent list
