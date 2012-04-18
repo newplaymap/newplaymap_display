@@ -107,6 +107,29 @@ newPlayMap.filters.setOrganizationSpecialInterestsMarkers = function(data) {
 }
 
 /*
+ * Organizations by National Network
+ */
+newPlayMap.filters.organizationNationalNetworks = function(searchString) {
+ console.log('searchString');
+ console.log(searchString);
+
+ $.ajax({
+   url:  'api/organization_national_networks_filter.php',
+   dataType: 'json',
+   data: {
+     national_networks: searchString
+   },
+   success: newPlayMap.filters.setOrganizationNationalNetworksMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setOrganizationNationalNetworksMarkers = function(data) {
+  // Success
+  console.log(data);
+}
+
+/*
  * Utility function shared by multiple ajax calls
  */
 newPlayMap.filters.error = function(data) {
