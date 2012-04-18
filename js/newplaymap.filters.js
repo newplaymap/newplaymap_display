@@ -84,6 +84,29 @@ newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
 }
 
 /*
+ * Organizations by Special Interest
+ */
+newPlayMap.filters.organizationSpecialInterests = function(searchString) {
+ console.log('searchString');
+ console.log(searchString);
+
+ $.ajax({
+   url:  'api/organization_special_interests_filter.php',
+   dataType: 'json',
+   data: {
+     special_interests: searchString
+   },
+   success: newPlayMap.filters.setOrganizationSpecialInterestsMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setOrganizationSpecialInterestsMarkers = function(data) {
+  // Success
+  console.log(data);
+}
+
+/*
  * Utility function shared by multiple ajax calls
  */
 newPlayMap.filters.error = function(data) {
