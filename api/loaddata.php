@@ -25,7 +25,7 @@ function loadOrganizations($m, $output) {
   
   $count = 0;
   $insert = array();
-  // print "<pre>";
+  print "<pre>";
   foreach ($objects as $obj_load) {
     $node = (array) $obj_load->node;
     // print_r($node);
@@ -55,6 +55,22 @@ function loadOrganizations($m, $output) {
     } else {
       $special_interests_list = '';
     }
+    
+    // Set up proper array for National Networks
+    if (!empty($node['National networks'])) {
+     $national_networks = explode(', ', $node['National networks']); 
+    } else {
+     $national_networks = ''; 
+    }
+    
+    $national_networks_list = array();
+    if (is_array($national_networks)) {
+      foreach ($national_networks as $interest) {
+        $national_networks_list[] = array('network' => $interest);
+      }
+    } else {
+      $national_networks_list = '';
+    }
 
     $newObj = array(
       "id" => $node["Org ID"],
@@ -76,15 +92,16 @@ function loadOrganizations($m, $output) {
           // "organization_type" => implode(',', get_object_vars($node["Organization type"])),
           "organization_type" => $org_list,
           "special_interests" => $special_interests_list,
+          "national_networks" => $national_networks_list,
  
       )
     );
     // This will completely replace the record.
     $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
     $count++;
-    // print_r($newObj);
+    print_r($newObj);
   }
-  // print "</pre>";
+  print "</pre>";
   $output .= "<p>Loaded " + $count + " Organizations</p>";
 }
 
