@@ -52,12 +52,45 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var organizationNames = data;
 
-  $('.typeahead').typeahead(
+  $('#organizations-filter').typeahead(
     {
       source: organizationNames,
       items: 10
     }
   );
+}
+
+
+/*
+ * Function to find organization feature from the name.
+ * Used when submitting the filter form
+ */
+newPlayMap.filters.organizationName = function(searchString) {
+  console.log('searchString');
+  console.log(searchString);
+  
+  // var playIdFromFilter;
+  // for (organization in jsonDataSearch.organizationsIndex) {
+  //   if (jsonDataSearch.organizationsIndex[organization].name == filterValue) {
+  //     newPlayMap.filters.organizationName(jsonDataSearch.organizationsIndex[organization].id);
+  //   }
+  // }
+  
+  $.ajax({
+    url:  'api/organizations_filter.php',
+    dataType: 'json',
+    data: {
+      organization_name: searchString
+    },
+    success: newPlayMap.filters.setOrganizationMarkers,
+    error: newPlayMap.filters.error
+  });
+}
+
+newPlayMap.filters.setOrganizationMarkers = function(data) {
+  // Successfully retrieved organizations from search
+  // console.log(data);
+  newPlayMap.filters.onLoadDataMarkers('vars', data.features);
 }
 
 /*
@@ -138,37 +171,40 @@ newPlayMap.filters.error = function(data) {
   // @TODO: Maybe remove / gray out the search filter if the index is not available?
 }
 
+
 /*
- * Function to find organization feature from the name.
- * Used when submitting the filter form
+ * Artists Index
  */
-newPlayMap.filters.organizationName = function(searchString) {
-  console.log('searchString');
-  console.log(searchString);
-  
-  // var playIdFromFilter;
-  // for (organization in jsonDataSearch.organizationsIndex) {
-  //   if (jsonDataSearch.organizationsIndex[organization].name == filterValue) {
-  //     newPlayMap.filters.organizationName(jsonDataSearch.organizationsIndex[organization].id);
-  //   }
-  // }
-  
+newPlayMap.filters.getArtistsIndex = function() {
   $.ajax({
-    url:  'api/organizations_filter.php',
+    url:  'api/artists_index.php',
     dataType: 'json',
-    data: {
-      organization_name: searchString
-    },
-    success: newPlayMap.filters.setOrganizationMarkers,
+    success: newPlayMap.filters.setArtistsIndex,
     error: newPlayMap.filters.error
   });
 }
 
-newPlayMap.filters.setOrganizationMarkers = function(data) {
-  // Successfully retrieved organizations from search
-  // console.log(data);
-  newPlayMap.filters.onLoadDataMarkers('vars', data.features);
+
+newPlayMap.filters.setArtistsIndex = function(data) {
+  jsonDataSearch.artistsIndex = data;
+  
+  // If we are returning org names and ids, use something like this to process and get a list of names
+  // var organizationNames = [];
+  // for (organization in jsonDataSearch.ArtistsIndex) {
+  //   organizationNames.push(jsonDataSearch.artistsIndex[organization].name);
+  // }
+  
+  // If we are returning just the names, then the raw data is fine
+  var artistsNames = data;
+
+  $('#artists-filter').typeahead(
+    {
+      source: artistsNames,
+      items: 10
+    }
+  );
 }
+
 
 /* 
  * Pulled from newplaymap.data.js almost in it's entirety. 
@@ -256,7 +292,9 @@ newPlayMap.filters.onLoadDataMarkers = function(vars, features) {
 
 
 $(document).ready(function() {
+  // @TODO: Don't load the index on page load, do it when the filters are shown
   newPlayMap.filters.getOrganizationsIndex();
+  newPlayMap.filters.getArtistsIndex();
   
   $('#filters form').submit(function(event) {
     event.preventDefault();
