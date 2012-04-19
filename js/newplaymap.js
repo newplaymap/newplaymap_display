@@ -7,7 +7,7 @@ var locationsByID = {};
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
-var markers = {};
+/* var markers = {}; */
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
 newPlayMap.browserEvents = [];
@@ -117,9 +117,6 @@ newPlayMap.initMapSimple = function() {
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
 
-  markers = new MM.MarkerLayer();
-  map.addLayer(markers);
-
   // Load map marker layers.
   var data = newPlayMap.loadMapData();
 
@@ -138,7 +135,9 @@ newPlayMap.loadData = function() {
     newPlayMap.loadJSONFile({
       path: 'data/organizations_300.json',
       type: "organization",
+      template: "organization",
       label: "org_type",
+      layer: "layer-organizations",
       id: "organization_id",
       title: "name",
       dataName: "organizations",
@@ -150,6 +149,8 @@ newPlayMap.loadData = function() {
     newPlayMap.loadJSONFile({
       path: "data/artists_300.json",
       type: "artist",
+      template: "artist",
+      layer: "layer-artists",
       id: "artist_id",
       label: "ensemble_collective",
       title: "generative_artist",
@@ -163,6 +164,8 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({
         path: 'data/events_300.json', 
         type: "event",
+        template: "event",
+        layer: "layer-events",
         id: "event_id",
         label: "related_theater", // field which will be used in label
         title: "play_title",
@@ -176,6 +179,8 @@ newPlayMap.loadData = function() {
   newPlayMap.loadJSONFile({
       path: "data/plays/9344.json",
       type: "play",
+      template: "layer-play",
+      layer: "play",
       id: "related_event_id",
       label: "related_theater",
       alt_path: "play_path",
