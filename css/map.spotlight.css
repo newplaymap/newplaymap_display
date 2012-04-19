@@ -20,12 +20,16 @@
     border: none !important;
 }
 
-.marker.active {
-    z-index: 8001;
+.marker {
+    z-index: 30;
+}
+.marker:active,
+.marker:hover {
+    z-index: 9000;
 }
 
 #map canvas:active {
-    z-index: 8000;
+    z-index: 8999;
 }
 
 #map canvas:inactive {
