@@ -150,9 +150,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     }
     else {
       // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.
-      map.setExtent(locations);
-      var zoomPoint = map.locationPoint(locations[0]);
-      map.zoomByAbout(vars.zoomLevel, zoomPoint);
+      map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), 9);
     }
     // Apply behavior listener for layer type.
     if(vars.callback !== undefined) {

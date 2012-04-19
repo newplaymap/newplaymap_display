@@ -69,7 +69,7 @@ newPlayMap.filters.organizationName = function(searchString) {
   
   newPlayMap.loadAPICall({
     data: {organization_name: searchString},
-    zoomLevel: 10,
+    zoomLevel: 9,
     class: "active",
     path: 'api/organizations_filter.php',
     type: "organization",
