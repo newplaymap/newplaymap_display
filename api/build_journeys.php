@@ -180,46 +180,40 @@ function loadEvents($m, $output) {
   
   $count = 0;
   $insert = array();
-  // print "<pre>";
   foreach ($objects as $obj_load) {
-    $node = (array) $obj_load->node;
+  //print "<pre>";
+  $node = (array) $obj_load->node;
   
-    // Process date values
-    $start_date = new MongoDate(strtotime($node["Date"]));
-    $end_date = new MongoDate(strtotime($node["To Date"]));
-  
-    $newObj = array(
-      "id" => $node["Event ID"],
-      "type" => "Feature",
-      "geometry" => array( 
-        "type" => "Point",
-        "coordinates"=> array($node["Longitude"], $node["Latitude"])
-        ),
-      "properties" => array(
-        "longitude"  => $node["Longitude"],
-        "latitude"  => $node["Latitude"],
-        "event_id"  => $node["Event ID"],
-        "event_type"  => $node["Event type"],
-        "event_to_date"  => $end_date,
-        "event_date"  => $start_date,
-        "content_type"  => $node["Content Type"],
-        "related_theater"  => $node["Related Theater"],
-        "related_theater_id"  => $node["Related Theater ID"],
-        "artist_id"  => $node["Artist ID"],
-        "play_title"  => $node["Play title"],
-        "related_play_id"  => $node["Related Play ID"],
-        "generative_artist"  => $node["Generative Artist"],
-        "event_description"  => $node["Event description"],
-        "synopsis"  => $node["Synopsis"],
-        "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
-    )
-    );
+  $newObj = array(
+    "id" => $node["Event ID"],
+    "type" => "Feature",
+    "geometry" => array( 
+      "type" => "Point",
+      "coordinates"=> array($node["Longitude"], $node["Latitude"])
+      ),
+    "properties" => array(
+      "longitude"  => $node["Longitude"],
+      "latitude"  => $node["Latitude"],
+      "event_id"  => $node["Event ID"],
+      "event_type"  => $node["Event type"],
+      "event_to_date"  => $node["To Date"],
+      "event_date"  => $node["Date"],
+      "content_type"  => $node["Content Type"],
+      "related_theater"  => $node["Related Theater"],
+      "related_theater_id"  => $node["Related Theater ID"],
+      "artist_id"  => $node["Artist ID"],
+      "play_title"  => $node["Play title"],
+      "related_play_id"  => $node["Related Play ID"],
+      "generative_artist"  => $node["Generative Artist"],
+      "event_description"  => $node["Event description"],
+      "synopsis"  => $node["Synopsis"],
+      "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
+  )
+  );
     // This will completely replace the record.
     $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
-    // print_r($newObj);
     $count++;
   }
-  // print '</pre>';
   $output .= "<p>Loaded " + $count + " Events</p>";
 }
 
