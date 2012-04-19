@@ -108,15 +108,15 @@ console.log(dataName);
 
 
 newPlayMap.loadArtist = function() {
-  console.log(newPlayMap.routing);
+
 };
 
 newPlayMap.loadOrganization = function() {
-  console.log(newPlayMap.routing);
+  
 };
 
 newPlayMap.loadPlay = function() {
-/*   console.log(newPlayMap.routing); */
+
   //get id, 
   // find $(a id)
   // trigger mouse over.
