@@ -331,9 +331,9 @@ $(document).ready(function() {
   
   $('#filters form').submit(function(event) {
     event.preventDefault();
-    var filterValue = $('#organizations-filter').val();
+    var organizationsFilterValue = $('#organizations-filter').val();
     
-    newPlayMap.filters.organizationName(filterValue);
+    newPlayMap.filters.organizationName(organizationsFilterValue);
   });
 });
 
