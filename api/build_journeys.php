@@ -9,10 +9,22 @@ buildJourneys($m, $output);
 function buildJourneys($m, $output) {
   $events = $m->newplaymap->events;
   $plays = $m->newplaymap->plays;
-  
-//    $collection = $events;
 
+  // find everything in the collection
+  $cursor = $plays->find();
+
+  // iterate through the results
+  foreach ($cursor as $playObj) {
+  var_dump($playObj);
+ /*
+     if(!empty($playObj['id'])) {
+        $output .= json_encode($playObj);
+      }
+*/
+    }
+  return $output;
 }
+
 
 
 
