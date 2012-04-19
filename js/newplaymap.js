@@ -19,9 +19,9 @@ window.onload = function() {
 
 newPlayMap.loadMap = function(callback){
   // Load map tiles.
-  // newPlayMap.loadWax();
+  //newPlayMap.loadWax();
   // for map debugging: 
-  newPlayMap.initMapSimple();
+   newPlayMap.initMapSimple();
 };
 
 newPlayMap.alterHomepage = function() {
@@ -69,8 +69,10 @@ newPlayMap.initMap = function(tj) {
         new easey.DoubleClickHandler(),
         new easey.MouseWheelHandler()
     ]);
-
-  map.setCenterZoom(new MM.Location(28.811530, -122.2666097), 4);
+  var zoomer = wax.mm.zoomer(map)
+  zoomer.appendTo('map');
+  
+  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
   // Load interactive behavior.
   spotlight = new SpotlightLayer();
@@ -82,7 +84,10 @@ newPlayMap.initMap = function(tj) {
   markers.parent.setAttribute("id", "markers");
 
   // Load map marker layers.
-  newPlayMap.loadMapLayers();
+  var data = newPlayMap.loadMapData();
+
+  // Run data layers closure.
+  data();
 };
 
 newPlayMap.initMapSimple = function() {
@@ -92,6 +97,9 @@ newPlayMap.initMapSimple = function() {
         new easey.DoubleClickHandler(),
         new easey.MouseWheelHandler()
     ]);
+  var zoomer = wax.mm.zoomer(map)
+  zoomer.appendTo('map');
+
   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
   // Load interactive behavior.
