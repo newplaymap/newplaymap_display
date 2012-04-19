@@ -31,9 +31,19 @@ $json = '{"name": "ensemble_collective_filter","type":"FeatureCollection","featu
 
 $i = 0;
 
-print_r($organizations_cursor);
-
 // iterate through the results
+foreach ($organizations_cursor as $obj) {
+  if(!empty($obj['id'])) {
+    if($i > 0) {
+     $json .= ',';
+    }
+
+    $json .= json_encode($obj);
+  
+    $i++;
+  }
+}
+
 foreach ($organizations_cursor as $obj) {
   if(!empty($obj['id'])) {
     if($i > 0) {
@@ -47,7 +57,7 @@ foreach ($organizations_cursor as $obj) {
 }
 /* $json .= "," . json_encode(array('count' => $collection->count())); */
 
-$json .= '], "count" : ' . $count . '}';
+$json .= '], "count" : ' . $i . '}';
 
 echo $json;
 
