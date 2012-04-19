@@ -72,7 +72,7 @@ newPlayMap.filters.organizationName = function(searchString) {
     zoomLevel: 10,
     class: "active",
     path: 'api/organizations_filter.php',
-    type: "organization_filter",
+    type: "organization",
     label: "org_type",
     id: "organization_id",
     title: "name",
