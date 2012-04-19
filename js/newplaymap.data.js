@@ -17,7 +17,7 @@ newPlayMap.loadJSONFile = function(vars) {
 newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
-  console.log(jsonData);
+/*   console.log(jsonData); */
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
   return false;
 };
@@ -109,8 +109,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // Actually no it is probably fine so long as locations is global.
     map.setExtent(locations);
     
-    // Apply behavior for layer.
-    console.log(vars);
-/*     $(vars.callback)(); */
-
+    // Apply behavior listener for layer type.
+    if(vars.callback !== undefined) {
+       $(vars.callback);
+    }
 };
