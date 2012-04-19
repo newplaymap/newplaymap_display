@@ -170,6 +170,7 @@ newPlayMap.loadData = function() {
         dataPath: 'api/events.php', 
         icon: "icons/event.png",
         grouping_field: "event_id",
+        related_play_id: "related_play_id",
         callback: newPlayMap.loadEvent
       }
     );
