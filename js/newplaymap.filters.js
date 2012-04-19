@@ -28,6 +28,31 @@ newPlayMap.filters.setEventTypeMarkers = function(data) {
 }
 
 /*
+ * Event date range
+ */
+newPlayMap.filters.eventDates = function(startDate, endDate) {
+ console.log('dates');
+ console.log(startDate);
+ console.log(endDate);
+
+ $.ajax({
+   url:  'api/event_date_filter.php',
+   dataType: 'json',
+   data: {
+     start_date: startDate,
+     end_date: endDate
+   },
+   success: newPlayMap.filters.setEventDatesMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setEventDatesMarkers = function(data) {
+  // Success
+  console.log(data);
+}
+
+/*
  * Organizations
  */
 newPlayMap.filters.getOrganizationsIndex = function() {
