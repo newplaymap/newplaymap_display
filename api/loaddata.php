@@ -7,6 +7,7 @@ $output = "";
 loadOrganizations($m, $output);
 loadArtists($m, $output);
 loadEvents($m, $output);
+loadPlays($m, $output);
 
 function loadOrganizations($m, $output) {
 
@@ -227,12 +228,12 @@ function loadEvents($m, $output) {
 
 function loadPlays($m, $output) {
   
-  $events = $m->newplaymap->events;
-  $events->drop();
-  $events_path = '../data/push/events-all.json';
+  $plays = $m->newplaymap->plays;
+  $plays->drop();
+  $plays_path = '../data/push/plays-all.json';
   
-  $file_data = file_get_contents($events_path);
-  $collection = $events;
+  $file_data = file_get_contents($plays_path);
+  $collection = $plays;
   
   $json = json_decode($file_data);
   
@@ -274,7 +275,7 @@ function loadPlays($m, $output) {
     $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
     $count++;
   }
-  $output .= "<p>Loaded " + $count + " Events</p>";
+  $output .= "<p>Loaded " + $count + " Plays</p>";
 }
 
 
