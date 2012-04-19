@@ -89,7 +89,7 @@ newPlayMap.filters.organizationName = function(searchString) {
 
 newPlayMap.filters.setOrganizationMarkers = function(data) {
   // Successfully retrieved organizations from search
-  // console.log(data);
+  console.log(data);
   newPlayMap.filters.onLoadDataMarkers('vars', data.features);
 }
 
