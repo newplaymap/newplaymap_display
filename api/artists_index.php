@@ -34,7 +34,7 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    $json .= json_encode($obj['properties']['generative_artists']);
+    $json .= json_encode($obj['properties']['generative_artist']);
     
     // $json .= json_encode(array(
     //   'id' => $obj['id'],
