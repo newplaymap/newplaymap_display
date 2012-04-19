@@ -243,8 +243,19 @@ function loadPlays($m, $output) {
   $insert = array();
   // print '<pre>';
   foreach ($objects as $obj_load) {
-  //print "<pre>";
+  // print "<pre>";
   $node = (array) $obj_load->node;
+  
+  // Set up proper array for Alternate play titles
+  $alternate_titles_list = array();
+
+  if (is_object($node["Alternate titles"])) {
+    foreach ($node["Alternate titles"] as $alt_title) {
+      $alternate_titles_list[] = array('title' => $alt_title);
+    }
+  } else {
+    $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
+  }
   
   // print_r($node);
   $newObj = array(
@@ -255,6 +266,7 @@ function loadPlays($m, $output) {
       "content_type"  => $node["Content Type"],
       "artist_id"  => $node["Artist ID"],
       "play_title"  => $node["Play title"],
+      "alternate_titles"  => $alternate_titles_list,
       "generative_artist"  => $node["Generative Artist"],
       "synopsis"  => $node["Synopsis"],
       "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
