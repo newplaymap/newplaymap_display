@@ -110,8 +110,20 @@ newPlayMap.loadArtist = function() {
     console.log("load artist");
 };
 
+newPlayMap.loadOrganizationFilter = function() {
+  console.log("load org");
+
+  $('div.marker[dataname=organization_filter]').each(function(){
+      var id = $(this).attr('marker_id');
+
+      spotlight.addLocations(locationsByID[id]);
+      spotlight.parent.className = "active";
+  });
+};
+
 newPlayMap.loadOrganization = function() {
     console.log("load org");
+
 };
 
 newPlayMap.loadEvent = function() {
@@ -128,25 +140,38 @@ newPlayMap.loadRelatedEvents = function() {
 };
 
 newPlayMap.loadPlayData = function(marker) {
-  // trigger mouse over.
-  // MM uses addEventListener to call onMarkerOver -- can't trigger the event...
+  // @TODO trigger spotlight.
+  var feature = newPlayMap.lookupFeatureByMarker(marker);
+  newPlayMap.drawPlayJourneyLines(feature[0]);
+};
 
+newPlayMap.loadOrganizationData = function(marker) {
+  // @TODO trigger spotlight.
   var feature = newPlayMap.lookupFeatureByMarker(marker);
   console.log(feature);
-  //$('div#marker-play-' +  feature[0]["id"]).trigger("click");
+
   
-  newPlayMap.drawPlayJourneyLines(feature[0]);
-  
-  
-/*
-  
-  , function() {
-   newPlayMap.onMarkerOver();
-  }
-*/
-        //  MM.addEventListener("triggerLoad", newPlayMap.onMarkerOver, false);
-  
+  $(marker).hoverIntent({
+    over: function() {
+      $(this).addClass('active');
+
+
+      var marker_id = $(this).attr('marker_id');
+
+      spotlight.addLocations(locationsByID[marker_id]);
+      spotlight.parent.className = "active";
+
+      $('div#panel-container div#panel').show();
+    },
+    out: function() {
+      $(this).removeClass('active');
+      spotlight.parent.className = "inactive";
+      spotlight.removeAllLocations();
+    }
+  });
+
 };
+
 newPlayMap.lookupFeatureByMarker = function(marker) {
   var marker = marker[0];
   var id = marker.getAttribute("marker_id");

@@ -14,6 +14,21 @@ newPlayMap.loadJSONFile = function(vars) {
 
 };
 
+newPlayMap.loadAPICall = function(vars) {
+  var vars = vars;
+  var contentData = vars.path + "?cache=" + Math.floor(Math.random()*11);
+
+  var getData = $.ajax({
+    url:  contentData,
+    dataType: 'json',
+    data: vars.data,
+    success: newPlayMap.setData,
+    error: newPlayMap.loadDataError
+  });
+  getData.vars = vars;
+
+};
+
 newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
@@ -35,6 +50,8 @@ newPlayMap.loadFeatureAction = function(callback) {
 */
 
 newPlayMap.onLoadDataMarkers = function(vars) {
+/*     $('map div.marker').each(function() { $(this).removeClass("active"); }); */
+
     var vars = vars;
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
@@ -53,7 +70,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         markers.addMarker(marker, feature);
 
         // Unique hash marker id for link
-/*         marker.id = "marker-" + vars.type + "-" + id; */
         marker.setAttribute("id", "marker-" + vars.type + "-" + id);
         marker.setAttribute("dataName", vars.dataName);
         marker.setAttribute("class", "marker");
@@ -98,18 +114,46 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         // add the marker's location to the extent list
         locations.push(marker.location);
 
+
         // Listen for mouseover & mouseout events.
         MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
         MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
         MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
+        
+        $(marker).hoverIntent({
+          over: function() {
+            $(this).addClass('active');
+  
+      
+            var marker_id = $(this).attr('marker_id');
+      
+            spotlight.addLocations(locationsByID[marker_id]);
+            spotlight.parent.className = "active";
+      
+            $('div#panel-container div#panel').show();
+          },
+          out: function() {
+            $(this).removeClass('active');
+            spotlight.parent.className = "inactive";
+            spotlight.removeAllLocations();
+          }
+        });
+        
     }
 
     // Tell the map to fit all of the locations in the available space
     
     // @TODO this will run on the last loaded item, which may make behavior strange.
     // Actually no it is probably fine so long as locations is global.
-    map.setExtent(locations);
-    
+    if(vars.zoomLevel === undefined) {
+      map.setExtent(locations);
+    }
+    else {
+      // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.
+      map.setExtent(locations);
+      var zoomPoint = map.locationPoint(locations[0]);
+      map.zoomByAbout(vars.zoomLevel, zoomPoint);
+    }
     // Apply behavior listener for layer type.
     if(vars.callback !== undefined) {
        $(vars.callback);
