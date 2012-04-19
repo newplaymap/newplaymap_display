@@ -132,17 +132,22 @@ newPlayMap.loadEvent = function() {
 
 newPlayMap.loadRelatedEvents = function() {
   console.log("load related events");
-  $('div.marker[type=play]').bind("click", function() {
-    var marker = $(this);
-    newPlayMap.loadPlayData(marker);    
-  });
 
+  $('div.marker[type=play]').bind( "click", function() {
+      var marker = $(this);
+      newPlayMap.loadPlayData(marker);
+    }
+  );
+  
 };
 
 newPlayMap.loadPlayData = function(marker) {
   // @TODO trigger spotlight.
   var feature = newPlayMap.lookupFeatureByMarker(marker);
   newPlayMap.drawPlayJourneyLines(feature[0]);
+  
+  $('div#play-journey').click(function() {$('div#play-journey').hide();});
+
 };
 
 newPlayMap.loadOrganizationData = function(marker) {
@@ -150,7 +155,7 @@ newPlayMap.loadOrganizationData = function(marker) {
   var feature = newPlayMap.lookupFeatureByMarker(marker);
   console.log(feature);
 
-  
+/*
   $(marker).hoverIntent({
     over: function() {
       $(this).addClass('active');
@@ -169,6 +174,7 @@ newPlayMap.loadOrganizationData = function(marker) {
       spotlight.removeAllLocations();
     }
   });
+*/
 
 };
 
@@ -203,47 +209,29 @@ newPlayMap.lookupFeatureByMarker = function(marker) {
 
 newPlayMap.drawPlayJourneyLines = function(feature) {
 //      http://raphaeljs.com/reference.html 
-        var locations = [];
-        for (var i = 0; i < jsonData.play.features.length; i++) {
-          var pair = jsonData.play.features[i]["geometry"]["coordinates"];
+  var locations = [];
+  for (var i = 0; i < jsonData.play.features.length; i++) {
+    var pair = jsonData.play.features[i]["geometry"]["coordinates"];
 
-          if (pair && pair.length == 2) {
-              var location = new MM.Location(pair[1], pair[0]);
-              if (!isNaN(location.lat) && !isNaN(location.lon)) {
-                  locations.push(location);
-              }
-          }
+    if (pair && pair.length == 2) {
+        var location = new MM.Location(pair[1], pair[0]);
+        if (!isNaN(location.lat) && !isNaN(location.lon)) {
+            locations.push(location);
         }
- 
-      // line style in function
-      
-        if (locations.length > 0) {
-            var fillStyle = 'transparent';
-            var fillAlpha = 0;
-            var strokeStyle = '#BF202E';
-            if(canvas.clear !== undefined) {
-              canvas.clear();
-            }
-            canvas = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
-        }
-/*
-@TODO   deal w/ z-index issues 
-      $("div#play-markers").css("z-index", 700);
-      $("div#play-journey").css("z-index", 600);
-      $("div#artists-markers").css("z-index", 500);
-      $("div#organizations-markers").css("z-index", 400);
-      $("div#events-markers").css("z-index", 300);
-*/
-      
-     // $("div#play-markers .marker").bind('mouseover'), function() {
-       // console.log("fade");
-/*
-      $("div#artists-markers").fadeOut(2000);
-      $("div#organizations-markers").fadeOut(2000);
-      $("div#events-markers").fadeOut(2000);
-*/
-        
-     // }
+    }
+  }
+
+// line style in function
+
+  if (locations.length > 0) {
+      var fillStyle = 'transparent';
+      var fillAlpha = 0;
+      var strokeStyle = '#BF202E';
+      if(canvas.clear !== undefined) {
+        canvas.clear();
+      }
+      canvas = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
+  }
 }
 
 

@@ -11,13 +11,19 @@ newPlayMap.onMarkerOver = function(e) {
   if (marker) {
     var grouping_field = marker.getAttribute("grouping_value");
     var marker_id = $(this).attr('marker_id');
-
+    var layer = $(marker).attr("parent");
+    
     if(grouping_field !== undefined){
       if (grouping_field in locationsByID) {
         spotlight.addLocations(locationsByID[marker_id]);
         spotlight.parent.className = "active";
 
         $('div#panel-container div#panel').show();
+ 
+        $('div.marker').each(function(){$(this).fadeTo(10, 0.4); });
+
+        $('div.marker[parent=' + layer + ']').each(function(){$(this).fadeTo(100, 1); });
+ 
                     
         // Update the panel data.
         newPlayMap.updatePanel(marker, locationsByID[grouping_field]);  
@@ -29,10 +35,16 @@ newPlayMap.onMarkerOver = function(e) {
 newPlayMap.onMarkerOut = function(e) {
 
   var marker = newPlayMap.getMarker(e.target);
+  var layer = $(marker).attr("parent");
   if (marker) {
     var type = marker.type;
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
+
+
+    $('div.marker').each(function(){$(this).fadeTo(10, 1); }); 
+
+
   }
 
   return false;
@@ -70,11 +82,6 @@ newPlayMap.onMarkerClick = function(e) {
 };
 
 
-// @TODO This doesn't seem to connect to any modest map click functions.
-// Maybe we do not need something like this. will think about it.
-newPlayMap.onMarkerClickOut = function(e) {
-
-};
 
 
 // Change Double Click easing.

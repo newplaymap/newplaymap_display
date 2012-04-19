@@ -32,6 +32,19 @@
     z-index: 8999;
 }
 
+#markers {
+    z-index: 500;
+}
+
+#play-journey {
+    z-index: 25;
+}
+
+#play-journey:hover,
+#play-journey:active {
+    z-index: 600;
+}
+
 #map canvas:inactive {
     z-index: 20;
 }
