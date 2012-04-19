@@ -173,5 +173,9 @@ newPlayMap.loadData = function() {
         callback: newPlayMap.loadEvent
       }
     );
+<<<<<<< HEAD
+=======
+  );
+>>>>>>> 13_closures
 };
 
