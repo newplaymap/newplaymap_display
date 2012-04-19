@@ -156,6 +156,7 @@ newPlayMap.loadData = function() {
     }
   );
 */
+/*
   newPlayMap.loadJSONFile({
         path: 'data/events_300.json', 
         type: "event",
@@ -171,6 +172,7 @@ newPlayMap.loadData = function() {
         callback: newPlayMap.loadEvent
       }
     );
+*/
   newPlayMap.loadJSONFile({
       path: "data/plays/9344.json",
       type: "play",
