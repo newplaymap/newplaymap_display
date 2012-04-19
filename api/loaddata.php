@@ -25,7 +25,7 @@ function loadOrganizations($m, $output) {
   
   $count = 0;
   $insert = array();
-  print "<pre>";
+  // print "<pre>";
   foreach ($objects as $obj_load) {
     $node = (array) $obj_load->node;
     // print_r($node);
@@ -99,9 +99,9 @@ function loadOrganizations($m, $output) {
     // This will completely replace the record.
     $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
     $count++;
-    print_r($newObj);
+    // print_r($newObj);
   }
-  print "</pre>";
+  // print "</pre>";
   $output .= "<p>Loaded " + $count + " Organizations</p>";
 }
 

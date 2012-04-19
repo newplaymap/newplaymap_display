@@ -2,10 +2,10 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->organizations;
+$collection = $m->newplaymap->artists;
 
 // find everything in the collection
-$cursor = $collection->find()->sort(array("properties.name" => 1));
+$cursor = $collection->find()->sort(array("properties.generative_artists" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
@@ -26,7 +26,7 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    $json .= json_encode($obj['properties']['name']);
+    $json .= json_encode($obj['properties']['generative_artist']);
     
     // $json .= json_encode(array(
     //   'id' => $obj['id'],

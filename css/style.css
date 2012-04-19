@@ -58,6 +58,9 @@ body {
   color: #fff;
 }
 
+ul.dropdown-menu {
+  z-index: 2100;
+}
 
 dl {
   margin: 0;
