@@ -401,7 +401,8 @@
             "Generative Artist": "Chiori Miyagawa",
             "Artist ID": "27437",
             "Synopsis": "Miguel Angel Flores, a 23-year-old homeless undocumented immigrant, falls through the ice of a pond in Central Park to his death.   No one reports him missing.  Erica, the only witnesses to the accident, is thrown into a strange world where she shuttles between her life, her memories, and historical events.  In the end, she finds herself in an unexpected place, and she must make a decision about living and dying.",
-            "Path": "\/play\/a-winters-captive"
+            "Path": "\/play\/a-winters-captive",
+            "Alternate titles": "Dividing Ashes"
         }
     },
     {
@@ -2611,7 +2612,8 @@
             "Content Type": "Play",
             "Generative Artist": "Ellen Koivisto",
             "Artist ID": "33830",
-            "Path": "\/play\/empathy"
+            "Path": "\/play\/empathy",
+            "Alternate titles": "Stumbling Into Morning"
         }
     },
     {
@@ -2653,7 +2655,8 @@
             "Generative Artist": "Dominic Orlando",
             "Artist ID": "11350",
             "Synopsis": "Sixteen year old Adam Parker believes his comic book collection provides a step-by-step guide to power. But can a small town high school student really put on a super-villain costume and take over the world?",
-            "Path": "\/play\/episode-one"
+            "Path": "\/play\/episode-one",
+            "Alternate titles": "The Sense of What Should Be"
         }
     },
     {
@@ -2713,7 +2716,11 @@
             "Generative Artist": "The Global Theatre Project",
             "Artist ID": "36113",
             "Synopsis": "The Global Theatre Project\r\n \tin association with Amnesty International\r\npresents\r\n \r\nESPECIALLY NOW\r\nCreate the World Together\r\n\r\n \r\nDecember 11, 2011\r\nat the Los Angeles Theatre  Center in historical downtown LA\r\nTicket information here\r\n \r\n7.00pm Bilingual Performance\r\nAct One includes the US premiere of \u2018A Stubborn Woman, a theatrical memorandum on Anna Politkovskaya\u2019 by Florentine playwright Stefano Massini.  Presented bilingually in English and Italian with corresponding supertitles. Directed by Bari Hochwald. Cast announced in November.\r\n \r\n8:45pm Panel: Journalists\u2019 Civil Rights\r\nAct Two is a panel discussion which explores the impact on civil rights and democracies when journalists suffer violent reprisal for reporting truth in conflict zones, and why we in the states should care about this issue. Panel announced in November.\r\n \r\n9:30pm Reception &amp; Action\r\nAct Three offers the choice of a cocktail with the event participants in the theatre or engaging in an human rights action in the lobby with members of Amnesty International.\r\n \r\nClick here for more information or to buy tickets to the event: http:\/\/bit.ly\/oyDuRr\r\n\r\nFollow the conversations: \r\nTwitter:\thttp:\/\/bit.ly\/TheGTP &amp; hashtag #EspNow\r\nYou Tube: http:\/\/bit.ly\/oBCmQ2\t\r\nFacebook: http:\/\/on.fb.me\/The_GTP\t\r\nLinkedin: http:\/\/linkd.in\/oBhIbc\t\r\n\r\nEspecially Now presented in collaboration with The Italian Cultural Institute\r\nYour contribution to this event establishes you as a Lifetime Founding Member of The Global Theatre Project.  We thank you for your generosity and partnership.",
-            "Path": "\/play\/especially-now-create-the-world-together"
+            "Path": "\/play\/especially-now-create-the-world-together",
+            "Alternate titles": {
+                "1": "Especially Now",
+                "2": "A Stubborn Woman"
+            }
         }
     },
     {
@@ -3138,7 +3145,12 @@
             "Generative Artist": "Andie Arthur, Chris Demos-Brown, Michaey Yawney",
             "Artist ID": "27589",
             "Synopsis": "Free Playwright Readings\r\nSunday, 6\/5\/2011\r\n\r\n11 am - 7 pm\r\nVisitor Center Exhibit Hall; free and open to the public. \r\n\r\nSee three new plays before they reach the stage on Sunday, June 5th, from 11 am to 7 pm, at the Deering Estate at Cutler! For the past two years, playwrights Chris Demos-Brown, Andie Arthur, and Michael Yawney have each been working on creating new plays from scratch - under the instruction of nationally renowned master playwright Kenny Finkle - as part of the Miami-Dade County Department of Cultural Affairs\u2019 Playwright Development Program. \r\n\r\nThe schedule for the Readings is as follows:\r\n\r\nWRONGFUL DEATH by Chris Demos-Brown\r\n11 am to 1 pm\r\nA jaded personal injury lawyer fights for the case of her life in a play that examines the weird ways the American civil justice system values human life.\r\n(Invitation Only)\r\n\r\nOUTCASTS OF EDEN by Andie Arthur\r\n2 pm to 4 pm\r\nIn 1637, Mary Dyer has left the only home she has ever known to come to a New Eden in the Massachusetts Bay Colony, where she befriends and follows outlaw preacher, Anne Hutchinson. As Hutchinson&#039;s preaching tears the colony apart, will Mary follow her heart or her community?\r\n\r\nIT FEELS GOOD by Michael Yawney\r\n5 pm to 7 pm\r\nKevin is underage, but he learns a lot from his older friends at the club. He learns that the real action happens in the storeroom; that all you need to be happy is handful of drink tickets, a few bumps, and lots of sex! oh, and beware of drag queens with glitter lipstick. IT FEELS GOOD examines the difference between FEELING good and BEING good.",
-            "Path": "\/play\/from-scratch-new-plays-from-miami"
+            "Path": "\/play\/from-scratch-new-plays-from-miami",
+            "Alternate titles": {
+                "1": "Outcasts of Eden",
+                "2": "It Feels Good",
+                "3": "Wrongful Death"
+            }
         }
     },
     {
@@ -5319,7 +5331,14 @@
             "Generative Artist": "Penelope Reed",
             "Artist ID": "33810",
             "Synopsis": "See full line-up of events at http:\/\/www.hedgerowtheatre.org\/specialEvents.php",
-            "Path": "\/play\/new-play-festival"
+            "Path": "\/play\/new-play-festival",
+            "Alternate titles": {
+                "1": "Her Red Umbrella",
+                "2": "Natural History",
+                "3": "Conversations With God",
+                "4": "The Reader&#039;s Club",
+                "5": "August Wilson Collection"
+            }
         }
     },
     {
@@ -5584,7 +5603,8 @@
             "Generative Artist": "Trevor Allen",
             "Artist ID": "11946",
             "Synopsis": "An In the Rough Reading of One Stone (Einstein),  a theatrical exploration of Einstein\u2019s life and concepts as seen from the synapses of Einstein\u2019s brain (which was cut up and kept in a jar after he died). Disjointed and fractured but compelling. A theatrical exploration of the genius, the man and his thoughts. A mixture of live action, live music, sound and movement with puppetry.",
-            "Path": "\/play\/one-stone"
+            "Path": "\/play\/one-stone",
+            "Alternate titles": "Einstein&#039;s Brain "
         }
     },
     {
@@ -6146,7 +6166,11 @@
             "Generative Artist": "Elise Forier Edie",
             "Artist ID": "14868",
             "Synopsis": "Jan 1912. In the depth of winter a ragged band of immigrant textile workers bands together to stage what would become one of the most successful strikes in the history of the labor movement.  Two sisters find themselves on opposite sides of the conflict and must choose between loyalty to family and the pursuit of their dreams.",
-            "Path": "\/play\/rebel-girls"
+            "Path": "\/play\/rebel-girls",
+            "Alternate titles": {
+                "1": "Bread and Roses",
+                "2": "Something Beautiful Somewhere"
+            }
         }
     },
     {
@@ -7040,7 +7064,8 @@
             "Generative Artist": "New Exhibition Room",
             "Artist ID": "11836",
             "Synopsis": "Once upon a time Elephant Tango Ensemble got together with New Exhibition Room to tell two wonderful bedtime stories with music, dance, and puppetry. Join us for Story Time Preservation Hour, featuring Baby Zombie and an adaptation of Robert Munsch&#039;s The Paper Bag Princess.\r\nFor More Information: www.newexhibitionroom.org\r\nTickets: $10",
-            "Path": "\/play\/storytime-preservation-hour"
+            "Path": "\/play\/storytime-preservation-hour",
+            "Alternate titles": "The Paper Bag Princess"
         }
     },
     {
@@ -7688,7 +7713,12 @@
             "Generative Artist": "Daniel Guyton",
             "Artist ID": "9730",
             "Synopsis": "What happens when The Black Swan meets Seinfeld? &quot;The Darker Places Trilogy&quot;, that&#039;s what. Each of these three one-act plays takes place in a different room in the same home of a very troubled young man. The titles are Attic, Basement, and Crawlspace.\r\n\r\n&quot;Attic&quot; won the Kennedy Center\/ACTF Award for Playwriting in 2004, and was hailed by Gary Garrison, the Executive Director of the Dramatists Guild of America, as &quot;The most innovative, original play I&#039;ve ever seen... from a college student.&quot; &quot;Basement&quot; and &quot;Crawlspace&quot; are both brand new world premiere plays that will be seen this February in Athens before they are seen anywhere else in the world!",
-            "Path": "\/play\/the-darker-places-trilogy"
+            "Path": "\/play\/the-darker-places-trilogy",
+            "Alternate titles": {
+                "1": "Attic",
+                "2": "Basement",
+                "3": "Crawlspace"
+            }
         }
     },
     {
@@ -8705,7 +8735,8 @@
             "Generative Artist": "Mike Wiley",
             "Artist ID": "34471",
             "Synopsis": "In the fiery first months of America\u2019s civil rights movement, waves of young people, mostly college students, rode buses into the heart of the Deep South. Many were brutally attacked, arrested, and imprisoned in Mississippi\u2019s notorious Parchman Farm Penitentiary, where they invented an ingenious pastime to help them endure, a live variety show inspired by programs then popular on radio and television. Jokes, stories, singing and Bible readings sprang from every cell. This nightly event became known as The Parchman Hour. With characters such as Stokely Carmichael, Martin Luther King and Robert Kennedy, &quot;The Parchman Hour&quot; honors an important piece of history.",
-            "Path": "\/play\/the-parchman-hour-songs-and-stories-of-the-1961-freedom-riders"
+            "Path": "\/play\/the-parchman-hour-songs-and-stories-of-the-1961-freedom-riders",
+            "Alternate titles": "The Parchman Hour"
         }
     },
     {
@@ -9966,7 +9997,8 @@
             "Generative Artist": "Tim Cahill, Laura Sheperd and Thomas M. Kelly",
             "Artist ID": "12318",
             "Synopsis": "The Thistle Dew Playwright&#039;s Workshop is calling for 2-3 minute monologues and 10 minute plays by local playwrights.\r\n\r\nThe Guidelines are as follows: \r\nA.  STRUCTURE:\r\nTimes Roman 12 point, margins all at 1&quot;, 1.5 line spacing.\r\n\r\nMonologues and plays exceeding the limits set will not be eligible for consideration.\r\n\r\nThere is no specific subject or theme for either monologues or plays. \r\n\r\nCharacter limit for 10 minute plays is three (3). \r\n\r\nB.  VETTING\r\nThere is no fee to enter this program.\r\n\r\nAll monologues must be presented to the Thistle Dew Playwrights Workshop on any Monday evening as part of the preparation for production process.\r\n\r\nMonologues previously presented to Thistle Dew Playwrights Workshop or any other workshop will not be considered.\r\n\r\nCreativity and artistic risk-taking are encouraged, although playwrights are encouraged to choose material judiciously.\r\n\r\nSubmissions should be comedies or &#039;dramadies&#039; (dramatic comedies).  \r\n\r\nMaterial should be suitable for all audiences.  If the judges deem material to be salacious or inappropriate, submissions will be ineligible for consideration.\r\n\r\nC.  STAGING\r\nSimple hand props will be allowed.  Those hand props approved by judges must be supplied by the author.\r\n\r\nNo costumes (clown, specific period, nurse, doctor, etc.) other than streetwear.  \r\n\r\nSimple set pieces such as a one table, one chair and a stool will be available for use.\r\n\r\nNo &#039;special effects&#039; lighting (only &#039;lights up and lights down&#039;). \r\n\r\nNo food or drink on stage.\r\n\r\nNo music or sound effects or author generated music or sound effects during performance of the piece.  Music prior to top of show, during intermission and\/or after show to be selected by the judges.\r\n\r\nD.  DEADLINES\r\nSubmission deadline is May 2, 2011.\r\n\r\nYou may email your submission with a request for a reading date.  Several submissions can be scheduled for the same reading\/rereading date.  Reading dates will be scheduled on a first come\/first serve basis.  The judges will work with you if your first requested read date can not be granted.\r\n\r\nProjected production dates are June 17, 18 and 19.  (Subject to change with notice.)\r\n\r\nFinalists will be chosen by the judges. All decisions are final.\r\n\r\nThe judges reserve the right to vary from the above guidelines depending on the submissions.",
-            "Path": "\/play\/various-shorts-and-shorters"
+            "Path": "\/play\/various-shorts-and-shorters",
+            "Alternate titles": "Monologues and 10 minute shorts"
         }
     },
     {

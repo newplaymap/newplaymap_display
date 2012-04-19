@@ -241,40 +241,43 @@ function loadPlays($m, $output) {
   
   $count = 0;
   $insert = array();
+  // print '<pre>';
   foreach ($objects as $obj_load) {
-  //print "<pre>";
+  // print "<pre>";
   $node = (array) $obj_load->node;
   
+  // Set up proper array for Alternate play titles
+  $alternate_titles_list = array();
+
+  if (is_object($node["Alternate titles"])) {
+    foreach ($node["Alternate titles"] as $alt_title) {
+      $alternate_titles_list[] = array('title' => $alt_title);
+    }
+  } else {
+    $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
+  }
+  
+  // print_r($node);
   $newObj = array(
-    "id" => $node["Event ID"],
+    "id" => $node["Play ID"],
     "type" => "Feature",
-    "geometry" => array( 
-      "type" => "Point",
-      "coordinates"=> array($node["Longitude"], $node["Latitude"])
-      ),
     "properties" => array(
-      "longitude"  => $node["Longitude"],
-      "latitude"  => $node["Latitude"],
-      "event_id"  => $node["Event ID"],
-      "event_type"  => $node["Event type"],
-      "event_to_date"  => $node["To Date"],
-      "event_date"  => $node["Date"],
+      "play_id"  => $node["Play ID"],
       "content_type"  => $node["Content Type"],
-      "related_theater"  => $node["Related Theater"],
-      "related_theater_id"  => $node["Related Theater ID"],
       "artist_id"  => $node["Artist ID"],
       "play_title"  => $node["Play title"],
-      "related_play_id"  => $node["Related Play ID"],
+      "alternate_titles"  => $alternate_titles_list,
       "generative_artist"  => $node["Generative Artist"],
-      "event_description"  => $node["Event description"],
       "synopsis"  => $node["Synopsis"],
       "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
-  )
+    )
   );
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
+    // print_r($newObj);
+    $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj), true);
     $count++;
   }
+    // print '</pre>';
   $output .= "<p>Loaded " + $count + " Plays</p>";
 }
 
