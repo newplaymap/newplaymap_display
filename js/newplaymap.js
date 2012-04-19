@@ -103,7 +103,12 @@ newPlayMap.initMap = function(tj) {
 };
 
 newPlayMap.initMapSimple = function() {
-  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"))
+  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"), null, [
+        new easey.DragHandler(),
+        new easey.TouchHandler(),
+        new easey.DoubleClickHandler(),
+        new easey.MouseWheelHandler()
+    ]);
   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
   // Load interactive behavior.
