@@ -129,7 +129,6 @@ newPlayMap.loadOrganization = function() {
 newPlayMap.loadEvent = function() {
     console.log("load event");
     
-
   $('div.marker[type=event]').bind( "click", function() {
       var marker = $(this);
       console.log(marker[0]);
@@ -161,13 +160,10 @@ newPlayMap.loadEvent = function() {
       
       
       
-      
-      newPlayMap.loadPlayData(marker);
-  }
+      /// newPlayMap.loadPlayData(marker);
+    }
+  );
 
-
-
-    
 };
 
 newPlayMap.loadRelatedEvents = function() {
