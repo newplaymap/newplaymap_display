@@ -4,17 +4,17 @@ connectMongo(false);
 
 $collection = $m->newplaymap->events;
 
-// $search_start = (!empty($_GET['start_date'])) ? $_GET['start_date'] : null;
-// $search_end = (!empty($_GET['end_date'])) ? $_GET['end_date'] : null;
-// 
-// if ($start_date == null || $end_date == null) {
-//   return;
-// }
+$search_start = (!empty($_GET['start_date'])) ? new MongoDate(strtotime($_GET['start_date'])) : null;
+$search_end = (!empty($_GET['end_date'])) ? new MongoDate(strtotime($_GET['end_date'])) : null;
 
+if ($search_start == null || $search_start == null) {
+  return;
+}
 
 // Testing
-$search_start = new MongoDate(strtotime('April 1, 2005'));
-$search_end = new MongoDate(strtotime('May 1, 2005'));
+// $search_start = new MongoDate(strtotime('April 1, 2005'));
+// $search_end = new MongoDate(strtotime('May 1, 2005'));
+
 
 // $event_start < $search_end && $event_end > $search_start
 // $search_end > $event_start && $search_start < $event_end
