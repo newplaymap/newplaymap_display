@@ -40,7 +40,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // http://geojson.org/geojson-spec.html#feature-collection-objects
     var features = jsonData[vars.dataName].features,
         len = features.length,
-        locations = [];  
+        locations = [];
+            
     // for each feature in the collection, create a marker and add it
     // to the markers layer
     for (var i = 0; i < len; i++) {

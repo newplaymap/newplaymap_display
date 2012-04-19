@@ -103,12 +103,14 @@ newPlayMap.initMap = function(tj) {
 };
 
 newPlayMap.initMapSimple = function() {
-  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"), null, [
+  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png")/*
+, null, [
         new easey.DragHandler(),
         new easey.TouchHandler(),
         new easey.DoubleClickHandler(),
         new easey.MouseWheelHandler()
-    ]);
+    ]
+*/);
   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
   // Load interactive behavior.
@@ -123,7 +125,6 @@ newPlayMap.initMapSimple = function() {
 
   // Run data layers closure.
   data();
-
 };
 
 newPlayMap.loadMapData = function() {
@@ -147,19 +148,6 @@ newPlayMap.loadData = function() {
       callback: newPlayMap.loadOrganization 
     });
     newPlayMap.loadJSONFile({
-        path: 'data/events_300.json', 
-        type: "event",
-        id: "event_id",
-        label: "related_theater", // field which will be used in label
-        title: "play_title",
-        dataName: "events",
-        dataPath: "data/events_300.json",
-        icon: "icons/event.png",
-        grouping_field: "event_id",
-        callback: newPlayMap.loadEvent
-      }
-    );
-    newPlayMap.loadJSONFile({
       path: "data/artists_300.json",
       type: "artist",
       id: "artist_id",
@@ -172,7 +160,20 @@ newPlayMap.loadData = function() {
       callback: newPlayMap.loadArtist
     }
   );
-    newPlayMap.loadJSONFile({
+  newPlayMap.loadJSONFile({
+        path: 'data/events_300.json', 
+        type: "event",
+        id: "event_id",
+        label: "related_theater", // field which will be used in label
+        title: "play_title",
+        dataName: "events",
+        dataPath: "data/events_300.json",
+        icon: "icons/event.png",
+        grouping_field: "event_id",
+        callback: newPlayMap.loadEvent
+      }
+    );
+  newPlayMap.loadJSONFile({
       path: "data/plays/9344.json",
       type: "play",
       id: "related_event_id",
