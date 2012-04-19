@@ -8,7 +8,7 @@ if(!empty($_GET['page'])){
 else{
   $page = 0;
 }
-$page_items = 50;
+$page_items = 150;
 
 $collection = $m->newplaymap->artists;
 
