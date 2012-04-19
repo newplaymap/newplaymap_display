@@ -91,12 +91,14 @@ newPlayMap.initMap = function(tj) {
 };
 
 newPlayMap.initMapSimple = function() {
-  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"), null, [
+  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png")/*
+, null, [
         new easey.DragHandler(),
         new easey.TouchHandler(),
         new easey.DoubleClickHandler(),
         new easey.MouseWheelHandler()
-    ]);
+    ]
+*/);
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
 
