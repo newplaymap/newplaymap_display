@@ -16,9 +16,9 @@ newPlayMap.loadJSONFile = function(vars) {
 
 newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
+  jsonData[data.name]["vars"] = jqxhr.vars;
   console.log(jsonData);
-  newPlayMap.onLoadDataMarkers(jqxhr.vars);
-  newPlayMap.loadFeatureAction(jqxhr.vars.callback);
+  var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
   return false;
 };
 
@@ -27,6 +27,12 @@ newPlayMap.loadDataError = function(data) {
   console.log(data);
   return false;
 };
+/*
+
+newPlayMap.loadFeatureAction = function(callback) {
+ $(callback)();
+};
+*/
 
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;
@@ -102,5 +108,9 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // @TODO this will run on the last loaded item, which may make behavior strange.
     // Actually no it is probably fine so long as locations is global.
     map.setExtent(locations);
+    
+    // Apply behavior for layer.
+    console.log(vars);
+/*     $(vars.callback)(); */
 
 };

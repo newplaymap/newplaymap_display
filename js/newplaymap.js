@@ -141,24 +141,21 @@ newPlayMap.loadData = function() {
       grouping_field: "organization_id",
       callback: newPlayMap.loadOrganization 
     });
- /*
-   newPlayMap.loadJSONFile({path: 'data/events_300.json'}, 
-      newPlayMap.onLoadDataMarkers(
-        {
-          type: "event",
-          id: "event_id",
-          label: "related_theater", // field which will be used in label
-          title: "play_title",
-          dataName: "events",
-          dataPath: "data/events_300.json",
-          icon: "icons/event.png",
-          grouping_field: "event_id",
-          path: "",
-          callback: newPlayMap.loadEvent
-        }
-      ));
-    newPlayMap.loadJSONFile({path: "data/artists_300.json"}, newPlayMap.onLoadDataMarkers(
-    {
+    newPlayMap.loadJSONFile({
+        path: 'data/events_300.json', 
+        type: "event",
+        id: "event_id",
+        label: "related_theater", // field which will be used in label
+        title: "play_title",
+        dataName: "events",
+        dataPath: "data/events_300.json",
+        icon: "icons/event.png",
+        grouping_field: "event_id",
+        callback: newPlayMap.loadEvent
+      }
+    );
+    newPlayMap.loadJSONFile({
+      path: "data/artists_300.json",
       type: "artist",
       id: "artist_id",
       label: "ensemble_collective",
@@ -169,9 +166,9 @@ newPlayMap.loadData = function() {
       grouping_field: "artist_id",
       callback: newPlayMap.loadArtist
     }
-  ));
-    newPlayMap.loadJSONFile({path: "data/plays/9344.json"}, newPlayMap.onLoadDataMarkers(
-    {
+  );
+    newPlayMap.loadJSONFile({
+      path: "data/plays/9344.json",
       type: "play",
       id: "related_event_id",
       label: "related_theater",
@@ -181,9 +178,8 @@ newPlayMap.loadData = function() {
       icon: "icons/play.png",
       grouping_field: "related_play_id",
       callback: newPlayMap.loadRelatedEvents,
-      callbackVars: {path: "play_path", id: "related_event_id", filter_id: newPlayMap.routing.path.filters.event_id}
+      //callbackVars: {path: "play_path", id: "related_event_id", filter_id: newPlayMap.routing.path.filters.event_id}
     }
-  ));
-*/
+  );
 };
 
