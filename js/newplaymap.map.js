@@ -20,9 +20,9 @@ newPlayMap.onMarkerOver = function(e) {
 
         $('div#panel-container div#panel').show();
  
-        $('div.marker').each(function(){$(this).fadeTo(10, 0.4); });
+        $('div.marker').css({ 'opacity' : 0.4 }); 
 
-        $('div.marker[parent=' + layer + ']').each(function(){$(this).fadeTo(100, 1); });
+        $('div.marker[grouping_value=' + grouping_field + ']').css({ 'opacity' : 1 }); 
  
                     
         // Update the panel data.
@@ -42,7 +42,7 @@ newPlayMap.onMarkerOut = function(e) {
     spotlight.removeAllLocations();
 
 
-    $('div.marker').each(function(){$(this).fadeTo(10, 1); }); 
+    $('div.marker').css({ 'opacity' : 1 }); 
 
 
   }

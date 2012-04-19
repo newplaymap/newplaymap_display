@@ -78,6 +78,22 @@ dd {
   margin: 5px 0 1em 0;
 }
 
+.marker[type=play] {
+  z-index: 100;
+}
+
+.marker[type=organization] {
+  z-index: 80;
+}
+
+.marker[type=artist] {
+  z-index: 60;
+}
+
+.marker[type=organization] {
+  z-index: 40;
+}
+
 #play-journey {
 /*
   z-index: 0;

@@ -126,7 +126,7 @@ newPlayMap.loadMapData = function() {
 
 newPlayMap.loadData = function() {
     newPlayMap.loadJSONFile({
-      path: 'data/organizations_300.json',
+      path: 'api/organizations.php',
       type: "organization",
       template: "organization",
       label: "org_type",
@@ -134,14 +134,13 @@ newPlayMap.loadData = function() {
       id: "organization_id",
       title: "name",
       dataName: "organizations",
-      dataPath: "data/organizations_300.json",
+      dataPath: 'api/organizations.php',
       icon: "icons/organization.png",
       grouping_field: "organization_id",
       callback: newPlayMap.loadOrganization 
     });
-/*
     newPlayMap.loadJSONFile({
-      path: "data/artists_300.json",
+      path: 'api/artists.php',
       type: "artist",
       template: "artist",
       layer: "layer-artists",
@@ -149,16 +148,14 @@ newPlayMap.loadData = function() {
       label: "ensemble_collective",
       title: "generative_artist",
       dataName: "artists",
-      dataPath: "data/artists_300.json",
+      dataPath: 'api/artists.php',
       icon: "icons/artist.png",
       grouping_field: "artist_id",
       callback: newPlayMap.loadArtist
     }
   );
-*/
-/*
   newPlayMap.loadJSONFile({
-        path: 'data/events_300.json', 
+        path: 'api/events.php', 
         type: "event",
         template: "event",
         layer: "layer-events",
@@ -166,13 +163,12 @@ newPlayMap.loadData = function() {
         label: "related_theater", // field which will be used in label
         title: "play_title",
         dataName: "events",
-        dataPath: "data/events_300.json",
+        dataPath: 'api/events.php', 
         icon: "icons/event.png",
         grouping_field: "event_id",
         callback: newPlayMap.loadEvent
       }
     );
-*/
   newPlayMap.loadJSONFile({
       path: "data/plays/9344.json",
       type: "play",
