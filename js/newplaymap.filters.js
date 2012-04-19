@@ -60,45 +60,36 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   );
 }
 
-
 /*
  * Function to find organization feature from the name.
  * Used when submitting the filter form
  */
 newPlayMap.filters.organizationName = function(searchString) {
-  console.log('searchString');
-  console.log(searchString);
+  console.log('searchString: ' + searchString);
   
-  // var playIdFromFilter;
-  // for (organization in jsonDataSearch.organizationsIndex) {
-  //   if (jsonDataSearch.organizationsIndex[organization].name == filterValue) {
-  //     newPlayMap.filters.organizationName(jsonDataSearch.organizationsIndex[organization].id);
-  //   }
-  // }
-  
-  $.ajax({
-    url:  'api/organizations_filter.php',
-    dataType: 'json',
-    data: {
-      organization_name: searchString
-    },
-    success: newPlayMap.filters.setOrganizationMarkers,
-    error: newPlayMap.filters.error
+  newPlayMap.loadAPICall({
+    data: {organization_name: searchString},
+    zoomLevel: 10,
+    class: "active",
+    path: 'api/organizations_filter.php',
+    type: "organization_filter",
+    label: "org_type",
+    id: "organization_id",
+    title: "name",
+    dataName: "organization_filter",
+    dataPath: "api/organizations_filter.php",
+    icon: "icons/organization.png",
+    grouping_field: "organization_id",
+    callback: newPlayMap.loadOrganizationFilter 
   });
 }
 
-newPlayMap.filters.setOrganizationMarkers = function(data) {
-  // Successfully retrieved organizations from search
-  console.log(data);
-  newPlayMap.filters.onLoadDataMarkers('vars', data.features);
-}
 
 /*
  * Organization type
  */
 newPlayMap.filters.organizationType = function(searchString) {
- console.log('searchString');
- console.log(searchString);
+  console.log('searchString: ' + searchString);
 
  $.ajax({
    url:  'api/organization_type_filter.php',
