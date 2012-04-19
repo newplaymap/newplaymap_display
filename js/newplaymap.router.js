@@ -128,6 +128,27 @@ newPlayMap.loadOrganization = function() {
 
 newPlayMap.loadEvent = function() {
     console.log("load event");
+    
+    
+
+  newPlayMap.loadAPICall({
+      path: "data/journeys.json",
+      data{}
+      type: "play",
+      template: "layer-play",
+      layer: "play",
+      id: "related_event_id",
+      label: "related_theater",
+      alt_path: "play_path",
+      title: "play_title",
+      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataPath: "data/plays/9344.json",
+      icon: "icons/play.png",
+      grouping_field: "related_play_id",
+      callback: newPlayMap.loadRelatedEvents
+    }
+
+    
 };
 
 newPlayMap.loadRelatedEvents = function() {
