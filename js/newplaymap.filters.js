@@ -205,6 +205,38 @@ newPlayMap.filters.setArtistsIndex = function(data) {
   );
 }
 
+/*
+ * Plays Index
+ */
+newPlayMap.filters.getPlaysIndex = function() {
+  $.ajax({
+    url:  'api/plays_index.php',
+    dataType: 'json',
+    success: newPlayMap.filters.setPlaysIndex,
+    error: newPlayMap.filters.error
+  });
+}
+
+
+newPlayMap.filters.setPlaysIndex = function(data) {
+  jsonDataSearch.playsIndex = data;
+  
+  // If we are returning org names and ids, use something like this to process and get a list of names
+  // var organizationNames = [];
+  // for (organization in jsonDataSearch.PlaysIndex) {
+  //   organizationNames.push(jsonDataSearch.PlaysIndex[organization].name);
+  // }
+  
+  // If we are returning just the names, then the raw data is fine
+  var playNames = data;
+
+  $('#plays-filter').typeahead(
+    {
+      source: playNames,
+      items: 10
+    }
+  );
+}
 
 /* 
  * Pulled from newplaymap.data.js almost in it's entirety. 
@@ -295,10 +327,11 @@ $(document).ready(function() {
   // @TODO: Don't load the index on page load, do it when the filters are shown
   newPlayMap.filters.getOrganizationsIndex();
   newPlayMap.filters.getArtistsIndex();
+  newPlayMap.filters.getPlaysIndex();
   
   $('#filters form').submit(function(event) {
     event.preventDefault();
-    var filterValue = $('#filters input').val();
+    var filterValue = $('#organizations-filter').val();
     
     newPlayMap.filters.organizationName(filterValue);
   });
