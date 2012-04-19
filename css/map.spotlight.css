@@ -21,7 +21,19 @@
 }
 
 .marker:hover {
+    z-index: 8001;
+}
+
+.marker.inactive {
+    z-index: 30;
+}
+
+#map canvas:active {
     z-index: 8000;
+}
+
+#map canvas:inactive {
+    z-index: 20;
 }
 
 #map canvas {

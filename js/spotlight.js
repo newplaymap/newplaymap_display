@@ -17,7 +17,7 @@ var Spotlight = function(canvas, fillStyle) {
 };
 
 Spotlight.prototype = {
-    fillStyle: "rgba(0,0,0,.4)",
+    fillStyle: "rgba(0,0,0,.8)",
     strokeWidth: null,
     strokeAlpha: 0,
     radius: 20,

@@ -52,13 +52,24 @@ newPlayMap.loadFeatureAction = function(callback) {
 newPlayMap.onLoadDataMarkers = function(vars) {
 /*     $('map div.marker').each(function() { $(this).removeClass("active"); }); */
 
+
+
     var vars = vars;
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
     var features = jsonData[vars.dataName].features,
         len = features.length,
         locations = [];
-            
+ 
+    var markers = {};
+    markers = new MM.MarkerLayer();
+    map.addLayer(markers);
+    
+                console.log(markers);
+    markers.parent.setAttribute("id", vars.layer);
+    console.log(markers.parent);
+/*     markers.parent.addClass("map-layer"); */
+
     // for each feature in the collection, create a marker and add it
     // to the markers layer
     for (var i = 0; i < len; i++) {
@@ -122,9 +133,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         
         $(marker).hoverIntent({
           over: function() {
-            $(this).addClass('active');
-  
-      
+/*             $(this).addClass('active'); */
+console.log($(this));
             var marker_id = $(this).attr('marker_id');
       
             spotlight.addLocations(locationsByID[marker_id]);
@@ -134,6 +144,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
           },
           out: function() {
             $(this).removeClass('active');
+/*             $(this).parent().removeClass('active'); */
             spotlight.parent.className = "inactive";
             spotlight.removeAllLocations();
           }
