@@ -9,25 +9,20 @@ newPlayMap.getMarker = function(target) {
 newPlayMap.onMarkerOver = function(e) {
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
-      var grouping_field = marker.getAttribute("grouping_value");
-      if(grouping_field !== undefined){
-        if (grouping_field in locationsByID) {
+    var grouping_field = marker.getAttribute("grouping_value");
+    var marker_id = $(this).attr('marker_id');
 
-          // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
-          // spotlight.addLocations(locationsByID[grouping_field] || []);
-          // spotlight.parent.className = "active";
+    if(grouping_field !== undefined){
+      if (grouping_field in locationsByID) {
+        spotlight.addLocations(locationsByID[marker_id]);
+        spotlight.parent.className = "active";
 
-          $('div#panel-container div#panel').show();
-                      
-          // Update the panel data.
-          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-            
-        } 
-      }
-      
-      else {
-          // spotlight.parent.className = "inactive";
-      }
+        $('div#panel-container div#panel').show();
+                    
+        // Update the panel data.
+        newPlayMap.updatePanel(marker, locationsByID[grouping_field]);  
+      } 
+    }
   }
 };
 
@@ -35,14 +30,9 @@ newPlayMap.onMarkerOut = function(e) {
 
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
-      var type = marker.type;
-
-      // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
-      // spotlight.removeAllLocations();
-      // keep last option visible.
-/*       $('div#panel-container div#panel').hide(); */
-      
-      // spotlight.parent.className = "inactive";
+    var type = marker.type;
+    spotlight.parent.className = "inactive";
+    spotlight.removeAllLocations();
   }
 
   return false;
@@ -59,27 +49,22 @@ newPlayMap.onMarkerClick = function(e) {
 
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
-      var grouping_field = marker.getAttribute("grouping_value");
-      if(grouping_field !== undefined){
-        if (grouping_field in locationsByID) {
+    var grouping_field = marker.getAttribute("grouping_value");
+    if(grouping_field !== undefined){
+      if (grouping_field in locationsByID) {
 
-          // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
-          // spotlight.addLocations(locationsByID[grouping_field] || []);
-          // spotlight.parent.className = "active";
+        // @TODO: Delete spotlight code once we have spotlight triggering from the sidebar
+        // spotlight.addLocations(locationsByID[grouping_field] || []);
+        // spotlight.parent.className = "active";
 
-          $('div#panel-container div#panel').show();
-                      
-          // Update the panel data.
-          newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-            
-        } 
-      }
-      
-      else {
-          // spotlight.parent.className = "inactive";
-      }
+        $('div#panel-container div#panel').show();
+                    
+        // Update the panel data.
+        newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+          
+      } 
+    }
   }
-
 
   return false;
 };

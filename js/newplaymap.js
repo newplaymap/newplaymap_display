@@ -7,23 +7,15 @@ var locationsByID = {};
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
-/* var markers = {}; */
+var markers = {};
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
 newPlayMap.browserEvents = [];
 
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
-  
-  // These three functions should be able to load independently.
-  // newPlayMap.loadPageRouter();  // Read address and store parsed address in an object.
-  newPlayMap.loadMap();         // Load map tiles.
-/*   newPlayMap.loadMapDataMarkers(); */
-  // newPlayMap.loadRouteInfo();     // Load route info (lookup route, get features).  
-  // newPlayMap.loadBehaviors() ;  // Load marker actions and events.
+  newPlayMap.loadMap();         // Load map tiles & trigger data to load.
 };
-
-
 
 newPlayMap.loadMap = function(callback){
   // Load map tiles.
@@ -31,7 +23,6 @@ newPlayMap.loadMap = function(callback){
   // for map debugging: 
   newPlayMap.initMapSimple();
 };
-
 
 newPlayMap.alterHomepage = function() {
   $('div#panel-container div#panel').hide();
@@ -45,8 +36,8 @@ newPlayMap.loadPageRouter = function() {
 
     // Do all of the map and data contingent functions only through this function (to make it simpler.)
     newPlayMap.buildRoutePath(event);
-    newPlayMap.loadRouteInfo();     // Load route info (lookup route, get features).  
-    newPlayMap.loadBehaviors() ;  // Load marker actions and events.
+    //newPlayMap.loadRouteInfo();     // Load route info (lookup route, get features).  
+    //newPlayMap.loadBehaviors() ;  // Load marker actions and events.
     return false;
   });
 
@@ -58,19 +49,6 @@ newPlayMap.loadPageRouter = function() {
   // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
   $.address.update();
 };
-
-/*
-newPlayMap.loadRouteInfo = function() {
-  newPlayMap.lookupRoute();
-};
-*/
-
-/*
-newPlayMap.loadBehaviors = function() {
-  // Load functions / trigger behaviors.
-  newPlayMap.loadFeatureAction();
-};
-*/
 
 newPlayMap.loadWax = function() {
   // Custom tiles
@@ -98,24 +76,32 @@ newPlayMap.initMap = function(tj) {
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
 
+
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
+  markers.parent.setAttribute("id", "markers");
+
   // Load map marker layers.
   newPlayMap.loadMapLayers();
 };
 
 newPlayMap.initMapSimple = function() {
-  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png")/*
-, null, [
+  map = new MM.Map('map', new MM.TemplatedLayer("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png"), null, [
         new easey.DragHandler(),
         new easey.TouchHandler(),
         new easey.DoubleClickHandler(),
         new easey.MouseWheelHandler()
-    ]
-*/);
+    ]);
   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
   // Load interactive behavior.
   spotlight = new SpotlightLayer();
   map.addLayer(spotlight);
+
+
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
+  markers.parent.setAttribute("id", "markers");
 
   // Load map marker layers.
   var data = newPlayMap.loadMapData();
@@ -129,7 +115,6 @@ newPlayMap.loadMapData = function() {
     newPlayMap.loadData();
   }
 };
-
 
 newPlayMap.loadData = function() {
     newPlayMap.loadJSONFile({
@@ -146,6 +131,7 @@ newPlayMap.loadData = function() {
       grouping_field: "organization_id",
       callback: newPlayMap.loadOrganization 
     });
+/*
     newPlayMap.loadJSONFile({
       path: "data/artists_300.json",
       type: "artist",
@@ -161,6 +147,7 @@ newPlayMap.loadData = function() {
       callback: newPlayMap.loadArtist
     }
   );
+*/
   newPlayMap.loadJSONFile({
         path: 'data/events_300.json', 
         type: "event",
