@@ -1,29 +1,24 @@
-
 newPlayMap.loadJSONFile = function(vars) {
   var vars = vars;
   var contentData = vars.path + "?cache=" + Math.floor(Math.random()*11);
   var data = "";
 
-  $.ajax({
+  var getData = $.ajax({
     url:  contentData,
     dataType: 'json',
     data: data,
-    complete: newPlayMap.loadDataComplete,
     success: newPlayMap.setData,
     error: newPlayMap.loadDataError
   });
+  getData.vars = vars;
 
 };
 
-newPlayMap.setData = function(data) {
+newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
-
-  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
-
-  var jsonLength = Object.keys(jsonData).length;
-    newPlayMap.lookupRoute();
-  };
-
+  console.log(jsonData);
+  newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  newPlayMap.loadFeatureAction(jqxhr.vars.callback);
   return false;
 };
 
@@ -33,16 +28,8 @@ newPlayMap.loadDataError = function(data) {
   return false;
 };
 
-newPlayMap.loadDataComplete = function() {
-  var jsonLength = Object.keys(jsonData).length;
-  if (jsonLength >= 4 && newPlayMap.routing.path !== undefined) {
-   newPlayMap.loadFeatureAction();
-  };
-};
-
 newPlayMap.onLoadDataMarkers = function(vars) {
     var vars = vars;
-  
     // onLoadMarkers() gets a GeoJSON FeatureCollection:
     // http://geojson.org/geojson-spec.html#feature-collection-objects
     var features = jsonData[vars.dataName].features,
@@ -116,6 +103,4 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // Actually no it is probably fine so long as locations is global.
     map.setExtent(locations);
 
-    // Set that each marker layer was loaded.
-    newPlayMap.status.markersLoaded[vars.type] = true;
 };
