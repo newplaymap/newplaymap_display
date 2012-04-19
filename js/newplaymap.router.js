@@ -129,11 +129,19 @@ newPlayMap.loadOrganization = function() {
 newPlayMap.loadEvent = function() {
     console.log("load event");
     
-    
 
-  newPlayMap.loadAPICall({
+  $('div.marker[type=event]').bind( "click", function() {
+      var marker = $(this);
+      console.log(marker[0]);
+/*       var play_id = $(this) jsondate */
+      var data = {
+      
+      };
+      
+/*
+    newPlayMap.loadAPICall({    
       path: "data/journeys.json",
-      data{}
+      data: data,
       type: "play",
       template: "layer-play",
       layer: "play",
@@ -147,6 +155,17 @@ newPlayMap.loadEvent = function() {
       grouping_field: "related_play_id",
       callback: newPlayMap.loadRelatedEvents
     }
+    );
+*/
+      
+      
+      
+      
+      
+      newPlayMap.loadPlayData(marker);
+  }
+
+
 
     
 };
