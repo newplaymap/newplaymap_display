@@ -2,14 +2,6 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-if(!empty($_GET['page'])){
- $page = $_GET['page'];
-}
-else{
-  $page = 0;
-}
-$page_items = 150;
-
 $collection = $m->newplaymap->artists;
 
 // find everything in the collection
