@@ -70,7 +70,6 @@ newPlayMap.urlParameters = function(){
 
 newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) {
   var path = newPlayMap.routing.path.baseStripped;
-console.log(dataName);
   if(jsonData[dataName] !== undefined){
     features = jsonData[dataName].features;
 
@@ -108,31 +107,35 @@ console.log(dataName);
 
 
 newPlayMap.loadArtist = function() {
-
+    console.log("load artist");
 };
 
 newPlayMap.loadOrganization = function() {
-  
+    console.log("load org");
 };
 
-newPlayMap.loadPlay = function() {
-
-  //get id, 
-  // find $(a id)
-  // trigger mouse over.
-
+newPlayMap.loadEvent = function() {
+    console.log("load event");
 };
 
 newPlayMap.loadRelatedEvents = function() {
-  newPlayMap.loadPlayData(newPlayMap.routing.route.feature);
+  console.log("load related events");
+  $('div.marker[type=play]').bind("click", function() {
+    var marker = $(this);
+    newPlayMap.loadPlayData(marker);    
+  });
+
 };
 
-newPlayMap.loadPlayData = function(feature) {
+newPlayMap.loadPlayData = function(marker) {
   // trigger mouse over.
   // MM uses addEventListener to call onMarkerOver -- can't trigger the event...
-  $('div#marker-play-' +  feature[0]["id"]).trigger("click");
+
+  var feature = newPlayMap.lookupFeatureByMarker(marker);
+  console.log(feature);
+  //$('div#marker-play-' +  feature[0]["id"]).trigger("click");
   
-  newPlayMap.drawPlayJourneyLines(feature);
+  newPlayMap.drawPlayJourneyLines(feature[0]);
   
   
 /*
@@ -144,6 +147,34 @@ newPlayMap.loadPlayData = function(feature) {
         //  MM.addEventListener("triggerLoad", newPlayMap.onMarkerOver, false);
   
 };
+newPlayMap.lookupFeatureByMarker = function(marker) {
+  var marker = marker[0];
+  var id = marker.getAttribute("marker_id");
+  var dataName = marker.getAttribute("dataname");
+
+  if(jsonData[dataName] !== undefined){
+    features = jsonData[dataName].features;
+
+    loadedFeatures = [];
+    for (var i = 0; i < features.length; i++) {
+        var feature = features[i];
+        var pathKey;
+        if(jsonData[dataName]["vars"]["alt_path"] !== undefined) {
+          pathKey = jsonData[dataName]["vars"]["alt_path"];
+        }
+        else {
+          pathKey = "path";
+        }
+        
+        if(feature.id == id){
+            loadedFeatures.push(feature);
+            return loadedFeatures;
+        }        
+    }
+    return loadedFeatures;
+   }
+};
+
 
 newPlayMap.drawPlayJourneyLines = function(feature) {
 //      http://raphaeljs.com/reference.html 
