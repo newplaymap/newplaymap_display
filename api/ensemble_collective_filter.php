@@ -17,7 +17,7 @@ $organizations_cursor = $organizations_collection->find(array("properties.ensemb
 $artists_cursor = $artists_collection->find(array("properties.ensemble_collective" => $ensemble))->sort(array("properties.artist_name" => 1));
 
 $organizations_count = $organizations_cursor->count();
-$artsits_count = $artists_cursor->count();
+$artists_count = $artists_cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
