@@ -81,18 +81,6 @@
     
       <div class="row-fluid">
 
-            <div id="filter-container">
-              <div id="filters">
-                <h4>Filters</h4>
-                <form>
-                  <input id="organizations-filter" class="typeahead" type="text" />
-                  <input id="artists-filter" class="typeahead" type="text" />
-                  <input id="plays-filter" class="typeahead" type="text" />
-                  <input type="submit" value="Display Results" class="submit-filters" />
-                </form>
-              </div>
-            </div>
-
             <div id="popup">
               <div class="content">
                 <h2><a href="${path}">${title}</a></h2>           
@@ -101,6 +89,40 @@
       
             <div id="panel-container">
               <div id="panel">
+                <div id="filter-container">
+                  <div id="filters">
+                    <h4>Filters</h4>
+                    <form>
+                      <!-- Events -->
+                      <h5 id="explore-plays" class="filter-header">Explore Plays</h5>
+                      
+                      <input id="plays-filter" class="typeahead" type="text" placeholder="Play title" />
+                      
+                      <label for="event-type-filter">Event Type:</label>
+                      <select id="event-type-filter" class="form-select" name="event_type"><option selected="selected" value="All">&lt;Any&gt;</option><option value="First Production">First Production</option><option value="Other">Other</option><option value="Presented Performance">Presented Performance</option><option value="Production">Production</option><option value="Reading">Reading</option><option value="Residency">Residency</option><option value="Rolling Premiere">Rolling Premiere</option><option value="Workshop">Workshop</option></select>
+                      
+                      <!-- Events -->
+                      <label for="">Event date:</label>
+                      <label for="event-date-filter">From date:</label>
+                      <input id="event-date-filter" type="text" size="60" maxlength="128" />
+                      <label for="event-to-date-filter">To date:</label>
+                      <input id="event-to-date-filter" type="text" size="60" maxlength="128" />
+                      <div class="description">Enter the date in the format: April 29, 2013</div>
+                      
+                      <!-- Organizations -->
+                      <h5 id="explore-organizations" class="filter-header">Explore Organizations</h5>
+                      <input id="organizations-filter" class="typeahead" type="text" placeholder="Organization name" />
+                      
+                      <label for="organization-type-filter">Organization type:</label>
+                      <select id="organization-type-filter" class="form-select" name="org_type"><option selected="selected"  value="All">&lt;Any&gt;</option><option value="Development">Development</option><option value="Festival">Festival</option><option value="Presenting">Presenting</option><option value="Producing">Producing</option><option value="Service / Network">Service / Network</option><option value="University">University</option></select>
+                      
+                      <!-- Artists -->
+                      <h5 id="explore-artists" class="filter-header">Explore Artists</h5>
+                      <input id="artists-filter" class="typeahead" type="text" placeholder="Artist name" />
+                      <input type="submit" value="Display Results" class="submit-filters" />
+                    </form>
+                  </div>
+                </div>
               
                 <!--               Templates -->
                 <div class="play content">
