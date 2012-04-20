@@ -10,10 +10,10 @@ else{
 }
 $page_items = 150;
 
-$collection = $m->newplaymap->events;
+$collection = $m->newplaymap->journeys;
 
 // find everything in the collection
-$cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("name" => 1));
+$cursor = $collection->find();
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
