@@ -181,6 +181,28 @@ newPlayMap.filters.setOrganizationNationalNetworksMarkers = function(data) {
 }
 
 /*
+ * Ensembles and collective
+ * Return both organizations and artists
+ */
+newPlayMap.filters.ensemble = function(searchString) {
+
+ $.ajax({
+   url:  'api/ensemble_collective_filter.php',
+   dataType: 'json',
+   data: {
+     ensemble_collective: searchString
+   },
+   success: newPlayMap.filters.setEnsembleMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setEnsembleMarkers = function(data) {
+  // Success
+  console.log(data);
+}
+
+/*
  * Utility function shared by multiple ajax calls
  */
 newPlayMap.filters.error = function(data) {
