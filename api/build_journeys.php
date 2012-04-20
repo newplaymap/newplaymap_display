@@ -21,7 +21,7 @@ function buildJourneys($m, $output) {
       if(!empty($playObj['id'])) {
 
         $query = array('properties.related_play_id' => (string) $playObj['id']);
-        $events_cursor = $m->newplaymap->events->find($query);
+        $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date.sec" => -1));
 
         foreach ($events_cursor as $eventObj) {
           // Combine arrays. Make sure this doesn't overwrite id or anything like that. It should be OK.
