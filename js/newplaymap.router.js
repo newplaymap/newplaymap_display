@@ -135,6 +135,7 @@ newPlayMap.loadEvent = function() {
       var related_play_id =  marker.attr("related_play_id");
       console.log(related_play_id );
       var data = {
+        type: "play",
         id: related_play_id
       };
 /*
@@ -161,14 +162,14 @@ newPlayMap.loadEvent = function() {
     newPlayMap.loadAPICall({    
       path: "data/plays/9344.json",
       data: data,
-      type: "journey",
-      template: "layer-journey",
-      layer: "journey",
+      type: "play",
+      template: "layer-play",
+      layer: "play",
       id: "event_id",
       label: "related_theater",
       alt_path: "play_path",
       title: "play_title",
-      dataName: "journey", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
       dataPath: "data/plays/9344.json",
       icon: "icons/play.png",
       grouping_field: "related_play_id",
@@ -181,8 +182,7 @@ newPlayMap.loadEvent = function() {
 
 newPlayMap.loadRelatedEvents = function() {
   console.log("load related events");
-console.log(jsonData);
-  $('div.marker[type=journey]').bind( "click", function() {
+  $('div.marker[type=play]').bind( "click", function() {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
     }
