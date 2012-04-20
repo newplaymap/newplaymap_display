@@ -15,6 +15,7 @@ newPlayMap.browserEvents = [];
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
   newPlayMap.loadMap();         // Load map tiles & trigger data to load.
+  newPlayMap.processFilters();  // Add interaction to filters in sidebar panel
 };
 
 newPlayMap.loadMap = function(callback){
@@ -25,7 +26,7 @@ newPlayMap.loadMap = function(callback){
 };
 
 newPlayMap.alterHomepage = function() {
-  $('div#panel-container div#panel').hide();
+  $('div#panel-container div#panel div.content').hide();
   return false;
 };
 
@@ -124,6 +125,12 @@ newPlayMap.loadMapData = function() {
   return function () {
     newPlayMap.loadData();
   }
+};
+
+newPlayMap.processFilters = function() {
+  $('#filter-container h4').css('cursor', 'pointer').click(function() {
+    $(this).siblings('form').slideToggle();
+  });
 };
 
 newPlayMap.loadData = function() {
