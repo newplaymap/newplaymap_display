@@ -199,7 +199,7 @@ newPlayMap.loadOrganizationData = function(marker) {
       spotlight.addLocations(locationsByID[marker_id]);
       spotlight.parent.className = "active";
 
-      $('div#panel-container div#panel').show();
+      $('div#panel-container div#panel .content').show();
     },
     out: function() {
       $(this).removeClass('active');

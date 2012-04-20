@@ -171,7 +171,7 @@ newPlayMap.eventListProcess = function(container) {
       spotlight.addLocations(locationsByID[eventId]);
       spotlight.parent.className = "active";
 
-      $('div#panel-container div#panel').show();
+      $('div#panel-container div#panel .content').show();
     },
     out: function() {
       $(this).removeClass('active');
