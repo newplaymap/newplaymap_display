@@ -4,23 +4,32 @@ connectMongo(true);
 
 
 $output = "";
-buildJourneys($m, $output);
+$output = buildJourneys($m, $output);
 
 function buildJourneys($m, $output) {
-  $events = $m->newplaymap->events;
+  $m->newplaymap->journeys->drop();
+  $collection = $m->newplaymap->journeys;
+
   $plays = $m->newplaymap->plays;
 
   // find everything in the collection
-  $cursor = $plays->find();
+  $cursor = $plays->find()->limit(30);
 
   // iterate through the results
   foreach ($cursor as $playObj) {
-  var_dump($playObj);
- /*
-     if(!empty($playObj['id'])) {
-        $output .= json_encode($playObj);
+
+      if(!empty($playObj['id'])) {
+
+        $query = array('properties.related_play_id' => (string) $playObj['id']);
+        $events_cursor = $m->newplaymap->events->find($query);
+
+        foreach ($events_cursor as $eventObj) {
+          // Combine arrays. Make sure this doesn't overwrite id or anything like that. It should be OK.
+          $journey = array_merge($playObj["properties"], $eventObj["properties"]);
+          $collection->update(array('id' => $playObj['id']), array('$set' => $journey), true);
+        }
+
       }
-*/
     }
   return $output;
 }
@@ -161,9 +170,11 @@ $plays = $m->newplaymap->plays;
 
 $events_path = '../data/push/events-all.json';
 */
-/*
 
-$cursor = $m->newplaymap->organizations->find()->limit(10);
+
+$cursor = $m->newplaymap->journeys->find()->limit(10);
+
+
 
 // Print data
 header('Access-Control-Allow-Origin: *.newplaymap.org | *.chachaville.com');
@@ -172,6 +183,7 @@ header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT");
 header("Cache-Control: no-cache, must-revalidate"); 
 header("Pragma: no-cache");
 header("Content-type: application/json");
+
 $json = '{"records": [' ;
 
 $i = 0;
@@ -191,8 +203,8 @@ foreach ($cursor as $obj) {
 }
 
 $json .= ']}';
-*/
 
-/* echo $json; */
+echo $json;
+/* echo $output; */
 echo "done";
 ?>
