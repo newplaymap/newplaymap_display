@@ -131,15 +131,14 @@ newPlayMap.loadEvent = function() {
     
   $('div.marker[type=event]').bind( "click", function() {
       var marker = $(this);
-      console.log(marker[0]);
-/*       var play_id = $(this) jsondate */
-      var data = {
       
+      var related_play_id =  marker.getAttribute("related_play_id");
+      var data = {
+        id: related_play_id
       };
       
-/*
     newPlayMap.loadAPICall({    
-      path: "data/journeys.json",
+      path: "api/journey.php?id=" + related_play_id,
       data: data,
       type: "play",
       template: "layer-play",
@@ -149,18 +148,10 @@ newPlayMap.loadEvent = function() {
       alt_path: "play_path",
       title: "play_title",
       dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
-      dataPath: "data/plays/9344.json",
+      dataPath: "api/journeys.php",
       icon: "icons/play.png",
       grouping_field: "related_play_id",
       callback: newPlayMap.loadRelatedEvents
-    }
-    );
-*/
-      
-      
-      
-      
-      /// newPlayMap.loadPlayData(marker);
     }
   );
 

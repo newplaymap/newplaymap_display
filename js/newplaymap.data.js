@@ -63,7 +63,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         markers.addMarker(marker, feature);
         
         if(vars.related_play_id !== undefined) {
-          marker.setAttribute("related_play_id", vars.related_play_id);        
+          marker.setAttribute("related_play_id", feature.properties[vars.related_play_id]);        
         }
 
         // Unique hash marker id for link
