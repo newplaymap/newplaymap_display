@@ -13,7 +13,7 @@ function buildJourneys($m, $output) {
   $plays = $m->newplaymap->plays;
 
   // find everything in the collection
-  $cursor = $plays->find()->limit(30);
+  $cursor = $plays->find();
 
   // iterate through the results
   foreach ($cursor as $playObj) {
@@ -25,8 +25,13 @@ function buildJourneys($m, $output) {
 
         foreach ($events_cursor as $eventObj) {
           // Combine arrays. Make sure this doesn't overwrite id or anything like that. It should be OK.
-          $journey = array_merge($playObj["properties"], $eventObj["properties"]);
-          $collection->update(array('id' => $playObj['id']), array('$set' => $journey), true);
+          $geometry = $eventObj["geometry"];
+          $properties = array_merge($playObj["properties"], $eventObj["properties"]);
+          $collection->update(array('id' => $playObj['id']), array('$set' => array(
+            "properties" => $properties, 
+            "geometry" =>  $geometry,
+            "type" => "journey"            
+            )), true);
         }
 
       }
@@ -172,12 +177,12 @@ $events_path = '../data/push/events-all.json';
 */
 
 
-$cursor = $m->newplaymap->journeys->find()->limit(10);
+$cursor = $m->newplaymap->events->find()->limit(10);
 
 
 
 // Print data
-header('Access-Control-Allow-Origin: *.newplaymap.org | *.chachaville.com');
+header('Access-Control-Allow-Origin: *.newplaymap.org | *.chachaville.com | localhost');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
 header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
 header("Cache-Control: no-cache, must-revalidate"); 
@@ -191,15 +196,19 @@ $i = 0;
 // iterate through the results
 
 foreach ($cursor as $obj) {
+/*
   if(!empty($obj['id'])) {
     if($i > 0) {
      $json .= ',';
     }
+*/
 
     $json .= json_encode($obj);
   
+/*
     $i++;
   }
+*/
 }
 
 $json .= ']}';

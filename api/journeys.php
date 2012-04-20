@@ -8,12 +8,12 @@ if(!empty($_GET['page'])){
 else{
   $page = 0;
 }
-$page_items = 150;
+$page_items = 10;
 
 $collection = $m->newplaymap->journeys;
 
 // find everything in the collection
-$cursor = $collection->find();
+$cursor = $collection->find()->limit($page_items);
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
