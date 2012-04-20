@@ -132,6 +132,25 @@ newPlayMap.filters.organizationType = function(searchString) {
 newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
   // Success
   console.log(data);
+  var searchString = 'Pork!';
+  
+  newPlayMap.loadAPICall({
+    data: {organization_name: searchString},
+    zoomLevel: 10,
+    template: "organization",
+    layer: "layer-organization-filter",
+    class: "active",
+    path: 'api/organization_type_filter.php',
+    type: "organization",
+    label: "org_type",
+    id: "organization_id",
+    title: "name",
+    dataName: "organization_path_filter",
+    dataPath: "api/organization_path_filter.php",
+    icon: "icons/organization.png",
+    grouping_field: "organization_id",
+    callback: newPlayMap.loadOrganizationFilter 
+  });
 }
 
 /*
