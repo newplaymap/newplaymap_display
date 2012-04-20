@@ -21,8 +21,7 @@ newPlayMap.filters.eventType = function(searchString) {
 
 newPlayMap.filters.setEventTypeMarkers = function(data) {
   // Success
-  // console.log(data);
-  newPlayMap.filters.feedback(data.count + ' events loaded');
+  newPlayMap.filters.feedback(data.count + ' events loaded', data);
 }
 
 /*
@@ -43,7 +42,7 @@ newPlayMap.filters.eventDates = function(startDate, endDate) {
 
 newPlayMap.filters.setEventDatesMarkers = function(data) {
   // Success
-  newPlayMap.filters.feedback(data.count + ' events loaded');
+  newPlayMap.filters.feedback(data.count + ' events loaded', data);
 }
 
 /*
@@ -121,7 +120,7 @@ newPlayMap.filters.organizationType = function(searchString) {
 
 newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
   // Success
-  newPlayMap.filters.feedback(data.count + ' organizations loaded');
+  newPlayMap.filters.feedback(data.count + ' organizations loaded', data);
   var searchString = 'Pork!';
   
   newPlayMap.loadAPICall({
@@ -160,7 +159,7 @@ newPlayMap.filters.organizationSpecialInterests = function(searchString) {
 
 newPlayMap.filters.setOrganizationSpecialInterestsMarkers = function(data) {
   // Success
-  newPlayMap.filters.feedback(data.count + ' organizations loaded');
+  newPlayMap.filters.feedback(data.count + ' organizations loaded', data);
 }
 
 /*
@@ -180,7 +179,7 @@ newPlayMap.filters.organizationNationalNetworks = function(searchString) {
 
 newPlayMap.filters.setOrganizationNationalNetworksMarkers = function(data) {
   // Success
-  newPlayMap.filters.feedback(data.count + ' organizations loaded');
+  newPlayMap.filters.feedback(data.count + ' organizations loaded', data);
 }
 
 /*
@@ -202,11 +201,11 @@ newPlayMap.filters.ensemble = function(searchString) {
 
 newPlayMap.filters.setEnsembleMarkers = function(data) {
   // Success
-  newPlayMap.filters.feedback(data.count + ' artists and organizations loaded');
+  newPlayMap.filters.feedback(data.count + ' artists and organizations loaded', data);
 }
 
 /*
- * Artists Index
+ * Artists
  */
 newPlayMap.filters.getArtistsIndex = function() {
   $.ajax({
@@ -238,8 +237,25 @@ newPlayMap.filters.setArtistsIndex = function(data) {
   );
 }
 
+newPlayMap.filters.artists = function(searchString) {
+ $.ajax({
+   url:  'api/artists_filter.php',
+   dataType: 'json',
+   data: {
+     artist_name: searchString
+   },
+   success: newPlayMap.filters.setArtistMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setArtistMarkers = function(data) {
+  // Success
+  newPlayMap.filters.feedback(data.count + ' artists loaded', data);
+}
+
 /*
- * Plays Index
+ * Plays
  */
 newPlayMap.filters.getPlaysIndex = function() {
   $.ajax({
@@ -271,6 +287,25 @@ newPlayMap.filters.setPlaysIndex = function(data) {
   );
 }
 
+
+newPlayMap.filters.plays = function(searchString) {
+ $.ajax({
+   url:  'api/plays_filter.php',
+   dataType: 'json',
+   data: {
+     play_title: searchString
+   },
+   success: newPlayMap.filters.setPlayMarkers,
+   error: newPlayMap.filters.error
+ });
+}
+
+newPlayMap.filters.setPlayMarkers = function(data) {
+  // Success
+  newPlayMap.filters.feedback(data.count + ' play(s) loaded', data);
+}
+
+
 /*
  * Utility function shared by multiple ajax calls
  */
@@ -280,10 +315,10 @@ newPlayMap.filters.error = function(data) {
   // @TODO: Maybe remove / gray out the search filter if the index is not available?
 }
 
-newPlayMap.filters.feedback = function(message) {
+newPlayMap.filters.feedback = function(message, data) {
   // Can either use an alert or console. Made this to more easily demostrate things to folks without console
   alert(message);
-  // console.log(message);
+  console.log(data);
 }
 
 newPlayMap.filters.reset = function(exception) {
@@ -394,7 +429,7 @@ $(document).ready(function() {
    * Trigger api calls on the form elements
    */
   $('#plays-filter').change(function() {
-    // newPlayMap.filters.eventType($(this).attr('value')); // @TODO: Change function when plays is written
+    newPlayMap.filters.plays($(this).attr('value'));
     newPlayMap.filters.reset(this);
   });
   
@@ -424,7 +459,7 @@ $(document).ready(function() {
   });
 
   $('#artists-filter').change(function() {
-    // newPlayMap.filters.organizationSpecialInterests($(this).attr('value'));
+    newPlayMap.filters.artists($(this).attr('value'));
     newPlayMap.filters.reset(this);
   });
   
