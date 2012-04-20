@@ -5,8 +5,7 @@ connectMongo(false);
 $organizations_collection = $m->newplaymap->organizations;
 $artists_collection = $m->newplaymap->artists;
 
-// $ensemble = (!empty($_GET['ensemble'])) ? $_GET['ensemble'] : null;
-$ensemble = 'Ensemble / Collective';
+$ensemble = ($_GET['ensemble_collective'] == 'Ensemble / Collective') ? 'Ensemble / Collective' : null;
 
 if ($ensemble == null) {
   return;
@@ -44,7 +43,7 @@ foreach ($organizations_cursor as $obj) {
   }
 }
 
-foreach ($organizations_cursor as $obj) {
+foreach ($artists_cursor as $obj) {
   if(!empty($obj['id'])) {
     if($i > 0) {
      $json .= ',';
@@ -57,7 +56,7 @@ foreach ($organizations_cursor as $obj) {
 }
 /* $json .= "," . json_encode(array('count' => $collection->count())); */
 
-$json .= '], "count" : ' . $i . '}';
+$json .= '], "count" : ' . ($organizations_count + $artists_count) . '}';
 
 echo $json;
 

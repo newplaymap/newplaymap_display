@@ -130,34 +130,36 @@ function loadArtists($m) {
   
   $count = 0;
   $insert = array();
+
   foreach ($objects as $obj_load) {
-  //print "<pre>";
-  $node = (array) $obj_load->node;
-  
-  $newObj = array(
-    "id" => $node["Artist ID"],
-    "type" => "Feature",
-    "geometry" => array( 
-      "type" => "Point",
-      "coordinates"=> array($node["Longitude"], $node["Latitude"])
-      ),
-    "properties" => array(
-        "latitude" => $node["Latitude"],
-        "longitude" => $node["Longitude"],
-        "artist_photo" => $node["Photo"],
-        "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
-        "artist_id" => $node["Artist ID"],
-        "content_type" => $node["Content Type"],
-        "generative_artist" => $node["Generative artist"],
-        "artist_name" => $node["Generative artist"],
-        "mission_statement" => $node["Mission statement"],
-        "ensemble_collective" => $node["Ensemble collective"] 
-  )
-  );
+    $node = (array) $obj_load->node;
+
+    $newObj = array(
+      "id" => $node["Artist ID"],
+      "type" => "Feature",
+      "geometry" => array( 
+        "type" => "Point",
+        "coordinates"=> array($node["Longitude"], $node["Latitude"])
+        ),
+      "properties" => array(
+          "latitude" => $node["Latitude"],
+          "longitude" => $node["Longitude"],
+          "artist_photo" => $node["Photo"],
+          "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+          "artist_id" => $node["Artist ID"],
+          "content_type" => $node["Content Type"],
+          "generative_artist" => $node["Generative artist"],
+          "artist_name" => $node["Generative artist"],
+          "mission_statement" => $node["Mission statement"],
+          "ensemble_collective" => $node["ensemble_collective"] 
+      )
+    );
+
     // This will completely replace the record.
     $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj), true);
     $count++;
   }
+
   $output .= "<p>Loaded " + $count + " Artists</p>";
 }
 
