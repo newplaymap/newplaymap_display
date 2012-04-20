@@ -18,26 +18,26 @@ header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT");
 header("Cache-Control: no-cache, must-revalidate"); 
 header("Pragma: no-cache");
 header("Content-type: application/json");
- $page;
 
-$json = '{"name": "journeys", "items": [ ';
+
+$json = "";
+/* $json = '{"name": "journeys", "items": [ '; */
 
 
 $i = 0;
 
 // iterate through the results
 foreach ($cursor as $obj) {
+
   if(!empty($obj['id'])) {
     if($i > 0) {
      $json .= ',';
     }
 
-
-$json .= '{"name": "journey", "id": ' . $obj['id'] . ', "type":"FeatureCollection", "features":[ ' ;
+    $json .= '{"name": "journey", "id": ' . $obj['id'] . ', "type":"FeatureCollection", "features":[ ' ;
 
     $json .= json_encode($obj);
 
-    $json .= ']}';  
     $i++;
   }
 }

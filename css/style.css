@@ -75,11 +75,11 @@ dd {
   margin: 5px 0 1em 0;
 }
 
-.marker[type=play] {
+.marker[type=journey] {
   z-index: 100;
 }
 
-.marker[type=organization] {
+.marker[type=event] {
   z-index: 80;
 }
 

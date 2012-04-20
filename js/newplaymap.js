@@ -134,7 +134,6 @@ newPlayMap.processFilters = function() {
 };
 
 newPlayMap.loadData = function() {
-/*
     newPlayMap.loadJSONFile({
       path: 'api/organizations.php',
       type: "organization",
@@ -164,7 +163,6 @@ newPlayMap.loadData = function() {
       callback: newPlayMap.loadArtist
     }
   );
-*/
   newPlayMap.loadJSONFile({
         path: 'api/events.php', 
         type: "event",

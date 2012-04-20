@@ -132,7 +132,8 @@ newPlayMap.loadEvent = function() {
   $('div.marker[type=event]').bind( "click", function() {
       var marker = $(this);
       
-      var related_play_id =  marker.getAttribute("related_play_id");
+      var related_play_id =  marker.attr("related_play_id");
+      console.log(related_play_id );
       var data = {
         id: related_play_id
       };
@@ -140,33 +141,26 @@ newPlayMap.loadEvent = function() {
     newPlayMap.loadAPICall({    
       path: "api/journey.php?id=" + related_play_id,
       data: data,
-      type: "play",
-      template: "layer-play",
-      layer: "play",
-      id: "related_event_id",
+      type: "journey",
+      template: "layer-journey",
+      layer: "journey",
+      id: "event_id",
       label: "related_theater",
       alt_path: "play_path",
       title: "play_title",
-      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
-      dataPath: "api/journeys.php",
+      dataName: "journey", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataPath: "api/journey.php?id=" + related_play_id,
       icon: "icons/play.png",
       grouping_field: "related_play_id",
       callback: newPlayMap.loadRelatedEvents
-    }
-      
-      
-      
-      
-      /// newPlayMap.loadPlayData(marker);
-    }
-  );
-
+    });
+  });
 };
 
 newPlayMap.loadRelatedEvents = function() {
   console.log("load related events");
 
-  $('div.marker[type=play]').bind( "click", function() {
+  $('div.marker[type=journey]').bind( "click", function() {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
     }
@@ -180,6 +174,7 @@ newPlayMap.loadPlayData = function(marker) {
   newPlayMap.drawPlayJourneyLines(feature[0]);
   
   $('div#play-journey').click(function() {$('div#play-journey').hide();});
+  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
 
 };
 

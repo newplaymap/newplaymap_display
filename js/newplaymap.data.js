@@ -59,7 +59,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
             marker = document.createElement("div");
 
         marker.feature = feature;
-        console.log(feature);
+
         markers.addMarker(marker, feature);
         
         if(vars.related_play_id !== undefined) {
