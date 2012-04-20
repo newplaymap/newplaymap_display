@@ -138,27 +138,26 @@ newPlayMap.loadEvent = function() {
         type: "play",
         id: related_play_id
       };
-/*
       
     newPlayMap.loadAPICall({    
       path: "api/journey.php?id=" + related_play_id,
       data: data,
-      type: "journey",
-      template: "layer-journey",
-      layer: "journey",
+      type: "play",
+      template: "layer-play",
+      layer: "play",
       id: "event_id",
       label: "related_theater",
       alt_path: "play_path",
       title: "play_title",
-      dataName: "journey", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
       dataPath: "api/journey.php?id=" + related_play_id,
       icon: "icons/play.png",
       grouping_field: "related_play_id",
       callback: newPlayMap.loadRelatedEvents
     });
-*/
 
       
+/*
     newPlayMap.loadAPICall({    
       path: "data/plays/9344.json",
       data: data,
@@ -175,6 +174,7 @@ newPlayMap.loadEvent = function() {
       grouping_field: "related_play_id",
       callback: newPlayMap.loadRelatedEvents
     });
+*/
 
 
   });
