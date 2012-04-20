@@ -48,14 +48,11 @@ body {
 }
 
 #filter-container {
-  position: fixed;
-  left: 0px;
-  z-index: 2000;
-  background: rgba(0,0,0, 0.7);
-  width: 100px;
-  height: 200px;
-  padding: 10px;
-  color: #fff;
+}
+
+/* @TODO: Replace with Rocket's fancy visibly hidden thing */
+#filter-container form {
+  display: none;
 }
 
 ul.dropdown-menu {
