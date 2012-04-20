@@ -127,7 +127,7 @@ newPlayMap.panelTemplates = function() {
     panelMarkup[type] = container.html();
   }
 
-  type = "play";
+  type = "journey";
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
     container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
@@ -182,7 +182,7 @@ newPlayMap.eventListProcess = function(container) {
 };
 
 newPlayMap.loadPlayJourney = function(feature) {
-  var type = 'play';
+  var type = 'journey';
   var container = $('#panel-container .' + type);
   
   // @TODO: Put this in a template
