@@ -18,7 +18,7 @@ newPlayMap.onMarkerOver = function(e) {
         spotlight.addLocations(locationsByID[marker_id]);
         spotlight.parent.className = "active";
 
-        $('div#panel-container div#panel').show();
+        $('div#panel-container div#panel .content').show();
  
         $('div.marker').css({ 'opacity' : 0.4 }); 
 
@@ -69,7 +69,7 @@ newPlayMap.onMarkerClick = function(e) {
         // spotlight.addLocations(locationsByID[grouping_field] || []);
         // spotlight.parent.className = "active";
 
-        $('div#panel-container div#panel').show();
+        $('div#panel-container div#panel .content').show();
                     
         // Update the panel data.
         newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
