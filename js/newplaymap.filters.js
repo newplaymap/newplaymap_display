@@ -330,6 +330,10 @@ newPlayMap.filters.reset = function(exception) {
   $('#filters form').children('select').not(exception).each(function() {
     $(this).children().eq(0).attr('selected', 'selected');
   });
+  
+  if (exception !== '.event-date-field') {
+    $('#filters .event-date-filter-complete').fadeOut();
+  }
 }
 
 
@@ -466,6 +470,16 @@ $(document).ready(function() {
   $('#ensemble-collective-filter').change(function() {
     newPlayMap.filters.ensemble('Ensemble / Collective');
     newPlayMap.filters.reset(this);
+  });
+  
+  $('.event-date-field').focus(function() {
+    $('#filters .event-date-filter-complete').fadeIn('slow');
+    newPlayMap.filters.reset('.event-date-field');
+  });
+  $('#filters .event-date-filter-complete').hide().click(function(event) {
+    event.preventDefault();
+    
+    newPlayMap.filters.eventDates($('#event-date-filter').val(),$('#event-to-date-filter').val());
   });
   
   // $('#filters form').submit(function(event) {
