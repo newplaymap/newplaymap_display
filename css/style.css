@@ -75,7 +75,7 @@ dd {
   margin: 5px 0 1em 0;
 }
 
-.marker[type=journey] {
+.marker[type=play] {
   z-index: 100;
 }
 

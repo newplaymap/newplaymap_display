@@ -1,4 +1,4 @@
-{"name": "journey", "id": 9344, "type":"FeatureCollection","features":[  {
+{"name": "play", "id": 9344, "type":"FeatureCollection","features":[  {
   "id":"10972",
   "type":"Feature",
   "geometry": {
@@ -6,6 +6,7 @@
     "coordinates": [-110.971909,32.220585]
     },
   "properties": {
+      "type": "play",
       "longitude" : -110.971909,
       "latitude" : 32.220585,
       "related_event_id" : 10972,
@@ -33,6 +34,7 @@
     "coordinates": [-72.920621,41.293108]
     },
   "properties": {
+      "type": "play",
       "longitude" : -72.920621,
       "latitude" : 41.293108,
       "related_event_id" : 9351,
@@ -61,6 +63,7 @@
     "coordinates": [-93.249161,44.97101]
     },
   "properties": {
+      "type": "play",
       "longitude" : -93.249161,
       "latitude" : 44.97101,
       "related_event_id" : 9348,
@@ -89,6 +92,7 @@
     "coordinates": [-77.020721,38.877536]
     },
   "properties": {
+      "type": "play",
       "longitude" : -77.020721,
       "latitude" : 38.877536,
       "related_event_id" : 9352,
@@ -117,6 +121,7 @@
     "coordinates": [-93.238971,44.962414]
     },
   "properties": {
+      "type": "play",
       "longitude" : -93.238971,
       "latitude" : 44.962414,
       "related_event_id" : 11110,
@@ -145,6 +150,7 @@
     "coordinates": [-73.990152,40.758343]
     },
   "properties": {
+      "type": "play",
       "longitude" : -73.990152,
       "latitude" : 40.758343,
       "related_event_id" : 11372,
@@ -173,6 +179,7 @@
     "coordinates": [-73.990152,40.758343]
     },
   "properties": {
+      "type": "play",
       "longitude" : -73.990152,
       "latitude" : 40.758343,
       "related_event_id" : 33902,
@@ -201,6 +208,7 @@
     "coordinates": [-73.990152,40.758343]
     },
   "properties": {
+      "type": "play",
       "longitude" : -73.990152,
       "latitude" : 40.758343,
       "related_event_id" : 11378,
@@ -229,6 +237,7 @@
     "coordinates": [-75.174646,39.951438]
     },
   "properties": {
+       "type": "play",
       "longitude" : -75.174646,
       "latitude" : 39.951438,
       "related_event_id" : 11174,
@@ -257,6 +266,7 @@
     "coordinates": [-93.238971,44.962414]
     },
   "properties": {
+      "type": "play",
       "longitude" : -93.238971,
       "latitude" : 44.962414,
       "related_event_id" : 11283,
@@ -285,6 +295,7 @@
     "coordinates": [-73.990152,40.758343]
     },
   "properties": {
+      "type": "play",
       "longitude" : -73.990152,
       "latitude" : 40.758343,
       "related_event_id" : 11109,
@@ -313,6 +324,7 @@
     "coordinates": [-91.791349,47.926314]
     },
   "properties": {
+      "type": "play",
       "longitude" : -91.791349,
       "latitude" : 47.926314,
       "related_event_id" : 18550,

@@ -18,7 +18,7 @@ newPlayMap.updatePanel = function(marker, data) {
   //        Make it work with plain events (type == event)
   // console.log(feature.marker_id);
   // console.log(jsonData[feature.marker_id]);
-  if (feature.type == 'journey') {
+  if (feature.type == 'play') {
     for (singleFeature in jsonData.play.features) {
       newPlayMap.loadPlayJourney(jsonData.play.features[singleFeature]);
     }
@@ -27,7 +27,7 @@ newPlayMap.updatePanel = function(marker, data) {
   // Add interaction to event listings in the new content
   // @TODO: Not only plays use this template. 
   //        Either be more specific or make sure it applies universally
-  var container = $('#panel-container .journey');
+  var container = $('#panel-container .play');
   newPlayMap.eventListProcess(container);
   
   // Make all links listen for address changes.
@@ -127,7 +127,7 @@ newPlayMap.panelTemplates = function() {
     panelMarkup[type] = container.html();
   }
 
-  type = "journey";
+  type = "play";
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
     container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
@@ -182,7 +182,7 @@ newPlayMap.eventListProcess = function(container) {
 };
 
 newPlayMap.loadPlayJourney = function(feature) {
-  var type = 'journey';
+  var type = 'play';
   var container = $('#panel-container .' + type);
   
   // @TODO: Put this in a template
