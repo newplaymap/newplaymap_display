@@ -34,7 +34,7 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    $json .= '{"name": "journey", "id": ' . $obj['id'] . ', "type":"FeatureCollection", "features":[ ' ;
+    $json .= '{"name": "play", "id": ' . $obj['id'] . ', "type":"FeatureCollection", "features":[ ' ;
 
     $json .= json_encode($obj);
 
