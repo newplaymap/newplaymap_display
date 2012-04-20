@@ -8,9 +8,6 @@ var jsonDataSearch = {};
  * Event type
  */
 newPlayMap.filters.eventType = function(searchString) {
- console.log('searchString');
- console.log(searchString);
-
  $.ajax({
    url:  'api/event_type_filter.php',
    dataType: 'json',
@@ -24,17 +21,14 @@ newPlayMap.filters.eventType = function(searchString) {
 
 newPlayMap.filters.setEventTypeMarkers = function(data) {
   // Success
-  console.log(data);
+  // console.log(data);
+  newPlayMap.filters.feedback(data.count + ' events loaded');
 }
 
 /*
  * Event date range
  */
 newPlayMap.filters.eventDates = function(startDate, endDate) {
- console.log('dates');
- console.log(startDate);
- console.log(endDate);
-
  $.ajax({
    url:  'api/event_date_filter.php',
    dataType: 'json',
@@ -49,7 +43,7 @@ newPlayMap.filters.eventDates = function(startDate, endDate) {
 
 newPlayMap.filters.setEventDatesMarkers = function(data) {
   // Success
-  console.log(data);
+  newPlayMap.filters.feedback(data.count + ' events loaded');
 }
 
 /*
@@ -90,8 +84,6 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
  * Used when submitting the filter form
  */
 newPlayMap.filters.organizationName = function(searchString) {
-  console.log('searchString: ' + searchString);
-  
   newPlayMap.loadAPICall({
     data: {organization_name: searchString},
     zoomLevel: 10,
@@ -116,8 +108,6 @@ newPlayMap.filters.organizationName = function(searchString) {
  * Organization type
  */
 newPlayMap.filters.organizationType = function(searchString) {
-  console.log('searchString: ' + searchString);
-
  $.ajax({
    url:  'api/organization_type_filter.php',
    dataType: 'json',
@@ -131,7 +121,7 @@ newPlayMap.filters.organizationType = function(searchString) {
 
 newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
   // Success
-  console.log(data);
+  newPlayMap.filters.feedback(data.count + ' organizations loaded');
   var searchString = 'Pork!';
   
   newPlayMap.loadAPICall({
@@ -157,9 +147,6 @@ newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
  * Organizations by Special Interest
  */
 newPlayMap.filters.organizationSpecialInterests = function(searchString) {
- console.log('searchString');
- console.log(searchString);
-
  $.ajax({
    url:  'api/organization_special_interests_filter.php',
    dataType: 'json',
@@ -173,16 +160,13 @@ newPlayMap.filters.organizationSpecialInterests = function(searchString) {
 
 newPlayMap.filters.setOrganizationSpecialInterestsMarkers = function(data) {
   // Success
-  console.log(data);
+  newPlayMap.filters.feedback(data.count + ' organizations loaded');
 }
 
 /*
  * Organizations by National Network
  */
 newPlayMap.filters.organizationNationalNetworks = function(searchString) {
- console.log('searchString');
- console.log(searchString);
-
  $.ajax({
    url:  'api/organization_national_networks_filter.php',
    dataType: 'json',
@@ -196,7 +180,7 @@ newPlayMap.filters.organizationNationalNetworks = function(searchString) {
 
 newPlayMap.filters.setOrganizationNationalNetworksMarkers = function(data) {
   // Success
-  console.log(data);
+  newPlayMap.filters.feedback(data.count + ' organizations loaded');
 }
 
 /*
@@ -218,18 +202,8 @@ newPlayMap.filters.ensemble = function(searchString) {
 
 newPlayMap.filters.setEnsembleMarkers = function(data) {
   // Success
-  console.log(data);
+  newPlayMap.filters.feedback(data.count + ' artists and organizations loaded');
 }
-
-/*
- * Utility function shared by multiple ajax calls
- */
-newPlayMap.filters.error = function(data) {
-  console.log('error');
-
-  // @TODO: Maybe remove / gray out the search filter if the index is not available?
-}
-
 
 /*
  * Artists Index
@@ -296,6 +270,34 @@ newPlayMap.filters.setPlaysIndex = function(data) {
     }
   );
 }
+
+/*
+ * Utility function shared by multiple ajax calls
+ */
+newPlayMap.filters.error = function(data) {
+  console.log('error');
+
+  // @TODO: Maybe remove / gray out the search filter if the index is not available?
+}
+
+newPlayMap.filters.feedback = function(message) {
+  // Can either use an alert or console. Made this to more easily demostrate things to folks without console
+  alert(message);
+  // console.log(message);
+}
+
+newPlayMap.filters.reset = function(exception) {
+  var exception = exception || '';
+  $('#filters form').children('input').not('.submit-filters').not($(exception)).each(function() {
+    $(this).val('').attr('checked', false);
+  });
+
+  $('#filters form').children('select').not(exception).each(function() {
+    $(this).children().eq(0).attr('selected', 'selected');
+  });
+}
+
+
 
 /* 
  * Pulled from newplaymap.data.js almost in it's entirety. 
@@ -388,12 +390,55 @@ $(document).ready(function() {
   newPlayMap.filters.getArtistsIndex();
   newPlayMap.filters.getPlaysIndex();
   
-  $('#filters form').submit(function(event) {
-    event.preventDefault();
-    var organizationsFilterValue = $('#organizations-filter').val();
-    
-    newPlayMap.filters.organizationName(organizationsFilterValue);
+  /*
+   * Trigger api calls on the form elements
+   */
+  $('#plays-filter').change(function() {
+    // newPlayMap.filters.eventType($(this).attr('value')); // @TODO: Change function when plays is written
+    newPlayMap.filters.reset(this);
   });
+  
+  $('#event-type-filter').change(function() {
+    newPlayMap.filters.eventType($(this).attr('value'));
+    newPlayMap.filters.reset(this);
+  });
+  
+  $('#organization-type-filter').change(function() {
+    newPlayMap.filters.organizationType($(this).attr('value'));
+    newPlayMap.filters.reset(this);
+  });
+  
+  $('#organizations-filter').change(function() {
+    newPlayMap.filters.organizationName($(this).attr('value'));
+    newPlayMap.filters.reset(this);
+  });
+  
+  $('#organization-national-networks-filter').change(function() {
+    newPlayMap.filters.organizationNationalNetworks($(this).attr('value'));
+    newPlayMap.filters.reset(this);
+  });
+
+  $('#organization-special-interests-filter').change(function() {
+    newPlayMap.filters.organizationSpecialInterests($(this).attr('value'));
+    newPlayMap.filters.reset(this);
+  });
+
+  $('#artists-filter').change(function() {
+    // newPlayMap.filters.organizationSpecialInterests($(this).attr('value'));
+    newPlayMap.filters.reset(this);
+  });
+  
+  $('#ensemble-collective-filter').change(function() {
+    newPlayMap.filters.ensemble('Ensemble / Collective');
+    newPlayMap.filters.reset(this);
+  });
+  
+  // $('#filters form').submit(function(event) {
+  //   event.preventDefault();
+  //   var organizationsFilterValue = $('#organizations-filter').val();
+  //   
+  //   newPlayMap.filters.organizationName(organizationsFilterValue);
+  // });
 });
 
 // 
