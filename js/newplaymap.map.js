@@ -85,7 +85,7 @@ newPlayMap.loadArtist = function() {
 newPlayMap.loadOrganizationFilter = function() {
   console.log("load org");
 
-  $('div.marker[dataname=organization_filter]').each(function(){
+  $('div.marker[dataname=organizations_filter]').each(function(){
       var id = $(this).attr('marker_id');
 
       spotlight.addLocations(locationsByID[id]);
