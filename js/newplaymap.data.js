@@ -29,12 +29,18 @@ newPlayMap.loadAPICall = function(vars) {
 };
 
 newPlayMap.setData = function(data, statusText, jqxhr) {
-console.log(data);
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
+  var length = jsonData[data.name]["features"].length;
+  var count =  newPlayMap.toTitleCase(data.name) + " Showing: " + length + " of " + jsonData[data.name].count + ".";
+  $('div.count').prepend('<p>' + count + '</p>');
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
   return false;
 };
+
+newPlayMap.toTitleCase = function (str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 // General function for handling AJAX errors.
 newPlayMap.loadDataError = function(data) {
