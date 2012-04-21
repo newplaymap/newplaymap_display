@@ -11,18 +11,18 @@ var jsonDataSearch = {};
 newPlayMap.filters.organizationName = function(searchString) {
   newPlayMap.loadAPICall({
     data: {organization_name: searchString},
-    zoomLevel: 10,
+    zoomLevel: 3,
     clearLayer: true,
     clearLayers: true,
     template: "organization",
     layer: "layer-organization-filter",
     class: "active",
-    path: 'api/organizations_filter.php?',
     type: "organization",
     label: "org_type",
     id: "organization_id",
     title: "name",
     dataName: "organization_filter",
+    path: 'api/organizations_filter.php?',
     dataPath: "api/organizations_filter.php?",
     icon: "icons/organization.png",
     grouping_field: "organization_id",
@@ -30,25 +30,84 @@ newPlayMap.filters.organizationName = function(searchString) {
   });
 }
 
+// Load plays
+newPlayMap.filters.plays = function(data) {
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-plays-filter",
+    class: "active",
+    label: "play_title",
+    id: "event_id",
+    title: "play_title",
+    template: "play",
+    type: "play",
+    dataName: "play",
+    path: "api/journey.php?play_title=" +  data.play_title,
+    dataPath: "api/journey.php?play_title=" +  data.play_title,
+    icon: "icons/play.png",
+    grouping_field: "related_play_id",
+    callback: newPlayMap.loadJourney 
+  });
+};
 
 
-
-newPlayMap.filters.setupFilters = function() {
-
+// Load plays
+newPlayMap.filters.events = function(data) {
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-events-filter",
+    class: "active",
+    id: "event_id",
+    label: "related_theater", // field which will be used in label
+    title: "play_title",
+    template: "play",
+    type: "play",
+    dataName: "events_filter",
+    path: "api/events_filter.php?event_type=" +  data.event_type,
+    dataPath: "api/events_filter.php?event_type=" +  data.event_type,
+    icon: "icons/event.png",
+    grouping_field: "event_id",
+    related_play_id: "related_play_id",
+    callback: newPlayMap.loadEvent 
+  });
+};
 
 
 /*
- * Trigger api calls on the form elements
+ * Event type
  */
-$('#plays-filter').change(function() {
-  newPlayMap.filters.plays({play_title: $(this).attr('value')});
-  newPlayMap.filters.reset(this);
-});
+newPlayMap.filters.eventType = function(searchString) {
+ $.ajax({
+   url:  'api/event_type_filter.php',
+   dataType: 'json',
+   data: {
+     event_type: searchString
+   },
+   success: newPlayMap.filters.setEventTypeMarkers,
+   error: newPlayMap.filters.error
+ });
+}
 
+newPlayMap.filters.setupFilters = function() {
 
+  /*
+   * Trigger api calls on the form elements
+   */
+  $('#plays-filter').change(function() {
+    newPlayMap.filters.plays({play_title: $(this).attr('value')});
+    newPlayMap.filters.reset(this);
+  });
 
-
-
+  $('#event-type-filter').change(function() {
+    newPlayMap.filters.events({event_type: $(this).attr('value')});
+    newPlayMap.filters.reset(this);
+  });
 
 
 
@@ -60,10 +119,7 @@ $('#plays-filter').change(function() {
   newPlayMap.filters.getPlaysIndex();
   
 
-  $('#event-type-filter').change(function() {
-    newPlayMap.filters.eventType($(this).attr('value'));
-    newPlayMap.filters.reset(this);
-  });
+
   
   $('#organization-type-filter').change(function() {
     newPlayMap.filters.organizationType($(this).attr('value'));
@@ -109,30 +165,6 @@ $('#plays-filter').change(function() {
 };
 
   
-  
-// Load plays
-newPlayMap.filters.plays = function(data) {
-  newPlayMap.loadAPICall({
-    data: data,
-    zoomLevel: 3,
-    clearLayer: true,
-    clearLayers: true,
-    layer: "layer-plays-filter",
-    class: "active",
-    label: "play_title",
-    id: "event_id",
-    title: "play_title",
-    template: "play",
-    type: "play",
-    dataName: "play",
-    path: "api/journey.php?play_title=" +  data.play_title,
-    dataPath: "api/journey.php?play_title=" +  data.play_title,
-    icon: "icons/play.png",
-    grouping_field: "related_play_id",
-    callback: newPlayMap.loadJourney 
-  });
-};
-
 /*
  * Utility function shared by multiple ajax calls
  */
@@ -166,22 +198,6 @@ newPlayMap.filters.reset = function(exception) {
 
 
 /***/
-
-
-/*
- * Event type
- */
-newPlayMap.filters.eventType = function(searchString) {
- $.ajax({
-   url:  'api/event_type_filter.php',
-   dataType: 'json',
-   data: {
-     event_type: searchString
-   },
-   success: newPlayMap.filters.setEventTypeMarkers,
-   error: newPlayMap.filters.error
- });
-}
 
 newPlayMap.filters.setEventTypeMarkers = function(data) {
   // Success
