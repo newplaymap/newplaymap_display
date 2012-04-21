@@ -5,14 +5,21 @@ connectMongo(false);
 $collection = $m->newplaymap->organizations;
 
 $organization_name = (!empty($_GET['organization_name'])) ? $_GET['organization_name'] : null;
+$organization_type = (!empty($_GET['organization_type'])) ? $_GET['organization_type'] : null;
 
-if ($organization_name == null) {
+if($organization_name !== null) {
+  // find everything in the collection
+  $cursor = $collection->find(array("properties.name" => $organization_name))->sort(array("properties.name" => 1));
+  $count = $cursor->count();
+}
+else if($organization_type !== null) {
+  // find everything in the collection
+  $cursor = $collection->find(array("properties.organization_type.type" => $organization_type))->sort(array("properties.name" => 1));
+  $count = $cursor->count();
+}
+else {
   return;
 }
-
-// find everything in the collection
-$cursor = $collection->find(array("properties.name" => $organization_name))->sort(array("properties.name" => 1));
-$count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
@@ -21,7 +28,7 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 header("Content-type: application/json");
  $page;
-$json = '{"name": "organization_filter","type":"FeatureCollection","features":[ ' ;
+$json = '{"name": "organizations_filter","type":"FeatureCollection","features":[ ' ;
 
 $i = 0;
 

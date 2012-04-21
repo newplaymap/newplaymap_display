@@ -57,13 +57,19 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
   // Remove new layers
   if(vars.clearLayers === true) {
-/*     $('div.marker[dataName=organization_filter]').remove(); */
+/*     $('div.marker[dataName=organizations_filter]').remove(); */
     $('div#play-journey').remove();
     $('div.marker[dataName=play]').remove();
     $('div.marker[dataName=artists_filter]').remove();
     $('div.marker[dataName=events_filter]').remove();
     $('div.marker[dataName=plays_filter]').remove();
-    $('div.marker[dataName=organization_filter]').remove();
+    $('div.marker[dataName=organizations_filter]').remove();
+
+    spotlight.parent.className = "inactive";
+    spotlight.removeAllLocations();
+    $('div.marker').css({ 'opacity' : 1 }); 
+
+
   }
 
   // for each feature in the collection, create a marker and add it

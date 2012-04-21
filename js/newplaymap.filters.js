@@ -8,9 +8,20 @@ var jsonDataSearch = {};
  * Function to find organization feature from the name.
  * Used when submitting the filter form
  */
-newPlayMap.filters.organizationName = function(searchString) {
+newPlayMap.filters.organizations = function(data) {
+  var pathQuery = "";
+  
+  if (data.organization_name !== undefined) {
+    pathQuery = "&organization_name=" +  data.organization_name;
+  }
+
+  if (data.organization_name !== undefined) {
+    pathQuery = "&organization_type=" +  data.organization_type;
+  }
+
+
   newPlayMap.loadAPICall({
-    data: {organization_name: searchString},
+    data: data,
     zoomLevel: 3,
     clearLayer: true,
     clearLayers: true,
@@ -21,11 +32,11 @@ newPlayMap.filters.organizationName = function(searchString) {
     label: "org_type",
     id: "organization_id",
     title: "name",
-    dataName: "organization_filter",
-    path: 'api/organizations_filter.php?',
-    dataPath: "api/organizations_filter.php?",
+    dataName: "organizations_filter",
+    path: 'api/organizations_filter.php?' + pathQuery,
+    dataPath: "api/organizations_filter.php?" + pathQuery,
     icon: "icons/organization.png",
-    grouping_field: "organization_id",
+    grouping_field: data.grouping_field,
     callback: newPlayMap.loadOrganizationFilter 
   });
 }
@@ -93,21 +104,6 @@ newPlayMap.filters.events = function(data) {
 };
 
 
-/*
- * Event type
- */
-newPlayMap.filters.eventType = function(searchString) {
- $.ajax({
-   url:  'api/event_type_filter.php',
-   dataType: 'json',
-   data: {
-     event_type: searchString
-   },
-   success: newPlayMap.filters.setEventTypeMarkers,
-   error: newPlayMap.filters.error
- });
-}
-
 newPlayMap.filters.setupFilters = function() {
 
   /*
@@ -139,25 +135,19 @@ newPlayMap.filters.setupFilters = function() {
   });
 
 
-
-  // @TODO: Don't load the index on page load, do it when the filters are shown
-  newPlayMap.filters.getOrganizationsIndex();
-  newPlayMap.filters.getArtistsIndex();
-  newPlayMap.filters.getPlaysIndex();
-  
-
-
-  
-  $('#organization-type-filter').change(function() {
-    newPlayMap.filters.organizationType($(this).attr('value'));
-    newPlayMap.filters.reset(this);
-  });
-  
   $('#organizations-filter').change(function() {
-    newPlayMap.filters.organizationName($(this).attr('value'));
+    newPlayMap.filters.organizations({organization_name: $(this).attr('value'), grouping_field: "organization_name" });
     newPlayMap.filters.reset(this);
   });
   
+
+
+  $('#organization-type-filter').change(function() {
+    newPlayMap.filters.organizations({organization_type: $(this).attr('value'), grouping_field: "organization_type"});
+    newPlayMap.filters.reset(this);
+  });
+  /*
+
   $('#organization-national-networks-filter').change(function() {
     newPlayMap.filters.organizationNationalNetworks($(this).attr('value'));
     newPlayMap.filters.reset(this);
@@ -167,6 +157,20 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.organizationSpecialInterests($(this).attr('value'));
     newPlayMap.filters.reset(this);
   });
+*/
+
+
+
+
+  // @TODO: Don't load the index on page load, do it when the filters are shown
+  newPlayMap.filters.getOrganizationsIndex();
+  newPlayMap.filters.getArtistsIndex();
+  newPlayMap.filters.getPlaysIndex();
+  
+
+
+  
+
 
   $('#artists-filter').change(function() {
     newPlayMap.filters.artists($(this).attr('value'));
@@ -222,21 +226,6 @@ newPlayMap.filters.setEventTypeMarkers = function(data) {
   newPlayMap.filters.feedback(data.count + ' events loaded', data);
 }
 
-/*
- * Event date range
- */
-newPlayMap.filters.eventDates = function(startDate, endDate) {
- $.ajax({
-   url:  'api/event_date_filter.php',
-   dataType: 'json',
-   data: {
-     start_date: startDate,
-     end_date: endDate
-   },
-   success: newPlayMap.filters.setEventDatesMarkers,
-   error: newPlayMap.filters.error
- });
-}
 
 newPlayMap.filters.setEventDatesMarkers = function(data) {
   // Success
