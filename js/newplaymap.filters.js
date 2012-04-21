@@ -56,6 +56,20 @@ newPlayMap.filters.plays = function(data) {
 
 // Load plays
 newPlayMap.filters.events = function(data) {
+  var pathQuery = "";
+  
+  if (data.event_type !== undefined) {
+    pathQuery = "&event_type=" +  data.event_type;
+  }
+
+  if (data.event_date !== undefined) {
+    pathQuery = "&event_date=" +  data.event_date;
+  }
+
+  if (data.event_to_date !== undefined) {
+    pathQuery = "&event_to_date=" +  data.event_to_date;
+  }
+
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: 3,
@@ -69,8 +83,8 @@ newPlayMap.filters.events = function(data) {
     template: "play",
     type: "play",
     dataName: "events_filter",
-    path: "api/events_filter.php?event_type=" +  data.event_type,
-    dataPath: "api/events_filter.php?event_type=" +  data.event_type,
+    path: "api/events_filter.php?" + pathQuery,
+    dataPath: "api/events_filter.php?" + pathQuery,
     icon: "icons/event.png",
     grouping_field: "event_id",
     related_play_id: "related_play_id",
@@ -102,14 +116,27 @@ newPlayMap.filters.setupFilters = function() {
   $('#plays-filter').change(function() {
     newPlayMap.filters.plays({play_title: $(this).attr('value')});
     newPlayMap.filters.reset(this);
+    return false;
   });
 
   $('#event-type-filter').change(function() {
     newPlayMap.filters.events({event_type: $(this).attr('value')});
     newPlayMap.filters.reset(this);
+    return false;
   });
 
+  
+  $('.event-date-field').focus(function() {
+    $('#filters .event-date-filter-complete').fadeIn('slow');
+    newPlayMap.filters.reset('.event-date-field');
+  });
 
+  $('#filters .event-date-filter-complete').hide().click(function(event) {
+    event.preventDefault();
+    
+    newPlayMap.filters.events({event_date: $('#event-date-filter').val(), event_to_date: $('#event-to-date-filter').val() });
+    return false;
+  });
 
 
 
@@ -150,16 +177,7 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.ensemble('Ensemble / Collective');
     newPlayMap.filters.reset(this);
   });
-  
-  $('.event-date-field').focus(function() {
-    $('#filters .event-date-filter-complete').fadeIn('slow');
-    newPlayMap.filters.reset('.event-date-field');
-  });
-  $('#filters .event-date-filter-complete').hide().click(function(event) {
-    event.preventDefault();
-    
-    newPlayMap.filters.eventDates($('#event-date-filter').val(),$('#event-to-date-filter').val());
-  });
+
 
 
 };
