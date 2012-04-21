@@ -51,6 +51,11 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     var features = jsonData[vars.dataName].features,
         len = features.length,
         locations = [];
+
+    if(vars.clearLayer === true) {
+    console.log("clearing");
+      $('div.marker[dataName=' + vars.dataName + ']').remove();
+    }
  
     // for each feature in the collection, create a marker and add it
     // to the markers layer
