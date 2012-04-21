@@ -8,12 +8,12 @@ if(!empty($_GET['page'])){
 else{
   $page = 0;
 }
-$page_items = 10;
+$page_items = 150;
 
-$collection = $m->newplaymap->journeys;
+$collection = $m->newplaymap->plays;
 
 // find everything in the collection
-$cursor = $collection->find()->limit($page_items);
+$cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("name" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
@@ -23,9 +23,7 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 header("Content-type: application/json");
  $page;
-
-$json = '{"name": "plays", "items": [ ';
-
+$json = '{"name": "events","type":"FeatureCollection","features":[ ' ;
 
 $i = 0;
 
@@ -36,23 +34,14 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-
-$json .= '{"name": "play", "id": ' . $obj['id'] . ', "type":"FeatureCollection", "features":[ ' ;
-
     $json .= json_encode($obj);
-
-    $json .= ']}';  
+  
     $i++;
   }
 }
 /* $json .= "," . json_encode(array('count' => $collection->count())); */
 
-// @TODO this is probably wrong.
 $json .= '], "count" : ' . $count . '}';
-
-
-  
-
 
 echo $json;
 
