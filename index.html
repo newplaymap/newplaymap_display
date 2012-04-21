@@ -138,7 +138,7 @@
               
                 <!--               Templates -->
                 <div class="play content">
-                (testing: journey)
+                (testing: play-journey)
                   <h2><a href="#/${play_path}?event_id=${related_event_id}">${play_title}</a></h2>
                   {{if generative_artist}}
                   <h3>By ${generative_artist}</h3>
@@ -164,9 +164,17 @@
                     <dt>Synopsis</dt>
                     <dd>{{html synopsis}}</dd>
                   {{/if}}
-                  </dl>
+                  </dl>                  
                 </div><!--   end play -->
                 
+               <div class="journey">
+                  <h2 class="journey-header">Journey</h2>
+                  <ol class="events content">
+                    <li listing_id="${properties.event_id}">${properties.event_type}
+                    <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
+                    </li>
+                  </ol>
+               </div><!--   end journey -->
                 
 <!--                   artist -->
                   <div class="artist content">
