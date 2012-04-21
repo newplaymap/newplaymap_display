@@ -27,6 +27,7 @@ newPlayMap.loadMap = function(callback){
 
 newPlayMap.alterHomepage = function() {
   $('div#panel-container div#panel div.content').hide();
+  $('div#panel-container div.journey').hide()
   return false;
 };
 
@@ -73,7 +74,7 @@ newPlayMap.initMap = function(tj) {
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
   
-  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
+  //map.setCenterZoom(new MM.Location(37.811530, -110.2666097), 3);
 
   // Load interactive behavior.
   spotlight = new SpotlightLayer();
@@ -103,7 +104,7 @@ newPlayMap.initMapSimple = function() {
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
 
-  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
+  map.setCenterZoom(new MM.Location(50.811530, -90.2666097), 3);
 
   // Load interactive behavior.
   spotlight = new SpotlightLayer();

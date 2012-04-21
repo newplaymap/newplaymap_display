@@ -129,7 +129,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // @TODO this will run on the last loaded item, which may make behavior strange.
     // Actually no it is probably fine so long as locations is global.
     if(vars.zoomLevel === undefined) {
-      map.setExtent(locations);
+      //map.setExtent(locations);
+    //map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), 4);
     }
     else {
       // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.

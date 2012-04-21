@@ -162,6 +162,8 @@ newPlayMap.loadEvent = function() {
 };
 
 newPlayMap.loadJourney = function(feature) {
+
+/*   $('#panel-container div.journey').show(); */
   // @TODO trigger spotlight.
   console.log(jsonData["play"]);
   newPlayMap.drawPlayJourneyLines(feature);
