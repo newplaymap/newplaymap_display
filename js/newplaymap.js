@@ -73,9 +73,9 @@ newPlayMap.cluster = function(e) {
   
     for (var i = 0; i < means.length; i++) {
       var mean = means[i];
-/*       var typeCounter = countTypes(mean); */
-/*       var data = "<ul class='cluster-data'><li>Artists: " + typeCounter.artist +  "</li><li>Events: "+ typeCounter.event + "</li><li>Organizations: " + typeCounter.organization + "</li></ul>"; */
-      var data = mean.points.length;
+      var typeCounter = countTypes(mean);
+      var data = "<ul class='cluster-data'><li>Artists: " + typeCounter.artist +  "</li><li>Events: "+ typeCounter.event + "</li><li>Organizations: " + typeCounter.organization + "</li></ul>";
+/*       var data = mean.points.length; */
       point = g.appendChild(po.svg("circle"));
       point.setAttribute("cx", mean.x);
       point.setAttribute("cy", mean.y);
@@ -111,15 +111,17 @@ $('.layer circle[title]').each(function() {
 
          style: {
           name: 'light',
+/*
           tip: { // Now an object instead of a string
             corner: 'topLeft', // We declare our corner within the object using the corner sub-option
-/*          color: '#6699CC', */
+/*          color: '#6699CC', 
             size: {
               x: 20, // Be careful that the x and y values refer to coordinates on screen, not height or width.
               y : 8 // Depending on which corner your tooltip is at, x and y could mean either height or width!
             }
+
           }
-          }
+*/          }
           ,
           // Give it a crea mstyle to make it stand out
 
@@ -142,7 +144,7 @@ $('.layer circle[title]').each(function() {
 
 
 map.add(po.geoJson()
-    .url('api/clusters.php?page_items=100')
+    .url('api/clusters.php?page_items=300')
     .on("load",  newPlayMap.cluster )
 
     .clip(false)
