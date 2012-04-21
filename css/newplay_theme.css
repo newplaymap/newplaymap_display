@@ -683,17 +683,20 @@
     }
         
       .additional-info .view-events ol li,
-      ol.journey li {
+      ol.events li {
         margin-bottom: 10px;
         padding: 10px;
       }
         
         .additional-info .view-events ol li.active,
-        ol.journey li.active {
+        ol.events li.active {
           background-color: #fff;
           border-radius: 5px 5px 5px 5px;
         }
 
+        ol.events p {
+          font-size: 80%;
+        }
   /* Feeds */
   
   .panel-overlay #pane-feeds-video.pane-feeds-panel-pane {

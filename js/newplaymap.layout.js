@@ -3,13 +3,12 @@ newPlayMap.updatePanel = function(marker, data) {
   // data is extra, we might use it...
   var feature = {};
   feature.markup = marker;
-console.log(marker);
+
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
-  // Error in here somewhere.
-
   featureData = newPlayMap.loadDataObject(feature);
+
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 
@@ -18,16 +17,20 @@ console.log(marker);
   //        Make it work with plain events (type == event)
   // console.log(feature.marker_id);
   // console.log(jsonData[feature.marker_id]);
-  if (feature.type == 'play') {
+///  if (feature.type == 'play') {
+//  newPlayMap.panelTemplate(featureData);
+
+/*
     for (singleFeature in jsonData.play.features) {
-      newPlayMap.loadPlayJourney(jsonData.play.features[singleFeature]);
+     // newPlayMap.loadPlayJourney(jsonData.play.features[singleFeature]);
     }
-  }
+*/
+//  }
 
   // Add interaction to event listings in the new content
   // @TODO: Not only plays use this template. 
   //        Either be more specific or make sure it applies universally
-  var container = $('#panel-container .play');
+  var container = $('#panel-container .journey');
   newPlayMap.eventListProcess(container);
   
   // Make all links listen for address changes.
@@ -36,13 +39,12 @@ console.log(marker);
 
 newPlayMap.loadDataObject = function(featureLookup) {
     var featureSet = [];
-  //  console.log(featureLookup);
+
     var features = jsonData[featureLookup.dataName].features,
         len = features.length,
         locations = [];
 
     // for each feature in the collection, get feature data and add it.
-
     for (var i = 0; i < len; i++) {
 
         feature = features[i];
@@ -52,6 +54,7 @@ newPlayMap.loadDataObject = function(featureLookup) {
         feature.title = featureLookup.title;
         feature.type = featureLookup.type;
         feature.marker_id = featureLookup.marker_id;
+
         if(feature.id == featureLookup.marker_id) {
           return feature;
         }
@@ -131,6 +134,9 @@ newPlayMap.panelTemplates = function() {
   if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
     container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
+
+    container = $('#panel-container .journey ol.events');
+    panelMarkup['journey'] = container.html();
   }
 
   containerEmpty = $('#panel-container .content').empty();
@@ -153,11 +159,22 @@ newPlayMap.panelTemplate = function(feature) {
   $.template( type + "Template", panelMarkup[type]);        
   $.tmpl(type + "Template", feature["properties"])
     .appendTo(container);
+
+  // Special templates
+  if (type === "play") {
+    type = "journey";
+    container = $('#panel-container .journey ol.events');
+    container.empty();
+    $.template( type + "Template", panelMarkup[type]);        
+    $.tmpl(type + "Template", jsonData["play"].features)
+      .appendTo(container);  
+  }  
+    
 }
 
 newPlayMap.eventListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));
-  $(container).find('ol.journey li').hoverIntent({
+  $(container).find('ol.events li').hoverIntent({
     over: function() {
       $(this).addClass('active');
 
@@ -181,6 +198,9 @@ newPlayMap.eventListProcess = function(container) {
   });
 };
 
+/*
+
+
 newPlayMap.loadPlayJourney = function(feature) {
   var type = 'play';
   var container = $('#panel-container .' + type);
@@ -193,3 +213,4 @@ newPlayMap.loadPlayJourney = function(feature) {
   // console.log(feature);
   $('<li></li>').attr('listing_id', feature.id).text(feature.properties.event_type).appendTo('ol.journey');
 }
+*/

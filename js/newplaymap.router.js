@@ -158,28 +158,6 @@ newPlayMap.loadEvent = function() {
       grouping_field: "related_play_id",
       callback: newPlayMap.loadJourney
     });
-
-      
-/*
-    newPlayMap.loadAPICall({    
-      path: "data/plays/9344.json",
-      data: data,
-      type: "play",
-      template: "layer-play",
-      layer: "play",
-      id: "event_id",
-      label: "related_theater",
-      alt_path: "play_path",
-      title: "play_title",
-      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
-      dataPath: "data/plays/9344.json",
-      icon: "icons/play.png",
-      grouping_field: "related_play_id",
-      callback: newPlayMap.loadRelatedEvents
-    });
-*/
-
-
   });
 };
 
@@ -196,22 +174,15 @@ newPlayMap.loadJourney = function(feature) {
   );
   
   $('div#play-journey').click(function() {$('div#play-journey').hide();});
-/*   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4); */
-
 };
 
 newPlayMap.loadRelatedEvents = function() {
-  console.log("load related events");
-
-
-
   // Add click event to play markers.
   $('div.marker[type=play]').bind( "click", function() {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
     }
   );
-  
 };
 
 newPlayMap.loadPlayData = function(marker) {
@@ -220,36 +191,12 @@ newPlayMap.loadPlayData = function(marker) {
   newPlayMap.drawPlayJourneyLines(feature[0]);
   
   $('div#play-journey').click(function() {$('div#play-journey').hide();});
-/*   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4); */
 
 };
 
 newPlayMap.loadOrganizationData = function(marker) {
   // @TODO trigger spotlight.
   var feature = newPlayMap.lookupFeatureByMarker(marker);
-  console.log(feature);
-
-/*
-  $(marker).hoverIntent({
-    over: function() {
-      $(this).addClass('active');
-
-
-      var marker_id = $(this).attr('marker_id');
-
-      spotlight.addLocations(locationsByID[marker_id]);
-      spotlight.parent.className = "active";
-
-      $('div#panel-container div#panel .content').show();
-    },
-    out: function() {
-      $(this).removeClass('active');
-      spotlight.parent.className = "inactive";
-      spotlight.removeAllLocations();
-    }
-  });
-*/
-
 };
 
 newPlayMap.lookupFeatureByMarker = function(marker) {
