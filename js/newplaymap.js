@@ -30,21 +30,6 @@ map.add(po.compass()
       + "/20760/256/{Z}/{X}/{Y}.png")
       .hosts(["a.", "b.", "c.", ""])));
 
- var events = {
-        path: 'api/events.php', 
-        type: "event",
-        template: "event",
-        layer: "layer-events",
-        id: "event_id",
-        label: "related_theater", // field which will be used in label
-        title: "play_title",
-        dataName: "events",
-        dataPath: 'api/events.php', 
-        icon: "icons/event.png",
-        grouping_field: "event_id",
-        related_play_id: "related_play_id",
-        //callback: newPlayMap.loadEvent
-      };
 
 /*
 map.add(po.geoJson()
@@ -65,90 +50,105 @@ map.add(po.geoJson()
 
 
 newPlayMap.cluster = function(e) {
-    var typeCounter = {
-      artist: 0,
-      event: 0,
-      organization: 0,
-    };
 
     var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
-        .iterations(16)
-        .size(45));
+        .iterations(10)
+        .size(20));
   
     for (var i = 0; i < e.features.length; i++) {
-      cluster.add(e.features[i].data.geometry.coordinates);
+
       var type = e.features[i].data.properties.type;
-      switch(type) {
-        case type:
-          typeCounter[type]++;
-        break;
+        e.features[i].data.geometry.coordinates.push({type: type});
+        cluster.add(e.features[i].data.geometry.coordinates);    
       }
-      
-      
-    }
 
     var tile = e.tile;
     var g = tile.element;
     while (g.lastChild) g.removeChild(g.lastChild);
   
     var means = cluster.means();
-  
     means.sort(function(a, b) { return b.size - a.size; });
   
   
   
     for (var i = 0; i < means.length; i++) {
       var mean = means[i];
-      var data = "<ul><li>Artists: " + typeCounter.artist +  "</li><li>Events: "+ typeCounter.event + "</li><li>Organizations:" + typeCounter.organization + "</li></ul>";
-      var mean = means[i];
-      console.log(mean);
+/*       var typeCounter = countTypes(mean); */
+/*       var data = "<ul class='cluster-data'><li>Artists: " + typeCounter.artist +  "</li><li>Events: "+ typeCounter.event + "</li><li>Organizations: " + typeCounter.organization + "</li></ul>"; */
+      var data = mean.points.length;
       point = g.appendChild(po.svg("circle"));
       point.setAttribute("cx", mean.x);
       point.setAttribute("cy", mean.y);
       point.setAttribute("size", mean.size);
       point.setAttribute("title", data);
-      
-      point.setAttribute("r", Math.pow(2, tile.zoom - 3) * Math.sqrt(mean.size) * 3)
-      
-      ;
+      point.setAttribute("r", Math.pow(2, tile.zoom - 4) * Math.sqrt(mean.size) * 2);
+    }
+
+    function countTypes(mean){
+        var typeCounter = {
+          artist: 0,
+          event: 0,
+          organization: 0,
+        };
+    
+    
+        for (var i = 0; i < mean.points.length; i++) {
+          var type = mean.points[i][2].type;
+          
+          switch(type) {
+            case type:
+              typeCounter[type]++;
+            break;
+          }
+        }
+        return typeCounter;
     }
 
 
-/*
-  $('.layer circle').qtip({
-     content: " " + this ,
-     show: 'mouseover',
-     hide: 'mouseout'
-  });
-*/
+$('.layer circle[title]').each(function() {
+      $(this).qtip({
+         content: $(this).attr('title'), // Use the tooltip attribute of the element for the content
 
-  $('.layer circle[title]').qtip({ style: { 
-      width: 200,
-      padding: 5,
-      background: '#FFF',
-      color: '#333',
-      border: {
-         width: 2,
-         radius: 2,
-         color: '#FFF'
-      },
-      name: 'dark' // Inherit the rest of the attributes from the preset dark style
-    }
-  });
-   
-  };
+         style: {
+          name: 'light',
+          tip: { // Now an object instead of a string
+            corner: 'topLeft', // We declare our corner within the object using the corner sub-option
+/*          color: '#6699CC', */
+            size: {
+              x: 20, // Be careful that the x and y values refer to coordinates on screen, not height or width.
+              y : 8 // Depending on which corner your tooltip is at, x and y could mean either height or width!
+            }
+          }
+          }
+          ,
+          // Give it a crea mstyle to make it stand out
+
+          position: {
+                  corner: {
+/*                      tooltip: "topMiddle", */
+                     target: "topLeft"
+                  },
+                  mouse: true
+/*                   adjust: { x: 5, y: 10 } */
+               },
+      });
+   });
+
+}
+
+
+
+
 
 
 map.add(po.geoJson()
-    .url('api/clusters.php?page_items=10')
+    .url('api/clusters.php?page_items=100')
     .on("load",  newPlayMap.cluster )
 
     .clip(false)
     .zoom(3)
     .id("clusters")
     );
-
-  
 
 
 window.onload = function() {

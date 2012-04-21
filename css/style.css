@@ -156,7 +156,7 @@ div#panel-container div#panel {
 
 #clusters.layer circle {
   fill: #bf1e2d;
-  fill-opacity: .8;
+  fill-opacity: .5;
   vector-effect: non-scaling-stroke;
 }
 
@@ -176,4 +176,11 @@ div#panel-container div#panel {
 
 #plays .layer circle {
   fill: #bf1e2d;
+}
+
+ul.cluster-data {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 80%;
 }
