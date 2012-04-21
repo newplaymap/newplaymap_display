@@ -46,6 +46,7 @@ map.add(po.compass()
         //callback: newPlayMap.loadEvent
       };
 
+/*
 map.add(po.geoJson()
     .url('api/organizations.php?page_items=300')
     .on("load", load)
@@ -59,13 +60,16 @@ map.add(po.geoJson()
     .clip(false)
     .zoom(3)
     .id("artists"));
+*/
+
+
 
 map.add(po.geoJson()
-    .url('api/events.php?page_items=300')
+    .url('api/clusters.php?page_items=100')
     .on("load", load)
     .clip(false)
     .zoom(3)
-    .id("events"));
+    .id("clusters"));
 
 
 function load(e) {
