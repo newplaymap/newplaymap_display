@@ -86,6 +86,8 @@ newPlayMap.filters.organizationName = function(searchString) {
   newPlayMap.loadAPICall({
     data: {organization_name: searchString},
     zoomLevel: 10,
+    clearLayer: true,
+    clearLayers: true,
     template: "organization",
     layer: "layer-organization-filter",
     class: "active",

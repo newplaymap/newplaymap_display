@@ -181,4 +181,3 @@ newPlayMap.loadData = function() {
       }
     );
 };
-
