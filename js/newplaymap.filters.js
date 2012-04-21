@@ -10,7 +10,7 @@ var jsonDataSearch = {};
  */
 newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
-  
+
   if (data.organization_name !== undefined) {
     pathQuery = "&organization_name=" +  data.organization_name;
   }
@@ -45,7 +45,7 @@ newPlayMap.filters.organizations = function(data) {
     dataPath: "api/organizations_filter.php?" + pathQuery,
     icon: "icons/organization.png",
 /*     grouping_field: data.grouping_field, */
-    callback: newPlayMap.loadOrganizationFilter 
+    callback: newPlayMap.loadOrganizationFilter
   });
 }
 
@@ -68,7 +68,7 @@ newPlayMap.filters.plays = function(data) {
     dataPath: "api/journey.php?play_title=" +  data.play_title,
     icon: "icons/play.png",
     grouping_field: "related_play_id",
-    callback: newPlayMap.loadJourney 
+    callback: newPlayMap.loadJourney
   });
 };
 
@@ -77,10 +77,6 @@ newPlayMap.filters.artists = function(data) {
   var pathQuery = "";
   if (data.artist_name !== undefined) {
     pathQuery = "&artist_name=" +  data.artist_name;
-  }
-  
-  if (data.ensemble_collective !== undefined) {
-    pathQuery = "&ensemble_collective=" +  data.ensemble_collective;
   }
 
   newPlayMap.loadAPICall({
@@ -104,10 +100,42 @@ newPlayMap.filters.artists = function(data) {
   });
 }
 
+newPlayMap.filters.ensemble = function(data) {
+// @TODO create layered effect here.
+/*
+  var pathQuery = "";
+
+  if (data.ensemble_collective !== undefined) {
+    pathQuery = "&ensemble_collective=" +  data.ensemble_collective;
+  }
+
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-ensemble-filter",
+    class: "active",
+    id: "artist_id",
+    label: "ensemble_collective",
+    title: "generative_artist",
+    template: "artist",
+    type: "artist",
+    dataName: "artists_filter",
+    path: "api/artists_filter.php?" + pathQuery,
+    dataPath: "api/artists_filter.php?" + pathQuery,
+    icon: "icons/artist.png",
+    grouping_field: "artist_id",
+    callback: newPlayMap.loadArtistFilter
+  });
+*/
+}
+
+
 // Load plays
 newPlayMap.filters.events = function(data) {
   var pathQuery = "";
-  
+
   if (data.event_type !== undefined) {
     pathQuery = "&event_type=" +  data.event_type;
   }
@@ -138,16 +166,15 @@ newPlayMap.filters.events = function(data) {
     icon: "icons/event.png",
     grouping_field: "event_id",
     related_play_id: "related_play_id",
-    callback: newPlayMap.loadEvent 
+    callback: newPlayMap.loadEvent
   });
 };
 
 
+/*
+ * Trigger api calls on the form elements
+ */
 newPlayMap.filters.setupFilters = function() {
-
-  /*
-   * Trigger api calls on the form elements
-   */
   $('#plays-filter').change(function() {
     newPlayMap.filters.plays({play_title: $(this).attr('value')});
     newPlayMap.filters.reset(this);
@@ -160,7 +187,6 @@ newPlayMap.filters.setupFilters = function() {
     return false;
   });
 
-  
   $('.event-date-field').focus(function() {
     $('#filters .event-date-filter-complete').fadeIn('slow');
     newPlayMap.filters.reset('.event-date-field');
@@ -168,18 +194,15 @@ newPlayMap.filters.setupFilters = function() {
 
   $('#filters .event-date-filter-complete').hide().click(function(event) {
     event.preventDefault();
-    
+
     newPlayMap.filters.events({event_date: $('#event-date-filter').val(), event_to_date: $('#event-to-date-filter').val() });
     return false;
   });
-
 
   $('#organizations-filter').change(function() {
     newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
     newPlayMap.filters.reset(this);
   });
-  
-
 
   $('#organization-type-filter').change(function() {
     newPlayMap.filters.organizations({organization_type: $(this).attr('value')});
@@ -190,7 +213,7 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.organizations({national_networks: $(this).attr('value')});
     newPlayMap.filters.reset(this);
   });
-  
+
   $('#organization-special-interests-filter').change(function() {
     newPlayMap.filters.organizations({special_interests: $(this).attr('value')});
     newPlayMap.filters.reset(this);
@@ -200,13 +223,11 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.artists({artist_name: $(this).attr('value')});
     newPlayMap.filters.reset(this);
   });
-  
-/*
+
   $('#ensemble-collective-filter').change(function() {
     newPlayMap.filters.ensemble({ensemble_collective: 'Ensemble / Collective'});
     newPlayMap.filters.reset(this);
   });
-*/
 
 
 
@@ -214,19 +235,25 @@ newPlayMap.filters.setupFilters = function() {
   newPlayMap.filters.getOrganizationsIndex();
   newPlayMap.filters.getArtistsIndex();
   newPlayMap.filters.getPlaysIndex();
-  
-
-
-  
-
-
-
-
-
 
 };
 
-  
+newPlayMap.filters.reset = function(exception) {
+  var exception = exception || '';
+  $('#filters form').children('input').not('.submit-filters').not($(exception)).each(function() {
+    $(this).val('').attr('checked', false);
+  });
+
+  $('#filters form').children('select').not(exception).each(function() {
+    $(this).children().eq(0).attr('selected', 'selected');
+  });
+
+  if (exception !== '.event-date-field') {
+    $('#filters .event-date-filter-complete').fadeOut();
+  }
+}
+
+
 /*
  * Utility function shared by multiple ajax calls
  */
@@ -242,22 +269,6 @@ newPlayMap.filters.feedback = function(message, data) {
   console.log(data);
 }
 
-newPlayMap.filters.reset = function(exception) {
-  var exception = exception || '';
-  $('#filters form').children('input').not('.submit-filters').not($(exception)).each(function() {
-    $(this).val('').attr('checked', false);
-  });
-
-  $('#filters form').children('select').not(exception).each(function() {
-    $(this).children().eq(0).attr('selected', 'selected');
-  });
-  
-  if (exception !== '.event-date-field') {
-    $('#filters .event-date-filter-complete').fadeOut();
-  }
-}
-
-
 /*
  * Organizations
  */
@@ -270,16 +281,15 @@ newPlayMap.filters.getOrganizationsIndex = function() {
   });
 }
 
-
 newPlayMap.filters.setOrganizationsIndex = function(data) {
   jsonDataSearch.organizationsIndex = data;
-  
+
   // If we are returning org names and ids, use something like this to process and get a list of names
   // var organizationNames = [];
   // for (organization in jsonDataSearch.organizationsIndex) {
   //   organizationNames.push(jsonDataSearch.organizationsIndex[organization].name);
   // }
-  
+
   // If we are returning just the names, then the raw data is fine
   var organizationNames = data;
 
@@ -306,13 +316,13 @@ newPlayMap.filters.getArtistsIndex = function() {
 
 newPlayMap.filters.setArtistsIndex = function(data) {
   jsonDataSearch.artistsIndex = data;
-  
+
   // If we are returning org names and ids, use something like this to process and get a list of names
   // var organizationNames = [];
   // for (organization in jsonDataSearch.ArtistsIndex) {
   //   organizationNames.push(jsonDataSearch.artistsIndex[organization].name);
   // }
-  
+
   // If we are returning just the names, then the raw data is fine
   var artistsNames = data;
 
@@ -339,13 +349,13 @@ newPlayMap.filters.getPlaysIndex = function() {
 
 newPlayMap.filters.setPlaysIndex = function(data) {
   jsonDataSearch.playsIndex = data;
-  
+
   // If we are returning org names and ids, use something like this to process and get a list of names
   // var organizationNames = [];
   // for (organization in jsonDataSearch.PlaysIndex) {
   //   organizationNames.push(jsonDataSearch.PlaysIndex[organization].name);
   // }
-  
+
   // If we are returning just the names, then the raw data is fine
   var playNames = data;
 
