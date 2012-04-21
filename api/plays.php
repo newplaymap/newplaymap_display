@@ -23,7 +23,7 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 header("Content-type: application/json");
  $page;
-$json = '{"name": "events","type":"FeatureCollection","features":[ ' ;
+$json = '{"name": "plays","type":"FeatureCollection","features":[ ' ;
 
 $i = 0;
 

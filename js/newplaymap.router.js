@@ -137,13 +137,14 @@ newPlayMap.loadEvent = function() {
       var data = {
         type: "play",
         name: "play",
-        id: 41363
+        id: related_play_id
       };
       
     newPlayMap.loadAPICall({    
       path: "api/journey.php?id=" + related_play_id,
       data: data,
       type: "play",
+      zoomLevel: 3,
       template: "layer-play",
       layer: "play",
       id: "event_id",
