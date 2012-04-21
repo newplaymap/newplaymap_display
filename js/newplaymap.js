@@ -99,20 +99,43 @@ newPlayMap.cluster = function(e) {
   
     for (var i = 0; i < means.length; i++) {
       var mean = means[i];
-      var data = "Artists: " + typeCounter.artist +  " Events: "+ typeCounter.event + " Organizations:" + typeCounter.organization;
+      var data = "<ul><li>Artists: " + typeCounter.artist +  "</li><li>Events: "+ typeCounter.event + "</li><li>Organizations:" + typeCounter.organization + "</li></ul>";
       var mean = means[i];
       console.log(mean);
       point = g.appendChild(po.svg("circle"));
       point.setAttribute("cx", mean.x);
       point.setAttribute("cy", mean.y);
       point.setAttribute("size", mean.size);
-      point.setAttribute("data", data);
+      point.setAttribute("title", data);
       
       point.setAttribute("r", Math.pow(2, tile.zoom - 3) * Math.sqrt(mean.size) * 3)
       
       ;
     }
 
+
+/*
+  $('.layer circle').qtip({
+     content: " " + this ,
+     show: 'mouseover',
+     hide: 'mouseout'
+  });
+*/
+
+  $('.layer circle[title]').qtip({ style: { 
+      width: 200,
+      padding: 5,
+      background: '#FFF',
+      color: '#333',
+      border: {
+         width: 2,
+         radius: 2,
+         color: '#FFF'
+      },
+      name: 'dark' // Inherit the rest of the attributes from the preset dark style
+    }
+  });
+   
   };
 
 
@@ -134,6 +157,8 @@ window.onload = function() {
   //newPlayMap.processFilters();  // Add interaction to filters in sidebar panel
 
  /*  newPlayMap.cluster(); */
+
+
 };
 
 
