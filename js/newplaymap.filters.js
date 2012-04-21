@@ -19,6 +19,9 @@ newPlayMap.filters.organizations = function(data) {
     pathQuery = "&organization_type=" +  data.organization_type;
   }
 
+  if (data.national_networks !== undefined) {
+    pathQuery = "&national_networks=" +  data.national_networks;
+  }
 
   newPlayMap.loadAPICall({
     data: data,
@@ -36,7 +39,7 @@ newPlayMap.filters.organizations = function(data) {
     path: 'api/organizations_filter.php?' + pathQuery,
     dataPath: "api/organizations_filter.php?" + pathQuery,
     icon: "icons/organization.png",
-    grouping_field: data.grouping_field,
+/*     grouping_field: data.grouping_field, */
     callback: newPlayMap.loadOrganizationFilter 
   });
 }
@@ -136,23 +139,22 @@ newPlayMap.filters.setupFilters = function() {
 
 
   $('#organizations-filter').change(function() {
-    newPlayMap.filters.organizations({organization_name: $(this).attr('value'), grouping_field: "organization_name" });
+    newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
     newPlayMap.filters.reset(this);
   });
   
 
 
   $('#organization-type-filter').change(function() {
-    newPlayMap.filters.organizations({organization_type: $(this).attr('value'), grouping_field: "organization_type"});
+    newPlayMap.filters.organizations({organization_type: $(this).attr('value')});
+    newPlayMap.filters.reset(this);
+  });
+
+  $('#organization-national-networks-filter').change(function() {
+    newPlayMap.filters.organizations({national_networks: $(this).attr('value')});
     newPlayMap.filters.reset(this);
   });
   /*
-
-  $('#organization-national-networks-filter').change(function() {
-    newPlayMap.filters.organizationNationalNetworks($(this).attr('value'));
-    newPlayMap.filters.reset(this);
-  });
-
   $('#organization-special-interests-filter').change(function() {
     newPlayMap.filters.organizationSpecialInterests($(this).attr('value'));
     newPlayMap.filters.reset(this);

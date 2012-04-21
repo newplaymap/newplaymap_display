@@ -18,6 +18,23 @@ body {
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.ttf') format('truetype'),
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
 }
+
+.count {
+  font-size: 80%;
+  line-height: 1em;
+  height: 200px;
+  overflow-y: hidden;
+  padding: 5px;
+
+}
+
+.count p {
+  opacity: 0.5;
+}
+.count:nth-child(-n+3) p {
+  opacity: 1;
+}
+
 #popup {
   position: fixed;
   bottom: 0px;
