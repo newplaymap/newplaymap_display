@@ -16,8 +16,7 @@ newPlayMap.loadJSONFile = function(vars) {
 
 newPlayMap.loadAPICall = function(vars) {
   var vars = vars;
-  var contentData = vars.path + "?cache=" + Math.floor(Math.random()*11);
-
+  var contentData = vars.path + "&cache=" + Math.floor(Math.random()*11);
   var getData = $.ajax({
     url:  contentData,
     dataType: 'json',
@@ -30,6 +29,7 @@ newPlayMap.loadAPICall = function(vars) {
 };
 
 newPlayMap.setData = function(data, statusText, jqxhr) {
+console.log(data);
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
@@ -60,6 +60,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 /*     $('div.marker[dataName=organization_filter]').remove(); */
     $('div#play-journey').remove();
     $('div.marker[dataName=play]').remove();
+    $('div.marker[dataName=plays_filter]').remove();
     $('div.marker[dataName=organization_filter]').remove();
   }
 
