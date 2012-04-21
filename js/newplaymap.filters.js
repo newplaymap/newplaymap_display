@@ -95,12 +95,12 @@ newPlayMap.filters.artists = function(data) {
     title: "generative_artist",
     template: "artist",
     type: "artist",
-    dataName: "artist",
+    dataName: "artists_filter",
     path: "api/artists_filter.php?" + pathQuery,
     dataPath: "api/artists_filter.php?" + pathQuery,
     icon: "icons/artist.png",
     grouping_field: "artist_id",
-    callback: newPlayMap.loadArtist
+    callback: newPlayMap.loadArtistFilter
   });
 }
 

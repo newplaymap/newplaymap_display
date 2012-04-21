@@ -52,6 +52,7 @@ newPlayMap.loadDataError = function(data) {
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
   var vars = vars;
+  console.log(vars);
   var features = jsonData[vars.dataName].features,
       len = features.length,
       locations = [];
