@@ -60,6 +60,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 /*     $('div.marker[dataName=organization_filter]').remove(); */
     $('div#play-journey').remove();
     $('div.marker[dataName=play]').remove();
+    $('div.marker[dataName=artists_filter]').remove();
+    $('div.marker[dataName=events_filter]').remove();
     $('div.marker[dataName=plays_filter]').remove();
     $('div.marker[dataName=organization_filter]').remove();
   }
