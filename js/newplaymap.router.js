@@ -133,10 +133,11 @@ newPlayMap.loadEvent = function() {
       var marker = $(this);
       
       var related_play_id =  marker.attr("related_play_id");
-      console.log(related_play_id );
+      console.log(related_play_id);
       var data = {
         type: "play",
-        id: related_play_id
+        name: "play",
+        id: 41363
       };
       
     newPlayMap.loadAPICall({    
@@ -153,7 +154,7 @@ newPlayMap.loadEvent = function() {
       dataPath: "api/journey.php?id=" + related_play_id,
       icon: "icons/play.png",
       grouping_field: "related_play_id",
-      callback: newPlayMap.loadRelatedEvents
+      callback: newPlayMap.loadJourney
     });
 
       
@@ -180,8 +181,29 @@ newPlayMap.loadEvent = function() {
   });
 };
 
+newPlayMap.loadJourney = function(feature) {
+  // @TODO trigger spotlight.
+  console.log(jsonData["play"]);
+  newPlayMap.drawPlayJourneyLines(feature);
+
+  // Add click event to play markers.
+  $('div.marker[type=play]').bind( "click", function() {
+      var marker = $(this);
+      newPlayMap.loadPlayData(marker);
+    }
+  );
+  
+  $('div#play-journey').click(function() {$('div#play-journey').hide();});
+/*   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4); */
+
+};
+
 newPlayMap.loadRelatedEvents = function() {
   console.log("load related events");
+
+
+
+  // Add click event to play markers.
   $('div.marker[type=play]').bind( "click", function() {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
@@ -196,7 +218,7 @@ newPlayMap.loadPlayData = function(marker) {
   newPlayMap.drawPlayJourneyLines(feature[0]);
   
   $('div#play-journey').click(function() {$('div#play-journey').hide();});
-  map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4);
+/*   map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 4); */
 
 };
 

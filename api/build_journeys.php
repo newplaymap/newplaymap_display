@@ -13,7 +13,7 @@ function buildJourneys($m, $output) {
   $plays = $m->newplaymap->plays;
 
   // find everything in the collection
-  $cursor = $plays->find();
+  $cursor = $plays->find()->limit(50);
 
   // iterate through the results
   foreach ($cursor as $playObj) {
@@ -30,16 +30,36 @@ function buildJourneys($m, $output) {
           // Combine arrays. Make sure this doesn't overwrite id or anything like that. It should be OK.
           $geometry = $eventObj["geometry"];
           $properties = array_merge($playObj["properties"], $eventObj["properties"]);
-          $properties["type"] = "journey";
-          // $event = array("geometry" => $geometry, "properties" => $properties, "id" => $playObj['id']);
+          $properties["type"] = "play";
+          $event = (object) array(
+            "geometry" => $geometry, 
+            "properties" => $properties
+          );
 
-
-          $collection->update(array('id' => $playObj['id']), array('$push' => array(
-            "properties" => $properties, 
-            "geometry" =>  $geometry
-                     
-            )), true);
-
+          $collection->update(array('id' => $playObj['id']), 
+          
+          array('$set' => array(
+            "name" => "play",
+            "id"   => $playObj['id'],
+            "type" => "FeatureCollection"),
+            "features" => array('$push' => $event)
+            ), true);
+       
+/*
+       
+        array(
+          "$set" => array(
+          "features" => array(
+          '$push' => array(
+              "id" => $eventObj["id"],
+              "properties" => (object) $properties, 
+              "geometry" =>  (object) $geometry
+           )))), true);
+   
+          
+*/
+          
+          
 /*           array_push($events, $event); */
         }        
        //   $collection->update(array('id' => $playObj['id']), array('$set' => $events), true);

@@ -32,6 +32,7 @@ newPlayMap.loadAPICall = function(vars) {
 newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
+  console.log(data);
 /*   console.log(jsonData); */
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
   return false;
