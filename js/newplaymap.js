@@ -128,9 +128,13 @@ newPlayMap.loadMapData = function() {
 };
 
 newPlayMap.processFilters = function() {
+  newPlayMap.filters.setupFilters();
+
   $('#filter-container h4').css('cursor', 'pointer').click(function() {
     $(this).siblings('form').slideToggle();
   });
+  
+
 };
 
 newPlayMap.loadData = function() {

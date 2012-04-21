@@ -2,14 +2,23 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
+$plays = $m->newplaymap->plays;
+
+
 if(!empty($_GET['id'])){
  $id = $_GET['id'];
-}
-
-  $plays = $m->newplaymap->plays;
-
   // find everything in the collection
   $play_cursor = $plays->findOne(array('id' => $id));
+
+}
+if(!empty($_GET['play_title'])){
+ $play_title = $_GET['play_title'];
+  // find everything in the collection
+  $play_cursor = $plays->findOne(array('properties.play_title' => $play_title));
+
+}
+
+
 
     if(!empty($play_cursor['id'])) {
 
