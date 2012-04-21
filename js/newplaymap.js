@@ -64,46 +64,68 @@ map.add(po.geoJson()
 
 
 
-map.add(po.geoJson()
-    .url('api/clusters.php?page_items=100')
-    .on("load", load)
-    .clip(false)
-    .zoom(3)
-    .id("clusters"));
+newPlayMap.cluster = function(e) {
+    var typeCounter = {
+      artist: 0,
+      event: 0,
+      organization: 0,
+    };
 
+    var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
+        .iterations(16)
+        .size(45));
+  
+    for (var i = 0; i < e.features.length; i++) {
+      cluster.add(e.features[i].data.geometry.coordinates);
+      var type = e.features[i].data.properties.type;
+      switch(type) {
+        case type:
+          typeCounter[type]++;
+        break;
+      }
+      
+      
+    }
 
-function load(e) {
-
-  var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
-      .iterations(16)
-      .size(40));
-
-  for (var i = 0; i < e.features.length; i++) {
-    cluster.add(e.features[i].data.geometry.coordinates);
-  }
-
-  var tile = e.tile;
-  var g = tile.element;
-  console.log(g);
-  while (g.lastChild) g.removeChild(g.lastChild);
-
-  var means = cluster.means();
-
-  means.sort(function(a, b) { return b.size - a.size; });
-
-
-
-  for (var i = 0; i < means.length; i++) {
-    var mean = means[i];
-
-    var mean = means[i], point = g.appendChild(po.svg("circle"));
-    point.setAttribute("cx", mean.x);
-    point.setAttribute("cy", mean.y);
-    point.setAttribute("r", Math.pow(2, tile.zoom - 11) * Math.sqrt(mean.size) * 1000);
-  }
+    var tile = e.tile;
+    var g = tile.element;
+    while (g.lastChild) g.removeChild(g.lastChild);
+  
+    var means = cluster.means();
+  
+    means.sort(function(a, b) { return b.size - a.size; });
+  
+  
+  
+    for (var i = 0; i < means.length; i++) {
+      var mean = means[i];
+      var data = "Artists: " + typeCounter.artist +  " Events: "+ typeCounter.event + " Organizations:" + typeCounter.organization;
+      var mean = means[i];
+      console.log(mean);
+      point = g.appendChild(po.svg("circle"));
+      point.setAttribute("cx", mean.x);
+      point.setAttribute("cy", mean.y);
+      point.setAttribute("size", mean.size);
+      point.setAttribute("data", data);
+      
+      point.setAttribute("r", Math.pow(2, tile.zoom - 3) * Math.sqrt(mean.size) * 3)
+      
+      ;
+    }
 
   };
 
+
+map.add(po.geoJson()
+    .url('api/clusters.php?page_items=10')
+    .on("load",  newPlayMap.cluster )
+
+    .clip(false)
+    .zoom(3)
+    .id("clusters")
+    );
+
+  
 
 
 window.onload = function() {
@@ -113,11 +135,6 @@ window.onload = function() {
 
  /*  newPlayMap.cluster(); */
 };
-
-
-
-
-
 
 
 

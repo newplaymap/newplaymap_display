@@ -49,7 +49,7 @@ foreach ($cursor as $obj) {
     }
 
 
-
+    $obj['properties']['type'] = 'event';
     $obj['geometry']['coordinates'][0] =   (float)  $obj['geometry']['coordinates'][0];
     $obj['geometry']['coordinates'][1] =   (float)  $obj['geometry']['coordinates'][1];
     $obj['properties']['latitude'] =   (float)  $obj['properties']['latitude'];
@@ -72,7 +72,7 @@ foreach ($cursor as $obj) {
     if($i > 0) {
      $json .= ',';
     }
-
+    $obj['properties']['type'] = 'organization';
     $obj['geometry']['coordinates'][0] =   (float)  $obj['geometry']['coordinates'][0];
     $obj['geometry']['coordinates'][1] =   (float)  $obj['geometry']['coordinates'][1];
     $obj['properties']['latitude'] =   (float)  $obj['properties']['latitude'];
@@ -93,7 +93,7 @@ foreach ($cursor as $obj) {
     if($i > 0) {
      $json .= ',';
     }
-
+    $obj['properties']['type'] = 'artist';
     $obj['geometry']['coordinates'][0] =   (float)  $obj['geometry']['coordinates'][0];
     $obj['geometry']['coordinates'][1] =   (float)  $obj['geometry']['coordinates'][1];
     $obj['properties']['latitude'] =   (float)  $obj['properties']['latitude'];
