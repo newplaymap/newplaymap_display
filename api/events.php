@@ -2,7 +2,7 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$limit = 150;
+$limit = 200;
 $collection = $m->newplaymap->events;
 
 if(!empty($_GET['event_type'])){
@@ -36,6 +36,12 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
+    $start_date = date('M j, Y', $obj['properties']['event_date']->sec);
+    $end_date = date('M j, Y', $obj['properties']['event_to_date']->sec);
+    
+    $obj['properties']['event_date'] = $start_date;
+    $obj['properties']['event_to_date'] = $end_date;
+    
     $json .= json_encode($obj);
   
     $i++;
