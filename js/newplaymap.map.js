@@ -82,6 +82,19 @@ newPlayMap.loadArtist = function() {
     console.log("load artist");
 };
 
+
+newPlayMap.loadArtistFilter = function() {
+    console.log("load artist");
+
+  $('div.marker[dataname=artists_filter]').each(function(){
+      var id = $(this).attr('marker_id');
+
+      spotlight.addLocations(locationsByID[id]);
+      spotlight.parent.className = "active";
+  });
+};
+
+
 newPlayMap.loadOrganizationFilter = function() {
   console.log("load org");
 
