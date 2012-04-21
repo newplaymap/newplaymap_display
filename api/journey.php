@@ -14,7 +14,7 @@ if(!empty($_GET['id'])){
       if(!empty($play_cursor['id'])) {
 
         $query = array('properties.related_play_id' => (string) $play_cursor['id']);
-        $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date.sec" => -1));
+        $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date.sec" => 1));
 
     }
 
@@ -45,9 +45,10 @@ foreach ($events_cursor as $obj) {
     if($i > 0) {
      $json .= ',';
     }
-
-
-/* $json .= '{"name": "play"; */
+    // Add play metadata to event.
+    $obj["properties"] = array_merge($play_cursor["properties"], $obj["properties"]);
+    $obj["type"] = "Feature";
+ 
     $json .= json_encode($obj);
 
     $i++;

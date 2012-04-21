@@ -3,7 +3,7 @@ newPlayMap.updatePanel = function(marker, data) {
   // data is extra, we might use it...
   var feature = {};
   feature.markup = marker;
-
+console.log(marker);
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
