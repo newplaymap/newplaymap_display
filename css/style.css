@@ -147,3 +147,10 @@ div#panel-container div#panel {
   visibility: hidden;
 }
 
+
+circle {
+  fill: #ffcc00;
+  fill-opacity: .5;
+  stroke: brown;
+  vector-effect: non-scaling-stroke;
+}

@@ -113,7 +113,7 @@ newPlayMap.loadOrganization = function() {
 
 newPlayMap.loadEvent = function() {
     console.log("load event");
-    
+      newPlayMap.cluster();
   $('div.marker[type=event]').bind( "click", function() {
       var marker = $(this);
       
@@ -277,50 +277,9 @@ easey.DoubleClickHandler.prototype = {
 };
 
 newPlayMap.mapCustomizations = function (map, markers) {
-/*   map.setZoomRange(0, 18); */
-
-
-/*
-    var minZoom = 2;
-    var maxZoom = 18;
-    var topLeft = new MM.Location(70.4, -80.8);
-    var bottomRight = new MM.Location(21.5, -90.3);
-
-    // override map limits so that panning and zooming are constrained within these bounds:
-    map.coordLimits = [
-      map.locationCoordinate(topLeft).zoomTo(minZoom),
-      map.locationCoordinate(bottomRight).zoomTo(maxZoom)
-    ];
-
-    // override provider limits so that tiles are not loaded unless they are inside these bounds:
-    markers.tileLimits = [
-      map.locationCoordinate(topLeft).zoomTo(minZoom),
-      map.locationCoordinate(bottomRight).zoomTo(maxZoom)
-   ];
-
-    // override sourceCoordinate so that it doesn't use coord limits to wrap tiles
-    // but so that it rejects any tile coordinates that lie outside the limits
-    markers.sourceCoordinate = function(coord) {
-        // don't need .container() stuff here but it means *something* will get loaded at low zoom levels
-        // e.g. at level 0 the base tile could contain the entire extent
-        // skip the .container() stuff if you don't want to load/render tiles outside the extent *at all*
-        var TL = this.tileLimits[0].zoomTo(coord.zoom).container();
-        var BR = this.tileLimits[1].zoomTo(coord.zoom).container().right().down();
-        if (coord.row < TL.row || coord.row >= BR.row || coord.column < TL.column || coord.column >= BR.column) {
-            // it's too high or too low or too lefty or too righty:
-            //console.log(coord.toString() + " is outside bounds");
-            return null;
-        }
-        // otherwise it's cool, let it through
-        return coord;
-    }
-*/
-
-
-
+console.log("mc");
   // Custom map steps?
   // Zoom out faster
-/*
   $("a.zoomer.zoomin").bind('click', function(e) {
 
                 easey.slow(map, {
@@ -330,9 +289,7 @@ newPlayMap.mapCustomizations = function (map, markers) {
                 });
 
   });
-*/
 
-/*
   $("a.zoomer.zoomout").bind('click', function(e) {
                 easey.slow(map, {
                     zoom: map.getZoom() - 2,
@@ -340,10 +297,29 @@ newPlayMap.mapCustomizations = function (map, markers) {
                     time: 500
                 });
   });
-*/
-/*
   $("a.zoomer.zoomout").click( function(e) {
     map.zoomBy(-2);
   });
-*/
+  
+
 };
+
+
+
+    
+    
+    
+newPlayMap.cluster = function() {
+
+};
+
+
+/*
+// Creates canvas 320 × 200 at 10, 50
+var paper = Raphael(200, 200, 320, 200);
+
+      var circle = paper.circle(radius, 40, 10);
+      circle.attr("fill", "#f00");
+      circle.attr("stroke", "#fff");
+*/
+// Creates circle at x = 50, y = 40, with radius 10

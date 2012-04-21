@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>Polymaps - k-Means Clustering</title>
+    <script type="text/javascript" src="js/modernizr.min.js?1.5"></script>
+    <script type="text/javascript" src="js/polymaps.min.js?2.5.0"></script>
+    <script type="text/javascript" src="js/nns.min.js?1.1.0"></script>
+    <script type="text/javascript" src="js/kmeans.js?2.0.2"></script>
+    <script type="text/javascript" src="js/crimespotting.js?2.4.0"></script>
+    <style type="text/css">
+
+@import url("../screen.css?0.9+1");
+@import url("../style.css?2.2.0");
+
+div#map {
+  background: #E6E6E6;
+}
+
+.layer circle {
+  fill: lightcoral;
+  fill-opacity: .5;
+  stroke: brown;
+  vector-effect: non-scaling-stroke;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <hr class="space"/>
+      <div class="span-5 append-1 logo">
+        <a href="../">
+          <img src="../logo-small.png"/>
+          <script type="text/javascript" src="../logo-small.js"></script>
+        </a>
+      </div>
+      <div class="span-18 last top">
+        <a href="../">Overview</a>
+        <a class="active" href="./">Examples</a>
+        <a href="../docs/">Documentation</a>
+        <a href="../download.html">Download</a>
+      </div>
+      <hr class="space"/>
+      <div id="map" class="span-24 last"></div>
+      <hr class="space"/>
+      <div id="copy" class="span-5 append-1">
+        &copy; 2010
+        <a href="http://www.cloudmade.com/">CloudMade</a>,
+        <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors,
+        <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a>.
+      </div>
+      <div class="span-18 last">
+
+        <h2><i>k</i>-Means Clustering</h2>
+
+        <p>Symbol maps, such as those used
+        by <a href="http://oakland.crimespotting.org/">Oakland
+        Crimespotting</a>, are great for visualizing discrete events across time
+        and space. But what happens if you want to show thousands of points?
+        Here we
+        use <a href="http://en.wikipedia.org/wiki/K-means_clustering"><i>k</i>-means
+        clustering</a> to coalesce dots and visualize the density of crime in
+        Oakland.</p>
+
+        <p>The map background is a monochrome <a href="../docs/#image">image</a>
+        layer from <a href="http://www.cloudmade.com/">CloudMade</a>. Register
+        a <a href="http://cloudmade.com/register">developer account</a> with
+        CloudMade for your own API key. Crime data is sourced
+        from <a href="http://gismaps.oaklandnet.com/crimewatch/">CrimeWatch</a>.</p>
+
+      </div>
+      <hr class="space"/>
+      <div id="copy" class="span-5 append-1">
+
+        <p>This example uses a helper library to compute
+        the <a href="kmeans.js"><i>k</i>-means</a> and build
+        a <i>kd</i>-tree. These helpers aren&rsquo;t part of the official
+        Polymaps release, but they are covered by the same BSD license and you
+        are welcome to use them!</p>
+
+      </div>
+
+      <script type="text/javascript">
+/*
+
+var po=org.polymaps,map=po.map().container(document.getElementById("map").appendChild(po.svg("svg"))).center({lat:37.787,lon:-122.228}).zoom(14).zoomRange([12,16]).add(po.interact());map.add(po.image().url(po.url("http://{S}tile.cloudmade.com/1a1b06b230af4efdbb989ea99e9841af/20760/256/{Z}/{X}/{Y}.png").hosts(["a.","b.","c.",""])));map.add(po.geoJson().url(crimespotting("http://oakland.crimespotting.org/crime-data?count=1000&format=json&bbox={B}&dstart=2010-04-01&dend=2010-05-01")).on("load",load).clip(false).zoom(14));
+map.add(po.compass().pan("none"));
+function load(a){for(var c=a.tile.cluster||(a.tile.cluster=kmeans().iterations(16).size(64)),b=0;b<a.features.length;b++)c.add(a.features[b].data.geometry.coordinates);a=a.tile;for(var d=a.element;d.lastChild;)d.removeChild(d.lastChild);c=c.means();c.sort(function(g,h){return h.size-g.size});for(b=0;b<c.length;b++){var e=c[b],f=d.appendChild(po.svg("circle"));f.setAttribute("cx",e.x);f.setAttribute("cy",e.y);f.setAttribute("r",Math.pow(2,a.zoom-11)*Math.sqrt(e.size))}};
+
+(function(){function d(){if(b=!b){c.style("position","fixed").style("border-width",0).style("width","100%").style("height","100%").style("top",0).style("left",0);a.style("position","fixed").style("right","16px").style("top","16px");e.attr("transform","translate(16,16)rotate(135)scale(5)translate(-1.85,0)");f.style("visibility","hidden").style("overflow","hidden")}else{c.style("position",null).style("border-width",null).style("width",null).style("height",null).style("top",null).style("left",null);
+a.style("position","absolute").style("right","-16px").style("top","-16px");e.attr("transform","translate(16,16)rotate(-45)scale(5)translate(-1.85,0)");f.style("visibility",null).style("overflow",null)}map.resize()}var f=n$(document.body),c=n$("#map").style("visibility","visible"),b=false,a=c.add("svg:svg").attr("width",32).attr("height",32).style("position","absolute").style("right","-16px").style("top","-16px").style("visibility","visible").on("mousedown",d);a.add("svg:circle").attr("cx",16).attr("cy",
+16).attr("r",14).attr("fill","#fff").attr("stroke","#ccc").attr("stroke-width",4).add("svg:title").text("Toggle fullscreen. (ESC)");var e=a.add("svg:path").attr("transform","translate(16,16)rotate(-45)scale(5)translate(-1.85,0)").attr("d","M0,0L0,.5 2,.5 2,1.5 4,0 2,-1.5 2,-.5 0,-.5Z").attr("pointer-events","none").attr("fill","#aaa");window.addEventListener("keydown",function(g){g.keyCode==27&&b&&d()},false)})();
+
+*/
+
+var po = org.polymaps;
+
+var map = po.map()
+    .container(document.getElementById("map").appendChild(po.svg("svg")))
+    .center({lat: 37.787, lon: -122.228})
+    .zoom(14)
+    .zoomRange([12, 16])
+    .add(po.interact());
+
+map.add(po.image()
+    .url(po.url("http://{S}tile.cloudmade.com"
+    + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
+    + "/20760/256/{Z}/{X}/{Y}.png")
+    .hosts(["a.", "b.", "c.", ""])));
+
+map.add(po.geoJson()
+    .url(crimespotting("http://oakland.crimespotting.org"
+        + "/crime-data"
+        + "?count=1000"
+        + "&format=json"
+        + "&bbox={B}"
+        + "&dstart=2010-04-01"
+        + "&dend=2010-05-01"))
+    .on("load", load)
+    .clip(false)
+    .zoom(14));
+
+map.add(po.compass()
+    .pan("none"));
+
+function load(e) {
+  var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
+      .iterations(16)
+      .size(64));
+
+  for (var i = 0; i < e.features.length; i++) {
+    cluster.add(e.features[i].data.geometry.coordinates);
+  }
+
+  var tile = e.tile, g = tile.element;
+  while (g.lastChild) g.removeChild(g.lastChild);
+
+  var means = cluster.means();
+  means.sort(function(a, b) { return b.size - a.size; });
+  for (var i = 0; i < means.length; i++) {
+    var mean = means[i], point = g.appendChild(po.svg("circle"));
+    point.setAttribute("cx", mean.x);
+    point.setAttribute("cy", mean.y);
+    point.setAttribute("r", Math.pow(2, tile.zoom - 11) * Math.sqrt(mean.size));
+  }
+}
+
+      </script>
+
+    </div>
+  </body>
+</html>
