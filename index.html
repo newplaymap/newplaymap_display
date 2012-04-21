@@ -75,17 +75,16 @@
       </div>
     </div>
 
-    <div class="container-fluid">
-    
-
-    
+    <div class="container-fluid"> 
       <div class="row-fluid">
 
+<!--
             <div id="popup">
               <div class="content">
                 <h2><a href="${path}">${title}</a></h2>           
               </div>
             </div>
+-->
       
             <div id="panel-container">
               <div id="panel">
@@ -138,15 +137,14 @@
               
                 <!--               Templates -->
                 <div class="play content">
-                (testing: play-journey)
-                  <h2><a href="#/${play_path}?event_id=${related_event_id}">${play_title}</a></h2>
+                  <h2><a href="#${play_path}?event_id=${related_event_id}">${play_title}</a></h2>
                   {{if generative_artist}}
                   <h3>By ${generative_artist}</h3>
                   {{/if}}
                   
                   {{if related_theater}}
 <!--                  @TODO  This will need some work -->
-                  <a href="#/${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                  <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
                   {{/if}}
                   
                   <p>{{if event_type}}
@@ -178,21 +176,18 @@
                 
 <!--                   artist -->
                   <div class="artist content">
-                (testing: artist)
-                  <h2><a href="#/${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
+                  <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
                   </div><!--  end artist -->
     
  <!--                   organization -->
                   <div class="organization content">
-                (testing: organization)
-                  <h2><a href="#/${path}">${name}</a></h2>
+                  <h2><a href="#${path}">${name}</a></h2>
                   </div><!--  end organization -->
  
  
  <!--                   event -->
                   <div class="event content">
-                (testing: event)
-                  <h2><a href="#/${path}">${play_title}</a> at ${related_theater}</h2>
+                  <h2><a href="#${path}">${play_title}</a> at ${related_theater}</h2>
                   </div><!--  end event -->               
                 
               </div>
@@ -230,7 +225,6 @@
       </div>
       <div class="modal-body">
         <h4>About</h4>
-<!--
          <div class="content">
             <p>What if the new works sector of the U.S. theater generated a Map of itself, harnessed and shared its collective infrastructural knowledge, and then coalesced as a diverse community to design powerful information tools that all belonged to the commons?</p>
             <p><a href="http://newplaymap.org" title="The New Play Map">The New Play Map</a> is a pilot project of the <a href="http://www.arenastage.com/new-play-institute/" title="American Voices New Play Institute at Arena Stage">American Voices New Play Institute at Arena Stage</a> on behalf of and in collaboration with the field that seeks to develop opportunities that internet and communication tools have for enabling collaborative, culturally transformative, and globally-scaled information resource and knowledge sharing&mdash;within and beyond the new works sector.     </p>
@@ -280,7 +274,6 @@
             <p><a href="/feedback" title="Feedback page">Contact Us through the Feedback System</a></p>
             <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />Unless otherwise noted, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
           </div>
--->
         </div>
       <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal" >Close</a>
@@ -296,7 +289,6 @@
       <div class="modal-body">
         <h4>Feedback</h4>
 
-<!--
         <div class="content">
           <script type="text/javascript" charset="utf-8">
             var is_ssl = ("https:" == document.location.protocol);
@@ -313,7 +305,6 @@
       
         var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
       </script>  </div>
--->
 
       </div>
       <div class="modal-footer">
@@ -352,11 +343,6 @@
     <script src='js/easey.handlers.js' type='text/javascript'></script>
 <!--     ender conflicts with easey? -->
 <!--     <script src='js/ender.js' type='text/javascript'></script> -->
-
-<!--
-    <script src='js/wax.g.js' type='text/javascript'></script>
-    <script src='js/wax.leaf.js' type='text/javascript'></script>
--->
     <script src='js/wax.mm.min.js' type='text/javascript'></script>
 
     <script src='js/kmeans.js' type='text/javascript'></script>

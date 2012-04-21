@@ -1,5 +1,6 @@
 
 newPlayMap.updatePanel = function(marker, data) {
+  $('div#panel-container div#panel').css('visibility', 'visible');
   // data is extra, we might use it...
   var feature = {};
   feature.markup = marker;
@@ -12,20 +13,6 @@ newPlayMap.updatePanel = function(marker, data) {
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 
-  // If it's an event, load journey into overlay
-  // @TODO: Right now this is just the journey that's already loaded. 
-  //        Make it work with plain events (type == event)
-  // console.log(feature.marker_id);
-  // console.log(jsonData[feature.marker_id]);
-///  if (feature.type == 'play') {
-//  newPlayMap.panelTemplate(featureData);
-
-/*
-    for (singleFeature in jsonData.play.features) {
-     // newPlayMap.loadPlayJourney(jsonData.play.features[singleFeature]);
-    }
-*/
-//  }
 
   // Add interaction to event listings in the new content
   // @TODO: Not only plays use this template. 
@@ -135,6 +122,7 @@ newPlayMap.panelTemplates = function() {
     container = $('#panel-container .' + type);
     panelMarkup[type] = container.html();
 
+    // Also template by journey.
     container = $('#panel-container .journey ol.events');
     panelMarkup['journey'] = container.html();
   }
@@ -160,7 +148,7 @@ newPlayMap.panelTemplate = function(feature) {
   $.tmpl(type + "Template", feature["properties"])
     .appendTo(container);
 
-  // Special templates
+  // Special templates for journeys -- this will probably become a display for extra data.
   if (type === "play") {
     type = "journey";
     container = $('#panel-container .journey ol.events');
@@ -168,8 +156,7 @@ newPlayMap.panelTemplate = function(feature) {
     $.template( type + "Template", panelMarkup[type]);        
     $.tmpl(type + "Template", jsonData["play"].features)
       .appendTo(container);  
-  }  
-    
+  }
 }
 
 newPlayMap.eventListProcess = function(container) {
@@ -181,7 +168,6 @@ newPlayMap.eventListProcess = function(container) {
       // Highlight pin on the map
         // @TODO: Set the event id dynamically. Make sure events are in the locationsByID object
         // @TODO: Once this is working, turn off highlight on hover/click
-
 
       var eventId = $(this).attr('listing_id');
 
@@ -197,20 +183,3 @@ newPlayMap.eventListProcess = function(container) {
     }
   });
 };
-
-/*
-
-
-newPlayMap.loadPlayJourney = function(feature) {
-  var type = 'play';
-  var container = $('#panel-container .' + type);
-  
-  // @TODO: Put this in a template
-  if ($('ol.journey').length == 0) {
-    $('<h2></h2>').addClass('journey-header').text('Journey').appendTo(container);
-    $('<ol></ol>').addClass('journey').appendTo(container);
-  }
-  // console.log(feature);
-  $('<li></li>').attr('listing_id', feature.id).text(feature.properties.event_type).appendTo('ol.journey');
-}
-*/

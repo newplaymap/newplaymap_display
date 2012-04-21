@@ -1,5 +1,5 @@
 h1, h2, h3, h4 {
-/*   font-family: 'Museo Slab 500', Helvetica, Arial, sans-serif;; */
+  font-family: 'Museo Slab 500', Helvetica, Arial, sans-serif;;
 }
 
 body {
@@ -10,7 +10,6 @@ body {
   padding: 9px 0;
 }
 
-/*
 @font-face{ 
 	font-family: 'Museo Slab 500';
 	src: url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.eot');
@@ -19,7 +18,6 @@ body {
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.ttf') format('truetype'),
 	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
 }
-*/
 #popup {
   position: fixed;
   bottom: 0px;
@@ -91,31 +89,40 @@ dd {
   z-index: 40;
 }
 
-#play-journey {
-/*
-  z-index: 0;
-  display: none;
-*/
-}
-
 #play-journey svg {
 /* pointer-events:  none; */
 }
 
-/*
+#map-container .ts-map .zoomer {
+  width: 28px;
+  height: 28px;
+  top: 80px;
+  left: 10px;
+}
 
-#play-markers {
-  display: none;
-  z-index: 400;
-  
+#map-container .ts-map .zoomin {
+  background-position: -31px -1px;
+  left: 39px;
+  border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
 }
-#artist-markers {
-  z-index: 80;
+
+#map-container .ts-map .zoomout {
+  background-position: -61px -1px;
+  border-radius: 3px 0px 0px 3px;
+  -moz-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
 }
-#organization-markers {
-  z-index: 60;
+
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 5px;
+  font-size: 80%;
 }
-#events-markers {
-  z-index: 90;
+
+div#panel-container div#panel {
+  visibility: hidden;
 }
-*/
+
