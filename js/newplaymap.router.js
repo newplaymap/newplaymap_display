@@ -145,6 +145,7 @@ newPlayMap.loadEvent = function() {
       data: data,
       type: "play",
       zoomLevel: 3,
+      clearLayer: true,
       template: "layer-play",
       layer: "play",
       id: "event_id",
