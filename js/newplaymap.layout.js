@@ -153,6 +153,7 @@ newPlayMap.panelTemplate = function(feature) {
     type = "journey";
     container = $('#panel-container .journey ol.events');
     container.empty();
+    $('div#panel-container div.journey').css('visibility', 'visible');
     $.template( type + "Template", panelMarkup[type]);        
     $.tmpl(type + "Template", jsonData["play"].features)
       .appendTo(container);  
@@ -173,7 +174,6 @@ newPlayMap.eventListProcess = function(container) {
 
       spotlight.addLocations(locationsByID[eventId]);
       spotlight.parent.className = "active";
-
       $('div#panel-container div#panel .content').show();
     },
     out: function() {

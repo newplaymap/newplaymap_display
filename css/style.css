@@ -122,6 +122,10 @@ footer {
   font-size: 80%;
 }
 
+div#panel-container div.journey {
+  visibility: hidden;
+}
+
 div#panel-container div#panel {
   visibility: hidden;
 }
