@@ -8,7 +8,12 @@ if(!empty($_GET['page'])){
 else{
   $page = 0;
 }
-$page_items = 150;
+if(!empty($_GET['page_items'])){
+ $page_items = $_GET['page_items'];
+}
+else{
+  $page_items = 150;
+}
 
 $collection = $m->newplaymap->organizations;
 
@@ -33,6 +38,11 @@ foreach ($cursor as $obj) {
     if($i > 0) {
      $json .= ',';
     }
+
+    $obj['geometry']['coordinates'][0] =   (float)  $obj['geometry']['coordinates'][0];
+    $obj['geometry']['coordinates'][1] =   (float)  $obj['geometry']['coordinates'][1];
+    $obj['properties']['latitude'] =   (float)  $obj['properties']['latitude'];
+    $obj['properties']['longitude'] =   (float)  $obj['properties']['longitude'];
 
     $json .= json_encode($obj);
   

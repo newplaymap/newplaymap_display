@@ -2,18 +2,31 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$limit = 200;
+if(!empty($_GET['page'])){
+ $page = $_GET['page'];
+}
+else{
+  $page = 0;
+}
+
+if(!empty($_GET['page_items'])){
+ $page_items = $_GET['page_items'];
+}
+else{
+  $page_items = 150;
+}
+
 $collection = $m->newplaymap->events;
 
 if(!empty($_GET['event_type'])){
   $event_type = $_GET['event_type'];
   // find everything in the collection
   $query = array("properties.event_type" => $event_type);
-  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find($query)->skip($page * $page_items)->limit($page_items)->sort(array("properties.event_date" => 1));
 
 }
 else {
-  $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("properties.event_date" => 1));
 }
 
 $count = $cursor->count();

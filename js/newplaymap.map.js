@@ -312,14 +312,3 @@ console.log("mc");
 newPlayMap.cluster = function() {
 
 };
-
-
-/*
-// Creates canvas 320 × 200 at 10, 50
-var paper = Raphael(200, 200, 320, 200);
-
-      var circle = paper.circle(radius, 40, 10);
-      circle.attr("fill", "#f00");
-      circle.attr("stroke", "#fff");
-*/
-// Creates circle at x = 50, y = 40, with radius 10

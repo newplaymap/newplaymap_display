@@ -148,9 +148,32 @@ div#panel-container div#panel {
 }
 
 
-circle {
-  fill: #ffcc00;
-  fill-opacity: .5;
-  stroke: brown;
+#events.layer circle {
+  fill: #273e8b;
+  fill-opacity: .8;
   vector-effect: non-scaling-stroke;
+}
+
+#clusters.layer circle {
+  fill: #bf1e2d;
+  fill-opacity: .8;
+  vector-effect: non-scaling-stroke;
+}
+
+
+#organizations.layer circle {
+  fill: #3d5425;
+  fill-opacity: .8;
+  vector-effect: non-scaling-stroke;
+}
+
+#artists.layer circle {
+  fill: #d69300;
+  fill-opacity: .8;
+/*   stroke: brown; */
+  vector-effect: non-scaling-stroke;
+}
+
+#plays .layer circle {
+  fill: #bf1e2d;
 }

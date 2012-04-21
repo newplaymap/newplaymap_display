@@ -17,7 +17,7 @@ var map = po.map()
     .container(document.getElementById("map").appendChild(po.svg("svg")))
     .center({lat: 45, lon: -90.228})
     .zoom(3)
-    .zoomRange([3, 16])
+    .zoomRange([2, 7])
     .add(po.interact());
 
 
@@ -46,27 +46,33 @@ map.add(po.compass()
         //callback: newPlayMap.loadEvent
       };
 
-var url = "http://oakland.crimespotting.org"
-        + "/crime-data"
-        + "?count=1000"
-        + "&format=json"
-        + "&bbox={B}"
-        + "&dstart=2010-04-01"
-        + "&dend=2010-05-01";
-        console.log(url);
-
 map.add(po.geoJson()
-    .url(/* crimespotting(url) */events.path)
+    .url('api/organizations.php?page_items=300')
     .on("load", load)
     .clip(false)
-    .zoom(3));
+    .zoom(3)
+    .id("organizations"));
+
+map.add(po.geoJson()
+    .url('api/artists.php?page_items=300')
+    .on("load", load)
+    .clip(false)
+    .zoom(3)
+    .id("artists"));
+
+map.add(po.geoJson()
+    .url('api/events.php?page_items=300')
+    .on("load", load)
+    .clip(false)
+    .zoom(3)
+    .id("events"));
 
 
 function load(e) {
 
   var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
       .iterations(16)
-      .size(30));
+      .size(40));
 
   for (var i = 0; i < e.features.length; i++) {
     cluster.add(e.features[i].data.geometry.coordinates);
@@ -80,6 +86,8 @@ function load(e) {
   var means = cluster.means();
 
   means.sort(function(a, b) { return b.size - a.size; });
+
+
 
   for (var i = 0; i < means.length; i++) {
     var mean = means[i];
