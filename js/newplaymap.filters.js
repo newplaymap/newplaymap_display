@@ -23,6 +23,11 @@ newPlayMap.filters.organizations = function(data) {
     pathQuery = "&national_networks=" +  data.national_networks;
   }
 
+  if (data.special_interests !== undefined) {
+    pathQuery = "&special_interests=" + data.special_interests;
+  }
+
+
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: 3,
@@ -67,6 +72,37 @@ newPlayMap.filters.plays = function(data) {
   });
 };
 
+
+newPlayMap.filters.artists = function(data) {
+  var pathQuery = "";
+  if (data.artist_name !== undefined) {
+    pathQuery = "&artist_name=" +  data.artist_name;
+  }
+  
+  if (data.ensemble_collective !== undefined) {
+    pathQuery = "&ensemble_collective=" +  data.ensemble_collective;
+  }
+
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-artists-filter",
+    class: "active",
+    id: "artist_id",
+    label: "ensemble_collective",
+    title: "generative_artist",
+    template: "artist",
+    type: "artist",
+    dataName: "artist",
+    path: "api/artists_filter.php?" + pathQuery,
+    dataPath: "api/artists_filter.php?" + pathQuery,
+    icon: "icons/artist.png",
+    grouping_field: "artist_id",
+    callback: newPlayMap.loadArtist
+  });
+}
 
 // Load plays
 newPlayMap.filters.events = function(data) {
@@ -154,13 +190,23 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.organizations({national_networks: $(this).attr('value')});
     newPlayMap.filters.reset(this);
   });
-  /*
+  
   $('#organization-special-interests-filter').change(function() {
-    newPlayMap.filters.organizationSpecialInterests($(this).attr('value'));
+    newPlayMap.filters.organizations({special_interests: $(this).attr('value')});
+    newPlayMap.filters.reset(this);
+  });
+
+  $('#artists-filter').change(function() {
+    newPlayMap.filters.artists({artist_name: $(this).attr('value')});
+    newPlayMap.filters.reset(this);
+  });
+  
+/*
+  $('#ensemble-collective-filter').change(function() {
+    newPlayMap.filters.ensemble({ensemble_collective: 'Ensemble / Collective'});
     newPlayMap.filters.reset(this);
   });
 */
-
 
 
 
@@ -174,15 +220,7 @@ newPlayMap.filters.setupFilters = function() {
   
 
 
-  $('#artists-filter').change(function() {
-    newPlayMap.filters.artists($(this).attr('value'));
-    newPlayMap.filters.reset(this);
-  });
-  
-  $('#ensemble-collective-filter').change(function() {
-    newPlayMap.filters.ensemble('Ensemble / Collective');
-    newPlayMap.filters.reset(this);
-  });
+
 
 
 
@@ -220,20 +258,6 @@ newPlayMap.filters.reset = function(exception) {
 }
 
 
-
-/***/
-
-newPlayMap.filters.setEventTypeMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' events loaded', data);
-}
-
-
-newPlayMap.filters.setEventDatesMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' events loaded', data);
-}
-
 /*
  * Organizations
  */
@@ -267,108 +291,6 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   );
 }
 
-
-/*
- * Organization type
- */
-newPlayMap.filters.organizationType = function(searchString) {
- $.ajax({
-   url:  'api/organization_type_filter.php',
-   dataType: 'json',
-   data: {
-     organization_type: searchString
-   },
-   success: newPlayMap.filters.setOrganizationTypeMarkers,
-   error: newPlayMap.filters.error
- });
-}
-
-newPlayMap.filters.setOrganizationTypeMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' organizations loaded', data);
-  var searchString = 'Pork!';
-  
-  newPlayMap.loadAPICall({
-    data: {organization_name: searchString},
-    zoomLevel: 10,
-    template: "organization",
-    layer: "layer-organization-filter",
-    class: "active",
-    path: 'api/organization_type_filter.php?',
-    type: "organization",
-    label: "org_type",
-    id: "organization_id",
-    title: "name",
-    dataName: "organization_path_filter",
-    dataPath: "api/organization_path_filter.php?",
-    icon: "icons/organization.png",
-    grouping_field: "organization_id",
-    callback: newPlayMap.loadOrganizationFilter 
-  });
-}
-
-/*
- * Organizations by Special Interest
- */
-newPlayMap.filters.organizationSpecialInterests = function(searchString) {
- $.ajax({
-   url:  'api/organization_special_interests_filter.php',
-   dataType: 'json',
-   data: {
-     special_interests: searchString
-   },
-   success: newPlayMap.filters.setOrganizationSpecialInterestsMarkers,
-   error: newPlayMap.filters.error
- });
-}
-
-newPlayMap.filters.setOrganizationSpecialInterestsMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' organizations loaded', data);
-}
-
-/*
- * Organizations by National Network
- */
-newPlayMap.filters.organizationNationalNetworks = function(searchString) {
- $.ajax({
-   url:  'api/organization_national_networks_filter.php',
-   dataType: 'json',
-   data: {
-     national_networks: searchString
-   },
-   success: newPlayMap.filters.setOrganizationNationalNetworksMarkers,
-   error: newPlayMap.filters.error
- });
-}
-
-newPlayMap.filters.setOrganizationNationalNetworksMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' organizations loaded', data);
-}
-
-/*
- * Ensembles and collective
- * Return both organizations and artists
- */
-newPlayMap.filters.ensemble = function(searchString) {
-
- $.ajax({
-   url:  'api/ensemble_collective_filter.php',
-   dataType: 'json',
-   data: {
-     ensemble_collective: searchString
-   },
-   success: newPlayMap.filters.setEnsembleMarkers,
-   error: newPlayMap.filters.error
- });
-}
-
-newPlayMap.filters.setEnsembleMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' artists and organizations loaded', data);
-}
-
 /*
  * Artists
  */
@@ -400,23 +322,6 @@ newPlayMap.filters.setArtistsIndex = function(data) {
       items: 10
     }
   );
-}
-
-newPlayMap.filters.artists = function(searchString) {
- $.ajax({
-   url:  'api/artists_filter.php',
-   dataType: 'json',
-   data: {
-     artist_name: searchString
-   },
-   success: newPlayMap.filters.setArtistMarkers,
-   error: newPlayMap.filters.error
- });
-}
-
-newPlayMap.filters.setArtistMarkers = function(data) {
-  // Success
-  newPlayMap.filters.feedback(data.count + ' artists loaded', data);
 }
 
 /*
