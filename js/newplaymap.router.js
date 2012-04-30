@@ -26,14 +26,15 @@ newPlayMap.splitPath = function(event) {
     path.base = path.parts[0];
     path.partsStripped = path.uriStripped.split("?");
     path.baseStripped = path.partsStripped[0];
-    path.vars = path.parts[1].split("&");
+    if(path.parts[1] !== undefined) {
+      path.vars = path.parts[1].split("&");
+    }
     path.filters = {};
     for (var singleFilter in path.vars) {
       var filter = path.vars[singleFilter].split('=');
       path.filters[filter[0]] = filter[1];
     }
   }
-  newPlayMap.status.routerPathLoaded = true;  
   return path;
 };
 
