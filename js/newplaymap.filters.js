@@ -175,11 +175,11 @@ newPlayMap.filters.events = function(data) {
  * Trigger api calls on the form elements
  */
 newPlayMap.filters.setupFilters = function() {
-  $('#plays-filter').change(function() {
-    newPlayMap.filters.plays({play_title: $(this).attr('value')});
-    newPlayMap.filters.reset(this);
-    return false;
-  });
+  // $('#plays-filter').change(function() {
+  //   newPlayMap.filters.plays({play_title: $(this).attr('value')});
+  //   newPlayMap.filters.reset(this);
+  //   return false;
+  // });
 
   $('#event-type-filter').change(function() {
     newPlayMap.filters.events({event_type: $(this).attr('value')});
@@ -219,10 +219,10 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.reset(this);
   });
 
-  $('#artists-filter').change(function() {
-    newPlayMap.filters.artists({artist_name: $(this).attr('value')});
-    newPlayMap.filters.reset(this);
-  });
+  // $('#artists-filter').change(function() {
+  //   newPlayMap.filters.artists({artist_name: $(this).attr('value')});
+  //   newPlayMap.filters.reset(this);
+  // });
 
   $('#ensemble-collective-filter').change(function() {
     newPlayMap.filters.ensemble({ensemble_collective: 'Ensemble / Collective'});
@@ -296,8 +296,8 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   $('#organizations-filter').autocomplete(
     {
       source: organizationNames,
+      appendTo: '#panel-container',
       select: function(event, ui) {
-        console.log(ui.item);
         newPlayMap.filters.organizations({organization_name: ui.item.value});
         newPlayMap.filters.reset(this);
       }
@@ -332,7 +332,12 @@ newPlayMap.filters.setArtistsIndex = function(data) {
 
   $('#artists-filter').autocomplete(
     {
-      source: artistsNames
+      source: artistsNames,
+      appendTo: '#panel-container',
+      select: function(event, ui) {
+        newPlayMap.filters.artists({artist_name: ui.item.value});
+        newPlayMap.filters.reset(this);
+      }
     }
   );
 }
@@ -364,7 +369,12 @@ newPlayMap.filters.setPlaysIndex = function(data) {
 
   $('#plays-filter').autocomplete(
     {
-      source: playNames
+      source: playNames,
+      appendTo: '#panel-container',
+      select: function(event, ui) {
+        newPlayMap.filters.plays({play_title: ui.item.value});
+        newPlayMap.filters.reset(this);
+      }
     }
   );
 }
