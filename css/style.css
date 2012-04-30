@@ -147,3 +147,12 @@ div#panel-container div#panel {
   visibility: hidden;
 }
 
+ul.ui-autocomplete {
+  width: 335px;
+  max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	/* add padding to account for vertical scrollbar */
+/*  padding-right: 20px; */
+}
