@@ -96,7 +96,7 @@ newPlayMap.loadArtistFilter = function() {
 
 
 newPlayMap.loadOrganizationFilter = function() {
-  console.log("load org");
+  console.log("load org filter");
 
   $('div.marker[dataname=organizations_filter]').each(function(){
       var id = $(this).attr('marker_id');
@@ -118,7 +118,7 @@ newPlayMap.loadEvent = function() {
       var marker = $(this);
       
       var related_play_id =  marker.attr("related_play_id");
-      console.log(related_play_id);
+
       var data = {
         type: "play",
         name: "play",
@@ -146,6 +146,51 @@ newPlayMap.loadEvent = function() {
     });
   });
 };
+
+newPlayMap.loadEventFilter = function() {
+    console.log("load event filters");
+
+
+  $('div.marker[dataname=events_filter]').each(function(){
+      var id = $(this).attr('marker_id');
+
+      spotlight.addLocations(locationsByID[id]);
+      spotlight.parent.className = "active";
+  });
+
+  $('div.marker[type=events_filter]').bind( "click", function() {
+      var marker = $(this);
+      
+      var related_play_id =  marker.attr("related_play_id");
+
+      var data = {
+        type: "play",
+        name: "play",
+        id: related_play_id
+      };
+      
+    newPlayMap.loadAPICall({    
+      path: "api/journey.php?id=" + related_play_id,
+      data: data,
+      type: "play",
+      zoomLevel: 3,
+      clearLayer: true,
+      clearLayers: true,
+      template: "layer-play",
+      layer: "play",
+      id: "event_id",
+      label: "related_theater",
+      alt_path: "play_path",
+      title: "play_title",
+      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataPath: "api/journey.php?id=" + related_play_id,
+      icon: "icons/play.png",
+      grouping_field: "related_play_id",
+      callback: newPlayMap.loadJourney
+    });
+  });
+};
+
 
 newPlayMap.loadJourney = function(feature) {
   // @TODO trigger spotlight.

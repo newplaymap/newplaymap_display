@@ -138,6 +138,7 @@ newPlayMap.processFilters = function() {
 };
 
 newPlayMap.loadData = function() {
+
     newPlayMap.loadJSONFile({
       path: 'api/organizations.php',
       type: "organization",

@@ -144,6 +144,6 @@ div#panel-container div.journey {
 }
 
 div#panel-container div#panel {
-  visibility: hidden;
+/*   visibility: hidden; */
 }
 
