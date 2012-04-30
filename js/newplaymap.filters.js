@@ -199,10 +199,10 @@ newPlayMap.filters.setupFilters = function() {
     return false;
   });
 
-  $('#organizations-filter').change(function() {
-    newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
-    newPlayMap.filters.reset(this);
-  });
+  // $('#organizations-filter').change(function() {
+  //   newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
+  //   newPlayMap.filters.reset(this);
+  // });
 
   $('#organization-type-filter').change(function() {
     newPlayMap.filters.organizations({organization_type: $(this).attr('value')});
@@ -293,10 +293,14 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var organizationNames = data;
 
-  $('#organizations-filter').typeahead(
+  $('#organizations-filter').autocomplete(
     {
       source: organizationNames,
-      items: 10
+      select: function(event, ui) {
+        console.log(ui.item);
+        newPlayMap.filters.organizations({organization_name: ui.item.value});
+        newPlayMap.filters.reset(this);
+      }
     }
   );
 }
@@ -326,10 +330,9 @@ newPlayMap.filters.setArtistsIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var artistsNames = data;
 
-  $('#artists-filter').typeahead(
+  $('#artists-filter').autocomplete(
     {
-      source: artistsNames,
-      items: 10
+      source: artistsNames
     }
   );
 }
@@ -359,10 +362,9 @@ newPlayMap.filters.setPlaysIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var playNames = data;
 
-  $('#plays-filter').typeahead(
+  $('#plays-filter').autocomplete(
     {
-      source: playNames,
-      items: 10
+      source: playNames
     }
   );
 }
