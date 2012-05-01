@@ -253,6 +253,31 @@ newPlayMap.filters.reset = function(exception) {
   }
 }
 
+/*
+ * Function to give users feedback that filter results are loading
+ */
+newPlayMap.filters.loadingFeedback = function() {
+  console.log('loading feedback');
+  if ($('#loading-feedback').length > 0) {
+    $('#loading-feedback').show()
+  } 
+  else {
+    $('<div></div>')
+      .attr('id', 'loading-feedback')
+      .appendTo('body');
+  }
+  
+}
+
+/*
+ * Function to give users feedback that filter results are done loading
+ */
+newPlayMap.filters.loadingCompleteFeedback = function() {
+  console.log('done loading feedback');
+  $('#loading-feedback').hide()
+}
+
+
 
 /*
  * Utility function shared by multiple ajax calls

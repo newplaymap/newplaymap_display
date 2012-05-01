@@ -21,6 +21,7 @@ newPlayMap.loadAPICall = function(vars) {
     url:  contentData,
     dataType: 'json',
     data: vars.data,
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.setData,
     error: newPlayMap.loadDataError
   });
@@ -35,6 +36,10 @@ newPlayMap.setData = function(data, statusText, jqxhr) {
   var count =  newPlayMap.toTitleCase(data.name) + " Showing: " + length + " of " + jsonData[data.name].count + ".";
   $('div.count').prepend('<p>' + count + '</p>');
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  
+  if (newPlayMap.filters.loadingCompleteFeedback) {
+    newPlayMap.filters.loadingCompleteFeedback();
+  }
   return false;
 };
 
