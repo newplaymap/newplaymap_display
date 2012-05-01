@@ -112,8 +112,6 @@ newPlayMap.processFilters = function() {
   $('#filter-container h4').css('cursor', 'pointer').click(function() {
     $(this).siblings('form').slideToggle();
   });
-  
-
 };
 
 newPlayMap.loadData = function() {
@@ -166,7 +164,6 @@ newPlayMap.loadData = function() {
     
   // Get path from browser and load content.
   newPlayMap.loadPageRouter();
-
 };
 
 
@@ -174,11 +171,32 @@ newPlayMap.loadPageRouter = function() {
   // Listen for address.
   $.address.change(function(event) {
     newPlayMap.browserEvents.push(event);
+    newPlayMap.routing.path = newPlayMap.splitPath(event);
+    
+    if(newPlayMap.routing.path.args[0] !== undefined) {
+      switch(newPlayMap.routing.path.args[0]) {
+        case 'play':
+          newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
+          break;
+        case 'artist':
+          newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
+          break;
+        case 'organization':
+          newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
+          break;
+        case 'event':
+          newPlayMap.filters.events({path: newPlayMap.routing.path.base});
+          break;
+      }
+    }
+  //  newPlayMap.filters.reset(this);
+/*
 
-    // Do all of the map and data contingent functions only through this function (to make it simpler.)
-    newPlayMap.buildRoutePath(event);
-    //newPlayMap.loadRouteInfo();     // Load route info (lookup route, get features).  
-    //newPlayMap.loadBehaviors();     // Load marker actions and events.
+
+
+
+*/
+    
     return false;
   });
 

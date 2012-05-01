@@ -7,9 +7,6 @@ var canvas = {}
  */
 
 
-newPlayMap.buildRoutePath = function(event) {
-  newPlayMap.routing.path = newPlayMap.splitPath(event);
-};
 
 newPlayMap.splitPath = function(event) {
   var path = {};
@@ -79,7 +76,7 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
         var feature = features[i];
         var pathKey;
         if(alt_path !== undefined) {
-          pathKey = alt_path
+          pathKey = alt_path;
         }
         else {
           pathKey = "path";
@@ -93,17 +90,6 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
     }
     return loadedFeatures;
    }
-   else {
-    console.log("in else in lookup");
-     // If jsonData isn't set up yet, stick the route somewhere to load later
-     newPlayMap.routing = {
-      path: newPlayMap.routing.path,
-      route: newPlayMap.routing.route || {},
-      dataName: dataName,
-      alt_path: alt_path
-     };
-   } 
-
 };
 
 /**

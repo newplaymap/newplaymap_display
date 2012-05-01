@@ -2,23 +2,16 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->artists;
-
-$artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
-$path = (!empty($_GET['path'])) ? $_GET['path'] : null;
-
-if($path !== null) {
-  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.artist_name" => 1));
-}
-else if($artist_name !== null) {
-  $cursor = $collection->find(array("properties.artist_name" => $artist_name))->sort(array("properties.artist_name" => 1));
+if(!empty($_GET['path'])){
+  $path = $_GET['path'];
+  $query = array('properties.path' => $path);
+  $cursor = $collection->find($query);
 }
 else {
-  return;
+  $path = '/play/the-seven-ages-of-mime/presented-performance-2007-01-19';
+  $query = array('properties.path' => $path);
+  $cursor = $collection->find($query);
 }
-
-
-// find everything in the collection
 
 $count = $cursor->count();
 
@@ -28,8 +21,8 @@ header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT");
 header("Cache-Control: no-cache, must-revalidate"); 
 header("Pragma: no-cache");
 header("Content-type: application/json");
- $page;
-$json = '{"name": "artists_filter","type":"FeatureCollection","features":[ ' ;
+
+$json = '{"name": "events","type":"FeatureCollection","features":[ ' ;
 
 $i = 0;
 
@@ -40,6 +33,12 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
+    $start_date = date('M j, Y', $obj['properties']['event_date']->sec);
+    $end_date = date('M j, Y', $obj['properties']['event_to_date']->sec);
+    
+    $obj['properties']['event_date'] = $start_date;
+    $obj['properties']['event_to_date'] = $end_date;
+    
     $json .= json_encode($obj);
   
     $i++;

@@ -4,33 +4,27 @@ connectMongo(false);
 
 $plays = $m->newplaymap->plays;
 
-
 if(!empty($_GET['id'])){
- $id = $_GET['id'];
-  // find everything in the collection
+  $id = $_GET['id'];
   $play_cursor = $plays->findOne(array('id' => $id));
-
 }
 if(!empty($_GET['play_title'])){
- $play_title = $_GET['play_title'];
-  // find everything in the collection
+  $play_title = $_GET['play_title'];
   $play_cursor = $plays->findOne(array('properties.play_title' => $play_title));
-
+}
+if(!empty($_GET['path'])) {
+  $path = $_GET['path'];
+  
+  $play_cursor = $plays->findOne(array('properties.path' => $path));
+}
+if(!empty($play_cursor['id'])) {
+  $query = array('properties.related_play_id' => (string) $play_cursor['id']);
+  $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
+}
+else {
+  return;
 }
 
-
-
-    if(!empty($play_cursor['id'])) {
-
-        $query = array('properties.related_play_id' => (string) $play_cursor['id']);
-        $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
-
-    }
-
-/* $collection = $m->newplaymap->journeys; */
-
-// find everything in the collection
-/* $cursor = $collection->find(array("id" => $id))->limit(1); */
 $count = $events_cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
@@ -39,7 +33,6 @@ header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT");
 header("Cache-Control: no-cache, must-revalidate"); 
 header("Pragma: no-cache");
 header("Content-type: application/json");
-
 
 $json = "";
 $json .= '{"name": "play", "id": ' . $play_cursor['id'] . ', "type":"FeatureCollection", "features":[ ' ;
@@ -69,16 +62,7 @@ foreach ($events_cursor as $obj) {
   }
 }
 
-    $json .= '], "count" : ' . $count . '}';
-
-/* $json .= "," . json_encode(array('count' => $collection->count())); */
-
-// @TODO this is probably wrong.
-
-
-
-  
-
+$json .= '], "count" : ' . $count . '}';
 
 echo $json;
 
