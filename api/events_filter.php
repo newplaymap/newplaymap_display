@@ -7,7 +7,7 @@ $collection = $m->newplaymap->events;
 
 $search_start = (!empty($_GET['start_date'])) ? new MongoDate(strtotime($_GET['start_date'])) : null;
 $search_end = (!empty($_GET['end_date'])) ? new MongoDate(strtotime($_GET['end_date'])) : null;
-
+$path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 
 if(!empty($_GET['event_type'])){
   $event_type = $_GET['event_type'];
@@ -34,6 +34,9 @@ $cursor = $collection->find(
   )
 )->sort(array("properties.event_date" => 1));
 
+}
+else if($path !== null) {
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => 1));
 }
 else {
   $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
