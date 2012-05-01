@@ -156,3 +156,13 @@ ul.ui-autocomplete {
 	/* add padding to account for vertical scrollbar */
 /*  padding-right: 20px; */
 }
+
+#loading-feedback {
+  background: url('../images/throbber.gif') no-repeat center center rgba(0,0,0,0.25);
+  z-index: 2000;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
