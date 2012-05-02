@@ -66,6 +66,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   if(vars.clearLayer === true) {
     $('div.marker[dataName=' + vars.dataName + ']').remove();
   }
+  
+  // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
 
   // Remove new layers
   if(vars.clearLayers === true) {

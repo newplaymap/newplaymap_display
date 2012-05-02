@@ -143,49 +143,49 @@ newPlayMap.processFilters = function() {
 };
 
 newPlayMap.loadData = function() {
-    newPlayMap.loadJSONFile({
-      path: 'api/organizations.php',
-      type: "organization",
-      template: "organization",
-      label: "org_type",
-      layer: "layer-organizations",
-      id: "organization_id",
-      title: "name",
-      dataName: "organizations",
-      dataPath: 'api/organizations.php',
-      icon: "icons/organization.png",
-      grouping_field: "organization_id",
-      callback: newPlayMap.loadOrganization 
-    });
-    newPlayMap.loadJSONFile({
-      path: 'api/artists.php',
-      type: "artist",
-      template: "artist",
-      layer: "layer-artists",
-      id: "artist_id",
-      label: "ensemble_collective",
-      title: "generative_artist",
-      dataName: "artists",
-      dataPath: 'api/artists.php',
-      icon: "icons/artist.png",
-      grouping_field: "artist_id",
-      callback: newPlayMap.loadArtist
-    }
-  );
-  newPlayMap.loadJSONFile({
-        path: 'api/events.php', 
-        type: "event",
-        template: "event",
-        layer: "layer-events",
-        id: "event_id",
-        label: "related_theater", // field which will be used in label
-        title: "play_title",
-        dataName: "events",
-        dataPath: 'api/events.php', 
-        icon: "icons/event.png",
-        grouping_field: "event_id",
-        related_play_id: "related_play_id",
-        callback: newPlayMap.loadEvent
-      }
-    );
+    // newPlayMap.loadJSONFile({
+    //   path: 'api/organizations.php',
+    //   type: "organization",
+    //   template: "organization",
+    //   label: "org_type",
+    //   layer: "layer-organizations",
+    //   id: "organization_id",
+    //   title: "name",
+    //   dataName: "organizations",
+    //   dataPath: 'api/organizations.php',
+    //   icon: "icons/organization.png",
+    //   grouping_field: "organization_id",
+    //   callback: newPlayMap.loadOrganization 
+    // });
+    // newPlayMap.loadJSONFile({
+    //   path: 'api/artists.php',
+    //   type: "artist",
+    //   template: "artist",
+    //   layer: "layer-artists",
+    //   id: "artist_id",
+    //   label: "ensemble_collective",
+    //   title: "generative_artist",
+    //   dataName: "artists",
+    //   dataPath: 'api/artists.php',
+    //   icon: "icons/artist.png",
+    //   grouping_field: "artist_id",
+    //   callback: newPlayMap.loadArtist
+    // }
+    // );
+    // newPlayMap.loadJSONFile({
+    //     path: 'api/events.php', 
+    //     type: "event",
+    //     template: "event",
+    //     layer: "layer-events",
+    //     id: "event_id",
+    //     label: "related_theater", // field which will be used in label
+    //     title: "play_title",
+    //     dataName: "events",
+    //     dataPath: 'api/events.php', 
+    //     icon: "icons/event.png",
+    //     grouping_field: "event_id",
+    //     related_play_id: "related_play_id",
+    //     callback: newPlayMap.loadEvent
+    //   }
+    // );
 };
