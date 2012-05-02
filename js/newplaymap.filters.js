@@ -240,11 +240,11 @@ newPlayMap.filters.setupFilters = function() {
 
 newPlayMap.filters.reset = function(exception) {
   var exception = exception || '';
-  $('#filters form').children('input').not('.submit-filters').not($(exception)).each(function() {
+  $('#filters form').find('input').not('.submit-filters').not($(exception)).each(function() {
     $(this).val('').attr('checked', false);
   });
 
-  $('#filters form').children('select').not(exception).each(function() {
+  $('#filters form').find('select').not(exception).each(function() {
     $(this).children().eq(0).attr('selected', 'selected');
   });
 
