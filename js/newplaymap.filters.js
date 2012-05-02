@@ -256,7 +256,7 @@ newPlayMap.filters.reset = function(exception) {
 /*
  * Function to give users feedback that filter results are loading
  */
-newPlayMap.filters.loadingFeedback = function() {
+newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
   console.log('loading feedback');
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
