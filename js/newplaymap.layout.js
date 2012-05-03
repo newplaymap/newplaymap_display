@@ -145,8 +145,9 @@ newPlayMap.panelTemplate = function(feature) {
 
   // @TODO Data may need some escaping.
   $.template( type + "Template", panelMarkup[type]);        
-  $.tmpl(type + "Template", feature["properties"])
+  $('#play-template').tmpl(feature["properties"])
     .appendTo(container);
+  console.log(type + "Template", feature["properties"]);
 
   // Special templates for journeys -- this will probably become a display for extra data.
   if (type === "play") {
