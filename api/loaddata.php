@@ -191,6 +191,7 @@ function loadEvents($m, $output) {
     $start_date = new MongoDate(strtotime($node["Date"]));
     $end_date = new MongoDate(strtotime($node["To Date"]));
   
+    // @TODO: See if the string replace on path can be removed
     $newObj = array(
       "id" => $node["Event ID"],
       "type" => "Feature",
