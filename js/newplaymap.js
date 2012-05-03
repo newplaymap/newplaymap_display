@@ -198,9 +198,6 @@ newPlayMap.loadPageRouter = function() {
           case 'organization':
             newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
             break;
-          case 'event':
-            newPlayMap.filters.events({path: newPlayMap.routing.path.base});
-            break;
         }
       }
     }

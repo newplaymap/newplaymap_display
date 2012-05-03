@@ -44,7 +44,6 @@ newPlayMap.filters.organizations = function(data) {
     path: 'api/organizations_filter.php?' + pathQuery,
     dataPath: "api/organizations_filter.php?" + pathQuery,
     icon: "icons/organization.png",
-/*     grouping_field: data.grouping_field, */
     callback: newPlayMap.loadOrganizationFilter
   });
 }
@@ -158,8 +157,8 @@ newPlayMap.filters.events = function(data) {
     id: "event_id",
     label: "play_title", // field which will be used in label
     title: "play_title",
-    template: "event",
-    type: "event",
+    template: "play",
+    type: "play",
     dataName: "events_filter",
     path: "api/events_filter.php?" + pathQuery,
     dataPath: "api/events_filter.php?" + pathQuery,
@@ -229,8 +228,6 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.reset(this);
   });
 
-
-
   // @TODO: Don't load the index on page load, do it when the filters are shown
   newPlayMap.filters.getOrganizationsIndex();
   newPlayMap.filters.getArtistsIndex();
@@ -266,7 +263,6 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
       .attr('id', 'loading-feedback')
       .appendTo('body');
   }
-  
 }
 
 /*
@@ -276,8 +272,6 @@ newPlayMap.filters.loadingCompleteFeedback = function() {
   console.log('done loading feedback');
   $('#loading-feedback').hide()
 }
-
-
 
 /*
  * Utility function shared by multiple ajax calls

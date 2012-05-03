@@ -81,6 +81,9 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     spotlight.removeAllLocations();
     $('div.marker').css({ 'opacity' : 1 }); 
   }
+  
+  newPlayMap.loadResults(features, vars);
+  
   // for each feature in the collection, create a marker and add it
   // to the markers layer
   for (var i = 0; i < len; i++) {
@@ -118,8 +121,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       img.setAttribute("src", vars.icon);
 
       // Determine placement of highlighting by geocoordinates.
-      // if(vars.grouping_field !== undefined) {
-      // 
+
         marker.setAttribute("grouping_field", vars.grouping_field);
         marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
       
@@ -128,15 +130,13 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         } else {
           locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
         }
-      // }
-      // else {
+
         // Add all of the locations to the array. making them unique for all layers
         if (feature.properties[vars.id] in locationsByID) {
           locationsByID[feature.properties[vars.id]].push(marker.location);
         } else {
           locationsByID[feature.properties[vars.id]] = [marker.location];
         }
-      // }
 
       // add the marker's location to the extent list
       locations.push(marker.location);

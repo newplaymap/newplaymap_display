@@ -139,12 +139,12 @@
 
                   </form>
                 </div>
-              </div> <!-- / Filter Container -->
+              </div><!-- / Filter Container -->
               <div id="panel">
               
                 <!--               Templates -->
                 <div class="play content">
-                  <h2><a href="#${play_path}?event_id=${related_event_id}">${play_title}</a></h2>
+                  <h2><a href="#${path}?event_id=${related_event_id}">${play_title}</a></h2>
                   {{if generative_artist}}
                   <h3>By ${generative_artist}</h3>
                   {{/if}}
@@ -180,6 +180,16 @@
                     </li>
                   </ol>
                </div><!--   end journey -->
+               
+               <div class="results-container">
+               results
+                  <h2 class="${type}">${label}</h2>
+                
+                  <ol class="results content">
+                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
+                  </ol>
+               </div><!--   end results -->
+               
                 
 <!--                   artist -->
                   <div class="artist content">

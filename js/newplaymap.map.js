@@ -142,7 +142,7 @@ newPlayMap.loadEvent = function() {
       label: "related_theater",
       alt_path: "play_path",
       title: "play_title",
-      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataName: "play",
       dataPath: "api/journey.php?id=" + related_play_id,
       icon: "icons/play.png",
       grouping_field: "related_play_id",
@@ -152,18 +152,6 @@ newPlayMap.loadEvent = function() {
 };
 
 newPlayMap.loadEventFilter = function() {
-    console.log("load event filters");
-
-
-/*
-  $('div.marker[dataname=events_filter]').each(function(){
-      var id = $(this).attr('marker_id');
-
-      spotlight.addLocations(locationsByID[id]);
-      spotlight.parent.className = "active";
-  });
-*/
-
   $('div.marker[type=events_filter]').bind( "click", function() {
       var marker = $(this);
       
@@ -197,6 +185,52 @@ newPlayMap.loadEventFilter = function() {
   });
 };
 
+newPlayMap.loadResults = function(features, vars) {
+console.log(features);
+console.log(vars);
+  newPlayMap.panelTemplates();
+  var type = "results";
+  var container, containerEmpty;
+  containerEmpty = $('#panel-container .results ol.content');
+  containerEmpty.empty();
+  container = $('#panel-container .' + type);
+  container.show();
+  container.empty();
+
+  $.template( type + "Template", panelMarkup[type]);
+
+  var len = features.length;
+  for (var i = 0; i < len; i++) {
+      var feature = features[i],
+          id = feature.properties[vars.id];
+          console.log(feature["properties"]);
+          console.log(vars);
+          var result = {
+            title: feature["properties"][vars.title],
+            path:  feature["properties"]["path"],
+            id:  feature["properties"][vars.id],
+          }
+          
+      $.tmpl(type + "Template", result)
+        .appendTo(container);
+  }
+
+
+
+  // Special templates for journeys -- this will probably become a display for extra data.
+/*
+  if (type === "play") {
+    type = "journey";
+    container = $('#panel-container .journey ol.events');
+    container.empty();
+    $('div#panel-container div.journey').css('visibility', 'visible');
+    $.template( type + "Template", panelMarkup[type]);        
+    $.tmpl(type + "Template", jsonData["play"].features)
+      .appendTo(container);  
+  }
+*/
+
+};
 
 newPlayMap.loadJourney = function(feature) {
   // @TODO trigger spotlight.
