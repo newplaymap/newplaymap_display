@@ -13,6 +13,7 @@
     <!-- Le styles -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/map.spotlight.css" />
+    <link rel="stylesheet" href="js/jquery-ui-1.8.19.custom/css/newplaymap-theme/jquery-ui-1.8.19.custom.css" />
     <link rel="stylesheet" href="css/newplay_theme.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -65,7 +66,7 @@
                 </div>
               </li>
               <li>
-                <a id="explore-filters-button"><span>Explore</span></a>
+                <a id="explore-filters-button" href="#"><span>Explore</span></a>
               </li>
             </ul>
             </p>
@@ -89,19 +90,21 @@
             </div>
       
             <div id="panel-container">
-              <div id="panel">
-                <div id="filter-container">
-                  <div id="filters">
-                    <h4>Filters</h4>
-                    <form>
-                      <!-- Events -->
-                      <h5 id="explore-plays" class="filter-header">Explore Plays</h5>
-                      
+              <div id="filter-container">
+                <div id="filters">
+                  <form>
+                    <ul id="filter-tabs">
+                      <li id="filter-tab-plays" class="filter-tab"><a href="#explore-plays">Plays</a></li>
+                      <li id="filter-tab-organizations" class="filter-tab"><a href="#explore-organizations">Organizations</a></li>
+                      <li id="filter-tab-artists" class="filter-tab"><a href="#explore-artists">Artists</a></li>
+                    </ul>
+                    <!-- Plays -->
+                    <div id="explore-plays">
                       <input id="plays-filter" class="typeahead" type="text" placeholder="Play title" />
-                      
+                    
                       <label for="event-type-filter">Event Type:</label>
                       <select id="event-type-filter" class="form-select" name="event_type"><option selected="selected" value="All">- Select -</option><option value="First Production">First Production</option><option value="Other">Other</option><option value="Presented Performance">Presented Performance</option><option value="Production">Production</option><option value="Reading">Reading</option><option value="Residency">Residency</option><option value="Rolling Premiere">Rolling Premiere</option><option value="Workshop">Workshop</option></select>
-                      
+                    
                       <!-- Events -->
                       <label for="">Event date:</label>
                       <label for="event-date-filter">From date:</label>
@@ -110,32 +113,34 @@
                       <input id="event-to-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
                       <div class="description">Enter the date in the format: April 29, 2013</div>
                       <a class="event-date-filter-complete" href="#">I'm done</a>
-                      
-                      <!-- Organizations -->
-                      <h5 id="explore-organizations" class="filter-header">Explore Organizations</h5>
+                    </div> <!-- / Plays -->
+                    
+                    <!-- Organizations -->
+                    <div id="explore-organizations">
                       <input id="organizations-filter" class="typeahead" type="text" placeholder="Organization name" />
-                      
+                    
                       <label for="organization-type-filter">Organization type:</label>
                       <select id="organization-type-filter" class="form-select" name="org_type"><option selected="selected"  value="All">- Select -</option><option value="Development">Development</option><option value="Festival">Festival</option><option value="Presenting">Presenting</option><option value="Producing">Producing</option><option value="Service / Network">Service / Network</option><option value="University">University</option></select>
-                      
+                    
                       <label for="organization-national-networks-filter">Networks/Affiliations:</label>
                       <select id="organization-national-networks-filter" class="form-select" name="nat_mem"><option selected="selected" value="All">- Select -</option><option value="AEA (Equity)">AEA (Equity)</option><option value="ASSITEJ/USA8">ASSITEJ/USA</option><option value="Association of Performing Arts Presenters (APAP)">Association of Performing Arts Presenters (APAP)</option><option value="ASTR">ASTR</option><option value="ATHE">ATHE</option><option value="equity">equity</option><option value="KCACTF">KCACTF</option><option value="League of Regional Theaters (LORT)">League of Regional Theaters (LORT)</option><option value="LMDA">LMDA</option><option value="National Alliance for Musical Theatre">National Alliance for Musical Theatre</option><option value="National New Play Network (NNPN)">National New Play Network (NNPN)</option><option value="National Performance Network (NPN)">National Performance Network (NPN)</option><option value="NEAT">NEAT</option><option value="Network of Ensemble Theaters (NET)">Network of Ensemble Theaters (NET)</option><option value="Theatre Communications Group (TCG)">Theatre Communications Group (TCG)</option></select>
-                      
+                    
                       <label for="organization-special-interests-filter">Special Interests:</label>
                       <select id="organization-special-interests-filter" class="form-select" name="interests"><option selected="selected" value="All">- Select -</option><option value="African-American">African-American</option><option value="Asian-American">Asian-American</option><option value="Classical">Classical</option><option value="Contemporary">Contemporary</option><option value="Devised">Devised</option><option value="Disabilities">Disabilities</option><option value="Ensemble">Ensemble</option><option value="Experimental">Experimental</option><option value="Gay/Lesbian">Gay/Lesbian</option><option value="International">International</option><option value="Jewish">Jewish</option><option value="Latino/Hispanic">Latino/Hispanic</option><option value="Multicultural">Multicultural</option><option value="Multidisciplinary">Multidisciplinary</option><option value="Musicals">Musicals</option><option value="Native American">Native American</option><option value="New Work">New Work</option><option value="Political/Social">Political/Social</option><option value="Puppetry">Puppetry</option><option value="Religious">Religious</option><option value="Student/Youth">Student/Youth</option><option value="Touring">Touring</option><option value="Translations/Adaptations">Translations/Adaptations</option><option value="University/Training">University/Training</option><option value="Women">Women</option><option value="Young Audiences">Young Audiences</option></select>
-                      
-                      <!-- Artists -->
-                      <h5 id="explore-artists" class="filter-header">Explore Artists</h5>
+                    </div> <!-- / Organizations -->
+                    
+                    <!-- Artists -->
+                    <div id="explore-artists">
                       <input id="artists-filter" class="typeahead" type="text" placeholder="Artist name" />
-                      
+                    
                       <label for="ensemble-collective-filter">Ensemble / Collective</label>
                       <input type="checkbox" id="ensemble-collective-filter" value="Ensemble / Collective" />
-                      
-                      <!-- Submit -->
-                      <input type="submit" value="Apply filters" class="submit-filters" />
-                    </form>
-                  </div>
+                    </div> <!-- / Artists -->
+
+                  </form>
                 </div>
+              </div> <!-- / Filter Container -->
+              <div id="panel">
               
                 <!--               Templates -->
                 <div class="play content">
@@ -167,7 +172,7 @@
                   </dl>                  
                 </div><!--   end play -->
                 
-               <div class="journey">
+               <div class="journey content">
                   <h2 class="journey-header">Journey</h2>
                   <ol class="events content">
                     <li listing_id="${properties.event_id}">${properties.event_type}
@@ -319,6 +324,8 @@
     <script src="assets/js/bootstrap-typeahead.js"></script>
     <script src="js/jquery.tmpl.min.js"></script>
     <script src="js/jquery.hoverintent.minified.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script> -->
+    <script src="js/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
 
 
     <script type="text/javascript" src="js/modestmaps.min.js"></script>

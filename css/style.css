@@ -58,15 +58,14 @@ body {
   width: 350px;
   height: 100%;
   overflow-y: scroll;
-  padding: 10px;
   color: #000;
 }
 
-#filter-container {
+#panel-container #panel {
+  margin: 10px;
 }
 
-/* @TODO: Replace with Rocket's fancy visibly hidden thing */
-#filter-container form {
+#filter-container {
   display: none;
 }
 
@@ -147,3 +146,46 @@ div#panel-container div#panel {
 /*   visibility: hidden; */
 }
 
+ul.ui-autocomplete {
+  width: 335px;
+  max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	/* add padding to account for vertical scrollbar */
+/*  padding-right: 20px; */
+}
+
+#loading-feedback {
+  background: url('../images/throbber.gif') no-repeat center center rgba(0,0,0,0.25);
+  z-index: 2000;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/*
+ * Override jQuery UI styles
+ */
+.ui-tabs {
+  padding: 0;
+}
+
+#filters .filter-tab {
+  font-size: 0.7em;
+}
+
+#filters .ui-corner-all {
+  border-radius: 0;
+}
+
+#filters .ui-widget-header {
+  border: none;
+  background-color: #BF202E;
+}
+
+#filters .ui-widget-content {
+  border: none;
+}

@@ -175,11 +175,11 @@ newPlayMap.filters.events = function(data) {
  * Trigger api calls on the form elements
  */
 newPlayMap.filters.setupFilters = function() {
-  $('#plays-filter').change(function() {
-    newPlayMap.filters.plays({play_title: $(this).attr('value')});
-    newPlayMap.filters.reset(this);
-    return false;
-  });
+  // $('#plays-filter').change(function() {
+  //   newPlayMap.filters.plays({play_title: $(this).attr('value')});
+  //   newPlayMap.filters.reset(this);
+  //   return false;
+  // });
 
   $('#event-type-filter').change(function() {
     newPlayMap.filters.events({event_type: $(this).attr('value')});
@@ -199,10 +199,10 @@ newPlayMap.filters.setupFilters = function() {
     return false;
   });
 
-  $('#organizations-filter').change(function() {
-    newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
-    newPlayMap.filters.reset(this);
-  });
+  // $('#organizations-filter').change(function() {
+  //   newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
+  //   newPlayMap.filters.reset(this);
+  // });
 
   $('#organization-type-filter').change(function() {
     newPlayMap.filters.organizations({organization_type: $(this).attr('value')});
@@ -219,10 +219,10 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.reset(this);
   });
 
-  $('#artists-filter').change(function() {
-    newPlayMap.filters.artists({artist_name: $(this).attr('value')});
-    newPlayMap.filters.reset(this);
-  });
+  // $('#artists-filter').change(function() {
+  //   newPlayMap.filters.artists({artist_name: $(this).attr('value')});
+  //   newPlayMap.filters.reset(this);
+  // });
 
   $('#ensemble-collective-filter').change(function() {
     newPlayMap.filters.ensemble({ensemble_collective: 'Ensemble / Collective'});
@@ -240,11 +240,11 @@ newPlayMap.filters.setupFilters = function() {
 
 newPlayMap.filters.reset = function(exception) {
   var exception = exception || '';
-  $('#filters form').children('input').not('.submit-filters').not($(exception)).each(function() {
+  $('#filters form').find('input').not('.submit-filters').not($(exception)).each(function() {
     $(this).val('').attr('checked', false);
   });
 
-  $('#filters form').children('select').not(exception).each(function() {
+  $('#filters form').find('select').not(exception).each(function() {
     $(this).children().eq(0).attr('selected', 'selected');
   });
 
@@ -252,6 +252,31 @@ newPlayMap.filters.reset = function(exception) {
     $('#filters .event-date-filter-complete').fadeOut();
   }
 }
+
+/*
+ * Function to give users feedback that filter results are loading
+ */
+newPlayMap.filters.loadingFeedback = function() {
+  console.log('loading feedback');
+  if ($('#loading-feedback').length > 0) {
+    $('#loading-feedback').show()
+  } 
+  else {
+    $('<div></div>')
+      .attr('id', 'loading-feedback')
+      .appendTo('body');
+  }
+  
+}
+
+/*
+ * Function to give users feedback that filter results are done loading
+ */
+newPlayMap.filters.loadingCompleteFeedback = function() {
+  console.log('done loading feedback');
+  $('#loading-feedback').hide()
+}
+
 
 
 /*
@@ -293,10 +318,14 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var organizationNames = data;
 
-  $('#organizations-filter').typeahead(
+  $('#organizations-filter').autocomplete(
     {
       source: organizationNames,
-      items: 10
+      appendTo: '#panel-container',
+      select: function(event, ui) {
+        newPlayMap.filters.organizations({organization_name: ui.item.value});
+        newPlayMap.filters.reset(this);
+      }
     }
   );
 }
@@ -326,10 +355,14 @@ newPlayMap.filters.setArtistsIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var artistsNames = data;
 
-  $('#artists-filter').typeahead(
+  $('#artists-filter').autocomplete(
     {
       source: artistsNames,
-      items: 10
+      appendTo: '#panel-container',
+      select: function(event, ui) {
+        newPlayMap.filters.artists({artist_name: ui.item.value});
+        newPlayMap.filters.reset(this);
+      }
     }
   );
 }
@@ -359,10 +392,14 @@ newPlayMap.filters.setPlaysIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var playNames = data;
 
-  $('#plays-filter').typeahead(
+  $('#plays-filter').autocomplete(
     {
       source: playNames,
-      items: 10
+      appendTo: '#panel-container',
+      select: function(event, ui) {
+        newPlayMap.filters.plays({play_title: ui.item.value});
+        newPlayMap.filters.reset(this);
+      }
     }
   );
 }
