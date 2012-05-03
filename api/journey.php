@@ -21,9 +21,16 @@ if(!empty($play_cursor['id'])) {
   $query = array('properties.related_play_id' => (string) $play_cursor['id']);
   $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
 }
-else {
-  return;
+// Have a path, but it is a path for an event.
+if(empty($play_cursor['id']) && !empty($path)) {
+  $query = array(
+/*     'properties.related_play_id' => (string) $play_cursor['id'], */
+    'properties.path' => $path,
+  );
+  $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
+
 }
+
 
 $count = $events_cursor->count();
 

@@ -1,12 +1,5 @@
 newPlayMap.routing = newPlayMap.routing || {};
 var canvas = {}
-// @TODO routing will be loaded everytime a dataset is loaded, it should be called.
-
-/* Upgrade to address 1.4, which MIGHT work with regular jquery, otherwise go back to jquery 1.4.2
- * Whenever the address changes, trigger popup markers & load node.
- */
-
-
 
 newPlayMap.splitPath = function(event) {
   var path = {};

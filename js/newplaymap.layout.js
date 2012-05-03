@@ -127,6 +127,12 @@ newPlayMap.panelTemplates = function() {
     panelMarkup['journey'] = container.html();
   }
 
+  type = "results";
+  if (panelMarkup[type] === null || panelMarkup[type] === undefined) {
+    container = $('#panel-container .' + type);
+    panelMarkup[type] = container.html();
+  }
+
   containerEmpty = $('#panel-container .content').empty();
 
 };
