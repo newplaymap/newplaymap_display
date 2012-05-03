@@ -1,0 +1,3 @@
+[submodule "participate"]
+	path = participate
+	url = git@github.com:newplaymap/newplaymap.git
