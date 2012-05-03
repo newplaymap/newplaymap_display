@@ -4,6 +4,7 @@ var jsonData = {};
 var panelMarkup = {};
 var spotlight = {};
 var locationsByID = {};
+var IDByLocations = {};
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
@@ -186,30 +187,24 @@ newPlayMap.loadPageRouter = function() {
   $.address.change(function(event) {
     newPlayMap.browserEvents.push(event);
     newPlayMap.routing.path = newPlayMap.splitPath(event);
-    
-    if(newPlayMap.routing.path.args !== undefined && newPlayMap.routing.path.args[0] !== undefined) {
-      switch(newPlayMap.routing.path.args[0]) {
-        case 'play':
-          newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
-          break;
-        case 'artist':
-          newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
-          break;
-        case 'organization':
-          newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
-          break;
-        case 'event':
-          newPlayMap.filters.events({path: newPlayMap.routing.path.base});
-          break;
+    if(newPlayMap.routing.path !== undefined) {
+      if(newPlayMap.routing.path.args !== undefined) {
+        switch(newPlayMap.routing.path.args[0]) {
+          case 'play':
+            newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
+            break;
+          case 'artist':
+            newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
+            break;
+          case 'organization':
+            newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
+            break;
+          case 'event':
+            newPlayMap.filters.events({path: newPlayMap.routing.path.base});
+            break;
+        }
       }
     }
-  //  newPlayMap.filters.reset(this);
-/*
-
-
-
-
-*/
     
     return false;
   });
