@@ -16,6 +16,7 @@ newPlayMap.loadJSONFile = function(vars) {
 
 newPlayMap.loadAPICall = function(vars) {
   var vars = vars;
+  console.log(vars);
   var contentData = vars.path + "&cache=" + Math.floor(Math.random()*11);
   var getData = $.ajax({
     url:  contentData,
@@ -158,7 +159,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   }
   else {
     // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.
-    map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), vars.zoomLevel);
+    //map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), vars.zoomLevel);
   }
   // Apply behavior listener for layer type.
   if(vars.callback !== undefined) {
