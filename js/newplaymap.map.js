@@ -57,8 +57,6 @@ newPlayMap.onMarkerClick = function(e) {
   // @TODO be careful that click is not actually on a.
   var marker = e.target.offsetParent;
 
-  // newPlayMap.popupMarker(marker);
-
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
     var grouping_field = marker.getAttribute("grouping_value");

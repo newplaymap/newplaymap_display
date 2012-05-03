@@ -36,6 +36,7 @@ newPlayMap.filters.organizations = function(data) {
     template: "organization",
     layer: "layer-organization-filter",
     class: "inactive",
+    template: "organization-template",
     type: "organization",
     label: "org_type",
     id: "organization_id",
@@ -60,7 +61,7 @@ newPlayMap.filters.plays = function(data) {
     label: "play_title",
     id: "event_id",
     title: "play_title",
-    template: "play",
+    template: "play-template",
     type: "play",
     dataName: "play",
     path: "api/journey.php?play_title=" +  data.play_title,
@@ -88,7 +89,7 @@ newPlayMap.filters.artists = function(data) {
     id: "artist_id",
     label: "ensemble_collective",
     title: "generative_artist",
-    template: "artist",
+    template: "artist-template",
     type: "artist",
     dataName: "artists_filter",
     path: "api/artists_filter.php?" + pathQuery,
@@ -98,38 +99,6 @@ newPlayMap.filters.artists = function(data) {
     callback: newPlayMap.loadArtistFilter
   });
 }
-
-newPlayMap.filters.ensemble = function(data) {
-// @TODO create layered effect here.
-/*
-  var pathQuery = "";
-
-  if (data.ensemble_collective !== undefined) {
-    pathQuery = "ensemble_collective=" +  data.ensemble_collective;
-  }
-
-  newPlayMap.loadAPICall({
-    data: data,
-    zoomLevel: 3,
-    clearLayer: true,
-    clearLayers: true,
-    layer: "layer-ensemble-filter",
-    class: "active",
-    id: "artist_id",
-    label: "ensemble_collective",
-    title: "generative_artist",
-    template: "artist",
-    type: "artist",
-    dataName: "artists_filter",
-    path: "api/artists_filter.php?" + pathQuery,
-    dataPath: "api/artists_filter.php?" + pathQuery,
-    icon: "icons/artist.png",
-    grouping_field: "artist_id",
-    callback: newPlayMap.loadArtistFilter
-  });
-*/
-}
-
 
 // Load plays
 newPlayMap.filters.events = function(data) {
@@ -157,7 +126,7 @@ newPlayMap.filters.events = function(data) {
     id: "event_id",
     label: "play_title", // field which will be used in label
     title: "play_title",
-    template: "play",
+    template: "play-template",
     type: "play",
     dataName: "events_filter",
     path: "api/events_filter.php?" + pathQuery,
@@ -398,3 +367,36 @@ newPlayMap.filters.setPlaysIndex = function(data) {
   );
 }
 
+
+
+
+newPlayMap.filters.ensemble = function(data) {
+// @TODO create layered effect here.
+/*
+  var pathQuery = "";
+
+  if (data.ensemble_collective !== undefined) {
+    pathQuery = "ensemble_collective=" +  data.ensemble_collective;
+  }
+
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-ensemble-filter",
+    class: "active",
+    id: "artist_id",
+    label: "ensemble_collective",
+    title: "generative_artist",
+    template: "artist",
+    type: "artist",
+    dataName: "artists_filter",
+    path: "api/artists_filter.php?" + pathQuery,
+    dataPath: "api/artists_filter.php?" + pathQuery,
+    icon: "icons/artist.png",
+    grouping_field: "artist_id",
+    callback: newPlayMap.loadArtistFilter
+  });
+*/
+}

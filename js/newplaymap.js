@@ -27,7 +27,7 @@ newPlayMap.loadMap = function(callback){
 };
 
 newPlayMap.alterHomepage = function() {
-  $('div#panel-container div#panel div.content').hide();
+/*   $('div#panel-container div#panel div.content').hide(); */
   return false;
 };
 

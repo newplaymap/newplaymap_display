@@ -142,35 +142,101 @@
               </div><!-- / Filter Container -->
               <div id="panel">
               
+
                 <!--               Templates -->
+<!-- old version
                 <div class="play content">
                   <h2><a href="#${path}?event_id=${related_event_id}">${play_title}</a></h2>
                   {{if generative_artist}}
                   <h3>By ${generative_artist}</h3>
                   {{/if}}
-                  
-                  {{if related_theater}}
-<!--                  @TODO  This will need some work -->
-                  <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
-                  {{/if}}
-                  
-                  <p>{{if event_type}}
-                    ${event_type}
-                  {{/if}}
-                  </p>
+-->
 
-                  <dl>
+              <!-- Templates -->
+                <!-- Play Template -->
+                <!-- Available options
+                  ${longitude}
+                  ${latitude}
+                  ${event_id}
+                  ${event_type}
+                  ${event_to_date}
+                  ${event_date}
+                  ${content_type}
+                  ${related_theater}
+                  ${related_theater_id} 
+                  ${artist_id}
+                  ${play_title}
+                  ${related_play_id}
+                  ${generative_artist}
+                  ${event_description}
+                  ${synopsis}
+                  ${path}
+                 -->
+              <div class="play content"></div>
+                <script id="play-template" type="text/x-jquery-tmpl">
 
-                  {{if event_description}}
-                    <dd>{{html event_description}}</dd>
-                  {{/if}}
+                    <h2>${play_title}</h2>
+                    {{if generative_artist}}
+                      <h3>by ${generative_artist}</h3>
+                    {{/if}}
+
+                  
+                    <ul id="panel-content-links">
+                      <li id="panel-add-event-link"><a href="participate/node/add/event/${related_play_id}">${related_play_id}Add Event</a></li>
+                      <li id="panel-share-link"><a href="#">Share</a></li>
+                      <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit">Edit</a></li>
+                    </ul>
+                    
+                    <dl>
+                    {{if synopsis}}     
+                      <dt>Synopsis</dt>
+                      <dd>{{html synopsis}}</dd>
+                    {{/if}}
+                    </dl>                  
+         
+                </script><!--   end play -->
+                
+                <div class="journey content"></div>
+                <!-- Journey: Used for each item on a journey for a play -->
+                <script id="journey-template" type="text/x-jquery-tmpl">
+                  <br />${event_id}
+                  <br />${event_type}
+                  <br />${event_to_date}
+                  <br />${event_date}
+                  <br />${content_type}
+                  <br />${related_theater}
+                  <br />${related_theater_id} 
+                  <br />${artist_id}
+                  <br />${play_title}
+                  <br />${related_play_id}
+                  <br />${generative_artist}
+                  <br />${event_description}
+                  <br />${synopsis}
+                  <br />${path}
+
+                    <h2 class="journey-header">Journey</h2>
+                    <ol class="events content">
+                      <li listing_id="${properties.event_id}">${properties.event_type}
+                      <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
+                      {{if related_theater}}
+                        <!-- @TODO  This will need some work -->
+                        <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                      {{/if}}
+
+                      <p>
+                        {{if event_type}}
+                          ${event_type}
+                        {{/if}}
+                      </p>
+
+<!--  old version
 
                   {{if synopsis}}     
                     <dt>Synopsis</dt>
                     <dd>{{html synopsis}}</dd>
                   {{/if}}
                   </dl>                  
-                </div><!--   end play -->
+                </div> 
                 
                <div class="journey content">
                   <h2 class="journey-header">Journey</h2>
@@ -179,7 +245,7 @@
                     <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
                     </li>
                   </ol>
-               </div><!--   end journey -->
+               </div> 
                
                <div class="results-container">
                results
@@ -188,27 +254,37 @@
                   <ol class="results content">
                     <li listing_id="${id}"><a href="${path}">${title}</a></li>
                   </ol>
-               </div><!--   end results -->
+               </div> 
                
-                
-<!--                   artist -->
-                  <div class="artist content">
-                  <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
-                  </div><!--  end artist -->
+-->
+
+                      <dl>
+                      {{if event_description}}
+                        <dd>{{html event_description}}</dd>
+                      {{/if}}
+                      </li>
+                    </ol>
+              
+                </script><!--   end journey -->
+
+                <div class="artist content"></div>
+                <!-- Artist -->
+                <script id="artist-template" type="text/x-jquery-tmpl">
+
+                    <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
+                  </div>
+                </script><!--  end artist -->
     
- <!--                   organization -->
-                  <div class="organization content">
-                  <h2><a href="#${path}">${name}</a></h2>
-                  </div><!--  end organization -->
- 
- 
- <!--                   event -->
-                  <div class="event content">
-                  <h2><a href="#${path}">${play_title}</a> at ${related_theater}</h2>
-                  </div><!--  end event -->               
+                <div class="organization content"></div>
+                <!-- Organization -->
+                <script id="organization-template" type="text/x-jquery-tmpl">
+                  
+                    <h2><a href="#${path}">${name}</a></h2>
+
+                </script><!--  end organization -->
                 
-              </div>
-            </div>
+              </div> <!-- End Panel -->
+            </div> <!-- End Panel Container -->
    
 <!--    <iframe width='500' height='300' frameBorder='0' src='http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.html#4/33.831/-87.284'></iframe> -->
             <div id="map-container">
