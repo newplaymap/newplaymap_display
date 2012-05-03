@@ -30,27 +30,6 @@ newPlayMap.alterHomepage = function() {
   return false;
 };
 
-newPlayMap.loadPageRouter = function() { 
-  // Listen for address.
-  $.address.change(function(event) {
-    newPlayMap.browserEvents.push(event);
-
-    // Do all of the map and data contingent functions only through this function (to make it simpler.)
-    newPlayMap.buildRoutePath(event);
-    //newPlayMap.loadRouteInfo();     // Load route info (lookup route, get features).  
-    //newPlayMap.loadBehaviors() ;  // Load marker actions and events.
-    return false;
-  });
-
-  // bind address to all a links (@TODO may also need divs)
-  $('a').address();
-
-  // Force address to update on page load.
-  // Note: there are multiple conditions to test:
-  // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
-  $.address.update();
-};
-
 newPlayMap.loadWax = function() {
   // Custom tiles
   var url = 'http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.jsonp' + '?cache=' + Math.floor(Math.random()*11);
@@ -196,4 +175,50 @@ newPlayMap.loadData = function() {
     //     callback: newPlayMap.loadEvent
     //   }
     // );
+    
+    // Get path from browser and load content.
+    newPlayMap.loadPageRouter();
+};
+
+
+newPlayMap.loadPageRouter = function() { 
+  // Listen for address.
+  $.address.change(function(event) {
+    newPlayMap.browserEvents.push(event);
+    newPlayMap.routing.path = newPlayMap.splitPath(event);
+    
+    if(newPlayMap.routing.path.args !== undefined && newPlayMap.routing.path.args[0] !== undefined) {
+      switch(newPlayMap.routing.path.args[0]) {
+        case 'play':
+          newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
+          break;
+        case 'artist':
+          newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
+          break;
+        case 'organization':
+          newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
+          break;
+        case 'event':
+          newPlayMap.filters.events({path: newPlayMap.routing.path.base});
+          break;
+      }
+    }
+  //  newPlayMap.filters.reset(this);
+/*
+
+
+
+
+*/
+    
+    return false;
+  });
+
+  // bind address to all a links (@TODO may also need divs)
+  $('a').address();
+
+  // Force address to update on page load.
+  // Note: there are multiple conditions to test:
+  // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
+  $.address.update();
 };
