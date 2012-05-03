@@ -135,9 +135,15 @@ dd {
   z-index: 900; /* Keep this below the loading overlay */
 }
 
+/* Override spotlight.css*/
+#map {
+  height: 100%;
+}
+
 footer {
   position: fixed;
   bottom: 0;
+  right: 375px;
   padding: 5px;
   font-size: 80%;
 }
