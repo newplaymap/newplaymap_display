@@ -183,53 +183,6 @@ newPlayMap.loadEventFilter = function() {
   });
 };
 
-newPlayMap.loadResults = function(features, vars) {
-console.log(features);
-console.log(vars);
-  newPlayMap.panelTemplates();
-  var type = "results";
-  var container, containerEmpty;
-  containerEmpty = $('#panel-container .results ol.content');
-  containerEmpty.empty();
-  container = $('#panel-container .' + type);
-  container.show();
-  container.empty();
-
-  $.template( type + "Template", panelMarkup[type]);
-
-  var len = features.length;
-  for (var i = 0; i < len; i++) {
-      var feature = features[i],
-          id = feature.properties[vars.id];
-          console.log(feature["properties"]);
-          console.log(vars);
-          var result = {
-            title: feature["properties"][vars.title],
-            path:  feature["properties"]["path"],
-            id:  feature["properties"][vars.id],
-          }
-          
-      $.tmpl(type + "Template", result)
-        .appendTo(container);
-  }
-
-
-
-  // Special templates for journeys -- this will probably become a display for extra data.
-/*
-  if (type === "play") {
-    type = "journey";
-    container = $('#panel-container .journey ol.events');
-    container.empty();
-    $('div#panel-container div.journey').css('visibility', 'visible');
-    $.template( type + "Template", panelMarkup[type]);        
-    $.tmpl(type + "Template", jsonData["play"].features)
-      .appendTo(container);  
-  }
-*/
-
-};
-
 newPlayMap.loadJourney = function(feature) {
   // @TODO trigger spotlight.
   console.log(jsonData["play"]);

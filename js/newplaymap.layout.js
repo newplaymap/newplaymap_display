@@ -104,19 +104,13 @@ newPlayMap.panelTemplates = function() {
 };
 
 newPlayMap.panelTemplate = function(feature) {
-  // http://api.jquery.com/jquery.tmpl/
-  // newPlayMap.panelTemplates();
   var type = feature.type;
   var template = feature.template;
   var container, containerEmpty;
   containerEmpty = $('#panel-container .content');
   containerEmpty.empty();
-
   container = $('#panel-container .' + type);
-
   container.empty();
-
-/*   $.template(template, panelMarkup[type]);         */
   $('#' + template).tmpl(feature["properties"])
         .appendTo(container);
 
@@ -134,6 +128,52 @@ newPlayMap.panelTemplate = function(feature) {
   }
 */
 }
+
+
+newPlayMap.loadResults = function(features, vars) {
+  var type = "results";
+  var template = "results-template";
+  var container, containerEmpty;
+  containerEmpty = $('#panel-container .content');
+  containerEmpty.empty();
+  container = $('#panel-container .' + type);
+  container.empty();
+  
+/*   $.template( type + "Template", panelMarkup[type]); */
+
+  var len = features.length;
+  for (var i = 0; i < len; i++) {
+      var feature = features[i],
+          id = feature.properties[vars.id];
+          var result = {
+            title: feature["properties"][vars.title],
+            path:  feature["properties"]["path"],
+            id:  feature["properties"][vars.id]
+          }
+          
+  
+      $('#' + template).tmpl(result)
+        .appendTo(container);
+  }
+
+
+
+  // Special templates for journeys -- this will probably become a display for extra data.
+/*
+  if (type === "play") {
+    type = "journey";
+    container = $('#panel-container .journey ol.events');
+    container.empty();
+    $('div#panel-container div.journey').css('visibility', 'visible');
+    $.template( type + "Template", panelMarkup[type]);        
+    $.tmpl(type + "Template", jsonData["play"].features)
+      .appendTo(container);  
+  }
+*/
+
+};
+
+
 
 newPlayMap.eventListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));
