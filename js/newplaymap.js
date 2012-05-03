@@ -4,6 +4,7 @@ var jsonData = {};
 var panelMarkup = {};
 var spotlight = {};
 var locationsByID = {};
+var IDByLocations = {};
 var mm = com.modestmaps;
 var map = map || {};
 var loaded = 0;
