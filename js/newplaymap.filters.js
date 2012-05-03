@@ -12,19 +12,19 @@ newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
 
   if (data.organization_name !== undefined) {
-    pathQuery = "&organization_name=" +  data.organization_name;
+    pathQuery = "organization_name=" +  data.organization_name;
   }
 
   if (data.organization_name !== undefined) {
-    pathQuery = "&organization_type=" +  data.organization_type;
+    pathQuery = "organization_type=" +  data.organization_type;
   }
 
   if (data.national_networks !== undefined) {
-    pathQuery = "&national_networks=" +  data.national_networks;
+    pathQuery = "national_networks=" +  data.national_networks;
   }
 
   if (data.special_interests !== undefined) {
-    pathQuery = "&special_interests=" + data.special_interests;
+    pathQuery = "special_interests=" + data.special_interests;
   }
 
 
@@ -76,7 +76,7 @@ newPlayMap.filters.plays = function(data) {
 newPlayMap.filters.artists = function(data) {
   var pathQuery = "";
   if (data.artist_name !== undefined) {
-    pathQuery = "&artist_name=" +  data.artist_name;
+    pathQuery = "artist_name=" +  data.artist_name;
   }
 
   newPlayMap.loadAPICall({
@@ -106,7 +106,7 @@ newPlayMap.filters.ensemble = function(data) {
   var pathQuery = "";
 
   if (data.ensemble_collective !== undefined) {
-    pathQuery = "&ensemble_collective=" +  data.ensemble_collective;
+    pathQuery = "ensemble_collective=" +  data.ensemble_collective;
   }
 
   newPlayMap.loadAPICall({
@@ -137,15 +137,15 @@ newPlayMap.filters.events = function(data) {
   var pathQuery = "";
 
   if (data.event_type !== undefined) {
-    pathQuery = "&event_type=" +  data.event_type;
+    pathQuery = "event_type=" +  data.event_type;
   }
 
-  if (data.event_date !== undefined) {
-    pathQuery = "&event_date=" +  data.event_date;
+  if (data.start_date !== undefined) {
+    pathQuery = "start_date=" +  data.start_date;
   }
 
-  if (data.event_to_date !== undefined) {
-    pathQuery = "&event_to_date=" +  data.event_to_date;
+  if (data.end_date !== undefined) {
+    pathQuery = "end_date=" +  data.end_date;
   }
 
   newPlayMap.loadAPICall({
@@ -195,7 +195,7 @@ newPlayMap.filters.setupFilters = function() {
   $('#filters .event-date-filter-complete').hide().click(function(event) {
     event.preventDefault();
 
-    newPlayMap.filters.events({event_date: $('#event-date-filter').val(), event_to_date: $('#event-to-date-filter').val() });
+    newPlayMap.filters.events({start_date: $('#event-date-filter').val(), end_date: $('#event-to-date-filter').val() });
     return false;
   });
 
