@@ -117,7 +117,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       var img = marker.appendChild(document.createElement("img"));
       img.setAttribute("src", vars.icon);
 
-
       // Determine placement of highlighting by geocoordinates.
       // if(vars.grouping_field !== undefined) {
       // 
@@ -141,7 +140,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
       // add the marker's location to the extent list
       locations.push(marker.location);
-
 
       // Listen for mouseover & mouseout events.
       MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);

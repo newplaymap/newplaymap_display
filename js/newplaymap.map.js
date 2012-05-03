@@ -84,6 +84,7 @@ newPlayMap.loadArtist = function() {
 
 
 newPlayMap.loadArtistFilter = function() {
+/*
     console.log("load artist");
 
   $('div.marker[dataname=artists_filter]').each(function(){
@@ -92,10 +93,12 @@ newPlayMap.loadArtistFilter = function() {
       spotlight.addLocations(locationsByID[id]);
       spotlight.parent.className = "active";
   });
+*/
 };
 
 
 newPlayMap.loadOrganizationFilter = function() {
+/*
   console.log("load org filter");
 
   $('div.marker[dataname=organizations_filter]').each(function(){
@@ -104,6 +107,7 @@ newPlayMap.loadOrganizationFilter = function() {
       spotlight.addLocations(locationsByID[id]);
       spotlight.parent.className = "active";
   });
+*/
 };
 
 newPlayMap.loadOrganization = function() {
@@ -151,12 +155,14 @@ newPlayMap.loadEventFilter = function() {
     console.log("load event filters");
 
 
+/*
   $('div.marker[dataname=events_filter]').each(function(){
       var id = $(this).attr('marker_id');
 
       spotlight.addLocations(locationsByID[id]);
       spotlight.parent.className = "active";
   });
+*/
 
   $('div.marker[type=events_filter]').bind( "click", function() {
       var marker = $(this);
@@ -182,7 +188,7 @@ newPlayMap.loadEventFilter = function() {
       label: "related_theater",
       alt_path: "play_path",
       title: "play_title",
-      dataName: "play", // @todo will change to be more dynamic hard coding for testing. play data is included in json ###prob needs play path###
+      dataName: "play",
       dataPath: "api/journey.php?id=" + related_play_id,
       icon: "icons/play.png",
       grouping_field: "related_play_id",
