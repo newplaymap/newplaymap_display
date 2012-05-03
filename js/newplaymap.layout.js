@@ -8,6 +8,9 @@ newPlayMap.updatePanel = function(marker, data) {
   feature.type = marker.getAttribute("type");
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
+/*   feature.template = marker.getAttribute("template"); */
+  
+  
   featureData = newPlayMap.loadDataObject(feature);
 
   // Load event data into the template.
@@ -41,49 +44,12 @@ newPlayMap.loadDataObject = function(featureLookup) {
         feature.title = featureLookup.title;
         feature.type = featureLookup.type;
         feature.marker_id = featureLookup.marker_id;
-
+        feature.template = jsonData[featureLookup.dataName].vars.template;
         if(feature.id == featureLookup.marker_id) {
           return feature;
         }
     }
 };
-
-
-newPlayMap.popupMarker = function(marker) {
-/*
-  newPlayMap.panelTemplates();
-
-  
-  var feature = {};
-  feature.markup = marker;
-  var type = "popup";
-  var container;
-  container = $('#popup .content');
-  container.empty();
-
-
-
-  feature.type = marker.getAttribute("type");
-
-  feature.marker_id = marker.getAttribute("marker_id");
-  feature.dataName = marker.getAttribute("dataName");
-  
-  featureData = newPlayMap.loadDataObject(feature);
-
-  featureData.properties.title = marker.getAttribute("title");
-
-  $.template( type + "Template", panelMarkup[type]);        
-  $.tmpl(type + "Template", featureData["properties"])
-    .appendTo(container); 
-
-
-  // Make all links listen for address changes.
-  $('a').address();
-  
-*/  
-};
-
-
 
 newPlayMap.panelTemplates = function() {
 
@@ -138,23 +104,25 @@ newPlayMap.panelTemplates = function() {
 };
 
 newPlayMap.panelTemplate = function(feature) {
-
-  newPlayMap.panelTemplates();
+  // http://api.jquery.com/jquery.tmpl/
+  // newPlayMap.panelTemplates();
   var type = feature.type;
+  var template = feature.template;
   var container, containerEmpty;
   containerEmpty = $('#panel-container .content');
   containerEmpty.empty();
 
   container = $('#panel-container .' + type);
-  container.empty();
-  // http://api.jquery.com/jquery.tmpl/
 
-  // @TODO Data may need some escaping.
-  $.template( type + "Template", panelMarkup[type]);        
-  $.tmpl(type + "Template", feature["properties"])
-    .appendTo(container);
+  container.empty();
+
+/*   $.template(template, panelMarkup[type]);         */
+  $('#' + template).tmpl(feature["properties"])
+        .appendTo(container);
+
 
   // Special templates for journeys -- this will probably become a display for extra data.
+/*
   if (type === "play") {
     type = "journey";
     container = $('#panel-container .journey ol.events');
@@ -164,6 +132,7 @@ newPlayMap.panelTemplate = function(feature) {
     $.tmpl(type + "Template", jsonData["play"].features)
       .appendTo(container);  
   }
+*/
 }
 
 newPlayMap.eventListProcess = function(container) {
