@@ -32,7 +32,7 @@ $cursor = $collection->find(
     "properties.event_date" => array('$lte' => $search_end),
     "properties.event_to_date" => array('$gte' => $search_start), 
   )
-)->sort(array("properties.event_date" => 1));
+)->limit($limit)->sort(array("properties.event_date" => 1));
 
 }
 else if($path !== null) {
