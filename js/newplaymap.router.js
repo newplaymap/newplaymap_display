@@ -7,9 +7,6 @@ var canvas = {}
  */
 
 
-newPlayMap.buildRoutePath = function(event) {
-  newPlayMap.routing.path = newPlayMap.splitPath(event);
-};
 
 newPlayMap.splitPath = function(event) {
   var path = {};
@@ -26,14 +23,15 @@ newPlayMap.splitPath = function(event) {
     path.base = path.parts[0];
     path.partsStripped = path.uriStripped.split("?");
     path.baseStripped = path.partsStripped[0];
-    path.vars = path.parts[1].split("&");
+    if(path.parts[1] !== undefined) {
+      path.vars = path.parts[1].split("&");
+    }
     path.filters = {};
     for (var singleFilter in path.vars) {
       var filter = path.vars[singleFilter].split('=');
       path.filters[filter[0]] = filter[1];
     }
   }
-  newPlayMap.status.routerPathLoaded = true;  
   return path;
 };
 
@@ -78,7 +76,7 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
         var feature = features[i];
         var pathKey;
         if(alt_path !== undefined) {
-          pathKey = alt_path
+          pathKey = alt_path;
         }
         else {
           pathKey = "path";
@@ -92,17 +90,6 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
     }
     return loadedFeatures;
    }
-   else {
-    console.log("in else in lookup");
-     // If jsonData isn't set up yet, stick the route somewhere to load later
-     newPlayMap.routing = {
-      path: newPlayMap.routing.path,
-      route: newPlayMap.routing.route || {},
-      dataName: dataName,
-      alt_path: alt_path
-     };
-   } 
-
 };
 
 /**

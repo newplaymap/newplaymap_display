@@ -3,15 +3,21 @@ include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $play_title = (!empty($_GET['play_title'])) ? $_GET['play_title'] : null;
-
-if ($play_title == null) {
-  return;
-}
+$path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 
 $collection = $m->newplaymap->plays;
 
-// find everything in the collection
-$cursor = $collection->find(array("properties.play_title" => $play_title))->sort(array("properties.play_title" => 1));
+if ($play_title !== null) {
+  $cursor = $collection->find(array("properties.play_title" => $play_title))->sort(array("properties.play_title" => 1));
+}
+else if($path !== null) {
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.play_title" => 1));
+}
+else {
+  return;
+}
+
+
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

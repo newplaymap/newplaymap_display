@@ -57,21 +57,19 @@ newPlayMap.loadDataError = function(data) {
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
   var vars = vars;
-  console.log(vars);
   var features = jsonData[vars.dataName].features,
       len = features.length,
       locations = [];
 
   // Remove divs if they exist and API function requests that they be cleared.
   if(vars.clearLayer === true) {
-    $('div.marker[dataName=' + vars.dataName + ']').remove();
+    $('div.marker[dataName=' +   + ']').remove();
   }
   
   // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
 
   // Remove new layers
   if(vars.clearLayers === true) {
-/*     $('div.marker[dataName=organizations_filter]').remove(); */
     $('div#play-journey').remove();
     $('div.marker[dataName=play]').remove();
     $('div.marker[dataName=artists_filter]').remove();
@@ -82,10 +80,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
     $('div.marker').css({ 'opacity' : 1 }); 
-
-
   }
-
   // for each feature in the collection, create a marker and add it
   // to the markers layer
   for (var i = 0; i < len; i++) {

@@ -8,10 +8,13 @@ $organization_name = (!empty($_GET['organization_name'])) ? $_GET['organization_
 $organization_type = (!empty($_GET['organization_type'])) ? $_GET['organization_type'] : null;
 $national_networks = (!empty($_GET['national_networks'])) ? $_GET['national_networks'] : null;
 $special_interests = (!empty($_GET['special_interests'])) ? $_GET['special_interests'] : null;
-
+$path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 
 if($organization_name !== null) {
   $cursor = $collection->find(array("properties.name" => $organization_name))->sort(array("properties.name" => 1));
+}
+else if($path !== null) {
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.name" => 1));
 }
 else if($organization_type !== null) {
   $cursor = $collection->find(array("properties.organization_type.type" => $organization_type))->sort(array("properties.name" => 1));

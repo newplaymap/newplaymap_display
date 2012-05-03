@@ -156,17 +156,17 @@ newPlayMap.filters.events = function(data) {
     layer: "layer-events-filter",
     class: "active",
     id: "event_id",
-    label: "related_theater", // field which will be used in label
+    label: "play_title", // field which will be used in label
     title: "play_title",
-    template: "play",
-    type: "play",
+    template: "event",
+    type: "event",
     dataName: "events_filter",
     path: "api/events_filter.php?" + pathQuery,
     dataPath: "api/events_filter.php?" + pathQuery,
     icon: "icons/event.png",
     grouping_field: "event_id",
     related_play_id: "related_play_id",
-    callback: newPlayMap.loadEvent
+    callback: newPlayMap.loadEventFilter
   });
 };
 
