@@ -16,7 +16,7 @@ if(!empty($_GET['event_type'])){
   $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
 
 }
-else if ($search_start != null) {
+else if ($search_start !== null) {
 
 
 
