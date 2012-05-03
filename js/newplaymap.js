@@ -121,6 +121,7 @@ newPlayMap.processFilters = function() {
 
 newPlayMap.loadData = function() {
 
+/*
     newPlayMap.loadJSONFile({
       path: 'api/organizations.php',
       type: "organization",
@@ -166,7 +167,16 @@ newPlayMap.loadData = function() {
         callback: newPlayMap.loadEvent
       }
     );
-    
+*/
+   
+  var todayData = {
+    "event_date": "Today",
+    "event_to_date": "Today"
+  };
+  // Load events
+  newPlayMap.filters.events(todayData);
+
+   
   // Get path from browser and load content.
   newPlayMap.loadPageRouter();
 };
@@ -177,21 +187,22 @@ newPlayMap.loadPageRouter = function() {
   $.address.change(function(event) {
     newPlayMap.browserEvents.push(event);
     newPlayMap.routing.path = newPlayMap.splitPath(event);
-    
-    if(newPlayMap.routing.path.args[0] !== undefined) {
-      switch(newPlayMap.routing.path.args[0]) {
-        case 'play':
-          newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
-          break;
-        case 'artist':
-          newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
-          break;
-        case 'organization':
-          newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
-          break;
-        case 'event':
-          newPlayMap.filters.events({path: newPlayMap.routing.path.base});
-          break;
+    if(newPlayMap.routing.path !== undefined) {
+      if(newPlayMap.routing.path.args !== undefined) {
+        switch(newPlayMap.routing.path.args[0]) {
+          case 'play':
+            newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
+            break;
+          case 'artist':
+            newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
+            break;
+          case 'organization':
+            newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
+            break;
+          case 'event':
+            newPlayMap.filters.events({path: newPlayMap.routing.path.base});
+            break;
+        }
       }
     }
   //  newPlayMap.filters.reset(this);
