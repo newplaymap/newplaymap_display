@@ -82,6 +82,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     $('div.marker').css({ 'opacity' : 1 }); 
   }
   
+  // Load result data for this set of features.
   newPlayMap.loadResults(features, vars);
   
   // for each feature in the collection, create a marker and add it

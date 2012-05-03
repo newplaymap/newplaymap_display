@@ -246,18 +246,7 @@
                     </li>
                   </ol>
                </div> 
-               
-               <div class="results-container">
-               results
-                  <h2 class="${type}">${label}</h2>
-                
-                  <ol class="results content">
-                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
-                  </ol>
-               </div> 
-               
 -->
-
                       <dl>
                       {{if event_description}}
                         <dd>{{html event_description}}</dd>
@@ -266,6 +255,17 @@
                     </ol>
               
                 </script><!--   end journey -->
+
+
+                <div class="results-container">
+                  <h2 class="title">Results</h2>
+                  <div class="results"><ol class="content"></ol></div>
+               </div> 
+
+                <script id="results-template" type="text/x-jquery-tmpl">
+                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
+                </script>
+
 
                 <div class="artist content"></div>
                 <!-- Artist -->
