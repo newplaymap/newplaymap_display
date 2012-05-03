@@ -194,6 +194,7 @@ ul.ui-autocomplete {
 #filters .ui-widget-header {
   border: none;
   background-color: #BF202E;
+  background-image: none;
 }
 
 #filters .ui-widget-content {
