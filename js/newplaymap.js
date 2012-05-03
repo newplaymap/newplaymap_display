@@ -138,11 +138,19 @@ newPlayMap.processFilters = function() {
   $('#explore-filters-button').click(function() {
     $('#filter-container').slideToggle();
   });
-  
 
+  // @TODO: If we are loading pins initially, then comment this out. 
+  //        The load function will take care of removing feedback.
+  // $('#loading-feedback').hide();
 };
 
 newPlayMap.loadData = function() {
+  // Start with what's on today
+  var today = new Date();
+  var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
+  console.log(formattedDate);
+  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate });
+  
     // newPlayMap.loadJSONFile({
     //   path: 'api/organizations.php',
     //   type: "organization",
