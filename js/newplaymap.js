@@ -128,8 +128,7 @@ newPlayMap.loadData = function() {
   // Start with what's on today
   var today = new Date();
   var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
-  console.log(formattedDate);
-  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate });
+  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
   
     // newPlayMap.loadJSONFile({
     //   path: 'api/organizations.php',
