@@ -140,7 +140,11 @@ newPlayMap.loadResults = function(features, vars) {
       };
       $.extend(result, feature);  
       console.log(result);
-          
+      
+      // Rewrite Results header
+      var resultsType = feature["properties"]["content_type"].replace(' ', '-').toLowerCase() + 's';
+      $('#panel-container .results-container h2.title').attr('id', resultsType).text(feature['properties']['content_type'] + 's');
+
       $('#' + template).tmpl(result)
         .appendTo(container);
         
