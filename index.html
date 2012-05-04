@@ -188,12 +188,12 @@
                       <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit">Edit</a></li>
                     </ul>
                     
-                    <dl>
+                    <article>
                     {{if synopsis}}     
-                      <dt>Synopsis</dt>
-                      <dd>{{html synopsis}}</dd>
+                      <h3>Synopsis</h3>
+                      {{html synopsis}} <!-- @TODO: Fix the encoding for what the DB spits out - paragraph breaks aren't working -->
                     {{/if}}
-                    </dl>                  
+                    </article>                  
          
                 </script><!--   end play -->
                 
