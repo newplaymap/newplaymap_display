@@ -15,8 +15,8 @@ newPlayMap.onMarkerOver = function(e) {
     var latlon = $(marker).attr("latlon");    
     if(grouping_field !== undefined){
       if (grouping_field in locationsByID) {
-        spotlight.addLocations(locationsByID[marker_id]);
-        spotlight.parent.className = "active";
+        // spotlight.addLocations(locationsByID[marker_id]);
+        // spotlight.parent.className = "active";
 
         $('div#panel-container div#panel .content').show();
  
