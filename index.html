@@ -229,8 +229,21 @@
                     <li listing_id="${id}"><a href="${path}">${title}</a>
 
                       {{if properties.event_type}}
-                      ${properties.event_type}            
-                      <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
+                      ${properties.event_type}
+                      {{/if}}
+                      
+                      {{if properties.event_date}}
+                        <div class="date">${properties.event_date}
+                        
+                        {{if properties.event_to_date}}
+                          - ${properties.event_to_date}</div>
+                        {{else}}
+                          </div>
+                        {{/if}}
+                      {{/if}}
+                      
+                      {{if properties.organization_type_display}}
+                        <div class="organization-type">${properties.organization_type_display}</div>
                       {{/if}}
                       
                       {{if city}}{{if state}}
