@@ -127,17 +127,24 @@ newPlayMap.loadResults = function(features, vars) {
 
   var len = features.length;
   for (var i = 0; i < len; i++) {
-      var feature = features[i],
-          id = feature.properties[vars.id];
-          var result = {
-            title: feature["properties"][vars.title],
-            path:  feature["properties"]["path"],
-            id:  feature["properties"][vars.id]
-            };
+    var feature = features[i],
+      id = feature.properties[vars.id];
+      console.log(feature);
+
+      var result = {
+        title: feature["properties"][vars.title],
+        path:  feature["properties"]["path"],
+        id:  feature["properties"][vars.id],
+        city: feature["properties"]["city"],
+        state: feature["properties"]["state"]
+      };
       $.extend(result, feature);  
       console.log(result);
+          
       $('#' + template).tmpl(result)
         .appendTo(container);
+        
+      newPlayMap.resultsListProcess($('#panel-container .results-container'));
   }
 };
 
@@ -171,9 +178,9 @@ newPlayMap.loadExtras = function(features) {
 
 
 
-newPlayMap.eventListProcess = function(container) {
+newPlayMap.resultsListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));
-  $(container).find('ol.events li').hoverIntent({
+  $(container).find('ol.results li').hoverIntent({
     over: function() {
       $(this).addClass('active');
 
