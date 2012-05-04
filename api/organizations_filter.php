@@ -61,6 +61,8 @@ foreach ($cursor as $obj) {
       
       $i++;
     }
+    
+    $obj['properties']['content_type'] = 'Organization';
 
     $json .= json_encode($obj);
   
