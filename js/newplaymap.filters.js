@@ -100,6 +100,38 @@ newPlayMap.filters.artists = function(data) {
   });
 }
 
+
+
+newPlayMap.filters.ensemble = function(data) {
+  var pathQuery = "";
+
+  if (data.ensemble_collective === "Ensemble / Collective") {
+    pathQuery = "ensemble_collective=" +  data.ensemble_collective;
+  }
+
+    newPlayMap.loadAPICall({
+      data: data,
+      zoomLevel: 3,
+      clearLayer: true,
+      clearLayers: true,
+      layer: "layer-ensemble-filter",
+      class: "active",
+      id: "artist_id",
+      label: "ensemble_collective",
+      title: "generative_artist",
+      template: "artist",
+      type: "artist",
+      dataName: "artists_filter",
+      path: "api/artists_filter.php?" + pathQuery,
+      dataPath: "api/artists_filter.php?" + pathQuery,
+      icon: "icons/artist.png",
+      grouping_field: "artist_id",
+      callback: newPlayMap.loadArtistFilter
+    });
+
+}
+
+
 // Load plays
 newPlayMap.filters.events = function(data) {
   var pathQuery = "";
@@ -448,36 +480,4 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
       }
     }
   );
-}
-
-
-newPlayMap.filters.ensemble = function(data) {
-// @TODO create layered effect here.
-/*
-  var pathQuery = "";
-
-  if (data.ensemble_collective !== undefined) {
-    pathQuery = "ensemble_collective=" +  data.ensemble_collective;
-  }
-
-  newPlayMap.loadAPICall({
-    data: data,
-    zoomLevel: 3,
-    clearLayer: true,
-    clearLayers: true,
-    layer: "layer-ensemble-filter",
-    class: "active",
-    id: "artist_id",
-    label: "ensemble_collective",
-    title: "generative_artist",
-    template: "artist",
-    type: "artist",
-    dataName: "artists_filter",
-    path: "api/artists_filter.php?" + pathQuery,
-    dataPath: "api/artists_filter.php?" + pathQuery,
-    icon: "icons/artist.png",
-    grouping_field: "artist_id",
-    callback: newPlayMap.loadArtistFilter
-  });
-*/
 }
