@@ -16,6 +16,26 @@ function loadOrganizations($m, $output) {
   $organizations->drop();
   $organization_path = '../data/push/orgs-all.json';
   
+  /*
+  $organization_path = '../participate/data/orgs-all';
+  
+  // create a new cURL resource
+  $ch = curl_init();
+  
+  // set URL and other appropriate options
+  curl_setopt($ch, CURLOPT_URL, $organization_path);
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+
+  // grab URL and pass it to the browser
+  curl_exec($ch);
+
+  // close cURL resource, and free up system resources
+  curl_close($ch);
+
+  $file_data = $ch;
+  print_r($ch);
+  */
+  
   $file_data = file_get_contents($organization_path);
   $collection = $organizations;
   /* var_dump($file_data); */
@@ -94,6 +114,8 @@ function loadOrganizations($m, $output) {
           "organization_type" => $org_list,
           "special_interests" => $special_interests_list,
           "national_networks" => $national_networks_list,
+          "city" => $node["City"],
+          "state" => $node["State"],
  
       )
     );
@@ -151,7 +173,9 @@ function loadArtists($m) {
           "generative_artist" => $node["Generative artist"],
           "artist_name" => $node["Generative artist"],
           "mission_statement" => $node["Mission statement"],
-          "ensemble_collective" => $node["ensemble_collective"] 
+          "ensemble_collective" => $node["ensemble_collective"],
+          "city" => $node["City"],
+          "state" => $node["State"],
       )
     );
 
@@ -215,7 +239,9 @@ function loadEvents($m, $output) {
         "generative_artist"  => $node["Generative Artist"],
         "event_description"  => $node["Event description"],
         "synopsis"  => $node["Synopsis"],
-        "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
+        "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+        "city" => $node["City"],
+        "state" => $node["State"],
     )
     );
     // This will completely replace the record.
