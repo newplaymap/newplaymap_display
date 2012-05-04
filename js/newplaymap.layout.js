@@ -133,7 +133,9 @@ newPlayMap.loadResults = function(features, vars) {
             title: feature["properties"][vars.title],
             path:  feature["properties"]["path"],
             id:  feature["properties"][vars.id]
-      } 
+            };
+      $.extend(result, feature);  
+      console.log(result);
       $('#' + template).tmpl(result)
         .appendTo(container);
   }
