@@ -371,22 +371,41 @@ newPlayMap.filters.setPlaysIndex = function(data) {
 /*
  * City / State filters
  */
-newPlayMap.filters.getCityStateIndex = function() {
+newPlayMap.filters.getArtistsCityStateIndex = function() {
   $.ajax({
     url:  'api/city_state_index.php',
     dataType: 'json',
+    data: {'type': 'artists'},
+    success: newPlayMap.filters.setCityStateIndex,
+    error: newPlayMap.filters.error
+  });
+}
+
+newPlayMap.filters.getOrganizationsCityStateIndex = function() {
+  $.ajax({
+    url:  'api/city_state_index.php',
+    dataType: 'json',
+    data: {'type': 'organizations'},
+    success: newPlayMap.filters.setCityStateIndex,
+    error: newPlayMap.filters.error
+  });
+}
+
+newPlayMap.filters.getEventsCityStateIndex = function() {
+  $.ajax({
+    url:  'api/city_state_index.php',
+    dataType: 'json',
+    data: {'type': 'events'},
     success: newPlayMap.filters.setCityStateIndex,
     error: newPlayMap.filters.error
   });
 }
 
 
-newPlayMap.filters.setCityStateIndex = function(data) {
+newPlayMap.filters.setArtistsCityStateIndex = function(data) {
   // If we are returning just the names, then the raw data is fine
   var cityStateNames = data;
   
-  console.log(cityStateNames);
-
   $('#artists-city-state-filter').autocomplete(
     {
       source: cityStateNames.artists,
@@ -397,6 +416,11 @@ newPlayMap.filters.setCityStateIndex = function(data) {
       }
     }
   );
+}
+
+newPlayMap.filters.setOrganizationsCityStateIndex = function(data) {
+  // If we are returning just the names, then the raw data is fine
+  var cityStateNames = data;
   
   $('#organizations-city-state-filter').autocomplete(
     {
@@ -408,7 +432,12 @@ newPlayMap.filters.setCityStateIndex = function(data) {
       }
     }
   );
-  
+}
+
+newPlayMap.filters.setEventsCityStateIndex = function(data) {
+  // If we are returning just the names, then the raw data is fine
+  var cityStateNames = data;
+
   $('#events-city-state-filter').autocomplete(
     {
       source: cityStateNames.events,
