@@ -21,7 +21,7 @@ newPlayMap.updatePanel = function(marker, data) {
   // @TODO: Not only plays use this template. 
   //        Either be more specific or make sure it applies universally
   var container = $('#panel-container .journey');
-  newPlayMap.eventListProcess(container);
+  newPlayMap.resultsListProcess(container);
   
   // Make all links listen for address changes.
   $('a').address();
