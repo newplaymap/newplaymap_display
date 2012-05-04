@@ -212,25 +212,40 @@
                   <br />${generative_artist}
                   <br />${event_description}
                   <br />${synopsis}
-                  <br />${path}
-
-<!--
-                    <h2 class="journey-header">Journey</h2>
-                    <ol class="events content">
-
-                    </ol>
--->
-              
+                  <br />${path}              
                 </script><!--   end journey -->
 
 
                 <div class="results-container">
-                  <h2 class="title">Results</h2>
+                  <h2 class="title">Label (rewrite)</h2>
                   <div class="results"><ol class="content"></ol></div>
                </div> 
 
                 <script id="results-template" type="text/x-jquery-tmpl">
-                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
+                    <li listing_id="${id}"><a href="${path}">${title}</a>
+
+                      {{if properties.event_type}}
+                      ${properties.event_type}            
+                      <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
+                      {{/if}}
+
+                      {{if related_theater}}
+                        <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                      {{/if}}
+
+                   
+                        {{if event_type}}
+                        <p>
+                          ${event_type}
+                        </p>
+                        {{/if}}
+                        
+                      {{if event_description}}
+                        <dl>
+                        <dd>{{html event_description}}</dd>
+                        </dl>
+                      {{/if}}
+                  </li>
                 </script>
 
                 <div class="extras-container">

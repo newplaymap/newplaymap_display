@@ -85,39 +85,15 @@ newPlayMap.loadArtist = function() {
 
 
 newPlayMap.loadArtistFilter = function() {
-/*
-    console.log("load artist");
-
-  $('div.marker[dataname=artists_filter]').each(function(){
-      var id = $(this).attr('marker_id');
-
-      spotlight.addLocations(locationsByID[id]);
-      spotlight.parent.className = "active";
-  });
-*/
 };
 
-
 newPlayMap.loadOrganizationFilter = function() {
-/*
-  console.log("load org filter");
-
-  $('div.marker[dataname=organizations_filter]').each(function(){
-      var id = $(this).attr('marker_id');
-
-      spotlight.addLocations(locationsByID[id]);
-      spotlight.parent.className = "active";
-  });
-*/
 };
 
 newPlayMap.loadOrganization = function() {
-    console.log("load org");
-
 };
 
 newPlayMap.loadEvent = function() {
-    console.log("load event");
     
   $('div.marker[type=event]').bind( "click", function() {
       var marker = $(this);
@@ -187,8 +163,7 @@ newPlayMap.loadEventFilter = function() {
 };
 
 newPlayMap.loadJourney = function(feature) {
-  // @TODO trigger spotlight.
-  console.log(jsonData["play"]);
+
   newPlayMap.drawPlayJourneyLines(feature);
 
   // Add click event to play markers.
