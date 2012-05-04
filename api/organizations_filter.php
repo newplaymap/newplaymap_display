@@ -48,6 +48,19 @@ foreach ($cursor as $obj) {
     if($i > 0) {
      $json .= ',';
     }
+    
+    $obj['properties']['organization_type_display'] = '';
+    $i = 0;
+    $l = count($obj['properties']['organization_type']);
+    foreach ($obj['properties']['organization_type'] as $type) {
+      $obj['properties']['organization_type_display'] .= $type['type'];
+      
+      if ($i < $l - 1) {
+        $obj['properties']['organization_type_display'] .= ', ';
+      }
+      
+      $i++;
+    }
 
     $json .= json_encode($obj);
   
