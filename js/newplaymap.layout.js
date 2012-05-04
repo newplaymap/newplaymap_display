@@ -113,20 +113,6 @@ newPlayMap.panelTemplate = function(feature) {
   container.empty();
   $('#' + template).tmpl(feature["properties"])
         .appendTo(container);
-
-
-  // Special templates for journeys -- this will probably become a display for extra data.
-/*
-  if (type === "play") {
-    type = "journey";
-    container = $('#panel-container .journey ol.events');
-    container.empty();
-    $('div#panel-container div.journey').css('visibility', 'visible');
-    $.template( type + "Template", panelMarkup[type]);        
-    $.tmpl(type + "Template", jsonData["play"].features)
-      .appendTo(container);  
-  }
-*/
 }
 
 
@@ -138,8 +124,6 @@ newPlayMap.loadResults = function(features, vars) {
   containerEmpty.empty();
   container = $('#panel-container .' + type);
   container.empty();
-  
-/*   $.template( type + "Template", panelMarkup[type]); */
 
   var len = features.length;
   for (var i = 0; i < len; i++) {
@@ -149,27 +133,37 @@ newPlayMap.loadResults = function(features, vars) {
             title: feature["properties"][vars.title],
             path:  feature["properties"]["path"],
             id:  feature["properties"][vars.id]
-          }
-          
-  
+      } 
       $('#' + template).tmpl(result)
         .appendTo(container);
   }
+};
 
+// Load data into extra container. (ex. points at same geo coordinate.)
+newPlayMap.loadExtras = function(features) {
+  var type = "extras";
+  var template = "extras-template";
+  var container, containerEmpty;
+  containerEmpty = $('#panel-container .content');
+  containerEmpty.empty();
+  container = $('#panel-container .' + type);
+  container.empty();
+  
+  var len = features.length;
+  for (var i = 0; i < len; i++) {
 
+    var vars = jsonData[features[i].dataName].vars;
 
-  // Special templates for journeys -- this will probably become a display for extra data.
-/*
-  if (type === "play") {
-    type = "journey";
-    container = $('#panel-container .journey ol.events');
-    container.empty();
-    $('div#panel-container div.journey').css('visibility', 'visible');
-    $.template( type + "Template", panelMarkup[type]);        
-    $.tmpl(type + "Template", jsonData["play"].features)
-      .appendTo(container);  
+      var feature = features[i],
+          id = feature.properties[vars.id];
+          var result = {
+            title: feature["properties"][vars.title],
+            path:  feature["properties"]["path"],
+            id:  feature["properties"][vars.id]
+          }
+      $('#' + template).tmpl(result)
+        .appendTo(container);
   }
-*/
 
 };
 

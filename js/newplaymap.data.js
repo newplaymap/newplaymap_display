@@ -57,6 +57,8 @@ newPlayMap.loadDataError = function(data) {
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
   var vars = vars;
+  // Clean out featuresByLocation.
+  featuresByLocation = {};
   var features = jsonData[vars.dataName].features,
       len = features.length,
       locations = [];
@@ -82,9 +84,8 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     $('div.marker').css({ 'opacity' : 1 }); 
   }
   
-  // Load result data for this set of features.
-  newPlayMap.loadResults(features, vars);
-  
+
+
   // for each feature in the collection, create a marker and add it
   // to the markers layer
   for (var i = 0; i < len; i++) {
@@ -93,6 +94,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
           marker = document.createElement("div");
 
       marker.feature = feature;
+      var latlon = feature.properties.latitude + "," + feature.properties.longitude;
 
       markers.addMarker(marker, feature);
       
@@ -106,6 +108,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       marker.setAttribute("class", "marker");
       marker.setAttribute("href", vars.dataPath);
       marker.setAttribute("type", vars.type);
+      marker.setAttribute("latlon", latlon);
 
       marker.setAttribute("parent", vars.layer);
       // Specially set value for loading data.
@@ -125,7 +128,14 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
         marker.setAttribute("grouping_field", vars.grouping_field);
         marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
-      
+
+        // Push to array of items on same latlon.
+        if (latlon in featuresByLocation) {
+          featuresByLocation[latlon].push(feature);
+        } else {
+          featuresByLocation[latlon] = [feature];
+        }
+
         if (feature.properties[vars.grouping_field] in locationsByID) {
           locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
         } else {
@@ -148,6 +158,12 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
       
   }
+
+  // Load result data for this set of features.
+  newPlayMap.loadResults(features, vars);
+
+
+
 
   // Tell the map to fit all of the locations in the available space
   
