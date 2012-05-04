@@ -175,7 +175,7 @@
                  -->
               <div class="play content"></div>
                 <script id="play-template" type="text/x-jquery-tmpl">
-                    // @TODO: Remove all the dummy else empty text
+                    <!-- @TODO: Remove all the dummy empty text -->
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
                       <h3>by ${generative_artist}</h3>
@@ -185,7 +185,7 @@
 
                   
                     <ul id="panel-content-links">
-                      <li id="panel-add-event-link"><a href="participate/node/add/event/${related_play_id}">${related_play_id}Add Event</a></li>
+                      <li id="panel-add-event-link"><a href="participate/node/add/event/${related_play_id}">Add Event</a></li>
                       <li id="panel-share-link"><a href="#">Share</a></li>
                       <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit">Edit</a></li>
                     </ul>
@@ -230,7 +230,14 @@
                 <div class="artist content"></div>
                 <!-- Artist -->
                 <script id="artist-template" type="text/x-jquery-tmpl">
-
+                
+                  {{if artist_photo}}
+                    <img src="participate/${artist_photo}" />
+                  {{else}}
+                    NO PHOTO
+                  {{/if}}
+                  
+                  <article>
                     <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
                     {{if city}}{{if state}}
                       <div>${city}, ${state}</div>
@@ -238,20 +245,52 @@
                     {{else}}
                       NO CITY
                     {{/if}}
-                  </div>
+                  </article>
                 </script><!--  end artist -->
     
                 <div class="organization content"></div>
                 <!-- Organization -->
                 <script id="organization-template" type="text/x-jquery-tmpl">
+                
+                  {{if logo}}
+                    <img src="participate/${logo}" />
+                  {{else}}
+                    NO LOGO
+                  {{/if}}
                   
-                    <h2><a href="#${path}">${name}</a></h2>
-                    {{if city}}{{if state}}
-                      <div>${city}, ${state}</div>
-                    {{/if}}
+                  <h2><a href="#${path}">${name}</a></h2>
+                  {{if city}}{{if state}}
+                    <div>${city}, ${state}</div>
+                  {{/if}}
+                  {{else}}
+                    NO CITY
+                  {{/if}}
+                  
+                  <ul id="panel-content-links">
+                    <li id="panel-add-event-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
+                    <li id="panel-share-link"><a href="#">Share</a></li>
+                    <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit">Edit</a></li>
+                  </ul>
+                  
+                  <article>
+                    {{if mission_statement}}
+                      ${mission_statement}
                     {{else}}
-                      NO CITY
+                      NO MISSION STATEMENT
                     {{/if}}
+                  
+                    {{if national_networks}}
+                      ${national_networks} @TODO: process national networks
+                    {{else}}
+                      NO NATIONAL NETWORKS
+                    {{/if}}
+                  
+                    {{if special_interests}}
+                      ${special_interests} @TODO: process special intersts
+                    {{else}}
+                      NO NATIONAL NETWORKS
+                    {{/if}}
+                  </article>
 
                 </script><!--  end organization -->
                 
