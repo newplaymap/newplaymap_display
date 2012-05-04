@@ -92,6 +92,8 @@ function loadOrganizations($m, $output) {
     } else {
       $national_networks_list = '';
     }
+    
+    $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
 
     $newObj = array(
       "id" => $node["Org ID"],
@@ -116,6 +118,7 @@ function loadOrganizations($m, $output) {
           "national_networks" => $national_networks_list,
           "city" => $node["City"],
           "state" => $node["State"],
+          "city_state" => $city_state,
  
       )
     );
@@ -155,6 +158,8 @@ function loadArtists($m) {
 
   foreach ($objects as $obj_load) {
     $node = (array) $obj_load->node;
+    
+    $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
 
     $newObj = array(
       "id" => $node["Artist ID"],
@@ -176,6 +181,7 @@ function loadArtists($m) {
           "ensemble_collective" => $node["ensemble_collective"],
           "city" => $node["City"],
           "state" => $node["State"],
+          "city_state" => $city_state,
       )
     );
 
@@ -214,6 +220,8 @@ function loadEvents($m, $output) {
     // Process date values
     $start_date = new MongoDate(strtotime($node["Date"]));
     $end_date = new MongoDate(strtotime($node["To Date"]));
+    
+    $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
   
     // @TODO: See if the string replace on path can be removed
     $newObj = array(
@@ -242,6 +250,7 @@ function loadEvents($m, $output) {
         "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
         "city" => $node["City"],
         "state" => $node["State"],
+        "city_state" => $city_state,
     )
     );
     // This will completely replace the record.
