@@ -214,45 +214,12 @@
                   <br />${synopsis}
                   <br />${path}
 
+<!--
                     <h2 class="journey-header">Journey</h2>
                     <ol class="events content">
-                      <li listing_id="${properties.event_id}">${properties.event_type}
-                      <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
-                      {{if related_theater}}
-                        <!-- @TODO  This will need some work -->
-                        <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
-                      {{/if}}
 
-                      <p>
-                        {{if event_type}}
-                          ${event_type}
-                        {{/if}}
-                      </p>
-
-<!--  old version
-
-                  {{if synopsis}}     
-                    <dt>Synopsis</dt>
-                    <dd>{{html synopsis}}</dd>
-                  {{/if}}
-                  </dl>                  
-                </div> 
-                
-               <div class="journey content">
-                  <h2 class="journey-header">Journey</h2>
-                  <ol class="events content">
-                    <li listing_id="${properties.event_id}">${properties.event_type}
-                    <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
-                    </li>
-                  </ol>
-               </div> 
--->
-                      <dl>
-                      {{if event_description}}
-                        <dd>{{html event_description}}</dd>
-                      {{/if}}
-                      </li>
                     </ol>
+-->
               
                 </script><!--   end journey -->
 
@@ -265,6 +232,15 @@
                 <script id="results-template" type="text/x-jquery-tmpl">
                     <li listing_id="${id}"><a href="${path}">${title}</a></li>
                 </script>
+
+                <div class="extras-container">
+                  <div class="extras"><ol class="content"></ol></div>
+               </div> 
+
+                <script id="extras-template" type="text/x-jquery-tmpl">
+                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
+                </script>
+
 
 
                 <div class="artist content"></div>

@@ -12,7 +12,7 @@ newPlayMap.onMarkerOver = function(e) {
     var grouping_field = marker.getAttribute("grouping_value");
     var marker_id = $(this).attr('marker_id');
     var layer = $(marker).attr("parent");
-    
+    var latlon = $(marker).attr("latlon");    
     if(grouping_field !== undefined){
       if (grouping_field in locationsByID) {
         spotlight.addLocations(locationsByID[marker_id]);
@@ -24,9 +24,12 @@ newPlayMap.onMarkerOver = function(e) {
 
         $('div.marker[grouping_value=' + grouping_field + ']').css({ 'opacity' : 1 }); 
  
-                    
         // Update the panel data.
-        newPlayMap.updatePanel(marker, locationsByID[grouping_field]);  
+        newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+        if(featuresByLocation[latlon].length > 1) {
+          newPlayMap.loadExtras(featuresByLocation[latlon]);
+        }
+
       } 
     }
   }
