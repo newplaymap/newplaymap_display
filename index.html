@@ -192,7 +192,11 @@
                       <dt>Synopsis</dt>
                       <dd>{{html synopsis}}</dd>
                     {{/if}}
-                    </dl>                  
+                    </dl>                
+                    
+                    {{if city}}{{if state}}
+                      <div>${city}, ${state}</div>
+                    {{/if}}{{/if}}
          
                 </script><!--   end play -->
                 
@@ -228,6 +232,10 @@
                       ${properties.event_type}            
                       <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
                       {{/if}}
+                      
+                      {{if city}}{{if state}}
+                        <div>${city}, ${state}</div>
+                      {{/if}}{{/if}}
 
                       {{if related_theater}}
                         <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
@@ -263,6 +271,9 @@
                 <script id="artist-template" type="text/x-jquery-tmpl">
 
                     <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
+                    {{if city}}{{if state}}
+                      <div>${city}, ${state}</div>
+                    {{/if}}{{/if}}
                   </div>
                 </script><!--  end artist -->
     
@@ -271,6 +282,9 @@
                 <script id="organization-template" type="text/x-jquery-tmpl">
                   
                     <h2><a href="#${path}">${name}</a></h2>
+                    {{if city}}{{if state}}
+                      <div>${city}, ${state}</div>
+                    {{/if}}{{/if}}
 
                 </script><!--  end organization -->
                 
