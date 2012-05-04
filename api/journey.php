@@ -3,32 +3,24 @@ include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $plays = $m->newplaymap->plays;
-
+$events = $m->newplaymap->events;
 if(!empty($_GET['id'])){
   $id = $_GET['id'];
   $play_cursor = $plays->findOne(array('id' => $id));
 }
-if(!empty($_GET['play_title'])){
+if(!empty($_GET['play_title']) && $_GET['play_title'] !== "undefined" ){
   $play_title = $_GET['play_title'];
   $play_cursor = $plays->findOne(array('properties.play_title' => $play_title));
 }
 if(!empty($_GET['path'])) {
   $path = $_GET['path'];
-  
-  $play_cursor = $plays->findOne(array('properties.path' => $path));
+  $expression = new MongoRegex('/'. $path . '/i');
+  $event_cursor = $events->findOne(array('properties.path' => $expression));
+  $play_cursor = $plays->findOne(array('id' => $event_cursor["properties"]["related_play_id"]));
 }
 if(!empty($play_cursor['id'])) {
   $query = array('properties.related_play_id' => (string) $play_cursor['id']);
   $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
-}
-// Have a path, but it is a path for an event.
-if(empty($play_cursor['id']) && !empty($path)) {
-  $query = array(
-/*     'properties.related_play_id' => (string) $play_cursor['id'], */
-    'properties.path' => $path,
-  );
-  $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
-
 }
 
 
@@ -43,7 +35,6 @@ header("Content-type: application/json");
 
 $json = "";
 $json .= '{"name": "play", "id": ' . $play_cursor['id'] . ', "type":"FeatureCollection", "features":[ ' ;
-
 
 $i = 0;
 
