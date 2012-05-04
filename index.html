@@ -219,7 +219,28 @@
                   <br />${path}              
                 </script><!--   end journey -->
 
+                <div class="artist content"></div>
+                <!-- Artist -->
+                <script id="artist-template" type="text/x-jquery-tmpl">
 
+                    <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
+                    {{if city}}{{if state}}
+                      <div>${city}, ${state}</div>
+                    {{/if}}{{/if}}
+                  </div>
+                </script><!--  end artist -->
+    
+                <div class="organization content"></div>
+                <!-- Organization -->
+                <script id="organization-template" type="text/x-jquery-tmpl">
+                  
+                    <h2><a href="#${path}">${name}</a></h2>
+                    {{if city}}{{if state}}
+                      <div>${city}, ${state}</div>
+                    {{/if}}{{/if}}
+
+                </script><!--  end organization -->
+                
                 <div class="results-container">
                   <h2 class="title">Label (rewrite)</h2>
                   <ol class="results"></ol>
@@ -276,30 +297,6 @@
                 <script id="extras-template" type="text/x-jquery-tmpl">
                     <li listing_id="${id}"><a href="${path}">${title}</a></li>
                 </script>
-
-
-
-                <div class="artist content"></div>
-                <!-- Artist -->
-                <script id="artist-template" type="text/x-jquery-tmpl">
-
-                    <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
-                    {{if city}}{{if state}}
-                      <div>${city}, ${state}</div>
-                    {{/if}}{{/if}}
-                  </div>
-                </script><!--  end artist -->
-    
-                <div class="organization content"></div>
-                <!-- Organization -->
-                <script id="organization-template" type="text/x-jquery-tmpl">
-                  
-                    <h2><a href="#${path}">${name}</a></h2>
-                    {{if city}}{{if state}}
-                      <div>${city}, ${state}</div>
-                    {{/if}}{{/if}}
-
-                </script><!--  end organization -->
                 
               </div> <!-- End Panel -->
             </div> <!-- End Panel Container -->
