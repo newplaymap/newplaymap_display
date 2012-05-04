@@ -175,10 +175,12 @@
                  -->
               <div class="play content"></div>
                 <script id="play-template" type="text/x-jquery-tmpl">
-
+                    // @TODO: Remove all the dummy else empty text
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
                       <h3>by ${generative_artist}</h3>
+                    {{else}}
+                      NO GENERATIVE ARTIST
                     {{/if}}
 
                   
@@ -192,11 +194,16 @@
                       {{if synopsis}}     
                         <h3>Synopsis</h3>
                         {{html synopsis}} <!-- @TODO: Fix the encoding for what the DB spits out - paragraph breaks are not working -->
+                      {{else}}
+                        NO SYNOPSIS
                       {{/if}}
                     
                       {{if city}}{{if state}}
                         <div>${city}, ${state}</div>
-                      {{/if}}{{/if}}
+                      {{/if}}
+                      {{else}}
+                        NO CITY
+                      {{/if}}
                     </article>                  
          
                 </script><!--   end play -->
@@ -227,7 +234,10 @@
                     <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
                     {{if city}}{{if state}}
                       <div>${city}, ${state}</div>
-                    {{/if}}{{/if}}
+                    {{/if}}
+                    {{else}}
+                      NO CITY
+                    {{/if}}
                   </div>
                 </script><!--  end artist -->
     
@@ -238,7 +248,10 @@
                     <h2><a href="#${path}">${name}</a></h2>
                     {{if city}}{{if state}}
                       <div>${city}, ${state}</div>
-                    {{/if}}{{/if}}
+                    {{/if}}
+                    {{else}}
+                      NO CITY
+                    {{/if}}
 
                 </script><!--  end organization -->
                 
@@ -251,7 +264,9 @@
                     <li listing_id="${id}"><a href="${path}">${title}</a>
 
                       {{if properties.event_type}}
-                      ${properties.event_type}
+                        ${properties.event_type}
+                      {{else}}
+                        NO EVENT TYPE
                       {{/if}}
                       
                       {{if properties.event_date}}
@@ -262,18 +277,27 @@
                         {{else}}
                           </div>
                         {{/if}}
+                      {{else}}
+                        NO DATE
                       {{/if}}
                       
                       {{if properties.organization_type_display}}
                         <div class="organization-type">${properties.organization_type_display}</div>
+                      {{else}}
+                        NO ORG TYPE
                       {{/if}}
                       
                       {{if city}}{{if state}}
                         <div>${city}, ${state}</div>
-                      {{/if}}{{/if}}
+                      {{/if}}
+                      {{else}}
+                        NO CITY
+                      {{/if}}
 
                       {{if related_theater}}
                         <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                      {{else}}
+                        NO RELATED THEATER
                       {{/if}}
 
                    
@@ -281,12 +305,16 @@
                         <p>
                           ${event_type}
                         </p>
+                        {{else}}
+                          NO EVENT TYPE
                         {{/if}}
                         
                       {{if event_description}}
                         <dl>
                         <dd>{{html event_description}}</dd>
                         </dl>
+                      {{else}}
+                        NO EVENT DESCRIPTION
                       {{/if}}
                   </li>
                 </script>
