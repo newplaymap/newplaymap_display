@@ -5,6 +5,7 @@ connectMongo(false);
 $collection = $m->newplaymap->artists;
 
 $artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
+$ensemble_collective = (!empty($_GET['ensemble_collective'])) ? $_GET['ensemble_collective'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 
 if($path !== null) {
@@ -12,6 +13,9 @@ if($path !== null) {
 }
 else if($artist_name !== null) {
   $cursor = $collection->find(array("properties.artist_name" => $artist_name))->sort(array("properties.artist_name" => 1));
+}
+else if($ensemble_collective === "Ensemble / Collective") {
+  $cursor = $collection->find(array("properties.ensemble_collective" => $ensemble_collective))->sort(array("properties.artist_name" => 1));
 }
 else {
   return;
