@@ -1,22 +1,43 @@
+/*
+Font Names
+
+font-family:'Avenir LT W01 55 Roman';
+font-family:'AvenirLTW01-55Oblique';
+font-family:'Avenir LT W01 85 Heavy';
+*/
+
 h1, h2, h3, h4 {
-  font-family: 'Museo Slab 500', Helvetica, Arial, sans-serif;;
+  font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+  font-weight: normal;
 }
 
 body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
-.sidebar-nav {
-  padding: 9px 0;
+
+/* Override Bootstrap Defaults */
+body,
+p,
+input,
+button,
+select,
+textarea {
+  font-family: 'Avenir LT W01 55 Roman', Helvetica, Arial, sans-serif;
 }
 
-@font-face{ 
-	font-family: 'Museo Slab 500';
-	src: url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.eot');
-	src: url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.eot?iefix') format('eot'),
-	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.woff') format('woff'),
-	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.ttf') format('truetype'),
-	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
+strong, b {
+  font-family: 'Avenir LT W01 85 Heavy';
+  font-weight: normal;
+}
+
+em, i {
+  font-family: 'AvenirLTW01-55Oblique';
+  font-style: normal;
+}
+
+.sidebar-nav {
+  padding: 9px 0;
 }
 
 .count {
