@@ -12,7 +12,12 @@ newPlayMap.onMarkerOver = function(e) {
     var grouping_field = marker.getAttribute("grouping_value");
     var marker_id = $(this).attr('marker_id');
     var layer = $(marker).attr("parent");
-    var latlon = $(marker).attr("latlon");    
+    var latlon = $(marker).attr("latlon");
+
+    // @TODO: Move the bubble code into updatePanel or more likely loadExtras()
+    var latlonSplit = latlon.split(',');
+    bubble = new MM.Follower(map, new MM.Location(latlonSplit[0], latlonSplit[1]), 'Broadway and Grand');
+      
     if(grouping_field !== undefined){
       if (grouping_field in locationsByID) {
         // spotlight.addLocations(locationsByID[marker_id]);
@@ -253,6 +258,42 @@ newPlayMap.drawPlayJourneyLines = function(feature) {
       }
       canvas = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
   }
+}
+
+
+/*
+ * Popup bubble
+ * Based on journey code using Raphael js.
+ * Not working
+ */
+newPlayMap.drawPopupBubble = function(feature) {
+//      http://raphaeljs.com/reference.html 
+ // var locations = [];
+ // for (var i = 0; i < jsonData.play.features.length; i++) {
+ //   var pair = jsonData.play.features[i]["geometry"]["coordinates"];
+ // 
+ //   if (pair && pair.length == 2) {
+ //       var location = new MM.Location(pair[1], pair[0]);
+ //       if (!isNaN(location.lat) && !isNaN(location.lon)) {
+ //           locations.push(location);
+ //       }
+ //   }
+ // }
+ 
+ // Test data
+ var locations = ["37.779846", "-122.407947"];
+
+// line style in function
+
+ if (locations.length > 0) {
+     var fillStyle = 'transparent';
+     var fillAlpha = 0;
+     var strokeStyle = '#BF202E';
+     if(canvas.clear !== undefined) {
+       canvas.clear();
+     }
+     canvas = new MM.PolygonMarker(map, locations, fillStyle, fillAlpha, strokeStyle);
+ }
 }
 
 
