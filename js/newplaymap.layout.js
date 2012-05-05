@@ -27,6 +27,38 @@ newPlayMap.updatePanel = function(marker, data) {
   $('a').address();
 };
 
+
+newPlayMap.updateBubble = function(marker, data) {
+  // data is extra, we might use it...
+  var feature = {};
+  feature.markup = marker;
+
+  feature.type = marker.getAttribute("type");
+  feature.marker_id = marker.getAttribute("marker_id");
+  feature.dataName = marker.getAttribute("dataName");
+/*   feature.template = marker.getAttribute("template"); */
+  
+  
+  featureData = newPlayMap.loadDataObject(feature);
+
+  // hard coded for events for now. @TODO: Figure out chach's way of using featureData.title and templates
+  var title = featureData.properties.play_title;
+  bubble = new MM.Follower(map, new MM.Location(featureData['geometry']['coordinates'][1], featureData['geometry']['coordinates'][0]), title);
+
+  // Load event data into the template.
+  // newPlayMap.panelTemplate(featureData);
+
+
+  // Add interaction to event listings in the new content
+  // @TODO: Not only plays use this template. 
+  //        Either be more specific or make sure it applies universally
+  // var container = $('#panel-container .journey');
+  // newPlayMap.resultsListProcess(container);
+  // 
+  // Make all links listen for address changes.
+  $('a').address();
+};
+
 newPlayMap.loadDataObject = function(featureLookup) {
     var featureSet = [];
 
