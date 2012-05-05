@@ -7,16 +7,15 @@ newPlayMap.getMarker = function(target) {
 };
 
 newPlayMap.onMarkerOver = function(e) {
+  // Remove old bubbles
+  // $('.bubble').fadeOut();
+
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
     var grouping_field = marker.getAttribute("grouping_value");
     var marker_id = $(this).attr('marker_id');
     var layer = $(marker).attr("parent");
     var latlon = $(marker).attr("latlon");
-
-    // @TODO: Move the bubble code into updatePanel or more likely loadExtras()
-    var latlonSplit = latlon.split(',');
-    bubble = new MM.Follower(map, new MM.Location(latlonSplit[0], latlonSplit[1]), 'Broadway and Grand');
       
     if(grouping_field !== undefined){
       if (grouping_field in locationsByID) {
@@ -29,11 +28,15 @@ newPlayMap.onMarkerOver = function(e) {
 
         $('div.marker[grouping_value=' + grouping_field + ']').css({ 'opacity' : 1 }); 
  
+        // Update the bubble
+        newPlayMap.updateBubble(marker, locationsByID[grouping_field]);
+        
+        // @TODO: Move this to click
         // Update the panel data.
-        newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-        if(featuresByLocation[latlon].length > 1) {
-          newPlayMap.loadExtras(featuresByLocation[latlon]);
-        }
+        // newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+        // if(featuresByLocation[latlon].length > 1) {
+        //   newPlayMap.loadExtras(featuresByLocation[latlon]);
+        // }
 
       } 
     }
@@ -48,6 +51,8 @@ newPlayMap.onMarkerOut = function(e) {
     var type = marker.type;
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
+    
+    $('.bubble').fadeOut();
 
 
     $('div.marker').css({ 'opacity' : 1 }); 
