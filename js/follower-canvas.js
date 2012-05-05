@@ -10,14 +10,12 @@ if (!com) {
 
     MM.Follower = function(map, location, content)
     {
-        console.log(location);
         this.coord = map.locationCoordinate(location);
-        console.log(this.coord);
         
         this.offset = new MM.Point(0, 0);
         this.dimensions = new MM.Point(150, 150);
         this.margin = new MM.Point(10, 10);
-        this.offset = new MM.Point(0, -this.dimensions.y);
+        this.offset = new MM.Point(-this.dimensions.x/2, -this.dimensions.y -10);
     
         var follower = this;
         
@@ -25,26 +23,14 @@ if (!com) {
         map.addCallback('drawn', callback);
         
         this.div = document.createElement('div');
+        this.div.className = 'bubble';
         this.div.style.position = 'absolute';
         this.div.style.width = this.dimensions.x + 'px';
         this.div.style.height = this.dimensions.y + 'px';
         
-        this.div.style.backgroundColor = 'white';
-        this.div.style.border = 'solid black 1px';
-    
-        var shadow = document.createElement('canvas');
-        this.div.appendChild(shadow);
-        if (typeof G_vmlCanvasManager !== 'undefined') shadow = G_vmlCanvasManager.initElement(shadow);
-        shadow.style.position = 'absolute';
-        shadow.style.left = '0px';
-        shadow.style.top = '0px';
-        shadow.width = this.dimensions.x*2;
-        shadow.height = this.dimensions.y;
-        var ctx = shadow.getContext("2d");
-        ctx.transform(1, 0, -0.5, 0.5, 75, this.dimensions.y/2);
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
-        this.drawBubblePath(ctx);
-        ctx.fill();
+        // this.div.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        // this.div.style.color = '#FFFFFF';
+        // this.div.style.border = 'solid black 1px';
     
         var bubble = document.createElement('canvas');
         this.div.appendChild(bubble);
