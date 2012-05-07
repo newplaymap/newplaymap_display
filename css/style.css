@@ -239,3 +239,7 @@ ul.ui-autocomplete {
   #panel-container .results-container ol.results p {
     font-size: 80%;
   }
+  
+  #panel-container .results-container .results-title h2 {
+    display: inline;
+  }
