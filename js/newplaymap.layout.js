@@ -156,12 +156,12 @@ newPlayMap.loadResults = function(features, vars) {
   containerEmpty.empty();
   container = $('#panel-container .' + type);
   container.empty();
+  console.log(features.length);
 
   var len = features.length;
   for (var i = 0; i < len; i++) {
     var feature = features[i],
       id = feature.properties[vars.id];
-      console.log(feature);
 
       var result = {
         title: feature["properties"][vars.title],
@@ -171,17 +171,27 @@ newPlayMap.loadResults = function(features, vars) {
         state: feature["properties"]["state"]
       };
       $.extend(result, feature);  
-      console.log(result);
-      
-      // Rewrite Results header
-      var resultsType = feature["properties"]["content_type"].replace(' ', '-').toLowerCase() + 's';
-      $('#panel-container .results-container h2.title').attr('id', resultsType).text(feature['properties']['content_type'] + 's');
 
       $('#' + template).tmpl(result)
         .appendTo(container);
         
       newPlayMap.resultsListProcess($('#panel-container .results-container'));
   }
+  
+  // Rewrite Results header
+  // var resultsCount = features.length;
+  // var resultsPlural = (features.length > 1 || features.length == 0) ? 's' : '';
+  // var resultsType = features[0]["properties"]["content_type"];
+  var resultsType = features[0]["properties"]["content_type"];
+  var resultsCount = jsonData[vars.dataName]["features"].length;
+  
+  var totalCount = jsonData[vars.dataName].count;
+  var totalCountText = (totalCount > resultsCount) ? ' (of ' + totalCount + ')' : '';
+  
+  var resultsPlural = (resultsCount > 1 || resultsCount == 0) ? 's' : '';
+
+  $('#panel-container .results-container .results-title h2').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's').text(resultsCount + ' ' + resultsType + resultsPlural);
+  $('#panel-container .results-container .results-title .results-total-count').text(totalCountText);
 };
 
 // Load data into extra container. (ex. points at same geo coordinate.)
