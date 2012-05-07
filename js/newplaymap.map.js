@@ -95,6 +95,36 @@ newPlayMap.loadArtist = function() {
 
 
 newPlayMap.loadArtistFilter = function() {
+  var data = jsonData["artists_filter"]["features"][0]["properties"];
+console.log("artistfilter");
+console.log(data);
+  if (data.artist_id !== undefined) {
+    var relatedPathQuery = "artist_id=" +  data.artist_id;
+
+    newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: false,
+    extra: true,
+    layer: "layer-events-filter",
+    class: "inactive",
+    id: "event_id",
+    label: "play_title", // field which will be used in label
+    title: "play_title",
+    template: "play-template",
+    type: "play",
+    dataName: "events_filter",
+    path: "api/events_filter.php?" + relatedPathQuery,
+    dataPath: "api/events_filter.php?" + relatedPathQuery,
+    icon: "icons/event.png",
+    grouping_field: "event_id",
+    related_play_id: "related_play_id",
+    callback: newPlayMap.loadEventFilter
+    });
+  }
+
+
 };
 
 newPlayMap.loadOrganizationFilter = function() {

@@ -23,7 +23,7 @@ else if(!empty($_GET['related_theater_id'])){
   $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
 }
 else if(!empty($_GET['artist_id'])){
-  $related_theater = $_GET['artist_id'];
+  $artist_id = $_GET['artist_id'];
   // find everything in the collection
   $query = array("properties.artist_id" => $artist_id);
   $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
