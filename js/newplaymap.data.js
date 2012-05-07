@@ -35,6 +35,7 @@ newPlayMap.setData = function(data, statusText, jqxhr) {
   var length = jsonData[data.name]["features"].length;
   var count =  newPlayMap.toTitleCase(data.name) + " Showing: " + length + " of " + jsonData[data.name].count + ".";
   $('div.count').prepend('<p>' + count + '</p>');
+
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
   
   if (newPlayMap.filters.loadingCompleteFeedback) {
