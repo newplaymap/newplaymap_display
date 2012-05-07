@@ -243,3 +243,12 @@ ul.ui-autocomplete {
   #panel-container .results-container .results-title h2 {
     display: inline;
   }
+
+.qtip-wrapper {
+  width: 350px;
+}
+.qtip-wrapper a {
+  display: block;
+  padding: 4px;
+  font-size: 80%;
+}

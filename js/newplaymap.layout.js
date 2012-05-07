@@ -51,8 +51,7 @@ newPlayMap.updateBubble = function(marker, data) {
   $('#' + markerID).qtip({
       content: title, // Use the tooltip attribute of the element for the content
       hide:{ //moved hide to here,
-        delay:2000, //give a small delay to allow the user to mouse over it.
-/*         fixed:true */
+        delay: 5000 //give a small delay to allow the user to mouse over it.
       },
       style: {
         name: 'light',
