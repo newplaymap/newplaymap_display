@@ -98,6 +98,34 @@ newPlayMap.loadArtistFilter = function() {
 };
 
 newPlayMap.loadOrganizationFilter = function() {
+  var data = jsonData["organizations_filter"]["features"][0]["properties"];
+
+  if (data.organization_id !== undefined) {
+    var relatedPathQuery = "related_theater_id=" +  data.organization_id;
+
+    newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: false,
+    extra: true,
+    layer: "layer-events-filter",
+    class: "inactive",
+    id: "event_id",
+    label: "play_title", // field which will be used in label
+    title: "play_title",
+    template: "play-template",
+    type: "play",
+    dataName: "events_filter",
+    path: "api/events_filter.php?" + relatedPathQuery,
+    dataPath: "api/events_filter.php?" + relatedPathQuery,
+    icon: "icons/event.png",
+    grouping_field: "event_id",
+    related_play_id: "related_play_id",
+    callback: newPlayMap.loadEventFilter
+    });
+  }
+
 };
 
 newPlayMap.loadOrganization = function() {

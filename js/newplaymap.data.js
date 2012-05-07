@@ -30,6 +30,13 @@ newPlayMap.loadAPICall = function(vars) {
 };
 
 newPlayMap.setData = function(data, statusText, jqxhr) {
+  console.log(data);
+  if (data.count === undefined || data.count === 0) {
+    console.log("no results");
+    newPlayMap.filters.loadingCompleteFeedback();
+    return false;
+  } 
+
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
   var length = jsonData[data.name]["features"].length;
@@ -83,8 +90,6 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     spotlight.removeAllLocations();
     $('div.marker').css({ 'opacity' : 1 }); 
   }
-  
-
 
   // for each feature in the collection, create a marker and add it
   // to the markers layer
@@ -160,9 +165,13 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   }
 
   // Load result data for this set of features.
-  newPlayMap.loadResults(features, vars);
-
-
+  // If secondary filter is called (extras), display in extras template.
+  if(vars.extra !== true) {
+    newPlayMap.loadResults(features, vars);
+  }
+  else {
+    newPlayMap.loadExtras(features, vars);
+  }
 
 
   // Tell the map to fit all of the locations in the available space
@@ -171,7 +180,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   // Actually no it is probably fine so long as locations is global.
   if(vars.zoomLevel === undefined) {
     //map.setExtent(locations);
-  //map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), 4);
+    //map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), 4);
   }
   else {
     // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.

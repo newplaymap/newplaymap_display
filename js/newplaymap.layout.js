@@ -155,6 +155,7 @@ newPlayMap.loadResults = function(features, vars) {
   containerEmpty = $('#panel-container .content');
   containerEmpty.empty();
   container = $('#panel-container .' + type);
+
   container.empty();
 
   var len = features.length;
@@ -185,7 +186,7 @@ newPlayMap.loadResults = function(features, vars) {
 };
 
 // Load data into extra container. (ex. points at same geo coordinate.)
-newPlayMap.loadExtras = function(features) {
+newPlayMap.loadExtras = function(features, vars) {
   var type = "extras";
   var template = "extras-template";
   var container, containerEmpty;
@@ -196,9 +197,9 @@ newPlayMap.loadExtras = function(features) {
   
   var len = features.length;
   for (var i = 0; i < len; i++) {
-
-    var vars = jsonData[features[i].dataName].vars;
-
+    if(vars === undefined) {
+      var vars = jsonData[features[i].dataName].vars;
+    }
       var feature = features[i],
           id = feature.properties[vars.id];
           var result = {
@@ -209,10 +210,7 @@ newPlayMap.loadExtras = function(features) {
       $('#' + template).tmpl(result)
         .appendTo(container);
   }
-
 };
-
-
 
 newPlayMap.resultsListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));

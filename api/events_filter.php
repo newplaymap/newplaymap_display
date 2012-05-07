@@ -16,28 +16,30 @@ if(!empty($_GET['event_type'])){
   $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
 
 }
+else if(!empty($_GET['related_theater_id'])){
+  $related_theater_id = $_GET['related_theater_id'];
+  // find everything in the collection
+  $query = array("properties.related_theater_id" => $related_theater_id);
+  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
+}
+else if(!empty($_GET['artist_id'])){
+  $related_theater = $_GET['artist_id'];
+  // find everything in the collection
+  $query = array("properties.artist_id" => $artist_id);
+  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
+}
 else if ($search_start !== null) {
-
-
-
-// Testing
-// $search_start = new MongoDate(strtotime('April 1, 2005'));
-// $search_end = new MongoDate(strtotime('May 1, 2005'));
-
-
-// $event_start < $search_end && $event_end > $search_start
-// $search_end > $event_start && $search_start < $event_end
-$cursor = $collection->find(
+  $cursor = $collection->find(
   array(
     "properties.event_date" => array('$lte' => $search_end),
     "properties.event_to_date" => array('$gte' => $search_start), 
   )
-)->limit($limit)->sort(array("properties.event_date" => 1));
-
+  )->limit($limit)->sort(array("properties.event_date" => 1));
 }
 else if($path !== null) {
   $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => 1));
 }
+
 else {
   $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
 }
