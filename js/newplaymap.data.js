@@ -113,6 +113,11 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       marker.setAttribute("type", vars.type);
       marker.setAttribute("latlon", latlon);
 
+      feature.title = feature.properties[vars.label];
+      feature.dataName = vars.dataName;
+      feature.latlon = latlon;
+      feature.path = feature.properties.path;
+            
       marker.setAttribute("parent", vars.layer);
       // Specially set value for loading data.
       marker.setAttribute("marker_id", id);

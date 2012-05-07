@@ -30,13 +30,6 @@ newPlayMap.onMarkerOver = function(e) {
  
         // Update the bubble
         newPlayMap.updateBubble(marker, locationsByID[grouping_field]);
-                
-        // @TODO: Move this to click
-        // Update the panel data.
-        // newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-        // if(featuresByLocation[latlon].length > 1) {
-        //   newPlayMap.loadExtras(featuresByLocation[latlon]);
-        // }
 
       } 
     }
