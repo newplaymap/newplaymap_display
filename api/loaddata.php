@@ -2,41 +2,50 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(true);
 
+// print "I think you're looking for the npm_datasource module.";
 
 $output = "";
-loadOrganizations($m, $output);
-loadArtists($m, $output);
-loadEvents($m, $output);
-loadPlays($m, $output);
+// loadOrganizations($m, $output);
+// loadArtists($m, $output);
+// loadEvents($m, $output);
+// loadPlays($m, $output);
+
+function getJsonExport($path) {
+  // create a new cURL resource
+  $ch = curl_init();
+  
+  // $base_path = base_path();
+  $host = 'http://localhost:8888';
+  $base_path = '/Quilted/NewPlayMap/newplaymap_private/www/participate/';
+  
+  $absolute_path = $host . $base_path . $path;
+  
+  // set URL and other appropriate options
+  curl_setopt($ch, CURLOPT_URL, $absolute_path);
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  // grab URL and pass it to the browser
+  $json = curl_exec($ch);
+
+  // close cURL resource, and free up system resources
+  curl_close($ch);
+  
+  return $json;
+}
 
 function loadOrganizations($m, $output) {
 
   $organizations = $m->newplaymap->organizations;
   // find everything in the collection
   $organizations->drop();
-  $organization_path = '../data/push/orgs-all.json';
-  
-  /*
-  $organization_path = '../participate/data/orgs-all';
-  
-  // create a new cURL resource
-  $ch = curl_init();
-  
-  // set URL and other appropriate options
-  curl_setopt($ch, CURLOPT_URL, $organization_path);
-  curl_setopt($ch, CURLOPT_HEADER, 0);
+  // $organization_path = '../data/push/orgs-all.json';
 
-  // grab URL and pass it to the browser
-  curl_exec($ch);
+  $organization_path = 'data/orgs-all';
+  $file_data = getJsonExport($organization_path);
 
-  // close cURL resource, and free up system resources
-  curl_close($ch);
-
-  $file_data = $ch;
-  print_r($ch);
-  */
+  // $file_data = file_get_contents($organization_path);
   
-  $file_data = file_get_contents($organization_path);
   $collection = $organizations;
   /* var_dump($file_data); */
   
@@ -127,8 +136,7 @@ function loadOrganizations($m, $output) {
     $count++;
     // print_r($newObj);
   }
-  // print "</pre>";
-  $output .= "<p>Loaded " + $count + " Organizations</p>";
+  // print  "</pre>";
 }
 
 
@@ -143,9 +151,9 @@ function loadArtists($m) {
   // find everything in the collection
   $cursor =  $artists->find();
   $artists->drop();
-  $artists_path = '../data/push/artists-all.json';
-  
-  $file_data = file_get_contents($artists_path);
+  $artists_path = 'data/artists-all';
+
+  $file_data = getJsonExport($artists_path);
   $collection = $artists;
   /* var_dump($file_data); */
   
@@ -202,9 +210,9 @@ function loadEvents($m, $output) {
   
   $events = $m->newplaymap->events;
   $events->drop();
-  $events_path = '../data/push/events-all.json';
-  
-  $file_data = file_get_contents($events_path);
+  $events_path = 'data/events-all';
+
+  $file_data = getJsonExport($events_path);
   $collection = $events;
   
   $json = json_decode($file_data);
@@ -259,7 +267,7 @@ function loadEvents($m, $output) {
     $count++;
   }
   // print '</pre>';
-  $output .= "<p>Loaded " + $count + " Events</p>";
+  // $output .= "<p>Loaded " + $count + " Events</p>";
 }
 
 
@@ -268,9 +276,11 @@ function loadPlays($m, $output) {
   
   $plays = $m->newplaymap->plays;
   $plays->drop();
-  $plays_path = '../data/push/plays-all.json';
+  // $plays_path = '../data/push/plays-all.json';
+  $plays_path = 'data/plays-all';
   
-  $file_data = file_get_contents($plays_path);
+  $file_data = getJsonExport($plays_path);
+  
   $collection = $plays;
   
   $json = json_decode($file_data);
