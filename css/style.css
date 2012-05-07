@@ -119,11 +119,11 @@ dd {
 }
 
 .marker[type=artist] {
-  z-index: 60;
+  z-index: 110;
 }
 
 .marker[type=organization] {
-  z-index: 40;
+  z-index: 120;
 }
 
 #play-journey svg {
