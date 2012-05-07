@@ -28,9 +28,9 @@ if (!com) {
         this.div.style.width = this.dimensions.x + 'px';
         this.div.style.height = this.dimensions.y + 'px';
         
-        // this.div.style.backgroundColor = 'rgba(0,0,0,0.8)';
-        // this.div.style.color = '#FFFFFF';
-        // this.div.style.border = 'solid black 1px';
+        this.div.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        this.div.style.color = '#FFFFFF';
+        this.div.style.border = 'solid black 1px';
     
         var bubble = document.createElement('canvas');
         this.div.appendChild(bubble);
