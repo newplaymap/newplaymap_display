@@ -74,7 +74,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   if(vars.clearLayer === true) {
     $('div.marker[dataName=' +   + ']').remove();
   }
-  
+
   // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
 
   // Remove new layers
@@ -165,6 +165,11 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   }
 
   // Load result data for this set of features.
+
+  
+    $('div#results-container').empty();
+    $('div#extras-container').empty();
+    
   // If secondary filter is called (extras), display in extras template.
   if(vars.extra !== true) {
     newPlayMap.loadResults(features, vars);
