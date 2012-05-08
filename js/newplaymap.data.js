@@ -30,7 +30,6 @@ newPlayMap.loadAPICall = function(vars) {
 };
 
 newPlayMap.setData = function(data, statusText, jqxhr) {
-  console.log(data);
   if (data.count === undefined || data.count === 0) {
     console.log("no results");
     newPlayMap.filters.loadingCompleteFeedback();
@@ -132,7 +131,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       var img = marker.appendChild(document.createElement("img"));
       img.setAttribute("src", vars.icon);
 
-      // Determine placement of highlighting by geocoordinates.
+        // Determine placement of highlighting by geocoordinates.
 
         marker.setAttribute("grouping_field", vars.grouping_field);
         marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
@@ -163,15 +162,12 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       // Listen for mouseover & mouseout events.
       MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
       MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
-      MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
-      
+      MM.addEvent(marker, "click", newPlayMap.onMarkerClick);  
   }
 
   // Load result data for this set of features.
-
-  
-    $('div#results-container').empty();
-    $('div#extras-container').empty();
+  $('div#results-container').empty();
+  $('div#extras-container').empty();
     
   // If secondary filter is called (extras), display in extras template.
   if(vars.extra !== true) {

@@ -51,6 +51,7 @@ newPlayMap.filters.organizations = function(data) {
 
 // Load plays
 newPlayMap.filters.plays = function(data) {
+console.log(data);
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: 3,
@@ -64,8 +65,8 @@ newPlayMap.filters.plays = function(data) {
     template: "play-template",
     type: "play",
     dataName: "play",
-    path: "api/journey.php?play_title=" +  data.play_title,
-    dataPath: "api/journey.php?play_title=" +  data.play_title,
+    path: "api/journey.php?path=" +  data.path,
+    dataPath: "api/journey.php?path=" +  data.path,
     icon: "icons/play.png",
     grouping_field: "related_play_id",
     callback: newPlayMap.loadJourney
@@ -255,7 +256,6 @@ newPlayMap.filters.reset = function(exception) {
  * Function to give users feedback that filter results are loading
  */
 newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
-  console.log('loading feedback');
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
   } 
@@ -270,7 +270,6 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
  * Function to give users feedback that filter results are done loading
  */
 newPlayMap.filters.loadingCompleteFeedback = function() {
-  console.log('done loading feedback');
   $('#loading-feedback').hide()
 }
 

@@ -7,20 +7,18 @@ newPlayMap.getMarker = function(target) {
 };
 
 newPlayMap.onMarkerOver = function(e) {
-  // Remove old bubbles
-  // $('.bubble').fadeOut();
 
-  var marker = newPlayMap.getMarker(e.target);
-  if (marker) {
+  var marker = newPlayMap.getMarker(e.target.offsetParent);
+
+  if (marker !== null) {
     var grouping_field = marker.getAttribute("grouping_value");
     var marker_id = $(this).attr('marker_id');
     var layer = $(marker).attr("parent");
-    var latlon = $(marker).attr("latlon");
-      
-    if(grouping_field !== undefined){
+    var latlon = $(marker).attr("latlon");  
+    if(grouping_field !== undefined && marker_id !== undefined){
       if (grouping_field in locationsByID) {
         // spotlight.addLocations(locationsByID[marker_id]);
-        // spotlight.parent.className = "active";
+        //spotlight.parent.className = "active";
 
         $('div#panel-container div#panel .content').show();
  
@@ -30,7 +28,6 @@ newPlayMap.onMarkerOver = function(e) {
  
         // Update the bubble
         newPlayMap.updateBubble(marker, locationsByID[grouping_field]);
-
       } 
     }
   }
@@ -38,19 +35,13 @@ newPlayMap.onMarkerOver = function(e) {
 
 newPlayMap.onMarkerOut = function(e) {
 
-  var marker = newPlayMap.getMarker(e.target);
+  var marker = newPlayMap.getMarker(e.target.offsetParent);
   var layer = $(marker).attr("parent");
-  if (marker) {
+  if (marker !== null) {
     var type = marker.type;
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
-    
-    $('.bubble').fadeOut();
-
-
     $('div.marker').css({ 'opacity' : 1 }); 
-
-
   }
 
   return false;
@@ -72,6 +63,9 @@ newPlayMap.onMarkerClick = function(e) {
                     
         // Update the panel data.
         newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
+
+          // Update the bubble
+        newPlayMap.updateBubble(marker, locationsByID[grouping_field]);
           
       } 
     }
@@ -80,17 +74,9 @@ newPlayMap.onMarkerClick = function(e) {
   return false;
 };
 
-
-
-newPlayMap.loadArtist = function() {
-    console.log("load artist");
-};
-
-
 newPlayMap.loadArtistFilter = function() {
   var data = jsonData["artists_filter"]["features"][0]["properties"];
-console.log("artistfilter");
-console.log(data);
+
   if (data.artist_id !== undefined) {
     var relatedPathQuery = "artist_id=" +  data.artist_id;
 
@@ -149,9 +135,6 @@ newPlayMap.loadOrganizationFilter = function() {
     });
   }
 
-};
-
-newPlayMap.loadOrganization = function() {
 };
 
 newPlayMap.loadEvent = function() {

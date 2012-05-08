@@ -36,34 +36,38 @@ newPlayMap.updateBubble = function(marker, data) {
   var len = featuresByLocation[latlon].length;
 
   for (var i = 0; i < len; i++) {
-
     var result = {
       title: featuresByLocation[latlon][i]["title"],
       path:  featuresByLocation[latlon][i]["path"],
       id:  featuresByLocation[latlon][i]["id"]
     }
 
-    title += '<a href="' + result.path + '">' + result.title + '</a>';
+    title += '<a href="#' + result.path + '">' + result.title + '</a>';
   }
 
   var markerID = $(marker).attr("id");
 
-  $('#' + markerID).qtip({
+  $('a[title]').qtip({ style: { tip: false } });
+  
+  if(markerID !== undefined && title !== undefined) {
+    $('#' + markerID).qtip({
       content: title, // Use the tooltip attribute of the element for the content
-      hide:{ //moved hide to here,
-        delay: 5000 //give a small delay to allow the user to mouse over it.
+      hide: {
+        delay: 1000
       },
       style: {
         name: 'light',
       },
+      adjust: { x: 80, y: 0 },
       position: {
         corner: {
-          target: "topLeft"
+          tooltip: "rightMiddle",
+          target: "leftMiddle"
       },
       mouse: true
-      },
-  });
-      
+      }
+    });
+  }   
    
 
   $('a').address();
@@ -168,7 +172,6 @@ newPlayMap.loadResults = function(features, vars) {
   container = $('#panel-container .' + type);
 
   container.empty();
-  console.log(features.length);
 
   var len = features.length;
   for (var i = 0; i < len; i++) {
