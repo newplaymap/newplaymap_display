@@ -27,6 +27,10 @@ newPlayMap.filters.organizations = function(data) {
     pathQuery = "special_interests=" + data.special_interests;
   }
 
+  if (data.city_state !== undefined) {
+    pathQuery = "city_state=" + data.special_interests;
+  }
+
 
   newPlayMap.loadAPICall({
     data: data,
@@ -170,7 +174,7 @@ newPlayMap.filters.events = function(data) {
   });
 };
 
-newPlayMap.filters.cityEventsStateEvents = function(data) {
+newPlayMap.filters.cityStateEvents = function(data) {
   var pathQuery = "city_state=" +  data.end_date;
 
   newPlayMap.loadAPICall({
@@ -259,6 +263,7 @@ newPlayMap.filters.setupFilters = function() {
   newPlayMap.filters.getArtistsIndex();
   newPlayMap.filters.getPlaysIndex();
   newPlayMap.filters.getEventsCityStateIndex();
+  newPlayMap.filters.getOrganizationsCityStateIndex();
 
 };
 
@@ -477,15 +482,12 @@ newPlayMap.filters.setArtistsCityStateIndex = function(data) {
 }
 
 newPlayMap.filters.setOrganizationsCityStateIndex = function(data) {
-  // If we are returning just the names, then the raw data is fine
-  var cityStateNames = data;
-  
   $('#organizations-city-state-filter').autocomplete(
     {
-      source: cityStateNames.organizations,
+      source: data,
       appendTo: '#panel-container',
       select: function(event, ui) {
-        newPlayMap.filters.cityStateOrganizations({city_state: ui.item.value});
+        newPlayMap.filters.organizations({city_state: ui.item.value});
         newPlayMap.filters.reset(this);
       }
     }
@@ -498,7 +500,7 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
       source: data,
       appendTo: '#panel-container',
       select: function(event, ui) {
-        newPlayMap.filters.cityEventsStateEvents({city_state: ui.item.value});
+        newPlayMap.filters.cityStateEvents({city_state: ui.item.value});
         newPlayMap.filters.reset(this);
       }
     }
