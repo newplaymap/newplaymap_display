@@ -4,11 +4,10 @@ connectMongo(true);
 
 // print "I think you're looking for the npm_datasource module.";
 
-$output = "";
-loadOrganizations($m, $output);
-loadArtists($m, $output);
-loadEvents($m, $output);
-loadPlays($m, $output);
+// loadOrganizations($m);
+// loadArtists($m);
+// loadEvents($m);
+// loadPlays($m);
 
 function getJsonExport($path) {
   // create a new cURL resource
@@ -34,7 +33,7 @@ function getJsonExport($path) {
   return $json;
 }
 
-function loadOrganizations($m, $output) {
+function loadOrganizations($m) {
 
   $organizations = $m->newplaymap->organizations;
   // find everything in the collection
@@ -137,6 +136,7 @@ function loadOrganizations($m, $output) {
     // print_r($newObj);
   }
   // print  "</pre>";
+  return true;
 }
 
 
@@ -198,7 +198,6 @@ function loadArtists($m) {
     $count++;
   }
 
-  $output .= "<p>Loaded " + $count + " Artists</p>";
 }
 
 
@@ -206,7 +205,7 @@ function loadArtists($m) {
 
 
 
-function loadEvents($m, $output) {
+function loadEvents($m) {
   
   $events = $m->newplaymap->events;
   $events->drop();
@@ -267,12 +266,11 @@ function loadEvents($m, $output) {
     $count++;
   }
   // print '</pre>';
-  // $output .= "<p>Loaded " + $count + " Events</p>";
 }
 
 
 
-function loadPlays($m, $output) {
+function loadPlays($m) {
   
   $plays = $m->newplaymap->plays;
   $plays->drop();
@@ -326,7 +324,6 @@ function loadPlays($m, $output) {
     $count++;
   }
     // print '</pre>';
-  $output .= "<p>Loaded " + $count + " Plays</p>";
 }
 
 
@@ -373,5 +370,5 @@ $json .= ']}';
 */
 
 /* echo $json; */
-echo "done";
+// echo "done";
 ?>
