@@ -83,6 +83,10 @@ newPlayMap.filters.artists = function(data) {
     pathQuery = "artist_name=" +  data.artist_name;
   }
 
+  if (data.city_state !== undefined) {
+    pathQuery = "city_state=" +  data.artist_name;
+  }
+
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: 3,
@@ -264,6 +268,7 @@ newPlayMap.filters.setupFilters = function() {
   newPlayMap.filters.getPlaysIndex();
   newPlayMap.filters.getEventsCityStateIndex();
   newPlayMap.filters.getOrganizationsCityStateIndex();
+  newPlayMap.filters.getArtistsCityStateIndex();
 
 };
 
@@ -466,15 +471,12 @@ newPlayMap.filters.getEventsCityStateIndex = function() {
 
 
 newPlayMap.filters.setArtistsCityStateIndex = function(data) {
-  // If we are returning just the names, then the raw data is fine
-  var cityStateNames = data;
-  
   $('#artists-city-state-filter').autocomplete(
     {
-      source: cityStateNames.artists,
+      source: data,
       appendTo: '#panel-container',
       select: function(event, ui) {
-        newPlayMap.filters.cityStateArtists({city_state: ui.item.value});
+        newPlayMap.filters.artists({city_state: ui.item.value});
         newPlayMap.filters.reset(this);
       }
     }
