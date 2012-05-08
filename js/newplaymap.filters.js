@@ -338,7 +338,7 @@ newPlayMap.filters.getOrganizationsIndex = function() {
 }
 
 newPlayMap.filters.setOrganizationsIndex = function(data) {
-  jsonDataSearch.organizationsIndex = data;
+  jsonDataSearch.organizations = data;
 
   // If we are returning org names and ids, use something like this to process and get a list of names
   // var organizationNames = [];
@@ -375,7 +375,7 @@ newPlayMap.filters.getArtistsIndex = function() {
 
 
 newPlayMap.filters.setArtistsIndex = function(data) {
-  jsonDataSearch.artistsIndex = data;
+  jsonDataSearch.artists = data;
 
   // If we are returning org names and ids, use something like this to process and get a list of names
   // var organizationNames = [];
@@ -412,7 +412,7 @@ newPlayMap.filters.getPlaysIndex = function() {
 
 
 newPlayMap.filters.setPlaysIndex = function(data) {
-  jsonDataSearch.playsIndex = data;
+  jsonDataSearch.plays = data;
 
   // If we are returning org names and ids, use something like this to process and get a list of names
   // var organizationNames = [];
@@ -507,4 +507,36 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
       }
     }
   );
+}
+
+newPlayMap.filters.showAll = function(type) {
+  // if the modal already exists, open it
+  
+  // otherwise create it
+  
+  var template = "show-all-template";
+  // var container, containerEmpty;
+  // containerEmpty = $('#panel-container .content');
+  // containerEmpty.empty();
+  // container = $('<ul></ul>');
+  container = $('#show-all-modal');
+  // container.empty();
+  
+  var len = jsonDataSearch[type].length;
+  for (var i = 0; i < len; i++) {
+  
+    var item = {title: jsonDataSearch[type][i]};
+
+    $('#' + template).tmpl(item)
+      .appendTo('#show-all-modal .modal-body');
+  }
+
+  $(container).find('a').click(function() {
+    var playName = $(this).text();
+    newPlayMap.filters.plays({play_title: playName});
+    $('#show-all-modal').modal('hide');
+  });
+  
+  $(container).modal();
+  
 }

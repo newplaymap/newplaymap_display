@@ -118,6 +118,10 @@ newPlayMap.processFilters = function() {
   $('#explore-filters-button').click(function() {
     $('#filter-container').slideToggle();
   });
+  
+  $('#explore-plays .show-all-link').click(function() {
+    newPlayMap.filters.showAll('plays');
+  });
 
   // @TODO: If we are loading pins initially, then comment this out. 
   //        The load function will take care of removing feedback.
