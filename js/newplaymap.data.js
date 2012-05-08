@@ -174,13 +174,11 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
   // If secondary filter is called (extras), display in extras template.
 /*   $('div.results-container').empty(); */
-
+/*   $('div.extras-container').empty(); */
   if(vars.extra !== true ) {
-
     newPlayMap.loadResults(features, vars);  
   }
   else {
-
     newPlayMap.loadExtras(features, vars);
   }
 
