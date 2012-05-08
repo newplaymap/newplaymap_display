@@ -8,6 +8,7 @@ $collection = $m->newplaymap->events;
 $search_start = (!empty($_GET['start_date'])) ? new MongoDate(strtotime($_GET['start_date'])) : null;
 $search_end = (!empty($_GET['end_date'])) ? new MongoDate(strtotime($_GET['end_date'])) : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
+$city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
 if(!empty($_GET['event_type'])){
   $event_type = $_GET['event_type'];
@@ -16,28 +17,28 @@ if(!empty($_GET['event_type'])){
   $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
 
 }
+
 else if ($search_start !== null) {
 
-
-
-// Testing
-// $search_start = new MongoDate(strtotime('April 1, 2005'));
-// $search_end = new MongoDate(strtotime('May 1, 2005'));
-
-
-// $event_start < $search_end && $event_end > $search_start
-// $search_end > $event_start && $search_start < $event_end
-$cursor = $collection->find(
-  array(
-    "properties.event_date" => array('$lte' => $search_end),
-    "properties.event_to_date" => array('$gte' => $search_start), 
-  )
-)->limit($limit)->sort(array("properties.event_date" => 1));
+  // $event_start < $search_end && $event_end > $search_start
+  // $search_end > $event_start && $search_start < $event_end
+  $cursor = $collection->find(
+    array(
+      "properties.event_date" => array('$lte' => $search_end),
+      "properties.event_to_date" => array('$gte' => $search_start), 
+    )
+  )->limit($limit)->sort(array("properties.event_date" => 1));
 
 }
+
 else if($path !== null) {
   $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => 1));
 }
+
+else if ($city_state !== null) {
+  $cursor = $collection->find(array("properties.city_state" => $city_state))->sort(array("properties.state" => 1));
+}
+
 else {
   $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
 }
