@@ -170,6 +170,31 @@ newPlayMap.filters.events = function(data) {
   });
 };
 
+newPlayMap.filters.cityEventsStateEvents = function(data) {
+  var pathQuery = "city_state=" +  data.end_date;
+
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: 3,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-events-filter",
+    class: "inactive",
+    label: "play_title",
+    id: "event_id",
+    title: "play_title",
+    template: "play-template",
+    type: "play",
+    dataName: "events_filter",
+    path: "api/events_filter.php?" + pathQuery,
+    dataPath: "api/events_filter.php?" + pathQuery,
+    icon: "icons/event.png",
+    grouping_field: "event_id",
+    related_play_id: "related_play_id",
+    callback: newPlayMap.loadEventFilter
+  });
+};
+
 
 /*
  * Trigger api calls on the form elements
@@ -233,6 +258,7 @@ newPlayMap.filters.setupFilters = function() {
   newPlayMap.filters.getOrganizationsIndex();
   newPlayMap.filters.getArtistsIndex();
   newPlayMap.filters.getPlaysIndex();
+  newPlayMap.filters.getEventsCityStateIndex();
 
 };
 
@@ -408,7 +434,7 @@ newPlayMap.filters.getArtistsCityStateIndex = function() {
     url:  'api/city_state_index.php',
     dataType: 'json',
     data: {'type': 'artists'},
-    success: newPlayMap.filters.setCityStateIndex,
+    success: newPlayMap.filters.setArtistsCityStateIndex,
     error: newPlayMap.filters.error
   });
 }
@@ -418,7 +444,7 @@ newPlayMap.filters.getOrganizationsCityStateIndex = function() {
     url:  'api/city_state_index.php',
     dataType: 'json',
     data: {'type': 'organizations'},
-    success: newPlayMap.filters.setCityStateIndex,
+    success: newPlayMap.filters.setOrganizationsCityStateIndex,
     error: newPlayMap.filters.error
   });
 }
@@ -428,7 +454,7 @@ newPlayMap.filters.getEventsCityStateIndex = function() {
     url:  'api/city_state_index.php',
     dataType: 'json',
     data: {'type': 'events'},
-    success: newPlayMap.filters.setCityStateIndex,
+    success: newPlayMap.filters.setEventsCityStateIndex,
     error: newPlayMap.filters.error
   });
 }
@@ -467,15 +493,12 @@ newPlayMap.filters.setOrganizationsCityStateIndex = function(data) {
 }
 
 newPlayMap.filters.setEventsCityStateIndex = function(data) {
-  // If we are returning just the names, then the raw data is fine
-  var cityStateNames = data;
-
   $('#events-city-state-filter').autocomplete(
     {
-      source: cityStateNames.events,
+      source: data,
       appendTo: '#panel-container',
       select: function(event, ui) {
-        newPlayMap.filters.cityStateEvents({city_state: ui.item.value});
+        newPlayMap.filters.cityEventsStateEvents({city_state: ui.item.value});
         newPlayMap.filters.reset(this);
       }
     }
