@@ -223,7 +223,6 @@ newPlayMap.loadExtras = function(features) {
 };
 
 
-
 newPlayMap.resultsListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));
   $(container).find('ol.results li').hoverIntent({

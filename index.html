@@ -104,6 +104,8 @@
                       <div class="description">Enter the date in the format: April 29, 2013</div>
                       <a class="event-date-filter-complete" href="#">I'm done</a>
                       <input id="events-city-state-filter" type="text" placeholder="City, State" />
+                      <div class="filter-seperator"><span class="filter-seperator-text">or</span></div>
+                      <a href="all-plays" class="show-all-link">Just show me a big list of all plays</a>
                     </div> <!-- / Plays -->
                     
                     <!-- Organizations -->
@@ -353,6 +355,12 @@
                       {{/if}}
                   </li>
                 </script>
+                
+                <script id="show-all-template" type="text/x-jquery-tmpl">
+                  <li>
+                    <a href="#">${title}</a>
+                  </li>
+                </script>
 
                 <div class="extras-container">
                   <ol class="extras"></ol>
@@ -452,7 +460,7 @@
       </div>
     </div>
 
-    <!-- about modal content -->
+    <!-- feedback modal content -->
     <div id="feedback" class="modal hide fade">
       <div class="modal-header">
         <a class="close" data-dismiss="modal" >&times;</a>
@@ -463,6 +471,21 @@
 
         <div class="content">
         </div>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal" >Close</a>
+      </div>
+    </div>
+    
+    
+    <!-- show all modal content -->
+    <div id="show-all-modal" class="modal hide fade">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal" >&times;</a>
+        <h3>Feedback</h3>
+      </div>
+      <div class="modal-body">
 
       </div>
       <div class="modal-footer">
