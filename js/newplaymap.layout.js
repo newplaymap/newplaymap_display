@@ -31,6 +31,7 @@ newPlayMap.updatePanel = function(marker, data) {
 newPlayMap.updateBubble = function(marker, data) {
 
   var latlon = $(marker).attr('latlon');
+  console.log(latlon);
   var title = "";
   var dataName = $(marker).attr('dataName');
   var len = featuresByLocation[latlon].length;
@@ -47,13 +48,14 @@ newPlayMap.updateBubble = function(marker, data) {
 
   var markerID = $(marker).attr("id");
 
+
   $('a[title]').qtip({ style: { tip: false } });
   
-  if(markerID !== undefined && title !== undefined) {
+  if(markerID !== undefined && result.title !== undefined) {
     $('#' + markerID).qtip({
       content: title, // Use the tooltip attribute of the element for the content
       hide: {
-        delay: 1000
+        delay: 2000
       },
       style: {
         name: 'light',
@@ -64,11 +66,11 @@ newPlayMap.updateBubble = function(marker, data) {
           tooltip: "rightMiddle",
           target: "leftMiddle"
       },
-      mouse: true
+
+      fixed: false
       }
     });
-  }   
-   
+  }
 
   $('a').address();
 

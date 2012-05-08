@@ -166,14 +166,21 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   }
 
   // Load result data for this set of features.
-  $('div#results-container').empty();
-  $('div#extras-container').empty();
-    
+
+
+
+
+
+
   // If secondary filter is called (extras), display in extras template.
-  if(vars.extra !== true) {
-    newPlayMap.loadResults(features, vars);
+/*   $('div.results-container').empty(); */
+
+  if(vars.extra !== true ) {
+
+    newPlayMap.loadResults(features, vars);  
   }
   else {
+
     newPlayMap.loadExtras(features, vars);
   }
 

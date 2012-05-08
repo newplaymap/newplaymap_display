@@ -250,12 +250,15 @@ newPlayMap.filters.reset = function(exception) {
   if (exception !== '.event-date-field') {
     $('#filters .event-date-filter-complete').fadeOut();
   }
+
+  $('a').address();
 }
 
 /*
  * Function to give users feedback that filter results are loading
  */
 newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
+
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
   } 
@@ -284,7 +287,7 @@ newPlayMap.filters.error = function(data) {
 
 newPlayMap.filters.feedback = function(message, data) {
   // Can either use an alert or console. Made this to more easily demostrate things to folks without console
-  alert(message);
+/*   alert(message); */
   console.log(data);
 }
 
