@@ -198,6 +198,7 @@ ul.ui-autocomplete {
 }
 
 /*
+  Filters
  * Override jQuery UI styles
  */
 .ui-tabs {
@@ -220,6 +221,18 @@ ul.ui-autocomplete {
 
 #filters .ui-widget-content {
   border: none;
+}
+
+#filters .filter-seperator {
+  border-top: 1px solid #CCCCCC;
+}
+
+#filters .filter-seperator-text {
+  background-color: #FFFFFF;
+}
+
+#filters a.show-all-link {
+  color: #BF202E;
 }
 
 /* Results styles */
