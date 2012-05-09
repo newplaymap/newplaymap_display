@@ -156,7 +156,7 @@ newPlayMap.loadResults = function(features, vars) {
   containerEmpty.empty();
   container = $('#panel-container .' + type);
   container.empty();
-  console.log(features.length);
+  // console.log(features.length);
 
   var len = features.length;
   for (var i = 0; i < len; i++) {
