@@ -110,6 +110,10 @@ dd {
   margin: 5px 0 1em 0;
 }
 
+.marker {
+  cursor: pointer;
+}
+
 .marker[type=play] {
   z-index: 100;
 }
@@ -256,3 +260,12 @@ ul.ui-autocomplete {
   #panel-container .results-container .results-title h2 {
     display: inline;
   }
+
+/* Bubble styles */
+.bubble {
+  background-color: rgba(0,0,0,0.75);
+  color: #FFFFFF;
+  border-radius: 12px;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+}
