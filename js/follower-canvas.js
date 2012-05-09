@@ -12,11 +12,27 @@ if (!com) {
     {
         this.coord = map.locationCoordinate(location);
         
+        // Deal with content first so that we can figure out the height
+        var width = 130;
+        var tempContent = $('<div></div>').text(content).hide().width(150).appendTo('body');
+        var height = tempContent.height();
+        tempContent.remove();
+      
+        
         this.offset = new MM.Point(0, 0);
-        this.dimensions = new MM.Point(150, 150);
         this.margin = new MM.Point(10, 10);
+        this.dimensions = new MM.Point(width + this.margin.x + this.margin.x, height + this.margin.y + this.margin.y);
         this.offset = new MM.Point(-this.dimensions.x/2, -this.dimensions.y -10);
-    
+        
+        var contentDiv = document.createElement('div');
+        contentDiv.innerHTML = content;
+        contentDiv.style.position = 'absolute';
+        contentDiv.style.left = '0px';
+        contentDiv.style.top = '0px';
+        contentDiv.style.overflow = 'hidden';    
+        contentDiv.style.width = width + 'px'; 
+        contentDiv.style.padding = this.margin.y + 'px ' + this.margin.x + 'px ' + this.margin.y + 'px ' + this.margin.x + 'px';
+
         var follower = this;
         
         var callback = function(m, a) { return follower.draw(m); };
@@ -28,34 +44,25 @@ if (!com) {
         this.div.style.width = this.dimensions.x + 'px';
         this.div.style.height = this.dimensions.y + 'px';
         
-        this.div.style.backgroundColor = 'rgba(0,0,0,0.8)';
-        this.div.style.color = '#FFFFFF';
-        this.div.style.border = 'solid black 1px';
+        // this.div.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        // this.div.style.color = '#FFFFFF';
+        // this.div.style.border = 'solid black 1px';
     
-        var bubble = document.createElement('canvas');
-        this.div.appendChild(bubble);
-        if (typeof G_vmlCanvasManager !== 'undefined') bubble = G_vmlCanvasManager.initElement(bubble);
-        bubble.style.position = 'absolute';
-        bubble.style.left = '0px';
-        bubble.style.top = '0px';
-        bubble.width = this.dimensions.x;
-        bubble.height = this.dimensions.y;
-        var bubCtx = bubble.getContext('2d');
-        bubCtx.strokeStyle = 'black';
-        bubCtx.fillStyle = 'white';
-        this.drawBubblePath(bubCtx);
-        bubCtx.fill();    
-        bubCtx.stroke();    
+        // var bubble = document.createElement('canvas');
+        // this.div.appendChild(bubble);
+        // if (typeof G_vmlCanvasManager !== 'undefined') bubble = G_vmlCanvasManager.initElement(bubble);
+        // bubble.style.position = 'absolute';
+        // bubble.style.left = '0px';
+        // bubble.style.top = '0px';
+        // bubble.width = this.dimensions.x;
+        // bubble.height = this.dimensions.y;
+        // var bubCtx = bubble.getContext('2d');
+        // bubCtx.strokeStyle = 'black';
+        // bubCtx.fillStyle = 'white';
+        // this.drawBubblePath(bubCtx);
+        // bubCtx.fill();    
+        // bubCtx.stroke();    
         
-        var contentDiv = document.createElement('div');
-        contentDiv.style.position = 'absolute';
-        contentDiv.style.left = '0px';
-        contentDiv.style.top = '0px';
-        contentDiv.style.overflow = 'hidden';    
-        contentDiv.style.width = (this.dimensions.x - this.margin.x) + 'px';
-        contentDiv.style.height = (this.dimensions.y - this.margin.y - 25) + 'px';    
-        contentDiv.style.padding = this.margin.y + 'px ' + this.margin.x + 'px ' + this.margin.y + 'px ' + this.margin.x + 'px';
-        contentDiv.innerHTML = content;    
         this.div.appendChild(contentDiv);
         
         MM.addEvent(contentDiv, 'mousedown', function(e) {
