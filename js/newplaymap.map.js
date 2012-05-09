@@ -90,7 +90,7 @@ newPlayMap.onMarkerClick = function(e) {
 
 
 newPlayMap.loadArtist = function() {
-    console.log("load artist");
+    // console.log("load artist");
 };
 
 

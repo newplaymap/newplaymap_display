@@ -47,7 +47,7 @@ newPlayMap.toTitleCase = function (str) {
 
 // General function for handling AJAX errors.
 newPlayMap.loadDataError = function(data) {
-  console.log(data);
+  // console.log(data);
   return false;
 };
 

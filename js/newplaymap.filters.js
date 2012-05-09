@@ -291,7 +291,7 @@ newPlayMap.filters.reset = function(exception) {
  * Function to give users feedback that filter results are loading
  */
 newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
-  console.log('loading feedback');
+  // console.log('loading feedback');
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
   } 
@@ -306,7 +306,7 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
  * Function to give users feedback that filter results are done loading
  */
 newPlayMap.filters.loadingCompleteFeedback = function() {
-  console.log('done loading feedback');
+  // console.log('done loading feedback');
   $('#loading-feedback').hide()
 }
 
@@ -314,7 +314,7 @@ newPlayMap.filters.loadingCompleteFeedback = function() {
  * Utility function shared by multiple ajax calls
  */
 newPlayMap.filters.error = function(data) {
-  console.log('error');
+  // console.log('error');
 
   // @TODO: Maybe remove / gray out the search filter if the index is not available?
 }
@@ -322,7 +322,7 @@ newPlayMap.filters.error = function(data) {
 newPlayMap.filters.feedback = function(message, data) {
   // Can either use an alert or console. Made this to more easily demostrate things to folks without console
   alert(message);
-  console.log(data);
+  // console.log(data);
 }
 
 /*
