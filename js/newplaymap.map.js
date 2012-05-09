@@ -8,7 +8,7 @@ newPlayMap.getMarker = function(target) {
 
 newPlayMap.onMarkerOver = function(e) {
   // Remove old bubbles
-  // $('.bubble').fadeOut();
+  $('.bubble').fadeOut().remove();
 
   var marker = newPlayMap.getMarker(e.target);
   if (marker) {
@@ -52,7 +52,7 @@ newPlayMap.onMarkerOut = function(e) {
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
     
-    $('.bubble').fadeOut();
+    $('.bubble').fadeOut().remove();
 
 
     $('div.marker').css({ 'opacity' : 1 }); 
