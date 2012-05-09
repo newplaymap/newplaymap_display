@@ -391,7 +391,8 @@ newPlayMap.filters.setArtistsIndex = function(data) {
       source: artistsNames,
       appendTo: '#panel-container',
       select: function(event, ui) {
-        newPlayMap.filters.artists({artist_name: ui.item.value});
+        // newPlayMap.filters.artists({artist_name: ui.item.value});
+        newPlayMap.filters.events({artist_name: ui.item.value});
         newPlayMap.filters.reset(this);
       }
     }
