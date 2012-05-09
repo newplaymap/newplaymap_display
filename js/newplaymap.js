@@ -83,7 +83,29 @@ newPlayMap.initMapSimple = function() {
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
 
-  map.setCenterZoom(new MM.Location(50.811530, -90.2666097), 3);
+  // Find appropriate zoom level
+  newPlayMap.defaultZoom = 3;
+
+  var defaultZoom = newPlayMap.defaultZoom,
+      defaultLat = 50.811530,
+      defaultLon = -90.2666097;
+  
+  if (window.outerWidth > 1900) {
+    defaultLat = 40.811530;
+    defaultZoom = 5;
+  }
+  else if (window.outerWidth > 1000) {
+    defaultLat = 40.811530;
+    defaultLon = -80.2666097;
+    defaultZoom = 4;
+  }
+  else {
+    defaultLat = 40.811530;
+    defaultLon = -65.2666097;
+    defaultZoom = 3;
+  }
+  
+  map.setCenterZoom(new MM.Location(defaultLat, defaultLon), defaultZoom);
 
   // Load interactive behavior.
   spotlight = new SpotlightLayer();

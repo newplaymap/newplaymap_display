@@ -34,7 +34,7 @@ newPlayMap.filters.organizations = function(data) {
 
   newPlayMap.loadAPICall({
     data: data,
-    zoomLevel: 3,
+    zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
     template: "organization",
@@ -57,7 +57,7 @@ newPlayMap.filters.organizations = function(data) {
 newPlayMap.filters.plays = function(data) {
   newPlayMap.loadAPICall({
     data: data,
-    zoomLevel: 3,
+    zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
     layer: "layer-plays-filter",
@@ -89,7 +89,7 @@ newPlayMap.filters.artists = function(data) {
 
   newPlayMap.loadAPICall({
     data: data,
-    zoomLevel: 3,
+    zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
     layer: "layer-artists-filter",
@@ -119,7 +119,7 @@ newPlayMap.filters.ensemble = function(data) {
 
     newPlayMap.loadAPICall({
       data: data,
-      zoomLevel: 3,
+      zoomLevel: newPlayMap.defaultZoom,
       clearLayer: true,
       clearLayers: true,
       layer: "layer-ensemble-filter",
@@ -158,7 +158,7 @@ newPlayMap.filters.events = function(data) {
 
   newPlayMap.loadAPICall({
     data: data,
-    zoomLevel: 3,
+    zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
     layer: "layer-events-filter",
@@ -183,7 +183,7 @@ newPlayMap.filters.cityStateEvents = function(data) {
 
   newPlayMap.loadAPICall({
     data: data,
-    zoomLevel: 3,
+    zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
     layer: "layer-events-filter",
