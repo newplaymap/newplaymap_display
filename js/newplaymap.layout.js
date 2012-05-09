@@ -178,21 +178,42 @@ newPlayMap.loadResults = function(features, vars) {
       newPlayMap.resultsListProcess($('#panel-container .results-container'));
   }
   
-  // Rewrite Results header
-  // var resultsCount = features.length;
-  // var resultsPlural = (features.length > 1 || features.length == 0) ? 's' : '';
-  // var resultsType = features[0]["properties"]["content_type"];
+  // Rewrite results header
   var resultsType = features[0]["properties"]["content_type"];
   var resultsCount = jsonData[vars.dataName]["features"].length;
   
   var totalCount = jsonData[vars.dataName].count;
+  newPlayMap.setResultsTitle(resultsType, resultsCount, totalCount);
+};
+
+/*
+ * Rewrite results header
+ */
+newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
+  var resultsType = resultsType;
+  var resultsCount = resultsCount;
+  var totalCount = totalCount || null;
+
   var totalCountText = (totalCount > resultsCount) ? ' (of ' + totalCount + ')' : '';
-  
-  var resultsPlural = (resultsCount > 1 || resultsCount == 0) ? 's' : '';
+  var resultsPlural = '';
+  if (resultsCount > 1 || resultsCount == 0) {
+    // Should be plural
+    // Check last letters for plural formatting: http://www.meredith.edu/grammar/plural.htm#and%20x
+    var lastLetter = resultsType.substring(resultsType.length, resultsType.length-1);
+    var lastTwoLetters = resultsType.substring(resultsType.length, resultsType.length-2);
+    
+    if (lastLetter === 's' || lastLetter === 'z' || lastLetter === 'x' || lastTwoLetters === 'ch' || lastTwoLetters === 'sh') {
+      resultsPlural = "es";
+    }
+    else {
+      resultsPlural = 's';
+    }
+  }
 
   $('#panel-container .results-container .results-title h2').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's').text(resultsCount + ' ' + resultsType + resultsPlural);
   $('#panel-container .results-container .results-title .results-total-count').text(totalCountText);
-};
+}
+
 
 // Load data into extra container. (ex. points at same geo coordinate.)
 newPlayMap.loadExtras = function(features) {

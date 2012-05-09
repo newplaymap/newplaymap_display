@@ -511,33 +511,37 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
 }
 
 newPlayMap.filters.showAll = function(type) {
-  // if the modal already exists, open it
-  
-  // otherwise create it
-  
+  var pluralType = type;
+  var displayType = newPlayMap.toTitleCase(pluralType.substring(0, pluralType.length-1));
   var template = "show-all-template";
-  // var container, containerEmpty;
-  // containerEmpty = $('#panel-container .content');
-  // containerEmpty.empty();
-  // container = $('<ul></ul>');
-  container = $('#show-all-modal');
-  // container.empty();
+  var container, containerEmpty;
+  containerEmpty = $('#panel-container .content, #panel-container .results');
+  containerEmpty.empty();
+  container = $('#panel-container .results');
+  container.empty();
   
   var len = jsonDataSearch[type].length;
+
+  // Set loading feedback
+  newPlayMap.filters.loadingFeedback();
+  
+  // Set title
+  newPlayMap.setResultsTitle(displayType, len);
+  
   for (var i = 0; i < len; i++) {
   
     var item = {title: jsonDataSearch[type][i]};
 
     $('#' + template).tmpl(item)
-      .appendTo('#show-all-modal .modal-body');
+      .appendTo(container);
   }
+  
+  // Remove loading feedback
+  newPlayMap.filters.loadingCompleteFeedback();
 
   $(container).find('a').click(function() {
     var playName = $(this).text();
     newPlayMap.filters.plays({play_title: playName});
-    $('#show-all-modal').modal('hide');
-  });
-  
-  $(container).modal();
+  })
   
 }
