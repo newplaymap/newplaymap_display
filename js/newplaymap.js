@@ -154,11 +154,6 @@ newPlayMap.processFilters = function() {
 };
 
 newPlayMap.loadData = function() {
-  // Start with what's on today
-  var today = new Date();
-  var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
-  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
-  
     // newPlayMap.loadJSONFile({
     //   path: 'api/organizations.php',
     //   type: "organization",
@@ -229,13 +224,19 @@ newPlayMap.loadPageRouter = function() {
             break;
         }
       }
+      else {
+        // Default to what's on today
+        var today = new Date();
+        var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
+        newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
+      }
     }
     
     return false;
   });
 
   // bind address to all a links (@TODO may also need divs)
-  // $('a').address();
+  $('a').address();
 
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
