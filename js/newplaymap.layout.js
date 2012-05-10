@@ -24,6 +24,7 @@ newPlayMap.updatePanel = function(marker, data) {
   newPlayMap.resultsListProcess(container);
   
   // Make all links listen for address changes.
+  newPlayMap.formatLinksBubble($('#share-links'), 'share-links');
   $('a').address();
 };
 

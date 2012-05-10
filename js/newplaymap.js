@@ -28,6 +28,9 @@ newPlayMap.loadMap = function(callback){
 
 newPlayMap.alterHomepage = function() {
 /*   $('div#panel-container div#panel div.content').hide(); */
+  
+  newPlayMap.formatLinksBubble($('#block-add_button-0'), 'add_button');
+
   return false;
 };
 
@@ -232,7 +235,7 @@ newPlayMap.loadPageRouter = function() {
   });
 
   // bind address to all a links (@TODO may also need divs)
-  $('a').address();
+  // $('a').address();
 
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
@@ -294,7 +297,8 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
        background: '#FFFFFF',
        border: {
          width: 7,
-         color: '#666666'
+         color: '#FFFFFF',
+         radius: 12
        },
        tip: {
          corner: 'topMiddle',

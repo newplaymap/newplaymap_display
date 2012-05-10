@@ -53,13 +53,11 @@
              
               <ul class="nav">
                 <li>
-                  <a id="add_button" style="cursor: pointer; " class=""><span>Add to the Map</span></a>
-                
                   <div id="block-add_button-0" class="block block-add_button region-odd odd region-count-1 count-1 with-block-editing">
 
                     <div class="content">
                       <div class="item-list">
-                        <h3></h3>
+                        <h3>Add to the Map</h3>
                         <ul id="add-button-list">
                           <li class="first"><a id="add-button-org" class="add-button-option" href="/node/add/organization">Add Organization</a></li>
                 
@@ -184,7 +182,17 @@
                   
                     <ul id="panel-content-links">
                       <li id="panel-add-event-link"><a href="participate/node/add/event/${related_play_id}">Add Event</a></li>
-                      <li id="panel-share-link"><a href="#">Share</a></li>
+                      <li id="panel-share-link">
+                        <div id="share-links">
+                          <h3>Share</h3>
+                          <ul class='content'>
+                            <li><a href="#" id="share-facebook">Facebook</a></li>
+                            <li><a href="#" id="share-twitter">Twitter</a></li>
+                            <li><a href="#" id="share-link">Get Link</a></li>
+                            <li><a href="#" id="share-badge">Get Badge Code</a></li>
+                          </ul>
+                        </div> 
+                      </li>
                       <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit">Edit</a></li>
                     </ul>
                     
@@ -266,7 +274,17 @@
                   
                   <ul id="panel-content-links">
                     <li id="panel-add-event-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
-                    <li id="panel-share-link"><a href="#">Share</a></li>
+                    <li id="panel-share-link">
+                      <div id="share-links">
+                        <h3>Share</h3>
+                        <ul class='content'>
+                          <li><a href="#" id="share-facebook">Facebook</a></li>
+                          <li><a href="#" id="share-twitter">Twitter</a></li>
+                          <li><a href="#" id="share-link">Get Link</a></li>
+                          <li><a href="#" id="share-badge">Get Badge Code</a></li>
+                        </ul>
+                      </div> 
+                    </li>
                     <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit">Edit</a></li>
                   </ul>
                   
