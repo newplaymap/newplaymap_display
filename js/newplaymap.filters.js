@@ -220,15 +220,13 @@ newPlayMap.filters.setupFilters = function() {
     return false;
   });
   
-  // $('.event-date-field').hide();
-  // $('.event-to-date-field').hide();
-  // var minDate = moment("September 9, 2000");
-  // var maxDate = moment("May 6, 2012")
-  // var rangeMilliseconds = maxDate.diff(minDate);
-  // var rangeDays = moment.duration(rangeMilliseconds).asDays();
-  // 
-  // console.log(rangeMilliseconds);
-  // console.log(rangeDays);
+  $('.event-date-field').hide();
+  $('.event-to-date-field').hide();
+
+  var minDate = moment("September 9, 2000");
+  var maxDate = moment("May 6, 2012")
+  var rangeMilliseconds = maxDate.diff(minDate);
+  var rangeDays = moment.duration(rangeMilliseconds).asDays();
 
   $('<div></div>')
       .attr('id', '#event-date-slider')
@@ -236,11 +234,20 @@ newPlayMap.filters.setupFilters = function() {
       .slider({
         range: true,
         min: 0,
-        max: 500,
+        max: rangeDays,
+        values: [2000, 3000],
         slide: function(event, ui) {
-          $('#event-label').html('Event date: ' + ui.values[0] + ' - ' + ui.values[1]);
+          var formattedMinDate = moment(minDate).add('days', ui.values[0]).format('MMMM D, YYYY'),
+              formattedMaxDate = moment(minDate).add('days', ui.values[1]).format('MMMM D, YYYY');
+          $('#event-label').html('Event date: ' + formattedMinDate + ' - ' + formattedMaxDate);
+        },
+        stop: function(event, ui) {
+          var formattedMinDate = moment(minDate).add('days', ui.values[0]).format('MMMM D, YYYY'),
+              formattedMaxDate = moment(minDate).add('days', ui.values[1]).format('MMMM D, YYYY');
+          newPlayMap.filters.events({start_date: formattedMinDate, end_date: formattedMaxDate });
         }
       });
+  
 
   // $('.event-date-field').focus(function() {
   //   $('#filters .event-date-filter-complete').fadeIn('slow');
