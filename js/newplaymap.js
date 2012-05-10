@@ -236,7 +236,8 @@ newPlayMap.loadPageRouter = function() {
   });
 
   // bind address to all a links (@TODO may also need divs)
-  $('a').address();
+  // @TODO: Turn this back on once it can be selectively set to not all <a> tags
+  // $('a').address();
 
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
