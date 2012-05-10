@@ -50,26 +50,30 @@
               <li><a href="participate/feedback">Feedback</a></li>
             </ul>
             <p class="nav-collapse">
-             <ul class="nav">
-               <li>
-                <a id="add_button" style="cursor: pointer; " class=""><span>Add to the Map</span></a>
+             
+              <ul class="nav">
+                <li>
+                  <a id="add_button" style="cursor: pointer; " class=""><span>Add to the Map</span></a>
                 
-                <div id="block-add_button-0" class="block block-add_button region-odd odd region-count-1 count-1 links-processed" style="display: none; ">
-                  <div class="content">
-                    <div class="item-list">
-                      <ul id="add-button-list">
-                        <li class="first"><a href="/node/add/organization" class="add-button-option" id="add-button-org">Add Organization</a></li>
-                        <li><a href="/node/add/event" class="add-button-option" id="add-button-event">Add Play Event</a></li>
-                        <li class="last"><a href="/node/add/artist" class="add-button-option" id="add-button-artist">Add Artist Profile</a></li>
-                      </ul>
+                  <div id="block-add_button-0" class="block block-add_button region-odd odd region-count-1 count-1 with-block-editing">
+
+                    <div class="content">
+                      <div class="item-list">
+                        <h3></h3>
+                        <ul id="add-button-list">
+                          <li class="first"><a id="add-button-org" class="add-button-option" href="/node/add/organization">Add Organization</a></li>
+                
+                          <li><a id="add-button-event" class="add-button-option" href="/node/add/event">Add Play Event</a></li>
+                          <li class="last"><a id="add-button-artist" class="add-button-option" href="/node/add/artist">Add Artist Profile</a></li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <a id="explore-filters-button" href="#explore-plays"><span>Explore</span></a>
-              </li>
-            </ul>
+                </li>
+                <li>
+                  <a id="explore-filters-button" href="#explore-plays"><span>Explore</span></a>
+                </li>
+              </ul>
             </p>
             <p class="navbar-text pull-right"><span class="welcome">Welcome!</span> <span class="login"><a href="/user">Sign in</a> or <a href="/user/register">Create Account</a></p>
           </div><!--/.nav-collapse -->
@@ -414,6 +418,7 @@
     <script src="js/jquery.hoverintent.minified.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script> -->
     <script src="js/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
+    <script src="js/jquery.qtip-1.0.0-rc3.min.js"></script>
 
 
     <script type="text/javascript" src="js/modestmaps.min.js"></script>
