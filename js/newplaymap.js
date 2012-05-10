@@ -239,3 +239,76 @@ newPlayMap.loadPageRouter = function() {
   // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
   $.address.update();
 };
+
+
+/**
+ * Function to format qtip links
+ * 
+ * element is a jquery object
+ */
+newPlayMap.formatLinksBubble = function(element, newId, width) {
+  if (element.hasClass('links-processed')) {
+    // return;
+  } else {
+    // Figure out title
+    var linkText = 'Link';
+    if (element.children('h2').length > 0) {
+      linkText = element.children('h2').remove().html();
+    } else if (element.find('h3').length > 0) {
+      linkText = element.find('h3').remove().html();
+    }
+    // Use width if it's there
+    var width = width || 215;
+    // Build button
+    $('<a></a>')
+      .attr({
+        'id': newId
+      })
+      .css('cursor', 'pointer')
+      .html(linkText)
+      .insertBefore(element);
+
+    // Add links as tool tip
+    $('#' + newId).qtip({
+      content: element.find('.content'),
+      // content: element.find('.item-list ul'),
+      position: {
+        adjust: {
+          screen: true
+      },
+      corner: {
+       target: 'bottomMiddle',
+       tooltip: 'topMiddle'
+      }
+      },
+      show: 'click',
+      hide: { 
+       when: 'unfocus',
+       fixed: false 
+      },
+
+      style: {
+       width: width,
+       'color': '#000000',
+       'padding': '0',
+       background: '#FFFFFF',
+       border: {
+         width: 7,
+         color: '#666666'
+       },
+       tip: {
+         corner: 'topMiddle',
+         size: {
+           x: 40,
+           y: 15
+         }
+       }
+      }
+
+    });
+    
+    element.addClass('links-processed');
+    element.hide();
+    
+  }
+}
