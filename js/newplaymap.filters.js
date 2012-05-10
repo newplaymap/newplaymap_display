@@ -219,18 +219,40 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.reset(this);
     return false;
   });
+  
+  // $('.event-date-field').hide();
+  // $('.event-to-date-field').hide();
+  // var minDate = moment("September 9, 2000");
+  // var maxDate = moment("May 6, 2012")
+  // var rangeMilliseconds = maxDate.diff(minDate);
+  // var rangeDays = moment.duration(rangeMilliseconds).asDays();
+  // 
+  // console.log(rangeMilliseconds);
+  // console.log(rangeDays);
 
-  $('.event-date-field').focus(function() {
-    $('#filters .event-date-filter-complete').fadeIn('slow');
-    newPlayMap.filters.reset('.event-date-field');
-  });
+  $('<div></div>')
+      .attr('id', '#event-date-slider')
+      .insertBefore('#event-date-filter')
+      .slider({
+        range: true,
+        min: 0,
+        max: 500,
+        slide: function(event, ui) {
+          $('#event-label').html('Event date: ' + ui.values[0] + ' - ' + ui.values[1]);
+        }
+      });
 
-  $('#filters .event-date-filter-complete').hide().click(function(event) {
-    event.preventDefault();
-
-    newPlayMap.filters.events({start_date: $('#event-date-filter').val(), end_date: $('#event-to-date-filter').val() });
-    return false;
-  });
+  // $('.event-date-field').focus(function() {
+  //   $('#filters .event-date-filter-complete').fadeIn('slow');
+  //   newPlayMap.filters.reset('.event-date-field');
+  // });
+  // 
+  // $('#filters .event-date-filter-complete').hide().click(function(event) {
+  //   event.preventDefault();
+  // 
+  //   newPlayMap.filters.events({start_date: $('#event-date-filter').val(), end_date: $('#event-to-date-filter').val() });
+  //   return false;
+  // });
 
   // $('#organizations-filter').change(function() {
   //   newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
