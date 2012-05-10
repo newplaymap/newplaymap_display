@@ -227,6 +227,16 @@ ul.ui-autocomplete {
   border: none;
 }
 
+  #filters #explore-plays .ui-widget-content {
+    border: 2px solid #EEEEEE;
+  }
+  
+  #filters #explore-plays .ui-corner-all {
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+  }
+
 #filters .filter-seperator {
   border-top: 1px solid #CCCCCC;
 }

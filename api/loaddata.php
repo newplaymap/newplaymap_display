@@ -4,10 +4,10 @@ connectMongo(true);
 
 // print "I think you're looking for the npm_datasource module.";
 
-// loadOrganizations($m);
-// loadArtists($m);
-// loadEvents($m);
-// loadPlays($m);
+loadOrganizations($m);
+loadArtists($m);
+loadEvents($m);
+loadPlays($m);
 
 function getJsonExport($path) {
   // create a new cURL resource

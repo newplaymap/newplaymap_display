@@ -96,13 +96,12 @@
                       <select id="event-type-filter" class="form-select" name="event_type"><option selected="selected" value="All">- Select -</option><option value="First Production">First Production</option><option value="Other">Other</option><option value="Presented Performance">Presented Performance</option><option value="Production">Production</option><option value="Reading">Reading</option><option value="Residency">Residency</option><option value="Rolling Premiere">Rolling Premiere</option><option value="Workshop">Workshop</option></select>
                     
                       <!-- Events -->
-                      <label for="">Event date:</label>
-                      <label for="event-date-filter">From date:</label>
+                      <label id="event-label" for="">Event date:</label>
+                      <!-- <label for="event-date-filter">From date:</label> -->
                       <input id="event-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
-                      <label for="event-to-date-filter">To date:</label>
-                      <input id="event-to-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
-                      <div class="description">Enter the date in the format: April 29, 2013</div>
-                      <a class="event-date-filter-complete" href="#">I'm done</a>
+                      <!-- <label for="event-to-date-filter">To date:</label> -->
+                      <!-- <input id="event-to-date-filter" class="event-date-field" type="text" size="60" maxlength="128" /> -->
+                      <!-- <div class="description">Enter the date in the format: April 29, 2013</div> -->
                       <input id="events-city-state-filter" type="text" placeholder="City, State" />
                       <div class="filter-seperator"><span class="filter-seperator-text">or</span></div>
                       <a href="all-plays" class="show-all-link">Just show me a big list of all plays</a>
@@ -422,6 +421,8 @@
     <script type="text/javascript" src="js/follower-canvas.js"></script>
     <script type="text/javascript" src="js/raphael.js"></script> 
     <script type="text/javascript" src="js/polygonmarker-raphael.js"></script>
+    
+    <script type="text/javascript" src="js/moment.js"></script>
 
 
     <script src='js/easey.js' type='text/javascript'></script>
