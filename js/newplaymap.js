@@ -132,21 +132,29 @@ newPlayMap.loadMapData = function() {
   }
 };
 
-newPlayMap.processFilters = function() {
-  newPlayMap.filters.setupFilters();
-
-  // $('#filter-container h4').css('cursor', 'pointer').click(function() {
-  //   $(this).siblings('form').slideToggle();
-  // });
-  $('#filters form').tabs();
-  
+newPlayMap.processFilters = function() { 
   $('#explore-filters-button').click(function() {
+    // newPlayMap.filters.loadingFeedback();
+    
+    newPlayMap.filters.setupFilters();
+
+    $('#filters form').tabs();
+    
+    $('#explore-plays .show-all-link').click(function() {
+      newPlayMap.filters.showAll('plays');
+    });  
+
+    $('#explore-organizations .show-all-link').click(function() {
+      newPlayMap.filters.showAll('organizations');
+    });  
+
+    $('#explore-artists .show-all-link').click(function() {
+      newPlayMap.filters.showAll('artists');
+    });
+    
     $('#filter-container').slideToggle();
   });
-  
-  $('#explore-plays .show-all-link').click(function() {
-    newPlayMap.filters.showAll('plays');
-  });
+
 
   // @TODO: If we are loading pins initially, then comment this out. 
   //        The load function will take care of removing feedback.
@@ -237,7 +245,7 @@ newPlayMap.loadPageRouter = function() {
 
   // bind address to all a links (@TODO may also need divs)
   // @TODO: Turn this back on once it can be selectively set to not all <a> tags
-  // $('a').address();
+  $('a').address();
 
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
@@ -267,7 +275,8 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
     // Build button
     $('<a></a>')
       .attr({
-        'id': newId
+        'id': newId,
+        'href': '#'
       })
       .css('cursor', 'pointer')
       .html(linkText)
