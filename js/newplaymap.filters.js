@@ -51,6 +51,9 @@ newPlayMap.filters.organizations = function(data) {
     icon: "icons/organization.png",
     callback: newPlayMap.loadOrganizationFilter
   });
+  
+  // @TODO: Trigger address change if appropriate (searching for org name)
+  //        This is also the time to load the profile
 }
 
 // Load plays
@@ -74,6 +77,9 @@ newPlayMap.filters.plays = function(data) {
     grouping_field: "related_play_id",
     callback: newPlayMap.loadJourney
   });
+  
+  // @TODO: Trigger address change if appropriate (searching for play name)
+  //        This is also the time to load the profile
 };
 
 
@@ -106,6 +112,9 @@ newPlayMap.filters.artists = function(data) {
     grouping_field: "artist_id",
     callback: newPlayMap.loadArtistFilter
   });
+  
+  // @TODO: Trigger address change if appropriate (searching for artist name). 
+  //        This is also the time to load the profile
 }
 
 
@@ -569,8 +578,20 @@ newPlayMap.filters.showAll = function(type) {
   newPlayMap.filters.loadingCompleteFeedback();
 
   $(container).find('a').click(function() {
-    var playName = $(this).text();
-    newPlayMap.filters.plays({play_title: playName});
+    var title = $(this).text();
+    switch(type) {
+      case 'plays':
+        newPlayMap.filters.plays({play_title: title});
+      break;
+      
+      case 'organizations':
+        newPlayMap.filters.organizations({organization_name: title});
+      break;
+      
+      case 'artists':
+        newPlayMap.filters.artists({artist_name: title});
+      break;
+    }
   })
   
 }
