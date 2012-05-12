@@ -184,9 +184,6 @@ newPlayMap.loadResults = function(features, vars) {
         title: feature["properties"][vars.title],
         path:  feature["properties"]["path"],
         id:  feature["properties"][vars.id],
-        related_theater:  feature["properties"]["related_theater"],
-        related_theater_path:  feature["properties"]["related_theater_path"],
-        related_theater_id:  feature["properties"]["related_theater_id"],
         city: feature["properties"]["city"],
         state: feature["properties"]["state"]
       };
