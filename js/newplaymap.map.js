@@ -161,6 +161,7 @@ newPlayMap.loadEventFilter = function() {
       zoomLevel: 3,
       clearLayer: true,
       clearLayers: true,
+      loadProfile: true,
       template: "layer-play",
       layer: "play",
       id: "event_id",

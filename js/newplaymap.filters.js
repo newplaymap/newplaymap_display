@@ -37,6 +37,7 @@ newPlayMap.filters.organizations = function(data) {
     zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
+    loadProfile: true,
     template: "organization",
     layer: "layer-organization-filter",
     class: "inactive",
