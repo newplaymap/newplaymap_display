@@ -10,12 +10,14 @@ var jsonDataSearch = {};
  */
 newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
+  var loadProfile = false;
 
   if (data.organization_name !== undefined) {
     pathQuery = "organization_name=" +  data.organization_name;
+    var loadProfile = true;
   }
 
-  if (data.organization_name !== undefined) {
+  if (data.organization_type !== undefined) {
     pathQuery = "organization_type=" +  data.organization_type;
   }
 
@@ -30,6 +32,10 @@ newPlayMap.filters.organizations = function(data) {
   if (data.city_state !== undefined) {
     pathQuery = "city_state=" + data.special_interests;
   }
+  
+  if (data.path !== undefined) {
+    var loadProfile = true;
+  }
 
 
   newPlayMap.loadAPICall({
@@ -37,7 +43,7 @@ newPlayMap.filters.organizations = function(data) {
     zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
-    loadProfile: true,
+    loadProfile: loadProfile,
     template: "organization",
     layer: "layer-organization-filter",
     class: "inactive",

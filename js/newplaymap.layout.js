@@ -27,6 +27,9 @@ newPlayMap.updatePanel = function(marker, data) {
   newPlayMap.formatLinksBubble($('#share-links'), 'share-links');
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
+  
+  // If the panel has been updated, assume that the filter value is no longer relevant and clear it
+  newPlayMap.filters.reset();
 };
 
 
