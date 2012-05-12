@@ -254,47 +254,6 @@ newPlayMap.loadPageRouter = function() {
   $.address.update();
 };
 
-/*
- * Process links so we can selectively use the address()
- */
-newPlayMap.processAddressLinks = function(className, target) {
-  if (target == undefined) {
-    var target = 'a';
-  }
-
-  $(target).each(function(){
-    var thisTarget = $(this);
-    var path = thisTarget.attr('href');
-
-    if (path !== undefined) {
-      if (thisTarget.hasClass(className)) {
-      }
-      else if (path.substr(0,11) === 'participate') {
-      }
-      else if (thisTarget.attr('id') == 'share-facebook') {
-      }
-      else if (thisTarget.hasClass('twitter-share-button')) {
-      }
-      // else if(path.substr(0,5) === '/node') {
-      // }
-      // else if(path.substr(0,4) === 'node') {
-      // }
-      // else if(path.substr(-4,4) === 'feed') {
-      // }
-      // else if(path.substr(0,7) === '/admin/') {
-      // }
-      // else if((path.substr(0,4) === 'http') || (path.substr(0,5) === '/http')) {
-      // }
-      // else if(path.length == 1) {
-      // }
-      else {
-        $(this).addClass(className);
-      }
-    }
-  });
-  return true;
-};
-
 
 /**
  * Function to format qtip links
