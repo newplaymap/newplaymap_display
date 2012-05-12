@@ -10,12 +10,14 @@ loadEvents($m);
 loadPlays($m);
 
 function getJsonExport($path) {
+  $server = $_SERVER['HTTP_HOST'];
+  $drupal_base_path = str_replace('api/loaddata.php', 'participate/', $_SERVER['REQUEST_URI']);
+  
   // create a new cURL resource
   $ch = curl_init();
-  
-  // $base_path = base_path();
-  $host = 'http://localhost:8888';
-  $base_path = '/Quilted/NewPlayMap/newplaymap_private/www/participate/';
+
+  $host = 'http://' . $server;
+  $base_path = $drupal_base_path;
   
   $absolute_path = $host . $base_path . $path;
   
