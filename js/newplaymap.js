@@ -230,14 +230,49 @@ newPlayMap.loadPageRouter = function() {
           case 'organization':
             newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
             break;
+          case 'explore-plays':
+            // Open tabs and select correct tab
+            // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
+            //        rather than on page load to speed things up.
+            // $('#filters form').tabs('select', 1);
+            // $('#filter-container').slideDown();
+
+            // If it's on initial page load, load default
+            // Otherwise it spins and breaks
+            if (jsonData.length == undefined) {
+              newPlayMap.loadDefaultContent();
+            }
+          break;
+          case 'explore-organizations':
+            // Open tabs and select correct tab
+            // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
+            //        rather than on page load to speed things up.
+            // $('#filters form').tabs('select', 2);
+            // $('#filter-container').slideDown();
+
+            // If it's on initial page load, load default
+            // Otherwise it spins and breaks
+            if (jsonData.length == undefined) {
+              newPlayMap.loadDefaultContent();
+            }
+          break;
+          case 'explore-artists':
+            // Open tabs and select correct tab
+            // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
+            //        rather than on page load to speed things up.
+            // $('#filters form').tabs('select', 3);
+            // $('#filter-container').slideDown();
+
+            // If it's on initial page load, load default
+            // Otherwise it spins and breaks
+            if (jsonData.length == undefined) {
+              newPlayMap.loadDefaultContent();
+            }
+          break;
         }
       }
       else {
-        // Default to what's on today
-        var today = new Date();
-        var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
-        // console.log('default');
-        newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
+        newPlayMap.loadDefaultContent();
       }
     }
     
@@ -254,6 +289,22 @@ newPlayMap.loadPageRouter = function() {
   // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
   $.address.update();
 };
+
+
+/*
+ * Function to load default content (right now What's on Today)
+ */
+newPlayMap.loadDefaultContent = function() {
+  // Default to what's on today
+  var today = new Date();
+  var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
+  // console.log('default');
+  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
+  
+  $('<div></div>')
+    .text("What's Happening on " + formattedDate)
+    .insertBefore('#panel-container .results-container .results-title h2');
+}
 
 
 /**
