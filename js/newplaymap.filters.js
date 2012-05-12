@@ -568,7 +568,10 @@ newPlayMap.filters.showAll = function(type) {
   
   for (var i = 0; i < len; i++) {
   
-    var item = {title: jsonDataSearch[type][i]};
+    var item = {
+      title: jsonDataSearch[type][i]['label'],
+      path: jsonDataSearch[type][i]['path']
+    };
 
     $('#' + template).tmpl(item)
       .appendTo(container);
@@ -577,21 +580,24 @@ newPlayMap.filters.showAll = function(type) {
   // Remove loading feedback
   newPlayMap.filters.loadingCompleteFeedback();
 
-  $(container).find('a').click(function() {
-    var title = $(this).text();
-    switch(type) {
-      case 'plays':
-        newPlayMap.filters.plays({play_title: title});
-      break;
-      
-      case 'organizations':
-        newPlayMap.filters.organizations({organization_name: title});
-      break;
-      
-      case 'artists':
-        newPlayMap.filters.artists({artist_name: title});
-      break;
-    }
-  })
+  newPlayMap.processAddressLinks('internal-address');
+  $('.internal-address').address();
+  
+  // $(container).find('a').click(function() {
+  //   var title = $(this).text();
+  //   switch(type) {
+  //     case 'plays':
+  //       newPlayMap.filters.plays({play_title: title});
+  //     break;
+  //     
+  //     case 'organizations':
+  //       newPlayMap.filters.organizations({organization_name: title});
+  //     break;
+  //     
+  //     case 'artists':
+  //       newPlayMap.filters.artists({artist_name: title});
+  //     break;
+  //   }
+  // });
   
 }

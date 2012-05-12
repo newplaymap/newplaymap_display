@@ -236,6 +236,7 @@ newPlayMap.loadPageRouter = function() {
         // Default to what's on today
         var today = new Date();
         var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
+        // console.log('default');
         newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
       }
     }
