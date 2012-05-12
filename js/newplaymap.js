@@ -245,7 +245,8 @@ newPlayMap.loadPageRouter = function() {
 
   // bind address to all a links (@TODO may also need divs)
   // @TODO: Turn this back on once it can be selectively set to not all <a> tags
-  $('a').address();
+  newPlayMap.processAddressLinks('internal-address');
+  $('.internal-address').address();
 
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
@@ -265,18 +266,22 @@ newPlayMap.processAddressLinks = function(className, target) {
     var path = $(this).attr('href');
 
     if(path !== undefined) {
-      if(path.substr(0,5) === '/node') {
+      if ($(this).hasClass(className)) {
       }
-      else if(path.substr(0,4) === 'node') {
+      else if(path.substr(0,11) === 'participate') {
       }
-      else if(path.substr(-4,4) === 'feed') {
-      }
-      else if(path.substr(0,7) === '/admin/') {
-      }
-      else if((path.substr(0,4) === 'http') || (path.substr(0,5) === '/http')) {
-      }
-      else if(path.length == 1) {
-      }
+      // else if(path.substr(0,5) === '/node') {
+      // }
+      // else if(path.substr(0,4) === 'node') {
+      // }
+      // else if(path.substr(-4,4) === 'feed') {
+      // }
+      // else if(path.substr(0,7) === '/admin/') {
+      // }
+      // else if((path.substr(0,4) === 'http') || (path.substr(0,5) === '/http')) {
+      // }
+      // else if(path.length == 1) {
+      // }
       else {
         $(this).addClass(className);
       }

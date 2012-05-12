@@ -25,7 +25,8 @@ newPlayMap.updatePanel = function(marker, data) {
   
   // Make all links listen for address changes.
   newPlayMap.formatLinksBubble($('#share-links'), 'share-links');
-  $('a').address();
+  newPlayMap.processAddressLinks('internal-address');
+  $('.internal-address').address();
 };
 
 
@@ -43,7 +44,18 @@ newPlayMap.updateBubble = function(marker, data) {
   featureData = newPlayMap.loadDataObject(feature);
 
   // hard coded for events for now. @TODO: Figure out chach's way of using featureData.title and templates
-  var title = featureData.properties.play_title;
+  console.log(featureData.properties);
+  switch (featureData.properties.content_type) {
+    case "Generative Artist":
+      var title = featureData.properties.artist_name;
+    break;
+    case "Event":
+      var title = featureData.properties.play_title;
+    break;
+    case "Organization":
+      var title = featureData.properties.name;
+    break;
+  }
   bubble = new MM.Follower(map, new MM.Location(featureData['geometry']['coordinates'][1], featureData['geometry']['coordinates'][0]), title);
 
   // Load event data into the template.
@@ -57,7 +69,8 @@ newPlayMap.updateBubble = function(marker, data) {
   // newPlayMap.resultsListProcess(container);
   // 
   // Make all links listen for address changes.
-  $('a').address();
+  newPlayMap.processAddressLinks('internal-address');
+  $('.internal-address').address();
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {
@@ -185,6 +198,9 @@ newPlayMap.loadResults = function(features, vars) {
   
   var totalCount = jsonData[vars.dataName].count;
   newPlayMap.setResultsTitle(resultsType, resultsCount, totalCount);
+  
+  newPlayMap.processAddressLinks('internal-address');
+  $('.internal-address').address();
 };
 
 /*
