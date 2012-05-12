@@ -4,20 +4,29 @@ connectMongo(true);
 
 // print "I think you're looking for the npm_datasource module.";
 
-loadOrganizations($m);
-loadArtists($m);
-loadEvents($m);
-loadPlays($m);
+$domain = $_SERVER['HTTP_HOST'];
+$drupal_base_path = str_replace('api/loaddata.php', 'participate/', $_SERVER['REQUEST_URI']);
 
-function getJsonExport($path) {
-  $server = $_SERVER['HTTP_HOST'];
-  $drupal_base_path = str_replace('api/loaddata.php', 'participate/', $_SERVER['REQUEST_URI']);
-  
+loadOrganizations($m, $domain, $drupal_base_path);
+loadArtists($m, $domain, $drupal_base_path);
+loadEvents($m, $domain, $drupal_base_path);
+loadPlays($m, $domain, $drupal_base_path);
+
+/*
+ * Helper function: Wrapper for curl request
+ *
+ * @param string $path Drupal path to the data source view
+ *
+ * @param string $domain Host name for building request
+ *
+ * @param string $base_path Base path of drupal install. Used from building request.
+ */
+function getJsonExport($path, $domain, $base_path) {
   // create a new cURL resource
   $ch = curl_init();
 
-  $host = 'http://' . $server;
-  $base_path = $drupal_base_path;
+  $host = 'http://' . $domain;
+  $base_path = $base_path;
   
   $absolute_path = $host . $base_path . $path;
   
@@ -35,7 +44,7 @@ function getJsonExport($path) {
   return $json;
 }
 
-function loadOrganizations($m) {
+function loadOrganizations($m, $domain, $base_path) {
 
   $organizations = $m->newplaymap->organizations;
   // find everything in the collection
@@ -43,7 +52,7 @@ function loadOrganizations($m) {
   // $organization_path = '../data/push/orgs-all.json';
 
   $organization_path = 'data/orgs-all';
-  $file_data = getJsonExport($organization_path);
+  $file_data = getJsonExport($organization_path, $domain, $base_path);
 
   // $file_data = file_get_contents($organization_path);
   
@@ -114,7 +123,7 @@ function loadOrganizations($m) {
         ),
       "properties" => array(
           "logo" => $node["Logo"],
-          "path" =>  str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+          "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
           "organization_id" => $node["Org ID"],
           "name" => $node["Org name"],
           "latitude" => $node["Latitude"],
@@ -132,6 +141,7 @@ function loadOrganizations($m) {
  
       )
     );
+
     // This will completely replace the record.
     $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
     $count++;
@@ -146,7 +156,7 @@ function loadOrganizations($m) {
 
 
 
-function loadArtists($m) {
+function loadArtists($m, $domain, $base_path) {
   
   $artists = $m->newplaymap->artists;
 
@@ -155,7 +165,7 @@ function loadArtists($m) {
   $artists->drop();
   $artists_path = 'data/artists-all';
 
-  $file_data = getJsonExport($artists_path);
+  $file_data = getJsonExport($artists_path, $domain, $base_path);
   $collection = $artists;
   /* var_dump($file_data); */
   
@@ -182,7 +192,7 @@ function loadArtists($m) {
           "latitude" => $node["Latitude"],
           "longitude" => $node["Longitude"],
           "artist_photo" => $node["Photo"],
-          "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+          "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
           "artist_id" => $node["Artist ID"],
           "content_type" => $node["Content Type"],
           "generative_artist" => $node["Generative artist"],
@@ -207,13 +217,13 @@ function loadArtists($m) {
 
 
 
-function loadEvents($m) {
+function loadEvents($m, $domain, $base_path) {
   
   $events = $m->newplaymap->events;
   $events->drop();
   $events_path = 'data/events-all';
 
-  $file_data = getJsonExport($events_path);
+  $file_data = getJsonExport($events_path, $domain, $base_path);
   $collection = $events;
   
   $json = json_decode($file_data);
@@ -256,7 +266,7 @@ function loadEvents($m) {
         "generative_artist"  => $node["Generative Artist"],
         "event_description"  => $node["Event description"],
         "synopsis"  => $node["Synopsis"],
-        "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"]),
+        "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
         "city" => $node["City"],
         "state" => $node["State"],
         "city_state" => $city_state,
@@ -272,14 +282,14 @@ function loadEvents($m) {
 
 
 
-function loadPlays($m) {
+function loadPlays($m, $domain, $base_path) {
   
   $plays = $m->newplaymap->plays;
   $plays->drop();
   // $plays_path = '../data/push/plays-all.json';
   $plays_path = 'data/plays-all';
   
-  $file_data = getJsonExport($plays_path);
+  $file_data = getJsonExport($plays_path, $domain, $base_path);
   
   $collection = $plays;
   
@@ -317,7 +327,7 @@ function loadPlays($m) {
       "alternate_titles"  => $alternate_titles_list,
       "generative_artist"  => $node["Generative Artist"],
       "synopsis"  => $node["Synopsis"],
-      "path" => str_replace("/newplay/newplaymap_private/www", "", $node["Path"])
+      "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
     )
   );
     // This will completely replace the record.
