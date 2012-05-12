@@ -195,15 +195,22 @@ newPlayMap.loadResults = function(features, vars) {
       newPlayMap.resultsListProcess($('#panel-container .results-container'));
   }
   
-  // Rewrite results header
-  var resultsType = features[0]["properties"]["content_type"];
-  var resultsCount = jsonData[vars.dataName]["features"].length;
-  
-  var totalCount = jsonData[vars.dataName].count;
-  newPlayMap.setResultsTitle(resultsType, resultsCount, totalCount);
-  
-  newPlayMap.processAddressLinks('internal-address');
-  $('.internal-address').address();
+  if (len > 0) {
+    // Rewrite results header
+    var resultsType = features[0]["properties"]["content_type"];
+    var resultsCount = jsonData[vars.dataName]["features"].length;
+
+    var totalCount = jsonData[vars.dataName].count;
+    newPlayMap.setResultsTitle(resultsType, resultsCount, totalCount);
+
+    newPlayMap.processAddressLinks('internal-address');
+    $('.internal-address').address();
+  }
+  else {
+    // If nothing came back, clear out
+    newPlayMap.filters.loadingCompleteFeedback();
+    newPlayMap.setResultsTitle('Result', 0);
+  }
 };
 
 /*
