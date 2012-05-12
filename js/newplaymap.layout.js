@@ -25,7 +25,7 @@ newPlayMap.updatePanel = function(marker, data) {
   
   // Make all links listen for address changes.
   newPlayMap.formatLinksBubble($('#share-links'), 'share-links');
-  $('.nav-collapse a').address();
+  $('a').address();
 };
 
 
@@ -57,7 +57,7 @@ newPlayMap.updateBubble = function(marker, data) {
   // newPlayMap.resultsListProcess(container);
   // 
   // Make all links listen for address changes.
-  $('.nav-collapse a').address();
+  $('a').address();
 };
 
 newPlayMap.loadDataObject = function(featureLookup) {

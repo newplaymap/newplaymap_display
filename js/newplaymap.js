@@ -245,7 +245,7 @@ newPlayMap.loadPageRouter = function() {
 
   // bind address to all a links (@TODO may also need divs)
   // @TODO: Turn this back on once it can be selectively set to not all <a> tags
-  $('.nav-collapse a').address();
+  $('a').address();
 
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
@@ -257,14 +257,13 @@ newPlayMap.loadPageRouter = function() {
  * Process links so we can selectively use the address()
  */
 newPlayMap.processAddressLinks = function(className, target) {
+  if (target == undefined) {
+    var target = 'a';
+  }
+  console.log($(target));
   $(target).each(function(){
     var path = $(this).attr('href');
-    
-    var cleanPath = Drupal.openlayers.popup.cleanDestination(path);
-    if (cleanPath) {
-      $(this).attr('href', cleanPath);
-    }
-    
+
     if(path !== undefined) {
       if(path.substr(0,5) === '/node') {
       }
