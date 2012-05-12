@@ -185,7 +185,7 @@ newPlayMap.loadJourney = function(feature) {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
     }
-  );
+  ).trigger('click');
   
   $('div#play-journey').click(function() {$('div#play-journey').hide();});
 };
