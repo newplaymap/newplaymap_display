@@ -24,8 +24,6 @@ if(!empty($play_cursor['id'])) {
 }
 
 
-$count = $events_cursor->count();
-
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
 header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
@@ -60,7 +58,7 @@ foreach ($events_cursor as $obj) {
   }
 }
 
-$json .= '], "count" : ' . $count . '}';
+$json .= ']}';
 
 echo $json;
 
