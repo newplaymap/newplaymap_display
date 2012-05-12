@@ -26,13 +26,13 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    $json .= json_encode($obj['properties']['name']);
+    // $json .= json_encode($obj['properties']['name']);
     
-    // $json .= json_encode(array(
-    //   'value' => $obj['name'],
-    //   'label' => $obj['properties']['name'],
-    //   'path' => $obj['properties']['path'],
-    // ));
+    $json .= json_encode(array(
+      'value' => $obj['properties']['name'],
+      'label' => $obj['properties']['name'],
+      'path' => $obj['properties']['path'],
+    ));
     
   
     $i++;

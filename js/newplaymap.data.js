@@ -55,6 +55,7 @@ newPlayMap.loadDataError = function(data) {
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
   var vars = vars;
+  // console.log(vars);
   // Clean out featuresByLocation.
   featuresByLocation = {};
   var features = jsonData[vars.dataName].features,
@@ -161,7 +162,16 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   newPlayMap.loadResults(features, vars);
 
 
-
+  // Load profiles if called for
+  if (vars.loadProfile == true) {
+    // Get the last marker
+    var markerLength = markers.markers.length - 1;
+    var thisMarker = markers.markers[markerLength];
+    
+    newPlayMap.updatePanel(thisMarker);
+    // Set address
+    window.location.hash = '#' + thisMarker.feature.properties.path
+  }
 
   // Tell the map to fit all of the locations in the available space
   
