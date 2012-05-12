@@ -301,9 +301,15 @@ newPlayMap.loadDefaultContent = function() {
   // console.log('default');
   newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
   
-  $('<div></div>')
-    .text("What's Happening on " + formattedDate)
-    .insertBefore('#panel-container .results-container .results-title h2');
+  var todayHeader;
+  if ($('#today-header').length > 0) {
+    todayHeader = $('#today-header');
+  }
+  else {
+    todayHeader = $('<div></div>').attr('id', 'today-header').insertBefore('#panel-container .results-container .results-title h2');
+  }
+  
+  todayHeader.text("What's Happening on " + formattedDate);
 }
 
 
