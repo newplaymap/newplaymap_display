@@ -297,7 +297,7 @@
                     {{if special_interests}}
                       ${special_interests} @TODO: process special intersts
                     {{else}}
-                      NO NATIONAL NETWORKS
+                      NO SPECIAL INTERSTS
                     {{/if}}
                   </article>
 
@@ -345,20 +345,12 @@
                         NO CITY
                       {{/if}}
 
-                      {{if related_theater}}
-                        <a href="${related_theater_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                      {{if properties.related_theater}}
+                        <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
                       {{else}}
                         NO RELATED THEATER
                       {{/if}}
 
-                   
-                        {{if event_type}}
-                        <p>
-                          ${event_type}
-                        </p>
-                        {{else}}
-                          NO EVENT TYPE
-                        {{/if}}
                         
                       {{if event_description}}
                         <dl>
