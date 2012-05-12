@@ -29,8 +29,9 @@ foreach ($cursor as $obj) {
     $json .= json_encode($obj['properties']['name']);
     
     // $json .= json_encode(array(
-    //   'value' => $obj['id'],
+    //   'value' => $obj['name'],
     //   'label' => $obj['properties']['name'],
+    //   'path' => $obj['properties']['path'],
     // ));
     
   
