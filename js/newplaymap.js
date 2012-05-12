@@ -261,7 +261,7 @@ newPlayMap.processAddressLinks = function(className, target) {
   if (target == undefined) {
     var target = 'a';
   }
-  console.log($(target));
+
   $(target).each(function(){
     var path = $(this).attr('href');
 
