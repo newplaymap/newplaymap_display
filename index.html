@@ -180,7 +180,7 @@
                     <!-- @TODO: Remove all the dummy empty text -->
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
-                      <h3>by ${generative_artist}</h3>
+                      <h3>by <a href="${generative_artist_path}">${generative_artist}</a></h3>
                     {{else}}
                       NO GENERATIVE ARTIST
                     {{/if}}
@@ -223,20 +223,7 @@
                 <div class="journey content"></div>
                 <!-- Journey: Used for each item on a journey for a play -->
                 <script id="journey-template" type="text/x-jquery-tmpl">
-                  <br />${event_id}
-                  <br />${event_type}
-                  <br />${event_to_date}
-                  <br />${event_date}
-                  <br />${content_type}
-                  <br />${related_theater}
-                  <br />${related_theater_id} 
-                  <br />${artist_id}
-                  <br />${play_title}
-                  <br />${related_play_id}
-                  <br />${generative_artist}
-                  <br />${event_description}
-                  <br />${synopsis}
-                  <br />${path}              
+             
                 </script><!--   end journey -->
 
                 <div class="artist content"></div>
@@ -359,7 +346,7 @@
                       {{/if}}
 
                       {{if related_theater}}
-                        <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                        <a href="${related_theater_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
                       {{else}}
                         NO RELATED THEATER
                       {{/if}}
