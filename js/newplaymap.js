@@ -263,12 +263,17 @@ newPlayMap.processAddressLinks = function(className, target) {
   }
 
   $(target).each(function(){
-    var path = $(this).attr('href');
+    var thisTarget = $(this);
+    var path = thisTarget.attr('href');
 
-    if(path !== undefined) {
-      if ($(this).hasClass(className)) {
+    if (path !== undefined) {
+      if (thisTarget.hasClass(className)) {
       }
-      else if(path.substr(0,11) === 'participate') {
+      else if (path.substr(0,11) === 'participate') {
+      }
+      else if (thisTarget.attr('id') == 'share-facebook') {
+      }
+      else if (thisTarget.hasClass('twitter-share-button')) {
       }
       // else if(path.substr(0,5) === '/node') {
       // }
