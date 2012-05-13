@@ -340,6 +340,9 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
         'id': newId,
         'href': '#'
       })
+      .click(function(event) {
+        event.preventDefault();
+      })
       .css('cursor', 'pointer')
       .html(linkText)
       .insertBefore(element);
