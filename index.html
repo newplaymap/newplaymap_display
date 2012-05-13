@@ -42,25 +42,27 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">New Play Map</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="participate/about">About the map</a></li>
-              <li><a href="participate/feedback">Feedback</a></li>
-            </ul>
-            <p class="nav-collapse">
-             
+          <div id="header-bar" class="nav-collapse">
+            <div id="header-links">
+              <a class="reset-map" href="#">Home</a>
+              <a class="brand" href="#">New Play Map</a>
               <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="participate/about">About the map</a></li>
+                <li><a href="participate/feedback">Feedback</a></li>
+              </ul>
+            </div>
+            <div id="header-buttons-wrapper">
+              <ul class="nav" id="header-buttons">
                 <li>
                   <div id="block-add_button-0" class="block block-add_button region-odd odd region-count-1 count-1 with-block-editing">
 
                     <div class="content">
                       <div class="item-list">
-                        <h3>Add to the Map</h3>
+                        <h3><span>Add to the Map</span></h3>
                         <ul id="add-button-list">
                           <li class="first"><a id="add-button-org" class="add-button-option" href="participate/node/add/organization">Add Organization</a></li>
-                
+              
                           <li><a id="add-button-event" class="add-button-option" href="participate/node/add/event">Add Play Event</a></li>
                           <li class="last"><a id="add-button-artist" class="add-button-option" href="participate/node/add/artist">Add Artist Profile</a></li>
                         </ul>
@@ -69,11 +71,11 @@
                   </div>
                 </li>
                 <li>
-                  <a id="explore-filters-button" href="explore-plays"><span>Explore</span></a>
+                  <a id="explore-filters-button" href="explore-plays"><span>Search</span></a>
                 </li>
               </ul>
-            </p>
-            <p class="navbar-text pull-right"><span class="welcome">Welcome!</span> <span class="login"><a href="participate/user">Sign in</a> or <a href="participate/user/register">Create Account</a></p>
+            </div>
+            <p id="header-register" class="navbar-text pull-right"><span class="welcome">Welcome!</span> <span class="login"><a href="participate/user">Sign in</a> or <a href="participate/user/register">Create Account</a></p>
           </div><!--/.nav-collapse -->
         </div>
       </div>

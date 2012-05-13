@@ -88,41 +88,6 @@
     margin-top: 18px;
   }  
   
-    /* Header buttons */
-    /* Additional default button style in Misc styles */
-    #header-blocks a#add_button,
-    #header-blocks a#filter_button,
-    #header-blocks a#invite_button,
-    #header-blocks a#explore-filters-button {
-      display: inline;
-      padding: 8px 20px 8px 14px !important;
-      margin: 0 4px;
-      cursor: pointer;
-    }
-    
-    #header-blocks a#add_button span,
-    #header-blocks a#invite_button span,
-    #header-blocks a#explore-filters-button span {
-      padding-left: 24px;
-      background-position: 0 50%;
-      background-repeat: no-repeat;
-    }
-    
-    #header-blocks a#add_button span { 
-      padding-left: 20px;
-      background-image: url(../images/header-icon-add.png);
-    }
-    
-    #header-blocks a#invite_button span {
-      background-image: url(../images/header-icon-invite.png);
-    }
-    
-    #header-blocks a#explore-filters-button span {
-      padding-left: 26px;
-      background-image: url(../images/header-icon-explore.png);
-    }
-    
-      
       /* Universal Add Button List */
       
       ul#add-button-list {
@@ -244,23 +209,7 @@
     color: #fff;
     box-shadow: none;
   }
-  
-  .navbar a,
-  .navbar .nav > li > a {
-    text-decoration: underline;
-    color: #fff;
-  }
-  
-  .navbar .nav .active > a  {
-    background-color: transparent;
-    color: #000;
-  }
-  
-  .navbar .nav .active > a:hover,
-  .navbar .nav > li > a:hover {
-    color: #EEE;
-    text-decoration: underline;
-  }
+
   
   #page {
     width: 100%;
