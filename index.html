@@ -268,7 +268,7 @@
                   {{/if}}
                   
                   <ul id="panel-content-links">
-                    <li id="panel-add-event-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
+                    <li id="panel-add-link-event" class="panel-add-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
                     <li id="panel-share-link">
                       <div id="share-links">
                         <h3>Share</h3>
@@ -283,7 +283,7 @@
                     <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit">Edit</a></li>
                   </ul>
                   
-                  <article>
+                  <article class="panel-content-info organization-info">
                     {{if mission_statement}}
                       ${mission_statement}
                     {{else}}

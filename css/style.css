@@ -4,6 +4,9 @@ Font Names
 font-family:'Avenir LT W01 55 Roman';
 font-family:'AvenirLTW01-55Oblique';
 font-family:'Avenir LT W01 85 Heavy';
+
+Colors
+Red: #BF202E
 */
 
 h1, h2, h3, h4 {
@@ -68,27 +71,6 @@ em, i {
   color: #fff;
 }
 
-
-/* @TODO load newplay map v1 css, or change it. */
-#panel-container {
-  position: fixed;
-  top: 48px;
-  right: 0;
-  z-index: 1000;
-  background-color: #E6DAC8;
-  width: 350px;
-  height: 100%;
-  overflow-y: scroll;
-  color: #000;
-}
-
-#panel-container #panel {
-  margin: 10px;
-}
-
-#filter-container {
-  display: none;
-}
 
 ul.dropdown-menu {
   z-index: 2100;
@@ -173,12 +155,66 @@ footer {
   font-size: 80%;
 }
 
+
+/* Panel styles */
+#panel-container {
+  position: fixed;
+  top: 48px;
+  right: 0;
+  z-index: 1000;
+  background-color: #E6DAC8;
+  width: 350px;
+  height: 100%;
+  overflow-y: scroll;
+  color: #000;
+}
+
+#panel-container #panel .content {
+  margin: 10px;
+}
+
+#filter-container {
+  display: none;
+}
+
 div#panel-container div.journey {
   visibility: hidden;
 }
 
 div#panel-container div#panel {
 /*   visibility: hidden; */
+}
+
+ul#panel-content-links {
+  list-style: none outside none;
+  margin: 10px 0;
+}
+
+  ul#panel-content-links li {
+    float: left;
+    font-size: 0.8em;
+    margin-right: 10px;
+  }
+    
+    ul#panel-content-links li a {
+      text-decoration: none;
+    }
+    
+    ul#panel-content-links li a:hover {
+      text-decoration: underline;
+      color: #BF202E;
+    }
+  
+  ul#panel-content-links li.panel-add-link a {
+    background-color: #BF202E;
+    color: #FFFFFF;
+    border-radius: 9px;
+    padding: 8px;
+  }
+  
+article.panel-content-info {
+  clear: both;
+  padding-top: 10px;
 }
 
 ul.ui-autocomplete {
