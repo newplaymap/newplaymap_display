@@ -239,9 +239,10 @@ newPlayMap.loadPageRouter = function() {
 
             // If it's on initial page load, load default
             // Otherwise it spins and breaks
-            if (jsonData.length == undefined) {
+            if (typeof jsonData.events_data == undefined) {
               newPlayMap.loadDefaultContent();
             }
+            // newPlayMap.filters.loadingCompleteFeedback();
           break;
           case 'explore-organizations':
             // Open tabs and select correct tab
@@ -252,9 +253,10 @@ newPlayMap.loadPageRouter = function() {
 
             // If it's on initial page load, load default
             // Otherwise it spins and breaks
-            if (jsonData.length == undefined) {
+            if (typeof jsonData.events_data == undefined) {
               newPlayMap.loadDefaultContent();
             }
+            // newPlayMap.filters.loadingCompleteFeedback();
           break;
           case 'explore-artists':
             // Open tabs and select correct tab
@@ -265,9 +267,10 @@ newPlayMap.loadPageRouter = function() {
 
             // If it's on initial page load, load default
             // Otherwise it spins and breaks
-            if (jsonData.length == undefined) {
+            if (typeof jsonData.events_data == undefined) {
               newPlayMap.loadDefaultContent();
             }
+            // newPlayMap.filters.loadingCompleteFeedback();
           break;
         }
       }
