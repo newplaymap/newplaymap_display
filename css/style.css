@@ -321,6 +321,7 @@ ul.ui-autocomplete {
       width: 79px;
       height: 50px;
       float: left;
+      text-indent: -500px;
     }
   #header-buttons-wrapper {
     width: 30%;
