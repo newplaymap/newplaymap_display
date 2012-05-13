@@ -279,3 +279,111 @@ ul.ui-autocomplete {
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
 }
+
+/* Header styles */
+/* Header buttons */
+/* Additional default button style in Misc styles */
+#header-bar {
+  padding: 5px;
+}
+
+  #header-links {
+    font-size: 0.8em;
+    width: 400px;
+    float: left;
+  }
+
+    #header-links a {
+      text-decoration: underline;
+      color: #FFFFFF;
+      padding: 0 5px;
+    }
+  
+      #header-links a:hover {
+        color: #000000;
+      }
+    
+      .navbar .nav .active > a,
+      .navbar .nav .active > a:hover {
+        background-color: transparent;
+      }
+    
+    #header-links .brand {
+    }
+    
+      #header-links a.brand {
+        text-decoration: none;
+      }
+    
+    #header-links .reset-map {
+      background: url("../images/map-white-on-red.png") no-repeat;
+      display: block;
+      width: 79px;
+      height: 50px;
+      float: left;
+    }
+  #header-buttons-wrapper {
+    width: 30%;
+    float: left;
+    margin-top: 6px;
+  }
+  
+    #header-buttons {
+      margin: auto;
+    }
+
+      #header-buttons li {
+        background-color: #FFFFFF;
+        color: #BF202E;
+        border-radius: 8px;
+        margin-right: 10px;
+      }
+
+        #header-buttons > li > a {
+          text-shadow: none;
+        }
+
+        #header-buttons a#add_button,
+        #header-buttons a#filter_button,
+        #header-buttons a#invite_button,
+        #header-buttons a#explore-filters-button {
+          padding: 6px 9px;
+          cursor: pointer;
+        }
+
+        #header-buttons a#add_button span,
+        #header-buttons a#invite_button span,
+        #header-buttons a#explore-filters-button span {
+          padding-left: 24px;
+          background-position: 0 50%;
+          background-repeat: no-repeat;
+        }
+
+        #header-buttons a#add_button span { 
+          padding-left: 20px;
+          background-image: url(../images/header-add-icon.png);
+        }
+  
+          #header-buttons a#add_button:hover span { 
+            background-image: url(../images/header-add-icon-active.png);
+            color: #000000;
+          }
+
+        #header-buttons a#invite_button span {
+          background-image: url(../images/header-icon-invite.png);
+        }
+
+        #header-buttons a#explore-filters-button span {
+          padding-left: 26px;
+          background-image: url(../images/header-explore-icon.png);
+        }
+  
+          #header-buttons a#explore-filters-button:hover span {
+            background-image: url(../images/header-explore-icon-active.png);
+            color: #000000;
+          }
+
+  #header-register a {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
