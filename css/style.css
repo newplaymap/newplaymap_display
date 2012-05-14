@@ -7,6 +7,9 @@ font-family:'Avenir LT W01 85 Heavy';
 
 Colors
 Red: #BF202E
+Tan: #E6DAC8
+Light tan: #F1EDE6
+(headers in overlay for example)
 */
 
 h1, h2, h3, h4 {
@@ -303,9 +306,27 @@ ul.ui-autocomplete {
     font-size: 80%;
   }
   
-  #panel-container .results-container .results-title h2 {
-    display: inline;
+  #panel-container .results-container .results-title {
+    background-color: #F1EDE6;
+    padding-left: 10px;
   }
+  
+    #panel-container .results-container .results-title h2 {
+      display: inline;
+      padding-left: 25px;
+    }
+    
+      #panel-container .results-container .results-title h2#generative-artists-results-title {
+        background: url("../images/filter-select-icon-artists.png") no-repeat 0 center;
+      }
+      
+      #panel-container .results-container .results-title h2#events-results-title {
+        background: url("../images/filter-select-icon-events.png") no-repeat 0 center;
+      }
+      
+      #panel-container .results-container .results-title h2#organizations-results-title {
+        background: url("../images/filter-select-icon-orgs.png") no-repeat 0 center;
+      }
 
 /* Bubble styles */
 .bubble {
