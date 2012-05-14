@@ -215,6 +215,12 @@ ul#panel-content-links {
     padding: 8px;
   }
   
+    ul#panel-content-links li.panel-add-link a:hover {
+      text-decoration: none;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+  
 article.panel-content-info {
   clear: both;
   padding-top: 10px;
