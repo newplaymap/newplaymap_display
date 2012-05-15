@@ -1,5 +1,5 @@
 // Establish namespaces.
-var newPlayMap = {};
+var newPlayMap = newPlayMap || {};
 var jsonData = {};
 var panelMarkup = {};
 var spotlight = {};
@@ -12,6 +12,7 @@ var markers = {};
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
 newPlayMap.browserEvents = [];
+newPlayMap.filters = newPlayMap.filters || {};
 
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
