@@ -92,12 +92,18 @@ newPlayMap.filters.plays = function(data) {
 
 newPlayMap.filters.artists = function(data) {
   var pathQuery = "";
+  var loadProfile = false;
   if (data.artist_name !== undefined) {
     pathQuery = "artist_name=" +  data.artist_name;
+    loadProfile = true;
   }
 
   if (data.city_state !== undefined) {
     pathQuery = "city_state=" +  data.artist_name;
+  }
+  
+  if (data.path !== undefined) {
+    loadProfile = true;
   }
 
   newPlayMap.loadAPICall({
@@ -105,6 +111,7 @@ newPlayMap.filters.artists = function(data) {
     zoomLevel: newPlayMap.defaultZoom,
     clearLayer: true,
     clearLayers: true,
+    loadProfile: loadProfile,
     layer: "layer-artists-filter",
     class: "inactive",
     id: "artist_id",
