@@ -127,6 +127,8 @@ newPlayMap.processAddressLinks = function(className, target) {
       }
       else if (thisTarget.attr('id') == 'embed-link') {
       }
+      else if (thisTarget.hasClass('reset-map')) {
+      }
       // else if(path.substr(0,5) === '/node') {
       // }
       // else if(path.substr(0,4) === 'node') {
