@@ -22,6 +22,10 @@ body {
   padding-bottom: 40px;
 }
 
+a:hover {
+  color: #BF202E;
+}
+
 /* Override Bootstrap Defaults */
 body,
 p,
@@ -220,6 +224,49 @@ ul#panel-content-links {
       background-color: #FFFFFF;
       color: #000000;
     }
+    
+ul#share-links-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+  ul#share-links-list li {
+    margin-bottom: 5px;
+  }
+  
+  ul#share-links-list li form {
+    margin: 0;
+  }
+  
+  ul#share-links-list a {
+    background: no-repeat left center;
+    padding-left: 22px;
+  }
+  
+    ul#share-links-list a#share-facebook {
+      background-image: url(../images/share-icon-facebook.png);
+    }
+
+    ul#share-links-list a#share-twitter {
+      background-image: url(../images/share-icon-twitter.png);
+    }
+
+    ul#share-links-list a#share-link {
+      background-image: url(../images/share-icon-link.png);
+    }
+    
+    ul#share-links-list input#share-code {
+      display: none;
+    }
+
+    ul#share-links-list a#embed-link {
+      background-image: url(../images/share-icon-badge.png);
+    }
+    
+    ul#share-links-list input#embed-code {
+      display: none;
+    }
+
   
 article.panel-content-info {
   clear: both;

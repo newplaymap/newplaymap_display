@@ -193,11 +193,17 @@
                       <li id="panel-share-link">
                         <div id="share-links">
                           <h3>Share</h3>
-                          <ul class='content'>
+                          <ul id="share-links-list" class='content'>
                             <li><a href="#" id="share-facebook">Facebook</a></li>
                             <li><a href="#" id="share-twitter">Twitter</a></li>
-                            <li><a href="#" id="share-link">Get Link</a></li>
-                            <li><a href="#" id="share-badge">Get Badge Code</a></li>
+                            <li>
+                              <a href="#" id="share-link">Get Link</a>
+                              <form><input type="text" value="http://newplaymap.org/participate/${path}" id="share-code"></form>
+                            </li>
+                            <li>
+                              <a href="#" id="embed-link">Get Badge Code</a>
+                              <form><input type="text" value="&lt;a href=&quot;http://newplaymap.org/participate/${path}&quot;&gt;&lt;img src=&quot;http://newplaymap.org/sites/default/files/images/badge_embed.png&quot; /&gt;&lt;/a&gt;" id="embed-code"></form>
+                            </li>
                           </ul>
                         </div> 
                       </li>
@@ -272,12 +278,18 @@
                     <li id="panel-share-link">
                       <div id="share-links">
                         <h3>Share</h3>
-                        <ul class='content'>
-                          <li><a href="#" id="share-facebook">Facebook</a></li>
-                          <li><a href="#" id="share-twitter">Twitter</a></li>
-                          <li><a href="#" id="share-link">Get Link</a></li>
-                          <li><a href="#" id="share-badge">Get Badge Code</a></li>
-                        </ul>
+                         <ul id="share-links-list" class='content'>
+                            <li><a href="#" id="share-facebook">Facebook</a></li>
+                            <li><a href="#" id="share-twitter">Twitter</a></li>
+                            <li>
+                              <a href="#" id="share-link">Get Link</a>
+                              <form><input type="text" value="http://newplaymap.org/participate/${path}" id="share-code"></form>
+                            </li>
+                            <li>
+                              <a href="#" id="embed-link">Get Badge Code</a>
+                              <form><input type="text" value="&lt;a href=&quot;http://newplaymap.org/participate/${path}&quot;&gt;&lt;img src=&quot;http://newplaymap.org/sites/default/files/images/badge_embed.png&quot; /&gt;&lt;/a&gt;" id="embed-code"></form>
+                            </li>
+                          </ul>
                       </div> 
                     </li>
                     <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit">Edit</a></li>

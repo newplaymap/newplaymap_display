@@ -16,15 +16,20 @@ newPlayMap.updatePanel = function(marker, data) {
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 
-
   // Add interaction to event listings in the new content
   // @TODO: Not only plays use this template. 
   //        Either be more specific or make sure it applies universally
   var container = $('#panel-container .journey');
   newPlayMap.resultsListProcess(container);
   
+  // Set up share links
+  newPlayMap.formatLinksBubble($('#share-links'), 'share-links-show');
+  $('#share-links-show').click(function() {
+    newPlayMap.shareInteraction();
+    newPlayMap.embedInteraction();
+  });
+  
   // Make all links listen for address changes.
-  newPlayMap.formatLinksBubble($('#share-links'), 'share-links');
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
   

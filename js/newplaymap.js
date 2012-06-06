@@ -390,6 +390,62 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
     
     element.addClass('links-processed');
     element.hide();
+    // element.remove();
     
+  }
+}
+
+/*
+ * Embedable Badge Block
+ * Direct link URL
+ */
+// Function for showing form to include selecting text etc
+newPlayMap.embedToggle = function() {
+  $('.qtip-content #embed-code').slideToggle('fast', function() {
+    $('.qtip-content input#embed-code').select();
+  });
+}
+
+newPlayMap.shareLinkToggle = function() {
+  $('.qtip-content #share-code').slideToggle('fast', function() {
+    $('.qtip-content input#share-code').select();
+  });
+}
+
+newPlayMap.embedInteraction = function() {
+  var target = $('.qtip-content #embed-link');
+  if (target.hasClass('processed')) {
+    return;
+  }
+  else {
+    target
+      .addClass('processed')
+      .click(function(event) {
+        event.preventDefault();
+        newPlayMap.embedToggle();
+      });
+
+    $('.qtip-content #embed-code').hover(function() {
+      $('.qtip-content #embed-code').select();
+    });
+  }
+}
+
+newPlayMap.shareInteraction = function() {
+  var target = $('.qtip-content #share-link');
+  if (target.hasClass('processed')) {
+    return;
+  }
+  else {
+    target
+      .addClass('processed')
+      .click(function(event) {
+        event.preventDefault();
+        newPlayMap.shareLinkToggle();
+      });
+
+    $('.qtip-content #share-code').hover(function() {
+      $('.qtip-content #share-code').select();
+    });
   }
 }
