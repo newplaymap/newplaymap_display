@@ -257,6 +257,7 @@ ul#share-links-list {
     
     ul#share-links-list input#share-code {
       display: none;
+      width: 180px;
     }
 
     ul#share-links-list a#embed-link {
@@ -265,6 +266,7 @@ ul#share-links-list {
     
     ul#share-links-list input#embed-code {
       display: none;
+      width: 180px;
     }
 
   
