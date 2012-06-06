@@ -31,6 +31,11 @@ newPlayMap.alterHomepage = function() {
 /*   $('div#panel-container div#panel div.content').hide(); */
   
   newPlayMap.formatLinksBubble($('#block-add_button-0'), 'add_button');
+  
+  // Set up some links to trigger default content
+  $('.reset-map').click(function() {
+    newPlayMap.loadDefaultContent();
+  });
 
   return false;
 };
