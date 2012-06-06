@@ -246,8 +246,9 @@ newPlayMap.loadPageRouter = function() {
             // If it's on initial page load, load default
             // Otherwise it spins and breaks
             // if (typeof jsonData.events_data == 'undefined') {
-            //   newPlayMap.loadDefaultContent();
+              newPlayMap.loadDefaultContent();
             // }
+            
             newPlayMap.filters.loadingCompleteFeedback();
           break;
           case 'explore-organizations':
@@ -260,7 +261,7 @@ newPlayMap.loadPageRouter = function() {
             // If it's on initial page load, load default
             // Otherwise it spins and breaks
             // if (typeof jsonData.events_data == 'undefined') {
-            //   newPlayMap.loadDefaultContent();
+              newPlayMap.loadDefaultContent();
             // }
             newPlayMap.filters.loadingCompleteFeedback();
           break;
@@ -274,7 +275,7 @@ newPlayMap.loadPageRouter = function() {
             // If it's on initial page load, load default
             // Otherwise it spins and breaks
             // if (typeof jsonData.events_data == 'undefined') {
-            //   newPlayMap.loadDefaultContent();
+              newPlayMap.loadDefaultContent();
             // }
             newPlayMap.filters.loadingCompleteFeedback();
           break;
