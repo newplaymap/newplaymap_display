@@ -17,7 +17,7 @@ newPlayMap.filters = newPlayMap.filters || {};
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
   newPlayMap.loadMap();         // Load map tiles & trigger data to load.
-  newPlayMap.processFilters();  // Add interaction to filters in sidebar panel
+  newPlayMap.initializeFilters();  // Add interaction to filters in sidebar panel
 };
 
 newPlayMap.loadMap = function(callback){
@@ -138,9 +138,14 @@ newPlayMap.loadMapData = function() {
   }
 };
 
-newPlayMap.processFilters = function() {
+newPlayMap.initializeFilters = function() {
   $('#explore-filters-button').click(function() {
-    if ($(this).hasClass('processed')) {
+    newPlayMap.processFilters();
+  });
+}
+
+newPlayMap.processFilters = function() {
+    if ($('#explore-filters-button').hasClass('processed')) {
       $('#filter-container').slideToggle();
     }
     else {
@@ -163,10 +168,8 @@ newPlayMap.processFilters = function() {
       });
 
       $('#filter-container').slideToggle();
-      $(this).addClass('processed');
+      $('#explore-filters-button').addClass('processed');
     }
-  });
-
 
   // @TODO: If we are loading pins initially, then comment this out. 
   //        The load function will take care of removing feedback.
@@ -242,48 +245,56 @@ newPlayMap.loadPageRouter = function() {
           case 'organization':
             newPlayMap.filters.organizations({path: newPlayMap.routing.path.base});
             break;
+          case 'explore':
+            // Open tabs and select correct tab
+            // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
+            //        rather than on page load to speed things up.
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              newPlayMap.processFilters();
+              $('#filter-container').slideDown();
+
+              // If it's on initial page load, load default
+              newPlayMap.loadDefaultContent();
+            }
+          break;
           case 'explore-plays':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
-            // $('#filters form').tabs('select', 1);
-            // $('#filter-container').slideDown();
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              newPlayMap.processFilters();
+              $('#filters form').tabs('select', 0);
+              $('#filter-container').slideDown();
 
-            // If it's on initial page load, load default
-            // Otherwise it spins and breaks
-            // if (typeof jsonData.events_data == 'undefined') {
+              // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
-            // }
-            
-            newPlayMap.filters.loadingCompleteFeedback();
+            }
           break;
           case 'explore-organizations':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
-            // $('#filters form').tabs('select', 2);
-            // $('#filter-container').slideDown();
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              newPlayMap.processFilters();
+              $('#filters form').tabs('select', 1);
+              $('#filter-container').slideDown();
 
-            // If it's on initial page load, load default
-            // Otherwise it spins and breaks
-            // if (typeof jsonData.events_data == 'undefined') {
+              // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
-            // }
-            newPlayMap.filters.loadingCompleteFeedback();
+            }
           break;
           case 'explore-artists':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
-            // $('#filters form').tabs('select', 3);
-            // $('#filter-container').slideDown();
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              newPlayMap.processFilters();
+              $('#filters form').tabs('select', 2);
+              $('#filter-container').slideDown();
 
-            // If it's on initial page load, load default
-            // Otherwise it spins and breaks
-            // if (typeof jsonData.events_data == 'undefined') {
+              // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
-            // }
-            newPlayMap.filters.loadingCompleteFeedback();
+            }
           break;
         }
       }
@@ -326,6 +337,20 @@ newPlayMap.loadDefaultContent = function() {
   }
   
   todayHeader.text("What's Happening on " + formattedDate);
+}
+
+
+/*
+ * Function to check if content has been loaded
+ */
+newPlayMap.hasContentBeenLoaded = function() {
+  // if (jsonData.events_filter.count > 0 || jsonData.organizations_filter.count > 0 || jsonData.artists_filter.count > 0) {
+  if (typeof jsonData.events_filter === 'undefined' && typeof jsonData.organizations_filter === 'undefined' && typeof jsonData.artists_filter === 'undefined') {
+    return false;
+  }
+  else {
+    return true;
+  }
 }
 
 
