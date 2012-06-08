@@ -255,7 +255,7 @@ ul#share-links-list {
       background-image: url(../images/share-icon-link.png);
     }
     
-    ul#share-links-list input#share-code {
+    ul#share-links-list #share-code {
       display: none;
       width: 180px;
     }
@@ -264,7 +264,7 @@ ul#share-links-list {
       background-image: url(../images/share-icon-badge.png);
     }
     
-    ul#share-links-list input#embed-code {
+    ul#share-links-list #embed-code {
       display: none;
       width: 180px;
     }

@@ -408,13 +408,13 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
 // Function for showing form to include selecting text etc
 newPlayMap.embedToggle = function() {
   $('.qtip-content #embed-code').slideToggle('fast', function() {
-    $('.qtip-content input#embed-code').select();
+    $('.qtip-content input#embed-code input').select();
   });
 }
 
 newPlayMap.shareLinkToggle = function() {
   $('.qtip-content #share-code').slideToggle('fast', function() {
-    $('.qtip-content input#share-code').select();
+    $('.qtip-content input#share-code input').select();
   });
 }
 
@@ -432,7 +432,7 @@ newPlayMap.embedInteraction = function() {
       });
 
     $('.qtip-content #embed-code').hover(function() {
-      $('.qtip-content #embed-code').select();
+      $('.qtip-content #embed-code input').select();
     });
   }
 }
@@ -451,7 +451,7 @@ newPlayMap.shareInteraction = function() {
       });
 
     $('.qtip-content #share-code').hover(function() {
-      $('.qtip-content #share-code').select();
+      $('.qtip-content #share-code input').select();
     });
   }
 }
