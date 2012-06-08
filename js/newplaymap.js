@@ -138,27 +138,33 @@ newPlayMap.loadMapData = function() {
   }
 };
 
-newPlayMap.processFilters = function() { 
+newPlayMap.processFilters = function() {
   $('#explore-filters-button').click(function() {
-    // newPlayMap.filters.loadingFeedback();
-    
-    newPlayMap.filters.setupFilters();
+    if ($(this).hasClass('processed')) {
+      $('#filter-container').slideToggle();
+    }
+    else {
+      // newPlayMap.filters.loadingFeedback();
 
-    $('#filters form').tabs();
-    
-    $('#explore-plays .show-all-link').click(function() {
-      newPlayMap.filters.showAll('plays');
-    });  
+      newPlayMap.filters.setupFilters();
 
-    $('#explore-organizations .show-all-link').click(function() {
-      newPlayMap.filters.showAll('organizations');
-    });  
+      $('#filters form').tabs();
 
-    $('#explore-artists .show-all-link').click(function() {
-      newPlayMap.filters.showAll('artists');
-    });
-    
-    $('#filter-container').slideToggle();
+      $('#explore-plays .show-all-link').click(function() {
+        newPlayMap.filters.showAll('plays');
+      });  
+
+      $('#explore-organizations .show-all-link').click(function() {
+        newPlayMap.filters.showAll('organizations');
+      });  
+
+      $('#explore-artists .show-all-link').click(function() {
+        newPlayMap.filters.showAll('artists');
+      });
+
+      $('#filter-container').slideToggle();
+      $(this).addClass('processed');
+    }
   });
 
 
