@@ -2,8 +2,6 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(true);
 
-// print "I think you're looking for the npm_datasource module.";
-
 $domain = $_SERVER['HTTP_HOST'];
 $drupal_base_path = str_replace('api/loaddata.php', 'participate/', $_SERVER['REQUEST_URI']);
 
