@@ -2,13 +2,35 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(true);
 
+$type = (!empty($_GET['type'])) ? $_GET['type'] : NULL;
+$id = (!empty($_GET['id'])) ? $_GET['id'] : NULL;
+
 $domain = $_SERVER['HTTP_HOST'];
 $drupal_base_path = str_replace('api/loaddata.php', 'participate/', $_SERVER['REQUEST_URI']);
 
-loadOrganizations($m, $domain, $drupal_base_path);
-loadArtists($m, $domain, $drupal_base_path);
-loadEvents($m, $domain, $drupal_base_path);
-loadPlays($m, $domain, $drupal_base_path);
+if ($id && $type) {
+  // Update a specific piece of content
+  switch ($type) {
+    case 'artist':
+      loadArtists($m, $domain, $drupal_base_path, $id);
+    break;
+    case 'event':
+      loadEvents($m, $domain, $drupal_base_path, $id);
+    break;
+    case 'organization':
+      loadOrganizations($m, $domain, $drupal_base_path, $id);
+    break;
+    case 'play':
+      loadPlays($m, $domain, $drupal_base_path, $id);
+    break;
+  }
+} else {
+  // Run everything
+  loadOrganizations($m, $domain, $drupal_base_path);
+  loadArtists($m, $domain, $drupal_base_path);
+  loadEvents($m, $domain, $drupal_base_path);
+  loadPlays($m, $domain, $drupal_base_path);
+}
 
 /*
  * Helper function: Wrapper for curl request
@@ -42,11 +64,13 @@ function getJsonExport($path, $domain, $base_path) {
   return $json;
 }
 
-function loadOrganizations($m, $domain, $base_path) {
+function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
   $organizations = $m->newplaymap->organizations;
-  // find everything in the collection
-  $organizations->drop();
+
+  if ($clear_data == TRUE) {
+    $organizations->drop();
+  }
   // $organization_path = '../data/push/orgs-all.json';
 
   $organization_path = 'data/orgs-all';
@@ -146,6 +170,7 @@ function loadOrganizations($m, $domain, $base_path) {
     // print_r($newObj);
   }
   // print  "</pre>";
+  echo 'organizations';
   return true;
 }
 
@@ -154,13 +179,17 @@ function loadOrganizations($m, $domain, $base_path) {
 
 
 
-function loadArtists($m, $domain, $base_path) {
+function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $artists = $m->newplaymap->artists;
 
   // find everything in the collection
   $cursor =  $artists->find();
-  $artists->drop();
+  
+  if ($clear_data == TRUE) {
+    $artists->drop();
+  }
+
   $artists_path = 'data/artists-all';
 
   $file_data = getJsonExport($artists_path, $domain, $base_path);
@@ -208,6 +237,7 @@ function loadArtists($m, $domain, $base_path) {
     $count++;
   }
 
+  echo 'artists';
 }
 
 
@@ -215,10 +245,14 @@ function loadArtists($m, $domain, $base_path) {
 
 
 
-function loadEvents($m, $domain, $base_path) {
+function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $events = $m->newplaymap->events;
-  $events->drop();
+  
+  if ($clear_data == TRUE) {
+    $events->drop();
+  }
+
   $events_path = 'data/events-all';
 
   $file_data = getJsonExport($events_path, $domain, $base_path);
@@ -279,14 +313,19 @@ function loadEvents($m, $domain, $base_path) {
     $count++;
   }
   // print '</pre>';
+  echo 'events';
 }
 
 
 
-function loadPlays($m, $domain, $base_path) {
+function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $plays = $m->newplaymap->plays;
-  $plays->drop();
+
+  if ($clear_data == TRUE) {
+    $plays->drop();
+  }
+
   // $plays_path = '../data/push/plays-all.json';
   $plays_path = 'data/plays-all';
   
@@ -338,6 +377,7 @@ function loadPlays($m, $domain, $base_path) {
     $count++;
   }
     // print '</pre>';
+  echo 'plays';
 }
 
 
@@ -384,5 +424,5 @@ $json .= ']}';
 */
 
 /* echo $json; */
-// echo "done";
+echo "done";
 ?>
