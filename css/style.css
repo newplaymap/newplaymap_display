@@ -324,7 +324,6 @@ ul.ui-autocomplete {
 #filters .filter-wrapper {
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
-  width: 320px;
 }
 
 #filters .filter-wrapper.last {
