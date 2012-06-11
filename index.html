@@ -94,52 +94,100 @@
                     </ul>
                     <!-- Plays -->
                     <div id="explore-plays">
-                      <input id="plays-filter" type="text" placeholder="Play title" />
+                      <div class="filter-wrapper">
+                        <input id="plays-filter" type="text" placeholder="Play title" />
+                      </div>
                     
-                      <label for="event-type-filter">Event Type:</label>
-                      <select id="event-type-filter" class="form-select" name="event_type"><option selected="selected" value="All">- Select -</option><option value="First Production">First Production</option><option value="Other">Other</option><option value="Presented Performance">Presented Performance</option><option value="Production">Production</option><option value="Reading">Reading</option><option value="Residency">Residency</option><option value="Rolling Premiere">Rolling Premiere</option><option value="Workshop">Workshop</option></select>
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <label for="event-type-filter">Event Type:</label>
+                        <select id="event-type-filter" class="form-select" name="event_type"><option selected="selected" value="All">- Select -</option><option value="First Production">First Production</option><option value="Other">Other</option><option value="Presented Performance">Presented Performance</option><option value="Production">Production</option><option value="Reading">Reading</option><option value="Residency">Residency</option><option value="Rolling Premiere">Rolling Premiere</option><option value="Workshop">Workshop</option></select>
+                      </div>
                     
                       <!-- Events -->
-                      <label id="event-label" for="">Event date:</label>
-                      <!-- <label for="event-date-filter">From date:</label> -->
-                      <input id="event-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <label id="event-label" for="">Event date:</label>
+                        <!-- <label for="event-date-filter">From date:</label> -->
+                        <input id="event-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
+                      </div>
                       <!-- <label for="event-to-date-filter">To date:</label> -->
                       <!-- <input id="event-to-date-filter" class="event-date-field" type="text" size="60" maxlength="128" /> -->
                       <!-- <div class="description">Enter the date in the format: April 29, 2013</div> -->
-                      <input id="events-city-state-filter" type="text" placeholder="City, State" />
-                      <div class="filter-seperator"><span class="filter-seperator-text">or</span></div>
-                      <a href="all-plays" class="show-all-link">Just show me a big list of all plays</a>
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <input id="events-city-state-filter" type="text" placeholder="City, State" />
+                      </div>
+                    
+                      <div class="filter-wrapper last">
+                        <span class="filter-separator">OR</span>
+                        <div>
+                          <a href="all-plays" class="show-all-link">Just show me a big list of all plays</a>
+                        </div>
+                      </div>
                     </div> <!-- / Plays -->
                     
                     <!-- Organizations -->
                     <div id="explore-organizations">
-                      <input id="organizations-filter" class="typeahead" type="text" placeholder="Organization name" />
                     
-                      <label for="organization-type-filter">Organization type:</label>
-                      <select id="organization-type-filter" class="form-select" name="org_type"><option selected="selected"  value="All">- Select -</option><option value="Development">Development</option><option value="Festival">Festival</option><option value="Presenting">Presenting</option><option value="Producing">Producing</option><option value="Service / Network">Service / Network</option><option value="University">University</option></select>
+                      <div class="filter-wrapper">
+                        <input id="organizations-filter" class="typeahead" type="text" placeholder="Organization name" />
+                      </div>
                     
-                      <label for="organization-national-networks-filter">Networks/Affiliations:</label>
-                      <select id="organization-national-networks-filter" class="form-select" name="nat_mem"><option selected="selected" value="All">- Select -</option><option value="AEA (Equity)">AEA (Equity)</option><option value="ASSITEJ/USA8">ASSITEJ/USA</option><option value="Association of Performing Arts Presenters (APAP)">Association of Performing Arts Presenters (APAP)</option><option value="ASTR">ASTR</option><option value="ATHE">ATHE</option><option value="equity">equity</option><option value="KCACTF">KCACTF</option><option value="League of Regional Theaters (LORT)">League of Regional Theaters (LORT)</option><option value="LMDA">LMDA</option><option value="National Alliance for Musical Theatre">National Alliance for Musical Theatre</option><option value="National New Play Network (NNPN)">National New Play Network (NNPN)</option><option value="National Performance Network (NPN)">National Performance Network (NPN)</option><option value="NEAT">NEAT</option><option value="Network of Ensemble Theaters (NET)">Network of Ensemble Theaters (NET)</option><option value="Theatre Communications Group (TCG)">Theatre Communications Group (TCG)</option></select>
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <label for="organization-type-filter">Organization type:</label>
+                        <select id="organization-type-filter" class="form-select" name="org_type"><option selected="selected"  value="All">- Select -</option><option value="Development">Development</option><option value="Festival">Festival</option><option value="Presenting">Presenting</option><option value="Producing">Producing</option><option value="Service / Network">Service / Network</option><option value="University">University</option></select>
+                      </div>
                     
-                      <label for="organization-special-interests-filter">Special Interests:</label>
-                      <select id="organization-special-interests-filter" class="form-select" name="interests"><option selected="selected" value="All">- Select -</option><option value="African-American">African-American</option><option value="Asian-American">Asian-American</option><option value="Classical">Classical</option><option value="Contemporary">Contemporary</option><option value="Devised">Devised</option><option value="Disabilities">Disabilities</option><option value="Ensemble">Ensemble</option><option value="Experimental">Experimental</option><option value="Gay/Lesbian">Gay/Lesbian</option><option value="International">International</option><option value="Jewish">Jewish</option><option value="Latino/Hispanic">Latino/Hispanic</option><option value="Multicultural">Multicultural</option><option value="Multidisciplinary">Multidisciplinary</option><option value="Musicals">Musicals</option><option value="Native American">Native American</option><option value="New Work">New Work</option><option value="Political/Social">Political/Social</option><option value="Puppetry">Puppetry</option><option value="Religious">Religious</option><option value="Student/Youth">Student/Youth</option><option value="Touring">Touring</option><option value="Translations/Adaptations">Translations/Adaptations</option><option value="University/Training">University/Training</option><option value="Women">Women</option><option value="Young Audiences">Young Audiences</option></select>
-
-                      <input id="organizations-city-state-filter" type="text" placeholder="City, State" />
-                      
-                      <div class="filter-seperator"><span class="filter-seperator-text">or</span></div>
-                      <a href="all-plays" class="show-all-link">Just show me a big list of all organizations</a>
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <label for="organization-national-networks-filter">Networks/Affiliations:</label>
+                        <select id="organization-national-networks-filter" class="form-select" name="nat_mem"><option selected="selected" value="All">- Select -</option><option value="AEA (Equity)">AEA (Equity)</option><option value="ASSITEJ/USA8">ASSITEJ/USA</option><option value="Association of Performing Arts Presenters (APAP)">Association of Performing Arts Presenters (APAP)</option><option value="ASTR">ASTR</option><option value="ATHE">ATHE</option><option value="equity">equity</option><option value="KCACTF">KCACTF</option><option value="League of Regional Theaters (LORT)">League of Regional Theaters (LORT)</option><option value="LMDA">LMDA</option><option value="National Alliance for Musical Theatre">National Alliance for Musical Theatre</option><option value="National New Play Network (NNPN)">National New Play Network (NNPN)</option><option value="National Performance Network (NPN)">National Performance Network (NPN)</option><option value="NEAT">NEAT</option><option value="Network of Ensemble Theaters (NET)">Network of Ensemble Theaters (NET)</option><option value="Theatre Communications Group (TCG)">Theatre Communications Group (TCG)</option></select>
+                      </div>
+                    
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <label for="organization-special-interests-filter">Special Interests:</label>
+                        <select id="organization-special-interests-filter" class="form-select" name="interests"><option selected="selected" value="All">- Select -</option><option value="African-American">African-American</option><option value="Asian-American">Asian-American</option><option value="Classical">Classical</option><option value="Contemporary">Contemporary</option><option value="Devised">Devised</option><option value="Disabilities">Disabilities</option><option value="Ensemble">Ensemble</option><option value="Experimental">Experimental</option><option value="Gay/Lesbian">Gay/Lesbian</option><option value="International">International</option><option value="Jewish">Jewish</option><option value="Latino/Hispanic">Latino/Hispanic</option><option value="Multicultural">Multicultural</option><option value="Multidisciplinary">Multidisciplinary</option><option value="Musicals">Musicals</option><option value="Native American">Native American</option><option value="New Work">New Work</option><option value="Political/Social">Political/Social</option><option value="Puppetry">Puppetry</option><option value="Religious">Religious</option><option value="Student/Youth">Student/Youth</option><option value="Touring">Touring</option><option value="Translations/Adaptations">Translations/Adaptations</option><option value="University/Training">University/Training</option><option value="Women">Women</option><option value="Young Audiences">Young Audiences</option></select>
+                      </div>
+                    
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <input id="organizations-city-state-filter" type="text" placeholder="City, State" />
+                      </div>
+                    
+                      <div class="filter-wrapper last">
+                        <span class="filter-separator">OR</span>
+                        <div>
+                          <a href="all-plays" class="show-all-link">Just show me a big list of all organizations</a>
+                        </div>
+                      </div>
                     </div> <!-- / Organizations -->
                     
                     <!-- Artists -->
                     <div id="explore-artists">
-                      <input id="artists-filter" class="typeahead" type="text" placeholder="Artist name" />
+                      <div class="filter-wrapper">
+                        <input id="artists-filter" class="typeahead" type="text" placeholder="Artist name" />
+                      </div>
                     
-                      <label for="ensemble-collective-filter">Ensemble / Collective</label>
-                      <input type="checkbox" id="ensemble-collective-filter" value="Ensemble / Collective" />
-                      <input id="artists-city-state-filter" type="text" placeholder="City, State" />
-                      
-                      <div class="filter-seperator"><span class="filter-seperator-text">or</span></div>
-                      <a href="all-plays" class="show-all-link">Just show me a big list of all artists</a>
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <label for="ensemble-collective-filter">Ensemble / Collective</label>
+                        <input type="checkbox" id="ensemble-collective-filter" value="Ensemble / Collective" />
+                      </div>
+                    
+                      <div class="filter-wrapper">
+                        <span class="filter-separator">OR</span>
+                        <input id="artists-city-state-filter" type="text" placeholder="City, State" />
+                      </div>
+                    
+                      <div class="filter-wrapper last">
+                        <span class="filter-separator">OR</span>
+                        <div>
+                          <a href="all-plays" class="show-all-link">Just show me a big list of all artists</a>
+                        </div>
+                      </div>
                     </div> <!-- / Artists -->
 
                   </form>

@@ -321,6 +321,38 @@ ul.ui-autocomplete {
   border: none;
 }
 
+#filters .filter-wrapper {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  width: 320px;
+}
+
+#filters .filter-wrapper.last {
+  border: none;
+}
+
+#filters .filter-wrapper .filter-separator {
+  display: block;
+  font-size: 0.611111111em;
+  text-transform: uppercase;
+  color: #666;
+  background: #fff;
+  padding: 5px;
+  width: 15px;
+  margin: 0 auto;
+  margin-top: -25px;
+  text-align: center;
+}
+
+#filters .filter-wrapper > label,
+#filters .filter-wrapper > div {
+  clear: both;
+}
+
+#filters .ui-tabs-panel {
+  padding: 15px;
+}
+
   #filters #explore-plays .ui-widget-content {
     border: 2px solid #EEEEEE;
   }
