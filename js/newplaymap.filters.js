@@ -412,6 +412,15 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
       }
     }
   );
+  
+  // http://stackoverflow.com/questions/3488016/using-html-in-jquery-ui-autocomplete
+  // .data("autocomplete")._renderItem = function( ul, item ) {
+  //   return $( "<li></li>" )
+  //      .data( "item.autocomplete", item )
+  //      .append( "<a>"+ item.label + "</a>" )
+  //      .appendTo( ul );
+  //   };
+  
 }
 
 /*
