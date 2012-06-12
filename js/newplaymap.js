@@ -326,17 +326,9 @@ newPlayMap.loadDefaultContent = function() {
   var today = new Date();
   var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
   // console.log('default');
-  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" });
+  var todayHeader = "What's Happening on " + formattedDate;
   
-  var todayHeader;
-  if ($('#today-header').length > 0) {
-    todayHeader = $('#today-header');
-  }
-  else {
-    todayHeader = $('<div></div>').attr('id', 'today-header').insertBefore('#panel-container .results-container .results-title h2');
-  }
-  
-  todayHeader.text("What's Happening on " + formattedDate);
+  newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" }, todayHeader);
 }
 
 

@@ -164,7 +164,7 @@ newPlayMap.filters.ensemble = function(data) {
 
 
 // Load plays
-newPlayMap.filters.events = function(data) {
+newPlayMap.filters.events = function(data, resultsTitle) {
   var pathQuery = "";
 
   if (data.event_type !== undefined) {
@@ -190,6 +190,7 @@ newPlayMap.filters.events = function(data) {
     label: "play_title", // field which will be used in label
     title: "play_title",
     template: "play-template",
+    resultsTitle: resultsTitle,
     type: "play",
     dataName: "events_filter",
     path: "api/events_filter.php?" + pathQuery,
