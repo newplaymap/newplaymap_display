@@ -6,7 +6,8 @@ $type = (!empty($_GET['type'])) ? $_GET['type'] : NULL;
 $id = (!empty($_GET['id'])) ? $_GET['id'] : NULL;
 
 $domain = $_SERVER['HTTP_HOST'];
-$drupal_base_path = str_replace('api/loaddata.php', 'participate/', $_SERVER['REQUEST_URI']);
+$server_array = explode('?', $_SERVER['REQUEST_URI']);
+$drupal_base_path = str_replace('api/loaddata.php', 'participate/', $server_array[0]);
 
 if ($id && $type) {
   // Update a specific piece of content
