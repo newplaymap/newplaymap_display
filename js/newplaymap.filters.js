@@ -572,13 +572,14 @@ newPlayMap.filters.showAll = function(type) {
   containerEmpty.empty();
   container = $('#panel-container .results');
   container.empty();
-  
+
   var len = jsonDataSearch[type].length;
 
   // Set loading feedback
   newPlayMap.filters.loadingFeedback();
   
-  // Set title
+  // Set results title and clear results header text (a.k.a. What's on today)
+  $('#results-header').text('');
   newPlayMap.setResultsTitle(displayType, len);
   
   for (var i = 0; i < len; i++) {

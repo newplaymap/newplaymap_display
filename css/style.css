@@ -402,7 +402,8 @@ ul.ui-autocomplete {
       padding-left: 25px;
     }
     
-      #panel-container .results-container .results-title h2#generative-artists-results-title {
+      #panel-container .results-container .results-title h2#generative-artists-results-title,
+      #panel-container .results-container .results-title h2#artists-results-title {
         background: url("../images/filter-select-icon-artists.png") no-repeat 0 center;
       }
       
