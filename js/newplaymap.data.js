@@ -104,7 +104,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
-    $('div.marker').css({ 'opacity' : 1 }); 
+    $('div.marker').css({ 'opacity' : 1 });
   }
   
 
@@ -114,6 +114,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   for (var i = 0; i < len; i++) {
       var feature = features[i],
           id = feature.properties[vars.id],
+          // marker = document.createElement("a");
           marker = document.createElement("div");
 
       marker.feature = feature;
@@ -129,7 +130,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       marker.setAttribute("id", "marker-" + vars.type + "-" + id);
       marker.setAttribute("dataName", vars.dataName);
       marker.setAttribute("class", "marker");
-      marker.setAttribute("href", vars.dataPath);
+      marker.setAttribute("href", feature.properties.path);
       marker.setAttribute("type", vars.type);
       marker.setAttribute("latlon", latlon);
 
