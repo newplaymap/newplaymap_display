@@ -390,49 +390,6 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   echo 'plays';
 }
 
-
-
-
-/*
-
-
-$events = $m->newplaymap->events;
-$plays = $m->newplaymap->plays;
-
-$events_path = '../data/push/events-all.json';
-*/
-/*
-
-$cursor = $m->newplaymap->organizations->find()->limit(10);
-
-// Print data
-header('Access-Control-Allow-Origin: *.newplaymap.org | *.chachaville.com');
-header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
-header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
-header("Cache-Control: no-cache, must-revalidate"); 
-header("Pragma: no-cache");
-header("Content-type: application/json");
-$json = '{"records": [' ;
-
-$i = 0;
-
-// iterate through the results
-
-foreach ($cursor as $obj) {
-  if(!empty($obj['id'])) {
-    if($i > 0) {
-     $json .= ',';
-    }
-
-    $json .= json_encode($obj);
-  
-    $i++;
-  }
-}
-
-$json .= ']}';
-*/
-
 /* echo $json; */
 echo "done";
 ?>
