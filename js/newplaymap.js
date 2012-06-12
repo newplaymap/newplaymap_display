@@ -328,7 +328,6 @@ newPlayMap.loadPageRouter = function() {
   });
 
   // bind address to all a links (@TODO may also need divs)
-  // @TODO: Turn this back on once it can be selectively set to not all <a> tags
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
 
