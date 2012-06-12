@@ -139,8 +139,8 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
     // print_r($newObj);
   }
   // print  "</pre>";
-  echo 'organizations<br />';
-  return true;
+  // echo 'organizations<br />';
+  // return true;
 }
 
 
@@ -209,7 +209,7 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
     // print_r($newObj);
   }
   // print "</pre>";
-  echo 'artists<br />';
+  // echo 'artists<br />';
 }
 
 
@@ -288,7 +288,7 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   }
 
   // print '</pre>';
-  echo 'events<br />';
+  // echo 'events<br />';
 }
 
 
@@ -354,5 +354,5 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
     // print_r($newObj);
   }
     // print '</pre>';
-  echo 'plays<br />';
+  // echo 'plays<br />';
 }
