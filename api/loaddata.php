@@ -42,14 +42,15 @@ if ($id && $type) {
  *
  * @param string $base_path Base path of drupal install. Used from building request.
  */
-function getJsonExport($path, $domain, $base_path) {
+function getJsonExport($domain, $base_path, $path, $arguments = NULL) {
   // create a new cURL resource
   $ch = curl_init();
 
   $host = 'http://' . $domain;
   $base_path = $base_path;
+  $arguments_path = ($arguments) ? '/' . $arguments : '';
   
-  $absolute_path = $host . $base_path . $path;
+  $absolute_path = $host . $base_path . $path . $arguments_path;
   
   // set URL and other appropriate options
   curl_setopt($ch, CURLOPT_URL, $absolute_path);
@@ -75,7 +76,7 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
   // $organization_path = '../data/push/orgs-all.json';
 
   $organization_path = 'data/orgs-all';
-  $file_data = getJsonExport($organization_path, $domain, $base_path);
+  $file_data = getJsonExport($domain, $base_path, $organization_path, $id);
 
   // $file_data = file_get_contents($organization_path);
   
@@ -193,7 +194,7 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
 
   $artists_path = 'data/artists-all';
 
-  $file_data = getJsonExport($artists_path, $domain, $base_path);
+  $file_data = getJsonExport($domain, $base_path, $artists_path, $id);
   $collection = $artists;
   /* var_dump($file_data); */
   
@@ -203,6 +204,8 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
   
   $count = 0;
   $insert = array();
+  
+  // print "<pre>";
 
   foreach ($objects as $obj_load) {
     $node = (array) $obj_load->node;
@@ -236,8 +239,9 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
     // This will completely replace the record.
     $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj), true);
     $count++;
+    // print_r($newObj);
   }
-
+  // print "</pre>";
   echo 'artists';
 }
 
@@ -256,7 +260,7 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
   $events_path = 'data/events-all';
 
-  $file_data = getJsonExport($events_path, $domain, $base_path);
+  $file_data = getJsonExport($domain, $base_path, $events_path, $id);
   $collection = $events;
   
   $json = json_decode($file_data);
@@ -266,6 +270,7 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   $count = 0;
   $insert = array();
   // print "<pre>";
+
   foreach ($objects as $obj_load) {
     $node = (array) $obj_load->node;
   
@@ -310,9 +315,11 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
     );
     // This will completely replace the record.
     $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
-    // print_r($newObj);
     $count++;
+
+    // print_r($newObj);
   }
+
   // print '</pre>';
   echo 'events';
 }
@@ -330,7 +337,7 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   // $plays_path = '../data/push/plays-all.json';
   $plays_path = 'data/plays-all';
   
-  $file_data = getJsonExport($plays_path, $domain, $base_path);
+  $file_data = getJsonExport($domain, $base_path, $plays_path, $id);
   
   $collection = $plays;
   
@@ -340,9 +347,11 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $count = 0;
   $insert = array();
+
   // print '<pre>';
+
   foreach ($objects as $obj_load) {
-  // print "<pre>";
+
   $node = (array) $obj_load->node;
   
   // Set up proper array for Alternate play titles
@@ -373,9 +382,9 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
     )
   );
     // This will completely replace the record.
-    // print_r($newObj);
     $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj), true);
     $count++;
+    // print_r($newObj);
   }
     // print '</pre>';
   echo 'plays';
