@@ -14,6 +14,30 @@ newPlayMap.loadJSONFile = function(vars) {
 
 };
 
+/*
+ * Function to load content from an API file
+ *
+ * Sample options to pass in as the vars object:
+ *   data: data,
+ *   zoomLevel: newPlayMap.defaultZoom,
+ *   clearLayer: true,
+ *   clearLayers: true,
+ *   loadProfile: loadProfile,
+ *   template: "organization",
+ *   layer: "layer-organization-filter",
+ *   class: "inactive",
+ *   template: "organization-template",
+ *   type: "organization",
+ *   label: "org_type",
+ *   id: "organization_id",
+ *   title: "name",
+ *   resultsTitle: "What's on Today",
+ *   dataName: "organizations_filter",
+ *   path: 'api/organizations_filter.php?' + pathQuery,
+ *   dataPath: "api/organizations_filter.php?" + pathQuery,
+ *   icon: "icons/organization.png",
+ *   callback: newPlayMap.loadOrganizationFilter
+ */
 newPlayMap.loadAPICall = function(vars) {
   var vars = vars;
   var contentData = vars.path + "&cache=" + Math.floor(Math.random()*11);

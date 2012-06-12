@@ -179,6 +179,13 @@ newPlayMap.loadResults = function(features, vars) {
   container = $('#panel-container .' + type);
   container.empty();
   // console.log(features.length);
+  
+  if (typeof vars.resultsTitle != 'undefined') {
+    $('#results-header').text(vars.resultsTitle);
+  }
+  else {
+    $('#results-header').text('');
+  }
 
   var len = features.length;
   for (var i = 0; i < len; i++) {
