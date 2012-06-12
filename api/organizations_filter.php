@@ -60,6 +60,7 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
     
+    /* Set up display version of Organization Type */
     $obj['properties']['organization_type_display'] = '';
     $i = 0;
     $l = count($obj['properties']['organization_type']);
@@ -68,6 +69,34 @@ foreach ($cursor as $obj) {
       
       if ($i < $l - 1) {
         $obj['properties']['organization_type_display'] .= ', ';
+      }
+      
+      $i++;
+    }
+    
+    /* Set up display version of Special Interests */
+    $obj['properties']['special_interests_display'] = '';
+    $i = 0;
+    $l = count($obj['properties']['special_interests']);
+    foreach ($obj['properties']['special_interests'] as $type) {
+      $obj['properties']['special_interests_display'] .= $type['interest'];
+      
+      if ($i < $l - 1) {
+        $obj['properties']['special_interests_display'] .= ', ';
+      }
+      
+      $i++;
+    }
+    
+    /* Set up display version of National Networks */
+    $obj['properties']['national_networks_display'] = '';
+    $i = 0;
+    $l = count($obj['properties']['national_networks']);
+    foreach ($obj['properties']['national_networks'] as $type) {
+      $obj['properties']['national_networks_display'] .= $type['network'];
+      
+      if ($i < $l - 1) {
+        $obj['properties']['national_networks_display'] .= ', ';
       }
       
       $i++;
