@@ -296,6 +296,27 @@ newPlayMap.loadPageRouter = function() {
               newPlayMap.loadDefaultContent();
             }
           break;
+          case 'all-artists':
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              // If it's on initial page load, load default
+              newPlayMap.loadDefaultContent();
+            }
+            // newPlayMap.filters.showAll('artists'); // the index isn't built yet
+          break;
+          case 'all-organizations':
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              // If it's on initial page load, load default
+              newPlayMap.loadDefaultContent();
+            }
+            // newPlayMap.filters.showAll('organizations'); // the index isn't built yet
+          break;
+          case 'all-plays':
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              // If it's on initial page load, load default
+              newPlayMap.loadDefaultContent();
+            }
+            // newPlayMap.filters.showAll('plays'); // the index isn't built yet
+          break;
         }
       }
       else {
