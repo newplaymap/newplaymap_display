@@ -83,7 +83,10 @@ newPlayMap.onMarkerClick = function(e) {
                     
         // Update the panel data.
         newPlayMap.updatePanel(marker, locationsByID[grouping_field]);
-          
+        
+        // This breaks everything because I made the profile show up when going directly to a url by similating clicking on a marker. So this is bad recursion
+        // console.log(marker.feature);
+        // $.address.path(marker.feature.properties.path);
       } 
     }
   }
@@ -205,7 +208,7 @@ newPlayMap.loadPlayData = function(marker) {
   var feature = newPlayMap.lookupFeatureByMarker(marker);
   newPlayMap.drawPlayJourneyLines(feature[0]);
   
-  $('div#play-journey').click(function() {$('div#play-journey').hide();});
+  // $('div#play-journey').click(function() {$('div#play-journey').hide();});
 
 };
 
