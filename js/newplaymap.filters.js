@@ -51,7 +51,7 @@ newPlayMap.filters.organizations = function(data) {
     type: "organization",
     label: "org_type",
     id: "organization_id",
-    title: "name",
+    title: "organization_name_display",
     dataName: "organizations_filter",
     path: 'api/organizations_filter.php?' + pathQuery,
     dataPath: "api/organizations_filter.php?" + pathQuery,
@@ -74,7 +74,7 @@ newPlayMap.filters.plays = function(data) {
     class: "inactive",
     label: "play_title",
     id: "event_id",
-    title: "play_title",
+    title: "play_title_display",
     template: "play-template",
     type: "play",
     dataName: "play",
@@ -116,7 +116,7 @@ newPlayMap.filters.artists = function(data) {
     class: "inactive",
     id: "artist_id",
     label: "ensemble_collective",
-    title: "generative_artist",
+    title: "artist_name_display",
     template: "artist-template",
     type: "artist",
     dataName: "artists_filter",
@@ -407,8 +407,10 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
       source: organizationNames,
       appendTo: '#panel-container',
       select: function(event, ui) {
+        $("#organizations-filter").val(ui.item.label);
         newPlayMap.filters.organizations({organization_name: ui.item.value});
         newPlayMap.filters.reset(this);
+        return false;
       }
     }
   );
@@ -453,9 +455,11 @@ newPlayMap.filters.setArtistsIndex = function(data) {
       source: artistsNames,
       appendTo: '#panel-container',
       select: function(event, ui) {
+        $("#artists-filter").val(ui.item.label);
         // newPlayMap.filters.artists({artist_name: ui.item.value});
         newPlayMap.filters.events({artist_name: ui.item.value});
         newPlayMap.filters.reset(this);
+        return false;
       }
     }
   );
@@ -491,8 +495,10 @@ newPlayMap.filters.setPlaysIndex = function(data) {
       source: playNames,
       appendTo: '#panel-container',
       select: function(event, ui) {
+        $("#plays-filter").val(ui.item.label);
         newPlayMap.filters.plays({play_title: ui.item.value});
         newPlayMap.filters.reset(this);
+        return false;
       }
     }
   );

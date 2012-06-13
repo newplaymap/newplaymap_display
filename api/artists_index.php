@@ -30,7 +30,7 @@ foreach ($cursor as $obj) {
     
     $json .= json_encode(array(
       'value' => $obj['properties']['artist_name'],
-      'label' => $obj['properties']['artist_name'],
+      'label' => $obj['properties']['artist_name_display'],
       'path' => $obj['properties']['path'],
     ));
     
