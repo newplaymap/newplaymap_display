@@ -453,6 +453,11 @@ ul.ui-autocomplete {
       }
     
     #header-links .brand {
+      margin-left: 0; /* override bootstrap.css */
+      text-transform: uppercase;
+      font-size: 1.23em; /* 16px */
+      font-family: 'Avenir LT W01 85 Heavy';
+      padding-top: 5px;
     }
     
       #header-links a.brand {
@@ -466,6 +471,8 @@ ul.ui-autocomplete {
       height: 50px;
       float: left;
       text-indent: -500px;
+      padding: 0;
+      background-position: -5px -5px;
     }
   #header-buttons-wrapper {
     width: 30%;
@@ -494,6 +501,8 @@ ul.ui-autocomplete {
         #header-buttons a#explore-filters-button {
           padding: 6px 9px;
           cursor: pointer;
+          color: #BF202E;
+          font-family: 'Avenir LT W01 85 Heavy'; 
         }
 
         #header-buttons a#add_button span,
