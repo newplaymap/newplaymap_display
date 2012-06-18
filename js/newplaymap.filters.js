@@ -71,6 +71,7 @@ newPlayMap.filters.plays = function(data) {
     clearLayer: true,
     clearLayers: true,
     layer: "layer-plays-filter",
+    loadProfile: true,
     class: "inactive",
     label: "play_title",
     id: "event_id",
