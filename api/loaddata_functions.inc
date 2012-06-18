@@ -129,7 +129,7 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
           "national_networks" => $national_networks_list,
           "city" => $node["City"],
           "state" => $node["State"],
-          "city_state" => $city_state,
+          "city_state" => html_entity_decode($city_state, ENT_QUOTES),
  
       )
     );
@@ -201,7 +201,7 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
           "ensemble_collective" => $node["ensemble_collective"],
           "city" => $node["City"],
           "state" => $node["State"],
-          "city_state" => $city_state,
+          "city_state" => html_entity_decode($city_state, ENT_QUOTES),
       )
     );
 
@@ -279,7 +279,7 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
         "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
         "city" => $node["City"],
         "state" => $node["State"],
-        "city_state" => $city_state,
+        "city_state" => html_entity_decode($city_state, ENT_QUOTES),
     )
     );
     // This will completely replace the record.
