@@ -26,9 +26,9 @@ newPlayMap.onMarkerOver = function(e) {
 
         $('div#panel-container div#panel .content').show();
  
-        $('div.marker').css({ 'opacity' : 0.4 }); 
+        $('a.marker').css({ 'opacity' : 0.4 }); 
 
-        $('div.marker[grouping_value=' + grouping_field + ']').css({ 'opacity' : 1 }); 
+        $('a.marker[grouping_value=' + grouping_field + ']').css({ 'opacity' : 1 }); 
  
         // Update the bubble
         newPlayMap.updateBubble(marker, locationsByID[grouping_field]);
@@ -59,7 +59,7 @@ newPlayMap.onMarkerOut = function(e) {
     });
 
 
-    $('div.marker').css({ 'opacity' : 1 }); 
+    $('a.marker').css({ 'opacity' : 1 }); 
 
 
   }
@@ -112,7 +112,7 @@ newPlayMap.loadOrganization = function() {
 
 newPlayMap.loadEvent = function() {
     
-  $('div.marker[type=event]').bind( "click", function() {
+  $('a.marker[type=event]').bind( "click", function() {
       var marker = $(this);
       
       var related_play_id =  marker.attr("related_play_id");
@@ -146,7 +146,7 @@ newPlayMap.loadEvent = function() {
 };
 
 newPlayMap.loadEventFilter = function() {
-  $('div.marker[type=events_filter]').bind( "click", function() {
+  $('a.marker[type=events_filter]').bind( "click", function() {
       var marker = $(this);
       
       var related_play_id =  marker.attr("related_play_id");
@@ -185,17 +185,17 @@ newPlayMap.loadJourney = function(feature) {
   newPlayMap.drawPlayJourneyLines(feature);
 
   // Add click event to play markers.
-  $('div.marker[type=play]').bind( "click", function() {
+  $('a.marker[type=play]').bind( "click", function() {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
     }
-  ).trigger('click');
+  );
   
 };
 
 newPlayMap.loadRelatedEvents = function() {
   // Add click event to play markers.
-  $('div.marker[type=play]').bind( "click", function() {
+  $('a.marker[type=play]').bind( "click", function() {
       var marker = $(this);
       newPlayMap.loadPlayData(marker);
     }

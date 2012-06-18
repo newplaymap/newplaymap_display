@@ -88,7 +88,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
   // Remove divs if they exist and API function requests that they be cleared.
   if(vars.clearLayer === true) {
-    $('div.marker[dataName=' +   + ']').remove();
+    $('a.marker[dataName=' +   + ']').remove();
   }
   
   // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
@@ -96,15 +96,15 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   // Remove new layers
   if(vars.clearLayers === true) {
     $('div#play-journey').remove();
-    $('div.marker[dataName=play]').remove();
-    $('div.marker[dataName=artists_filter]').remove();
-    $('div.marker[dataName=events_filter]').remove();
-    $('div.marker[dataName=plays_filter]').remove();
-    $('div.marker[dataName=organizations_filter]').remove();
+    $('a.marker[dataName=play]').remove();
+    $('a.marker[dataName=artists_filter]').remove();
+    $('a.marker[dataName=events_filter]').remove();
+    $('a.marker[dataName=plays_filter]').remove();
+    $('a.marker[dataName=organizations_filter]').remove();
 
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
-    $('div.marker').css({ 'opacity' : 1 });
+    $('a.marker').css({ 'opacity' : 1 });
   }
   
 
@@ -114,8 +114,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   for (var i = 0; i < len; i++) {
       var feature = features[i],
           id = feature.properties[vars.id],
-          // marker = document.createElement("a");
-          marker = document.createElement("div");
+          marker = document.createElement("a");
 
       marker.feature = feature;
       var latlon = feature.properties.latitude + "," + feature.properties.longitude;
