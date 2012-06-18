@@ -1,6 +1,6 @@
 newPlayMap.getMarker = function(target) {
     var marker = target;
-    while (marker && marker.className != "marker") {
+    while (marker && $(marker).hasClass('marker') != true) {
         marker = marker.parentNode;
     }
     return marker;
