@@ -191,7 +191,6 @@ newPlayMap.loadJourney = function(feature) {
     }
   ).trigger('click');
   
-  $('div#play-journey').click(function() {$('div#play-journey').hide();});
 };
 
 newPlayMap.loadRelatedEvents = function() {
