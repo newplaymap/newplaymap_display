@@ -175,7 +175,8 @@ footer {
   color: #000;
 }
 
-#panel-container {
+#panel-container #panel,
+#panel-container #filter-container {
   margin-top: 55px;
 }
 
