@@ -379,6 +379,10 @@ ul.ui-autocomplete {
 }
 
 /* Results styles */
+#panel-container .results-container ol {
+  margin: 7px;
+}
+
 #panel-container .results-container ol li,
 #panel-container .results-container ol.results li {
   cursor: pointer;
@@ -390,6 +394,20 @@ ul.ui-autocomplete {
   #panel-container .results-container ol.results li.active {
     background-color: #fff;
     border-radius: 5px 5px 5px 5px;
+  }
+  
+  #panel-container .results-container ol.results img.results-item-image {
+    float: left;
+  }
+  
+  #panel-container .results-container ol#events-results li {
+    background-image: url("../images/listing-icon-event-single.png");
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+  }
+  
+  #panel-container .results-container ol.results div.results-item-content {
+    margin-left: 40px;
   }
 
   #panel-container .results-container ol.results p {
