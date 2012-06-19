@@ -114,6 +114,7 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
         ),
       "properties" => array(
           "logo" => $node["Logo"],
+          "icon_small" => $node["Small logo"],
           "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
           "organization_id" => $node["Org ID"],
           "name" => $node["Org name"],
@@ -191,6 +192,7 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
           "latitude" => $node["Latitude"],
           "longitude" => $node["Longitude"],
           "artist_photo" => $node["Photo"],
+          "icon_small" => $node["Small photo"],
           "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
           "artist_id" => $node["Artist ID"],
           "content_type" => $node["Content Type"],
