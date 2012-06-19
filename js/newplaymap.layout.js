@@ -250,11 +250,12 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
   }
 
   $('#panel-container .results-container .results-title h2')
-    .attr('id', resultsType.replace(' ', '-')
-    .toLowerCase() + 's-results-title')
+    .attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results-title')
     .text(resultsCount + ' ' + resultsType + resultsPlural);
     
   $('#panel-container .results-container .results-title .results-total-count').text(totalCountText);
+  
+  $('#panel-container .results-container ol.results').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results');
 }
 
 
