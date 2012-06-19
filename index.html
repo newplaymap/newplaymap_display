@@ -369,55 +369,62 @@
                </div> 
 
                 <script id="results-template" type="text/x-jquery-tmpl">
-                    <li listing_id="${id}"><a href="${path}">${title}</a>
-
-                      {{if properties.event_type}}
-                        ${properties.event_type}
-                      {{else}}
-                        NO EVENT TYPE
+                    <li listing_id="${id}">
+                      {{if properties.icon_small}}
+                        <img class="results-item-image" src="participate/${properties.icon_small}" />
                       {{/if}}
-                      
-                      {{if properties.event_date}}
-                        <div class="date">${properties.event_date}
-                        
-                        {{if properties.event_to_date}}
-                          - ${properties.event_to_date}</div>
+
+                      <div class="results-item-content">
+                        <a href="${path}">${title}</a>
+
+                        {{if properties.event_type}}
+                          ${properties.event_type}
                         {{else}}
-                          </div>
+                          NO EVENT TYPE
                         {{/if}}
-                      {{else}}
-                        NO DATE
-                      {{/if}}
                       
-                      {{if properties.organization_type_display}}
-                        <div class="organization-type">${properties.organization_type_display}</div>
-                      {{else}}
-                        NO ORG TYPE
-                      {{/if}}
+                        {{if properties.event_date}}
+                          <div class="date">${properties.event_date}
+                        
+                          {{if properties.event_to_date}}
+                            - ${properties.event_to_date}</div>
+                          {{else}}
+                            </div>
+                          {{/if}}
+                        {{else}}
+                          NO DATE
+                        {{/if}}
                       
-                      {{if city}}{{if state}}
-                        <div>${city}, ${state}</div>
-                      {{/if}}
-                      {{else}}
-                        NO CITY
-                      {{/if}}
+                        {{if properties.organization_type_display}}
+                          <div class="organization-type">${properties.organization_type_display}</div>
+                        {{else}}
+                          NO ORG TYPE
+                        {{/if}}
+                      
+                        {{if city}}{{if state}}
+                          <div>${city}, ${state}</div>
+                        {{/if}}
+                        {{else}}
+                          NO CITY
+                        {{/if}}
 
-                      {{if properties.related_theater}}
-                        <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
-                      {{else}}
-                        NO RELATED THEATER
-                      {{/if}}
+                        {{if properties.related_theater}}
+                          <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
+                        {{else}}
+                          NO RELATED THEATER
+                        {{/if}}
 
                         
-                      {{if event_description}}
-                        <dl>
-                        <dd>{{html event_description}}</dd>
-                        </dl>
-                      {{else}}
-                        NO EVENT DESCRIPTION
-                      {{/if}}
+                        {{if event_description}}
+                          <dl>
+                          <dd>{{html event_description}}</dd>
+                          </dl>
+                        {{else}}
+                          NO EVENT DESCRIPTION
+                        {{/if}}
                       
-                      <a href="participate/node/${id}/edit" class="event-edit-link">Edit</a>
+                        <a href="participate/node/${id}/edit" class="event-edit-link">Edit</a>
+                      </div>
                   </li>
                 </script>
                 
