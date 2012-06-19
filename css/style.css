@@ -166,7 +166,6 @@ footer {
 /* Panel styles */
 #panel-container {
   position: fixed;
-  top: 48px;
   right: 0;
   z-index: 1000;
   background-color: #E6DAC8;
@@ -174,6 +173,10 @@ footer {
   height: 100%;
   overflow-y: scroll;
   color: #000;
+}
+
+#panel-container #panel {
+  margin-top: 55px;
 }
 
 #panel-container #panel .content {
