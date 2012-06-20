@@ -420,6 +420,7 @@ ul.ui-autocomplete {
   list-style: none;
   font-size: 0.9em;
   overflow: auto;
+  line-height: 21px;
 }
   
   #panel-container .results-container ol li.active,
