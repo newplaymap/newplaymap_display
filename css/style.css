@@ -202,8 +202,18 @@ div#panel-container div#panel {
   margin-top: 10px;
 }
 
-#panel div.profile-header {
+#panel .profile-header {
   margin-left: 95px;
+}
+
+#panel .profile-header .profile-location {
+  font-size: 0.9em;
+}
+
+#panel article {
+  clear: both;
+  margin-top: 15px;
+  font-size: 0.9em;
 }
 
 ul#panel-content-links {
