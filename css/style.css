@@ -177,15 +177,16 @@ footer {
 
 #panel-container #panel,
 #panel-container #filter-container {
-  margin-top: 65px;
+  margin-top: 55px;
 }
 
 #panel-container #panel .content {
-  margin: 10px;
+  margin: 0 10px;
 }
 
 #filter-container {
   display: none;
+  margin-bottom: -55px;
 }
 
 div#panel-container div.journey {
@@ -198,6 +199,7 @@ div#panel-container div#panel {
 
 #panel img.profile-image {
   float: left;
+  margin-top: 10px;
 }
 
 #panel div.profile-header {
@@ -393,6 +395,10 @@ ul.ui-autocomplete {
 }
 
 /* Results styles */
+#panel-container .results-container {
+  padding-top: 10px;
+}
+
 #panel-container .results-container ol {
   margin: 7px;
 }
@@ -402,6 +408,7 @@ ul.ui-autocomplete {
   cursor: pointer;
   margin-bottom: 10px;
   padding: 10px;
+  list-style: none;
 }
   
   #panel-container .results-container ol li.active,
