@@ -13,8 +13,8 @@ Light tan: #F1EDE6
 */
 
 h1, h2, h3, h4 {
-  font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-weight: bold;
 }
 
 body {
@@ -33,17 +33,16 @@ input,
 button,
 select,
 textarea {
-  font-family: 'Avenir LT W01 55 Roman', Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 
 strong, b {
-  font-family: 'Avenir LT W01 85 Heavy';
-  font-weight: normal;
+  font-family: 'Avenir';
+  font-weight: bold;
 }
 
 em, i {
-  font-family: 'AvenirLTW01-55Oblique';
-  font-style: normal;
+  font-family: 'Avenir';
 }
 
 .sidebar-nav {
@@ -542,7 +541,8 @@ ul.ui-autocomplete {
       margin-left: 0; /* override bootstrap.css */
       text-transform: uppercase;
       font-size: 1.23em; /* 16px */
-      font-family: 'Avenir LT W01 85 Heavy';
+      font-family: 'Avenir';
+      font-weight: bold;
       padding-top: 5px;
     }
     
@@ -588,7 +588,8 @@ ul.ui-autocomplete {
           padding: 6px 9px;
           cursor: pointer;
           color: #BF202E;
-          font-family: 'Avenir LT W01 85 Heavy'; 
+          font-family: 'Avenir';
+          font-weight: bold;
         }
 
         #header-buttons a#add_button span,
