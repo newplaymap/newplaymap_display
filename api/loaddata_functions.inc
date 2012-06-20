@@ -199,7 +199,7 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
           "generative_artist" => $node["Generative artist"],
           "artist_name" => $node["Generative artist"],
           "artist_name_display" => html_entity_decode($node["Generative artist"], ENT_QUOTES),
-          "mission_statement" => $node["Mission statement"],
+          "artist_bio" => $node["Bio"],
           "ensemble_collective" => $node["ensemble_collective"],
           "city" => $node["City"],
           "state" => $node["State"],
