@@ -177,7 +177,7 @@ footer {
 
 #panel-container #panel,
 #panel-container #filter-container {
-  margin-top: 55px;
+  margin-top: 65px;
 }
 
 #panel-container #panel .content {
@@ -196,9 +196,19 @@ div#panel-container div#panel {
 /*   visibility: hidden; */
 }
 
+#panel img.profile-image {
+  float: left;
+}
+
+#panel div.profile-header {
+  margin-left: 95px;
+}
+
 ul#panel-content-links {
   list-style: none outside none;
-  margin: 10px 0;
+  margin: 0;
+  padding-top: 17px;
+  clear: both;
 }
 
   ul#panel-content-links li {
@@ -231,7 +241,7 @@ ul#panel-content-links {
     
 ul#share-links-list {
   list-style: none;
-  margin-left: 0;
+  margin: 0;
 }
 
   ul#share-links-list li {
@@ -272,6 +282,10 @@ ul#share-links-list {
       display: none;
       width: 180px;
     }
+    
+      ul#share-links-list input {
+        width: 100%;
+      }
 
   
 article.panel-content-info {
