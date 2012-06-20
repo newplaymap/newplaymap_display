@@ -275,7 +275,26 @@
                     {{/if}}{{/if}}
                   </div>
                   
-                  <article>
+                  <ul id="panel-content-links">
+                    <li id="panel-share-link">
+                      <div id="share-links">
+                        <h3>Share</h3>
+                         <ul id="share-links-list" class='content'>
+                            <li>
+                              <a href="#" id="share-link">Get Link</a>
+                              <form id="share-code"><input type="text" value="http://newplaymap.org/participate${path}"></form>
+                            </li>
+                            <li>
+                              <a href="#" id="embed-link">Get Badge Code</a>
+                              <form id="embed-code"><input type="text" value="&lt;a href=&quot;http://newplaymap.org/participate${path}&quot;&gt;&lt;img src=&quot;http://newplaymap.org/sites/default/files/images/badge_embed.png&quot; /&gt;&lt;/a&gt;"></form>
+                            </li>
+                          </ul>
+                      </div> 
+                    </li>
+                    <li id="panel-edit-link"><a href="participate/node/${artist_id}/edit">Edit</a></li>
+                  </ul>
+                  
+                  <article class="panel-content-info artist-info">
                     {{if artist_bio}}
                       <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
