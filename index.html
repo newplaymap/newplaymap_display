@@ -243,9 +243,8 @@
                       <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit">Edit</a></li>
                     </ul>
                     
-                    <article>
+                    <article class="panel-content-info play-info">
                       {{if synopsis}}     
-                        <h3>Synopsis</h3>
                         {{html synopsis}} <!-- @TODO: Fix the encoding for what the DB spits out - paragraph breaks are not working -->
                       {{else}}
                         NO SYNOPSIS
