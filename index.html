@@ -371,12 +371,13 @@
                       {{/if}}
 
                       <div class="results-item-content">
-                        <a href="${path}">${title}</a>
-
                         {{if properties.event_type}}
-                          ${properties.event_type}
-                        {{else}}
-                          NO EVENT TYPE
+                          <div class="event-type">${properties.event_type}</div>
+                        {{/if}}
+                        <a class="results-item-title" href="${path}">${title}</a>
+                        
+                        {{if properties.generative_artist}}
+                          <div class="artist-name">by <a href="${path}">${properties.generative_artist}</a></div>
                         {{/if}}
                       
                         {{if properties.event_date}}
@@ -387,40 +388,23 @@
                           {{else}}
                             </div>
                           {{/if}}
-                        {{else}}
-                          NO DATE
                         {{/if}}
                       
                         {{if properties.organization_type_display}}
                           <div class="organization-type">${properties.organization_type_display}</div>
-                        {{else}}
-                          NO ORG TYPE
                         {{/if}}
                       
                         {{if city}}{{if state}}
-                          <div>${city}, ${state}</div>
-                        {{/if}}
-                        {{else}}
-                          NO CITY
-                        {{/if}}
+                          <div class="results-location">${city}, ${state}</div>
+                        {{/if}}{{/if}}
 
                         {{if properties.related_theater}}
                           <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
-                        {{else}}
-                          NO RELATED THEATER
                         {{/if}}
 
-                        
-                        {{if event_description}}
-                          <dl>
-                          <dd>{{html event_description}}</dd>
-                          </dl>
-                        {{else}}
-                          NO EVENT DESCRIPTION
-                        {{/if}}
-                      
-                        <a href="participate/node/${id}/edit" class="event-edit-link">Edit</a>
                       </div>
+                      
+                      <div class="results-edit-link"><a href="participate/node/${id}/edit" class="event-edit-link">Edit</a></div>
                   </li>
                 </script>
                 
