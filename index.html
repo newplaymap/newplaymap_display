@@ -282,11 +282,7 @@
                 <!-- Artist -->
                 <script id="artist-template" type="text/x-jquery-tmpl">
                 
-                  {{if artist_photo}}
-                    <img src="participate/${artist_photo}" />
-                  {{else}}
-                    NO PHOTO
-                  {{/if}}
+                  <img class="profile-image" src="participate/${artist_photo}" />
                   
                   <article>
                     <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
@@ -303,19 +299,17 @@
                 <!-- Organization -->
                 <script id="organization-template" type="text/x-jquery-tmpl">
                 
-                  {{if logo}}
-                    <img src="participate/${logo}" />
-                  {{else}}
-                    NO LOGO
-                  {{/if}}
+                  <img class="profile-image" src="participate/${logo}" />
                   
-                  <h2>${name}</h2>
-                  {{if city}}{{if state}}
-                    <div>${city}, ${state}</div>
-                  {{/if}}
-                  {{else}}
-                    NO CITY
-                  {{/if}}
+                  <div class="profile-header">
+                    <h2>${name}</h2>
+                    {{if city}}{{if state}}
+                      <div>${city}, ${state}</div>
+                    {{/if}}
+                    {{else}}
+                      NO CITY
+                    {{/if}}
+                  </div>
                   
                   <ul id="panel-content-links">
                     <li id="panel-add-link-event" class="panel-add-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
