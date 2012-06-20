@@ -453,7 +453,8 @@ ul.ui-autocomplete {
   }
   
   #panel-container .results-container ol.results .event-type,
-  #panel-container .results-container ol.results .date {
+  #panel-container .results-container ol.results .date,
+  #panel-container .results-container ol.results .organization-type {
     text-transform: uppercase;
     font-size: 0.9em;
   }
