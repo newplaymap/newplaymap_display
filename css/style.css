@@ -419,6 +419,7 @@ ul.ui-autocomplete {
   padding: 10px;
   list-style: none;
   font-size: 0.9em;
+  overflow: auto;
 }
   
   #panel-container .results-container ol li.active,
@@ -437,8 +438,14 @@ ul.ui-autocomplete {
     background-position: 10px 10px;
   }
   
+    #panel-container .results-container ol#events-results div.results-item-content {
+      margin-left: 40px;
+    }
+  
   #panel-container .results-container ol.results div.results-item-content {
-    margin-left: 40px;
+    margin-left: 10px;
+    float: left;
+    width: 200px;
   }
 
   #panel-container .results-container ol.results p {
@@ -458,8 +465,16 @@ ul.ui-autocomplete {
   
   #panel-container .results-container ol.results .results-edit-link {
     float: right;
-    margin-top: 27px;
+    display: none;
   }
+
+    #panel-container .results-container ol.results li.active .results-edit-link {
+      display: block;
+    }
+    
+      #panel-container .results-container ol.results li.active .results-edit-link a {
+        color: #DDDDDD;
+      }
   
   #panel-container .results-container .results-title {
     background-color: #F1EDE6;
