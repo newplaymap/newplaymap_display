@@ -211,25 +211,7 @@
 -->
 
               <!-- Templates -->
-                <!-- Play Template -->
-                <!-- Available options
-                  ${longitude}
-                  ${latitude}
-                  ${event_id}
-                  ${event_type}
-                  ${event_to_date}
-                  ${event_date}
-                  ${content_type}
-                  ${related_theater}
-                  ${related_theater_id} 
-                  ${artist_id}
-                  ${play_title}
-                  ${related_play_id}
-                  ${generative_artist}
-                  ${event_description}
-                  ${synopsis}
-                  ${path}
-                 -->
+              <!-- Play Template -->
               <div class="play content"></div>
                 <script id="play-template" type="text/x-jquery-tmpl">
                     <!-- @TODO: Remove all the dummy empty text -->
@@ -273,6 +255,8 @@
                 </script><!--   end play -->
                 
                 <div class="journey content"></div>
+
+
                 <!-- Journey: Used for each item on a journey for a play -->
                 <script id="journey-template" type="text/x-jquery-tmpl">
              
@@ -284,13 +268,16 @@
                 
                   <img class="profile-image" src="participate/${artist_photo}" />
                   
-                  <article>
-                    <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
+                  <div class="profile-header">
+                    <h2>${generative_artist}</h2>
                     {{if city}}{{if state}}
-                      <div>${city}, ${state}</div>
-                    {{/if}}
-                    {{else}}
-                      NO CITY
+                      <div class="profile-location">${city}, ${state}</div>
+                    {{/if}}{{/if}}
+                  </div>
+                  
+                  <article>
+                    {{if artist_bio}}
+                      <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
                   </article>
                 </script><!--  end artist -->
@@ -305,10 +292,7 @@
                     <h2>${name}</h2>
                     {{if city}}{{if state}}
                       <div>${city}, ${state}</div>
-                    {{/if}}
-                    {{else}}
-                      NO CITY
-                    {{/if}}
+                    {{/if}}{{/if}}
                   </div>
                   
                   <ul id="panel-content-links">
