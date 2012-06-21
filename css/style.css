@@ -180,7 +180,11 @@ footer {
 }
 
 #panel-container #panel .content {
-  margin: 0 10px;
+  margin: 15px;
+}
+
+#panel-container #panel .content h2 {
+  padding-top: 15px;
 }
 
 #filter-container {
@@ -492,8 +496,8 @@ ul.ui-autocomplete {
 }
 
 /* Results styles */
-#panel-container .results-container {
-  padding-top: 10px;
+#panel-container #results-header {
+  padding: 15px;
 }
 
 #panel-container .results-container ol {
@@ -504,7 +508,7 @@ ul.ui-autocomplete {
 #panel-container .results-container ol.results li {
   cursor: pointer;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 8px;
   list-style: none;
   font-size: 0.9em;
   overflow: auto;
@@ -524,7 +528,7 @@ ul.ui-autocomplete {
   #panel-container .results-container ol#events-results li {
     background-image: url("../images/listing-icon-event-single.png");
     background-repeat: no-repeat;
-    background-position: 10px 10px;
+    background-position: 7px 10px;
   }
   
     #panel-container .results-container ol#events-results div.results-item-content {
@@ -568,25 +572,25 @@ ul.ui-autocomplete {
   
   #panel-container .results-container .results-title {
     background-color: #F1EDE6;
-    padding-left: 10px;
+    padding-left: 15px;
   }
   
     #panel-container .results-container .results-title h2 {
       display: inline;
-      padding-left: 25px;
+      padding-left: 40px;
     }
     
       #panel-container .results-container .results-title h2#generative-artists-results-title,
       #panel-container .results-container .results-title h2#artists-results-title {
-        background: url("../images/filter-select-icon-artists.png") no-repeat 0 center;
+        background: url("../images/results-artists-icon.png") no-repeat 0 center;
       }
       
       #panel-container .results-container .results-title h2#events-results-title {
-        background: url("../images/filter-select-icon-events.png") no-repeat 0 center;
+        background: url("../images/results-events-icon.png") no-repeat 0 center;
       }
       
       #panel-container .results-container .results-title h2#organizations-results-title {
-        background: url("../images/filter-select-icon-orgs.png") no-repeat 0 center;
+        background: url("../images/results-orgs-icon.png") no-repeat 0 center;
       }
 
 /* Bubble styles */
