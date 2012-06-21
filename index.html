@@ -227,8 +227,6 @@
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
                       <h3>by <a href="${generative_artist_path}">${generative_artist}</a></h3>
-                    {{else}}
-                      NO GENERATIVE ARTIST
                     {{/if}}
 
                   
@@ -255,8 +253,6 @@
                     <article class="panel-content-info play-info">
                       {{if synopsis}}     
                         {{html synopsis}} <!-- @TODO: Fix the encoding for what the DB spits out - paragraph breaks are not working -->
-                      {{else}}
-                        NO SYNOPSIS
                       {{/if}}
                     </article>                  
          
@@ -344,21 +340,15 @@
                   
                   <article class="panel-content-info organization-info">
                     {{if mission_statement}}
-                      ${mission_statement}
-                    {{else}}
-                      NO MISSION STATEMENT
+                      <div class="organization-mission-statement">${mission_statement}</div>
                     {{/if}}
                   
                     {{if national_networks}}
-                      ${national_networks_display}
-                    {{else}}
-                      NO NATIONAL NETWORKS
+                      <div class="organization-national-networks profile-additional-content">${national_networks_display}</div>
                     {{/if}}
                   
                     {{if special_interests}}
-                      ${special_interests_display}
-                    {{else}}
-                      NO SPECIAL INTERSTS
+                      <div class="organization-interests profile-additional-content">${special_interests_display}</div>
                     {{/if}}
                   </article>
 
