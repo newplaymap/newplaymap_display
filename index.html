@@ -99,8 +99,8 @@
                     </ul>
                     <!-- Plays -->
                     <div id="explore-plays">
-                      <div class="filter-wrapper">
-                        <input id="plays-filter" type="text" placeholder="Play title" />
+                      <div class="filter-wrapper first">
+                        <input id="plays-filter" class="primary-filter" type="text" placeholder="Play title" />
                       </div>
                     
                       <div class="filter-wrapper">
@@ -121,7 +121,8 @@
                       <!-- <div class="description">Enter the date in the format: April 29, 2013</div> -->
                       <div class="filter-wrapper">
                         <span class="filter-separator">OR</span>
-                        <input id="events-city-state-filter" type="text" placeholder="City, State" />
+                        <label for="events-city-state-filter">City, State:</label>
+                        <input id="events-city-state-filter" type="text" />
                       </div>
                     
                       <div class="filter-wrapper last">
@@ -135,8 +136,8 @@
                     <!-- Organizations -->
                     <div id="explore-organizations">
                     
-                      <div class="filter-wrapper">
-                        <input id="organizations-filter" class="typeahead" type="text" placeholder="Organization name" />
+                      <div class="filter-wrapper first">
+                        <input id="organizations-filter" class="typeahead primary-filter" type="text" placeholder="Organization name" />
                       </div>
                     
                       <div class="filter-wrapper">
@@ -159,7 +160,8 @@
                     
                       <div class="filter-wrapper">
                         <span class="filter-separator">OR</span>
-                        <input id="organizations-city-state-filter" type="text" placeholder="City, State" />
+                        <label for="organizations-city-state-filter">City, State:</label>
+                        <input id="organizations-city-state-filter" type="text" />
                       </div>
                     
                       <div class="filter-wrapper last">
@@ -172,19 +174,20 @@
                     
                     <!-- Artists -->
                     <div id="explore-artists">
-                      <div class="filter-wrapper">
-                        <input id="artists-filter" class="typeahead" type="text" placeholder="Artist name" />
+                      <div class="filter-wrapper first">
+                        <input id="artists-filter" class="typeahead primary-filter" type="text" placeholder="Artist name" />
                       </div>
                     
                       <div class="filter-wrapper">
                         <span class="filter-separator">OR</span>
-                        <label for="ensemble-collective-filter">Ensemble / Collective</label>
+                        <label for="ensemble-collective-filter">Ensemble / Collective:</label>
                         <input type="checkbox" id="ensemble-collective-filter" value="Ensemble / Collective" />
                       </div>
                     
                       <div class="filter-wrapper">
                         <span class="filter-separator">OR</span>
-                        <input id="artists-city-state-filter" type="text" placeholder="City, State" />
+                        <label for="artists-city-state-filter">City, State:</label>
+                        <input id="artists-city-state-filter" type="text" />
                       </div>
                     
                       <div class="filter-wrapper last">

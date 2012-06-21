@@ -391,11 +391,12 @@ ul.ui-autocomplete {
 }
 
 #filters .filter-wrapper {
-  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   padding: 10px 0;
+  clear: both;
 }
 
-#filters .filter-wrapper.last {
+#filters .filter-wrapper.first {
   border: none;
 }
 
@@ -408,35 +409,74 @@ ul.ui-autocomplete {
   padding: 5px;
   width: 15px;
   margin: 0 auto;
-  margin-top: -25px;
+  line-height: 0.1em;
+  margin-top: -15px;
   text-align: center;
-}
-
-#filters .filter-wrapper > label,
-#filters .filter-wrapper > div {
-  clear: both;
 }
 
 #filters .ui-tabs-panel {
   padding: 15px;
 }
 
-  #filters #explore-plays .ui-widget-content {
-    border: 2px solid #EEEEEE;
-  }
-  
-  #filters #explore-plays .ui-corner-all {
-    border-radius: 6px;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-  }
-
-#filters .filter-seperator {
-  border-top: 1px solid #CCCCCC;
+#filters .filter-wrapper > label {
+  font-weight: bold;
+  font-size: 0.777777778em;
+  float: left;
+  text-align: right;
+  padding-right: 3%;
+  padding-top: 6px;
+  width: 47%;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-#filters .filter-seperator-text {
-  background-color: #FFFFFF;
+#filters .filter-wrapper > input,
+#filters .filter-wrapper > select,
+#filters .filter-wrapper > div.ui-slider {
+  width: 50%;
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#filters .filter-wrapper > input[type="checkbox"] {
+  margin-top: 16px;
+  float: left;
+  width: auto;
+}
+
+#filters .filter-wrapper > input[type="text"] {
+  width: 45%;
+}
+
+#filters .filter-wrapper > select {
+  width: 150px;
+}
+
+#filters .filter-wrapper > div.ui-slider {
+  width: 146px;
+}
+
+#filters .filter-wrapper > input.primary-filter {
+  width: 97%;
+  margin-left: 0;
+}
+#filters .filter-wrapper a.show-all-link {
+  display: block;
+  text-align: center;
+  font-size: 0..888888889em;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#filters #explore-plays .ui-widget-content {
+  border: 2px solid #EEEEEE;
+}
+  
+#filters #explore-plays .ui-corner-all {
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 
 #filters a.show-all-link {
