@@ -185,6 +185,7 @@ footer {
 
 #panel-container #panel .content h2 {
   padding-top: 15px;
+  line-height: 1.2em;
 }
 
 #filter-container {
@@ -202,11 +203,11 @@ div#panel-container div#panel {
 
 #panel img.profile-image {
   float: left;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 #panel .profile-header {
-  margin-left: 95px;
+  margin-left: 100px;
 }
 
 #panel .profile-header .profile-location {
@@ -221,7 +222,7 @@ div#panel-container div#panel {
 ul#panel-content-links {
   list-style: none outside none;
   margin: 0;
-  padding-top: 17px;
+  padding-top: 22px;
   clear: both;
 }
 
@@ -229,6 +230,7 @@ ul#panel-content-links {
     float: left;
     font-size: 0.8em;
     margin-right: 10px;
+    font-weight: bold;
   }
     
     ul#panel-content-links li a {
@@ -304,7 +306,7 @@ ul#share-links-list {
   
 article.panel-content-info {
   clear: both;
-  padding-top: 10px;
+  padding-top: 15px;
 }
 
 ul.ui-autocomplete {
@@ -549,12 +551,13 @@ ul.ui-autocomplete {
   #panel-container .results-container ol.results .date,
   #panel-container .results-container ol.results .organization-type {
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-size: 0.857142857em;
   }
 
   
   #panel-container .results-container ol.results .results-item-title {
-    font-size: 1.1em;
+    font-size: 1em;
+    font-weight: bold;
   }
   
   #panel-container .results-container ol.results .results-edit-link {
