@@ -37,12 +37,12 @@ textarea {
 }
 
 strong, b {
-  font-family: 'Avenir';
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 
 em, i {
-  font-family: 'Avenir';
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 
 .sidebar-nav {
@@ -329,10 +329,51 @@ ul.ui-autocomplete {
  */
 .ui-tabs {
   padding: 0;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+
+#filters .filter-tab.ui-state-active a {
+  cursor: pointer;
 }
 
 #filters .filter-tab {
-  font-size: 0.7em;
+  font-size: 0.777777778em;
+}
+
+#filters .filter-tab a {
+  color: #000;
+  padding-left: 28px;
+  background: url('../images/filter-select-icon-events.png') 10px 7px no-repeat;
+}
+
+#filters .filter-tab#filter-tab-artists a {
+  padding-left: 33px;
+  background: url('../images/filter-select-icon-artists.png') 10px 7px no-repeat;
+}
+
+#filters .filter-tab#filter-tab-organizations a {
+  background: url('../images/filter-select-icon-orgs.png') 10px 7px no-repeat;
+}
+
+#filters .filter-tab a:hover {
+  color: #bf202e;
+}
+
+#filters .filter-tab:first-child {
+  margin-left: 10px;
+}
+
+.ui-state-default,
+.ui-widget-content
+.ui-state-default,
+.ui-widget-header .ui-state-default {
+  background: #e0d7c9;
+  border-color: #e0d7c9;
+}
+
+#filters .filter-tab.ui-state-active {
+  background: #fff;
+  border-color: #fff;
 }
 
 #filters .ui-corner-all {
@@ -400,6 +441,14 @@ ul.ui-autocomplete {
 
 #filters a.show-all-link {
   color: #BF202E;
+}
+
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-size: 0.888888889em;
 }
 
 /* Results styles */
@@ -541,7 +590,7 @@ ul.ui-autocomplete {
       margin-left: 0; /* override bootstrap.css */
       text-transform: uppercase;
       font-size: 1.23em; /* 16px */
-      font-family: 'Avenir';
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
       font-weight: bold;
       padding-top: 5px;
     }
@@ -588,7 +637,7 @@ ul.ui-autocomplete {
           padding: 6px 9px;
           cursor: pointer;
           color: #BF202E;
-          font-family: 'Avenir';
+          font-family: 'Avenir', Helvetica, Arial, sans-serif;
           font-weight: bold;
         }
 
