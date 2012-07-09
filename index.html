@@ -1,20 +1,374 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>New Play Map</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/map.spotlight.css" />
+    <link rel="stylesheet" href="css/newplay_theme.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+     <link href='css/wax-controls.css' rel='stylesheet' type='text/css' />   
+    <link href="http://a.tiles.mapbox.com/lib/mm/embed.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
-  <body onload="initMap()">
 
-  <div id="map-container">
-    <div id="map"></div>
-  </div>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">New Play Map</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a data-toggle="modal" href="#about">About the map</a></li>
+              <li><a data-toggle="modal" href="#feedback">Feedback</a></li>
+            </ul>
+            <p class="nav-collapse">
+             <ul class="nav">
+               <li>
+                <a id="add_button" style="cursor: pointer; " class=""><span>Add to the Map</span></a>
+                
+                <div id="block-add_button-0" class="block block-add_button region-odd odd region-count-1 count-1 links-processed" style="display: none; ">
+                  <div class="content">
+                    <div class="item-list">
+                      <ul id="add-button-list">
+                        <li class="first"><a href="/node/add/organization" class="add-button-option" id="add-button-org">Add Organization</a></li>
+                        <li><a href="/node/add/event" class="add-button-option" id="add-button-event">Add Play Event</a></li>
+                        <li class="last"><a href="/node/add/artist" class="add-button-option" id="add-button-artist">Add Artist Profile</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a id="explore-filters-button"><span>Explore</span></a>
+              </li>
+            </ul>
+            </p>
+            <p class="navbar-text pull-right"><span class="welcome">Welcome!</span> <span class="login"><a href="/user">Sign in</a> or <a href="/user/register">Create Account</a></p>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-    <script type="text/javascript" src="js/modestmaps.js"></script>
+    <div class="container-fluid"> 
+      <div class="row-fluid">
+
+            <div id="popup">
+              <div class="content">
+<!--                 <h2><a href="${path}">${title}</a></h2>            -->
+              </div>
+              <div class="count">
+         
+              </div>
+
+            </div>
+      
+            <div id="panel-container">
+              <div id="panel">
+                <div id="filter-container">
+                  <div id="filters">
+                    <h4>Filters</h4>
+                    <form>
+                      <!-- Events -->
+                      <h5 id="explore-plays" class="filter-header">Explore Plays</h5>
+                      
+                      <input id="plays-filter" class="typeahead" type="text" placeholder="Play title" />
+                      
+                      <label for="event-type-filter">Event Type:</label>
+                      <select id="event-type-filter" class="form-select" name="event_type"><option selected="selected" value="All">- Select -</option><option value="First Production">First Production</option><option value="Other">Other</option><option value="Presented Performance">Presented Performance</option><option value="Production">Production</option><option value="Reading">Reading</option><option value="Residency">Residency</option><option value="Rolling Premiere">Rolling Premiere</option><option value="Workshop">Workshop</option></select>
+                      
+                      <!-- Events -->
+                      <label for="">Event date:</label>
+                      <label for="event-date-filter">From date:</label>
+                      <input id="event-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
+                      <label for="event-to-date-filter">To date:</label>
+                      <input id="event-to-date-filter" class="event-date-field" type="text" size="60" maxlength="128" />
+                      <div class="description">Enter the date in the format: April 29, 2013</div>
+                      <a class="event-date-filter-complete" href="#">I'm done</a>
+                      
+                      <!-- Organizations -->
+                      <h5 id="explore-organizations" class="filter-header">Explore Organizations</h5>
+                      <input id="organizations-filter" class="typeahead" type="text" placeholder="Organization name" />
+                      
+                      <label for="organization-type-filter">Organization type:</label>
+                      <select id="organization-type-filter" class="form-select" name="org_type"><option selected="selected"  value="All">- Select -</option><option value="Development">Development</option><option value="Festival">Festival</option><option value="Presenting">Presenting</option><option value="Producing">Producing</option><option value="Service / Network">Service / Network</option><option value="University">University</option></select>
+                      
+                      <label for="organization-national-networks-filter">Networks/Affiliations:</label>
+                      <select id="organization-national-networks-filter" class="form-select" name="nat_mem"><option selected="selected" value="All">- Select -</option><option value="AEA (Equity)">AEA (Equity)</option><option value="ASSITEJ/USA8">ASSITEJ/USA</option><option value="Association of Performing Arts Presenters (APAP)">Association of Performing Arts Presenters (APAP)</option><option value="ASTR">ASTR</option><option value="ATHE">ATHE</option><option value="equity">equity</option><option value="KCACTF">KCACTF</option><option value="League of Regional Theaters (LORT)">League of Regional Theaters (LORT)</option><option value="LMDA">LMDA</option><option value="National Alliance for Musical Theatre">National Alliance for Musical Theatre</option><option value="National New Play Network (NNPN)">National New Play Network (NNPN)</option><option value="National Performance Network (NPN)">National Performance Network (NPN)</option><option value="NEAT">NEAT</option><option value="Network of Ensemble Theaters (NET)">Network of Ensemble Theaters (NET)</option><option value="Theatre Communications Group (TCG)">Theatre Communications Group (TCG)</option></select>
+                      
+                      <label for="organization-special-interests-filter">Special Interests:</label>
+                      <select id="organization-special-interests-filter" class="form-select" name="interests"><option selected="selected" value="All">- Select -</option><option value="African-American">African-American</option><option value="Asian-American">Asian-American</option><option value="Classical">Classical</option><option value="Contemporary">Contemporary</option><option value="Devised">Devised</option><option value="Disabilities">Disabilities</option><option value="Ensemble">Ensemble</option><option value="Experimental">Experimental</option><option value="Gay/Lesbian">Gay/Lesbian</option><option value="International">International</option><option value="Jewish">Jewish</option><option value="Latino/Hispanic">Latino/Hispanic</option><option value="Multicultural">Multicultural</option><option value="Multidisciplinary">Multidisciplinary</option><option value="Musicals">Musicals</option><option value="Native American">Native American</option><option value="New Work">New Work</option><option value="Political/Social">Political/Social</option><option value="Puppetry">Puppetry</option><option value="Religious">Religious</option><option value="Student/Youth">Student/Youth</option><option value="Touring">Touring</option><option value="Translations/Adaptations">Translations/Adaptations</option><option value="University/Training">University/Training</option><option value="Women">Women</option><option value="Young Audiences">Young Audiences</option></select>
+                      
+                      <!-- Artists -->
+                      <h5 id="explore-artists" class="filter-header">Explore Artists</h5>
+                      <input id="artists-filter" class="typeahead" type="text" placeholder="Artist name" />
+                      
+                      <label for="ensemble-collective-filter">Ensemble / Collective</label>
+                      <input type="checkbox" id="ensemble-collective-filter" value="Ensemble / Collective" />
+                      
+                      <!-- Submit -->
+                      <input type="submit" value="Apply filters" class="submit-filters" />
+                    </form>
+                  </div>
+                </div>
+              
+                <!--               Templates -->
+                <div class="play content">
+                  <h2><a href="#${play_path}?event_id=${related_event_id}">${play_title}</a></h2>
+                  {{if generative_artist}}
+                  <h3>By ${generative_artist}</h3>
+                  {{/if}}
+                  
+                  {{if related_theater}}
+<!--                  @TODO  This will need some work -->
+                  <a href="#${organization_path}" type="organization" load_id="${related_theater_id}">${related_theater}</a>
+                  {{/if}}
+                  
+                  <p>{{if event_type}}
+                    ${event_type}
+                  {{/if}}
+                  </p>
+
+                  <dl>
+
+                  {{if event_description}}
+                    <dd>{{html event_description}}</dd>
+                  {{/if}}
+
+                  {{if synopsis}}     
+                    <dt>Synopsis</dt>
+                    <dd>{{html synopsis}}</dd>
+                  {{/if}}
+                  </dl>                  
+                </div><!--   end play -->
+                
+               <div class="journey">
+                  <h2 class="journey-header">Journey</h2>
+                  <ol class="events content">
+                    <li listing_id="${properties.event_id}">${properties.event_type}
+                    <p class="date">${properties.event_date} - ${properties.event_to_date}</p>
+                    </li>
+                  </ol>
+               </div><!--   end journey -->
+                
+<!--                   artist -->
+                  <div class="artist content">
+                  <h2><a href="#${path}?artist_id=${artist_id}">${generative_artist}</a></h2>
+                  </div><!--  end artist -->
+    
+ <!--                   organization -->
+                  <div class="organization content">
+                  <h2><a href="#${path}">${name}</a></h2>
+                  </div><!--  end organization -->
+ 
+ 
+ <!--                   event -->
+                  <div class="event content">
+                  <h2><a href="#${path}">${play_title}</a> at ${related_theater}</h2>
+                  </div><!--  end event -->               
+                
+              </div>
+            </div>
+   
+<!--    <iframe width='500' height='300' frameBorder='0' src='http://a.tiles.mapbox.com/v3/newplaymap.map-m3r2xeuk.html#4/33.831/-87.284'></iframe> -->
+<!--
+            <div id="map-container">
+              <div class="ts-map mm zoompan zoomwheel streetlevel zoombox attribution watermark" id="map">
+                <a href="http://mapbox.com" target="_blank" class="mapbox-watermark">MapBox</a>
+                <a href="#" class="zoomer zoomin">+</a><a href="#" class="zoomer zoomout">-</a>
+                <div id="map-zoombox-box" class="zoombox-box"></div>
+  
+                <div class="wax-attribution wax-mm">© <a href="http://www.mapquest.com">MapQuest</a>. Map data © <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a></div></div>      
+  
+                <div id="map-legend">Map Legend</div>
+                <div id="map-help">?</div>
+              </div>
+-->
+     
+      <div id="map" class="span-24 last"></div>     
+
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <footer>
+        Developed through <a href="http://arenastage.org/new-play-institute" title="The American Voices New Play Institute at Arena Stage" target="_blank">The American Voices New Play Institute at Arena Stage</a>
+      </footer>
+    </div><!--/.fluid-container-->
+
+
+    <!-- about modal content -->
+    <div id="about" class="modal hide fade">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal" >&times;</a>
+        <h3>About</h3>
+      </div>
+      <div class="modal-body">
+        <h4>About</h4>
+         <div class="content">
+            <p>What if the new works sector of the U.S. theater generated a Map of itself, harnessed and shared its collective infrastructural knowledge, and then coalesced as a diverse community to design powerful information tools that all belonged to the commons?</p>
+            <p><a href="http://newplaymap.org" title="The New Play Map">The New Play Map</a> is a pilot project of the <a href="http://www.arenastage.com/new-play-institute/" title="American Voices New Play Institute at Arena Stage">American Voices New Play Institute at Arena Stage</a> on behalf of and in collaboration with the field that seeks to develop opportunities that internet and communication tools have for enabling collaborative, culturally transformative, and globally-scaled information resource and knowledge sharing&mdash;within and beyond the new works sector.     </p>
+            <p>The principles and strategy grounding this initiative are influenced by the culture and ethos of open-source software development communities and by community-generated collaborative projects such as Wikipedia, <a href="http://www.ushahidi.com/ " title="Ushahidi Crisis Mapping Project">Ushahidi</a> and <a href="http://openarchitecturenetwork.org/" title="Open Architecture Network">Open Architecture Network</a>.</p>
+            <p>The first public version of the New Play Map was launched for the field’s co-creation and feedback on January 10, 2011.  Version 2 will complete development in June 2011.  Follow and contribute to Version 2's open development process through the <a href="http://twitter.com/newplaymap" title="@NewPlayMap">@NewPlayMap</a> Twitter account, the <a href="http://newplay.arenastage.org/new-play-map/" title="New Play Blog">New Play Blog</a> which documents the development, and through the New Play Map's <a href="http://newplaymap.org/feedback" title="feedback and idea system"> feedback and idea system</a>.</p>
+            <h3>What were the functional goals of Version 1 of the New Play Map website?</h3>
+            <ol>
+            <li>Make an open platform for the field to create a Map of itself in order to make visible&mdash;for the first time ever&mdash;all the organizations, activity, and generative artists that comprise our yet unknown infrastructure for new work.  The New Play Map aims to be a community-generated, real-time map of the national new works infrastructure.  It is designed as an aggregator and a platform for the collaborative editing of content.  All content will be provided or “patched in” by people to whom the information pertains or by anyone who is knowledgeable about a particular event, organization, or artist.  The site is real-time in that any feed from blogs, video and photo sites, social networks are updated on the site automatically and instantaneously.</li>
+            <li>Facilitate discovery and learning about the new works infrastructure.<br />
+            <ol type="a">
+            <li>By using various category filtering and search features that aim to help the user sort, discover, and learn about our sector. </li>
+            <li>By using the New Play Journeys Mapping feature that visualizes how a project journeys through time, space, and relationships within the different support systems that comprise the national new works infrastructure.</li>
+            </ol>
+            </li>
+            <li>Collectively capture and identify the New Works Sector's most compelling ideas for shaping the future of this tool and resource.  The field's ideas will determine how to design and build version 2 of the New Play Map. There was and continues to be <a href="/feedback" title="Feedback page">feedback capturing and moderation system here</a> that will enables feedback and discussion from anyone.  Final feedback and discussion on the Version 1 of the website was collected during the American Voices New Play Institute hosted national convening <em>From Scarcity to Abundance &ndash; Capturing the Moment for the New Work Sector</em> at the end of January 2011.</li>
+            </ol>
+            <h3>What did the New Play Sector collectively determine are the potential uses of the New Play Map?</h3>
+            <p>Feedback gathered from the January 2011 Convening and through the online feedback system was synthesized and articulated into four major tool-set descriptions.  Tools 1 and 2 will be addressed in Version 2's development.  The following statements are formulated like this: "The New Play Map is _____".</p>
+            <ol>
+            <li><strong>A Scouting/Discovery/Learning Tool</strong> (ie. Follow specific projects/artists/orgs by email alerts, rss feeds. See an Event Calendar.)</li>
+            <li><strong>A Demonstrate Your Impact Tool</strong>  (ie. play, playwright, org showing what she/he/it has done, Exporting and Sharing Journeys outside of the website - online and printed)</li>
+            <li><strong>An Artistic Development/Dramaturgy Tool</strong> (ie. artistic process tracking on the Journey, production notebooks, patching in feeds, uploading dramaturgy.)</li>
+            <li><strong>A matching need to opportunity/resource Tool</strong> (ie. resource filter, mapping resources, I have rehearsal space, residency opportunity and you need what I have. I want to champion this play and am seeking partners. broadcast what the show looking for.)</li>
+            </ol>
+            <h3>Development History and Timeline</h3>
+            <p>Further documentation and information about the New Play Map's development can be found on the <a href="http://newplay.arenastage.org/new-play-map/" title="New Play Blog">New Play Blog</a>. </p>
+            <p><strong>Since the Fall of 2009,</strong> the Institute has been collaborating with the web development company <a href="http://quilted.coop" title="Quilted">Quilted</a> which is &lsquo;a worker-owned, cooperatively-managed company stitching together technology and social change.&rsquo;</p>
+            <p><strong>In the Spring of 2010,</strong> several member organizations of the <a href="http://nnpn.org"title="National New Play Network">National New Play Network</a> contributed to early prototypes of the New Play Map website and provided crucial feedback and ideas for the current version.</p>
+            <p><strong>January 10, 2011:</strong> Version 1 is released for the field's participation.</p>
+            <p><strong>January 26-29, 2011:</strong> Final feedback is collected at the national convening From <em>Scarcity to Abundance &ndash; Capturing the Moment for the New Work Sector.</em></p>
+            <p><strong>June 2011:</strong> Version 2 completes development. </p>
+            <h3>The New Play Map is Open Source and Available on GitHub</h3>
+            <p>The source code for the entire project is open, free, and publicly available on <a href="https://github.com/newplaymap/newplaymap" title="GitHub">GitHub</a>, a social coding repository. Take it, use it, adapt it, and build with us!  We would like to encourage any organization or individual to adapt this project for their own community within the U.S. or even beyond our borders. We could imagine a "New Play Map: World" if, for example, another nation&rsquo;s arts service organization wanted to take the lead on creating a Map for its particular constituency. Or, one could imagine Mapping something entirely different based on some of work that is already built here.</p>
+            <p><strong><a href="https://github.com/newplaymap/newplaymap">Get the source code on GitHub</a></strong></p>
+            <h3>The New Play Map's Website Development Team</h3>
+            <p><a href="http://quilted.coop" title="Quilted">Quilted</a>: Michelle Moon Lee, Ben Mauer, Colin Sagan<br />
+            Independent Developer: <a href="http://www.chachaville.com/">Chacha Sikes</a></p>
+            <h3>Website Technical Specifications</h3>
+            <p>The New Play Map website is built using <a href="http://drupal.org" title="Drupal">Drupal</a>, an open source content management platform, <a href="http://openstreetmap.org" title="Open Street Map">OpenStreetMap</a>, and is hosted by <a href="http://gaiahost.coop">GAIA Host Collective</a>, a worker-owned cooperative dedicated to environmental and social sustainability.</p>
+            <p>The New Play Map supports the following browsers:<br />
+            Firefox 3.6+<br />
+            Safari 4+<br />
+            Chrome 7+<br />
+            Internet Explorer 9+<br />
+            Due to the heavy use of JavaScript on the New Play Map, any version of Internet Explorer below 9 is not recommended due to its poor JavaScript performance.</p>
+            <p><a href="/terms-of-use" title="Terms of Use">Terms of Use</a></p>
+            <p><a href="/feedback" title="Feedback page">Contact Us through the Feedback System</a></p>
+            <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />Unless otherwise noted, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal" >Close</a>
+      </div>
+    </div>
+
+    <!-- about modal content -->
+    <div id="feedback" class="modal hide fade">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal" >&times;</a>
+        <h3>Feedback</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Feedback</h4>
+
+        <div class="content">
+<!--
+          <script type="text/javascript" charset="utf-8">
+            var is_ssl = ("https:" == document.location.protocol);
+            var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+            document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+          </script><script type="text/javascript" charset="utf-8">
+        var feedback_widget_options = {};
+      
+        feedback_widget_options.display = "inline";  
+        feedback_widget_options.company = "newplaymap";
+        feedback_widget_options.placement = "left";
+        feedback_widget_options.color = "#222";
+        feedback_widget_options.style = "idea";
+      
+        var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+      </script> 
+--> </div>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal" >Close</a>
+      </div>
+    </div>
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="js/jquery.tmpl.min.js"></script>
+    <script src="js/jquery.hoverintent.minified.js"></script>
+
+
+    <script type="text/javascript" src="js/modestmaps.min.js"></script>
     <script type="text/javascript" src="js/modestmaps.markers.js"></script>
+    <script type="text/javascript" src="js/raphael.js"></script> 
+    <script type="text/javascript" src="js/polygonmarker-raphael.js"></script>
+
+
+    <script src='js/easey.js' type='text/javascript'></script>
+    <script src='js/easey.handlers.js' type='text/javascript'></script>
+<!--     ender conflicts with easey? -->
+<!--     <script src='js/ender.js' type='text/javascript'></script> -->
+    <script src='js/wax.mm.min.js' type='text/javascript'></script>
+
+<!--     <script type="text/javascript" src="js/modernizr.min.js?1.5"></script> -->
+    <script type="text/javascript" src="js/polymaps.js"></script>
+<!--     <script type="text/javascript" src="js/nns.min.js?1.1.0"></script> -->
+    <script type="text/javascript" src="js/kmeans.js?2.0.2"></script>
+<!--     <script type="text/javascript" src="js/crimespotting.js?2.4.0"></script> -->
+    <script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
+
     <script type="text/javascript" src="js/spotlight.js"></script>
-    <script type="text/javascript" src="js/map.spotlight.js"></script>
+    <script type="text/javascript" src="js/jquery.address-1.4.js"></script>
     <script type="text/javascript" src="js/newplaymap.js"></script>
+    <script type="text/javascript" src="js/newplaymap.map.js"></script>
+    <script type="text/javascript" src="js/newplaymap.layout.js"></script>
+    <script type="text/javascript" src="js/newplaymap.router.js"></script>
+    <script type="text/javascript" src="js/newplaymap.data.js"></script>
+    <script type="text/javascript" src="js/newplaymap.filters.js"></script>
+
+
+
+
   </body>
 </html>

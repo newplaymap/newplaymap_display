@@ -1,0 +1,160 @@
+new play map
+
+
+priorities
+-- map loading cache
+-- trigger play load event
+-- make callback order more stable
+-- test addresses
+
+
+next week
+-- load a particular play into data layer
+-- filters / facets/search & triggering
+-- load data in all panels and test all links
+-- styled
+-- test in front of drupal on a dev site
+-- play lines clear canvas
+-- layer order & hiding interactivity
+-- see which address clearing functions we will need from the old site
+-- finish mongo & write update script
+
+
+
+ things to do
+
+-- goal: no bugs
+
+* map loading cache issue -- severity 9
+ -- tried adding random number
+ -- problem still exists
+ -- can switch to mapbox - perhaps with no wax - not sure we're really using wax (tilejson) for all it does
+
+* address tests
+homepage -- load filtered data (next week)
+play share link: http://localhost/newplay/display/#/play/agnes-under-the-big-top-a-tall-tale?event_id=18550
+click play
+click artist
+click organization
+click event
+
+* data - filters
+-- load events today
+-- load any events/plays/organizations/artists
+-- load playJourney by event id
+-- faceted data lookup by id
+
+* filters interaction
+-- load faceted data
+
+* theme
+-- colin is styling, ben is finishing mockups
+
+* data templates
+-- need to fill them in
+
+* highlight map item when hovering in popup panel
+-- will use the same trigger event to look up data or load it if it is not there into an extra data array and bump old items off the list and then run the featureAction on it to highlight/select it.
+
+* panel / popup interactivity
+-- need to decide then build
+
+* mongo
+-- data pushed except by play
+-- drupal views need updating
+-- api loadddata works, needs plays.
+-- api events/organizations/artists -- load but have a delay sync issue - switched back to flat files
+-- backup/fallback option
+-- cron update script need to write & setup and test
+-- we will totally replace data with data from the db. if only using new data, then update old & don't drop the whole database.
+
+* trigger play journey
+-- event listener being a pain - also moving around function calls is breaking order of execution.
+
+
+* play lines
+-- working - draws red lines that are partly opaque and fade, based on a data object of a whole play.
+-- need to clear the canvas when drawing a new playJourney (on click) -- keeps redrawing them.
+-- need to load in order (JSON) -- next week.
+
+* load play
+-- need to write a loader to look at mongo document (or big list of events/plays)
+
+* data
+-- check fields mapping
+-- update view to export all as well
+-- added path to event
+-- export all
+-- export 300 latest entries --> more frequent sync
+-- fallback hard files - save on server & point to them if mongo fails.
+
+* popup info (feedback) -- working again.
+-- artist / generative artist label issue
+
+* events -- json doc does not have paths, so we can't test.
+-- events_all & mongo don't have paths i think either
+
+* interactions all layers
+-- when play journey appears it conflicts w/ other layers. we should hide them.
+
+*  loading path
+-- consolidate load path object -- done, good object
+-- trigger callback on load data based on route  -- exists, but some order of execution issues
+-- debugging tip: print to screen the action when page is loaded
+
+* push to current dev site in front of drupal (tomorrow)
+-- colin?
+
+* ensure redirects from drupal
+Start a list of kinds of links to test.
+-- http://newplaymap.org/play
+-- http://newplaymap.org/#/play
+-- #/node/123
+-- node/123/edit
+-- http://newplaymap.org/#/play/blah
+-- http://newplaymap.org/play/blah?event_id=12345  (in a module -- look for it)
+-- back: http://newplaymap.org/#/play/blah?event_id=12345
+-- fallback : http://newplaymap.org/play/blah?event_id=12345 -- requires routing
+-- node/123/edit
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+Notes April 11
+
+loading information that is not in the map -- ex. a play organization that is not loaded
+hover try to find in the jsonObject - if not search database - and insert it -- into a temporary information layer that we can unlaod if it gets too big
+
+-- on mouse interaction of a differnet/new play
+-- look up path in ALL of the jsonData based on the type
+-- if it exists based on that type, load it, if NOT then go look in special bigger database( search) - if found, go load that record and append it to the jsonData in a special information layer such as
+
+jsonData.play (play journey, object of related events)
+if more than 50 items are loaded, garbage collection - bump old ones off the end
+jsonData.organization
+jsonData.event
+jsonData.artist
+
+the data stays, so after searching primary data sources, search secondary ones, if not then load them into the secondary one
+
+
+___ these currently exist:
+these are basically a pre-search -- for convenience/presentation are loaded
+jsonData.play
+jsonData.organizations
+jsonData.events
+jsonData.artists
+___
+
+unload data / unload layer / unload play
+look up play based on a db of all plays/events (search)
+draw lines
+draw lines w/ opacity
+spotlight
+
+templating -> all info loading in panel
+links in the template work
+make sure event id is parsed == it does.
+

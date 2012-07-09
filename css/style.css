@@ -1,0 +1,186 @@
+h1, h2, h3, h4 {
+  font-family: 'Museo Slab 500', Helvetica, Arial, sans-serif;;
+}
+
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+@font-face{ 
+	font-family: 'Museo Slab 500';
+	src: url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.eot');
+	src: url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.eot?iefix') format('eot'),
+	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.woff') format('woff'),
+	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.ttf') format('truetype'),
+	     url('../fonts/museoslab_500_macroman/Museo_Slab_500-webfont.svg#webfont') format('svg');
+}
+
+.count {
+  font-size: 80%;
+  line-height: 1em;
+  height: 200px;
+  overflow-y: hidden;
+  padding: 5px;
+
+}
+
+.count p {
+  opacity: 0.5;
+}
+.count:nth-child(-n+3) p {
+  opacity: 1;
+}
+
+#popup {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1000;
+  background: rgba(0,0,0, 0.5);
+  width: 100px;
+  height: 200px;
+  padding: 10px;
+  color: #fff;
+}
+
+
+/* @TODO load newplay map v1 css, or change it. */
+#panel-container {
+  position: fixed;
+  top: 48px;
+  right: 0;
+  z-index: 1000;
+  background-color: #E6DAC8;
+  width: 350px;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 10px;
+  color: #000;
+}
+
+#filter-container {
+}
+
+/* @TODO: Replace with Rocket's fancy visibly hidden thing */
+#filter-container form {
+  display: none;
+}
+
+ul.dropdown-menu {
+  z-index: 2100;
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+dt {
+  text-transform: uppercase;
+  padding: 0;
+  margin: 1em 0 5px 0;
+}
+
+dd {
+  padding: 0;
+  margin: 5px 0 1em 0;
+}
+
+.marker[type=play] {
+  z-index: 100;
+}
+
+.marker[type=event] {
+  z-index: 80;
+}
+
+.marker[type=artist] {
+  z-index: 60;
+}
+
+.marker[type=organization] {
+  z-index: 40;
+}
+
+#play-journey svg {
+/* pointer-events:  none; */
+}
+
+#map-container .ts-map .zoomer {
+  width: 28px;
+  height: 28px;
+  top: 80px;
+  left: 10px;
+}
+
+#map-container .ts-map .zoomin {
+  background-position: -31px -1px;
+  left: 39px;
+  border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+}
+
+#map-container .ts-map .zoomout {
+  background-position: -61px -1px;
+  border-radius: 3px 0px 0px 3px;
+  -moz-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 5px;
+  font-size: 80%;
+}
+
+div#panel-container div.journey {
+  visibility: hidden;
+}
+
+div#panel-container div#panel {
+  visibility: hidden;
+}
+
+
+#events.layer circle {
+  fill: #273e8b;
+  fill-opacity: .8;
+  vector-effect: non-scaling-stroke;
+}
+
+#clusters.layer circle {
+  fill: #bf1e2d;
+  fill-opacity: .5;
+  vector-effect: non-scaling-stroke;
+}
+
+
+#organizations.layer circle {
+  fill: #3d5425;
+  fill-opacity: .8;
+  vector-effect: non-scaling-stroke;
+}
+
+#artists.layer circle {
+  fill: #d69300;
+  fill-opacity: .8;
+/*   stroke: brown; */
+  vector-effect: non-scaling-stroke;
+}
+
+#plays .layer circle {
+  fill: #bf1e2d;
+}
+
+ul.cluster-data {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 80%;
+}

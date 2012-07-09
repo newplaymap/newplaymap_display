@@ -1,4 +1,4 @@
------------------start
+-----------------start  event
 
   {
   "id":"{{jsonize(cells["node - Event ID"].value)}}",
@@ -27,20 +27,47 @@
   }
   
 -----------------end  
+
+start organization ----
+
+  {
+  "id":"{{jsonize(cells["node - Org ID"].value)}}",
+  "type":"Feature",
+  "geometry": {
+    "type":"Point",
+    "coordinates": [{{jsonize(cells["node - Longitude"].value)}},{{jsonize(cells["node - Latitude"].value)}}]
+    },
+  "properties":
+  {
+      "logo" : {{jsonize(cells["node - Logo"].value)}},
+      "path" : {{jsonize(cells["node - Path"].value)}},
+      "organization_id" : {{jsonize(cells["node - Org ID"].value)}},
+      "name" : {{jsonize(cells["node - Org name"].value)}},
+      "latitude" : {{jsonize(cells["node - Latitude"].value)}},
+      "longitude" : {{jsonize(cells["node - Longitude"].value)}},
+      "mission_statement" : {{jsonize(cells["node - Mission statement"].value)}},
+      "ensemble_collective" : {{jsonize(cells["node - Ensemble collective"].value)}},
+      "founding_date" : {{jsonize(cells["node - Founding date"].value)}},
+      "organization_type" : {{jsonize(cells["node - Organization type"].value)}},
+      "organization_type_2" : {{jsonize(cells["node - Organization type - 2"].value)}},
+      "organization_type_1" : {{jsonize(cells["node - Organization type - 1"].value)}},
+      "organization_type_3" : {{jsonize(cells["node - Organization type - 3"].value)}},
+      "organization_type_4" : {{jsonize(cells["node - Organization type - 4"].value)}},
+      "organization_type_5" : {{jsonize(cells["node - Organization type - 5"].value)}}
+    }
+  }
   
-  
-  
------------------start 
-  {"type":"FeatureCollection","features":[ 
+
+
 
 -----------------end
-  
-  
-  
+
+
+newPlayMap.onLoadEventMarkers(  {"type":"FeatureCollection","features":[ 
+newPlayMap.onLoadOrganizationMarkers(  {"type":"FeatureCollection","features":[ 
+
+-----------------end
 -----------------start  
-  
     ]
 })
-
-
 -----------------end

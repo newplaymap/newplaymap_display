@@ -17,10 +17,10 @@ var Spotlight = function(canvas, fillStyle) {
 };
 
 Spotlight.prototype = {
-    fillStyle: "rgba(0,0,0,.6)",
+    fillStyle: "rgba(0,0,0,.8)",
     strokeWidth: null,
-    strokeAlpha: 0,
-    radius: 40,
+    strokeAlpha: 1,
+    radius: 20,
 
     // clearing resets the canvas and fills it with the fillStyle
     clear: function() {
@@ -78,7 +78,7 @@ Spotlight.prototype = {
 
         this.ctx.globalCompositeOperation = "destination-out";
         this.drawPoints(points);
-        console.log(points.length, "pts took", (new Date() - time), "ms");
+        // console.log(points.length, "pts took", (new Date() - time), "ms");
     }
 };
 
