@@ -28,11 +28,6 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    $obj['geometry']['coordinates'][0] =   (float)  $obj['geometry']['coordinates'][0];
-    $obj['geometry']['coordinates'][1] =   (float)  $obj['geometry']['coordinates'][1];
-    $obj['properties']['latitude'] =   (float)  $obj['properties']['latitude'];
-    $obj['properties']['longitude'] =   (float)  $obj['properties']['longitude'];
-
     $json .= json_encode($obj);
   
     $i++;
