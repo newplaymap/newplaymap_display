@@ -9,11 +9,11 @@ if(!empty($_GET['event_type'])){
   $event_type = $_GET['event_type'];
   // find everything in the collection
   $query = array("properties.event_type" => $event_type);
-  $cursor = $collection->find($query)->skip($page * $page_items)->limit($page_items)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
 
 }
 else {
-  $cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
 }
 
 $count = $cursor->count();
@@ -41,11 +41,6 @@ foreach ($cursor as $obj) {
     
     $obj['properties']['event_date'] = $start_date;
     $obj['properties']['event_to_date'] = $end_date;
-
-    $obj['geometry']['coordinates'][0] =   (float)  $obj['geometry']['coordinates'][0];
-    $obj['geometry']['coordinates'][1] =   (float)  $obj['geometry']['coordinates'][1];
-    $obj['properties']['latitude'] =   (float)  $obj['properties']['latitude'];
-    $obj['properties']['longitude'] =   (float)  $obj['properties']['longitude'];
     
     $json .= json_encode($obj);
   

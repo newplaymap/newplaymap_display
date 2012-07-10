@@ -14,161 +14,17 @@ newPlayMap.routing.route = {};
 newPlayMap.browserEvents = [];
 newPlayMap.filters = newPlayMap.filters || {};
 
-var po = org.polymaps;
-var map = po.map()
-    .container(document.getElementById("map").appendChild(po.svg("svg")))
-    .center({lat: 45, lon: -90.228})
-    .zoom(3)
-    .zoomRange([2, 7])
-    .add(po.interact());
-
-
-map.add(po.compass()
-    .pan("none"));
-
-  map.add(po.image()
-      .url(po.url("http://{S}tile.cloudmade.com"
-      + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
-      + "/20760/256/{Z}/{X}/{Y}.png")
-      .hosts(["a.", "b.", "c.", ""])));
-
-
-/*
-map.add(po.geoJson()
-    .url('api/organizations.php?page_items=300')
-    .on("load", load)
-    .clip(false)
-    .zoom(3)
-    .id("organizations"));
-
-map.add(po.geoJson()
-    .url('api/artists.php?page_items=300')
-    .on("load", load)
-    .clip(false)
-    .zoom(3)
-    .id("artists"));
-*/
-
-
-
-newPlayMap.cluster = function(e) {
-
-    var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
-        .iterations(10)
-        .size(20));
-  
-    for (var i = 0; i < e.features.length; i++) {
-
-      var type = e.features[i].data.properties.type;
-        e.features[i].data.geometry.coordinates.push({type: type});
-        cluster.add(e.features[i].data.geometry.coordinates);    
-      }
-
-    var tile = e.tile;
-    var g = tile.element;
-    while (g.lastChild) g.removeChild(g.lastChild);
-  
-    var means = cluster.means();
-    means.sort(function(a, b) { return b.size - a.size; });
-  
-  
-  
-    for (var i = 0; i < means.length; i++) {
-      var mean = means[i];
-      var typeCounter = countTypes(mean);
-      var data = "<ul class='cluster-data'><li>Artists: " + typeCounter.artist +  "</li><li>Events: "+ typeCounter.event + "</li><li>Organizations: " + typeCounter.organization + "</li></ul>";
-/*       var data = mean.points.length; */
-      point = g.appendChild(po.svg("circle"));
-      point.setAttribute("cx", mean.x);
-      point.setAttribute("cy", mean.y);
-      point.setAttribute("size", mean.size);
-      point.setAttribute("title", data);
-      point.setAttribute("r", Math.pow(2, tile.zoom - 4) * Math.sqrt(mean.size) * 2);
-    }
-
-    function countTypes(mean){
-        var typeCounter = {
-          artist: 0,
-          event: 0,
-          organization: 0,
-        };
-    
-    
-        for (var i = 0; i < mean.points.length; i++) {
-          var type = mean.points[i][2].type;
-          
-          switch(type) {
-            case type:
-              typeCounter[type]++;
-            break;
-          }
-        }
-        return typeCounter;
-    }
-
-
-$('.layer circle[title]').each(function() {
-      $(this).qtip({
-         content: $(this).attr('title'), // Use the tooltip attribute of the element for the content
-
-         style: {
-          name: 'light',
-/*
-          tip: { // Now an object instead of a string
-            corner: 'topLeft', // We declare our corner within the object using the corner sub-option
-/*          color: '#6699CC', 
-            size: {
-              x: 20, // Be careful that the x and y values refer to coordinates on screen, not height or width.
-              y : 8 // Depending on which corner your tooltip is at, x and y could mean either height or width!
-            }
-
-          }
-*/          }
-          ,
-          // Give it a crea mstyle to make it stand out
-
-          position: {
-                  corner: {
-/*                      tooltip: "topMiddle", */
-                     target: "topLeft"
-                  },
-                  mouse: true
-/*                   adjust: { x: 5, y: 10 } */
-               },
-      });
-   });
-
-}
-
-
-
-
-
-
-map.add(po.geoJson()
-    .url('api/clusters.php?page_items=300')
-    .on("load",  newPlayMap.cluster )
-
-    .clip(false)
-    .zoom(3)
-    .id("clusters")
-    );
-
-
 window.onload = function() {
   newPlayMap.alterHomepage();   // Change basic layout of page.
   newPlayMap.loadMap();         // Load map tiles & trigger data to load.
   newPlayMap.initializeFilters();  // Add interaction to filters in sidebar panel
 };
 
-
-
-
 newPlayMap.loadMap = function(callback){
   // Load map tiles.
   //newPlayMap.loadWax();
   // for map debugging: 
-  newPlayMap.initMapSimple();
+   newPlayMap.initMapSimple();
 };
 
 newPlayMap.alterHomepage = function() {
@@ -274,8 +130,6 @@ newPlayMap.initMapSimple = function() {
 
   // Run data layers closure.
   data();
-
-newPlayMap.mapCustomizations();
 };
 
 newPlayMap.loadMapData = function() {
