@@ -2,25 +2,12 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-if(!empty($_GET['page'])){
- $page = $_GET['page'];
-}
-else{
-  $page = 0;
-}
-
-if(!empty($_GET['page_items'])){
- $page_items = $_GET['page_items'];
-}
-else{
-  $page_items = 150;
-}
-
+$limit = 10;
 
 $collection = $m->newplaymap->artists;
 
 // find everything in the collection
-$cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("name" => 1));
+$cursor = $collection->find()->limit($limit)->sort(array("name" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

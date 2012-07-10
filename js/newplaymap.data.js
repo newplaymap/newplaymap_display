@@ -14,6 +14,30 @@ newPlayMap.loadJSONFile = function(vars) {
 
 };
 
+/*
+ * Function to load content from an API file
+ *
+ * Sample options to pass in as the vars object:
+ *   data: data,
+ *   zoomLevel: newPlayMap.defaultZoom,
+ *   clearLayer: true,
+ *   clearLayers: true,
+ *   loadProfile: loadProfile,
+ *   template: "organization",
+ *   layer: "layer-organization-filter",
+ *   class: "inactive",
+ *   template: "organization-template",
+ *   type: "organization",
+ *   label: "org_type",
+ *   id: "organization_id",
+ *   title: "name",
+ *   resultsTitle: "What's on Today",
+ *   dataName: "organizations_filter",
+ *   path: 'api/organizations_filter.php?' + pathQuery,
+ *   dataPath: "api/organizations_filter.php?" + pathQuery,
+ *   icon: "icons/organization.png",
+ *   callback: newPlayMap.loadOrganizationFilter
+ */
 newPlayMap.loadAPICall = function(vars) {
   var vars = vars;
   var contentData = vars.path + "&cache=" + Math.floor(Math.random()*11);
@@ -21,6 +45,7 @@ newPlayMap.loadAPICall = function(vars) {
     url:  contentData,
     dataType: 'json',
     data: vars.data,
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.setData,
     error: newPlayMap.loadDataError
   });
@@ -31,10 +56,12 @@ newPlayMap.loadAPICall = function(vars) {
 newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
-  var length = jsonData[data.name]["features"].length;
-  var count =  newPlayMap.toTitleCase(data.name) + " Showing: " + length + " of " + jsonData[data.name].count + ".";
-  $('div.count').prepend('<p>' + count + '</p>');
+
   var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  
+  if (newPlayMap.filters.loadingCompleteFeedback) {
+    newPlayMap.filters.loadingCompleteFeedback();
+  }
   return false;
 };
 
@@ -44,7 +71,7 @@ newPlayMap.toTitleCase = function (str) {
 
 // General function for handling AJAX errors.
 newPlayMap.loadDataError = function(data) {
-  console.log(data);
+  // console.log(data);
   return false;
 };
 
@@ -52,41 +79,45 @@ newPlayMap.loadDataError = function(data) {
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
   var vars = vars;
-  console.log(vars);
+  // console.log(vars);
+  // Clean out featuresByLocation.
+  featuresByLocation = {};
   var features = jsonData[vars.dataName].features,
       len = features.length,
       locations = [];
 
   // Remove divs if they exist and API function requests that they be cleared.
   if(vars.clearLayer === true) {
-    $('div.marker[dataName=' + vars.dataName + ']').remove();
+    $('a.marker[dataName=' +   + ']').remove();
   }
+  
+  // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
 
   // Remove new layers
   if(vars.clearLayers === true) {
-/*     $('div.marker[dataName=organizations_filter]').remove(); */
     $('div#play-journey').remove();
-    $('div.marker[dataName=play]').remove();
-    $('div.marker[dataName=artists_filter]').remove();
-    $('div.marker[dataName=events_filter]').remove();
-    $('div.marker[dataName=plays_filter]').remove();
-    $('div.marker[dataName=organizations_filter]').remove();
+    $('a.marker[dataName=play]').remove();
+    $('a.marker[dataName=artists_filter]').remove();
+    $('a.marker[dataName=events_filter]').remove();
+    $('a.marker[dataName=plays_filter]').remove();
+    $('a.marker[dataName=organizations_filter]').remove();
 
     spotlight.parent.className = "inactive";
     spotlight.removeAllLocations();
-    $('div.marker').css({ 'opacity' : 1 }); 
-
-
+    $('a.marker').css({ 'opacity' : 1 });
   }
+  
+
 
   // for each feature in the collection, create a marker and add it
   // to the markers layer
   for (var i = 0; i < len; i++) {
       var feature = features[i],
           id = feature.properties[vars.id],
-          marker = document.createElement("div");
+          marker = document.createElement("a");
 
       marker.feature = feature;
+      var latlon = feature.properties.latitude + "," + feature.properties.longitude;
 
       markers.addMarker(marker, feature);
       
@@ -98,8 +129,9 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       marker.setAttribute("id", "marker-" + vars.type + "-" + id);
       marker.setAttribute("dataName", vars.dataName);
       marker.setAttribute("class", "marker");
-      marker.setAttribute("href", vars.dataPath);
+      marker.setAttribute("href", feature.properties.path);
       marker.setAttribute("type", vars.type);
+      marker.setAttribute("latlon", latlon);
 
       marker.setAttribute("parent", vars.layer);
       // Specially set value for loading data.
@@ -115,37 +147,54 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       var img = marker.appendChild(document.createElement("img"));
       img.setAttribute("src", vars.icon);
 
-
       // Determine placement of highlighting by geocoordinates.
-      // if(vars.grouping_field !== undefined) {
-      // 
+
         marker.setAttribute("grouping_field", vars.grouping_field);
         marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
-      
+
+        // Push to array of items on same latlon.
+        if (latlon in featuresByLocation) {
+          featuresByLocation[latlon].push(feature);
+        } else {
+          featuresByLocation[latlon] = [feature];
+        }
+
         if (feature.properties[vars.grouping_field] in locationsByID) {
           locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
         } else {
           locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
         }
-      // }
-      // else {
+
         // Add all of the locations to the array. making them unique for all layers
         if (feature.properties[vars.id] in locationsByID) {
           locationsByID[feature.properties[vars.id]].push(marker.location);
         } else {
           locationsByID[feature.properties[vars.id]] = [marker.location];
         }
-      // }
 
       // add the marker's location to the extent list
       locations.push(marker.location);
-
 
       // Listen for mouseover & mouseout events.
       MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
       MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
       MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
       
+  }
+
+  // Load result data for this set of features.
+  newPlayMap.loadResults(features, vars);
+
+
+  // Load profiles if called for
+  if (vars.loadProfile == true) {
+    // Get the last marker
+    var markerLength = markers.markers.length - 1;
+    var thisMarker = markers.markers[markerLength];
+    
+    newPlayMap.updatePanel(thisMarker);
+    // Set address
+    window.location.hash = '#' + thisMarker.feature.properties.path
   }
 
   // Tell the map to fit all of the locations in the available space
@@ -158,7 +207,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
   }
   else {
     // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.
-    map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), vars.zoomLevel);
+    // map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), vars.zoomLevel);
   }
   // Apply behavior listener for layer type.
   if(vars.callback !== undefined) {

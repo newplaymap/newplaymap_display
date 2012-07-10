@@ -3,35 +3,26 @@ include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $plays = $m->newplaymap->plays;
-
-
+$events = $m->newplaymap->events;
 if(!empty($_GET['id'])){
- $id = $_GET['id'];
-  // find everything in the collection
+  $id = $_GET['id'];
   $play_cursor = $plays->findOne(array('id' => $id));
-
 }
-if(!empty($_GET['play_title'])){
- $play_title = $_GET['play_title'];
-  // find everything in the collection
+if(!empty($_GET['play_title']) && $_GET['play_title'] !== "undefined" ){
+  $play_title = $_GET['play_title'];
   $play_cursor = $plays->findOne(array('properties.play_title' => $play_title));
-
+}
+if(!empty($_GET['path'])) {
+  $path = $_GET['path'];
+  $expression = new MongoRegex('/'. $path . '/i');
+  $event_cursor = $events->findOne(array('properties.path' => $expression));
+  $play_cursor = $plays->findOne(array('id' => $event_cursor["properties"]["related_play_id"]));
+}
+if(!empty($play_cursor['id'])) {
+  $query = array('properties.related_play_id' => (string) $play_cursor['id']);
+  $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
 }
 
-
-
-    if(!empty($play_cursor['id'])) {
-
-        $query = array('properties.related_play_id' => (string) $play_cursor['id']);
-        $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
-
-    }
-
-/* $collection = $m->newplaymap->journeys; */
-
-// find everything in the collection
-/* $cursor = $collection->find(array("id" => $id))->limit(1); */
-$count = $events_cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
@@ -40,10 +31,8 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 header("Content-type: application/json");
 
-
 $json = "";
 $json .= '{"name": "play", "id": ' . $play_cursor['id'] . ', "type":"FeatureCollection", "features":[ ' ;
-
 
 $i = 0;
 
@@ -69,16 +58,7 @@ foreach ($events_cursor as $obj) {
   }
 }
 
-    $json .= '], "count" : ' . $count . '}';
-
-/* $json .= "," . json_encode(array('count' => $collection->count())); */
-
-// @TODO this is probably wrong.
-
-
-
-  
-
+$json .= ']}';
 
 echo $json;
 

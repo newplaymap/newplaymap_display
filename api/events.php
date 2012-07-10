@@ -2,20 +2,7 @@
 include('../../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-if(!empty($_GET['page'])){
- $page = $_GET['page'];
-}
-else{
-  $page = 0;
-}
-
-if(!empty($_GET['page_items'])){
- $page_items = $_GET['page_items'];
-}
-else{
-  $page_items = 150;
-}
-
+$limit = 10;
 $collection = $m->newplaymap->events;
 
 if(!empty($_GET['event_type'])){
