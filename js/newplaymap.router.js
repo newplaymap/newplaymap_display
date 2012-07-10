@@ -1,15 +1,5 @@
 newPlayMap.routing = newPlayMap.routing || {};
 var canvas = {}
-// @TODO routing will be loaded everytime a dataset is loaded, it should be called.
-
-/* Upgrade to address 1.4, which MIGHT work with regular jquery, otherwise go back to jquery 1.4.2
- * Whenever the address changes, trigger popup markers & load node.
- */
-
-
-newPlayMap.buildRoutePath = function(event) {
-  newPlayMap.routing.path = newPlayMap.splitPath(event);
-};
 
 newPlayMap.splitPath = function(event) {
   var path = {};
@@ -26,14 +16,15 @@ newPlayMap.splitPath = function(event) {
     path.base = path.parts[0];
     path.partsStripped = path.uriStripped.split("?");
     path.baseStripped = path.partsStripped[0];
-    path.vars = path.parts[1].split("&");
+    if(path.parts[1] !== undefined) {
+      path.vars = path.parts[1].split("&");
+    }
     path.filters = {};
     for (var singleFilter in path.vars) {
       var filter = path.vars[singleFilter].split('=');
       path.filters[filter[0]] = filter[1];
     }
   }
-  newPlayMap.status.routerPathLoaded = true;  
   return path;
 };
 
@@ -78,7 +69,7 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
         var feature = features[i];
         var pathKey;
         if(alt_path !== undefined) {
-          pathKey = alt_path
+          pathKey = alt_path;
         }
         else {
           pathKey = "path";
@@ -92,17 +83,6 @@ newPlayMap.lookupFeatureByPath = function(dataName, alt_path, id_key, id_value) 
     }
     return loadedFeatures;
    }
-   else {
-    console.log("in else in lookup");
-     // If jsonData isn't set up yet, stick the route somewhere to load later
-     newPlayMap.routing = {
-      path: newPlayMap.routing.path,
-      route: newPlayMap.routing.route || {},
-      dataName: dataName,
-      alt_path: alt_path
-     };
-   } 
-
 };
 
 /**
@@ -118,39 +98,49 @@ newPlayMap.clearAddress = function() {
   return false;
 }
 
-/**
- * Process ajax links
- *
- * Add ajax-processed link to tags in given paths in the document.
- * Excludes: 
- *   /
- *   http:
- *   node/add
- *   node/xxx/edit
- *   admin
+/*
+ * Process links so we can selectively use the address()
  */
-newPlayMap.ajaxLinks = function(className, target) {
+newPlayMap.processAddressLinks = function(className, target) {
+  if (target == undefined) {
+    var target = 'a';
+  }
+
   $(target).each(function(){
-    var path = $(this).attr('href');
-    
-    var cleanPath = newPlayMap.cleanDestination(path);
-    if (cleanPath) {
-      $(this).attr('href', cleanPath);
-    }
-    
-    if(path !== undefined) {
-      if(path.substr(0,5) === '/node') {
+    var thisTarget = $(this);
+    var path = thisTarget.attr('href');
+
+    if (path !== undefined) {
+      if (thisTarget.hasClass(className)) {
       }
-      else if(path.substr(0,4) === 'node') {
+      else if (path.substr(0,11) === 'participate') {
       }
-      else if(path.substr(-4,4) === 'feed') {
+      else if (thisTarget.attr('id') == 'share-facebook') {
       }
-      else if(path.substr(0,7) === '/admin/') {
+      else if (thisTarget.hasClass('twitter-share-button')) {
       }
-      else if((path.substr(0,4) === 'http') || (path.substr(0,5) === '/http')) {
+      else if (thisTarget.attr('id') == 'share-links-show') {
       }
-      else if(path.length == 1) {
+      else if (thisTarget.attr('id') == 'add_button') {
       }
+      else if (thisTarget.attr('id') == 'share-link') {
+      }
+      else if (thisTarget.attr('id') == 'embed-link') {
+      }
+      else if (thisTarget.hasClass('reset-map')) {
+      }
+      // else if(path.substr(0,5) === '/node') {
+      // }
+      // else if(path.substr(0,4) === 'node') {
+      // }
+      // else if(path.substr(-4,4) === 'feed') {
+      // }
+      // else if(path.substr(0,7) === '/admin/') {
+      // }
+      // else if((path.substr(0,4) === 'http') || (path.substr(0,5) === '/http')) {
+      // }
+      // else if(path.length == 1) {
+      // }
       else {
         $(this).addClass(className);
       }
