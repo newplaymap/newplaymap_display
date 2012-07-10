@@ -1,5 +1,5 @@
 <?php
-include('../../../authentication/newplaymap_authentication.php');
+include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $play_title = (!empty($_GET['play_title'])) ? $_GET['play_title'] : null;
