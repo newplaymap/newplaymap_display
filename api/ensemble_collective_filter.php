@@ -1,5 +1,5 @@
 <?php
-include('../../../authentication/newplaymap_authentication.php');
+include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $organizations_collection = $m->newplaymap->organizations;
