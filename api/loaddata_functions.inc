@@ -276,6 +276,7 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
         "related_theater_has_location"  => $related_theater_has_location,
         "artist_id"  => $node["Artist ID"],
         "play_title"  => $node["Play title"],
+        "play_title_display"  => html_entity_decode($node["Play title"], ENT_QUOTES),
         "related_play_id"  => $node["Related Play ID"],
         "related_play_path"  => '/' . str_replace($base_path, "", $node["Related play path"]),
         "generative_artist"  => $node["Generative Artist"],
