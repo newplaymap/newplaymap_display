@@ -250,6 +250,9 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
     $end_date = new MongoDate(strtotime($node["To Date"]));
     
     $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
+    
+    $related_theater_has_location = ($node["Organization coordinates"] != ',') ? TRUE : FALSE;
+    $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
   
     // @TODO: See if the string replace on path can be removed
     $newObj = array(
@@ -270,11 +273,13 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
         "related_theater"  => $node["Related Theater"],
         "related_theater_path"  => '/' . str_replace($base_path, "", $node["Related theater path"]),
         "related_theater_id"  => $node["Related Theater ID"],
+        "related_theater_has_location"  => $related_theater_has_location,
         "artist_id"  => $node["Artist ID"],
         "play_title"  => $node["Play title"],
         "related_play_id"  => $node["Related Play ID"],
         "related_play_path"  => '/' . str_replace($base_path, "", $node["Related play path"]),
         "generative_artist"  => $node["Generative Artist"],
+        "generative_artist_has_location"  => $generative_artist_has_location,
         "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
         "event_description"  => $node["Event description"],
         "synopsis"  => $node["Synopsis"],
@@ -336,6 +341,8 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
     $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
   }
   
+  $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+  
   // print_r($node);
   $newObj = array(
     "id" => $node["Play ID"],
@@ -349,6 +356,7 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
       "alternate_titles"  => $alternate_titles_list,
       "generative_artist"  => $node["Generative Artist"],
       "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
+      "generative_artist_has_location"  => $generative_artist_has_location,
       "synopsis"  => $node["Synopsis"],
       "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
     )
