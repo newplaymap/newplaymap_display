@@ -28,10 +28,10 @@ if ($id && $type) {
   }
 } else {
   // Run everything
-  loadOrganizations($m, $domain, $drupal_base_path);
-  loadArtists($m, $domain, $drupal_base_path);
-  loadEvents($m, $domain, $drupal_base_path);
-  loadPlays($m, $domain, $drupal_base_path);
+  loadOrganizations($m, $domain, $drupal_base_path, FALSE, TRUE);
+  loadArtists($m, $domain, $drupal_base_path, FALSE, TRUE);
+  loadEvents($m, $domain, $drupal_base_path, FALSE, TRUE);
+  loadPlays($m, $domain, $drupal_base_path, FALSE, TRUE);
 }
 
 /* echo $json; */
