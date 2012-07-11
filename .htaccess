@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  RewriteRule sites/default/files/images/badge_embed.png participate/sites/default/files/images/badge_embed.png [L,QSA]
+</IfModule>
