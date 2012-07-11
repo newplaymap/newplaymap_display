@@ -226,7 +226,11 @@
                     <!-- @TODO: Remove all the dummy empty text -->
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
-                      <h3>by <a href="${generative_artist_path}">${generative_artist}</a></h3>
+                      {{if generative_artist_has_location == true}}
+                        <h3>by <a href="${generative_artist_path}">${generative_artist}</a></h3>
+                      {{else}}
+                        <h3>by ${generative_artist}</h3>
+                      {{/if}}
                     {{/if}}
 
                   
@@ -376,7 +380,11 @@
                         <a class="results-item-title" href="${path}">${title}</a>
                         
                         {{if properties.content_type == 'Event'}}
-                          <div class="artist-name">by <a href="${properties.generative_artist_path}">${properties.generative_artist}</a></div>
+                          {{if properties.generative_artist_has_location == true}}
+                            <div class="artist-name">by <a href="${properties.generative_artist_path}">${properties.generative_artist}</a></div>
+                          {{else}}
+                            <div class="artist-name">by ${properties.generative_artist}</div>
+                          {{/if}}
                         {{/if}}
                       
                         {{if properties.organization_type_display}}

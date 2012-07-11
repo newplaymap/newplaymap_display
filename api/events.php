@@ -38,6 +38,7 @@ foreach ($cursor as $obj) {
 
     $start_date = date('M j, Y', $obj['properties']['event_date']->sec);
     $end_date = date('M j, Y', $obj['properties']['event_to_date']->sec);
+    // $organization_location;
     
     $obj['properties']['event_date'] = $start_date;
     $obj['properties']['event_to_date'] = $end_date;
