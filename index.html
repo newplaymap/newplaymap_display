@@ -392,7 +392,11 @@
                         {{/if}}
                         
                         {{if properties.related_theater}}
-                          <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
+                          {{if properties.related_theater_has_location == true}}
+                            <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
+                          {{else}}
+                            <div>${properties.related_theater}</div>
+                          {{/if}}
                         {{/if}}
                       
                         {{if city}}{{if state}}
