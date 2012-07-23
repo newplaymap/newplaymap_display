@@ -604,7 +604,8 @@ ul.ui-autocomplete {
         background: url("../images/results-artists-icon.png") no-repeat 0 center;
       }
       
-      #panel-container .results-container .results-title h2#events-results-title {
+      #panel-container .results-container .results-title h2#events-results-title,
+      #panel-container .results-container .results-title h2#plays-results-title {
         background: url("../images/results-events-icon.png") no-repeat 0 center;
       }
       
