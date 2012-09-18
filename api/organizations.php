@@ -4,7 +4,7 @@ connectMongo(false);
 
 $limit = 10;
 
-$collection = $m->newplaymap->organizations;
+$collection = $m->$mongo_database->organizations;
 
 // find everything in the collection
 $cursor = $collection->find()->limit($limit)->sort(array("properties.name" => 1));

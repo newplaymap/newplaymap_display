@@ -14,24 +14,24 @@ if ($id && $type) {
   // Update a specific piece of content
   switch ($type) {
     case 'artist':
-      loadArtists($m, $domain, $drupal_base_path, $id);
+      loadArtists($m, $mongo_database, $domain, $drupal_base_path, $id);
     break;
     case 'event':
-      loadEvents($m, $domain, $drupal_base_path, $id);
+      loadEvents($m, $mongo_database, $domain, $drupal_base_path, $id);
     break;
     case 'organization':
-      loadOrganizations($m, $domain, $drupal_base_path, $id);
+      loadOrganizations($m, $mongo_database, $domain, $drupal_base_path, $id);
     break;
     case 'play':
-      loadPlays($m, $domain, $drupal_base_path, $id);
+      loadPlays($m, $mongo_database, $domain, $drupal_base_path, $id);
     break;
   }
 } else {
   // Run everything
-  loadOrganizations($m, $domain, $drupal_base_path, FALSE, TRUE);
-  loadArtists($m, $domain, $drupal_base_path, FALSE, TRUE);
-  loadEvents($m, $domain, $drupal_base_path, FALSE, TRUE);
-  loadPlays($m, $domain, $drupal_base_path, FALSE, TRUE);
+  loadOrganizations($m, $mongo_database, $domain, $drupal_base_path, FALSE, TRUE);
+  loadArtists($m, $mongo_database, $domain, $drupal_base_path, FALSE, TRUE);
+  loadEvents($m, $mongo_database, $domain, $drupal_base_path, FALSE, TRUE);
+  loadPlays($m, $mongo_database, $domain, $drupal_base_path, FALSE, TRUE);
 }
 
 /* echo $json; */

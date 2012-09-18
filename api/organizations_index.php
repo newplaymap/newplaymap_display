@@ -2,7 +2,7 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->organizations;
+$collection = $m->$mongo_database->organizations;
 
 // find everything in the collection
 $cursor = $collection->find()->sort(array("properties.name" => 1));
