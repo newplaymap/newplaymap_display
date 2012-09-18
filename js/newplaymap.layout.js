@@ -173,11 +173,11 @@ newPlayMap.panelTemplate = function(feature) {
 newPlayMap.loadResults = function(features, vars) {
   var type = "results";
   var template = "results-template";
-  var container, containerEmpty;
+  var container, containerEmpty, resultsEmpty;
   containerEmpty = $('#panel-container .content');
-  containerEmpty.empty();
-  // resultsEmpty = $('#panel-container .results-container-' + vars.type);
-  // resultsEmpty.empty();
+  // containerEmpty.empty();
+  resultsEmpty = $('#panel-container .results-container-' + vars.type + ' .results');
+  resultsEmpty.empty();
   container = $('#panel-container .results-container-' + vars.type + '.' + type);
   container.empty();
   // console.log(features.length);
