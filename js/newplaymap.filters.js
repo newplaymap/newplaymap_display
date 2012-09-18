@@ -66,7 +66,6 @@ newPlayMap.filters.organizations = function(data) {
     pathQuery = "event_organization_path=" +  data.path;
     var loadProfile = true;
 
-    console.log(pathQuery)
     newPlayMap.loadAPICall({
       data: data,
       zoomLevel: newPlayMap.defaultZoom,
@@ -79,7 +78,7 @@ newPlayMap.filters.organizations = function(data) {
       title: "play_title",
       template: "play-template",
       resultsTitle: null,
-      type: "play",
+      type: "event",
       dataName: "events_filter",
       path: "api/events_filter.php?" + pathQuery,
       dataPath: "api/events_filter.php?" + pathQuery,
@@ -223,7 +222,7 @@ newPlayMap.filters.events = function(data, resultsTitle) {
     title: "play_title",
     template: "play-template",
     resultsTitle: resultsTitle,
-    type: "play",
+    type: "event",
     dataName: "events_filter",
     path: "api/events_filter.php?" + pathQuery,
     dataPath: "api/events_filter.php?" + pathQuery,
@@ -248,7 +247,7 @@ newPlayMap.filters.cityStateEvents = function(data) {
     id: "event_id",
     title: "play_title",
     template: "play-template",
-    type: "play",
+    type: "event",
     dataName: "events_filter",
     path: "api/events_filter.php?" + pathQuery,
     dataPath: "api/events_filter.php?" + pathQuery,
