@@ -59,6 +59,35 @@ newPlayMap.filters.organizations = function(data) {
     callback: newPlayMap.loadOrganizationFilter
   });
   
+  // Load Related Events for this Organization
+  // if (data.organization_name !== undefined) {
+    pathQuery = "event_organization_path=" +  data.path;
+    var loadProfile = true;
+
+    console.log(pathQuery)
+    newPlayMap.loadAPICall({
+      data: data,
+      zoomLevel: newPlayMap.defaultZoom,
+      clearLayer: false,
+      clearLayers: false,
+      layer: "layer-events-filter",
+      class: "inactive",
+      id: "event_id",
+      label: "play_title", // field which will be used in label
+      title: "play_title",
+      template: "play-template",
+      resultsTitle: null,
+      type: "play",
+      dataName: "events_filter",
+      path: "api/events_filter.php?" + pathQuery,
+      dataPath: "api/events_filter.php?" + pathQuery,
+      icon: "icons/event.png",
+      grouping_field: "event_id",
+      related_play_id: "related_play_id",
+      callback: newPlayMap.loadEventFilter
+    });
+  // }
+  
   // @TODO: Trigger address change if appropriate (searching for org name)
   //        This is also the time to load the profile
 }
