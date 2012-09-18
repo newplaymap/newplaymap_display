@@ -37,7 +37,7 @@ else if ($search_start !== null) {
 }
 
 // Find Events by Organization
-if ($event_organization_path !== null) {
+else if ($event_organization_path !== null) {
   $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => 1));
 }
 
