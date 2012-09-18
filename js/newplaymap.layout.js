@@ -174,13 +174,18 @@ newPlayMap.panelTemplate = function(feature) {
 
 newPlayMap.loadResults = function(features, vars) {
   var type = "results";
+  var resultType = vars.type;
   var template = "results-template";
   var container, containerEmpty, resultsEmpty;
   containerEmpty = $('#panel-container .content');
-  // containerEmpty.empty();
-  resultsEmpty = $('#panel-container .results-container-' + vars.type + ' .results');
+  
+  // Play type should load results into events list
+  if (resultType == 'play') {
+    resultType = 'event';
+  }
+  resultsEmpty = $('#panel-container .results-container-' + resultType + ' .results');
   resultsEmpty.empty();
-  container = $('#panel-container .results-container-' + vars.type + '.' + type);
+  container = $('#panel-container .results-container-' + resultType + '.' + type);
   container.empty();
   // console.log(features.length);
   
@@ -207,10 +212,10 @@ newPlayMap.loadResults = function(features, vars) {
 
       $('#' + template).tmpl(result)
         // .appendTo(container);
-        .appendTo('#panel-container .results-container-' + vars.type + ' .results');
+        .appendTo('#panel-container .results-container-' + resultType + ' .results');
         // .appendTo('#panel-container .results-container-organization .results');
         
-      newPlayMap.resultsListProcess($('#panel-container .results-container-' + vars.type));
+      newPlayMap.resultsListProcess($('#panel-container .results-container-' + resultType));
   }
   
   if (len > 0) {
@@ -278,9 +283,9 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
     .attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results-title')
     .text(resultsCount + ' ' + resultsType + resultsPlural);
     
-  $('#panel-container .results-container .results-title .results-total-count').text(totalCountText);
+  $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' .results-title .results-total-count').text(totalCountText);
   
-  $('#panel-container .results-container ol.results').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results');
+  $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' ol.results').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results');
 }
 
 
