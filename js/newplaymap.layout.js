@@ -178,7 +178,7 @@ newPlayMap.loadResults = function(features, vars) {
   containerEmpty.empty();
   // resultsEmpty = $('#panel-container .results-container-' + vars.type);
   // resultsEmpty.empty();
-  container = $('#panel-container .' + type);
+  container = $('#panel-container .results-container-' + vars.type + '.' + type);
   container.empty();
   // console.log(features.length);
   
@@ -205,7 +205,8 @@ newPlayMap.loadResults = function(features, vars) {
 
       $('#' + template).tmpl(result)
         // .appendTo(container);
-        .appendTo('#panel-container .results-container-' + vars.type);
+        .appendTo('#panel-container .results-container-' + vars.type + ' .results');
+        // .appendTo('#panel-container .results-container-organization .results');
         
       newPlayMap.resultsListProcess($('#panel-container .results-container-' + vars.type));
   }
