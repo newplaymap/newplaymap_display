@@ -1,3 +1,6 @@
+var newPlayMap = newPlayMap || {};
+newPlayMap.data = newPlayMap.data || {};
+
 newPlayMap.loadJSONFile = function(vars) {
   var vars = vars;
   var contentData = vars.path + "?cache=" + Math.floor(Math.random()*11);
@@ -75,6 +78,34 @@ newPlayMap.loadDataError = function(data) {
   return false;
 };
 
+/*
+ * Helper function to clear markers by layer
+ */
+newPlayMap.data.clearLayer = function(layerName) {
+  // @TODO: I don't know why there was no variable in dataName. 
+  // This was probably just never needed and unfinished.
+  var layerName = layerName || '';
+  // $('a.marker[dataName=' +   + ']').remove(); // Original
+  $('a.marker[dataName=' + layerName + ']').remove();
+}
+
+/*
+* Helper function to clear all layer
+*/
+newPlayMap.data.clearAllLayers = function() {
+  $('div#play-journey').remove();
+  $('a.marker[dataName=play]').remove();
+  $('a.marker[dataName=artists_filter]').remove();
+  $('a.marker[dataName=events_filter]').remove();
+  $('a.marker[dataName=plays_filter]').remove();
+  $('a.marker[dataName=organizations_filter]').remove();
+
+  spotlight.parent.className = "inactive";
+  spotlight.removeAllLocations();
+  $('a.marker').css({ 'opacity' : 1 });
+}
+
+
 // onLoadMarkers() gets a GeoJSON FeatureCollection
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
@@ -88,23 +119,14 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
   // Remove divs if they exist and API function requests that they be cleared.
   if(vars.clearLayer === true) {
-    $('a.marker[dataName=' +   + ']').remove();
+    newPlayMap.data.clearLayer();
   }
   
   // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
 
   // Remove new layers
   if(vars.clearLayers === true) {
-    $('div#play-journey').remove();
-    $('a.marker[dataName=play]').remove();
-    $('a.marker[dataName=artists_filter]').remove();
-    $('a.marker[dataName=events_filter]').remove();
-    $('a.marker[dataName=plays_filter]').remove();
-    $('a.marker[dataName=organizations_filter]').remove();
-
-    spotlight.parent.className = "inactive";
-    spotlight.removeAllLocations();
-    $('a.marker').css({ 'opacity' : 1 });
+    newPlayMap.data.clearAllLayers();
   }
   
 

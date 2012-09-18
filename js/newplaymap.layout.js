@@ -1,3 +1,5 @@
+var newPlayMap = newPlayMap || {};
+newPlayMap.layout = newPlayMap.layout || {};
 
 newPlayMap.updatePanel = function(marker, data) {
   $('div#panel-container div#panel').css('visibility', 'visible');
@@ -228,6 +230,25 @@ newPlayMap.loadResults = function(features, vars) {
     newPlayMap.setResultsTitle('Result', 0);
   }
 };
+
+/*
+ * Helper function to clear out content panel
+ *
+ * For now all panels should be cleared. Maybe in the future we'll want type but not foreseable.
+ */
+newPlayMap.layout.clearPanelContent = function() {
+  
+}
+ 
+/*
+ * Helper function to clear out different results listing
+ *
+ * @param type
+ * type of results to be cleared
+ */
+newPlayMap.layout.clearResults = function(type) {
+  
+}
 
 /*
  * Rewrite results header

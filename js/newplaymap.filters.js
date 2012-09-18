@@ -1,4 +1,5 @@
 var newPlayMap = newPlayMap || {};
+newPlayMap.filters = newPlayMap.filters || {};
 
 // Set up container for filters functions and objects
 newPlayMap.filters = {};
@@ -37,6 +38,7 @@ newPlayMap.filters.organizations = function(data) {
     var loadProfile = true;
   }
 
+  // @TODO: Write seperate function to clear results lists and clear content panel. Pull those calls out of newPlayMap.loadResults and newPlayMap.panelTemplate and newPlayMap.onLoadDataMarkers
 
   newPlayMap.loadAPICall({
     data: data,
