@@ -2,7 +2,7 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->artists;
+$collection = $m->$mongo_database->artists;
 
 // find everything in the collection
 $cursor = $collection->find()->sort(array("properties.generative_artists" => 1));

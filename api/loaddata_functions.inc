@@ -33,9 +33,9 @@ function getJsonExport($domain, $base_path, $path, $arguments = NULL) {
   return $json;
 }
 
-function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
-  $organizations = $m->newplaymap->organizations;
+  $organizations = $m->$mongo_database->organizations;
 
   if ($clear_data == TRUE) {
     $organizations->drop();
@@ -150,9 +150,9 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
 
 
 
-function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
-  $artists = $m->newplaymap->artists;
+  $artists = $m->$mongo_database->artists;
 
   // find everything in the collection
   $cursor =  $artists->find();
@@ -221,9 +221,9 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
 
 
 
-function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
-  $events = $m->newplaymap->events;
+  $events = $m->$mongo_database->events;
   
   if ($clear_data == TRUE) {
     $events->drop();
@@ -303,9 +303,9 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
 
 
-function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
-  $plays = $m->newplaymap->plays;
+  $plays = $m->$mongo_database->plays;
 
   if ($clear_data == TRUE) {
     $plays->drop();

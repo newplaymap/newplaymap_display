@@ -4,7 +4,7 @@ connectMongo(false);
 
 $limit = 10;
 
-$collection = $m->newplaymap->artists;
+$collection = $m->$mongo_database->artists;
 
 // find everything in the collection
 $cursor = $collection->find()->limit($limit)->sort(array("name" => 1));

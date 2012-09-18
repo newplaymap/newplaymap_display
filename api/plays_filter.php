@@ -5,7 +5,7 @@ connectMongo(false);
 $play_title = (!empty($_GET['play_title'])) ? $_GET['play_title'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 
-$collection = $m->newplaymap->plays;
+$collection = $m->$mongo_database->plays;
 
 if ($play_title !== null) {
   $cursor = $collection->find(array("properties.play_title" => $play_title))->sort(array("properties.play_title" => 1));

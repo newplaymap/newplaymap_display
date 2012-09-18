@@ -10,7 +10,7 @@ else{
 }
 $page_items = 150;
 
-$collection = $m->newplaymap->plays;
+$collection = $m->$mongo_database->plays;
 
 // find everything in the collection
 $cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("name" => 1));

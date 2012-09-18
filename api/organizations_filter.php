@@ -3,7 +3,7 @@ include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $limit = 150;
-$collection = $m->newplaymap->organizations;
+$collection = $m->$mongo_database->organizations;
 
 $organization_name = (!empty($_GET['organization_name'])) ? $_GET['organization_name'] : null;
 $organization_type = (!empty($_GET['organization_type'])) ? $_GET['organization_type'] : null;

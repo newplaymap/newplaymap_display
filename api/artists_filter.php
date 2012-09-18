@@ -2,7 +2,7 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->artists;
+$collection = $m->$mongo_database->artists;
 
 $artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
 $ensemble_collective = (!empty($_GET['ensemble_collective'])) ? $_GET['ensemble_collective'] : null;

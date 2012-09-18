@@ -3,7 +3,7 @@ include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $limit = 150;
-$collection = $m->newplaymap->events;
+$collection = $m->$mongo_database->events;
 
 // Grab arguments
 $search_start = (!empty($_GET['start_date'])) ? new MongoDate(strtotime($_GET['start_date'])) : null;
