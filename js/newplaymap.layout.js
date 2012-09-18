@@ -176,6 +176,8 @@ newPlayMap.loadResults = function(features, vars) {
   var container, containerEmpty;
   containerEmpty = $('#panel-container .content');
   containerEmpty.empty();
+  // resultsEmpty = $('#panel-container .results-container-' + vars.type);
+  // resultsEmpty.empty();
   container = $('#panel-container .' + type);
   container.empty();
   // console.log(features.length);
@@ -202,9 +204,10 @@ newPlayMap.loadResults = function(features, vars) {
       $.extend(result, feature);  
 
       $('#' + template).tmpl(result)
-        .appendTo(container);
+        // .appendTo(container);
+        .appendTo('#panel-container .results-container-' + vars.type);
         
-      newPlayMap.resultsListProcess($('#panel-container .results-container'));
+      newPlayMap.resultsListProcess($('#panel-container .results-container-' + vars.type));
   }
   
   if (len > 0) {
@@ -249,7 +252,7 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
     }
   }
 
-  $('#panel-container .results-container .results-title h2')
+  $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' .results-title h2')
     .attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results-title')
     .text(resultsCount + ' ' + resultsType + resultsPlural);
     
