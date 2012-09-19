@@ -12,6 +12,8 @@ var jsonDataSearch = {};
 newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
   var loadProfile = false;
+
+  // Clear panel, results, and pins
   newPlayMap.layout.clearEntirePanel();
   newPlayMap.data.clearAllLayers();
 
@@ -123,7 +125,9 @@ newPlayMap.filters.artists = function(data) {
   var pathQuery = "";
   var loadProfile = false;
 
+  // Clear panel, results, and pins
   newPlayMap.layout.clearEntirePanel();
+  newPlayMap.data.clearAllLayers();
 
   if (data.artist_name !== undefined) {
     pathQuery = "artist_name=" +  data.artist_name;
@@ -136,13 +140,15 @@ newPlayMap.filters.artists = function(data) {
   
   if (data.path !== undefined) {
     loadProfile = true;
+
+    newPlayMap.filters.events({artist_path: data.path});
   }
 
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
-    clearLayer: true,
-    clearLayers: true,
+    clearLayer: false,
+    clearLayers: false,
     loadProfile: loadProfile,
     layer: "layer-artists-filter",
     class: "inactive",
@@ -199,7 +205,10 @@ newPlayMap.filters.ensemble = function(data) {
 // Load plays
 newPlayMap.filters.events = function(data, resultsTitle) {
   var pathQuery = "";
+
+  // Clear panel, results, and pins
   newPlayMap.layout.clearEntirePanel();
+  newPlayMap.data.clearAllLayers();
 
   if (data.event_type !== undefined) {
     pathQuery = "event_type=" +  data.event_type;
@@ -218,8 +227,8 @@ newPlayMap.filters.events = function(data, resultsTitle) {
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
-    clearLayer: true,
-    clearLayers: true,
+    clearLayer: false,
+    clearLayers: false,
     layer: "layer-events-filter",
     class: "inactive",
     id: "event_id",
