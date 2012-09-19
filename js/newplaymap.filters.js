@@ -12,31 +12,27 @@ var jsonDataSearch = {};
 newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
   var loadProfile = false;
+  newPlayMap.layout.clearEntirePanel();
 
   if (data.organization_name !== undefined) {
     pathQuery = "organization_name=" +  data.organization_name;
     var loadProfile = true;
-    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.organization_type !== undefined) {
     pathQuery = "organization_type=" +  data.organization_type;
-    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.national_networks !== undefined) {
     pathQuery = "national_networks=" +  data.national_networks;
-    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.special_interests !== undefined) {
     pathQuery = "special_interests=" + data.special_interests;
-    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.city_state !== undefined) {
     pathQuery = "city_state=" + data.special_interests;
-    newPlayMap.layout.clearEntirePanel()
   }
   
   if (data.path !== undefined) {
@@ -94,6 +90,8 @@ newPlayMap.filters.organizations = function(data) {
 
 // Load plays
 newPlayMap.filters.plays = function(data) {
+  newPlayMap.layout.clearEntirePanel();
+
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
@@ -123,6 +121,9 @@ newPlayMap.filters.plays = function(data) {
 newPlayMap.filters.artists = function(data) {
   var pathQuery = "";
   var loadProfile = false;
+
+  newPlayMap.layout.clearEntirePanel();
+
   if (data.artist_name !== undefined) {
     pathQuery = "artist_name=" +  data.artist_name;
     loadProfile = true;
@@ -165,30 +166,31 @@ newPlayMap.filters.artists = function(data) {
 
 newPlayMap.filters.ensemble = function(data) {
   var pathQuery = "";
+  newPlayMap.layout.clearEntirePanel();
 
   if (data.ensemble_collective === "Ensemble / Collective") {
     pathQuery = "ensemble_collective=" +  data.ensemble_collective;
   }
 
-    newPlayMap.loadAPICall({
-      data: data,
-      zoomLevel: newPlayMap.defaultZoom,
-      clearLayer: true,
-      clearLayers: true,
-      layer: "layer-ensemble-filter",
-      class: "active",
-      id: "artist_id",
-      label: "ensemble_collective",
-      title: "generative_artist",
-      template: "artist",
-      type: "artist",
-      dataName: "artists_filter",
-      path: "api/artists_filter.php?" + pathQuery,
-      dataPath: "api/artists_filter.php?" + pathQuery,
-      icon: "icons/artist.png",
-      grouping_field: "artist_id",
-      callback: newPlayMap.loadArtistFilter
-    });
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: newPlayMap.defaultZoom,
+    clearLayer: true,
+    clearLayers: true,
+    layer: "layer-ensemble-filter",
+    class: "active",
+    id: "artist_id",
+    label: "ensemble_collective",
+    title: "generative_artist",
+    template: "artist",
+    type: "artist",
+    dataName: "artists_filter",
+    path: "api/artists_filter.php?" + pathQuery,
+    dataPath: "api/artists_filter.php?" + pathQuery,
+    icon: "icons/artist.png",
+    grouping_field: "artist_id",
+    callback: newPlayMap.loadArtistFilter
+  });
 
 }
 
@@ -196,6 +198,7 @@ newPlayMap.filters.ensemble = function(data) {
 // Load plays
 newPlayMap.filters.events = function(data, resultsTitle) {
   var pathQuery = "";
+  newPlayMap.layout.clearEntirePanel();
 
   if (data.event_type !== undefined) {
     pathQuery = "event_type=" +  data.event_type;
@@ -208,6 +211,8 @@ newPlayMap.filters.events = function(data, resultsTitle) {
   if (data.end_date !== undefined) {
     pathQuery = "end_date=" +  data.end_date;
   }
+
+  newPlayMap.layout.clearEntirePanel();
 
   newPlayMap.loadAPICall({
     data: data,
@@ -234,6 +239,7 @@ newPlayMap.filters.events = function(data, resultsTitle) {
 
 newPlayMap.filters.cityStateEvents = function(data) {
   var pathQuery = "city_state=" +  data.end_date;
+  newPlayMap.layout.clearEntirePanel();
 
   newPlayMap.loadAPICall({
     data: data,
@@ -610,25 +616,26 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
 
 newPlayMap.filters.showAll = function(type) {
   var pluralType = type;
+  var singularType = pluralType.substring(0, pluralType.length-1);
   var displayType = newPlayMap.toTitleCase(pluralType.substring(0, pluralType.length-1));
   var template = "show-all-template";
-  var container, containerEmpty;
-  containerEmpty = $('#panel-container .content, #panel-container .results');
-  containerEmpty.empty();
-  container = $('#panel-container .results');
-  container.empty();
+  var container;
+  
+  newPlayMap.layout.clearEntirePanel();
+
+  container = $('#panel-container .results-container-' + singularType + ' ol.results');
 
   var len = jsonDataSearch[type].length;
 
   // Set loading feedback
   newPlayMap.filters.loadingFeedback();
-  
+
   // Set results title and clear results header text (a.k.a. What's on today)
   $('#results-header').text('');
   newPlayMap.setResultsTitle(displayType, len);
-  
+
   for (var i = 0; i < len; i++) {
-  
+
     var item = {
       title: jsonDataSearch[type][i]['label'],
       path: jsonDataSearch[type][i]['path']
