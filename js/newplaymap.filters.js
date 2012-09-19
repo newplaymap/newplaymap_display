@@ -502,8 +502,8 @@ newPlayMap.filters.setArtistsIndex = function(data) {
       appendTo: '#panel-container',
       select: function(event, ui) {
         $("#artists-filter").val(ui.item.label);
-        // newPlayMap.filters.artists({artist_name: ui.item.value});
-        newPlayMap.filters.events({artist_name: ui.item.value});
+
+        newPlayMap.filters.artists({path: ui.item.path});
         newPlayMap.filters.reset(this);
         return false;
       }
