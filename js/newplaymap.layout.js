@@ -224,6 +224,10 @@ newPlayMap.loadResults = function(features, vars) {
     var resultsCount = jsonData[vars.dataName]["features"].length;
 
     var totalCount = jsonData[vars.dataName].count;
+
+    if (resultsType == 'Generative Artist') {
+      resultsType = 'Artist';
+    }
     newPlayMap.setResultsTitle(resultsType, resultsCount, totalCount);
 
     newPlayMap.processAddressLinks('internal-address');
@@ -286,7 +290,7 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
     // Check last letters for plural formatting: http://www.meredith.edu/grammar/plural.htm#and%20x
     var lastLetter = resultsType.substring(resultsType.length, resultsType.length-1);
     var lastTwoLetters = resultsType.substring(resultsType.length, resultsType.length-2);
-    
+
     if (lastLetter === 's' || lastLetter === 'z' || lastLetter === 'x' || lastTwoLetters === 'ch' || lastTwoLetters === 'sh') {
       resultsPlural = "es";
     }
