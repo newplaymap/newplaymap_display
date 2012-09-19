@@ -16,29 +16,56 @@ newPlayMap.filters.organizations = function(data) {
   if (data.organization_name !== undefined) {
     pathQuery = "organization_name=" +  data.organization_name;
     var loadProfile = true;
+    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.organization_type !== undefined) {
     pathQuery = "organization_type=" +  data.organization_type;
+    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.national_networks !== undefined) {
     pathQuery = "national_networks=" +  data.national_networks;
+    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.special_interests !== undefined) {
     pathQuery = "special_interests=" + data.special_interests;
+    newPlayMap.layout.clearEntirePanel();
   }
 
   if (data.city_state !== undefined) {
     pathQuery = "city_state=" + data.special_interests;
+    newPlayMap.layout.clearEntirePanel()
   }
   
   if (data.path !== undefined) {
     var loadProfile = true;
-  }
 
-  // @TODO: Write seperate function to clear results lists and clear content panel. Pull those calls out of newPlayMap.loadResults and newPlayMap.panelTemplate and newPlayMap.onLoadDataMarkers
+    // Load Related Events for this Organization
+    var loadProfile = true;
+    newPlayMap.loadAPICall({
+      data: data,
+      zoomLevel: newPlayMap.defaultZoom,
+      clearLayer: false,
+      clearLayers: false,
+      layer: "layer-events-filter",
+      class: "inactive",
+      id: "event_id",
+      label: "play_title", // field which will be used in label
+      title: "play_title",
+      template: "play-template",
+      resultsTitle: null,
+      type: "event",
+      dataName: "events_filter",
+      path: "api/events_filter.php?" + "event_organization_path=" +  data.path,
+      dataPath: "api/events_filter.php?" + "event_organization_path=" +  data.path,
+      icon: "icons/event.png",
+      grouping_field: "event_id",
+      related_play_id: "related_play_id",
+      callback: newPlayMap.loadEventFilter
+    });
+  }
 
   newPlayMap.loadAPICall({
     data: data,
@@ -60,34 +87,6 @@ newPlayMap.filters.organizations = function(data) {
     icon: "icons/organization.png",
     callback: newPlayMap.loadOrganizationFilter
   });
-  
-  // Load Related Events for this Organization
-  // if (data.organization_name !== undefined) {
-    pathQuery = "event_organization_path=" +  data.path;
-    var loadProfile = true;
-
-    newPlayMap.loadAPICall({
-      data: data,
-      zoomLevel: newPlayMap.defaultZoom,
-      clearLayer: false,
-      clearLayers: false,
-      layer: "layer-events-filter",
-      class: "inactive",
-      id: "event_id",
-      label: "play_title", // field which will be used in label
-      title: "play_title",
-      template: "play-template",
-      resultsTitle: null,
-      type: "event",
-      dataName: "events_filter",
-      path: "api/events_filter.php?" + pathQuery,
-      dataPath: "api/events_filter.php?" + pathQuery,
-      icon: "icons/event.png",
-      grouping_field: "event_id",
-      related_play_id: "related_play_id",
-      callback: newPlayMap.loadEventFilter
-    });
-  // }
   
   // @TODO: Trigger address change if appropriate (searching for org name)
   //        This is also the time to load the profile
