@@ -611,6 +611,13 @@ ul.ui-autocomplete {
       #panel-container .results-container .results-title h2#organizations-results-title {
         background: url("../images/results-orgs-icon.png") no-repeat 0 center;
       }
+      
+  #panel-container .results-container .show-more-results {
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 7px;
+    font-size: 12px;
+  }
 
 /* Bubble styles */
 .bubble {

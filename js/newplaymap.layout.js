@@ -232,6 +232,28 @@ newPlayMap.loadResults = function(features, vars) {
 
     newPlayMap.processAddressLinks('internal-address');
     $('.internal-address').address();
+
+    // Truncate all results to 3 each and add a link for more
+    if (len > 3) {
+      $('#panel-container .results-container-' + resultType + ' ol.results li').each(function(count) {
+        if (count > 2) {
+          $(this).addClass('more-results');
+        }
+      });
+      
+      $('#panel-container .results-container-' + resultType + ' ol.results li.more-results').hide();
+
+      if ($('#panel-container .results-container-' + resultType + ' .show-more-results').length == 0) {
+        $('<a></a>')
+          .addClass('show-more-results')
+          .text('More ' + resultType + 's')
+          .click(function() {
+            $('#panel-container .results-container-' + resultType + ' ol.results li.more-results').fadeIn();
+            $(this).fadeOut().remove();
+          })
+          .appendTo('#panel-container .results-container-' + resultType);
+      }
+    }
   }
   else {
     // If nothing came back, clear out
