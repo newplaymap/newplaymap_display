@@ -264,6 +264,14 @@ newPlayMap.layout.clearResults = function(type) {
 }
 
 /*
+ * Wrapper function to clear all results and panel content 
+ */
+newPlayMap.layout.clearEntirePanel = function() {
+  newPlayMap.layout.clearPanelContent();
+  newPlayMap.layout.clearResults();
+}
+
+/*
  * Rewrite results header
  */
 newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
