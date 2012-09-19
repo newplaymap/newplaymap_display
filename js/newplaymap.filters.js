@@ -42,7 +42,8 @@ newPlayMap.filters.organizations = function(data) {
     var loadProfile = true;
 
     // Load Related Events for this Organization
-    var loadProfile = true;
+    // @TODO: Refactor with the newPlayMap.filters.events() function. I think it would be ewPlayMap.filters.events({event_organization_path: data.path})
+    // Something would have to change to make the clears not get called too many times.
     newPlayMap.loadAPICall({
       data: data,
       zoomLevel: newPlayMap.defaultZoom,

@@ -334,6 +334,8 @@ newPlayMap.loadPageRouter = function() {
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
   // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
+  // -- Clear the pins before the reload to prevent duplicate pins. @TODO: Figure out why this needs to load twice and if possible remove both these function calls.
+  newPlayMap.data.clearAllLayers();
   $.address.update();
 };
 
