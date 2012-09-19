@@ -13,6 +13,7 @@ newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
   var loadProfile = false;
   newPlayMap.layout.clearEntirePanel();
+  newPlayMap.data.clearAllLayers();
 
   if (data.organization_name !== undefined) {
     pathQuery = "organization_name=" +  data.organization_name;
@@ -66,8 +67,8 @@ newPlayMap.filters.organizations = function(data) {
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
-    clearLayer: true,
-    clearLayers: true,
+    clearLayer: false,
+    clearLayers: false,
     loadProfile: loadProfile,
     template: "organization",
     layer: "layer-organization-filter",
