@@ -348,6 +348,12 @@ newPlayMap.loadDefaultContent = function() {
   // console.log('default');
   var todayHeader = "What's Happening on " + formattedDate;
   
+  // Clear out any panel content
+  newPlayMap.layout.clearPanelContent();
+
+  // Clear out any results content
+  newPlayMap.layout.clearResults();
+  
   newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" }, todayHeader);
 }
 

@@ -242,7 +242,8 @@ newPlayMap.loadResults = function(features, vars) {
  * For now all panels should be cleared. Maybe in the future we'll want type but not foreseable.
  */
 newPlayMap.layout.clearPanelContent = function() {
-  
+  var containerEmpty = $('#panel-container .content');
+  containerEmpty.empty();
 }
  
 /*
@@ -252,7 +253,14 @@ newPlayMap.layout.clearPanelContent = function() {
  * type of results to be cleared
  */
 newPlayMap.layout.clearResults = function(type) {
-  
+  if (typeof type != 'undefined') {
+    $('.results-container-' + type + ' ol.results').empty().siblings('.results-title').find('h2').text('');
+  }
+  else {
+    $('.results-container ol.results').each(function() {
+      $(this).empty().siblings('.results-title').find('h2').text('');
+    });
+  }
 }
 
 /*
@@ -293,12 +301,10 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
 newPlayMap.loadExtras = function(features) {
   var type = "extras";
   var template = "extras-template";
-  var container, containerEmpty;
-  containerEmpty = $('#panel-container .content');
-  containerEmpty.empty();
-  container = $('#panel-container .' + type);
-  container.empty();
-  
+  var container;
+
+  newPlayMap.layout.clearPanelContent();
+
   var len = features.length;
   for (var i = 0; i < len; i++) {
 
