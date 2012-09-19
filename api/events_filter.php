@@ -11,6 +11,7 @@ $search_end = (!empty($_GET['end_date'])) ? new MongoDate(strtotime($_GET['end_d
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 $artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
+$artist_path = (!empty($_GET['artist_path'])) ? $_GET['artist_path'] : null;
 $event_organization_path = (!empty($_GET['event_organization_path'])) ? $_GET['event_organization_path'] : null;
 
 // Find Events by Type
@@ -39,6 +40,11 @@ else if ($search_start !== null) {
 // Find Events by Organization
 else if ($event_organization_path !== null) {
   $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => 1));
+}
+
+// Find Events by Artist
+else if($artist_path !== null) {
+  $cursor = $collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.event_date" => 1));
 }
 
 // Find Events by path
