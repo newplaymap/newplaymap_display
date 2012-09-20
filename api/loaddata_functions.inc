@@ -367,6 +367,26 @@ function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear
     }
   
     $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+    
+    //Generate list of organizations per play
+    $play_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(array("properties.related_play_path" => $play_path))->sort(array("properties.related_theater" => 1));
+
+    $organizations_by_play = array();
+    $unique_organizations_by_play = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['related_theater'])) {
+        if (!in_array($obj['properties']['related_theater'], $unique_organizations_by_play)) {
+
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_play[] = $obj['properties']['related_theater'];
+          $organizations_by_play[] = array(
+            "name" => $obj['properties']['related_theater'],
+            "path" => $obj['properties']['related_theater_path'],
+          );
+        }
+      }
+    }
   
     // print_r($node);
     $newObj = array(
@@ -382,6 +402,7 @@ function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear
         "generative_artist"  => $node["Generative Artist"],
         "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
         "generative_artist_has_location"  => $generative_artist_has_location,
+        "related_organizations" => $organizations_by_play,
         "synopsis"  => $node["Synopsis"],
         "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
       )
