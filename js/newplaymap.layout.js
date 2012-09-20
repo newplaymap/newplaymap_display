@@ -178,11 +178,7 @@ newPlayMap.loadResults = function(features, vars) {
   var template = "results-template";
   var container, containerEmpty, resultsEmpty;
   containerEmpty = $('#panel-container .content');
-  
-  // Play type should load results into events list
-  if (resultType == 'play') {
-    resultType = 'event';
-  }
+
   resultsEmpty = $('#panel-container .results-container-' + resultType + ' .results');
   resultsEmpty.empty();
   container = $('#panel-container .results-container-' + resultType + '.' + type);
@@ -214,8 +210,9 @@ newPlayMap.loadResults = function(features, vars) {
         // .appendTo(container);
         .appendTo('#panel-container .results-container-' + resultType + ' .results');
         // .appendTo('#panel-container .results-container-organization .results');
-        
-      newPlayMap.resultsListProcess($('#panel-container .results-container-' + resultType));
+      if (resultType != 'play') {
+        newPlayMap.resultsListProcess($('#panel-container .results-container-' + resultType));
+      }
   }
   
   if (len > 0) {
