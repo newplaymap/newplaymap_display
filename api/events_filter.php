@@ -19,7 +19,7 @@ if(!empty($_GET['event_type'])){
   $event_type = $_GET['event_type'];
   // find everything in the collection
   $query = array("properties.event_type" => $event_type);
-  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => -1));
 
 }
 
@@ -33,23 +33,23 @@ else if ($search_start !== null) {
       "properties.event_date" => array('$lte' => $search_end),
       "properties.event_to_date" => array('$gte' => $search_start), 
     )
-  )->limit($limit)->sort(array("properties.event_date" => 1));
+  )->limit($limit)->sort(array("properties.event_date" => -1));
 
 }
 
 // Find Events by Organization
 else if ($event_organization_path !== null) {
-  $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => -1));
 }
 
 // Find Events by Artist
 else if($artist_path !== null) {
-  $cursor = $collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.event_date" => -1));
 }
 
 // Find Events by path
 else if($path !== null) {
-  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => -1));
 }
 
 // Find Events by City, State
@@ -64,7 +64,7 @@ else if ($artist_name !== null) {
 
 // Find All Events (limited by max number)
 else {
-  $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => -1));
 }
 
 $count = $cursor->count();
