@@ -65,6 +65,9 @@ newPlayMap.filters.organizations = function(data) {
       related_play_id: "related_play_id",
       callback: newPlayMap.loadEventFilter
     });
+
+    // Load Related Artists for this Organization
+    newPlayMap.filters.artists({related_organization_path: data.path});
   }
 
   newPlayMap.loadAPICall({

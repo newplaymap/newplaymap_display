@@ -7,9 +7,14 @@ $collection = $m->$mongo_database->artists;
 $artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
 $ensemble_collective = (!empty($_GET['ensemble_collective'])) ? $_GET['ensemble_collective'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
+$related_organization_path = (!empty($_GET['related_organization_path'])) ? $_GET['related_organization_path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
-if($path !== null) {
+if ($related_organization_path !== null) {
+  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->sort(array("properties.artist_name" => 1));
+}
+
+else if($path !== null) {
   $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.artist_name" => 1));
 }
 
