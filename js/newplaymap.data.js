@@ -60,7 +60,12 @@ newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
 
-  var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  if (data.name == 'plays_filter') {
+    var data = newPlayMap.data.onLoadDataNoLocation(jqxhr.vars);
+  }
+  else {
+    var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  }
   
   if (newPlayMap.filters.loadingCompleteFeedback) {
     newPlayMap.filters.loadingCompleteFeedback();
@@ -232,6 +237,28 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.
     // map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), vars.zoomLevel);
   }
+  // Apply behavior listener for layer type.
+  if(vars.callback !== undefined) {
+     $(vars.callback);
+  }
+};
+
+
+/**
+ * Function to load data that doesn't have geo location data
+ *
+ * gets a GeoJSON FeatureCollection
+ * -- http://geojson.org/geojson-spec.html#feature-collection-objects
+ */
+newPlayMap.data.onLoadDataNoLocation = function(vars) {
+  var vars = vars;
+
+  var features = jsonData[vars.dataName].features,
+      len = features.length
+
+  // Load result data for this set of features.
+  newPlayMap.loadResults(features, vars);
+
   // Apply behavior listener for layer type.
   if(vars.callback !== undefined) {
      $(vars.callback);

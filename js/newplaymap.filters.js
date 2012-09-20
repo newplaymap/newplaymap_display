@@ -95,7 +95,7 @@ newPlayMap.filters.organizations = function(data) {
   //        This is also the time to load the profile
 }
 
-// Load plays
+// Load a Play Journey
 newPlayMap.filters.playJourney = function(data) {
   newPlayMap.layout.clearEntirePanel();
 
@@ -124,6 +124,39 @@ newPlayMap.filters.playJourney = function(data) {
   //        This is also the time to load the profile
 };
 
+// Load plays
+newPlayMap.filters.plays = function(data) {
+  var pathQuery = "";
+  var loadProfile = false;
+  
+  // Clear panel, results, and pins
+  newPlayMap.layout.clearEntirePanel();
+  newPlayMap.data.clearAllLayers();
+
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: newPlayMap.defaultZoom,
+    clearLayer: false,
+    clearLayers: false,
+    layer: "layer-plays-filter",
+    loadProfile: true,
+    class: "inactive",
+    label: "play_title",
+    id: "event_id",
+    title: "play_title_display",
+    template: "play-template",
+    type: "play",
+    dataName: "plays_filter",
+    path: "api/plays_filter.php?" +  pathQuery,
+    dataPath: "api/plays_filter.php?" +  pathQuery,
+    icon: "icons/play.png",
+    grouping_field: "related_play_id"
+  });
+  
+  // @TODO: Trigger address change if appropriate (searching for play name)
+  //        This is also the time to load the profile
+};
+
 
 newPlayMap.filters.artists = function(data) {
   var pathQuery = "";
@@ -146,7 +179,7 @@ newPlayMap.filters.artists = function(data) {
     loadProfile = true;
 
     newPlayMap.filters.events({artist_path: data.path});
-    // newPlayMap.filters.plays({artist_path: data.path});
+    newPlayMap.filters.plays({related_artist_path: data.path});
   }
 
   newPlayMap.loadAPICall({
