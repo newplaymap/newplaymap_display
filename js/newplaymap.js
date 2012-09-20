@@ -237,7 +237,7 @@ newPlayMap.loadPageRouter = function() {
       if(newPlayMap.routing.path.args !== undefined) {
         switch(newPlayMap.routing.path.args[0]) {
           case 'play':
-            newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
+            newPlayMap.filters.playJourney({path: newPlayMap.routing.path.base});
             break;
           case 'artist':
             newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
