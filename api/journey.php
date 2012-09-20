@@ -20,7 +20,7 @@ if(!empty($_GET['path'])) {
 }
 if(!empty($play_cursor['id'])) {
   $query = array('properties.related_play_id' => (string) $play_cursor['id']);
-  $events_cursor = $m->$mongo_database->events->find($query)->sort(array("properties.event_date" => 1));
+  $events_cursor = $m->$mongo_database->events->find($query)->sort(array("properties.event_date" => -1));
 }
 
 
