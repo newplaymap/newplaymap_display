@@ -209,6 +209,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
 
   // Load profiles if called for
+  // -- @TODO: Load this based on the features (or the jsonData object) instead of a marker. That way it will work with conent that doesn't have a pin.
   if (vars.loadProfile == true) {
     // Get the last marker
     var markerLength = markers.markers.length - 1;
