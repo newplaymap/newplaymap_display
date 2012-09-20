@@ -281,11 +281,13 @@ newPlayMap.layout.clearPanelContent = function() {
 newPlayMap.layout.clearResults = function(type) {
   if (typeof type != 'undefined') {
     $('.results-container-' + type + ' ol.results').empty().siblings('.results-title').find('h2').text('');
+    $('.results-container-' + type + ' .show-more-results').remove();
   }
   else {
     $('.results-container ol.results').each(function() {
       $(this).empty().siblings('.results-title').find('h2').text('');
     });
+    $('.show-more-results').remove();
   }
 }
 
