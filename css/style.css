@@ -615,8 +615,9 @@ ul.ui-autocomplete {
   #panel-container .results-container .show-more-results {
     cursor: pointer;
     text-transform: uppercase;
-    margin: 7px;
+    margin: 15px;
     font-size: 12px;
+    display: block;
   }
 
 /* Bubble styles */
