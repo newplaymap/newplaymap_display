@@ -4,12 +4,18 @@ connectMongo(false);
 
 $play_title = (!empty($_GET['play_title'])) ? $_GET['play_title'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
+$related_artist_path = (!empty($_GET['related_artist_path'])) ? $_GET['related_artist_path'] : null;
 
 $collection = $m->$mongo_database->plays;
 
 if ($play_title !== null) {
   $cursor = $collection->find(array("properties.play_title" => $play_title))->sort(array("properties.play_title" => 1));
 }
+
+else if($related_artist_path !== null) {
+  $cursor = $collection->find(array("properties.generative_artist_path" => $related_artist_path))->sort(array("properties.play_title" => 1));
+}
+
 else if($path !== null) {
   $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.play_title" => 1));
 }
