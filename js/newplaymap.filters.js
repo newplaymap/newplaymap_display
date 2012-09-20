@@ -96,7 +96,7 @@ newPlayMap.filters.organizations = function(data) {
 }
 
 // Load plays
-newPlayMap.filters.plays = function(data) {
+newPlayMap.filters.playJourney = function(data) {
   newPlayMap.layout.clearEntirePanel();
 
   newPlayMap.loadAPICall({
@@ -146,6 +146,7 @@ newPlayMap.filters.artists = function(data) {
     loadProfile = true;
 
     newPlayMap.filters.events({artist_path: data.path});
+    // newPlayMap.filters.plays({artist_path: data.path});
   }
 
   newPlayMap.loadAPICall({
@@ -283,7 +284,7 @@ newPlayMap.filters.cityStateEvents = function(data) {
  */
 newPlayMap.filters.setupFilters = function() {
   // $('#plays-filter').change(function() {
-  //   newPlayMap.filters.plays({play_title: $(this).attr('value')});
+  //   newPlayMap.filters.playJourney({play_title: $(this).attr('value')});
   //   newPlayMap.filters.reset(this);
   //   return false;
   // });
@@ -546,7 +547,7 @@ newPlayMap.filters.setPlaysIndex = function(data) {
       appendTo: '#panel-container',
       select: function(event, ui) {
         $("#plays-filter").val(ui.item.label);
-        newPlayMap.filters.plays({play_title: ui.item.value});
+        newPlayMap.filters.playJourney({play_title: ui.item.value});
         newPlayMap.filters.reset(this);
         return false;
       }
@@ -669,7 +670,7 @@ newPlayMap.filters.showAll = function(type) {
   //   var title = $(this).text();
   //   switch(type) {
   //     case 'plays':
-  //       newPlayMap.filters.plays({play_title: title});
+  //       newPlayMap.filters.playJourney({play_title: title});
   //     break;
   //     
   //     case 'organizations':
