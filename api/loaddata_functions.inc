@@ -182,12 +182,8 @@ function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $cle
     
     $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
 
-    // Generate list of organizations per artist
-
-    // @TODO: Figure out how to get this data. Views (and put a loaddata callback in drupal)? Elsewhere in mongo and assume the data is already there?
-    // All events for this artist
+    //Generate list of organizations per artist
     $artist_path = '/' . str_replace($base_path, "", $node["Path"]);
-
     $events_cursor = $events_collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.related_theater" => 1));
 
     $organizations_by_artist = array();
@@ -333,6 +329,7 @@ function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clea
 function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $plays = $m->$mongo_database->plays;
+  $events_collection = $m->$mongo_database->events;
 
   if ($clear_data == TRUE) {
     $plays->drop();
@@ -356,43 +353,43 @@ function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear
 
   foreach ($objects as $obj_load) {
 
-  $node = (array) $obj_load->node;
+    $node = (array) $obj_load->node;
   
-  // Set up proper array for Alternate play titles
-  $alternate_titles_list = array();
+    // Set up proper array for Alternate play titles
+    $alternate_titles_list = array();
 
-  if (is_object($node["Alternate titles"])) {
-    foreach ($node["Alternate titles"] as $alt_title) {
-      $alternate_titles_list[] = array('title' => $alt_title);
+    if (is_object($node["Alternate titles"])) {
+      foreach ($node["Alternate titles"] as $alt_title) {
+        $alternate_titles_list[] = array('title' => $alt_title);
+      }
+    } else {
+      $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
     }
-  } else {
-    $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
-  }
   
-  $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+    $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
   
-  // print_r($node);
-  $newObj = array(
-    "id" => $node["Play ID"],
-    "type" => "Feature",
-    "properties" => array(
-      "play_id"  => $node["Play ID"],
-      "content_type"  => $node["Content Type"],
-      "artist_id"  => $node["Artist ID"],
-      "play_title"  => $node["Play title"],
-      "play_title_display"  => html_entity_decode($node["Play title"], ENT_QUOTES),
-      "alternate_titles"  => $alternate_titles_list,
-      "generative_artist"  => $node["Generative Artist"],
-      "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
-      "generative_artist_has_location"  => $generative_artist_has_location,
-      "synopsis"  => $node["Synopsis"],
-      "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
-    )
-  );
-    // This will completely replace the record.
-    $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj), true);
-    $count++;
-    // print_r($newObj);
+    // print_r($node);
+    $newObj = array(
+      "id" => $node["Play ID"],
+      "type" => "Feature",
+      "properties" => array(
+        "play_id"  => $node["Play ID"],
+        "content_type"  => $node["Content Type"],
+        "artist_id"  => $node["Artist ID"],
+        "play_title"  => $node["Play title"],
+        "play_title_display"  => html_entity_decode($node["Play title"], ENT_QUOTES),
+        "alternate_titles"  => $alternate_titles_list,
+        "generative_artist"  => $node["Generative Artist"],
+        "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
+        "generative_artist_has_location"  => $generative_artist_has_location,
+        "synopsis"  => $node["Synopsis"],
+        "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
+      )
+    );
+      // This will completely replace the record.
+      $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj), true);
+      $count++;
+      // print_r($newObj);
   }
     // print '</pre>';
   // echo 'plays<br />';
