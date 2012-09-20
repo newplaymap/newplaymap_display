@@ -153,6 +153,7 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
 function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $artists = $m->$mongo_database->artists;
+  $events_collection = $m->$mongo_database->events;
 
   // find everything in the collection
   $cursor =  $artists->find();
@@ -182,19 +183,28 @@ function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $cle
     $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
 
     // Generate list of organizations per artist
-    $related_organizations_by_artist = array();
 
     // @TODO: Figure out how to get this data. Views (and put a loaddata callback in drupal)? Elsewhere in mongo and assume the data is already there?
-      // All events for this artist
-      // All primary orgs
-      // All secondary orgs
-      // Make the list unique
+    // All events for this artist
+    $artist_path = '/' . str_replace($base_path, "", $node["Path"]);
 
-    $related_organizations_by_artist = '';
-    // $related_organizations_by_artist[] = array(
-    //   "name" => "related organization name",
-    //   "path" => '/' . str_replace($base_path, "", "/organization/related-organization-name")
-    // );
+    $events_cursor = $events_collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.related_theater" => 1));
+
+    $organizations_by_artist = array();
+    $unique_organizations_by_artist = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['related_theater'])) {
+        if (!in_array($obj['properties']['related_theater'], $unique_organizations_by_artist)) {
+
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_artist[] = $obj['properties']['related_theater'];
+          $organizations_by_artist[] = array(
+            "name" => $obj['properties']['related_theater'],
+            "path" => $obj['properties']['related_theater_path'],
+          );
+        }
+      }
+    }
 
     $newObj = array(
       "id" => $node["Artist ID"],
@@ -216,7 +226,8 @@ function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $cle
           "artist_name_display" => html_entity_decode($node["Generative artist"], ENT_QUOTES),
           "artist_bio" => $node["Bio"],
           "ensemble_collective" => $node["ensemble_collective"],
-          "related_organizations" => $related_organizations_by_artist,
+          // "related_organizations" => $related_organizations_by_artist,
+          "related_organizations" => $organizations_by_artist,
           "city" => $node["City"],
           "state" => $node["State"],
           "city_state" => html_entity_decode($city_state, ENT_QUOTES),
