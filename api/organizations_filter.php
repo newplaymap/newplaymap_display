@@ -9,11 +9,16 @@ $organization_name = (!empty($_GET['organization_name'])) ? $_GET['organization_
 $organization_type = (!empty($_GET['organization_type'])) ? $_GET['organization_type'] : null;
 $national_networks = (!empty($_GET['national_networks'])) ? $_GET['national_networks'] : null;
 $special_interests = (!empty($_GET['special_interests'])) ? $_GET['special_interests'] : null;
+$related_play_path = (!empty($_GET['related_play_path'])) ? $_GET['related_play_path'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
 if($organization_name !== null) {
   $cursor = $collection->find(array("properties.name" => $organization_name))->limit($limit)->sort(array("properties.name" => 1));
+}
+
+else if($related_play_path !== null) {
+  $cursor = $collection->find(array("properties.related_plays.path" => $related_play_path))->limit($limit)->sort(array("properties.name" => 1));
 }
 
 else if($path !== null) {
