@@ -100,7 +100,7 @@ newPlayMap.filters.playJourney = function(data) {
   newPlayMap.layout.clearEntirePanel();
 
   // Load related organizations
-  // newPlayMap.filters.organizations({related_play_path: data.path});
+  newPlayMap.filters.organizations({related_play_path: data.path});
 
   newPlayMap.loadAPICall({
     data: data,
