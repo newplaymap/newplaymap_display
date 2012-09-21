@@ -178,6 +178,11 @@ newPlayMap.loadResults = function(features, vars) {
   var template = "results-template";
   var container, containerEmpty, resultsEmpty;
   containerEmpty = $('#panel-container .content');
+  
+  // Play type should load results into events list
+  if (resultType == 'play') {
+    resultType = 'event';
+  }
 
   resultsEmpty = $('#panel-container .results-container-' + resultType + ' .results');
   resultsEmpty.empty();
