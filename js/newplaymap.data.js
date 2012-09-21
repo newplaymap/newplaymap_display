@@ -250,6 +250,7 @@ newPlayMap.onLoadDataMarkers = function(vars) {
  * gets a GeoJSON FeatureCollection
  * -- http://geojson.org/geojson-spec.html#feature-collection-objects
  */
+// @TODO: Think about refactoring this in with newPlayMap.onLoadDataMarkers and just have that check whether there is a marker or not. That would maybe handle data that should have a marker but doesn't have a location.
 newPlayMap.data.onLoadDataNoLocation = function(vars) {
   var vars = vars;
 
