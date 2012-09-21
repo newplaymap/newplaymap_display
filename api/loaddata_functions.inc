@@ -36,6 +36,7 @@ function getJsonExport($domain, $base_path, $path, $arguments = NULL) {
 function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
   $organizations = $m->$mongo_database->organizations;
+  $events_collection = $m->$mongo_database->events;
 
   if ($clear_data == TRUE) {
     $organizations->drop();
@@ -104,6 +105,26 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
     }
     
     $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
+    
+    // Add Related Play info to Orgs (in order to build the orgs per play list)
+    $organization_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(array("properties.related_theater_path" => $organization_path))->sort(array("properties.play_title" => 1));
+
+    $organizations_by_play = array();
+    $unique_organizations_by_play = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['play_title'])) {
+        if (!in_array($obj['properties']['play_title'], $unique_organizations_by_play)) {
+
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_play[] = $obj['properties']['play_title'];
+          $organizations_by_play[] = array(
+            "name" => $obj['properties']['play_title_display'],
+            "path" => $obj['properties']['related_play_path'],
+          );
+        }
+      }
+    }
 
     $newObj = array(
       "id" => $node["Org ID"],
@@ -123,11 +144,10 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
           "longitude" => $node["Longitude"],
           "mission_statement" => $node["Mission statement"],
           "ensemble_collective" => $node["Ensemble collective"],
-  /*         "founding_date" => $node["Founding date"] == $node["Founding date"] ? "", */
-          // "organization_type" => implode(',', get_object_vars($node["Organization type"])),
           "organization_type" => $org_list,
           "special_interests" => $special_interests_list,
           "national_networks" => $national_networks_list,
+          "related_plays" => $organizations_by_play,
           "city" => $node["City"],
           "state" => $node["State"],
           "city_state" => html_entity_decode($city_state, ENT_QUOTES),
