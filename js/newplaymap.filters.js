@@ -99,6 +99,9 @@ newPlayMap.filters.organizations = function(data) {
 newPlayMap.filters.playJourney = function(data) {
   newPlayMap.layout.clearEntirePanel();
 
+  // Load related organizations
+  // newPlayMap.filters.organizations({related_play_path: data.path});
+
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
@@ -179,7 +182,9 @@ newPlayMap.filters.artists = function(data) {
     loadProfile = true;
 
     newPlayMap.filters.events({artist_path: data.path});
-    newPlayMap.filters.plays({related_artist_path: data.path});
+    // This requires line 183 of newplaymap.layout.js to be commented out to work, which breaks other things
+    // -- A larger refactor of the variables named 'play' needs to be done to fix this conflict
+    // newPlayMap.filters.plays({related_artist_path: data.path});
   }
 
   newPlayMap.loadAPICall({
