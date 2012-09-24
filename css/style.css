@@ -536,13 +536,13 @@ ul.ui-autocomplete {
   #panel-container .results-container ol#events-results li {
     background-image: url("../images/listing-icon-event-single.png");
     background-repeat: no-repeat;
-    background-position: 7px 10px;
+    background-position: 12px 10px;
   }
   
   #panel-container .results-container ol#plays-results li {
-    background-image: url("../images/listing-icon-play.png");
+    background-image: url("../images/listing-icon-play-single.png");
     background-repeat: no-repeat;
-    background-position: 7px 10px;
+    background-position: 13px 10px;
     cursor: default;
   }
   
@@ -612,11 +612,11 @@ ul.ui-autocomplete {
       }
       
       #panel-container .results-container .results-title h2#events-results-title {
-        background: url("../images/results-events-icon.png") no-repeat 0 center;
+        background: url("../images/results-events-icon.png") no-repeat 4px center;
       }
 
       #panel-container .results-container .results-title h2#plays-results-title {
-        background: url("../images/listing-icon-play.png") no-repeat 0 center;
+        background: url("../images/listing-icon-play.png") no-repeat 4px center;
       }
       
       #panel-container .results-container .results-title h2#organizations-results-title {
