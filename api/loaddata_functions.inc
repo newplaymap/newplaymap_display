@@ -110,17 +110,38 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
     $organization_path = '/' . str_replace($base_path, "", $node["Path"]);
     $events_cursor = $events_collection->find(array("properties.related_theater_path" => $organization_path))->sort(array("properties.play_title" => 1));
 
-    $organizations_by_play = array();
-    $unique_organizations_by_play = array();
+    $plays_by_organization = array();
+    $unique_plays_by_organization = array();
     foreach ($events_cursor as $obj) {
       if(!empty($obj['id']) && !empty($obj['properties']['play_title'])) {
-        if (!in_array($obj['properties']['play_title'], $unique_organizations_by_play)) {
+        if (!in_array($obj['properties']['play_title'], $unique_plays_by_organization)) {
 
           // Add it to an array to check if things are unique
-          $unique_organizations_by_play[] = $obj['properties']['play_title'];
-          $organizations_by_play[] = array(
+          $unique_plays_by_organization[] = $obj['properties']['play_title'];
+          $plays_by_organization[] = array(
             "name" => $obj['properties']['play_title_display'],
             "path" => $obj['properties']['related_play_path'],
+          );
+        }
+      }
+    }
+    
+    // Add Related Artist info to Orgs (in order to build the orgs per artist list)
+    $organization_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(array("properties.related_theater_path" => $organization_path))->sort(array("properties.generative_artist" => 1));
+
+    $artists_by_organization = array();
+    $unique_artists_by_organization = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['generative_artist'])) {
+        if (!in_array($obj['properties']['generative_artist'], $unique_artists_by_organization)) {
+
+          // Add it to an array to check if things are unique
+          $unique_artists_by_organization[] = $obj['properties']['generative_artist'];
+          $artists_by_organization[] = array(
+            "name" => $obj['properties']['generative_artist'],
+            "path" => $obj['properties']['generative_artist_path'],
+            "has_location" => $obj['properties']['generative_artist_has_location'],
           );
         }
       }
@@ -147,7 +168,8 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
           "organization_type" => $org_list,
           "special_interests" => $special_interests_list,
           "national_networks" => $national_networks_list,
-          "related_plays" => $organizations_by_play,
+          "related_plays" => $plays_by_organization,
+          "related_artists" => $artists_by_organization,
           "city" => $node["City"],
           "state" => $node["State"],
           "city_state" => html_entity_decode($city_state, ENT_QUOTES),
