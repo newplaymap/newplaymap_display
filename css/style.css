@@ -23,7 +23,7 @@ body {
 }
 
 a:hover {
-  color: #BF202E;
+  color: #830B1B;
 }
 
 /* Override Bootstrap Defaults */
@@ -900,17 +900,34 @@ ul.ui-autocomplete {
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+    cursor: pointer;
   }
   
   #tour #tour-controls .tour-previous {
     background: url(../images/tour-control-previous.png) center left no-repeat;
     margin-right: 10px;
   }
+    
+    #tour #tour-controls .tour-previous:hover {
+      background-image: url(../images/tour-control-previous-hover.png);
+    }
+    
+    #tour #tour-controls .tour-previous:active {
+      background-image: url(../images/tour-control-previous-active.png);
+    }
   
   #tour #tour-controls .tour-next {
     background: url(../images/tour-control-next.png) center left no-repeat;
     margin-left: 10px;
   }
+  
+    #tour #tour-controls .tour-next:hover {
+      background-image: url(../images/tour-control-next-hover.png);
+    }
+    
+    #tour #tour-controls .tour-next:active {
+      background-image: url(../images/tour-control-next-active.png);
+    }
 
 #tour #tour-step2,
 #tour #tour-step3 {
@@ -940,4 +957,16 @@ ul.ui-autocomplete {
   padding-right: 30px;
   background: url(../images/tour-exit.png) center right no-repeat;
   color: #BF1F2C;
+  cursor: pointer;
 }
+
+  #tour #tour-exit:hover {
+    background-image: url(../images/tour-exit-hover.png);
+    color: #830B1B;
+    text-decoration: underline;
+  }
+  
+  #tour #tour-exit:active {
+    background-image: url(../images/tour-exit-active.png);
+    color: black;
+  }
