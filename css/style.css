@@ -766,14 +766,14 @@ ul.ui-autocomplete {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 380px;
+  width: 400px;
   height: 250px;
   padding: 25px;
   background: #fff;
   color: #000;
   font-size: 18px;
   z-index: 3000;
-  margin-left: -215px;
+  margin-left: -225px;
   margin-top: -150px;
 }
 
@@ -805,9 +805,20 @@ ul.ui-autocomplete {
     cursor: pointer;
   }
   
+  #tour #tour-controls .tour-previous.inactive,
+  #tour #tour-controls .tour-next.inactive {
+    cursor: default;
+  }
+  
   #tour #tour-controls .tour-previous {
     background: url(../images/tour-control-previous.png) center left no-repeat;
     margin-right: 10px;
+  }
+  
+  #tour #tour-controls .tour-previous.inactive,
+  #tour #tour-controls .tour-previous.inactive:hover,
+  #tour #tour-controls .tour-previous.inactive:active {
+    background-image: url(../images/tour-control-previous-inactive.png)
   }
     
     #tour #tour-controls .tour-previous:hover {
@@ -822,6 +833,12 @@ ul.ui-autocomplete {
   #tour #tour-controls .tour-next {
     background: url(../images/tour-control-next.png) center left no-repeat;
     margin-left: 10px;
+  }
+  
+  #tour #tour-controls .tour-next.inactive,
+  #tour #tour-controls .tour-next.inactive:hover,
+  #tour #tour-controls .tour-next.inactive:active {
+    background-image: url(../images/tour-control-next-inactive.png)
   }
   
     #tour #tour-controls .tour-next:hover {
@@ -875,3 +892,33 @@ ul.ui-autocomplete {
     color: black;
     text-decoration: underline;
   }
+
+#tour #tour-create-account {
+  background-color: #BF202E;
+  color: #FFFFFF;
+  border-radius: 9px;
+  padding: 8px 32px 8px 14px;
+  font-weight: bold;
+  background: #BF202E url(../images/tour-create-account-arrow.png) 93% 50% no-repeat;
+  box-shadow: 1px 1px 2px 0px #000000;
+}
+
+  #tour #tour-create-account:hover {
+    text-decoration: none;
+    background-color: #830B1B;
+  }
+  
+  #tour #tour-create-account:active {
+    text-decoration: none;
+    background-color: #000;
+    margin-left: 2px;
+    box-shadow: none;
+  }
+
+#tour #tour-signin {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  font-size: 14px;
+  color: #666;
+}
