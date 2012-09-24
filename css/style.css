@@ -943,9 +943,13 @@ ul.ui-autocomplete {
       background-image: url(../images/tour-control-next-active.png);
     }
 
-#tour #tour-step2,
-#tour #tour-step3 {
+/* Hide all the steps */
+#tour .tour-step {
   display: none;
+}
+
+#tour .tour-step.active {
+  display: block;
 }
 
 #tour .tour-step h4 {
