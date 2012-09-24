@@ -926,6 +926,12 @@ ul.ui-autocomplete {
     background-position: 0 0;
     margin-right: 10px;
   }
+  
+  #tour #tour-controls .tour-previous.inactive,
+  #tour #tour-controls .tour-previous.inactive:hover,
+  #tour #tour-controls .tour-previous.inactive:active {
+    background-image: url(../images/tour-control-previous-inactive.png)
+  }
     
     #tour #tour-controls .tour-previous:hover {
       background-image: url(../images/tour-control-previous-hover.png);
