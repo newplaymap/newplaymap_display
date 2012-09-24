@@ -141,7 +141,6 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
           $artists_by_organization[] = array(
             "name" => $obj['properties']['generative_artist'],
             "path" => $obj['properties']['generative_artist_path'],
-            "has_location" => $obj['properties']['generative_artist_has_location'],
           );
         }
       }
