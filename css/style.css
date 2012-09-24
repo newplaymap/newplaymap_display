@@ -620,7 +620,7 @@ ul.ui-autocomplete {
       }
       
       #panel-container .results-container .results-title h2#organizations-results-title {
-        background: url("../images/results-orgs-icon.png") no-repeat 0 center;
+        background: url("../images/results-orgs-icon.png") no-repeat 3px center;
       }
       
   #panel-container .results-container .show-more-results {
