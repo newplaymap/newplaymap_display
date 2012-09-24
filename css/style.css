@@ -817,6 +817,7 @@ ul.ui-autocomplete {
     #tour #tour-controls .tour-previous:active {
       background-image: url(../images/tour-control-previous-active.png);
     }
+    
   
   #tour #tour-controls .tour-next {
     background: url(../images/tour-control-next.png) center left no-repeat;
@@ -830,6 +831,7 @@ ul.ui-autocomplete {
     #tour #tour-controls .tour-next:active {
       background-image: url(../images/tour-control-next-active.png);
     }
+
 
 #tour #tour-step2,
 #tour #tour-step3 {
@@ -871,4 +873,5 @@ ul.ui-autocomplete {
   #tour #tour-exit:active {
     background-image: url(../images/tour-exit-active.png);
     color: black;
+    text-decoration: underline;
   }
