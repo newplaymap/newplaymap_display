@@ -540,8 +540,8 @@ ul.ui-autocomplete {
   margin: 7px;
 }
 
-#panel-container .results-container ol li,
-#panel-container .results-container ol.results li {
+#panel-container .results-container ol > li,
+#panel-container .results-container ol.results > li {
   cursor: pointer;
   margin-bottom: 10px;
   padding: 8px;
@@ -561,19 +561,32 @@ ul.ui-autocomplete {
     float: left;
   }
 
-  #panel-container .results-container ol#events-results li {
+  #panel-container .results-container ol#events-results > li {
     background-image: url("../images/listing-icon-event-single.png");
     background-repeat: no-repeat;
     background-position: 12px 10px;
   }
   
-  #panel-container .results-container ol#plays-results li {
+    #panel-container .results-container ol#events-results .partner-organizations {
+      font-size: 0.9em;
+      line-height: 20px;
+    }
+  
+      #panel-container .results-container ol#events-results .partner-organizations ul {
+        margin: 0;
+      }
+
+        #panel-container .results-container ol#events-results .partner-organizations ul li {
+          list-style: none;
+        }
+  
+  #panel-container .results-container ol#plays-results > li {
     background-image: url("../images/listing-icon-play-single.png");
     background-repeat: no-repeat;
     background-position: 13px 10px;
     cursor: default;
   }
-  
+
     #panel-container .results-container ol#events-results div.results-item-content,
     #panel-container .results-container ol#plays-results div.results-item-content {
       margin-left: 40px;
