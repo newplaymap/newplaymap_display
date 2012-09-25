@@ -703,6 +703,10 @@ ul.ui-autocomplete {
       .navbar .nav > li > a {
         text-shadow: none; /* override bootstrap */
       }
+      
+      .navbar-inner {
+        filter: none; /* override bootstrap IE9 */
+      }
           
     #header-links .brand {
       margin-left: 0; /* override bootstrap.css */
