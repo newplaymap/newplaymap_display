@@ -428,7 +428,11 @@
                             In partner with
                             <ul class="partner-organizations-list">
                             {{each properties.partner_organizations}}
-                              <li><a href="${$value.path}" type="organization">${$value.name}</a></li>
+                              {{if $value.has_location == true}}
+                                <li><a href="${$value.path}" type="organization">${$value.name}</a></li>
+                              {{else}}
+                              <li>${$value.name}</li>
+                              {{/if}}
                             {{/each}}
                             </ul>
                           </div>
