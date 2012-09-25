@@ -323,6 +323,7 @@ ul#share-links-list {
 
     ul#share-links-list a#embed-link {
       background-image: url(../images/share-icon-badge.png);
+      background-position: 3% 50%;
     }
     
     ul#share-links-list #embed-code {
