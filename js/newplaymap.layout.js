@@ -237,7 +237,7 @@ newPlayMap.loadResults = function(features, vars) {
 
     // Truncate all results to 3 each and add a link for more
     if (len > 3) {
-      $('#panel-container .results-container-' + resultType + ' ol.results li').each(function(count) {
+      $('#panel-container .results-container-' + resultType + ' ol.results > li').each(function(count) {
         if (count > 2) {
           $(this).addClass('more-results');
         }
@@ -364,7 +364,7 @@ newPlayMap.loadExtras = function(features) {
 
 newPlayMap.resultsListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));
-  $(container).find('ol.results li').hoverIntent({
+  $(container).find('ol.results > li').hoverIntent({
     over: function() {
       $(this).addClass('active');
 

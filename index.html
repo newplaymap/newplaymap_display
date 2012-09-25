@@ -422,6 +422,17 @@
                             <div>${properties.related_theater}</div>
                           {{/if}}
                         {{/if}}
+
+                        {{if properties.partner_organizations}}
+                          <div class="partner-organizations">
+                            In partner with
+                            <ul class="partner-organizations-list">
+                            {{each properties.partner_organizations}}
+                              <li><a href="${$value.path}" type="organization">${$value.name}</a></li>
+                            {{/each}}
+                            </ul>
+                          </div>
+                        {{/if}}
                       
                         {{if city}}{{if state}}
                           <div class="results-location">${city}, ${state}</div>
