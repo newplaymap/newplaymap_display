@@ -345,10 +345,10 @@ newPlayMap.loadPageRouter = function() {
  */
 newPlayMap.loadDefaultContent = function() {
   // Default to what's on today
-  var today = new Date();
-  var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
+  // var today = new Date();
+  // var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
   // console.log('default');
-  var todayHeader = "What's Happening on " + formattedDate;
+  var todayHeader = "What's Happening Today";
   
   // Clear out any panel content
   newPlayMap.layout.clearPanelContent();

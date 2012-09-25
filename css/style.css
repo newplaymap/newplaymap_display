@@ -534,6 +534,9 @@ ul.ui-autocomplete {
 /* Results styles */
 #panel-container #results-header {
   padding: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1em;
 }
 
 #panel-container .results-container ol {
