@@ -333,7 +333,6 @@ ul.ui-autocomplete {
   position: absolute;
   top: 0;
   left: 0;
-  display: none;/* TEMPORARILY DISABLED */
 }
 
 /*
@@ -687,7 +686,7 @@ ul.ui-autocomplete {
       }
     
     #header-links .map-logo {
-      background: url("../images/map-white-on-red.png") no-repeat;
+      background: url(../images/map-white-on-red.png) no-repeat;
       display: block;
       width: 79px;
       height: 50px;
@@ -745,7 +744,7 @@ ul.ui-autocomplete {
         #header-buttons a#filter_button:hover,
         #header-buttons a#invite_button:hover,
         #header-buttons a#explore-filters-button:hover {
-          color: #BF202E;
+          color: #000;
         }
         
         #header-buttons a#add_button:active,
@@ -769,12 +768,25 @@ ul.ui-autocomplete {
         }
   
           #header-buttons a#add_button:hover span { 
+            background-image: url(../images/header-add-icon-hover.png);
+          }
+          
+          #header-buttons a#add_button:active span { 
             background-image: url(../images/header-add-icon-active.png);
           }
 
         #header-buttons a#invite_button span {
-          background-image: url(../images/header-icon-invite.png);
+          background-image: url(../images/header-invite-icon.png);
         }
+        
+          #header-buttons a#invite_button:hover span {
+            background-image: url(../images/header-invite-icon-hover.png);
+          }
+          
+          #header-buttons a#invite_button:active span {
+            background-image: url(../images/header-invite-icon-active.png);
+          }
+
 
         #header-buttons a#explore-filters-button span {
           padding-left: 26px;
@@ -782,6 +794,10 @@ ul.ui-autocomplete {
         }
   
           #header-buttons a#explore-filters-button:hover span {
+            background-image: url(../images/header-explore-icon-hover.png);
+          }
+          
+          #header-buttons a#explore-filters-button:active span {
             background-image: url(../images/header-explore-icon-active.png);
           }
 
