@@ -235,8 +235,8 @@ ul#panel-content-links {
   ul#panel-content-links li {
     float: left;
     font-size: 0.8em;
-    margin-right: 10px;
     font-weight: bold;
+    margin-right: 10px;
   }
     
     ul#panel-content-links li a {
@@ -245,20 +245,45 @@ ul#panel-content-links {
     
     ul#panel-content-links li a:hover {
       text-decoration: underline;
-      color: #BF202E;
     }
   
-  ul#panel-content-links li.panel-add-link a {
+  ul#panel-content-links li.panel-add-link a,
+  ul#panel-content-links li#panel-share-link a {
     background-color: #BF202E;
+    background-position: 5% 50%;
+    background-repeat: no-repeat;
     color: #FFFFFF;
-    border-radius: 9px;
-    padding: 8px;
+    border-radius: 8px;
+    padding: 6px 10px 30px 6px;
+    box-shadow: 1px 1px 2px 0px #000000;
   }
   
-    ul#panel-content-links li.panel-add-link a:hover {
+  ul#panel-content-links li.panel-add-link a {
+    background-image: url(../images/button-add.png);
+  }
+  
+  ul#panel-content-links li#panel-share-link a {
+    background-image: url(../images/button-share.png);
+  }
+  
+    ul#panel-content-links li.panel-add-link a:hover,
+    ul#panel-content-links li#panel-share-link a:hover {
       text-decoration: none;
-      background-color: #FFFFFF;
-      color: #000000;
+      background-color: #830B1B;
+    }
+    
+    ul#panel-content-links li.panel-add-link a:active,
+    ul#panel-content-links li#panel-share-link a:active {
+      text-decoration: none;
+      background-color: #000000;
+      box-shadow: none;
+    }
+    
+    /* Move button over when clicked */
+    ul#panel-content-links li.panel-add-link:active,
+    ul#panel-content-links li#panel-share-link:active {
+      margin-left: 2px;
+      margin-right: 8px;
     }
     
 ul#share-links-list {
