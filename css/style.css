@@ -333,6 +333,7 @@ ul.ui-autocomplete {
   position: absolute;
   top: 0;
   left: 0;
+  display: none;/* TEMPORARILY DISABLED */
 }
 
 /*
@@ -668,6 +669,10 @@ ul.ui-autocomplete {
         background-color: transparent;
       }
     
+      .navbar .nav > li > a {
+        text-shadow: none; /* override bootstrap */
+      }
+          
     #header-links .brand {
       margin-left: 0; /* override bootstrap.css */
       text-transform: uppercase;
@@ -706,6 +711,19 @@ ul.ui-autocomplete {
         color: #BF202E;
         border-radius: 8px;
         margin-right: 10px;
+        box-shadow: 1px 1px 2px 0px #660000;
+      }
+      
+      #header-buttons li:hover {
+        background-color: #F6F0E6;
+        box-shadow: 1px 1px 2px 0px #000000;
+      }
+      
+      #header-buttons li:active {
+        background-color: #000;
+        margin-left: 2px;
+        margin-right: 8px;
+        box-shadow: none;
       }
 
         #header-buttons > li > a {
@@ -721,6 +739,20 @@ ul.ui-autocomplete {
           color: #BF202E;
           font-family: 'Avenir', Helvetica, Arial, sans-serif;
           font-weight: bold;
+        }
+        
+        #header-buttons a#add_button:hover,
+        #header-buttons a#filter_button:hover,
+        #header-buttons a#invite_button:hover,
+        #header-buttons a#explore-filters-button:hover {
+          color: #BF202E;
+        }
+        
+        #header-buttons a#add_button:active,
+        #header-buttons a#filter_button:active,
+        #header-buttons a#invite_button:active,
+        #header-buttons a#explore-filters-button:active {
+          color: #fff;
         }
 
         #header-buttons a#add_button span,
@@ -738,7 +770,6 @@ ul.ui-autocomplete {
   
           #header-buttons a#add_button:hover span { 
             background-image: url(../images/header-add-icon-active.png);
-            color: #000000;
           }
 
         #header-buttons a#invite_button span {
@@ -752,7 +783,6 @@ ul.ui-autocomplete {
   
           #header-buttons a#explore-filters-button:hover span {
             background-image: url(../images/header-explore-icon-active.png);
-            color: #000000;
           }
 
   #header-register a {
