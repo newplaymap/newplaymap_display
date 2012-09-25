@@ -864,10 +864,11 @@ ul.ui-autocomplete {
 }
 
 #tour .tour-step h4 {
-  font-size: 32px;
+  font-size: 29px;
   font-weight: bold;
   color: #BF1F2C;
   margin-top: 18px;
+  line-height: 1em;
 }
 
 #tour p {
