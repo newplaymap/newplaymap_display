@@ -728,7 +728,7 @@ ul.ui-autocomplete {
       background-position: -5px -5px;
     }
   #header-buttons-wrapper {
-    width: 30%;
+    width: 35%;
     float: left;
     margin-top: 6px;
   }
@@ -765,7 +765,7 @@ ul.ui-autocomplete {
         #header-buttons a#filter_button,
         #header-buttons a#invite_button,
         #header-buttons a#explore-filters-button {
-          padding: 6px 9px;
+          padding: 6px 14px;
           cursor: pointer;
           color: #BF202E;
           font-family: 'Avenir', Helvetica, Arial, sans-serif;
