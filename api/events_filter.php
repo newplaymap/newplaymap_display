@@ -39,7 +39,13 @@ else if ($search_start !== null) {
 
 // Find Events by Organization
 else if ($event_organization_path !== null) {
-  $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => -1));
+  $cursor = $collection->find(
+    array('$or' => array(
+      array("properties.related_theater_path" => $event_organization_path),
+      array("properties.partner_organizations.path" => $event_organization_path),
+    ))
+  )->sort(array("properties.event_date" => -1));
+  // $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => -1));
 }
 
 // Find Events by Artist

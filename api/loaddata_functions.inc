@@ -317,6 +317,11 @@ function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clea
     
     $related_theater_has_location = ($node["Organization coordinates"] != ',') ? TRUE : FALSE;
     $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+    
+    // Process Partner Orgs
+    $partner_organizations = json_decode($node['Partner Organizations Data']);
+    // $dsm(json_decode($node['Partner Organizations Data']));
+    // $partner_organizations = str_replace('"', "", $node['Partner Organizations Data']);
   
     // @TODO: See if the string replace on path can be removed
     $newObj = array(
@@ -352,6 +357,8 @@ function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clea
         "city" => $node["City"],
         "state" => $node["State"],
         "city_state" => html_entity_decode($city_state, ENT_QUOTES),
+        "partner_organizations" => $partner_organizations,
+        
     )
     );
     // This will completely replace the record.
