@@ -861,8 +861,8 @@ ul.ui-autocomplete {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 400px;
-  height: 250px;
+  width: 398px;
+  height: 248px;
   padding: 25px;
   background: #fff;
   color: #000;
@@ -870,6 +870,8 @@ ul.ui-autocomplete {
   z-index: 3000;
   margin-left: -225px;
   margin-top: -150px;
+  box-shadow: 2px 2px 4px 0px #000;
+  border: 1px solid #eee;
 }
 
 #tour #tour-header {
