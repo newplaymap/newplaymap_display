@@ -577,6 +577,8 @@ newPlayMap.setTourArrows = function() {
       opacity: 1,
       left: '+=50'
     }, 800, function(){});
+    
+    $('#filter-container:visible').slideUp();
   }
   else if (step == 2) {
     target = $('#explore-filters-button').offset();
@@ -590,6 +592,20 @@ newPlayMap.setTourArrows = function() {
       opacity: 1,
       top: '-=50'
     }, 800, function(){});
+    
+    // target = $('#filter-container').offset();
+    // 
+    // $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+    //   'top': target.top + 50,
+    //   'right': target.left - 50,
+    //   'opacity': 0.5
+    // })
+    // .animate({
+    //   opacity: 1,
+    //   right: '+=50'
+    // }, 800, function(){});
+    
+    newPlayMap.processFilters();
   }
   else if (step == 3) {
     target = $('#add_button').offset();
@@ -604,5 +620,7 @@ newPlayMap.setTourArrows = function() {
       opacity: 1,
       top: '-=50'
     }, 800, function(){});
+    
+    $('#filter-container:visible').slideUp();
   }
 }
