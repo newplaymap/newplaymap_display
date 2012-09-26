@@ -515,6 +515,7 @@ newPlayMap.tourInteraction = function() {
     newPlayMap.tourStop();
   });
 
+interaction for previous/next tour slides.
   $('#tour-controls .tour-next').click(function() {
     if ($(this).hasClass('inactive') == false) {
       // If this isn't the last step...
@@ -641,3 +642,4 @@ newPlayMap.setTourArrows = function() {
     $('#filter-container:visible').slideUp();
   }
 }
+
