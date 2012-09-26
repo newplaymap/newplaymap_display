@@ -1029,3 +1029,24 @@ ul.ui-autocomplete {
   top: 0;
   left: 0;
 }
+
+.tour-arrows {
+  display: block;
+  background-repeat: no-repeat;
+  z-index: 3001;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.tour-arrows.right {
+  width: 107px;
+  height: 57px;
+  background-image: url(../images/tour-arrow-right.png);
+}
+
+.tour-arrows.up {
+  width: 52px;
+  height: 106px;
+  background-image: url(../images/tour-arrow-up.png);
+}
