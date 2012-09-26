@@ -899,10 +899,12 @@ ul.ui-autocomplete {
   #tour #tour-controls .tour-previous,
   #tour #tour-controls .tour-next {
     width: 12px;
+    height: 14px;
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
+    margin-top: 6px;
   }
   
   #tour #tour-controls .tour-previous.inactive,
@@ -911,55 +913,33 @@ ul.ui-autocomplete {
   }
   
   #tour #tour-controls .tour-previous {
-    background: url(../images/tour-control-previous.png) center left no-repeat;
+    background: url(../images/tour-control-previous-all.png) no-repeat;
+    background-position: 0 0;
     margin-right: 10px;
   }
   
-  #tour #tour-controls .tour-previous.inactive,
-  #tour #tour-controls .tour-previous.inactive:hover,
-  #tour #tour-controls .tour-previous.inactive:active {
-    background-image: url(../images/tour-control-previous-inactive.png)
-  }
-    
-    #tour #tour-controls .tour-previous:hover {
-      background-image: url(../images/tour-control-previous-hover.png);
-    }
-    
-    #tour #tour-controls .tour-previous:active {
-      background-image: url(../images/tour-control-previous-active.png);
-    }
-  
-  #tour #tour-controls .tour-previous.inactive,
-  #tour #tour-controls .tour-previous.inactive:hover,
-  #tour #tour-controls .tour-previous.inactive:active {
-    background-image: url(../images/tour-control-previous-inactive.png)
-  }
-    
-    #tour #tour-controls .tour-previous:hover {
-      background-image: url(../images/tour-control-previous-hover.png);
-    }
-    
-    #tour #tour-controls .tour-previous:active {
-      background-image: url(../images/tour-control-previous-active.png);
-    }
-  
   #tour #tour-controls .tour-next {
-    background: url(../images/tour-control-next.png) center left no-repeat;
+    background: url(../images/tour-control-next-all.png) top left no-repeat;
     margin-left: 10px;
   }
   
+  #tour #tour-controls .tour-previous.inactive,
+  #tour #tour-controls .tour-previous.inactive:hover,
+  #tour #tour-controls .tour-previous.inactive:active,
   #tour #tour-controls .tour-next.inactive,
   #tour #tour-controls .tour-next.inactive:hover,
   #tour #tour-controls .tour-next.inactive:active {
-    background-image: url(../images/tour-control-next-inactive.png)
+    background-position: 0 -28px;
   }
-  
+    
+    #tour #tour-controls .tour-previous:hover,
     #tour #tour-controls .tour-next:hover {
-      background-image: url(../images/tour-control-next-hover.png);
+      background-position: 0 -14px;
     }
     
+    #tour #tour-controls .tour-previous:active,
     #tour #tour-controls .tour-next:active {
-      background-image: url(../images/tour-control-next-active.png);
+      background-position: 0 -42px;
     }
 
 /* Hide all the steps */
@@ -1038,4 +1018,14 @@ ul.ui-autocomplete {
   left: 25px;
   font-size: 14px;
   color: #666;
+}
+
+#tour-overlay {
+  background-color: rgba(0,0,0,0.25);
+  z-index: 2000;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
