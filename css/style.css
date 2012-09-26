@@ -235,8 +235,8 @@ ul#panel-content-links {
   ul#panel-content-links li {
     float: left;
     font-size: 0.8em;
-    margin-right: 10px;
     font-weight: bold;
+    margin-right: 10px;
   }
     
     ul#panel-content-links li a {
@@ -245,20 +245,47 @@ ul#panel-content-links {
     
     ul#panel-content-links li a:hover {
       text-decoration: underline;
-      color: #BF202E;
     }
   
-  ul#panel-content-links li.panel-add-link a {
+  ul#panel-content-links li.panel-add-link a,
+  ul#panel-content-links li#panel-share-link a {
     background-color: #BF202E;
+    background-position: 8% 50%;
+    background-repeat: no-repeat;
     color: #FFFFFF;
-    border-radius: 9px;
-    padding: 8px;
+    border-radius: 8px;
+    padding: 6px 10px 6px 25px;
+    box-shadow: 1px 1px 2px 0px #000000;
   }
   
-    ul#panel-content-links li.panel-add-link a:hover {
+  ul#panel-content-links li.panel-add-link a {
+    background-image: url(../images/button-add.png);
+  }
+  
+  ul#panel-content-links li#panel-share-link a {
+    background-image: url(../images/button-share.png);
+    background-position: 14% 45%;
+    padding-left: 28px;
+  }
+  
+    ul#panel-content-links li.panel-add-link a:hover,
+    ul#panel-content-links li#panel-share-link a:hover {
       text-decoration: none;
-      background-color: #FFFFFF;
-      color: #000000;
+      background-color: #830B1B;
+    }
+    
+    ul#panel-content-links li.panel-add-link a:active,
+    ul#panel-content-links li#panel-share-link a:active {
+      text-decoration: none;
+      background-color: #000000;
+      box-shadow: none;
+    }
+    
+    /* Move button over when clicked */
+    ul#panel-content-links li.panel-add-link:active,
+    ul#panel-content-links li#panel-share-link:active {
+      margin-left: 2px;
+      margin-right: 8px;
     }
     
 ul#share-links-list {
@@ -298,6 +325,7 @@ ul#share-links-list {
 
     ul#share-links-list a#embed-link {
       background-image: url(../images/share-icon-badge.png);
+      background-position: 3% 50%;
     }
     
     ul#share-links-list #embed-code {
@@ -640,6 +668,10 @@ ul.ui-autocomplete {
   -webkit-border-radius: 12px;
 }
 
+/* Basic button style */
+
+/* core stuff here */
+
 /* Header styles */
 /* Header buttons */
 /* Additional default button style in Misc styles */
@@ -668,6 +700,14 @@ ul.ui-autocomplete {
         background-color: transparent;
       }
     
+      .navbar .nav > li > a {
+        text-shadow: none; /* override bootstrap */
+      }
+      
+      .navbar-inner {
+        filter: none; /* override bootstrap IE9 */
+      }
+          
     #header-links .brand {
       margin-left: 0; /* override bootstrap.css */
       text-transform: uppercase;
@@ -682,7 +722,7 @@ ul.ui-autocomplete {
       }
     
     #header-links .map-logo {
-      background: url("../images/map-white-on-red.png") no-repeat;
+      background: url(../images/map-white-on-red.png) no-repeat;
       display: block;
       width: 79px;
       height: 50px;
@@ -692,7 +732,7 @@ ul.ui-autocomplete {
       background-position: -5px -5px;
     }
   #header-buttons-wrapper {
-    width: 30%;
+    width: 35%;
     float: left;
     margin-top: 6px;
   }
@@ -706,6 +746,19 @@ ul.ui-autocomplete {
         color: #BF202E;
         border-radius: 8px;
         margin-right: 10px;
+        box-shadow: 1px 1px 2px 0px #660000;
+      }
+      
+      #header-buttons li:hover {
+        background-color: #F6F0E6;
+        box-shadow: 1px 1px 2px 0px #000000;
+      }
+      
+      #header-buttons li:active {
+        background-color: #000;
+        margin-left: 2px;
+        margin-right: 8px;
+        box-shadow: none;
       }
 
         #header-buttons > li > a {
@@ -716,11 +769,25 @@ ul.ui-autocomplete {
         #header-buttons a#filter_button,
         #header-buttons a#invite_button,
         #header-buttons a#explore-filters-button {
-          padding: 6px 9px;
+          padding: 6px 14px;
           cursor: pointer;
           color: #BF202E;
           font-family: 'Avenir', Helvetica, Arial, sans-serif;
           font-weight: bold;
+        }
+        
+        #header-buttons a#add_button:hover,
+        #header-buttons a#filter_button:hover,
+        #header-buttons a#invite_button:hover,
+        #header-buttons a#explore-filters-button:hover {
+          color: #000;
+        }
+        
+        #header-buttons a#add_button:active,
+        #header-buttons a#filter_button:active,
+        #header-buttons a#invite_button:active,
+        #header-buttons a#explore-filters-button:active {
+          color: #fff;
         }
 
         #header-buttons a#add_button span,
@@ -737,13 +804,25 @@ ul.ui-autocomplete {
         }
   
           #header-buttons a#add_button:hover span { 
+            background-image: url(../images/header-add-icon-hover.png);
+          }
+          
+          #header-buttons a#add_button:active span { 
             background-image: url(../images/header-add-icon-active.png);
-            color: #000000;
           }
 
         #header-buttons a#invite_button span {
-          background-image: url(../images/header-icon-invite.png);
+          background-image: url(../images/header-invite-icon.png);
         }
+        
+          #header-buttons a#invite_button:hover span {
+            background-image: url(../images/header-invite-icon-hover.png);
+          }
+          
+          #header-buttons a#invite_button:active span {
+            background-image: url(../images/header-invite-icon-active.png);
+          }
+
 
         #header-buttons a#explore-filters-button span {
           padding-left: 26px;
@@ -751,8 +830,11 @@ ul.ui-autocomplete {
         }
   
           #header-buttons a#explore-filters-button:hover span {
+            background-image: url(../images/header-explore-icon-hover.png);
+          }
+          
+          #header-buttons a#explore-filters-button:active span {
             background-image: url(../images/header-explore-icon-active.png);
-            color: #000000;
           }
 
   #header-register a {
