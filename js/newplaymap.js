@@ -517,11 +517,9 @@ newPlayMap.tourInteraction = function() {
       // If this isn't the last step...
       if ($('.tour-step.active').hasClass('last') == false) {
         // Move to the next slide
-        $('.tour-step.active').fadeOut('normal', function() {
-          $(this).removeClass('active').next().fadeIn('normal').addClass('active');
-          newPlayMap.setTourControlsStatus();
-          newPlayMap.setTourArrows();
-        });
+        $('.tour-step.active').hide().removeClass('active').next().show().addClass('active');
+        newPlayMap.setTourControlsStatus();
+        newPlayMap.setTourArrows();
       }
     }
   });
@@ -531,11 +529,9 @@ newPlayMap.tourInteraction = function() {
       // If this isn't the first step...
       if ($('.tour-step.active').hasClass('first') == false) {
         // Move to the previous slide
-        $('.tour-step.active').fadeOut('normal', function() {
-          $(this).removeClass('active').prev().fadeIn('normal').addClass('active');
-          newPlayMap.setTourControlsStatus();
-          newPlayMap.setTourArrows();
-        });
+        $('.tour-step.active').hide().removeClass('active').prev().show().addClass('active');
+        newPlayMap.setTourControlsStatus();
+        newPlayMap.setTourArrows();
       }
     }
   });
@@ -570,18 +566,43 @@ newPlayMap.setTourArrows = function() {
     return;
   }
   else if (step == 1) {
-    target = $('#panel-container').offset().left;
+    target = $('#panel-container').offset();
     arrowImageOffset = 107;
     
     $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
-      'left': target - arrowImageOffset,
+      'left': target.left - arrowImageOffset - 50,
       'opacity': 0.5
-    });
+    })
+    .animate({
+      opacity: 1,
+      left: '+=50'
+    }, 800, function(){});
   }
   else if (step == 2) {
+    target = $('#explore-filters-button').offset();
     
+    $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
+      'top': target.top + 36 + 50,
+      'left': target.left + 30,
+      'opacity': 0.5
+    })
+    .animate({
+      opacity: 1,
+      top: '-=50'
+    }, 800, function(){});
   }
   else if (step == 3) {
+    target = $('#add_button').offset();
+    arrowImageOffset = 107;
     
+    $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
+      'top': target.top + 36 + 50,
+      'left': target.left + 60,
+      'opacity': 0.5
+    })
+    .animate({
+      opacity: 1,
+      top: '-=50'
+    }, 800, function(){});
   }
 }
