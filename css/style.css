@@ -927,34 +927,6 @@ ul.ui-autocomplete {
     margin-right: 10px;
   }
   
-  #tour #tour-controls .tour-previous.inactive,
-  #tour #tour-controls .tour-previous.inactive:hover,
-  #tour #tour-controls .tour-previous.inactive:active {
-    background-image: url(../images/tour-control-previous-inactive.png)
-  }
-    
-    #tour #tour-controls .tour-previous:hover {
-      background-image: url(../images/tour-control-previous-hover.png);
-    }
-    
-    #tour #tour-controls .tour-previous:active {
-      background-image: url(../images/tour-control-previous-active.png);
-    }
-  
-  #tour #tour-controls .tour-previous.inactive,
-  #tour #tour-controls .tour-previous.inactive:hover,
-  #tour #tour-controls .tour-previous.inactive:active {
-    background-image: url(../images/tour-control-previous-inactive.png)
-  }
-    
-    #tour #tour-controls .tour-previous:hover {
-      background-image: url(../images/tour-control-previous-hover.png);
-    }
-    
-    #tour #tour-controls .tour-previous:active {
-      background-image: url(../images/tour-control-previous-active.png);
-    }
-  
   #tour #tour-controls .tour-next {
     background: url(../images/tour-control-next-all.png) top left no-repeat;
     margin-left: 10px;
