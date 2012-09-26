@@ -15,9 +15,10 @@ newPlayMap.browserEvents = [];
 newPlayMap.filters = newPlayMap.filters || {};
 
 window.onload = function() {
-  newPlayMap.alterHomepage();   // Change basic layout of page.
-  newPlayMap.loadMap();         // Load map tiles & trigger data to load.
-  newPlayMap.initializeFilters();  // Add interaction to filters in sidebar panel
+  newPlayMap.alterHomepage();       // Change basic layout of page.
+  newPlayMap.loadMap();             // Load map tiles & trigger data to load.
+  newPlayMap.initializeFilters();   // Add interaction to filters in sidebar panel
+  newPlayMap.tourInteraction();     // Set up tour interaction
 };
 
 newPlayMap.loadMap = function(callback){
@@ -504,5 +505,50 @@ newPlayMap.shareInteraction = function() {
     $('.qtip-content #share-code').hover(function() {
       $('.qtip-content #share-code input').select();
     });
+  }
+}
+
+newPlayMap.tourInteraction = function() {
+  $('#tour-controls .tour-next').click(function() {
+    if ($(this).hasClass('inactive') == false) {
+      // If this isn't the last step...
+      if ($('.tour-step.active').hasClass('last') == false) {
+        // Move to the next slide
+        $('.tour-step.active').fadeOut('normal', function() {
+          $(this).removeClass('active').next().fadeIn('normal').addClass('active');
+          setTourControlsStatus();
+        });
+      }
+    }
+  });
+  
+  $('#tour-controls .tour-previous').click(function() {
+    if ($(this).hasClass('inactive') == false) {
+      // If this isn't the first step...
+      if ($('.tour-step.active').hasClass('first') == false) {
+        // Move to the previous slide
+        $('.tour-step.active').fadeOut('normal', function() {
+          $(this).removeClass('active').prev().fadeIn('normal').addClass('active');
+          setTourControlsStatus();
+        });
+      }
+    }
+  });
+  
+  var setTourControlsStatus = function() {
+    // Set the controls status
+    if ($('.tour-step.active').hasClass('first') == true) {
+      $('#tour-controls .tour-previous').addClass('inactive');
+    }
+    else if ($('.tour-step.active').hasClass('last') == true) {
+      $('#tour-controls .tour-next').addClass('inactive');
+    }
+    else {
+      $('#tour-controls .inactive').removeClass('inactive');
+    }
+    
+    // Set the number
+    var currentSlideNumber = $('.tour-step.active').index();
+    $('#tour-controls .tour-counter .tour-counter-current').text(currentSlideNumber);
   }
 }
