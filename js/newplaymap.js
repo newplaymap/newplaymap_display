@@ -509,6 +509,9 @@ newPlayMap.shareInteraction = function() {
 }
 
 newPlayMap.tourInteraction = function() {
+  // Add the arrows for the first slide
+  newPlayMap.setTourArrows();
+
   $('#tour-controls .tour-next').click(function() {
     if ($(this).hasClass('inactive') == false) {
       // If this isn't the last step...
@@ -516,7 +519,8 @@ newPlayMap.tourInteraction = function() {
         // Move to the next slide
         $('.tour-step.active').fadeOut('normal', function() {
           $(this).removeClass('active').next().fadeIn('normal').addClass('active');
-          setTourControlsStatus();
+          newPlayMap.setTourControlsStatus();
+          newPlayMap.setTourArrows();
         });
       }
     }
@@ -529,26 +533,55 @@ newPlayMap.tourInteraction = function() {
         // Move to the previous slide
         $('.tour-step.active').fadeOut('normal', function() {
           $(this).removeClass('active').prev().fadeIn('normal').addClass('active');
-          setTourControlsStatus();
+          newPlayMap.setTourControlsStatus();
+          newPlayMap.setTourArrows();
         });
       }
     }
   });
+}
+
+newPlayMap.setTourControlsStatus = function() {
+  // Set the controls status
+  if ($('.tour-step.active').hasClass('first') == true) {
+    $('#tour-controls .tour-previous').addClass('inactive');
+  }
+  else if ($('.tour-step.active').hasClass('last') == true) {
+    $('#tour-controls .tour-next').addClass('inactive');
+  }
+  else {
+    $('#tour-controls .inactive').removeClass('inactive');
+  }
   
-  var setTourControlsStatus = function() {
-    // Set the controls status
-    if ($('.tour-step.active').hasClass('first') == true) {
-      $('#tour-controls .tour-previous').addClass('inactive');
-    }
-    else if ($('.tour-step.active').hasClass('last') == true) {
-      $('#tour-controls .tour-next').addClass('inactive');
-    }
-    else {
-      $('#tour-controls .inactive').removeClass('inactive');
-    }
+  // Set the number
+  var currentSlideNumber = $('.tour-step.active').index();
+  $('#tour-controls .tour-counter .tour-counter-current').text(currentSlideNumber);
+}
+
+newPlayMap.setTourArrows = function() {
+  var step = $('.tour-step.active').index();
+  var target = '';
+  var arrowImageOffset = 0;
+
+  // Clear out old arrows
+  $('.tour-arrows').remove();
+
+  if (step == null) {
+    return;
+  }
+  else if (step == 1) {
+    target = $('#panel-container').offset().left;
+    arrowImageOffset = 107;
     
-    // Set the number
-    var currentSlideNumber = $('.tour-step.active').index();
-    $('#tour-controls .tour-counter .tour-counter-current').text(currentSlideNumber);
+    $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+      'left': target - arrowImageOffset,
+      'opacity': 0.5
+    });
+  }
+  else if (step == 2) {
+    
+  }
+  else if (step == 3) {
+    
   }
 }
