@@ -509,6 +509,9 @@ newPlayMap.shareInteraction = function() {
 }
 
 newPlayMap.tourInteraction = function() {
+  // Start tour immediately for testing
+  newPlayMap.tourStart();
+
   // Close button functionality
   $('#tour-exit').click(function() {
     // Hide the tour and all arrows
