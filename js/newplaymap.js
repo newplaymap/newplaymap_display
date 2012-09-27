@@ -571,7 +571,7 @@ newPlayMap.setTourArrows = function() {
     
     $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
       'left': target.left - arrowImageOffset - 50,
-      'opacity': 0.5
+      'top': '50%'
     })
     .animate({
       opacity: 1,
@@ -581,31 +581,32 @@ newPlayMap.setTourArrows = function() {
     $('#filter-container:visible').slideUp();
   }
   else if (step == 2) {
+    // Top explore button arrow
     target = $('#explore-filters-button').offset();
     
     $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
       'top': target.top + 36 + 50,
-      'left': target.left + 30,
-      'opacity': 0.5
+      'left': target.left + 30
     })
     .animate({
       opacity: 1,
       top: '-=50'
     }, 800, function(){});
-    
-    // target = $('#filter-container').offset();
-    // 
-    // $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
-    //   'top': target.top + 50,
-    //   'right': target.left - 50,
-    //   'opacity': 0.5
-    // })
-    // .animate({
-    //   opacity: 1,
-    //   right: '+=50'
-    // }, 800, function(){});
-    
+
+    // Right filter arrow
     newPlayMap.processFilters();
+
+    target = $('#filter-container').offset();
+    arrowImageOffset = 107;
+    
+    $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+      'top': target.top + 50,
+      'left': target.left - arrowImageOffset - 50
+    })
+    .animate({
+      opacity: 1,
+      left: '+=50'
+    }, 800, function(){});
   }
   else if (step == 3) {
     target = $('#add_button').offset();
@@ -613,8 +614,7 @@ newPlayMap.setTourArrows = function() {
     
     $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
       'top': target.top + 36 + 50,
-      'left': target.left + 60,
-      'opacity': 0.5
+      'left': target.left + 60
     })
     .animate({
       opacity: 1,
