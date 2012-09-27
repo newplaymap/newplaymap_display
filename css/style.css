@@ -862,6 +862,7 @@ ul.ui-autocomplete {
   margin-top: -150px;
   box-shadow: 2px 2px 4px 0px #000;
   border: 1px solid #eee;
+  display: none;
 }
 
 #tour #tour-header {
@@ -1015,6 +1016,7 @@ ul.ui-autocomplete {
   position: absolute;
   top: 0;
   left: 0;
+  display: none;
 }
 
 .tour-arrows {
