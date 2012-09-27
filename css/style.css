@@ -1067,8 +1067,7 @@ ul.ui-autocomplete {
   background-repeat: no-repeat;
   z-index: 3001;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  opacity: 0.25;
 }
 
 .tour-arrows.right {
