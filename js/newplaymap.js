@@ -620,7 +620,7 @@ newPlayMap.setTourArrows = function() {
     arrowImageOffset = 107;
     
     $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
-      'top': target.top + 150,
+      'top': target.top + 75,
       'left': target.left - arrowImageOffset - 50
     })
     .animate({
