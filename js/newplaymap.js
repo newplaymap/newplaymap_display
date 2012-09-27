@@ -509,8 +509,11 @@ newPlayMap.shareInteraction = function() {
 }
 
 newPlayMap.tourInteraction = function() {
-  // Add the arrows for the first slide
-  newPlayMap.setTourArrows();
+  // Close button functionality
+  $('#tour-exit').click(function() {
+    // Hide the tour and all arrows
+    newPlayMap.tourStop();
+  });
 
   $('#tour-controls .tour-next').click(function() {
     if ($(this).hasClass('inactive') == false) {
@@ -536,6 +539,20 @@ newPlayMap.tourInteraction = function() {
     }
   });
 }
+
+newPlayMap.tourStart = function() {
+  $('#tour').show();
+  $('#tour-overlay').show();
+  // Add the arrows for the first slide
+  newPlayMap.setTourArrows();
+}
+
+newPlayMap.tourStop = function() {
+  $('#tour').hide();
+  $('.tour-arrows').remove();
+  $('#tour-overlay').hide();
+}
+
 
 newPlayMap.setTourControlsStatus = function() {
   // Set the controls status
@@ -600,7 +617,7 @@ newPlayMap.setTourArrows = function() {
     arrowImageOffset = 107;
     
     $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
-      'top': target.top + 50,
+      'top': target.top + 150,
       'left': target.left - arrowImageOffset - 50
     })
     .animate({
