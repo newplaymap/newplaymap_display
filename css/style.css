@@ -961,19 +961,21 @@ ul.ui-autocomplete {
   font-size: 14px;
   font-weight: bold;
   padding-right: 30px;
-  background: url(../images/tour-exit.png) center right no-repeat;
+  background-image: url(../images/tour-exit-all.png);
+  background-repeat: no-repeat;
+  background-position: right top;
   color: #BF1F2C;
   cursor: pointer;
 }
 
   #tour #tour-exit:hover {
-    background-image: url(../images/tour-exit-hover.png);
+    background-position: right -50px;
     color: #830B1B;
     text-decoration: underline;
   }
   
   #tour #tour-exit:active {
-    background-image: url(../images/tour-exit-active.png);
+    background-position: right -100px;
     color: black;
     text-decoration: underline;
   }
