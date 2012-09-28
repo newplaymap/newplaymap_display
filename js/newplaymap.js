@@ -599,12 +599,12 @@ newPlayMap.setTourControlsStatus = function() {
   }
   
   // Set the number
-  var currentSlideNumber = $('.tour-step.active').index();
+  var currentSlideNumber = $('.tour-step.active').attr('id').replace('tour-step', '');
   $('#tour-controls .tour-counter .tour-counter-current').text(currentSlideNumber);
 }
 
 newPlayMap.setTourArrows = function() {
-  var step = $('.tour-step.active').index();
+  var step = $('.tour-step.active').attr('id').replace('tour-step', '');
   var target = '';
   var arrowImageOffset = 0;
   var arrowDelay = 500;
