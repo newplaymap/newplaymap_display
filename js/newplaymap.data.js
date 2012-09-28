@@ -1,5 +1,7 @@
 var newPlayMap = newPlayMap || {};
 newPlayMap.data = newPlayMap.data || {};
+newPlayMap.loadingStack = newPlayMap.loadingStack || [];
+newPlayMap.loadingStackCallbacks = newPlayMap.loadingStackCallbacks || $.Callbacks();
 
 newPlayMap.loadJSONFile = function(vars) {
   var vars = vars;
@@ -68,7 +70,7 @@ newPlayMap.setData = function(data, statusText, jqxhr) {
   }
   
   if (newPlayMap.filters.loadingCompleteFeedback) {
-    newPlayMap.filters.loadingCompleteFeedback();
+    newPlayMap.filters.loadingCompleteFeedback(data.name);
   }
   return false;
 };
