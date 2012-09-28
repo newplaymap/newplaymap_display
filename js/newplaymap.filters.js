@@ -1,7 +1,7 @@
 var newPlayMap = newPlayMap || {};
 newPlayMap.filters = newPlayMap.filters || {};
 newPlayMap.loadingStack = newPlayMap.loadingStack || [];
-newPlayMap.loadingStack.callbacks = newPlayMap.loadingStack.callbacks || $.Callbacks();
+newPlayMap.loadingStackCallbacks = newPlayMap.loadingStackCallbacks || $.Callbacks();
 
 // Set up container for filters functions and objects
 newPlayMap.filters = {};
@@ -473,7 +473,7 @@ newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
     $('#loading-feedback').hide()
 
     // trigger any callbacks
-    newPlayMap.loadingStack.callbacks.fire();
+    newPlayMap.loadingStackCallbacks.fire();
   }
 }
 
