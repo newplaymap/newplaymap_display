@@ -321,10 +321,7 @@ newPlayMap.loadPageRouter = function() {
             // newPlayMap.filters.showAll('plays'); // the index isn't built yet
           break;
           case 'tour':
-            if (newPlayMap.hasContentBeenLoaded() == false) {
-              // If it's on initial page load, load default
-              newPlayMap.loadDefaultContent();
-            }
+            newPlayMap.loadDefaultContent();
             newPlayMap.tourStart();
           break;
         }
