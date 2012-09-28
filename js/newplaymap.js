@@ -516,8 +516,9 @@ newPlayMap.shareInteraction = function() {
 
 newPlayMap.tourInteraction = function() {
   // Queue start tour for when the filters are done
-  // @TODO: Set and respect a cookie
-  newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart()); 
+  if ($.cookie('newplaymap_tour') != 'true') {
+    newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart());
+  }
 
   // Add start tour link
   $('<a></a>')
@@ -571,6 +572,7 @@ newPlayMap.tourStart = function() {
   $('#tour-overlay').show();
   // Add the arrows for the first slide
   newPlayMap.setTourArrows();
+  $.cookie('newplaymap_tour', true);
 }
 
 newPlayMap.tourStop = function() {
