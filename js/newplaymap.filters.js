@@ -1,5 +1,7 @@
 var newPlayMap = newPlayMap || {};
 newPlayMap.filters = newPlayMap.filters || {};
+newPlayMap.loadingStack = newPlayMap.loadingStack || [];
+newPlayMap.loadingStack.callbacks = newPlayMap.loadingStack.callbacks || $.Callbacks();
 
 // Set up container for filters functions and objects
 newPlayMap.filters = {};
@@ -438,7 +440,10 @@ newPlayMap.filters.reset = function(exception) {
  * Function to give users feedback that filter results are loading
  */
 newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
-  // console.log('loading feedback');
+  // Add this call to the loading stack
+  var dataName = newPlayMap.filters.getDataNameFromURL(settings.url);
+  newPlayMap.loadingStack.push(dataName);
+
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
   } 
@@ -452,9 +457,39 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
 /*
  * Function to give users feedback that filter results are done loading
  */
-newPlayMap.filters.loadingCompleteFeedback = function() {
-  // console.log('done loading feedback');
-  $('#loading-feedback').hide()
+newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
+  // Remove this call from the loading stack
+  if (newPlayMap.loadingStack.indexOf(dataName) < 0) {
+    return;
+  }
+  else {
+    newPlayMap.loadingStack.splice(newPlayMap.loadingStack.indexOf(dataName),1);
+    
+  }
+
+  // When everything is done loading:
+  if (newPlayMap.loadingStack.length >= 0) {
+    // Hide overlay
+    $('#loading-feedback').hide()
+
+    // trigger any callbacks
+    newPlayMap.loadingStack.callbacks.fire();
+  }
+}
+
+/*
+ * Utility function to process an ajax api call into the data name
+ */
+newPlayMap.filters.getDataNameFromURL = function(url) {
+  if (url == null) {
+    return;
+  }
+  var dataName = '';
+  var urlComponents = url.split('?');
+  var apiFile = urlComponents.slice(0,1).pop();
+  var apiFileComponents = apiFile.split('/');
+  dataName = apiFileComponents.slice(1,2).pop().replace('.php', '');
+  return dataName;
 }
 
 /*

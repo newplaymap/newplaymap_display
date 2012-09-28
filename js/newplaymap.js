@@ -13,6 +13,8 @@ newPlayMap.routing = {};
 newPlayMap.routing.route = {};
 newPlayMap.browserEvents = [];
 newPlayMap.filters = newPlayMap.filters || {};
+newPlayMap.loadingStack = newPlayMap.loadingStack || [];
+newPlayMap.loadingStackCallbacks = newPlayMap.loadingStackCallbacks || $.Callbacks();
 
 window.onload = function() {
   newPlayMap.alterHomepage();       // Change basic layout of page.
@@ -516,6 +518,10 @@ newPlayMap.shareInteraction = function() {
 }
 
 newPlayMap.tourInteraction = function() {
+  // Queue start tour for when the filters are done
+  // @TODO: Set and respect a cookie
+  newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart()); 
+
   // Add start tour link
   $('<a></a>')
     .text('Tour')
