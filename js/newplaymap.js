@@ -605,6 +605,7 @@ newPlayMap.setTourArrows = function() {
   var step = $('.tour-step.active').index();
   var target = '';
   var arrowImageOffset = 0;
+  var arrowDelay = 500;
 
   // Clear out old arrows
   $('.tour-arrows').remove();
@@ -615,58 +616,65 @@ newPlayMap.setTourArrows = function() {
   else if (step == 1) {
     target = $('#panel-container').offset();
     arrowImageOffset = 107;
-    
-    $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
-      'left': target.left - arrowImageOffset - 50,
-      'top': '50%'
-    })
-    .animate({
-      opacity: 1,
-      left: '+=50'
-    }, 800, function(){});
-    
-    $('#filter-container:visible').slideUp();
+
+    setTimeout(function() {
+      $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+        'left': target.left - arrowImageOffset - 50,
+        'top': '50%'
+      })
+      .animate({
+        opacity: 1,
+        left: '+=50'
+      }, 800, function(){});
+
+      $('#filter-container:visible').slideUp();
+    }, arrowDelay);
   }
   else if (step == 2) {
     // Top explore button arrow
-    target = $('#explore-filters-button').offset();
-    
-    $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
-      'top': target.top + 36 + 50,
-      'left': target.left + 30
-    })
-    .animate({
-      opacity: 1,
-      top: '-=50'
-    }, 800, function(){});
+    topTarget = $('#explore-filters-button').offset();
 
-    // Right filter arrow
-    newPlayMap.processFilters();
+    setTimeout(function() {
+      $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
+        'top': topTarget.top + 36 + 50,
+        'left': topTarget.left + 30
+      })
+      .animate({
+        opacity: 1,
+        top: '-=50'
+      }, 800, function(){});
 
-    target = $('#filter-container').offset();
-    arrowImageOffset = 107;
-    
-    $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
-      'top': target.top + 75,
-      'left': target.left - arrowImageOffset - 50
-    })
-    .animate({
-      opacity: 1,
-      left: '+=50'
-    }, 800, function(){});
+      // Right filter arrow
+      newPlayMap.processFilters();
+    }, arrowDelay);
+
+    setTimeout(function() {
+      target = $('#filter-container').offset();
+      arrowImageOffset = 107;
+      $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+        'top': target.top + 75,
+        'left': target.left - arrowImageOffset - 50
+      })
+      .animate({
+        opacity: 1,
+        left: '+=50'
+      }, 800, function(){});
+    }, arrowDelay);
   }
   else if (step == 3) {
     target = $('#add_button').offset();
     arrowImageOffset = 107;
     
-    $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
-      'top': target.top + 36 + 50,
-      'left': target.left + 60
-    })
-    .animate({
-      opacity: 1,
-      top: '-=50'
-    }, 800, function(){});
+    setTimeout(function() {
+      $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
+        'top': target.top + 36 + 50,
+        'left': target.left + 60
+      })
+      .animate({
+        opacity: 1,
+        top: '-=50'
+      }, 800, function(){});
+    }, arrowDelay);
     
     $('#filter-container:visible').slideUp();
   }
