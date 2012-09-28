@@ -318,6 +318,13 @@ newPlayMap.loadPageRouter = function() {
             }
             // newPlayMap.filters.showAll('plays'); // the index isn't built yet
           break;
+          case 'tour':
+            if (newPlayMap.hasContentBeenLoaded() == false) {
+              // If it's on initial page load, load default
+              newPlayMap.loadDefaultContent();
+            }
+            newPlayMap.tourStart();
+          break;
         }
       }
       else {
@@ -509,8 +516,18 @@ newPlayMap.shareInteraction = function() {
 }
 
 newPlayMap.tourInteraction = function() {
-  // Start tour immediately for testing
-  newPlayMap.tourStart();
+  // Add start tour link
+  $('<a></a>')
+    .text('Tour')
+    .addClass('start-tour')
+    .attr('href', 'tour')
+    .click(function(event) {
+      event.preventDefault();
+      newPlayMap.tourStart();
+    })
+    .wrap('<li></li>')
+    .parent()
+    .insertAfter('#header-links ul.nav li:eq(1)');
 
   // Close button functionality
   $('#tour-exit').click(function() {
@@ -554,9 +571,14 @@ newPlayMap.tourStart = function() {
 }
 
 newPlayMap.tourStop = function() {
+  $('.tour-step').removeClass('active').hide();
+  $('.tour-step:first').addClass('active').show();
   $('#tour').hide();
   $('.tour-arrows').remove();
   $('#tour-overlay').hide();
+  $('#tour-controls .tour-counter .tour-counter-current').text(1);
+  $('#tour-controls .tour-previous').addClass('inactive');
+  $('#tour-controls .tour-next').removeClass('inactive');
 }
 
 newPlayMap.setTourControlsStatus = function() {
