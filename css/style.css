@@ -827,16 +827,16 @@ ul.ui-autocomplete {
 
         #header-buttons a#invite_button span {
           background-image: url(../images/header-invite-icon-all.png);
+          background-position: 0 3px;
         }
         
           #header-buttons a#invite_button:hover span {
-            background-position: 0 -50px;
+            background-position: 0 -47px;
           }
           
           #header-buttons a#invite_button:active span {
-            background-position: 0 -100px;
+            background-position: 0 -97px;
           }
-
 
         #header-buttons a#explore-filters-button span {
           padding-left: 26px;
@@ -851,6 +851,7 @@ ul.ui-autocomplete {
           #header-buttons a#explore-filters-button:active span {
             background-position: 0 -99px;
           }
+
 
   #header-register a {
     color: #FFFFFF;
