@@ -99,11 +99,21 @@ newPlayMap.filters.organizations = function(data) {
 
 // Load a Play Journey
 newPlayMap.filters.playJourney = function(data) {
+  var pathQuery = "";
+
   newPlayMap.layout.clearEntirePanel();
+  
+  if (data.play_title !== undefined) {
+    pathQuery = "play_title=" +  data.play_title;
+  }
+
+  if (data.path !== undefined) {
+    pathQuery = "path=" +  data.path;
+  }
 
   // Load related organizations
   newPlayMap.filters.organizations({related_play_path: data.path});
-
+  
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
@@ -118,8 +128,8 @@ newPlayMap.filters.playJourney = function(data) {
     template: "play-template",
     type: "play",
     dataName: "play",
-    path: "api/journey.php?play_title=" +  data.play_title,
-    dataPath: "api/journey.php?play_title=" +  data.play_title,
+    path: "api/journey.php?" +  pathQuery,
+    dataPath: "api/journey.php?" +  pathQuery,
     icon: "icons/play.png",
     grouping_field: "related_play_id",
     callback: newPlayMap.loadJourney
@@ -441,8 +451,17 @@ newPlayMap.filters.reset = function(exception) {
  */
 newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
   // Add this call to the loading stack
-  var dataName = newPlayMap.filters.getDataNameFromURL(settings.url);
-  newPlayMap.loadingStack.push(dataName);
+  var dataName = '';
+  
+  var urlComponents = settings.url.split('?');
+  if ($.isArray(urlComponents)) {
+    dataName = newPlayMap.filters.getDataNameFromURL(settings.url);
+    newPlayMap.loadingStack.push(dataName);
+  }
+  else if (settings.dataName) {
+    dataName = settings.dataName;
+    newPlayMap.loadingStack.push(dataName);
+  }
 
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
@@ -458,17 +477,22 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
  * Function to give users feedback that filter results are done loading
  */
 newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
+  // @TODO: Remove this when the play vs. playJourney is cleared up. 
+  // -- This is necessary for the loading stack to clear properly.
+  if (dataName == 'play') {
+    var dataName = 'journey';
+  }
+
   // Remove this call from the loading stack
   if (newPlayMap.loadingStack.indexOf(dataName) < 0) {
     return;
   }
   else {
     newPlayMap.loadingStack.splice(newPlayMap.loadingStack.indexOf(dataName),1);
-    
   }
 
   // When everything is done loading:
-  if (newPlayMap.loadingStack.length >= 0) {
+  if (newPlayMap.loadingStack.length <= 0) {
     // Hide overlay
     $('#loading-feedback').hide()
 
@@ -514,6 +538,7 @@ newPlayMap.filters.getOrganizationsIndex = function() {
   $.ajax({
     url:  'api/organizations_index.php',
     dataType: 'json',
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.filters.setOrganizationsIndex,
     error: newPlayMap.filters.error
   });
@@ -521,12 +546,6 @@ newPlayMap.filters.getOrganizationsIndex = function() {
 
 newPlayMap.filters.setOrganizationsIndex = function(data) {
   jsonDataSearch.organizations = data;
-
-  // If we are returning org names and ids, use something like this to process and get a list of names
-  // var organizationNames = [];
-  // for (organization in jsonDataSearch.organizationsIndex) {
-  //   organizationNames.push(jsonDataSearch.organizationsIndex[organization].name);
-  // }
 
   // If we are returning just the names, then the raw data is fine
   var organizationNames = data;
@@ -543,14 +562,8 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
       }
     }
   );
-  
-  // http://stackoverflow.com/questions/3488016/using-html-in-jquery-ui-autocomplete
-  // .data("autocomplete")._renderItem = function( ul, item ) {
-  //   return $( "<li></li>" )
-  //      .data( "item.autocomplete", item )
-  //      .append( "<a>"+ item.label + "</a>" )
-  //      .appendTo( ul );
-  //   };
+
+  newPlayMap.filters.loadingCompleteFeedback('organizations_index');
   
 }
 
@@ -561,6 +574,7 @@ newPlayMap.filters.getArtistsIndex = function() {
   $.ajax({
     url:  'api/artists_index.php',
     dataType: 'json',
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.filters.setArtistsIndex,
     error: newPlayMap.filters.error
   });
@@ -592,6 +606,8 @@ newPlayMap.filters.setArtistsIndex = function(data) {
       }
     }
   );
+
+  newPlayMap.filters.loadingCompleteFeedback('artists_index');
 }
 
 /*
@@ -601,6 +617,7 @@ newPlayMap.filters.getPlaysIndex = function() {
   $.ajax({
     url:  'api/plays_index.php',
     dataType: 'json',
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.filters.setPlaysIndex,
     error: newPlayMap.filters.error
   });
@@ -625,12 +642,14 @@ newPlayMap.filters.setPlaysIndex = function(data) {
       appendTo: '#panel-container',
       select: function(event, ui) {
         $("#plays-filter").val(ui.item.label);
-        newPlayMap.filters.playJourney({play_title: ui.item.value});
+        newPlayMap.filters.playJourney({path: ui.item.path});
         newPlayMap.filters.reset(this);
         return false;
       }
     }
   );
+
+  newPlayMap.filters.loadingCompleteFeedback('plays_index');
 }
 
 
@@ -642,6 +661,7 @@ newPlayMap.filters.getArtistsCityStateIndex = function() {
     url:  'api/city_state_index.php',
     dataType: 'json',
     data: {'type': 'artists'},
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.filters.setArtistsCityStateIndex,
     error: newPlayMap.filters.error
   });
@@ -652,6 +672,7 @@ newPlayMap.filters.getOrganizationsCityStateIndex = function() {
     url:  'api/city_state_index.php',
     dataType: 'json',
     data: {'type': 'organizations'},
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.filters.setOrganizationsCityStateIndex,
     error: newPlayMap.filters.error
   });
@@ -662,6 +683,7 @@ newPlayMap.filters.getEventsCityStateIndex = function() {
     url:  'api/city_state_index.php',
     dataType: 'json',
     data: {'type': 'events'},
+    beforeSend: newPlayMap.filters.loadingFeedback,
     success: newPlayMap.filters.setEventsCityStateIndex,
     error: newPlayMap.filters.error
   });
@@ -679,6 +701,8 @@ newPlayMap.filters.setArtistsCityStateIndex = function(data) {
       }
     }
   );
+
+  newPlayMap.filters.loadingCompleteFeedback('city_state_index');
 }
 
 newPlayMap.filters.setOrganizationsCityStateIndex = function(data) {
@@ -692,6 +716,8 @@ newPlayMap.filters.setOrganizationsCityStateIndex = function(data) {
       }
     }
   );
+
+  newPlayMap.filters.loadingCompleteFeedback('city_state_index');
 }
 
 newPlayMap.filters.setEventsCityStateIndex = function(data) {
@@ -705,6 +731,8 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
       }
     }
   );
+
+  newPlayMap.filters.loadingCompleteFeedback('city_state_index');
 }
 
 newPlayMap.filters.showAll = function(type) {
