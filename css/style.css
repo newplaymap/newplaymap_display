@@ -807,47 +807,49 @@ ul.ui-autocomplete {
         #header-buttons a#invite_button span,
         #header-buttons a#explore-filters-button span {
           padding-left: 24px;
-          background-position: 0 50%;
+          background-position: 0 0;
           background-repeat: no-repeat;
         }
 
         #header-buttons a#add_button span { 
           padding-left: 20px;
-          background-image: url(../images/header-add-icon.png);
+          background-image: url(../images/header-add-icon-all.png);
+          background-position: 0 4px;
         }
   
           #header-buttons a#add_button:hover span { 
-            background-image: url(../images/header-add-icon-hover.png);
+            background-position: 0 -46px;
           }
           
           #header-buttons a#add_button:active span { 
-            background-image: url(../images/header-add-icon-active.png);
+            background-position: 0 -96px;
           }
 
         #header-buttons a#invite_button span {
-          background-image: url(../images/header-invite-icon.png);
+          background-image: url(../images/header-invite-icon-all.png);
         }
         
           #header-buttons a#invite_button:hover span {
-            background-image: url(../images/header-invite-icon-hover.png);
+            background-position: 0 -50px;
           }
           
           #header-buttons a#invite_button:active span {
-            background-image: url(../images/header-invite-icon-active.png);
+            background-position: 0 -100px;
           }
 
 
         #header-buttons a#explore-filters-button span {
           padding-left: 26px;
-          background-image: url(../images/header-explore-icon.png);
+          background-image: url(../images/header-explore-icon-all.png);
+          background-position: 0 1px;
         }
   
           #header-buttons a#explore-filters-button:hover span {
-            background-image: url(../images/header-explore-icon-hover.png);
+            background-position: 0 -49px;
           }
           
           #header-buttons a#explore-filters-button:active span {
-            background-image: url(../images/header-explore-icon-active.png);
+            background-position: 0 -99px;
           }
 
   #header-register a {
