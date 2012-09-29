@@ -11,6 +11,7 @@ var loaded = 0;
 var markers = {};
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
+newPlayMap.tour = {};
 newPlayMap.browserEvents = [];
 newPlayMap.filters = newPlayMap.filters || {};
 newPlayMap.loadingStack = newPlayMap.loadingStack || [];
@@ -608,19 +609,31 @@ newPlayMap.setTourArrows = function() {
   var step = $('.tour-step.active').attr('id').replace('tour-step', '');
   var target = '';
   var arrowImageOffset = 0;
-  var arrowDelay = 500;
+  var arrowDelay = 250;
+  var arrowFadeTime = 1000;
+  var clearTimers = function() {
+    clearTimeout(newPlayMap.tour.step1Timer);
+    clearTimeout(newPlayMap.tour.step2Timer);
+    clearTimeout(newPlayMap.tour.step3Timer);
+  };
 
   // Clear out old arrows
-  $('.tour-arrows').remove();
+  var clearArrows = function() {
+    $('.tour-arrows').remove();
+  };
+  clearArrows();
 
   if (step == null) {
     return;
   }
   else if (step == 1) {
+    clearTimers();
+
     target = $('#panel-container').offset();
     arrowImageOffset = 107;
 
-    setTimeout(function() {
+    newPlayMap.tour.step1Timer = setTimeout(function() {
+      clearArrows();
       $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
         'left': target.left - arrowImageOffset - 50,
         'top': '50%'
@@ -628,16 +641,19 @@ newPlayMap.setTourArrows = function() {
       .animate({
         opacity: 1,
         left: '+=50'
-      }, 800, function(){});
+      }, arrowFadeTime, function(){});
 
       $('#filter-container:visible').slideUp();
     }, arrowDelay);
   }
   else if (step == 2) {
     // Top explore button arrow
-    topTarget = $('#explore-filters-button').offset();
+    clearTimers();
 
-    setTimeout(function() {
+    newPlayMap.tour.step2Timer = setTimeout(function() {
+      clearArrows();
+
+      topTarget = $('#explore-filters-button').offset();
       $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
         'top': topTarget.top + 36 + 50,
         'left': topTarget.left + 30
@@ -645,13 +661,10 @@ newPlayMap.setTourArrows = function() {
       .animate({
         opacity: 1,
         top: '-=50'
-      }, 800, function(){});
+      }, arrowFadeTime, function(){});
 
       // Right filter arrow
       newPlayMap.processFilters();
-    }, arrowDelay);
-
-    setTimeout(function() {
       target = $('#filter-container').offset();
       arrowImageOffset = 107;
       $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
@@ -661,14 +674,19 @@ newPlayMap.setTourArrows = function() {
       .animate({
         opacity: 1,
         left: '+=50'
-      }, 800, function(){});
+      }, arrowFadeTime, function(){});
     }, arrowDelay);
+
+
   }
   else if (step == 3) {
+    clearTimers();
+
     target = $('#add_button').offset();
     arrowImageOffset = 107;
     
-    setTimeout(function() {
+    newPlayMap.tour.step3Timer = setTimeout(function() {
+      clearArrows();
       $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
         'top': target.top + 36 + 50,
         'left': target.left + 60
@@ -676,9 +694,9 @@ newPlayMap.setTourArrows = function() {
       .animate({
         opacity: 1,
         top: '-=50'
-      }, 800, function(){});
+      }, arrowFadeTime, function(){});
     }, arrowDelay);
-    
+
     $('#filter-container:visible').slideUp();
   }
 }

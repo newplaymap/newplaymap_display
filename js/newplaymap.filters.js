@@ -453,7 +453,9 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
   // Add this call to the loading stack
   var dataName = '';
   
-  var urlComponents = settings.url.split('?');
+  if (settings.url) {
+    var urlComponents = settings.url.split('?');
+  }
   if ($.isArray(urlComponents)) {
     dataName = newPlayMap.filters.getDataNameFromURL(settings.url);
     newPlayMap.loadingStack.push(dataName);
@@ -749,7 +751,7 @@ newPlayMap.filters.showAll = function(type) {
   var len = jsonDataSearch[type].length;
 
   // Set loading feedback
-  newPlayMap.filters.loadingFeedback();
+  newPlayMap.filters.loadingFeedback(null, {dataName: 'all_' + type});
 
   // Set results title and clear results header text (a.k.a. What's on today)
   $('#results-header').text('');
@@ -767,7 +769,7 @@ newPlayMap.filters.showAll = function(type) {
   }
   
   // Remove loading feedback
-  newPlayMap.filters.loadingCompleteFeedback();
+  newPlayMap.filters.loadingCompleteFeedback('all_' + type);
 
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
