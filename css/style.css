@@ -1039,7 +1039,7 @@ ul.ui-autocomplete {
   background-repeat: no-repeat;
   z-index: 3001;
   position: absolute;
-  opacity: 0.25;
+  opacity: 0;
 }
 
 .tour-arrows.right {
