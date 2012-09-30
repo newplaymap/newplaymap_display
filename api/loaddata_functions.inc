@@ -145,6 +145,63 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
         }
       }
     }
+    
+    // Add Related Organization info to Orgs (in order to build the orgs per org list)
+    $organization_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(
+      array('$or' => array(
+        array("properties.related_theater_path" => $organization_path),
+        array("properties.partner_organizations.path" => $organization_path),
+      ))
+    )->sort(array("properties.related_theater" => 1));
+    
+    $organizations_by_organization = array();
+    $unique_organizations_by_organization = array();
+    foreach ($events_cursor as $obj) {
+      // Add all the main related theaters to the lsit
+      if(!empty($obj['id']) && !empty($obj['properties']['related_theater_path'])) {
+        if (
+          !in_array($obj['properties']['related_theater_path'], $unique_organizations_by_organization)
+          // && $organization_path != $obj['properties']['related_theater_path']
+        ) {
+    
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_organization[] = $obj['properties']['related_theater_path'];
+          $organizations_by_organization[] = array(
+            "name" => $obj['properties']['related_theater'],
+            "path" => $obj['properties']['related_theater_path'],
+            "has_location" => $obj['properties']['related_theater_has_location'],
+          );
+        }
+
+        if (!empty($obj['properties']['partner_organizations'][0]['path'])) {
+          foreach ($obj['properties']['partner_organizations'] as $partner_organization) {
+            if (
+              !in_array($partner_organization['path'], $unique_organizations_by_organization)
+              // && $organization_path != $partner_organization['path']
+            ) {
+    
+              // Add it to an array to check if things are unique
+              $unique_organizations_by_organization[] = $partner_organization['path'];
+              $organizations_by_organization[] = array(
+                "name" => $partner_organization['name'],
+                "path" => $partner_organization['path'],
+                "has_location" => $partner_organization['has_location'],
+              );
+            }
+          }
+        }
+      }
+    }
+    
+    // Order the related organizations by name (http://www.php.net/manual/en/function.array-multisort.php)
+    // Obtain a list of columns
+    foreach ($organizations_by_organization as $key => $row) {
+        $name[$key]  = $row['name'];
+    }
+    // Sort the organizations with name ascending
+    // Add $organizations_by_organization as the last parameter, to sort by the common key
+    array_multisort($name, SORT_ASC, $organizations_by_organization);
 
     $newObj = array(
       "id" => $node["Org ID"],
@@ -169,6 +226,7 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
           "national_networks" => $national_networks_list,
           "related_plays" => $plays_by_organization,
           "related_artists" => $artists_by_organization,
+          "related_organizations" => $organizations_by_organization,
           "city" => $node["City"],
           "state" => $node["State"],
           "city_state" => html_entity_decode($city_state, ENT_QUOTES),
