@@ -700,4 +700,3 @@ newPlayMap.setTourArrows = function() {
     $('#filter-container:visible').slideUp();
   }
 }
-
