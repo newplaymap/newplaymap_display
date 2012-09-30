@@ -588,6 +588,7 @@ ul.ui-autocomplete {
     background-repeat: no-repeat;
     background-position: 13px 10px;
     cursor: default;
+    padding-left: 40px;
   }
 
     #panel-container .results-container ol#events-results div.results-item-content,

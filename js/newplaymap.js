@@ -610,7 +610,7 @@ newPlayMap.setTourArrows = function() {
   var target = '';
   var arrowImageOffset = 0;
   var arrowDelay = 250;
-  var arrowFadeTime = 1000;
+  var arrowFadeTime = 800;
   var clearTimers = function() {
     clearTimeout(newPlayMap.tour.step1Timer);
     clearTimeout(newPlayMap.tour.step2Timer);
