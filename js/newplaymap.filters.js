@@ -738,6 +738,9 @@ newPlayMap.filters.setEventsCityStateIndex = function(data) {
 }
 
 newPlayMap.filters.showAll = function(type) {
+  // Set loading feedback
+  newPlayMap.filters.loadingFeedback(null, {dataName: 'all_' + type});
+
   var pluralType = type;
   var singularType = pluralType.substring(0, pluralType.length-1);
   var displayType = newPlayMap.toTitleCase(pluralType.substring(0, pluralType.length-1));
@@ -750,20 +753,17 @@ newPlayMap.filters.showAll = function(type) {
 
   var len = jsonDataSearch[type].length;
 
-  // Set loading feedback
-  newPlayMap.filters.loadingFeedback(null, {dataName: 'all_' + type});
-
   // Set results title and clear results header text (a.k.a. What's on today)
   $('#results-header').text('');
   newPlayMap.setResultsTitle(displayType, len);
 
   for (var i = 0; i < len; i++) {
-
+  
     var item = {
       title: jsonDataSearch[type][i]['label'],
       path: jsonDataSearch[type][i]['path']
     };
-
+  
     $('#' + template).tmpl(item)
       .appendTo(container);
   }
