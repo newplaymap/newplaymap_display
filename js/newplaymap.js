@@ -572,6 +572,7 @@ newPlayMap.tourInteraction = function() {
 newPlayMap.tourStart = function() {
   $('#tour').show();
   $('#tour-overlay').show();
+  $('.tour-step.first').addClass('active').show();
   // Add the arrows for the first slide
   newPlayMap.setTourArrows();
   // $.cookie('newplaymap_tour', true);
@@ -579,7 +580,6 @@ newPlayMap.tourStart = function() {
 
 newPlayMap.tourStop = function() {
   $('.tour-step').removeClass('active').hide();
-  $('.tour-step:first').addClass('active').show();
   $('#tour').hide();
   $('.tour-arrows').remove();
   $('#tour-overlay').hide();
