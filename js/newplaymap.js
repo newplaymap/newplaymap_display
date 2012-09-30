@@ -541,9 +541,6 @@ newPlayMap.tourInteraction = function() {
     newPlayMap.tourStop();
   });
 
-  // Add the arrows for the first slide
-  newPlayMap.setTourArrows();
-
   $('#tour-controls .tour-next').click(function() {
     if ($(this).hasClass('inactive') == false) {
       // If this isn't the last step...
