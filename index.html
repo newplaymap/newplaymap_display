@@ -416,11 +416,7 @@
                         {{/if}}
                         
                         {{if properties.related_theater}}
-                          {{if properties.related_theater_has_location == true}}
-                            <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
-                          {{else}}
-                            <div>${properties.related_theater}</div>
-                          {{/if}}
+                          <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
                         {{/if}}
 
                         {{if properties.partner_organizations}}
@@ -428,11 +424,7 @@
                             In partner with
                             <ul class="partner-organizations-list">
                             {{each properties.partner_organizations}}
-                              {{if $value.has_location == true}}
-                                <li><a href="${$value.path}" type="organization">${$value.name}</a></li>
-                              {{else}}
-                              <li>${$value.name}</li>
-                              {{/if}}
+                              <li><a href="${$value.path}" type="organization">${$value.name}</a></li>
                             {{/each}}
                             </ul>
                           </div>
