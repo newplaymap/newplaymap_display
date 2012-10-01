@@ -196,12 +196,13 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
     
     // Order the related organizations by name (http://www.php.net/manual/en/function.array-multisort.php)
     // Obtain a list of columns
+    $organizations_by_organization_name = array();
     foreach ($organizations_by_organization as $key => $row) {
-        $name[$key]  = $row['name'];
+        $organizations_by_organization_name[$key]  = $row['name'];
     }
     // Sort the organizations with name ascending
     // Add $organizations_by_organization as the last parameter, to sort by the common key
-    array_multisort($name, SORT_ASC, $organizations_by_organization);
+    array_multisort($organizations_by_organization_name, SORT_ASC, $organizations_by_organization);
 
     $newObj = array(
       "id" => $node["Org ID"],

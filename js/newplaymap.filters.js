@@ -15,9 +15,12 @@ newPlayMap.filters.organizations = function(data) {
   var pathQuery = "";
   var loadProfile = false;
 
-  // Clear panel, results, and pins
-  newPlayMap.layout.clearEntirePanel();
-  newPlayMap.data.clearAllLayers();
+  if (data.path == undefined) {
+    // Clear panel, results, and pins
+    // -- Only run this when loading a path because the related orgs load multiple times into Orgs results
+    newPlayMap.layout.clearEntirePanel();
+    newPlayMap.data.clearAllLayers();
+  }
 
   if (data.organization_name !== undefined) {
     pathQuery = "organization_name=" +  data.organization_name;
@@ -40,6 +43,33 @@ newPlayMap.filters.organizations = function(data) {
     pathQuery = "city_state=" + data.special_interests;
   }
   
+  if (data.path !== undefined) {
+    var loadProfile = true;
+  }
+
+  // Main organization filter api call
+  newPlayMap.loadAPICall({
+    data: data,
+    zoomLevel: newPlayMap.defaultZoom,
+    clearLayer: false,
+    clearLayers: false,
+    loadProfile: loadProfile,
+    template: "organization",
+    layer: "layer-organization-filter",
+    class: "inactive",
+    template: "organization-template",
+    type: "organization",
+    label: "org_type",
+    id: "organization_id",
+    title: "organization_name_display",
+    dataName: "organizations_filter",
+    path: 'api/organizations_filter.php?' + pathQuery,
+    dataPath: "api/organizations_filter.php?" + pathQuery,
+    icon: "icons/organization.png",
+    callback: newPlayMap.loadOrganizationFilter
+  });
+  
+  // Run this after main filter call
   if (data.path !== undefined) {
     var loadProfile = true;
 
@@ -68,33 +98,34 @@ newPlayMap.filters.organizations = function(data) {
       callback: newPlayMap.loadEventFilter
     });
 
+    // Related Organizations by Organization
+    // Clear organization pins to remove duplicated from main org
+    // newPlayMap.data.clearLayer('organizations_filter');
+
+    newPlayMap.loadAPICall({
+      data: data,
+      zoomLevel: newPlayMap.defaultZoom,
+      clearLayer: false,
+      clearLayers: false,
+      loadProfile: false,
+      template: "organization",
+      layer: "layer-organization-filter",
+      class: "inactive",
+      template: "organization-template",
+      type: "organization",
+      label: "org_type",
+      id: "organization_id",
+      title: "organization_name_display",
+      dataName: "organizations_filter",
+      path: 'api/organizations_filter.php?' + 'related_organization_path=' + data.path,
+      dataPath: "api/organizations_filter.php?" + 'related_organization_path=' + data.path,
+      icon: "icons/organization.png",
+      callback: newPlayMap.loadOrganizationFilter
+    });
+
     // Load Related Artists for this Organization
     newPlayMap.filters.artists({related_organization_path: data.path});
   }
-
-  newPlayMap.loadAPICall({
-    data: data,
-    zoomLevel: newPlayMap.defaultZoom,
-    clearLayer: false,
-    clearLayers: false,
-    loadProfile: loadProfile,
-    template: "organization",
-    layer: "layer-organization-filter",
-    class: "inactive",
-    template: "organization-template",
-    type: "organization",
-    label: "org_type",
-    id: "organization_id",
-    title: "organization_name_display",
-    dataName: "organizations_filter",
-    path: 'api/organizations_filter.php?' + pathQuery,
-    dataPath: "api/organizations_filter.php?" + pathQuery,
-    icon: "icons/organization.png",
-    callback: newPlayMap.loadOrganizationFilter
-  });
-  
-  // @TODO: Trigger address change if appropriate (searching for org name)
-  //        This is also the time to load the profile
 }
 
 // Load a Play Journey

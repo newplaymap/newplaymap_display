@@ -11,6 +11,7 @@ $national_networks = (!empty($_GET['national_networks'])) ? $_GET['national_netw
 $special_interests = (!empty($_GET['special_interests'])) ? $_GET['special_interests'] : null;
 $related_play_path = (!empty($_GET['related_play_path'])) ? $_GET['related_play_path'] : null;
 $related_artist_path = (!empty($_GET['related_artist_path'])) ? $_GET['related_artist_path'] : null;
+$related_organization_path = (!empty($_GET['related_organization_path'])) ? $_GET['related_organization_path'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
@@ -24,6 +25,10 @@ else if($related_play_path !== null) {
 
 else if($related_artist_path !== null) {
   $cursor = $collection->find(array("properties.related_artists.path" => $related_artist_path))->limit($limit)->sort(array("properties.name" => 1));
+}
+
+else if($related_organization_path !== null) {
+  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->limit($limit)->sort(array("properties.name" => 1));
 }
 
 else if($path !== null) {
