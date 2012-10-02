@@ -140,78 +140,80 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
   // for each feature in the collection, create a marker and add it
   // to the markers layer
+  // Only if it has a location
+  // @TODO: Refactor with newPlayMap.data.onLoadDataNoLocation if this function can handle features without locations
   for (var i = 0; i < len; i++) {
       var feature = features[i],
           id = feature.properties[vars.id],
           marker = document.createElement("a");
+      if(typeof feature.geometry != 'undefined') {
+        marker.feature = feature;
+        var latlon = feature.properties.latitude + "," + feature.properties.longitude;
 
-      marker.feature = feature;
-      var latlon = feature.properties.latitude + "," + feature.properties.longitude;
+        markers.addMarker(marker, feature);
 
-      markers.addMarker(marker, feature);
-      
-      if(vars.related_play_id !== undefined) {
-        marker.setAttribute("related_play_id", feature.properties[vars.related_play_id]);        
+        if(vars.related_play_id !== undefined) {
+          marker.setAttribute("related_play_id", feature.properties[vars.related_play_id]);        
+        }
+
+        // Unique hash marker id for link
+        marker.setAttribute("id", "marker-" + vars.type + "-" + id);
+        marker.setAttribute("dataName", vars.dataName);
+        marker.setAttribute("class", "marker");
+        marker.setAttribute("href", feature.properties.path);
+        marker.setAttribute("type", vars.type);
+        marker.setAttribute("latlon", latlon);
+
+        marker.setAttribute("parent", vars.layer);
+        // Specially set value for loading data.
+        marker.setAttribute("marker_id", id);
+
+        // @TODO add popup tooltip here
+        // give it a title
+        marker.setAttribute("title", [
+          feature.properties[vars.title]
+        ]);
+
+        // create an image icon
+        var img = marker.appendChild(document.createElement("img"));
+        img.setAttribute("src", vars.icon);
+
+        // Determine placement of highlighting by geocoordinates.
+
+          marker.setAttribute("grouping_field", vars.grouping_field);
+          marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
+
+          // Push to array of items on same latlon.
+          if (latlon in featuresByLocation) {
+            featuresByLocation[latlon].push(feature);
+          } else {
+            featuresByLocation[latlon] = [feature];
+          }
+
+          // Make sure marker has a location before adding it
+          if (marker.location.lat != 0 && marker.location.lon != 0) {
+             if (feature.properties[vars.grouping_field] in locationsByID) {
+                locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
+              } else {
+                locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
+              }
+
+              // Add all of the locations to the array. making them unique for all layers
+              if (feature.properties[vars.id] in locationsByID) {
+                locationsByID[feature.properties[vars.id]].push(marker.location);
+              } else {
+                locationsByID[feature.properties[vars.id]] = [marker.location];
+              }
+          }
+
+        // add the marker's location to the extent list
+        locations.push(marker.location);
+
+        // Listen for mouseover & mouseout events.
+        MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
+        MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
+        MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
       }
-
-      // Unique hash marker id for link
-      marker.setAttribute("id", "marker-" + vars.type + "-" + id);
-      marker.setAttribute("dataName", vars.dataName);
-      marker.setAttribute("class", "marker");
-      marker.setAttribute("href", feature.properties.path);
-      marker.setAttribute("type", vars.type);
-      marker.setAttribute("latlon", latlon);
-
-      marker.setAttribute("parent", vars.layer);
-      // Specially set value for loading data.
-      marker.setAttribute("marker_id", id);
-
-      // @TODO add popup tooltip here
-      // give it a title
-      marker.setAttribute("title", [
-        feature.properties[vars.title]
-      ]);
-
-      // create an image icon
-      var img = marker.appendChild(document.createElement("img"));
-      img.setAttribute("src", vars.icon);
-
-      // Determine placement of highlighting by geocoordinates.
-
-        marker.setAttribute("grouping_field", vars.grouping_field);
-        marker.setAttribute("grouping_value", feature.properties[vars.grouping_field]);
-
-        // Push to array of items on same latlon.
-        if (latlon in featuresByLocation) {
-          featuresByLocation[latlon].push(feature);
-        } else {
-          featuresByLocation[latlon] = [feature];
-        }
-
-        // Make sure marker has a location before adding it
-        if (marker.location.lat != 0 && marker.location.lon != 0) {
-           if (feature.properties[vars.grouping_field] in locationsByID) {
-              locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
-            } else {
-              locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
-            }
-
-            // Add all of the locations to the array. making them unique for all layers
-            if (feature.properties[vars.id] in locationsByID) {
-              locationsByID[feature.properties[vars.id]].push(marker.location);
-            } else {
-              locationsByID[feature.properties[vars.id]] = [marker.location];
-            }
-        }
-
-      // add the marker's location to the extent list
-      locations.push(marker.location);
-
-      // Listen for mouseover & mouseout events.
-      MM.addEvent(marker, "mouseover", newPlayMap.onMarkerOver);
-      MM.addEvent(marker, "mouseout", newPlayMap.onMarkerOut);
-      MM.addEvent(marker, "click", newPlayMap.onMarkerClick);
-      
   }
 
   // Load result data for this set of features.

@@ -16,7 +16,7 @@ if(!empty($_GET['path'])) {
   $path = $_GET['path'];
   $expression = new MongoRegex('/'. $path . '/i');
   $event_cursor = $events->findOne(array('properties.path' => $expression));
-  $play_cursor = $plays->findOne(array('id' => $event_cursor["properties"]["related_play_id"]));
+  $play_cursor = $plays->findOne(array('properties.path' => $_GET['path']));
 }
 if(!empty($play_cursor['id'])) {
   $query = array('properties.related_play_id' => (string) $play_cursor['id']);
@@ -34,13 +34,18 @@ header("Content-type: application/json");
 $json = "";
 $json .= '{"name": "play", "id": ' . $play_cursor['id'] . ', "type":"FeatureCollection", "features":[ ' ;
 
+// Add the play as a feature to allow plays without events
+if(!empty($play_cursor['id'])) {
+  $json .= json_encode($play_cursor);
+}
+
 $i = 0;
 
 // iterate through the results
 foreach ($events_cursor as $obj) {
 
   if(!empty($obj['id'])) {
-    if($i > 0) {
+    if($i > 0 || !empty($play_cursor['id'])) {
      $json .= ',';
     }
     // Add play metadata to event.
