@@ -188,17 +188,20 @@ newPlayMap.onLoadDataMarkers = function(vars) {
           featuresByLocation[latlon] = [feature];
         }
 
-        if (feature.properties[vars.grouping_field] in locationsByID) {
-          locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
-        } else {
-          locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
-        }
+        // Make sure marker has a location before adding it
+        if (marker.location.lat != 0 && marker.location.lon != 0) {
+           if (feature.properties[vars.grouping_field] in locationsByID) {
+              locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
+            } else {
+              locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
+            }
 
-        // Add all of the locations to the array. making them unique for all layers
-        if (feature.properties[vars.id] in locationsByID) {
-          locationsByID[feature.properties[vars.id]].push(marker.location);
-        } else {
-          locationsByID[feature.properties[vars.id]] = [marker.location];
+            // Add all of the locations to the array. making them unique for all layers
+            if (feature.properties[vars.id] in locationsByID) {
+              locationsByID[feature.properties[vars.id]].push(marker.location);
+            } else {
+              locationsByID[feature.properties[vars.id]] = [marker.location];
+            }
         }
 
       // add the marker's location to the extent list
