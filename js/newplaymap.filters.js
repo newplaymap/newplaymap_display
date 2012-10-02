@@ -338,12 +338,6 @@ newPlayMap.filters.cityStateEvents = function(data) {
  * Trigger api calls on the form elements
  */
 newPlayMap.filters.setupFilters = function() {
-  // $('#plays-filter').change(function() {
-  //   newPlayMap.filters.playJourney({play_title: $(this).attr('value')});
-  //   newPlayMap.filters.reset(this);
-  //   return false;
-  // });
-
   $('#event-type-filter').change(function() {
     newPlayMap.filters.events({event_type: $(this).attr('value')});
     newPlayMap.filters.reset(this);
@@ -377,24 +371,6 @@ newPlayMap.filters.setupFilters = function() {
           newPlayMap.filters.events({start_date: formattedMinDate, end_date: formattedMaxDate });
         }
       });
-  
-
-  // $('.event-date-field').focus(function() {
-  //   $('#filters .event-date-filter-complete').fadeIn('slow');
-  //   newPlayMap.filters.reset('.event-date-field');
-  // });
-  // 
-  // $('#filters .event-date-filter-complete').hide().click(function(event) {
-  //   event.preventDefault();
-  // 
-  //   newPlayMap.filters.events({start_date: $('#event-date-filter').val(), end_date: $('#event-to-date-filter').val() });
-  //   return false;
-  // });
-
-  // $('#organizations-filter').change(function() {
-  //   newPlayMap.filters.organizations({organization_name: $(this).attr('value')});
-  //   newPlayMap.filters.reset(this);
-  // });
 
   $('#organization-type-filter').change(function() {
     newPlayMap.filters.organizations({organization_type: $(this).attr('value')});
@@ -411,17 +387,11 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.reset(this);
   });
 
-  // $('#artists-filter').change(function() {
-  //   newPlayMap.filters.artists({artist_name: $(this).attr('value')});
-  //   newPlayMap.filters.reset(this);
-  // });
-
   $('#ensemble-collective-filter').change(function() {
     newPlayMap.filters.ensemble({ensemble_collective: 'Ensemble / Collective'});
     newPlayMap.filters.reset(this);
   });
 
-  // @TODO: Don't load the index on page load, do it when the filters are shown
   newPlayMap.filters.getOrganizationsIndex();
   newPlayMap.filters.getArtistsIndex();
   newPlayMap.filters.getPlaysIndex();
