@@ -143,41 +143,31 @@ newPlayMap.loadMapData = function() {
 };
 
 newPlayMap.initializeFilters = function() {
+  newPlayMap.processFilters();
+
   $('#explore-filters-button').click(function() {
-    newPlayMap.processFilters();
+    $('#filter-container').slideToggle();
   });
 }
 
 newPlayMap.processFilters = function() {
-    if ($('#explore-filters-button').hasClass('processed')) {
-      $('#filter-container').slideToggle();
-    }
-    else {
-      // newPlayMap.filters.loadingFeedback();
+  newPlayMap.filters.setupFilters();
 
-      newPlayMap.filters.setupFilters();
+  $('#filters form').tabs();
 
-      $('#filters form').tabs();
+  $('#explore-plays .show-all-link').click(function() {
+    newPlayMap.filters.showAll('plays');
+  });  
 
-      $('#explore-plays .show-all-link').click(function() {
-        newPlayMap.filters.showAll('plays');
-      });  
+  $('#explore-organizations .show-all-link').click(function() {
+    newPlayMap.filters.showAll('organizations');
+  });  
 
-      $('#explore-organizations .show-all-link').click(function() {
-        newPlayMap.filters.showAll('organizations');
-      });  
+  $('#explore-artists .show-all-link').click(function() {
+    newPlayMap.filters.showAll('artists');
+  });
 
-      $('#explore-artists .show-all-link').click(function() {
-        newPlayMap.filters.showAll('artists');
-      });
-
-      $('#filter-container').slideToggle();
-      $('#explore-filters-button').addClass('processed');
-    }
-
-  // @TODO: If we are loading pins initially, then comment this out. 
-  //        The load function will take care of removing feedback.
-  // $('#loading-feedback').hide();
+  $('#explore-filters-button').addClass('processed');
 };
 
 newPlayMap.loadData = function() {
