@@ -374,8 +374,10 @@ newPlayMap.resultsListProcess = function(container) {
 
       var eventId = $(this).attr('listing_id');
 
-      spotlight.addLocations(locationsByID[eventId]);
-      spotlight.parent.className = "active";
+      if (typeof locationsByID[eventId] != 'undefined') {
+        spotlight.addLocations(locationsByID[eventId]);
+        spotlight.parent.className = "active";
+      }
       $('div#panel-container div#panel .content').show();
     },
     out: function() {
