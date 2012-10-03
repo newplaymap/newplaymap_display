@@ -844,7 +844,7 @@ ul.ui-autocomplete {
 
         #header-buttons a#add_button span { 
           padding-left: 20px;
-          background-image: url(../images/header-add-icon-all.png);
+          background-image: url(../images/header-icon-add.png);
           background-position: 0 4px;
         }
   
@@ -857,7 +857,7 @@ ul.ui-autocomplete {
           }
 
         #header-buttons a#invite_button span {
-          background-image: url(../images/header-invite-icon-all.png);
+          background-image: url(../images/header-icon-invite.png);
           background-position: 0 3px;
         }
         
@@ -871,7 +871,7 @@ ul.ui-autocomplete {
 
         #header-buttons a#explore-filters-button span {
           padding-left: 26px;
-          background-image: url(../images/header-explore-icon-all.png);
+          background-image: url(../images/header-icon-explore.png);
           background-position: 0 1px;
         }
   
