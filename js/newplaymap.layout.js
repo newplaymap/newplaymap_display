@@ -272,6 +272,9 @@ newPlayMap.loadResults = function(features, vars) {
 newPlayMap.layout.clearPanelContent = function() {
   var containerEmpty = $('#panel-container .content');
   containerEmpty.empty();
+
+  // Also clear out all share qtips
+  $('.qtip').has('.share-link').remove();
 }
  
 /*
