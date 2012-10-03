@@ -295,7 +295,7 @@
                           </ul>
                       </div> 
                     </li>
-                    <li id="panel-edit-link"><a href="participate/node/${artist_id}/edit" title="Edit Artist Bio and Photo">Edit Artist Details</a></li>
+                    <li id="panel-edit-link"><a href="participate/node/${artist_id}/edit" title="Edit Artist Bio & Photo">Edit Artist Details</a></li>
                   </ul>
                   
                   <article class="panel-content-info artist-info">
@@ -319,7 +319,7 @@
                   </div>
                   
                   <ul id="panel-content-links">
-                    <li id="panel-add-link-event" class="panel-add-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
+                    <li id="panel-add-link-event" class="panel-add-link"><a href="participate/node/add/event/${organization_id}" title="Add an Event to this Organization's Event List">Add Event</a></li>
                     <li id="panel-share-link">
                       <div id="share-links">
                         <h3>Share</h3>
@@ -335,7 +335,7 @@
                           </ul>
                       </div> 
                     </li>
-                    <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit" title="Edit organization information">Edit Organization Details</a></li>
+                    <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit" title="Edit Organization Name, Logo, Location, Type, Website, etc.">Edit Org Details</a></li>
                   </ul>
                   
                   <article class="panel-content-info organization-info">
@@ -439,7 +439,7 @@
                       </div>
                       
                       <div class="results-edit-link">
-                        <a href="participate/node/${id}/edit" title="{{if properties.content_type == 'Event'}}Edit Event Type, Date, Location, Lead & Partner Organizations{{else properties.content_type == 'Generative Artist'}}Edit Generative Artist Stuff{{else properties.content_type == 'Organization'}}Edit Organization Stuff{{/if}}">${properties.content_type}
+                        <a href="participate/node/${id}/edit" title="{{if properties.content_type == 'Event'}}Edit Event Type, Date, Location, Lead & Partner Organizations{{else properties.content_type == 'Generative Artist'}}Edit Generative Artist Bio & Photo{{else properties.content_type == 'Organization'}}Edit Organization Name, Logo, Location, Type, Website, etc.{{/if}}">${properties.content_type}
                           {{if properties.content_type}}
                             Edit ${properties.content_type}
                           {{else}}
