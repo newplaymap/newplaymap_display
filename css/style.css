@@ -259,11 +259,11 @@ ul#panel-content-links {
   }
   
   ul#panel-content-links li.panel-add-link a {
-    background-image: url(../images/button-add.png);
+    background-image: url(../images/action-add.png);
   }
   
   ul#panel-content-links li#panel-share-link a {
-    background-image: url(../images/button-share.png);
+    background-image: url(../images/action-share.png);
     background-position: 14% 45%;
     padding-left: 28px;
   }
