@@ -26,6 +26,10 @@ a:hover {
   color: #830B1B;
 }
 
+a:active {
+  color: #000000;
+}
+
 /* Override Bootstrap Defaults */
 body,
 p,
@@ -188,6 +192,10 @@ footer {
   line-height: 1.2em;
 }
 
+#panel-container #panel .content h3 {
+  font-weight: normal;
+}
+
 #filter-container {
   display: none;
   margin-bottom: -55px;
@@ -227,9 +235,11 @@ div#panel-container div#panel {
 
 ul#panel-content-links {
   list-style: none outside none;
-  margin: 0;
-  padding-top: 22px;
+  margin: 10px -15px 10px -15px;
+  padding: 10px 15px;
   clear: both;
+  overflow: hidden;
+  background: #F1EDE6;
 }
 
   ul#panel-content-links li {
@@ -287,6 +297,23 @@ ul#panel-content-links {
       margin-left: 2px;
       margin-right: 8px;
     }
+    
+    ul#panel-content-links li#panel-edit-link {
+      float: right;
+    }
+    
+      ul#panel-content-links li#panel-edit-link a {
+        padding-left: 18px;
+        background: url(../images/action-edit.png) 0 1px no-repeat;
+      }
+    
+      ul#panel-content-links li#panel-edit-link a:hover {
+        background-position: 0 -49px;
+      }
+      
+      ul#panel-content-links li#panel-edit-link a:active {
+        background-position: 0 -99px;
+      }
     
 ul#share-links-list {
   list-style: none;
