@@ -487,7 +487,7 @@ newPlayMap.embedInteraction = function() {
 }
 
 newPlayMap.shareInteraction = function() {
-  var target = $('.qtip-content #share-link');
+  var target = $('.qtip-content .share-link');
   if (target.hasClass('processed')) {
     return;
   }
