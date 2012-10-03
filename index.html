@@ -226,7 +226,7 @@
                     <!-- @TODO: Remove all the dummy empty text -->
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
-                      <h3>by <a href="${generative_artist_path}">${generative_artist}</a></h3>
+                      <h3>by <a href="#${generative_artist_path}">${generative_artist}</a></h3>
                     {{/if}}
 
                   
@@ -397,10 +397,10 @@
                         {{if properties.event_type}}
                           <div class="event-type">${properties.event_type}</div>
                         {{/if}}
-                        <a class="results-item-title" href="${path}">${title}</a>
+                        <a class="results-item-title" href="#${path}">${title}</a>
                         
                         {{if properties.content_type == 'Event'}}
-                          <div class="artist-name">by <a href="${properties.generative_artist_path}">${properties.generative_artist}</a></div>
+                          <div class="artist-name">by <a href="#${properties.generative_artist_path}">${properties.generative_artist}</a></div>
                         {{/if}}
                       
                         {{if properties.organization_type_display}}
@@ -408,7 +408,7 @@
                         {{/if}}
                         
                         {{if properties.related_theater}}
-                          <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
+                          <a href="#${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
                         {{/if}}
 
                         {{if properties.partner_organizations}}
@@ -416,7 +416,7 @@
                             In partner with
                             <ul class="partner-organizations-list">
                             {{each properties.partner_organizations}}
-                              <li><a href="${$value.path}" type="organization">${$value.name}</a></li>
+                              <li><a href="#${$value.path}" type="organization">${$value.name}</a></li>
                             {{/each}}
                             </ul>
                           </div>
@@ -444,7 +444,7 @@
                 
                 <script id="show-all-template" type="text/x-jquery-tmpl">
                   <li>
-                    <a href="${path}" class="show-all-item">${title}</a>
+                    <a href="#${path}" class="show-all-item">${title}</a>
                   </li>
                 </script>
 
@@ -453,7 +453,7 @@
                </div> 
 
                 <script id="extras-template" type="text/x-jquery-tmpl">
-                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
+                    <li listing_id="${id}"><a href="#${path}">${title}</a></li>
                 </script>
                 
               </div> <!-- End Panel -->
