@@ -236,7 +236,7 @@ div#panel-container div#panel {
 ul#panel-content-links {
   list-style: none outside none;
   margin: 10px -15px 10px -15px;
-  padding: 10px 15px;
+  padding: 10px 10px 10px 15px;
   clear: both;
   overflow: hidden;
   background: #F1EDE6;
@@ -300,6 +300,7 @@ ul#panel-content-links {
     
     ul#panel-content-links li#panel-edit-link {
       float: right;
+      margin-right: 0;
     }
     
       ul#panel-content-links li#panel-edit-link a {
