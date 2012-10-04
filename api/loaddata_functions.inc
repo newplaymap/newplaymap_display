@@ -108,20 +108,43 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
     
     // Add Related Play info to Orgs (in order to build the orgs per play list)
     $organization_path = '/' . str_replace($base_path, "", $node["Path"]);
-    $events_cursor = $events_collection->find(array("properties.related_theater_path" => $organization_path))->sort(array("properties.play_title" => 1));
+    $events_cursor = $events_collection->find(
+      array('$or' => array(
+        array("properties.related_theater_path" => $organization_path),
+        array("properties.partner_organizations.path" => $organization_path),
+      ))
+    )->sort(array("properties.related_theater" => 1));
 
     $plays_by_organization = array();
     $unique_plays_by_organization = array();
     foreach ($events_cursor as $obj) {
       if(!empty($obj['id']) && !empty($obj['properties']['play_title'])) {
-        if (!in_array($obj['properties']['play_title'], $unique_plays_by_organization)) {
+        if (!in_array($obj['properties']['related_play_path'], $unique_plays_by_organization)) {
 
           // Add it to an array to check if things are unique
-          $unique_plays_by_organization[] = $obj['properties']['play_title'];
+          $unique_plays_by_organization[] = $obj['properties']['related_play_path'];
           $plays_by_organization[] = array(
             "name" => $obj['properties']['play_title_display'],
             "path" => $obj['properties']['related_play_path'],
           );
+        }
+      }
+
+      if (!empty($obj['properties']['partner_organizations'][0]['path'])) {
+        foreach ($obj['properties']['partner_organizations'] as $partner_organization) {
+          if (
+            !in_array($partner_organization['path'], $unique_plays_by_organization)
+            // && $organization_path != $partner_organization['path']
+          ) {
+  
+            // Add it to an array to check if things are unique
+            $unique_plays_by_organization[] = $partner_organization['path'];
+            $plays_by_organization[] = array(
+              "name" => $partner_organization['name'],
+              "path" => $partner_organization['path'],
+              "has_location" => $partner_organization['has_location'],
+            );
+          }
         }
       }
     }
