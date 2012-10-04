@@ -645,6 +645,7 @@ ul.ui-autocomplete {
     font-size: 1em;
     font-weight: bold;
     margin-right: 70px; /* make room for edit link */
+    display: block;
   }
   
   #panel-container .results-container ol.results .results-edit-link {
