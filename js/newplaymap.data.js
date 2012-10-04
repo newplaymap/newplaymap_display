@@ -214,9 +214,15 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       
   }
 
-  // Load result data for this set of features.
-  newPlayMap.loadResults(features, vars);
-
+  // @TODO: Refactor play and journey
+  if (vars.type == 'play') {
+    // Load result data for this set of features.
+    newPlayMap.loadResults(features, vars);
+  }
+  else if (vars.loadProfile != true) {
+    // Load result data for this set of features.
+    newPlayMap.loadResults(features, vars);
+  }
 
   // Load profiles if called for
   // -- @TODO: Load this based on the features (or the jsonData object) instead of a marker. That way it will work with conent that doesn't have a pin.
