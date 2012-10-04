@@ -439,13 +439,15 @@
                       </div>
                       
                       <div class="results-edit-link">
-                        <a href="participate/node/${id}/edit" title="{{if properties.content_type == 'Event'}}Edit Event Type, Date, Location, Lead & Partner Organizations{{else properties.content_type == 'Generative Artist'}}Edit Generative Artist Bio & Photo{{else properties.content_type == 'Organization'}}Edit Organization Name, Logo, Location, Type, Website, etc.{{/if}}">${properties.content_type}
-                          {{if properties.content_type}}
-                            Edit ${properties.content_type}
-                          {{else}}
-                            Edit
-                          {{/if}}
-                        </a>
+                        {{if properties.content_type == 'Event'}}
+                           <a href="participate/node/${id}/edit" title="Edit Event Type, Date, Location, Lead & Partner Organizations">Edit Event</a>
+                        {{else properties.content_type == 'Generative Artist'}}
+                          <a href="participate/node/${id}/edit" title="Edit Generative Artist Bio & Photo">Edit Artist</a>
+                        {{else properties.content_type == 'Organization'}}
+                          <a href="participate/node/${id}/edit" title="Edit Organization Name, Logo, Location, Type, Website, etc.">Edit Org</a>
+                        {{else}}
+                          <a href="participate/node/${id}/edit" title="Edit this item">Edit</a>
+                        {{/if}}
                       </div>
                   </li>
                 </script>

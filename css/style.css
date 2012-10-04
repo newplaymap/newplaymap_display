@@ -579,6 +579,7 @@ ul.ui-autocomplete {
   font-size: 0.9em;
   overflow: auto;
   line-height: 21px;
+  position: relative;
 }
   
   #panel-container .results-container ol li.active,
@@ -625,8 +626,6 @@ ul.ui-autocomplete {
   
   #panel-container .results-container ol.results div.results-item-content {
     margin-left: 10px;
-    float: left;
-    width: 200px;
   }
 
   #panel-container .results-container ol.results p {
@@ -638,35 +637,40 @@ ul.ui-autocomplete {
   #panel-container .results-container ol.results .organization-type {
     text-transform: uppercase;
     font-size: 0.857142857em;
+    margin-right: 70px; /* make room for edit link */
   }
 
   
   #panel-container .results-container ol.results .results-item-title {
     font-size: 1em;
     font-weight: bold;
+    margin-right: 70px; /* make room for edit link */
   }
   
   #panel-container .results-container ol.results .results-edit-link {
-    float: right;
     display: none;
   }
 
     #panel-container .results-container ol.results li.active .results-edit-link {
       display: block;
+      position: absolute;
+      top: 5px;
+      right: 8px;
     }
     
       #panel-container .results-container ol.results li.active .results-edit-link a {
-        color: #DDDDDD;
-        background: url("../images/edit-icon.png") no-repeat;
-        width: 12px;
-        height: 12px;
-        text-indent: -500px;
-        overflow: hidden;
-        display: block;
+        background: url("../images/action-edit.png") no-repeat 0 1px;
+        padding-left: 18px;
+        font-size: 0.8em;
+        font-weight: bold;
       }
       
       #panel-container .results-container ol.results li.active .results-edit-link a:hover {
-        background-position: 0 -12px;
+        background-position: 0 -49px;
+      }
+      
+      #panel-container .results-container ol.results li.active .results-edit-link a:active {
+        background-position: 0 -99px;
       }
   
   #panel-container .results-container .results-title {
