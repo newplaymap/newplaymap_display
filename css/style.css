@@ -626,10 +626,12 @@ ul.ui-autocomplete {
   
   #panel-container .results-container ol.results div.results-item-content {
     margin-left: 10px;
+    float: left;
+    width: 270px;
   }
 
   #panel-container .results-container ol.results p {
-    font-size: 80%;
+    font-size: 0.8em;
   }
   
   #panel-container .results-container ol.results .event-type,
