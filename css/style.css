@@ -314,7 +314,7 @@ ul#share-links-list {
       background-image: url(../images/share-icon-twitter.png);
     }
 
-    ul#share-links-list a#share-link {
+    ul#share-links-list a.share-link {
       background-image: url(../images/share-icon-link.png);
     }
     

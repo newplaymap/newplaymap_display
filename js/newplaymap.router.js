@@ -123,7 +123,7 @@ newPlayMap.processAddressLinks = function(className, target) {
       }
       else if (thisTarget.attr('id') == 'add_button') {
       }
-      else if (thisTarget.attr('id') == 'share-link') {
+      else if (thisTarget.hasClass('share-link')) {
       }
       else if (thisTarget.attr('id') == 'embed-link') {
       }
