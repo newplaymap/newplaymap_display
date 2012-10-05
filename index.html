@@ -389,9 +389,11 @@
 
                 <script id="results-template" type="text/x-jquery-tmpl">
                     <li listing_id="${id}">
-                      {{if properties.icon_small}}
-                        <img class="results-item-image" src="participate/${properties.icon_small}" />
-                      {{/if}}
+                      <div class="results-item-image-wrapper">
+                        {{if properties.icon_small}}
+                          <img class="results-item-image" src="participate/${properties.icon_small}" />
+                        {{/if}}
+                      </div>
 
                       <div class="results-item-content">
                         {{if properties.event_type}}
