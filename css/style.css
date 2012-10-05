@@ -212,6 +212,7 @@ div#panel-container div#panel {
 #panel img.profile-image {
   float: left;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 #panel .profile-header {
