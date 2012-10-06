@@ -26,6 +26,10 @@ a:hover {
   color: #830B1B;
 }
 
+a:active {
+  color: #000000;
+}
+
 /* Override Bootstrap Defaults */
 body,
 p,
@@ -188,6 +192,10 @@ footer {
   line-height: 1.2em;
 }
 
+#panel-container #panel .content h3 {
+  font-weight: normal;
+}
+
 #filter-container {
   display: none;
   margin-bottom: -55px;
@@ -204,6 +212,7 @@ div#panel-container div#panel {
 #panel img.profile-image {
   float: left;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 #panel .profile-header {
@@ -227,9 +236,11 @@ div#panel-container div#panel {
 
 ul#panel-content-links {
   list-style: none outside none;
-  margin: 0;
-  padding-top: 22px;
+  margin: 10px -15px 10px -15px;
+  padding: 10px 10px 10px 15px;
   clear: both;
+  overflow: hidden;
+  background: #F1EDE6;
 }
 
   ul#panel-content-links li {
@@ -259,11 +270,11 @@ ul#panel-content-links {
   }
   
   ul#panel-content-links li.panel-add-link a {
-    background-image: url(../images/button-add.png);
+    background-image: url(../images/action-add.png);
   }
   
   ul#panel-content-links li#panel-share-link a {
-    background-image: url(../images/button-share.png);
+    background-image: url(../images/action-share.png);
     background-position: 14% 45%;
     padding-left: 28px;
   }
@@ -287,6 +298,24 @@ ul#panel-content-links {
       margin-left: 2px;
       margin-right: 8px;
     }
+    
+    ul#panel-content-links li#panel-edit-link {
+      float: right;
+      margin-right: 0;
+    }
+    
+      ul#panel-content-links li#panel-edit-link a {
+        padding-left: 18px;
+        background: url(../images/action-edit.png) 0 1px no-repeat;
+      }
+    
+      ul#panel-content-links li#panel-edit-link a:hover {
+        background-position: 0 -49px;
+      }
+      
+      ul#panel-content-links li#panel-edit-link a:active {
+        background-position: 0 -99px;
+      }
     
 ul#share-links-list {
   list-style: none;
@@ -552,6 +581,7 @@ ul.ui-autocomplete {
   font-size: 0.9em;
   overflow: auto;
   line-height: 21px;
+  position: relative;
 }
   
   #panel-container .results-container ol li.active,
@@ -560,8 +590,20 @@ ul.ui-autocomplete {
     border-radius: 5px 5px 5px 5px;
   }
   
-  #panel-container .results-container ol.results img.results-item-image {
+  #panel-container .results-container ol.results div.results-item-image-wrapper {
+    width: 33px;
     float: left;
+  }
+
+  #panel-container .results-container ol.results div.results-item-image-wrapper img {
+    display: block;
+    margin: auto;
+  }
+
+  #panel-container .results-container ol.results div.results-item-content {
+    margin-left: 10px;
+    float: left;
+    width: 250px;
   }
 
   #panel-container .results-container ol#events-results > li {
@@ -595,15 +637,9 @@ ul.ui-autocomplete {
     #panel-container .results-container ol#plays-results div.results-item-content {
       margin-left: 40px;
     }
-  
-  #panel-container .results-container ol.results div.results-item-content {
-    margin-left: 10px;
-    float: left;
-    width: 200px;
-  }
 
   #panel-container .results-container ol.results p {
-    font-size: 80%;
+    font-size: 0.8em;
   }
   
   #panel-container .results-container ol.results .event-type,
@@ -611,35 +647,41 @@ ul.ui-autocomplete {
   #panel-container .results-container ol.results .organization-type {
     text-transform: uppercase;
     font-size: 0.857142857em;
+    margin-right: 70px; /* make room for edit link */
   }
 
   
   #panel-container .results-container ol.results .results-item-title {
     font-size: 1em;
     font-weight: bold;
+    margin-right: 70px; /* make room for edit link */
+    display: block;
   }
   
   #panel-container .results-container ol.results .results-edit-link {
-    float: right;
     display: none;
   }
 
     #panel-container .results-container ol.results li.active .results-edit-link {
       display: block;
+      position: absolute;
+      top: 5px;
+      right: 8px;
     }
     
       #panel-container .results-container ol.results li.active .results-edit-link a {
-        color: #DDDDDD;
-        background: url("../images/edit-icon.png") no-repeat;
-        width: 12px;
-        height: 12px;
-        text-indent: -500px;
-        overflow: hidden;
-        display: block;
+        background: url("../images/action-edit.png") no-repeat 0 1px;
+        padding-left: 18px;
+        font-size: 0.8em;
+        font-weight: bold;
       }
       
       #panel-container .results-container ol.results li.active .results-edit-link a:hover {
-        background-position: 0 -12px;
+        background-position: 0 -49px;
+      }
+      
+      #panel-container .results-container ol.results li.active .results-edit-link a:active {
+        background-position: 0 -99px;
       }
   
   #panel-container .results-container .results-title {
@@ -817,7 +859,7 @@ ul.ui-autocomplete {
 
         #header-buttons a#add_button span { 
           padding-left: 20px;
-          background-image: url(../images/header-add-icon-all.png);
+          background-image: url(../images/header-icon-add.png);
           background-position: 0 4px;
         }
   
@@ -830,7 +872,7 @@ ul.ui-autocomplete {
           }
 
         #header-buttons a#invite_button span {
-          background-image: url(../images/header-invite-icon-all.png);
+          background-image: url(../images/header-icon-invite.png);
           background-position: 0 3px;
         }
         
@@ -844,7 +886,7 @@ ul.ui-autocomplete {
 
         #header-buttons a#explore-filters-button span {
           padding-left: 26px;
-          background-image: url(../images/header-explore-icon-all.png);
+          background-image: url(../images/header-icon-explore.png);
           background-position: 0 1px;
         }
   
