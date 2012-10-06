@@ -439,7 +439,8 @@
                         {{/if}}
 
                       </div>
-                      
+
+                      <!-- Edit link -->
                       <div class="results-edit-link">
                         {{if properties.content_type == 'Event'}}
                            <a href="participate/node/${id}/edit" title="Edit Event Type, Date, Location, Lead & Partner Organizations">Edit Event</a>
@@ -449,6 +450,19 @@
                           <a href="participate/node/${id}/edit" title="Edit Organization Name, Logo, Location, Type, Website, etc.">Edit Org</a>
                         {{else}}
                           <a href="participate/node/${id}/edit" title="Edit this item">Edit</a>
+                        {{/if}}
+                      </div>
+
+                      <!-- Delete link -->
+                      <div class="results-delete-link">
+                        {{if properties.content_type == 'Event'}}
+                           <a href="participate/node/add/delete-request/${id}" title="Request Deletion of this Event">Delete</a>
+                        {{else properties.content_type == 'Generative Artist'}}
+                          <a href="participate/node/add/delete-request/${id}" title="Request Deletion of this Artist">Delete</a>
+                        {{else properties.content_type == 'Organization'}}
+                          <a href="participate/node/add/delete-request/${id}" title="Request Deletion of this Organization">Delete</a>
+                        {{else}}
+                          <a href="participate/node/add/delete-request/${id}" title="Edit this item">Delete</a>
                         {{/if}}
                       </div>
                   </li>

@@ -683,6 +683,37 @@ ul.ui-autocomplete {
       #panel-container .results-container ol.results li.active .results-edit-link a:active {
         background-position: 0 -99px;
       }
+      
+  #panel-container .results-container ol.results .results-delete-link {
+    display: none;
+  }
+
+    #panel-container .results-container ol.results li.active .results-delete-link {
+      display: block;
+      position: absolute;
+      bottom: 5px;
+      right: 8px;
+    }
+
+      #panel-container .results-container ol.results li.active .results-delete-link a {
+        background-image: url("../images/action-delete.png");
+        background-repeat: no-repeat;
+        background-position: right 0px;
+        padding-right: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+        color: #999999;
+      }
+
+      #panel-container .results-container ol.results li.active .results-delete-link a:hover {
+        background-position: right -50px;
+        color: #666666;
+      }
+
+      #panel-container .results-container ol.results li.active .results-delete-link a:active {
+        background-position: right -150px;
+        color: #000000;
+      }
   
   #panel-container .results-container .results-title {
     background-color: #F1EDE6;
