@@ -254,6 +254,10 @@
                       {{if synopsis}}     
                         {{html synopsis}} <!-- @TODO: Fix the encoding for what the DB spits out - paragraph breaks are not working -->
                       {{/if}}
+
+                      <div class="panel-delete-link">
+                        <a href="participate/node/add/delete-request/${related_play_id}" title="Request Deletion of ${play_title}">Delete</a>
+                      </div>
                     </article>                  
          
                 </script><!--   end play -->
@@ -302,6 +306,9 @@
                     {{if artist_bio}}
                       <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
+                    <div class="panel-delete-link">
+                      <a href="participate/node/add/delete-request/${artist_id}" title="Request Deletion of ${generative_artist}">Delete</a>
+                    </div>
                   </article>
                 </script><!--  end artist -->
     
@@ -350,6 +357,9 @@
                     {{if special_interests}}
                       <div class="organization-interests profile-additional-content">${special_interests_display}</div>
                     {{/if}}
+                    <div class="panel-delete-link">
+                      <a href="participate/node/add/delete-request/${organization_id}" title="Request Deletion of ${name}">Delete</a>
+                    </div>
                   </article>
 
                 </script><!--  end organization -->
