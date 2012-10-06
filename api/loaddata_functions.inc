@@ -299,14 +299,29 @@ function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $cle
     $unique_organizations_by_artist = array();
     foreach ($events_cursor as $obj) {
       if(!empty($obj['id']) && !empty($obj['properties']['related_theater'])) {
-        if (!in_array($obj['properties']['related_theater'], $unique_organizations_by_artist)) {
+        if (!in_array($obj['properties']['related_theater_path'], $unique_organizations_by_artist)) {
 
           // Add it to an array to check if things are unique
-          $unique_organizations_by_artist[] = $obj['properties']['related_theater'];
+          $unique_organizations_by_artist[] = $obj['properties']['related_theater_path'];
           $organizations_by_artist[] = array(
             "name" => $obj['properties']['related_theater'],
             "path" => $obj['properties']['related_theater_path'],
           );
+        }
+      }
+
+      if (!empty($obj['properties']['partner_organizations'][0]['path'])) {
+        foreach ($obj['properties']['partner_organizations'] as $partner_organization) {
+          if (!in_array($partner_organization['path'], $unique_organizations_by_artist)) {
+
+            // Add it to an array to check if things are unique
+            $unique_organizations_by_artist[] = $partner_organization['path'];
+            $organizations_by_artist[] = array(
+              "name" => $partner_organization['name'],
+              "path" => $partner_organization['path'],
+              "has_location" => $partner_organization['has_location'],
+            );
+          }
         }
       }
     }
