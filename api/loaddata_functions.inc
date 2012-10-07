@@ -33,6 +33,9 @@ function getJsonExport($domain, $base_path, $path, $arguments = NULL) {
   return $json;
 }
 
+/* 
+ * Function to load Organizations into mongo
+ */
 function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
   $organizations = $m->$mongo_database->organizations;
@@ -254,11 +257,9 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
   // return true;
 }
 
-
-
-
-
-
+/*
+ * Function to load artists into mongo
+ */
 function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $artists = $m->$mongo_database->artists;
@@ -363,11 +364,9 @@ function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $cle
   // echo 'artists<br />';
 }
 
-
-
-
-
-
+/*
+ * Function to load Events into mongo
+ */
 function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $events = $m->$mongo_database->events;
@@ -455,8 +454,9 @@ function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clea
   // echo 'events<br />';
 }
 
-
-
+/*
+ * Function to load plays into mongo
+ */
 function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
   $plays = $m->$mongo_database->plays;
@@ -545,4 +545,36 @@ function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear
   }
     // print '</pre>';
   // echo 'plays<br />';
+}
+
+/*
+ * Function to Delete Organizations from mongo
+ */
+function deleteOrganizations($m, $mongo_database, $id) {
+ $organizations_collection = $m->$mongo_database->organizations;
+ $organizations_collection->remove(array('id' => $id));
+}
+
+/*
+ * Function to Delete Artists from mongo
+ */
+function deleteArtists($m, $mongo_database, $id) {
+ $artists_collection = $m->$mongo_database->artists;
+ $artists_collection->remove(array('id' => $id));
+}
+
+/*
+ * Function to Delete Events from mongo
+ */
+function deleteEvents($m, $mongo_database, $id) {
+ $events_collection = $m->$mongo_database->events;
+ $events_collection->remove(array('id' => $id));
+}
+
+/*
+ * Function to Delete Plays from mongo
+ */
+function deletePlays($m, $mongo_database, $id) {
+ $plays_collection = $m->$mongo_database->plays;
+ $plays_collection->remove(array('id' => $id));
 }
