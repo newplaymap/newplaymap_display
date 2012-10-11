@@ -804,9 +804,15 @@ ul.ui-autocomplete {
 }
 
   #header-links {
-    font-size: 0.8em;
+    font-size: 0.86em;
     width: 390px;
     float: left;
+  }
+  
+  #header-links .nav {
+    width: 75%;
+    margin: 0; /* override bootstrap */
+    padding-top: 3px;
   }
 
     #header-links a {
@@ -838,7 +844,7 @@ ul.ui-autocomplete {
       font-size: 1.23em; /* 16px */
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
       font-weight: bold;
-      padding-top: 5px;
+      padding-top: 2px;
     }
     
       #header-links a.brand {
