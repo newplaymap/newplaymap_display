@@ -892,7 +892,8 @@ ul.ui-autocomplete {
         #header-buttons a#add_button,
         #header-buttons a#filter_button,
         #header-buttons a#invite_button,
-        #header-buttons a#explore-filters-button {
+        #header-buttons a#explore-filters-button,
+        #header-buttons a#reset-button {
           padding: 6px 14px;
           cursor: pointer;
           color: #BF202E;
@@ -903,20 +904,23 @@ ul.ui-autocomplete {
         #header-buttons a#add_button:hover,
         #header-buttons a#filter_button:hover,
         #header-buttons a#invite_button:hover,
-        #header-buttons a#explore-filters-button:hover {
+        #header-buttons a#explore-filters-button:hover,
+        #header-buttons a#reset-button:hover {
           color: #000;
         }
         
         #header-buttons a#add_button:active,
         #header-buttons a#filter_button:active,
         #header-buttons a#invite_button:active,
-        #header-buttons a#explore-filters-button:active {
+        #header-buttons a#explore-filters-button:active,
+        #header-buttons a#reset-button:active {
           color: #fff;
         }
 
         #header-buttons a#add_button span,
         #header-buttons a#invite_button span,
-        #header-buttons a#explore-filters-button span {
+        #header-buttons a#explore-filters-button span,
+        #header-buttons a#reset-button span {
           padding-left: 24px;
           background-position: 0 0;
           background-repeat: no-repeat;
@@ -961,6 +965,20 @@ ul.ui-autocomplete {
           
           #header-buttons a#explore-filters-button:active span {
             background-position: 0 -99px;
+          }
+          
+        #header-buttons a#reset-button span { 
+          padding-left: 20px;
+          background-image: url(../images/header-icon-reset.png);
+          background-position: 0 3px;
+        }
+  
+          #header-buttons a#reset-button:hover span { 
+            background-position: 0 -47px;
+          }
+          
+          #header-buttons a#reset-button:active span { 
+            background-position: 0 -97px;
           }
 
 
