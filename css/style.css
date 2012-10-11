@@ -439,7 +439,7 @@ ul.ui-autocomplete {
   cursor: pointer;
 }
 
-#filters .filter-tab {
+#filters #filter-tabs {
   font-size: 0.777777778em;
 }
 
@@ -520,6 +520,19 @@ ul.ui-autocomplete {
 #filters .ui-tabs-panel {
   padding: 15px;
 }
+
+#filters #filters-hide {
+  float: right;
+  font-size: 12px;
+  padding: 8px 14px 0 0;
+  background: url(../images/action-hide.png) 100% 73% no-repeat;
+  cursor: pointer;
+}
+
+  #filters #filters-hide:hover {
+    text-decoration: underline;
+  }
+
 
 #filters .filter-wrapper > label {
   font-weight: bold;
