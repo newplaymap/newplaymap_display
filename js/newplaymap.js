@@ -154,6 +154,10 @@ newPlayMap.processFilters = function() {
   newPlayMap.filters.setupFilters();
 
   $('#filters form').tabs();
+  
+  $('#filters-hide span').click(function() {
+    $('#filter-container').slideUp();
+  });
 
   $('#explore-plays .show-all-link').click(function() {
     newPlayMap.filters.showAll('plays');
