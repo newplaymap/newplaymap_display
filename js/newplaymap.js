@@ -156,6 +156,7 @@ newPlayMap.initializeFilters = function() {
     $('#filter-container').slideDown();
     // newPlayMap.loadDefaultContent();
     newPlayMap.filters.showAll('plays');
+    newPlayMap.recenterMap(map);
   });
 }
 
