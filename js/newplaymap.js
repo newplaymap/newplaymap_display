@@ -527,7 +527,7 @@ newPlayMap.tourInteraction = function() {
     })
     .wrap('<li></li>')
     .parent()
-    .insertAfter('#header-links ul.nav li:eq(1)');
+    .insertBefore('#header-links ul.nav li:last');
 
   // Close button functionality
   $('#tour-exit').click(function() {
