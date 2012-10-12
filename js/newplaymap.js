@@ -96,6 +96,25 @@ newPlayMap.initMapSimple = function() {
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
 
+  newPlayMap.recenterMap(map);
+
+  // Load interactive behavior.
+  spotlight = new SpotlightLayer();
+  map.addLayer(spotlight);
+
+
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
+  markers.parent.setAttribute("id", "markers");
+
+  // Load map marker layers.
+  var data = newPlayMap.loadMapData();
+
+  // Run data layers closure.
+  data();
+};
+
+newPlayMap.recenterMap = function(map) {
   // Find appropriate zoom level
   newPlayMap.defaultZoom = 3;
 
@@ -119,22 +138,7 @@ newPlayMap.initMapSimple = function() {
   }
   
   map.setCenterZoom(new MM.Location(defaultLat, defaultLon), defaultZoom);
-
-  // Load interactive behavior.
-  spotlight = new SpotlightLayer();
-  map.addLayer(spotlight);
-
-
-  markers = new MM.MarkerLayer();
-  map.addLayer(markers);
-  markers.parent.setAttribute("id", "markers");
-
-  // Load map marker layers.
-  var data = newPlayMap.loadMapData();
-
-  // Run data layers closure.
-  data();
-};
+}
 
 newPlayMap.loadMapData = function() {
   return function () {
@@ -357,8 +361,15 @@ newPlayMap.loadDefaultContent = function() {
 
   // Clear out any results content
   newPlayMap.layout.clearResults();
-  
+
+  // Load What's on Today
   newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" }, todayHeader);
+
+  // Recenter map
+  newPlayMap.recenterMap(map);
+  
+  // Close Filters
+  $('#filter-container:visible').slideUp();
 }
 
 
