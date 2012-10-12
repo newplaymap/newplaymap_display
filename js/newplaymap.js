@@ -39,6 +39,9 @@ newPlayMap.alterHomepage = function() {
   // Set up some links to trigger default content
   $('.reset-map').click(function() {
     newPlayMap.loadDefaultContent();
+    
+    // Close Filters
+    $('#filter-container:visible').slideUp();
   });
 
   return false;
@@ -150,7 +153,9 @@ newPlayMap.initializeFilters = function() {
   newPlayMap.processFilters();
 
   $('#explore-filters-button').click(function() {
-    $('#filter-container').slideToggle();
+    $('#filter-container').slideDown();
+    // newPlayMap.loadDefaultContent();
+    newPlayMap.filters.showAll('plays');
   });
 }
 
@@ -252,38 +257,36 @@ newPlayMap.loadPageRouter = function() {
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 0);
           break;
           case 'explore-plays':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
-              $('#filters form').tabs('select', 0);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 0);
           break;
           case 'explore-organizations':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
-              $('#filters form').tabs('select', 1);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 1);
           break;
           case 'explore-artists':
             // Open tabs and select correct tab
@@ -291,12 +294,12 @@ newPlayMap.loadPageRouter = function() {
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
               newPlayMap.processFilters();
-              $('#filters form').tabs('select', 2);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 2);
           break;
           case 'all-artists':
             if (newPlayMap.hasContentBeenLoaded() == false) {
@@ -367,9 +370,6 @@ newPlayMap.loadDefaultContent = function() {
 
   // Recenter map
   newPlayMap.recenterMap(map);
-  
-  // Close Filters
-  $('#filter-container:visible').slideUp();
 }
 
 
