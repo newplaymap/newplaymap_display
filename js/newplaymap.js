@@ -157,6 +157,7 @@ newPlayMap.initializeFilters = function() {
     // newPlayMap.loadDefaultContent();
     newPlayMap.filters.showAll('plays');
     newPlayMap.recenterMap(map);
+    newPlayMap.data.clearAllLayers();
   });
 }
 
