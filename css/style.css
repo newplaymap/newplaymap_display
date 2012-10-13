@@ -875,7 +875,7 @@ ul.ui-autocomplete {
       background-position: -5px -5px;
     }
   #header-buttons-wrapper {
-    width: 35%;
+    width: 40%;
     float: left;
     margin-top: 6px;
   }
@@ -1000,10 +1000,17 @@ ul.ui-autocomplete {
             background-position: 0 -97px;
           }
 
+  #header-register {
+    display: none;
+  }
 
   #header-register a {
     color: #FFFFFF;
     text-decoration: underline;
+  }
+  
+  #header-register .welcome, #header-register .my-account {
+    padding-right: 1em;
   }
 
 /* Tour */
