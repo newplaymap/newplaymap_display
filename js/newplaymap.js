@@ -39,6 +39,9 @@ newPlayMap.alterHomepage = function() {
   // Set up some links to trigger default content
   $('.reset-map').click(function() {
     newPlayMap.loadDefaultContent();
+    
+    // Close Filters
+    $('#filter-container:visible').slideUp();
   });
 
   return false;
@@ -96,6 +99,25 @@ newPlayMap.initMapSimple = function() {
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
 
+  newPlayMap.recenterMap(map);
+
+  // Load interactive behavior.
+  spotlight = new SpotlightLayer();
+  map.addLayer(spotlight);
+
+
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
+  markers.parent.setAttribute("id", "markers");
+
+  // Load map marker layers.
+  var data = newPlayMap.loadMapData();
+
+  // Run data layers closure.
+  data();
+};
+
+newPlayMap.recenterMap = function(map) {
   // Find appropriate zoom level
   newPlayMap.defaultZoom = 3;
 
@@ -119,22 +141,7 @@ newPlayMap.initMapSimple = function() {
   }
   
   map.setCenterZoom(new MM.Location(defaultLat, defaultLon), defaultZoom);
-
-  // Load interactive behavior.
-  spotlight = new SpotlightLayer();
-  map.addLayer(spotlight);
-
-
-  markers = new MM.MarkerLayer();
-  map.addLayer(markers);
-  markers.parent.setAttribute("id", "markers");
-
-  // Load map marker layers.
-  var data = newPlayMap.loadMapData();
-
-  // Run data layers closure.
-  data();
-};
+}
 
 newPlayMap.loadMapData = function() {
   return function () {
@@ -146,7 +153,11 @@ newPlayMap.initializeFilters = function() {
   newPlayMap.processFilters();
 
   $('#explore-filters-button').click(function() {
-    $('#filter-container').slideToggle();
+    $('#filter-container').slideDown();
+    // newPlayMap.loadDefaultContent();
+    newPlayMap.filters.showAll('plays');
+    newPlayMap.recenterMap(map);
+    newPlayMap.data.clearAllLayers();
   });
 }
 
@@ -154,6 +165,10 @@ newPlayMap.processFilters = function() {
   newPlayMap.filters.setupFilters();
 
   $('#filters form').tabs();
+  
+  $('#filters-hide span').click(function() {
+    $('#filter-container').slideUp();
+  });
 
   $('#explore-plays .show-all-link').click(function() {
     newPlayMap.filters.showAll('plays');
@@ -244,38 +259,36 @@ newPlayMap.loadPageRouter = function() {
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 0);
           break;
           case 'explore-plays':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
-              $('#filters form').tabs('select', 0);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 0);
           break;
           case 'explore-organizations':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
-              $('#filters form').tabs('select', 1);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 1);
           break;
           case 'explore-artists':
             // Open tabs and select correct tab
@@ -283,12 +296,12 @@ newPlayMap.loadPageRouter = function() {
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
               newPlayMap.processFilters();
-              $('#filters form').tabs('select', 2);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 2);
           break;
           case 'all-artists':
             if (newPlayMap.hasContentBeenLoaded() == false) {
@@ -353,8 +366,12 @@ newPlayMap.loadDefaultContent = function() {
 
   // Clear out any results content
   newPlayMap.layout.clearResults();
-  
+
+  // Load What's on Today
   newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" }, todayHeader);
+
+  // Recenter map
+  newPlayMap.recenterMap(map);
 }
 
 
@@ -523,7 +540,7 @@ newPlayMap.tourInteraction = function() {
     })
     .wrap('<li></li>')
     .parent()
-    .insertAfter('#header-links ul.nav li:eq(1)');
+    .insertBefore('#header-links ul.nav li:last');
 
   // Close button functionality
   $('#tour-exit').click(function() {

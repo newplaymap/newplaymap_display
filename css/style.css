@@ -439,7 +439,7 @@ ul.ui-autocomplete {
   cursor: pointer;
 }
 
-#filters .filter-tab {
+#filters #filter-tabs {
   font-size: 0.777777778em;
 }
 
@@ -520,6 +520,19 @@ ul.ui-autocomplete {
 #filters .ui-tabs-panel {
   padding: 15px;
 }
+
+#filters #filters-hide {
+  float: right;
+  font-size: 12px;
+  padding: 8px 14px 0 0;
+  background: url(../images/action-hide.png) 100% 73% no-repeat;
+  cursor: pointer;
+}
+
+  #filters #filters-hide:hover {
+    text-decoration: underline;
+  }
+
 
 #filters .filter-wrapper > label {
   font-weight: bold;
@@ -804,9 +817,15 @@ ul.ui-autocomplete {
 }
 
   #header-links {
-    font-size: 0.8em;
+    font-size: 0.86em;
     width: 390px;
     float: left;
+  }
+  
+  #header-links .nav {
+    width: 75%;
+    margin: 0; /* override bootstrap */
+    padding-top: 3px;
   }
 
     #header-links a {
@@ -838,7 +857,7 @@ ul.ui-autocomplete {
       font-size: 1.23em; /* 16px */
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
       font-weight: bold;
-      padding-top: 5px;
+      padding-top: 2px;
     }
     
       #header-links a.brand {
@@ -892,7 +911,8 @@ ul.ui-autocomplete {
         #header-buttons a#add_button,
         #header-buttons a#filter_button,
         #header-buttons a#invite_button,
-        #header-buttons a#explore-filters-button {
+        #header-buttons a#explore-filters-button,
+        #header-buttons a#reset-button {
           padding: 6px 14px;
           cursor: pointer;
           color: #BF202E;
@@ -903,20 +923,23 @@ ul.ui-autocomplete {
         #header-buttons a#add_button:hover,
         #header-buttons a#filter_button:hover,
         #header-buttons a#invite_button:hover,
-        #header-buttons a#explore-filters-button:hover {
+        #header-buttons a#explore-filters-button:hover,
+        #header-buttons a#reset-button:hover {
           color: #000;
         }
         
         #header-buttons a#add_button:active,
         #header-buttons a#filter_button:active,
         #header-buttons a#invite_button:active,
-        #header-buttons a#explore-filters-button:active {
+        #header-buttons a#explore-filters-button:active,
+        #header-buttons a#reset-button:active {
           color: #fff;
         }
 
         #header-buttons a#add_button span,
         #header-buttons a#invite_button span,
-        #header-buttons a#explore-filters-button span {
+        #header-buttons a#explore-filters-button span,
+        #header-buttons a#reset-button span {
           padding-left: 24px;
           background-position: 0 0;
           background-repeat: no-repeat;
@@ -961,6 +984,20 @@ ul.ui-autocomplete {
           
           #header-buttons a#explore-filters-button:active span {
             background-position: 0 -99px;
+          }
+          
+        #header-buttons a#reset-button span { 
+          padding-left: 20px;
+          background-image: url(../images/header-icon-reset.png);
+          background-position: 0 3px;
+        }
+  
+          #header-buttons a#reset-button:hover span { 
+            background-position: 0 -47px;
+          }
+          
+          #header-buttons a#reset-button:active span { 
+            background-position: 0 -97px;
           }
 
 
