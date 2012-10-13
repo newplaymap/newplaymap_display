@@ -407,8 +407,8 @@ ul#share-links-list {
     }
 
 ul.ui-autocomplete {
-  width: 335px;
-  max-height: 200px;
+  width: 290px;
+  max-height: 60%;
 	overflow-y: auto;
 	/* prevent horizontal scrollbar */
 	overflow-x: hidden;
