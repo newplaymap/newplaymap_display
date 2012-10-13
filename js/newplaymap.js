@@ -247,9 +247,11 @@ newPlayMap.setWelcomeLinks = function() {
       if (data != '') {
         $('#header-register').html(data);
       }
+    },
+    complete: function() {
+      $('#header-register').fadeIn('slow');
     }
   });
-  // $('#header-register').load('participate/welcome-links');
 }
 
 
