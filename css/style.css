@@ -1005,6 +1005,10 @@ ul.ui-autocomplete {
     color: #FFFFFF;
     text-decoration: underline;
   }
+  
+  #header-register .welcome, #header-register .my-account {
+    padding-right: 1em;
+  }
 
 /* Tour */
 

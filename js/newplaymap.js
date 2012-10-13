@@ -44,6 +44,9 @@ newPlayMap.alterHomepage = function() {
     $('#filter-container:visible').slideUp();
   });
 
+  // Pull welcome links from drupal site
+  newPlayMap.setWelcomeLinks();
+
   return false;
 };
 
@@ -235,6 +238,19 @@ newPlayMap.loadData = function() {
     // Get path from browser and load content.
     newPlayMap.loadPageRouter();
 };
+
+
+newPlayMap.setWelcomeLinks = function() {
+  $.ajax({
+    url: 'participate/welcome-links',
+    success: function(data) {
+      if (data != '') {
+        $('#header-register').html(data);
+      }
+    }
+  });
+  // $('#header-register').load('participate/welcome-links');
+}
 
 
 newPlayMap.loadPageRouter = function() { 
