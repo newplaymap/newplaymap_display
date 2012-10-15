@@ -236,7 +236,7 @@ newPlayMap.loadResults = function(features, vars) {
     $('.internal-address').address();
 
     // Truncate all results to 3 each and add a link for more
-    if (len > 3) {
+    if (len > 3 && vars.resultsTitle != "What's Happening Today") {
       $('#panel-container .results-container-' + resultType + ' ol.results > li').each(function(count) {
         if (count > 2) {
           $(this).addClass('more-results');
