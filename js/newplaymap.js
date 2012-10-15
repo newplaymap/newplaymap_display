@@ -541,11 +541,13 @@ newPlayMap.shareInteraction = function() {
 }
 
 newPlayMap.tourInteraction = function() {
-  // Don't show the tour initially. Will launch later. Also uncomment line 573
+  // If you don't want the tour to launch automatically, comment out:
+  // -- newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart()); below
+  // -- $.cookie('newplaymap_tour', true); in newPlayMap.tourStart function
   // Queue start tour for when the filters are done
-  // if ($.cookie('newplaymap_tour') != 'true') {
-    // newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart());
-  // }
+  if ($.cookie('newplaymap_tour') != 'true') {
+    newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart());
+  }
 
   // Add start tour link
   $('<a></a>')
@@ -597,7 +599,7 @@ newPlayMap.tourStart = function() {
   $('.tour-step.first').addClass('active').show();
   // Add the arrows for the first slide
   newPlayMap.setTourArrows();
-  // $.cookie('newplaymap_tour', true);
+  $.cookie('newplaymap_tour', true);
 }
 
 newPlayMap.tourStop = function() {
@@ -686,7 +688,7 @@ newPlayMap.setTourArrows = function() {
       }, arrowFadeTime, function(){});
 
       // Right filter arrow
-      newPlayMap.processFilters();
+      $('#filter-container').slideDown();
       target = $('#filter-container').offset();
       arrowImageOffset = 107;
       $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
