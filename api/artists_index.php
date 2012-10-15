@@ -26,16 +26,15 @@ foreach ($cursor as $obj) {
      $json .= ',';
     }
 
-    // $json .= json_encode($obj['properties']['generative_artist']);
-    
-    $json .= json_encode(array(
-      'value' => $obj['properties']['artist_name'],
-      'label' => $obj['properties']['artist_name_display'],
-      'path' => $obj['properties']['path'],
-    ));
-    
-  
-    $i++;
+    if (!empty($obj['properties']['artist_name'])) {
+      $json .= json_encode(array(
+        'value' => $obj['properties']['artist_name'],
+        'label' => $obj['properties']['artist_name_display'],
+        'path' => $obj['properties']['path'],
+      ));
+
+      $i++;
+    }
   }
 }
 /* $json .= "," . json_encode(array('count' => $collection->count())); */
