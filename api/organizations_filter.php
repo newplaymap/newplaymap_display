@@ -91,30 +91,34 @@ foreach ($cursor as $obj) {
     
     /* Set up display version of Special Interests */
     $obj['properties']['special_interests_display'] = '';
-    $i = 0;
-    $l = count($obj['properties']['special_interests']);
-    foreach ($obj['properties']['special_interests'] as $type) {
-      $obj['properties']['special_interests_display'] .= $type['interest'];
-      
-      if ($i < $l - 1) {
-        $obj['properties']['special_interests_display'] .= ', ';
+    if (!empty($obj['properties']['special_interests'])) {
+      $i = 0;
+      $l = count($obj['properties']['special_interests']);
+      foreach ($obj['properties']['special_interests'] as $type) {
+        $obj['properties']['special_interests_display'] .= $type['interest'];
+
+        if ($i < $l - 1) {
+          $obj['properties']['special_interests_display'] .= ', ';
+        }
+
+        $i++;
       }
-      
-      $i++;
     }
     
     /* Set up display version of National Networks */
     $obj['properties']['national_networks_display'] = '';
-    $i = 0;
-    $l = count($obj['properties']['national_networks']);
-    foreach ($obj['properties']['national_networks'] as $type) {
-      $obj['properties']['national_networks_display'] .= $type['network'];
-      
-      if ($i < $l - 1) {
-        $obj['properties']['national_networks_display'] .= ', ';
+    if (!empty($obj['properties']['national_networks'])) {
+      $i = 0;
+      $l = count($obj['properties']['national_networks']);
+      foreach ($obj['properties']['national_networks'] as $type) {
+        $obj['properties']['national_networks_display'] .= $type['network'];
+
+        if ($i < $l - 1) {
+          $obj['properties']['national_networks_display'] .= ', ';
+        }
+
+        $i++;
       }
-      
-      $i++;
     }
     
     $obj['properties']['content_type'] = 'Organization';
