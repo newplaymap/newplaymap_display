@@ -56,7 +56,7 @@ newPlayMap.updateBubble = function(marker, data) {
   // hard coded for events for now. @TODO: Figure out chach's way of using featureData.title and templates
 
   switch (featureData.properties.content_type) {
-    case "Generative Artist":
+    case "Artist":
       var title = featureData.properties.artist_name;
     break;
     case "Event":
