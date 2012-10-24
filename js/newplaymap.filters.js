@@ -511,8 +511,9 @@ newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
     // Clear error message timer
     clearTimeout(newPlayMap.loadingStackError);
 
-    // trigger any callbacks
+    // trigger any callbacks and clear the stack
     newPlayMap.loadingStackCallbacks.fire();
+    newPlayMap.loadingStackCallbacks.empty();
   }
 }
 
