@@ -154,10 +154,17 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         marker.setAttribute("related_play_id", feature.properties[vars.related_play_id]);        
       }
 
+      // If the marker has a lat of 0 and a lon on 0, give it a special class
+      // @TODO: Once we are loading profile info from the json object and not the marker, this work-around can be removed.
+      var classes = 'marker';
+      if (feature.properties.latitude == null && feature.properties.longitude == null) {
+        classes += " empty-marker";
+      }
+
       // Unique hash marker id for link
       marker.setAttribute("id", "marker-" + vars.type + "-" + id);
       marker.setAttribute("dataName", vars.dataName);
-      marker.setAttribute("class", "marker");
+      marker.setAttribute("class", classes);
       marker.setAttribute("href", feature.properties.path);
       marker.setAttribute("type", vars.type);
       marker.setAttribute("latlon", latlon);
