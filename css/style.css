@@ -122,6 +122,10 @@ dd {
   z-index: 40;
 }
 
+.marker.empty-marker {
+  display: none;
+}
+
 #play-journey svg {
 /* pointer-events:  none; */
 }
