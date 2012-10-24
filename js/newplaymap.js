@@ -546,7 +546,7 @@ newPlayMap.tourInteraction = function() {
   // -- $.cookie('newplaymap_tour', true); in newPlayMap.tourStart function
   // Queue start tour for when the filters are done
   if ($.cookie('newplaymap_tour') != 'true') {
-    newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart());
+    newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart);
   }
 
   // Add start tour link

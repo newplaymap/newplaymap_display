@@ -1013,9 +1013,10 @@ ul.ui-autocomplete {
     padding-right: 1em;
   }
 
-/* Tour */
+/* Tour and Failure Message */
 
-#tour {
+#tour,
+#failure-message {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1033,11 +1034,13 @@ ul.ui-autocomplete {
   display: none;
 }
 
-#tour #tour-header {
+#tour #tour-header,
+#failure-message #failure-message-header {
   position: relative; /* make sure absolute elements stay within me */
 }
 
-  #tour #tour-header h3 {
+  #tour #tour-header h3,
+  #failure-message #failure-message-header h3 {
     font-size: 18px;
   }
 
@@ -1112,7 +1115,8 @@ ul.ui-autocomplete {
   display: block;
 }
 
-#tour .tour-step h4 {
+#tour .tour-step h4,
+#failure-message .failure-message-step h4 {
   font-size: 29px;
   font-weight: bold;
   color: #BF1F2C;
@@ -1120,10 +1124,15 @@ ul.ui-autocomplete {
   line-height: 1em;
 }
 
-#tour p {
+#tour p,
+#failure-message p {
   font-size: 18px;
   line-height: 1.4em;
   margin-top: 18px;
+}
+
+#failure-message .phone-number {
+  white-space: nowrap;
 }
 
 #tour #tour-exit {
