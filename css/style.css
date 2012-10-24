@@ -1131,6 +1131,10 @@ ul.ui-autocomplete {
   margin-top: 18px;
 }
 
+#failure-message .phone-number {
+  white-space: nowrap;
+}
+
 #tour #tour-exit {
   position: absolute;
   height: 22px;
