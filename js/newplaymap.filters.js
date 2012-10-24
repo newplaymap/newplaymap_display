@@ -474,6 +474,12 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
       .attr('id', 'loading-feedback')
       .appendTo('body');
   }
+  
+  // Set a timer in case things break. Each time this gets called clear the previous timout functions.
+  clearTimeout(newPlayMap.loadingStackError);
+  newPlayMap.loadingStackError = setTimeout(function() {
+    $('#failure-message').show();
+  }, 15000);
 }
 
 /*
@@ -497,10 +503,17 @@ newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
   // When everything is done loading:
   if (newPlayMap.loadingStack.length <= 0) {
     // Hide overlay
-    $('#loading-feedback').hide()
+    $('#loading-feedback').hide();
 
-    // trigger any callbacks
+    // Hide error message just in case it fired already on a slow day
+    $('#failure-message').hide();
+    
+    // Clear error message timer
+    clearTimeout(newPlayMap.loadingStackError);
+
+    // trigger any callbacks and clear the stack
     newPlayMap.loadingStackCallbacks.fire();
+    newPlayMap.loadingStackCallbacks.empty();
   }
 }
 
