@@ -503,7 +503,10 @@ newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
   // When everything is done loading:
   if (newPlayMap.loadingStack.length <= 0) {
     // Hide overlay
-    $('#loading-feedback').hide()
+    $('#loading-feedback').hide();
+
+    // Hide error message just in case it fired already on a slow day
+    $('#failure-message').hide();
     
     // Clear error message timer
     clearTimeout(newPlayMap.loadingStackError);
