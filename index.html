@@ -373,6 +373,10 @@
                     {{if special_interests}}
                       <div class="organization-interests profile-additional-content">${special_interests_display}</div>
                     {{/if}}
+
+                    {{if ensemble_collective == "Ensemble / Collective"}}
+                      <div class="organization-ensemble profile-additional-content">${ensemble_collective}</div>
+                    {{/if}}
                     <div class="panel-delete-link">
                       <a href="participate/node/add/delete-request/${organization_id}" title="Request Deletion of ${name}">Delete</a>
                     </div>
