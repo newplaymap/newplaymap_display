@@ -316,6 +316,10 @@
                       <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
 
+                    {{if ensemble_collective == "Ensemble / Collective"}}
+                      <div class="ensemble profile-additional-content">${ensemble_collective}</div>
+                    {{/if}}
+
                     {{if website}}
                       <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
                     {{/if}}
@@ -393,7 +397,7 @@
                     {{/if}}
 
                     {{if ensemble_collective == "Ensemble / Collective"}}
-                      <div class="organization-ensemble profile-additional-content">${ensemble_collective}</div>
+                      <div class="ensemble profile-additional-content">${ensemble_collective}</div>
                     {{/if}}
 
                     {{if budget}}
