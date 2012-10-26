@@ -239,6 +239,7 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
           "related_organizations" => $organizations_by_organization,
           "founding_date" => $node["Founding date"],
           "website" => preg_replace('/https*:\/\//', '', $node["Website"]),
+          "budget" => str_replace(')', '', preg_replace('/Group [0-9] \(/', '', $node["Budget"])),
           "street" => $node["Street"],
           "postal_code" => $node["Postal Code"],
           "city" => $node["City"],
