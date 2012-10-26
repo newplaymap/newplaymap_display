@@ -361,7 +361,11 @@
                     {{if mission_statement}}
                       <div class="organization-mission-statement">${mission_statement}</div>
                     {{/if}}
-                  
+
+                    {{if organization_type_display}}
+                      <div class="organization-type profile-additional-content">${organization_type_display}</div>
+                    {{/if}}
+
                     {{if national_networks}}
                       <div class="organization-national-networks profile-additional-content">${national_networks_display}</div>
                     {{/if}}
@@ -425,10 +429,6 @@
                         
                         {{if properties.content_type == 'Event'}}
                           <div class="artist-name">by <a href="#${properties.generative_artist_path}">${properties.generative_artist}</a></div>
-                        {{/if}}
-                      
-                        {{if properties.organization_type_display}}
-                          <div class="organization-type">${properties.organization_type_display}</div>
                         {{/if}}
                         
                         {{if properties.related_theater}}
