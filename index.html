@@ -315,6 +315,19 @@
                     {{if artist_bio}}
                       <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
+
+                    {{if website}}
+                      <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
+                    {{/if}}
+
+                    {{if facebook}}
+                      <div class="website profile-additional-content"><a href="http://${facebook}">${facebook}</a></div>
+                    {{/if}}
+
+                    {{if twitter}}
+                      <div class="website profile-additional-content"><a href="http://${twitter}">${twitter}</a></div>
+                    {{/if}}
+
                     <div class="panel-delete-link">
                       <a href="participate/node/add/delete-request/${artist_id}" title="Request Deletion of ${generative_artist}">Delete</a>
                     </div>
@@ -388,7 +401,7 @@
                     {{/if}}
 
                     {{if website}}
-                      <div class="website profile-additional-content"><a href="${website}">${website}</a></div>
+                      <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
                     {{/if}}
                     <div class="panel-delete-link">
                       <a href="participate/node/add/delete-request/${organization_id}" title="Request Deletion of ${name}">Delete</a>

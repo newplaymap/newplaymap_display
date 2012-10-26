@@ -239,7 +239,7 @@ div#panel-container div#panel {
 }
 
 #panel .profile-additional-content.website {
-  text-transform: normal;
+  text-transform: lowercase;
 }
 
 ul#panel-content-links {
