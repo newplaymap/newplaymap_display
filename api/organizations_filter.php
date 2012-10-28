@@ -16,40 +16,40 @@ $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
 if($organization_name !== null) {
-  $cursor = $collection->find(array("properties.name" => $organization_name))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.name" => $organization_name))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($related_play_path !== null) {
-  $cursor = $collection->find(array("properties.related_plays.path" => $related_play_path))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.related_plays.path" => $related_play_path))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($related_artist_path !== null) {
-  $cursor = $collection->find(array("properties.related_artists.path" => $related_artist_path))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.related_artists.path" => $related_artist_path))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($related_organization_path !== null) {
-  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($path !== null) {
-  $cursor = $collection->find(array("properties.path" => $path))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.path" => $path))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($organization_type !== null) {
-  $cursor = $collection->find(array("properties.organization_type.type" => $organization_type))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.organization_type.type" => $organization_type))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($national_networks !== null) {
-  $cursor = $collection->find(array("properties.national_networks.network" => $national_networks))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.national_networks.network" => $national_networks))->limit($limit)->sort(array("properties.path" => 1));
 
 }
 
 else if($special_interests !== null) {
-  $cursor = $collection->find(array("properties.special_interests.interest" => $special_interests))->limit($limit)->sort(array("properties.name" => 1));
+  $cursor = $collection->find(array("properties.special_interests.interest" => $special_interests))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else if($city_state !== null) {
-  $cursor = $collection->find(array("properties.city_state" => $city_state))->limit($limit)->sort(array("properties.state" => 1));
+  $cursor = $collection->find(array("properties.city_state" => $city_state))->limit($limit)->sort(array("properties.path" => 1));
 }
 
 else {
