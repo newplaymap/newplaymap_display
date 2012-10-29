@@ -117,6 +117,8 @@ newPlayMap.processAddressLinks = function(className, target) {
       }
       else if (thisTarget.attr('id') == 'share-facebook') {
       }
+      else if (thisTarget.attr('id') == 'share-twitter') {
+      }
       else if (thisTarget.hasClass('twitter-share-button')) {
       }
       else if (thisTarget.attr('id') == 'share-links-show') {
