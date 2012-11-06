@@ -22,11 +22,10 @@ $i = 0;
 // iterate through the results
 foreach ($cursor as $obj) {
   if(!empty($obj['id'])) {
-    if($i > 0) {
-     $json .= ',';
-    }
-
     if (!empty($obj['properties']['artist_name'])) {
+      if($i > 0) {
+       $json .= ',';
+      }
       $json .= json_encode(array(
         'value' => $obj['properties']['artist_name'],
         'label' => $obj['properties']['artist_name_display'],
