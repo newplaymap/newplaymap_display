@@ -315,6 +315,23 @@
                     {{if artist_bio}}
                       <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
+
+                    {{if ensemble_collective == "Ensemble / Collective"}}
+                      <div class="ensemble profile-additional-content">${ensemble_collective}</div>
+                    {{/if}}
+
+                    {{if website}}
+                      <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
+                    {{/if}}
+
+                    {{if facebook}}
+                      <div class="website profile-additional-content"><a href="http://${facebook}">${facebook}</a></div>
+                    {{/if}}
+
+                    {{if twitter}}
+                      <div class="website profile-additional-content"><a href="http://${twitter}">${twitter}</a></div>
+                    {{/if}}
+
                     <div class="panel-delete-link">
                       <a href="participate/node/add/delete-request/${artist_id}" title="Request Deletion of ${generative_artist}">Delete</a>
                     </div>
@@ -329,8 +346,9 @@
                   
                   <div class="profile-header">
                     <h2>${name}</h2>
+                    {{if street}}<div>${street}</div>{{/if}}
                     {{if city}}{{if state}}
-                      <div>${city}, ${state}</div>
+                      <div>${city}, ${state}{{if postal_code}} ${postal_code}{{/if}}</div>
                     {{/if}}{{/if}}
                   </div>
                   
@@ -361,13 +379,33 @@
                     {{if mission_statement}}
                       <div class="organization-mission-statement">${mission_statement}</div>
                     {{/if}}
-                  
+
+                    {{if organization_type_display}}
+                      <div class="organization-type profile-additional-content">${organization_type_display}</div>
+                    {{/if}}
+
                     {{if national_networks}}
                       <div class="organization-national-networks profile-additional-content">${national_networks_display}</div>
                     {{/if}}
                   
                     {{if special_interests}}
                       <div class="organization-interests profile-additional-content">${special_interests_display}</div>
+                    {{/if}}
+
+                    {{if founding_date}}
+                      <div class="organization-founding-date profile-additional-content">Founded in ${founding_date}</div>
+                    {{/if}}
+
+                    {{if ensemble_collective == "Ensemble / Collective"}}
+                      <div class="ensemble profile-additional-content">${ensemble_collective}</div>
+                    {{/if}}
+
+                    {{if budget}}
+                      <div class="profile-additional-content">Budget: ${budget}</div>
+                    {{/if}}
+
+                    {{if website}}
+                      <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
                     {{/if}}
                     <div class="panel-delete-link">
                       <a href="participate/node/add/delete-request/${organization_id}" title="Request Deletion of ${name}">Delete</a>
@@ -425,10 +463,6 @@
                         
                         {{if properties.content_type == 'Event'}}
                           <div class="artist-name">by <a href="#${properties.generative_artist_path}">${properties.generative_artist}</a></div>
-                        {{/if}}
-                      
-                        {{if properties.organization_type_display}}
-                          <div class="organization-type">${properties.organization_type_display}</div>
                         {{/if}}
                         
                         {{if properties.related_theater}}

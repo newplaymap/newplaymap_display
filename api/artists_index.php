@@ -5,7 +5,7 @@ connectMongo(false);
 $collection = $m->$mongo_database->artists;
 
 // find everything in the collection
-$cursor = $collection->find()->sort(array("properties.generative_artists" => 1));
+$cursor = $collection->find()->sort(array("properties.path" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');
@@ -22,11 +22,10 @@ $i = 0;
 // iterate through the results
 foreach ($cursor as $obj) {
   if(!empty($obj['id'])) {
-    if($i > 0) {
-     $json .= ',';
-    }
-
     if (!empty($obj['properties']['artist_name'])) {
+      if($i > 0) {
+       $json .= ',';
+      }
       $json .= json_encode(array(
         'value' => $obj['properties']['artist_name'],
         'label' => $obj['properties']['artist_name_display'],

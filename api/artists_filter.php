@@ -11,19 +11,19 @@ $related_organization_path = (!empty($_GET['related_organization_path'])) ? $_GE
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
 if ($related_organization_path !== null) {
-  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->sort(array("properties.artist_name" => 1));
+  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->sort(array("properties.path" => 1));
 }
 
 else if($path !== null) {
-  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.artist_name" => 1));
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.path" => 1));
 }
 
 else if($artist_name !== null) {
-  $cursor = $collection->find(array("properties.artist_name" => $artist_name))->sort(array("properties.artist_name" => 1));
+  $cursor = $collection->find(array("properties.artist_name" => $artist_name))->sort(array("properties.path" => 1));
 }
 
 else if($ensemble_collective === "Ensemble / Collective") {
-  $cursor = $collection->find(array("properties.ensemble_collective" => $ensemble_collective))->sort(array("properties.artist_name" => 1));
+  $cursor = $collection->find(array("properties.ensemble_collective" => $ensemble_collective))->sort(array("properties.path" => 1));
 }
 
 else if($city_state !== null) {
