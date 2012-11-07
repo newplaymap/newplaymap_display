@@ -5,7 +5,7 @@ connectMongo(false);
 $collection = $m->$mongo_database->organizations;
 
 // find everything in the collection
-$cursor = $collection->find()->sort(array("properties.name" => 1));
+$cursor = $collection->find()->sort(array("properties.path" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

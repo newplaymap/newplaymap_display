@@ -238,6 +238,10 @@ div#panel-container div#panel {
   font-size: 0.857142857em;
 }
 
+#panel .profile-additional-content.website {
+  text-transform: lowercase;
+}
+
 ul#panel-content-links {
   list-style: none outside none;
   margin: 10px -15px 10px -15px;
