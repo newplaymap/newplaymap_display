@@ -250,7 +250,7 @@ function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE
     );
 
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
+    $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj),  array('upsert' => true));
     $count++;
     // print_r($newObj);
   }
@@ -363,7 +363,7 @@ function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $cle
     );
 
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj), true);
+    $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj),  array('upsert' => true));
     $count++;
     // print_r($newObj);
   }
@@ -453,7 +453,7 @@ function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clea
     )
     );
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
+    $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj),  array('upsert' => true));
     $count++;
 
     // print_r($newObj);
@@ -547,7 +547,7 @@ function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear
       )
     );
       // This will completely replace the record.
-      $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj), true);
+      $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj),  array('upsert' => true));
       $count++;
       // print_r($newObj);
   }
