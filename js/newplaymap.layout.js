@@ -1,3 +1,5 @@
+var newPlayMap = newPlayMap || {};
+newPlayMap.layout = newPlayMap.layout || {};
 
 newPlayMap.updatePanel = function(marker, data) {
   $('div#panel-container div#panel').css('visibility', 'visible');
@@ -54,7 +56,7 @@ newPlayMap.updateBubble = function(marker, data) {
   // hard coded for events for now. @TODO: Figure out chach's way of using featureData.title and templates
 
   switch (featureData.properties.content_type) {
-    case "Generative Artist":
+    case "Artist":
       var title = featureData.properties.artist_name;
     break;
     case "Event":
@@ -172,11 +174,19 @@ newPlayMap.panelTemplate = function(feature) {
 
 newPlayMap.loadResults = function(features, vars) {
   var type = "results";
+  var resultType = vars.type;
   var template = "results-template";
-  var container, containerEmpty;
+  var container, containerEmpty, resultsEmpty;
   containerEmpty = $('#panel-container .content');
-  containerEmpty.empty();
-  container = $('#panel-container .' + type);
+  
+  // Play type should load results into events list
+  if (resultType == 'play') {
+    resultType = 'event';
+  }
+
+  resultsEmpty = $('#panel-container .results-container-' + resultType + ' .results');
+  resultsEmpty.empty();
+  container = $('#panel-container .results-container-' + resultType + '.' + type);
   container.empty();
   // console.log(features.length);
   
@@ -202,9 +212,12 @@ newPlayMap.loadResults = function(features, vars) {
       $.extend(result, feature);  
 
       $('#' + template).tmpl(result)
-        .appendTo(container);
-        
-      newPlayMap.resultsListProcess($('#panel-container .results-container'));
+        // .appendTo(container);
+        .appendTo('#panel-container .results-container-' + resultType + ' .results');
+        // .appendTo('#panel-container .results-container-organization .results');
+      if (resultType != 'play') {
+        newPlayMap.resultsListProcess($('#panel-container .results-container-' + resultType));
+      }
   }
   
   if (len > 0) {
@@ -213,10 +226,36 @@ newPlayMap.loadResults = function(features, vars) {
     var resultsCount = jsonData[vars.dataName]["features"].length;
 
     var totalCount = jsonData[vars.dataName].count;
+
+    if (resultsType == 'Generative Artist') {
+      resultsType = 'Artist';
+    }
     newPlayMap.setResultsTitle(resultsType, resultsCount, totalCount);
 
     newPlayMap.processAddressLinks('internal-address');
     $('.internal-address').address();
+
+    // Truncate all results to 3 each and add a link for more
+    if (len > 3 && vars.resultsTitle != "What's Happening Today") {
+      $('#panel-container .results-container-' + resultType + ' ol.results > li').each(function(count) {
+        if (count > 2) {
+          $(this).addClass('more-results');
+        }
+      });
+      
+      $('#panel-container .results-container-' + resultType + ' ol.results li.more-results').hide();
+
+      if ($('#panel-container .results-container-' + resultType + ' .show-more-results').length == 0) {
+        $('<a></a>')
+          .addClass('show-more-results')
+          .text('More ' + resultType + 's')
+          .click(function() {
+            $('#panel-container .results-container-' + resultType + ' ol.results li.more-results').fadeIn();
+            $(this).fadeOut().remove();
+          })
+          .appendTo('#panel-container .results-container-' + resultType);
+      }
+    }
   }
   else {
     // If nothing came back, clear out
@@ -224,6 +263,46 @@ newPlayMap.loadResults = function(features, vars) {
     newPlayMap.setResultsTitle('Result', 0);
   }
 };
+
+/*
+ * Helper function to clear out content panel
+ *
+ * For now all panels should be cleared. Maybe in the future we'll want type but not foreseable.
+ */
+newPlayMap.layout.clearPanelContent = function() {
+  var containerEmpty = $('#panel-container .content');
+  containerEmpty.empty();
+
+  // Also clear out all share qtips
+  $('.qtip').has('.share-link').remove();
+}
+ 
+/*
+ * Helper function to clear out different results listing
+ *
+ * @param type
+ * type of results to be cleared
+ */
+newPlayMap.layout.clearResults = function(type) {
+  if (typeof type != 'undefined') {
+    $('.results-container-' + type + ' ol.results').empty().siblings('.results-title').find('h2').text('');
+    $('.results-container-' + type + ' .show-more-results').remove();
+  }
+  else {
+    $('.results-container ol.results').each(function() {
+      $(this).empty().siblings('.results-title').find('h2').text('');
+    });
+    $('.show-more-results').remove();
+  }
+}
+
+/*
+ * Wrapper function to clear all results and panel content 
+ */
+newPlayMap.layout.clearEntirePanel = function() {
+  newPlayMap.layout.clearPanelContent();
+  newPlayMap.layout.clearResults();
+}
 
 /*
  * Rewrite results header
@@ -240,7 +319,7 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
     // Check last letters for plural formatting: http://www.meredith.edu/grammar/plural.htm#and%20x
     var lastLetter = resultsType.substring(resultsType.length, resultsType.length-1);
     var lastTwoLetters = resultsType.substring(resultsType.length, resultsType.length-2);
-    
+
     if (lastLetter === 's' || lastLetter === 'z' || lastLetter === 'x' || lastTwoLetters === 'ch' || lastTwoLetters === 'sh') {
       resultsPlural = "es";
     }
@@ -249,13 +328,13 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
     }
   }
 
-  $('#panel-container .results-container .results-title h2')
+  $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' .results-title h2')
     .attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results-title')
     .text(resultsCount + ' ' + resultsType + resultsPlural);
     
-  $('#panel-container .results-container .results-title .results-total-count').text(totalCountText);
+  $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' .results-title .results-total-count').text(totalCountText);
   
-  $('#panel-container .results-container ol.results').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results');
+  $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' ol.results').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results');
 }
 
 
@@ -263,12 +342,10 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
 newPlayMap.loadExtras = function(features) {
   var type = "extras";
   var template = "extras-template";
-  var container, containerEmpty;
-  containerEmpty = $('#panel-container .content');
-  containerEmpty.empty();
-  container = $('#panel-container .' + type);
-  container.empty();
-  
+  var container;
+
+  newPlayMap.layout.clearPanelContent();
+
   var len = features.length;
   for (var i = 0; i < len; i++) {
 
@@ -290,7 +367,7 @@ newPlayMap.loadExtras = function(features) {
 
 newPlayMap.resultsListProcess = function(container) {
   // console.log($(container).find('ol.journey li'));
-  $(container).find('ol.results li').hoverIntent({
+  $(container).find('ol.results > li').hoverIntent({
     over: function() {
       $(this).addClass('active');
 
@@ -300,8 +377,10 @@ newPlayMap.resultsListProcess = function(container) {
 
       var eventId = $(this).attr('listing_id');
 
-      spotlight.addLocations(locationsByID[eventId]);
-      spotlight.parent.className = "active";
+      if (typeof locationsByID[eventId] != 'undefined') {
+        spotlight.addLocations(locationsByID[eventId]);
+        spotlight.parent.className = "active";
+      }
       $('div#panel-container div#panel .content').show();
     },
     out: function() {

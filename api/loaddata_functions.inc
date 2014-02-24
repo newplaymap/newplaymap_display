@@ -33,9 +33,10 @@ function getJsonExport($domain, $base_path, $path, $arguments = NULL) {
   return $json;
 }
 
-function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadOrganizations($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
-  $organizations = $m->newplaymap->organizations;
+  $organizations = $m->$mongo_database->organizations;
+  $events_collection = $m->$mongo_database->events;
 
   if ($clear_data == TRUE) {
     $organizations->drop();
@@ -104,6 +105,113 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
     }
     
     $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
+    
+    // Add Related Play info to Orgs (in order to build the orgs per play list)
+    // AND Add Related Organization info to Orgs (in order to build the orgs per org list)
+    // AND Add Related Artist info to Orgs (in order to build the orgs per artist list)
+    // -- It's the same loop, building different sets of data
+    $organization_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(
+      array('$or' => array(
+        array("properties.related_theater_path" => $organization_path),
+        array("properties.partner_organizations.path" => $organization_path),
+      ))
+    )->sort(array("properties.related_theater" => 1));
+
+    $plays_by_organization = array();
+    $unique_plays_by_organization = array();
+    $organizations_by_organization = array();
+    $unique_organizations_by_organization = array();
+    $artists_by_organization = array();
+    $unique_artists_by_organization = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['play_title'])) {
+        if (!in_array($obj['properties']['related_play_path'], $unique_plays_by_organization)) {
+
+          // Add it to an array to check if things are unique
+          $unique_plays_by_organization[] = $obj['properties']['related_play_path'];
+          $plays_by_organization[] = array(
+            "name" => $obj['properties']['play_title_display'],
+            "path" => $obj['properties']['related_play_path'],
+          );
+        }
+      }
+
+      if (!empty($obj['properties']['partner_organizations'][0]['path'])) {
+        foreach ($obj['properties']['partner_organizations'] as $partner_organization) {
+          if (
+            !in_array($partner_organization['path'], $unique_plays_by_organization)
+            // && $organization_path != $partner_organization['path']
+          ) {
+
+            // Add it to an array to check if things are unique
+            $unique_plays_by_organization[] = $partner_organization['path'];
+            $plays_by_organization[] = array(
+              "name" => $partner_organization['name'],
+              "path" => $partner_organization['path'],
+              "has_location" => $partner_organization['has_location'],
+            );
+          }
+        }
+      }
+
+      // Add all the main related theaters to the lsit
+      if(!empty($obj['id']) && !empty($obj['properties']['related_theater_path'])) {
+        if (
+          !in_array($obj['properties']['related_theater_path'], $unique_organizations_by_organization)
+          // && $organization_path != $obj['properties']['related_theater_path']
+        ) {
+
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_organization[] = $obj['properties']['related_theater_path'];
+          $organizations_by_organization[] = array(
+            "name" => $obj['properties']['related_theater'],
+            "path" => $obj['properties']['related_theater_path'],
+            "has_location" => $obj['properties']['related_theater_has_location'],
+          );
+        }
+
+        if (!empty($obj['properties']['partner_organizations'][0]['path'])) {
+          foreach ($obj['properties']['partner_organizations'] as $partner_organization) {
+            if (
+              !in_array($partner_organization['path'], $unique_organizations_by_organization)
+              // && $organization_path != $partner_organization['path']
+            ) {
+
+              // Add it to an array to check if things are unique
+              $unique_organizations_by_organization[] = $partner_organization['path'];
+              $organizations_by_organization[] = array(
+                "name" => $partner_organization['name'],
+                "path" => $partner_organization['path'],
+                "has_location" => $partner_organization['has_location'],
+              );
+            }
+          }
+        }
+      }
+      
+      if(!empty($obj['id']) && !empty($obj['properties']['generative_artist'])) {
+        if (!in_array($obj['properties']['generative_artist'], $unique_artists_by_organization)) {
+    
+          // Add it to an array to check if things are unique
+          $unique_artists_by_organization[] = $obj['properties']['generative_artist'];
+          $artists_by_organization[] = array(
+            "name" => $obj['properties']['generative_artist'],
+            "path" => $obj['properties']['generative_artist_path'],
+          );
+        }
+      }
+    }
+    
+    // Order the related organizations by name (http://www.php.net/manual/en/function.array-multisort.php)
+    // Obtain a list of columns
+    $organizations_by_organization_name = array();
+    foreach ($organizations_by_organization as $key => $row) {
+        $organizations_by_organization_name[$key]  = $row['name'];
+    }
+    // Sort the organizations with name ascending
+    // Add $organizations_by_organization as the last parameter, to sort by the common key
+    array_multisort($organizations_by_organization_name, SORT_ASC, $organizations_by_organization);
 
     $newObj = array(
       "id" => $node["Org ID"],
@@ -123,11 +231,17 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
           "longitude" => $node["Longitude"],
           "mission_statement" => $node["Mission statement"],
           "ensemble_collective" => $node["Ensemble collective"],
-  /*         "founding_date" => $node["Founding date"] == $node["Founding date"] ? "", */
-          // "organization_type" => implode(',', get_object_vars($node["Organization type"])),
           "organization_type" => $org_list,
           "special_interests" => $special_interests_list,
           "national_networks" => $national_networks_list,
+          "related_plays" => $plays_by_organization,
+          "related_artists" => $artists_by_organization,
+          "related_organizations" => $organizations_by_organization,
+          "founding_date" => $node["Founding date"],
+          "website" => preg_replace('/https*:\/\/w*\.*/', '', $node["Website"]),
+          "budget" => str_replace(')', '', preg_replace('/Group [0-9] \(/', '', $node["Budget"])),
+          "street" => $node["Street"],
+          "postal_code" => $node["Postal Code"],
           "city" => $node["City"],
           "state" => $node["State"],
           "city_state" => html_entity_decode($city_state, ENT_QUOTES),
@@ -136,7 +250,7 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
     );
 
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj), true);
+    $collection->update(array('id' => $node["Org ID"]), array('$set' => $newObj),  array('upsert' => true));
     $count++;
     // print_r($newObj);
   }
@@ -150,9 +264,10 @@ function loadOrganizations($m, $domain, $base_path, $id = FALSE, $clear_data = F
 
 
 
-function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadArtists($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
-  $artists = $m->newplaymap->artists;
+  $artists = $m->$mongo_database->artists;
+  $events_collection = $m->$mongo_database->events;
 
   // find everything in the collection
   $cursor =  $artists->find();
@@ -181,6 +296,41 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
     
     $city_state = (!empty($node["City"]) && !empty($node["State"])) ? $node["City"] . ', ' . $node["State"] : '';
 
+    //Generate list of organizations per artist
+    $artist_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.related_theater" => 1));
+
+    $organizations_by_artist = array();
+    $unique_organizations_by_artist = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['related_theater'])) {
+        if (!in_array($obj['properties']['related_theater_path'], $unique_organizations_by_artist)) {
+
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_artist[] = $obj['properties']['related_theater_path'];
+          $organizations_by_artist[] = array(
+            "name" => $obj['properties']['related_theater'],
+            "path" => $obj['properties']['related_theater_path'],
+          );
+        }
+      }
+
+      if (!empty($obj['properties']['partner_organizations'][0]['path'])) {
+        foreach ($obj['properties']['partner_organizations'] as $partner_organization) {
+          if (!in_array($partner_organization['path'], $unique_organizations_by_artist)) {
+
+            // Add it to an array to check if things are unique
+            $unique_organizations_by_artist[] = $partner_organization['path'];
+            $organizations_by_artist[] = array(
+              "name" => $partner_organization['name'],
+              "path" => $partner_organization['path'],
+              "has_location" => $partner_organization['has_location'],
+            );
+          }
+        }
+      }
+    }
+
     $newObj = array(
       "id" => $node["Artist ID"],
       "type" => "Feature",
@@ -201,6 +351,11 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
           "artist_name_display" => html_entity_decode($node["Generative artist"], ENT_QUOTES),
           "artist_bio" => $node["Bio"],
           "ensemble_collective" => $node["ensemble_collective"],
+          "website" => preg_replace('/https*:\/\/w*\.*/', '', $node["Website"]),
+          "facebook" => preg_replace('/https*:\/\/w*\.*/', '', $node["Facebook"]),
+          "twitter" => preg_replace('/https*:\/\/w*\.*/', '', $node["Twitter"]),
+          // "related_organizations" => $related_organizations_by_artist,
+          "related_organizations" => $organizations_by_artist,
           "city" => $node["City"],
           "state" => $node["State"],
           "city_state" => html_entity_decode($city_state, ENT_QUOTES),
@@ -208,7 +363,7 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
     );
 
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj), true);
+    $collection->update(array('id' => $node["Artist ID"]), array('$set' => $newObj),  array('upsert' => true));
     $count++;
     // print_r($newObj);
   }
@@ -221,9 +376,9 @@ function loadArtists($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) 
 
 
 
-function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadEvents($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
-  $events = $m->newplaymap->events;
+  $events = $m->$mongo_database->events;
   
   if ($clear_data == TRUE) {
     $events->drop();
@@ -253,6 +408,11 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
     
     $related_theater_has_location = ($node["Organization coordinates"] != ',') ? TRUE : FALSE;
     $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+    
+    // Process Partner Orgs
+    $partner_organizations = json_decode($node['Partner Organizations Data']);
+    // $dsm(json_decode($node['Partner Organizations Data']));
+    // $partner_organizations = str_replace('"', "", $node['Partner Organizations Data']);
   
     // @TODO: See if the string replace on path can be removed
     $newObj = array(
@@ -288,10 +448,12 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
         "city" => $node["City"],
         "state" => $node["State"],
         "city_state" => html_entity_decode($city_state, ENT_QUOTES),
+        "partner_organizations" => $partner_organizations,
+        
     )
     );
     // This will completely replace the record.
-    $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj), true);
+    $collection->update(array('id' => $node["Event ID"]), array('$set' => $newObj),  array('upsert' => true));
     $count++;
 
     // print_r($newObj);
@@ -303,9 +465,10 @@ function loadEvents($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
 
 
-function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
+function loadPlays($m, $mongo_database, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
   
-  $plays = $m->newplaymap->plays;
+  $plays = $m->$mongo_database->plays;
+  $events_collection = $m->$mongo_database->events;
 
   if ($clear_data == TRUE) {
     $plays->drop();
@@ -329,43 +492,64 @@ function loadPlays($m, $domain, $base_path, $id = FALSE, $clear_data = FALSE) {
 
   foreach ($objects as $obj_load) {
 
-  $node = (array) $obj_load->node;
+    $node = (array) $obj_load->node;
   
-  // Set up proper array for Alternate play titles
-  $alternate_titles_list = array();
+    // Set up proper array for Alternate play titles
+    $alternate_titles_list = array();
 
-  if (is_object($node["Alternate titles"])) {
-    foreach ($node["Alternate titles"] as $alt_title) {
-      $alternate_titles_list[] = array('title' => $alt_title);
+    if (is_object($node["Alternate titles"])) {
+      foreach ($node["Alternate titles"] as $alt_title) {
+        $alternate_titles_list[] = array('title' => $alt_title);
+      }
+    } else {
+      $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
     }
-  } else {
-    $alternate_titles_list[] = array('title' => $node["Alternate titles"]);
-  }
   
-  $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+    $generative_artist_has_location = ($node["Generative artist coordinates"] != ',') ? TRUE : FALSE;
+    
+    //Generate list of organizations per play
+    $play_path = '/' . str_replace($base_path, "", $node["Path"]);
+    $events_cursor = $events_collection->find(array("properties.related_play_path" => $play_path))->sort(array("properties.related_theater" => 1));
+
+    $organizations_by_play = array();
+    $unique_organizations_by_play = array();
+    foreach ($events_cursor as $obj) {
+      if(!empty($obj['id']) && !empty($obj['properties']['related_theater'])) {
+        if (!in_array($obj['properties']['related_theater'], $unique_organizations_by_play)) {
+
+          // Add it to an array to check if things are unique
+          $unique_organizations_by_play[] = $obj['properties']['related_theater'];
+          $organizations_by_play[] = array(
+            "name" => $obj['properties']['related_theater'],
+            "path" => $obj['properties']['related_theater_path'],
+          );
+        }
+      }
+    }
   
-  // print_r($node);
-  $newObj = array(
-    "id" => $node["Play ID"],
-    "type" => "Feature",
-    "properties" => array(
-      "play_id"  => $node["Play ID"],
-      "content_type"  => $node["Content Type"],
-      "artist_id"  => $node["Artist ID"],
-      "play_title"  => $node["Play title"],
-      "play_title_display"  => html_entity_decode($node["Play title"], ENT_QUOTES),
-      "alternate_titles"  => $alternate_titles_list,
-      "generative_artist"  => $node["Generative Artist"],
-      "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
-      "generative_artist_has_location"  => $generative_artist_has_location,
-      "synopsis"  => $node["Synopsis"],
-      "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
-    )
-  );
-    // This will completely replace the record.
-    $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj), true);
-    $count++;
-    // print_r($newObj);
+    // print_r($node);
+    $newObj = array(
+      "id" => $node["Play ID"],
+      "type" => "Feature",
+      "properties" => array(
+        "play_id"  => $node["Play ID"],
+        "content_type"  => $node["Content Type"],
+        "artist_id"  => $node["Artist ID"],
+        "play_title"  => $node["Play title"],
+        "play_title_display"  => html_entity_decode($node["Play title"], ENT_QUOTES),
+        "alternate_titles"  => $alternate_titles_list,
+        "generative_artist"  => $node["Generative Artist"],
+        "generative_artist_path"  => '/' . str_replace($base_path, "", $node["Related artist path"]),
+        "generative_artist_has_location"  => $generative_artist_has_location,
+        "related_organizations" => $organizations_by_play,
+        "synopsis"  => $node["Synopsis"],
+        "path" =>  '/' . str_replace($base_path, "", $node["Path"]),
+      )
+    );
+      // This will completely replace the record.
+      $collection->update(array('id' => $node["Play ID"]), array('$set' => $newObj),  array('upsert' => true));
+      $count++;
+      // print_r($newObj);
   }
     // print '</pre>';
   // echo 'plays<br />';

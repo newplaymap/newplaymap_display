@@ -2,25 +2,28 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$plays = $m->newplaymap->plays;
-$events = $m->newplaymap->events;
+$plays = $m->$mongo_database->plays;
+$events = $m->$mongo_database->events;
+
 if(!empty($_GET['id'])){
   $id = $_GET['id'];
   $play_cursor = $plays->findOne(array('id' => $id));
 }
+
 if(!empty($_GET['play_title']) && $_GET['play_title'] !== "undefined" ){
   $play_title = $_GET['play_title'];
   $play_cursor = $plays->findOne(array('properties.play_title' => $play_title));
 }
+
 if(!empty($_GET['path'])) {
   $path = $_GET['path'];
-  $expression = new MongoRegex('/'. $path . '/i');
-  $event_cursor = $events->findOne(array('properties.path' => $expression));
+  $event_cursor = $events->findOne(array('properties.related_play_path' => $path));
   $play_cursor = $plays->findOne(array('id' => $event_cursor["properties"]["related_play_id"]));
 }
+
 if(!empty($play_cursor['id'])) {
   $query = array('properties.related_play_id' => (string) $play_cursor['id']);
-  $events_cursor = $m->newplaymap->events->find($query)->sort(array("properties.event_date" => 1));
+  $events_cursor = $m->$mongo_database->events->find($query)->sort(array("properties.event_date" => -1));
 }
 
 

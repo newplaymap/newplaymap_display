@@ -2,23 +2,28 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->artists;
+$collection = $m->$mongo_database->artists;
 
 $artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
 $ensemble_collective = (!empty($_GET['ensemble_collective'])) ? $_GET['ensemble_collective'] : null;
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
+$related_organization_path = (!empty($_GET['related_organization_path'])) ? $_GET['related_organization_path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
-if($path !== null) {
-  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.artist_name" => 1));
+if ($related_organization_path !== null) {
+  $cursor = $collection->find(array("properties.related_organizations.path" => $related_organization_path))->sort(array("properties.path" => 1));
+}
+
+else if($path !== null) {
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.path" => 1));
 }
 
 else if($artist_name !== null) {
-  $cursor = $collection->find(array("properties.artist_name" => $artist_name))->sort(array("properties.artist_name" => 1));
+  $cursor = $collection->find(array("properties.artist_name" => $artist_name))->sort(array("properties.path" => 1));
 }
 
 else if($ensemble_collective === "Ensemble / Collective") {
-  $cursor = $collection->find(array("properties.ensemble_collective" => $ensemble_collective))->sort(array("properties.artist_name" => 1));
+  $cursor = $collection->find(array("properties.ensemble_collective" => $ensemble_collective))->sort(array("properties.path" => 1));
 }
 
 else if($city_state !== null) {

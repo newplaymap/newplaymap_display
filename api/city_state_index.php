@@ -6,19 +6,19 @@ $type = (!empty($_GET['type'])) ? $_GET['type'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 
 // Default to artists
-$collection = $m->newplaymap->artists;
+$collection = $m->$mongo_database->artists;
 
 switch ($type) {
   case 'artists':
-    $collection = $m->newplaymap->artists;
+    $collection = $m->$mongo_database->artists;
   break;
   
   case 'organizations':
-    $collection = $m->newplaymap->organizations;
+    $collection = $m->$mongo_database->organizations;
   break;
   
   case 'events':
-    $collection = $m->newplaymap->events;
+    $collection = $m->$mongo_database->events;
   break;
 }
 

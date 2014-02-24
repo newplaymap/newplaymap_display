@@ -11,13 +11,17 @@ var loaded = 0;
 var markers = {};
 newPlayMap.routing = {};
 newPlayMap.routing.route = {};
+newPlayMap.tour = {};
 newPlayMap.browserEvents = [];
 newPlayMap.filters = newPlayMap.filters || {};
+newPlayMap.loadingStack = newPlayMap.loadingStack || [];
+newPlayMap.loadingStackCallbacks = newPlayMap.loadingStackCallbacks || $.Callbacks();
 
 window.onload = function() {
-  newPlayMap.alterHomepage();   // Change basic layout of page.
-  newPlayMap.loadMap();         // Load map tiles & trigger data to load.
-  newPlayMap.initializeFilters();  // Add interaction to filters in sidebar panel
+  newPlayMap.alterHomepage();       // Change basic layout of page.
+  newPlayMap.loadMap();             // Load map tiles & trigger data to load.
+  newPlayMap.initializeFilters();   // Add interaction to filters in sidebar panel
+  newPlayMap.tourInteraction();     // Set up tour interaction
 };
 
 newPlayMap.loadMap = function(callback){
@@ -35,7 +39,13 @@ newPlayMap.alterHomepage = function() {
   // Set up some links to trigger default content
   $('.reset-map').click(function() {
     newPlayMap.loadDefaultContent();
+    
+    // Close Filters
+    $('#filter-container:visible').slideUp();
   });
+
+  // Pull welcome links from drupal site
+  newPlayMap.setWelcomeLinks();
 
   return false;
 };
@@ -92,6 +102,25 @@ newPlayMap.initMapSimple = function() {
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
 
+  newPlayMap.recenterMap(map);
+
+  // Load interactive behavior.
+  spotlight = new SpotlightLayer();
+  map.addLayer(spotlight);
+
+
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
+  markers.parent.setAttribute("id", "markers");
+
+  // Load map marker layers.
+  var data = newPlayMap.loadMapData();
+
+  // Run data layers closure.
+  data();
+};
+
+newPlayMap.recenterMap = function(map) {
   // Find appropriate zoom level
   newPlayMap.defaultZoom = 3;
 
@@ -115,22 +144,7 @@ newPlayMap.initMapSimple = function() {
   }
   
   map.setCenterZoom(new MM.Location(defaultLat, defaultLon), defaultZoom);
-
-  // Load interactive behavior.
-  spotlight = new SpotlightLayer();
-  map.addLayer(spotlight);
-
-
-  markers = new MM.MarkerLayer();
-  map.addLayer(markers);
-  markers.parent.setAttribute("id", "markers");
-
-  // Load map marker layers.
-  var data = newPlayMap.loadMapData();
-
-  // Run data layers closure.
-  data();
-};
+}
 
 newPlayMap.loadMapData = function() {
   return function () {
@@ -139,41 +153,39 @@ newPlayMap.loadMapData = function() {
 };
 
 newPlayMap.initializeFilters = function() {
+  newPlayMap.processFilters();
+
   $('#explore-filters-button').click(function() {
-    newPlayMap.processFilters();
+    $('#filter-container').slideDown();
+    // newPlayMap.loadDefaultContent();
+    newPlayMap.filters.showAll('plays');
+    newPlayMap.recenterMap(map);
+    newPlayMap.data.clearAllLayers();
   });
 }
 
 newPlayMap.processFilters = function() {
-    if ($('#explore-filters-button').hasClass('processed')) {
-      $('#filter-container').slideToggle();
-    }
-    else {
-      // newPlayMap.filters.loadingFeedback();
+  newPlayMap.filters.setupFilters();
 
-      newPlayMap.filters.setupFilters();
+  $('#filters form').tabs();
+  
+  $('#filters-hide span').click(function() {
+    $('#filter-container').slideUp();
+  });
 
-      $('#filters form').tabs();
+  $('#explore-plays .show-all-link').click(function() {
+    newPlayMap.filters.showAll('plays');
+  });  
 
-      $('#explore-plays .show-all-link').click(function() {
-        newPlayMap.filters.showAll('plays');
-      });  
+  $('#explore-organizations .show-all-link').click(function() {
+    newPlayMap.filters.showAll('organizations');
+  });  
 
-      $('#explore-organizations .show-all-link').click(function() {
-        newPlayMap.filters.showAll('organizations');
-      });  
+  $('#explore-artists .show-all-link').click(function() {
+    newPlayMap.filters.showAll('artists');
+  });
 
-      $('#explore-artists .show-all-link').click(function() {
-        newPlayMap.filters.showAll('artists');
-      });
-
-      $('#filter-container').slideToggle();
-      $('#explore-filters-button').addClass('processed');
-    }
-
-  // @TODO: If we are loading pins initially, then comment this out. 
-  //        The load function will take care of removing feedback.
-  // $('#loading-feedback').hide();
+  $('#explore-filters-button').addClass('processed');
 };
 
 newPlayMap.loadData = function() {
@@ -228,6 +240,21 @@ newPlayMap.loadData = function() {
 };
 
 
+newPlayMap.setWelcomeLinks = function() {
+  $.ajax({
+    url: 'participate/welcome-links',
+    success: function(data) {
+      if (data != '') {
+        $('#header-register').html(data);
+      }
+    },
+    complete: function() {
+      $('#header-register').fadeIn('slow');
+    }
+  });
+}
+
+
 newPlayMap.loadPageRouter = function() { 
   // Listen for address.
   $.address.change(function(event) {
@@ -237,7 +264,7 @@ newPlayMap.loadPageRouter = function() {
       if(newPlayMap.routing.path.args !== undefined) {
         switch(newPlayMap.routing.path.args[0]) {
           case 'play':
-            newPlayMap.filters.plays({path: newPlayMap.routing.path.base});
+            newPlayMap.filters.playJourney({path: newPlayMap.routing.path.base});
             break;
           case 'artist':
             newPlayMap.filters.artists({path: newPlayMap.routing.path.base});
@@ -250,38 +277,36 @@ newPlayMap.loadPageRouter = function() {
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 0);
           break;
           case 'explore-plays':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
-              $('#filters form').tabs('select', 0);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 0);
           break;
           case 'explore-organizations':
             // Open tabs and select correct tab
             // @TODO: Somehow set up filters and show them. Not working since we moved the setup to click
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
-              newPlayMap.processFilters();
-              $('#filters form').tabs('select', 1);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 1);
           break;
           case 'explore-artists':
             // Open tabs and select correct tab
@@ -289,12 +314,12 @@ newPlayMap.loadPageRouter = function() {
             //        rather than on page load to speed things up.
             if (newPlayMap.hasContentBeenLoaded() == false) {
               newPlayMap.processFilters();
-              $('#filters form').tabs('select', 2);
               $('#filter-container').slideDown();
 
               // If it's on initial page load, load default
               newPlayMap.loadDefaultContent();
             }
+            $('#filters form').tabs('select', 2);
           break;
           case 'all-artists':
             if (newPlayMap.hasContentBeenLoaded() == false) {
@@ -317,6 +342,10 @@ newPlayMap.loadPageRouter = function() {
             }
             // newPlayMap.filters.showAll('plays'); // the index isn't built yet
           break;
+          case 'tour':
+            newPlayMap.loadDefaultContent();
+            newPlayMap.tourStart();
+          break;
         }
       }
       else {
@@ -334,6 +363,8 @@ newPlayMap.loadPageRouter = function() {
   // Force address to update on page load.
   // Note: there are multiple conditions to test:
   // -- refresh,reload + home, play+event_id,play, and the page loading, and clicking first time, and subsequent clicks.
+  // -- Clear the pins before the reload to prevent duplicate pins. @TODO: Figure out why this needs to load twice and if possible remove both these function calls.
+  newPlayMap.data.clearAllLayers();
   $.address.update();
 };
 
@@ -346,9 +377,19 @@ newPlayMap.loadDefaultContent = function() {
   var today = new Date();
   var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
   // console.log('default');
-  var todayHeader = "What's Happening on " + formattedDate;
+  var todayHeader = "What's Happening Today";
   
+  // Clear out any panel content
+  newPlayMap.layout.clearPanelContent();
+
+  // Clear out any results content
+  newPlayMap.layout.clearResults();
+
+  // Load What's on Today
   newPlayMap.filters.events({ start_date: formattedDate, end_date: formattedDate, highlight: "off" }, todayHeader);
+
+  // Recenter map
+  newPlayMap.recenterMap(map);
 }
 
 
@@ -481,7 +522,7 @@ newPlayMap.embedInteraction = function() {
 }
 
 newPlayMap.shareInteraction = function() {
-  var target = $('.qtip-content #share-link');
+  var target = $('.qtip-content .share-link');
   if (target.hasClass('processed')) {
     return;
   }
@@ -496,5 +537,190 @@ newPlayMap.shareInteraction = function() {
     $('.qtip-content #share-code').hover(function() {
       $('.qtip-content #share-code input').select();
     });
+  }
+}
+
+newPlayMap.tourInteraction = function() {
+  // If you don't want the tour to launch automatically, comment out:
+  // -- newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart()); below
+  // -- $.cookie('newplaymap_tour', true); in newPlayMap.tourStart function
+  // Queue start tour for when the filters are done
+  if ($.cookie('newplaymap_tour') != 'true') {
+    newPlayMap.loadingStackCallbacks.add(newPlayMap.tourStart);
+  }
+
+  // Add start tour link
+  $('<a></a>')
+    .text('Tour')
+    .addClass('start-tour')
+    .attr('href', 'tour')
+    .click(function(event) {
+      event.preventDefault();
+      newPlayMap.tourStart();
+    })
+    .wrap('<li></li>')
+    .parent()
+    .insertBefore('#header-links ul.nav li:last');
+
+  // Close button functionality
+  $('#tour-exit').click(function() {
+    // Hide the tour and all arrows
+    newPlayMap.tourStop();
+  });
+
+  $('#tour-controls .tour-next').click(function() {
+    if ($(this).hasClass('inactive') == false) {
+      // If this isn't the last step...
+      if ($('.tour-step.active').hasClass('last') == false) {
+        // Move to the next slide
+        $('.tour-step.active').hide().removeClass('active').next().show().addClass('active');
+        newPlayMap.setTourControlsStatus();
+        newPlayMap.setTourArrows();
+      }
+    }
+  });
+  
+  $('#tour-controls .tour-previous').click(function() {
+    if ($(this).hasClass('inactive') == false) {
+      // If this isn't the first step...
+      if ($('.tour-step.active').hasClass('first') == false) {
+        // Move to the previous slide
+        $('.tour-step.active').hide().removeClass('active').prev().show().addClass('active');
+        newPlayMap.setTourControlsStatus();
+        newPlayMap.setTourArrows();
+      }
+    }
+  });
+}
+
+newPlayMap.tourStart = function() {
+  $('#tour').show();
+  $('#tour-overlay').show();
+  $('.tour-step.first').addClass('active').show();
+  // Add the arrows for the first slide
+  newPlayMap.setTourArrows();
+  $.cookie('newplaymap_tour', true);
+}
+
+newPlayMap.tourStop = function() {
+  $('.tour-step').removeClass('active').hide();
+  $('#tour').hide();
+  $('.tour-arrows').remove();
+  $('#tour-overlay').hide();
+  $('#tour-controls .tour-counter .tour-counter-current').text(1);
+  $('#tour-controls .tour-previous').addClass('inactive');
+  $('#tour-controls .tour-next').removeClass('inactive');
+}
+
+newPlayMap.setTourControlsStatus = function() {
+  // Set the controls status
+  if ($('.tour-step.active').hasClass('first') == true) {
+    $('#tour-controls .tour-previous').addClass('inactive');
+  }
+  else if ($('.tour-step.active').hasClass('last') == true) {
+    $('#tour-controls .tour-next').addClass('inactive');
+  }
+  else {
+    $('#tour-controls .inactive').removeClass('inactive');
+  }
+  
+  // Set the number
+  var currentSlideNumber = $('.tour-step.active').attr('id').replace('tour-step', '');
+  $('#tour-controls .tour-counter .tour-counter-current').text(currentSlideNumber);
+}
+
+newPlayMap.setTourArrows = function() {
+  var step = $('.tour-step.active').attr('id').replace('tour-step', '');
+  var target = '';
+  var arrowImageOffset = 0;
+  var arrowDelay = 250;
+  var arrowFadeTime = 800;
+  var clearTimers = function() {
+    clearTimeout(newPlayMap.tour.step1Timer);
+    clearTimeout(newPlayMap.tour.step2Timer);
+    clearTimeout(newPlayMap.tour.step3Timer);
+  };
+
+  // Clear out old arrows
+  var clearArrows = function() {
+    $('.tour-arrows').remove();
+  };
+  clearArrows();
+
+  if (step == null) {
+    return;
+  }
+  else if (step == 1) {
+    clearTimers();
+
+    target = $('#panel-container').offset();
+    arrowImageOffset = 107;
+
+    newPlayMap.tour.step1Timer = setTimeout(function() {
+      clearArrows();
+      $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+        'left': target.left - arrowImageOffset - 50,
+        'top': '50%'
+      })
+      .animate({
+        opacity: 1,
+        left: '+=50'
+      }, arrowFadeTime, function(){});
+
+      $('#filter-container:visible').slideUp();
+    }, arrowDelay);
+  }
+  else if (step == 2) {
+    // Top explore button arrow
+    clearTimers();
+
+    newPlayMap.tour.step2Timer = setTimeout(function() {
+      clearArrows();
+
+      topTarget = $('#explore-filters-button').offset();
+      $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
+        'top': topTarget.top + 36 + 50,
+        'left': topTarget.left + 30
+      })
+      .animate({
+        opacity: 1,
+        top: '-=50'
+      }, arrowFadeTime, function(){});
+
+      // Right filter arrow
+      $('#filter-container').slideDown();
+      target = $('#filter-container').offset();
+      arrowImageOffset = 107;
+      $('<div></div>').addClass('tour-arrows right').appendTo('body').css({
+        'top': target.top + 75,
+        'left': target.left - arrowImageOffset - 50
+      })
+      .animate({
+        opacity: 1,
+        left: '+=50'
+      }, arrowFadeTime, function(){});
+    }, arrowDelay);
+
+
+  }
+  else if (step == 3) {
+    clearTimers();
+
+    target = $('#add_button').offset();
+    arrowImageOffset = 107;
+    
+    newPlayMap.tour.step3Timer = setTimeout(function() {
+      clearArrows();
+      $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
+        'top': target.top + 36 + 50,
+        'left': target.left + 60
+      })
+      .animate({
+        opacity: 1,
+        top: '-=50'
+      }, arrowFadeTime, function(){});
+    }, arrowDelay);
+
+    $('#filter-container:visible').slideUp();
   }
 }

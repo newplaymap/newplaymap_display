@@ -204,8 +204,8 @@ newPlayMap.loadRelatedEvents = function() {
 
 newPlayMap.loadPlayData = function(marker) {
   // @TODO trigger spotlight.
-  var feature = newPlayMap.lookupFeatureByMarker(marker);
-  newPlayMap.drawPlayJourneyLines(feature[0]);
+  // var feature = newPlayMap.lookupFeatureByMarker(marker);
+  // newPlayMap.drawPlayJourneyLines(feature[0]);
   
   // $('div#play-journey').click(function() {$('div#play-journey').hide();});
 

@@ -4,10 +4,10 @@ connectMongo(false);
 
 $limit = 10;
 
-$collection = $m->newplaymap->organizations;
+$collection = $m->$mongo_database->organizations;
 
 // find everything in the collection
-$cursor = $collection->find()->limit($limit)->sort(array("properties.name" => 1));
+$cursor = $collection->find()->limit($limit)->sort(array("properties.path" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

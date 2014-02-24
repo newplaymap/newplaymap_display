@@ -3,7 +3,7 @@ include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
 $limit = 150;
-$collection = $m->newplaymap->events;
+$collection = $m->$mongo_database->events;
 
 // Grab arguments
 $search_start = (!empty($_GET['start_date'])) ? new MongoDate(strtotime($_GET['start_date'])) : null;
@@ -11,13 +11,15 @@ $search_end = (!empty($_GET['end_date'])) ? new MongoDate(strtotime($_GET['end_d
 $path = (!empty($_GET['path'])) ? $_GET['path'] : null;
 $city_state = (!empty($_GET['city_state'])) ? $_GET['city_state'] : null;
 $artist_name = (!empty($_GET['artist_name'])) ? $_GET['artist_name'] : null;
+$artist_path = (!empty($_GET['artist_path'])) ? $_GET['artist_path'] : null;
+$event_organization_path = (!empty($_GET['event_organization_path'])) ? $_GET['event_organization_path'] : null;
 
 // Find Events by Type
 if(!empty($_GET['event_type'])){
   $event_type = $_GET['event_type'];
   // find everything in the collection
   $query = array("properties.event_type" => $event_type);
-  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find($query)->limit($limit)->sort(array("properties.event_date" => -1));
 
 }
 
@@ -31,13 +33,29 @@ else if ($search_start !== null) {
       "properties.event_date" => array('$lte' => $search_end),
       "properties.event_to_date" => array('$gte' => $search_start), 
     )
-  )->limit($limit)->sort(array("properties.event_date" => 1));
+  )->limit($limit)->sort(array("properties.event_date" => -1));
 
+}
+
+// Find Events by Organization
+else if ($event_organization_path !== null) {
+  $cursor = $collection->find(
+    array('$or' => array(
+      array("properties.related_theater_path" => $event_organization_path),
+      array("properties.partner_organizations.path" => $event_organization_path),
+    ))
+  )->sort(array("properties.event_date" => -1));
+  // $cursor = $collection->find(array("properties.related_theater_path" => $event_organization_path))->sort(array("properties.event_date" => -1));
+}
+
+// Find Events by Artist
+else if($artist_path !== null) {
+  $cursor = $collection->find(array("properties.generative_artist_path" => $artist_path))->sort(array("properties.event_date" => -1));
 }
 
 // Find Events by path
 else if($path !== null) {
-  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find(array("properties.path" => $path))->sort(array("properties.event_date" => -1));
 }
 
 // Find Events by City, State
@@ -52,7 +70,7 @@ else if ($artist_name !== null) {
 
 // Find All Events (limited by max number)
 else {
-  $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => 1));
+  $cursor = $collection->find()->limit($limit)->sort(array("properties.event_date" => -1));
 }
 
 $count = $cursor->count();

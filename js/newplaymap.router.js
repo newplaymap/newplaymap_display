@@ -117,17 +117,22 @@ newPlayMap.processAddressLinks = function(className, target) {
       }
       else if (thisTarget.attr('id') == 'share-facebook') {
       }
+      else if (thisTarget.attr('id') == 'share-twitter') {
+      }
       else if (thisTarget.hasClass('twitter-share-button')) {
       }
       else if (thisTarget.attr('id') == 'share-links-show') {
       }
       else if (thisTarget.attr('id') == 'add_button') {
       }
-      else if (thisTarget.attr('id') == 'share-link') {
+      else if (thisTarget.hasClass('share-link')) {
       }
       else if (thisTarget.attr('id') == 'embed-link') {
       }
       else if (thisTarget.hasClass('reset-map')) {
+      }
+      else if (thisTarget.parent().hasClass('website')) {
+        thisTarget.attr('target', '_BLANK');
       }
       // else if(path.substr(0,5) === '/node') {
       // }

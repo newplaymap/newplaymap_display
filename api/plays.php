@@ -10,10 +10,10 @@ else{
 }
 $page_items = 150;
 
-$collection = $m->newplaymap->plays;
+$collection = $m->$mongo_database->plays;
 
 // find everything in the collection
-$cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("name" => 1));
+$cursor = $collection->find()->skip($page * $page_items)->limit($page_items)->sort(array("path" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

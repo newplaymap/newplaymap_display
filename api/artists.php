@@ -4,10 +4,10 @@ connectMongo(false);
 
 $limit = 10;
 
-$collection = $m->newplaymap->artists;
+$collection = $m->$mongo_database->artists;
 
 // find everything in the collection
-$cursor = $collection->find()->limit($limit)->sort(array("name" => 1));
+$cursor = $collection->find()->limit($limit)->sort(array("path" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

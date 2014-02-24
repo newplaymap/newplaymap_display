@@ -1,3 +1,8 @@
+var newPlayMap = newPlayMap || {};
+newPlayMap.data = newPlayMap.data || {};
+newPlayMap.loadingStack = newPlayMap.loadingStack || [];
+newPlayMap.loadingStackCallbacks = newPlayMap.loadingStackCallbacks || $.Callbacks();
+
 newPlayMap.loadJSONFile = function(vars) {
   var vars = vars;
   var contentData = vars.path + "?cache=" + Math.floor(Math.random()*11);
@@ -57,10 +62,15 @@ newPlayMap.setData = function(data, statusText, jqxhr) {
   jsonData[data.name] = data;
   jsonData[data.name]["vars"] = jqxhr.vars;
 
-  var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  if (data.name == 'plays_filter') {
+    var data = newPlayMap.data.onLoadDataNoLocation(jqxhr.vars);
+  }
+  else {
+    var dataMarkers = newPlayMap.onLoadDataMarkers(jqxhr.vars);
+  }
   
   if (newPlayMap.filters.loadingCompleteFeedback) {
-    newPlayMap.filters.loadingCompleteFeedback();
+    newPlayMap.filters.loadingCompleteFeedback(data.name);
   }
   return false;
 };
@@ -75,6 +85,34 @@ newPlayMap.loadDataError = function(data) {
   return false;
 };
 
+/*
+ * Helper function to clear markers by layer
+ */
+newPlayMap.data.clearLayer = function(layerName) {
+  // @TODO: I don't know why there was no variable in dataName. 
+  // This was probably just never needed and unfinished.
+  var layerName = layerName || '';
+  // $('a.marker[dataName=' +   + ']').remove(); // Original
+  $('a.marker[dataName=' + layerName + ']').remove();
+}
+
+/*
+* Helper function to clear all layer
+*/
+newPlayMap.data.clearAllLayers = function() {
+  $('div#play-journey').remove();
+  $('a.marker[dataName=play]').remove();
+  $('a.marker[dataName=artists_filter]').remove();
+  $('a.marker[dataName=events_filter]').remove();
+  $('a.marker[dataName=plays_filter]').remove();
+  $('a.marker[dataName=organizations_filter]').remove();
+
+  spotlight.parent.className = "inactive";
+  spotlight.removeAllLocations();
+  $('a.marker').css({ 'opacity' : 1 });
+}
+
+
 // onLoadMarkers() gets a GeoJSON FeatureCollection
 //  http://geojson.org/geojson-spec.html#feature-collection-objects
 newPlayMap.onLoadDataMarkers = function(vars) {
@@ -88,23 +126,14 @@ newPlayMap.onLoadDataMarkers = function(vars) {
 
   // Remove divs if they exist and API function requests that they be cleared.
   if(vars.clearLayer === true) {
-    $('a.marker[dataName=' +   + ']').remove();
+    newPlayMap.data.clearLayer();
   }
   
   // @TODO: Write a new attribute, something like appendAndRemove that handles the "stack"
 
   // Remove new layers
   if(vars.clearLayers === true) {
-    $('div#play-journey').remove();
-    $('a.marker[dataName=play]').remove();
-    $('a.marker[dataName=artists_filter]').remove();
-    $('a.marker[dataName=events_filter]').remove();
-    $('a.marker[dataName=plays_filter]').remove();
-    $('a.marker[dataName=organizations_filter]').remove();
-
-    spotlight.parent.className = "inactive";
-    spotlight.removeAllLocations();
-    $('a.marker').css({ 'opacity' : 1 });
+    newPlayMap.data.clearAllLayers();
   }
   
 
@@ -125,10 +154,17 @@ newPlayMap.onLoadDataMarkers = function(vars) {
         marker.setAttribute("related_play_id", feature.properties[vars.related_play_id]);        
       }
 
+      // If the marker has a lat of 0 and a lon on 0, give it a special class
+      // @TODO: Once we are loading profile info from the json object and not the marker, this work-around can be removed.
+      var classes = 'marker';
+      if (feature.properties.latitude == null && feature.properties.longitude == null) {
+        classes += " empty-marker";
+      }
+
       // Unique hash marker id for link
       marker.setAttribute("id", "marker-" + vars.type + "-" + id);
       marker.setAttribute("dataName", vars.dataName);
-      marker.setAttribute("class", "marker");
+      marker.setAttribute("class", classes);
       marker.setAttribute("href", feature.properties.path);
       marker.setAttribute("type", vars.type);
       marker.setAttribute("latlon", latlon);
@@ -159,17 +195,20 @@ newPlayMap.onLoadDataMarkers = function(vars) {
           featuresByLocation[latlon] = [feature];
         }
 
-        if (feature.properties[vars.grouping_field] in locationsByID) {
-          locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
-        } else {
-          locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
-        }
+        // Make sure marker has a location before adding it
+        if (marker.location.lat != 0 && marker.location.lon != 0) {
+           if (feature.properties[vars.grouping_field] in locationsByID) {
+              locationsByID[feature.properties[vars.grouping_field]].push(marker.location);
+            } else {
+              locationsByID[feature.properties[vars.grouping_field]] = [marker.location];
+            }
 
-        // Add all of the locations to the array. making them unique for all layers
-        if (feature.properties[vars.id] in locationsByID) {
-          locationsByID[feature.properties[vars.id]].push(marker.location);
-        } else {
-          locationsByID[feature.properties[vars.id]] = [marker.location];
+            // Add all of the locations to the array. making them unique for all layers
+            if (feature.properties[vars.id] in locationsByID) {
+              locationsByID[feature.properties[vars.id]].push(marker.location);
+            } else {
+              locationsByID[feature.properties[vars.id]] = [marker.location];
+            }
         }
 
       // add the marker's location to the extent list
@@ -182,11 +221,18 @@ newPlayMap.onLoadDataMarkers = function(vars) {
       
   }
 
-  // Load result data for this set of features.
-  newPlayMap.loadResults(features, vars);
-
+  // @TODO: Refactor play and journey
+  if (vars.type == 'play') {
+    // Load result data for this set of features.
+    newPlayMap.loadResults(features, vars);
+  }
+  else if (vars.loadProfile != true) {
+    // Load result data for this set of features.
+    newPlayMap.loadResults(features, vars);
+  }
 
   // Load profiles if called for
+  // -- @TODO: Load this based on the features (or the jsonData object) instead of a marker. That way it will work with conent that doesn't have a pin.
   if (vars.loadProfile == true) {
     // Get the last marker
     var markerLength = markers.markers.length - 1;
@@ -209,6 +255,29 @@ newPlayMap.onLoadDataMarkers = function(vars) {
     // Zoom for feature. By default was zooming in a lot because of set extent and the availability of location data.
     // map.setCenterZoom(new MM.Location(locations[0]["lat"],locations[0]["lon"]), vars.zoomLevel);
   }
+  // Apply behavior listener for layer type.
+  if(vars.callback !== undefined) {
+     $(vars.callback);
+  }
+};
+
+
+/**
+ * Function to load data that doesn't have geo location data
+ *
+ * gets a GeoJSON FeatureCollection
+ * -- http://geojson.org/geojson-spec.html#feature-collection-objects
+ */
+// @TODO: Think about refactoring this in with newPlayMap.onLoadDataMarkers and just have that check whether there is a marker or not. That would maybe handle data that should have a marker but doesn't have a location.
+newPlayMap.data.onLoadDataNoLocation = function(vars) {
+  var vars = vars;
+
+  var features = jsonData[vars.dataName].features,
+      len = features.length
+
+  // Load result data for this set of features.
+  newPlayMap.loadResults(features, vars);
+
   // Apply behavior listener for layer type.
   if(vars.callback !== undefined) {
      $(vars.callback);

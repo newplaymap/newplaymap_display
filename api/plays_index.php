@@ -2,10 +2,10 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$collection = $m->newplaymap->events;
+$collection = $m->$mongo_database->events;
 
 // find everything in the collection
-$cursor = $collection->find()->sort(array("properties.play_title" => 1));
+$cursor = $collection->find()->sort(array("properties.path" => 1));
 $count = $cursor->count();
 
 header('Access-Control-Allow-Origin: *.newplaymap.org | localhost | *.chachaville.com');

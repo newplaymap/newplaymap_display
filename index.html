@@ -58,13 +58,15 @@
               <a class="map-logo reset-map" href="#">Home</a>
               <a class="brand reset-map" href="#">New Play Map</a>
               <ul class="nav">
-                <li class="active"><a href="#" class="reset-map">Home</a></li>
-                <li><a href="participate/about">About the map</a></li>
-                <li><a href="participate/feedback">Feedback</a></li>
+                <li><a href="participate/about">About</a></li>
+                <li><a href="participate/contact">Help</a></li>
               </ul>
             </div>
             <div id="header-buttons-wrapper">
               <ul class="nav" id="header-buttons">
+                <li>
+                  <a id="reset-button" href="#" class="reset-map" title="Reset zoom, close Search, and start fresh."><span>Start Over</span></a>
+                </li>
                 <li>
                   <div id="block-add_button-0" class="block block-add_button region-odd odd region-count-1 count-1 with-block-editing">
 
@@ -82,7 +84,7 @@
                   </div>
                 </li>
                 <li>
-                  <a id="explore-filters-button" href="explore"><span>Search</span></a>
+                  <a id="explore-filters-button" href="explore" title="Search for Organizations, Plays, and Artists"><span>Search</span></a>
                 </li>
               </ul>
             </div>
@@ -99,9 +101,10 @@
                 <div id="filters">
                   <form>
                     <ul id="filter-tabs">
-                      <li id="filter-tab-plays" class="filter-tab"><a href="#explore-plays">Plays</a></li>
-                      <li id="filter-tab-organizations" class="filter-tab"><a href="#explore-organizations">Organizations</a></li>
-                      <li id="filter-tab-artists" class="filter-tab"><a href="#explore-artists">Artists</a></li>
+                      <li id="filter-tab-plays" class="filter-tab"><a href="#explore-plays" title="Search Plays and Events by title, type, date, and city">Plays</a></li>
+                      <li id="filter-tab-organizations" class="filter-tab"><a href="#explore-organizations" title="Search Organizations by name, type, networks/affiliations, special interests, and city">Orgs</a></li>
+                      <li id="filter-tab-artists" class="filter-tab"><a href="#explore-artists" title="Search Artists by name, ensemble/collective status, and city">Artists</a></li>
+                      <li id="filters-hide"><span>Hide</span></li>
                     </ul>
                     <!-- Plays -->
                     <div id="explore-plays">
@@ -226,11 +229,7 @@
                     <!-- @TODO: Remove all the dummy empty text -->
                     <h2>${play_title}</h2>
                     {{if generative_artist}}
-                      {{if generative_artist_has_location == true}}
-                        <h3>by <a href="${generative_artist_path}">${generative_artist}</a></h3>
-                      {{else}}
-                        <h3>by ${generative_artist}</h3>
-                      {{/if}}
+                      <h3>by <a href="#${generative_artist_path}">${generative_artist}</a></h3>
                     {{/if}}
 
                   
@@ -241,7 +240,13 @@
                           <h3>Share</h3>
                           <ul id="share-links-list" class='content'>
                             <li>
-                              <a href="#" id="share-link">Get Link</a>
+                              <a href='https://www.facebook.com/dialog/feed?app_id=352269292382&link=http://newplaymap.org/participate${path}&picture=http://newplaymap.org/participate/sites/default/files/imagecache/org_standard/imagefield_default_images/map-default-image_0.gif&name=${play_title} on the New Play Map&description=${synopsis}&redirect_uri=http://newplaymap.org/participate${path}' id="share-facebook">Facebook</a>
+                            </li>
+                            <li>
+                              <a href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnewplaymap.org%2Fparticipate${related_play_path}&via=NewPlayMap&related=NewPlayMap&text=${play_title} on the New Play Map&hashtags=NewPlay' id="share-twitter">Twitter</a>
+                            </li>
+                            <li>
+                              <a href="#" class="share-link">Get Link</a>
                               <form id="share-code"><input type="text" value="http://newplaymap.org/participate${path}"></form>
                             </li>
                             <li>
@@ -251,13 +256,17 @@
                           </ul>
                         </div> 
                       </li>
-                      <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit">Edit</a></li>
+                      <li id="panel-edit-link"><a href="participate/node/${related_play_id}/edit" title="Edit Play Title, Artist, and Synopsis">Edit Play Details</a></li>
                     </ul>
                     
                     <article class="panel-content-info play-info">
                       {{if synopsis}}     
                         {{html synopsis}} <!-- @TODO: Fix the encoding for what the DB spits out - paragraph breaks are not working -->
                       {{/if}}
+
+                      <div class="panel-delete-link">
+                        <a href="participate/node/add/delete-request/${related_play_id}" title="Request Deletion of ${play_title}">Delete</a>
+                      </div>
                     </article>                  
          
                 </script><!--   end play -->
@@ -289,7 +298,13 @@
                         <h3>Share</h3>
                          <ul id="share-links-list" class='content'>
                             <li>
-                              <a href="#" id="share-link">Get Link</a>
+                              <a href='https://www.facebook.com/dialog/feed?app_id=352269292382&link=http://newplaymap.org/participate${path}&picture=http://newplaymap.org/participate/${artist_photo}&name=${generative_artist} on the New Play Map&description=${artist_bio}&redirect_uri=http://newplaymap.org/participate${path}' id="share-facebook">Facebook</a>
+                            </li>
+                            <li>
+                              <a href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnewplaymap.org%2Fparticipate${path}&via=NewPlayMap&related=NewPlayMap&text=${generative_artist} on the New Play Map&hashtags=NewPlay' id="share-twitter">Twitter</a>
+                            </li>
+                            <li>
+                              <a href="#" class="share-link">Get Link</a>
                               <form id="share-code"><input type="text" value="http://newplaymap.org/participate${path}"></form>
                             </li>
                             <li>
@@ -299,13 +314,33 @@
                           </ul>
                       </div> 
                     </li>
-                    <li id="panel-edit-link"><a href="participate/node/${artist_id}/edit">Edit</a></li>
+                    <li id="panel-edit-link"><a href="participate/node/${artist_id}/edit" title="Edit Artist Bio & Photo">Edit Artist Details</a></li>
                   </ul>
                   
                   <article class="panel-content-info artist-info">
                     {{if artist_bio}}
                       <div class="mission-statement">${artist_bio}</div>
                     {{/if}}
+
+                    {{if ensemble_collective == "Ensemble / Collective"}}
+                      <div class="ensemble profile-additional-content">${ensemble_collective}</div>
+                    {{/if}}
+
+                    {{if website}}
+                      <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
+                    {{/if}}
+
+                    {{if facebook}}
+                      <div class="website profile-additional-content"><a href="http://${facebook}">${facebook}</a></div>
+                    {{/if}}
+
+                    {{if twitter}}
+                      <div class="website profile-additional-content"><a href="http://${twitter}">${twitter}</a></div>
+                    {{/if}}
+
+                    <div class="panel-delete-link">
+                      <a href="participate/node/add/delete-request/${artist_id}" title="Request Deletion of ${generative_artist}">Delete</a>
+                    </div>
                   </article>
                 </script><!--  end artist -->
     
@@ -317,19 +352,26 @@
                   
                   <div class="profile-header">
                     <h2>${name}</h2>
+                    {{if street}}<div>${street}</div>{{/if}}
                     {{if city}}{{if state}}
-                      <div>${city}, ${state}</div>
+                      <div>${city}, ${state}{{if postal_code}} ${postal_code}{{/if}}</div>
                     {{/if}}{{/if}}
                   </div>
                   
                   <ul id="panel-content-links">
-                    <li id="panel-add-link-event" class="panel-add-link"><a href="participate/node/add/event/${organization_id}">Add Event</a></li>
+                    <li id="panel-add-link-event" class="panel-add-link"><a href="participate/node/add/event/${organization_id}" title="Add an Event to this Organization's Event List">Add Event</a></li>
                     <li id="panel-share-link">
                       <div id="share-links">
                         <h3>Share</h3>
                          <ul id="share-links-list" class='content'>
                             <li>
-                              <a href="#" id="share-link">Get Link</a>
+                              <a href='https://www.facebook.com/dialog/feed?app_id=352269292382&link=http://newplaymap.org/participate${path}&picture=http://newplaymap.org/participate/${logo}&name=${name} on the New Play Map&description=${mission_statement}&redirect_uri=http://newplaymap.org/participate${path}' id="share-facebook">Facebook</a>
+                            </li>
+                            <li>
+                              <a href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnewplaymap.org%2Fparticipate${path}&via=NewPlayMap&related=NewPlayMap&text=${name} on the New Play Map&hashtags=NewPlay' id="share-twitter">Twitter</a>
+                            </li>
+                            <li>
+                              <a href="#" class="share-link">Get Link</a>
                               <form id="share-code"><input type="text" value="http://newplaymap.org/participate${path}"></form>
                             </li>
                             <li>
@@ -339,14 +381,18 @@
                           </ul>
                       </div> 
                     </li>
-                    <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit">Edit</a></li>
+                    <li id="panel-edit-link"><a href="participate/node/${organization_id}/edit" title="Edit Organization Name, Logo, Location, Type, Website, etc.">Edit Org Details</a></li>
                   </ul>
                   
                   <article class="panel-content-info organization-info">
                     {{if mission_statement}}
                       <div class="organization-mission-statement">${mission_statement}</div>
                     {{/if}}
-                  
+
+                    {{if organization_type_display}}
+                      <div class="organization-type profile-additional-content">${organization_type_display}</div>
+                    {{/if}}
+
                     {{if national_networks}}
                       <div class="organization-national-networks profile-additional-content">${national_networks_display}</div>
                     {{/if}}
@@ -354,49 +400,93 @@
                     {{if special_interests}}
                       <div class="organization-interests profile-additional-content">${special_interests_display}</div>
                     {{/if}}
+
+                    {{if founding_date}}
+                      <div class="organization-founding-date profile-additional-content">Founded in ${founding_date}</div>
+                    {{/if}}
+
+                    {{if ensemble_collective == "Ensemble / Collective"}}
+                      <div class="ensemble profile-additional-content">${ensemble_collective}</div>
+                    {{/if}}
+
+                    {{if budget}}
+                      <div class="profile-additional-content">Budget: ${budget}</div>
+                    {{/if}}
+
+                    {{if website}}
+                      <div class="website profile-additional-content"><a href="http://${website}">${website}</a></div>
+                    {{/if}}
+                    <div class="panel-delete-link">
+                      <a href="participate/node/add/delete-request/${organization_id}" title="Request Deletion of ${name}">Delete</a>
+                    </div>
                   </article>
 
                 </script><!--  end organization -->
-                
-                <div class="results-container">
-                  <div id="results-header"></div>
+
+                <div id="results-header"></div>
+                <div class="results-container results-container-event">
+                   <div class="results-title">
+                     <h2 class="title"></h2>
+                     <span class="results-total-count"></span>
+                   </div>
+                   <ol class="results"></ol>
+                </div>
+
+                <div class="results-container results-container-artist">
+                   <div class="results-title">
+                     <h2 class="title"></h2>
+                     <span class="results-total-count"></span>
+                   </div>
+                   <ol class="results"></ol>
+                </div>
+
+                <div class="results-container results-container-play">
+                   <div class="results-title">
+                     <h2 class="title"></h2>
+                     <span class="results-total-count"></span>
+                   </div>
+                   <ol class="results"></ol>
+                </div>
+
+                <div class="results-container results-container-organization">
                   <div class="results-title">
                     <h2 class="title"></h2>
                     <span class="results-total-count"></span>
                   </div>
                   <ol class="results"></ol>
-               </div> 
+               </div>
 
                 <script id="results-template" type="text/x-jquery-tmpl">
                     <li listing_id="${id}">
-                      {{if properties.icon_small}}
-                        <img class="results-item-image" src="participate/${properties.icon_small}" />
-                      {{/if}}
+                      <div class="results-item-image-wrapper">
+                        {{if properties.icon_small}}
+                          <img class="results-item-image" src="participate/${properties.icon_small}" />
+                        {{/if}}
+                      </div>
 
                       <div class="results-item-content">
                         {{if properties.event_type}}
                           <div class="event-type">${properties.event_type}</div>
                         {{/if}}
-                        <a class="results-item-title" href="${path}">${title}</a>
+                        <a class="results-item-title" href="#${path}">${title}</a>
                         
                         {{if properties.content_type == 'Event'}}
-                          {{if properties.generative_artist_has_location == true}}
-                            <div class="artist-name">by <a href="${properties.generative_artist_path}">${properties.generative_artist}</a></div>
-                          {{else}}
-                            <div class="artist-name">by ${properties.generative_artist}</div>
-                          {{/if}}
-                        {{/if}}
-                      
-                        {{if properties.organization_type_display}}
-                          <div class="organization-type">${properties.organization_type_display}</div>
+                          <div class="artist-name">by <a href="#${properties.generative_artist_path}">${properties.generative_artist}</a></div>
                         {{/if}}
                         
                         {{if properties.related_theater}}
-                          {{if properties.related_theater_has_location == true}}
-                            <a href="${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
-                          {{else}}
-                            <div>${properties.related_theater}</div>
-                          {{/if}}
+                          <a href="#${properties.related_theater_path}" type="organization" load_id="${properties.related_theater_id}">${properties.related_theater}</a>
+                        {{/if}}
+
+                        {{if properties.partner_organizations}}
+                          <div class="partner-organizations">
+                            In partnership with
+                            <ul class="partner-organizations-list">
+                            {{each properties.partner_organizations}}
+                              <li><a href="#${$value.path}" type="organization">${$value.name}</a></li>
+                            {{/each}}
+                            </ul>
+                          </div>
                         {{/if}}
                       
                         {{if city}}{{if state}}
@@ -414,14 +504,38 @@
                         {{/if}}
 
                       </div>
-                      
-                      <div class="results-edit-link"><a href="participate/node/${id}/edit" class="event-edit-link">Edit</a></div>
+
+                      <!-- Edit link -->
+                      <div class="results-edit-link">
+                        {{if properties.content_type == 'Event'}}
+                           <a href="participate/node/${id}/edit" title="Edit Event Type, Date, Location, Lead & Partner Organizations">Edit Event</a>
+                        {{else properties.content_type == 'Generative Artist'}}
+                          <a href="participate/node/${id}/edit" title="Edit Generative Artist Bio & Photo">Edit Artist</a>
+                        {{else properties.content_type == 'Organization'}}
+                          <a href="participate/node/${id}/edit" title="Edit Organization Name, Logo, Location, Type, Website, etc.">Edit Org</a>
+                        {{else}}
+                          <a href="participate/node/${id}/edit" title="Edit this item">Edit</a>
+                        {{/if}}
+                      </div>
+
+                      <!-- Delete link -->
+                      <div class="results-delete-link">
+                        {{if properties.content_type == 'Event'}}
+                           <a href="participate/node/add/delete-request/${id}" title="Request Deletion of this Event">Delete</a>
+                        {{else properties.content_type == 'Generative Artist'}}
+                          <a href="participate/node/add/delete-request/${id}" title="Request Deletion of this Artist">Delete</a>
+                        {{else properties.content_type == 'Organization'}}
+                          <a href="participate/node/add/delete-request/${id}" title="Request Deletion of this Organization">Delete</a>
+                        {{else}}
+                          <a href="participate/node/add/delete-request/${id}" title="Edit this item">Delete</a>
+                        {{/if}}
+                      </div>
                   </li>
                 </script>
                 
                 <script id="show-all-template" type="text/x-jquery-tmpl">
                   <li>
-                    <a href="${path}" class="show-all-item">${title}</a>
+                    <a href="#${path}" class="show-all-item">${title}</a>
                   </li>
                 </script>
 
@@ -430,7 +544,7 @@
                </div> 
 
                 <script id="extras-template" type="text/x-jquery-tmpl">
-                    <li listing_id="${id}"><a href="${path}">${title}</a></li>
+                    <li listing_id="${id}"><a href="#${path}">${title}</a></li>
                 </script>
                 
               </div> <!-- End Panel -->
@@ -457,6 +571,59 @@
     
     <div id="loading-feedback"></div>
 
+    <div id="tour">
+      <div id="tour-header">
+      
+        <h3>Getting Started Tour<h3>
+      
+        <div id="tour-controls">
+          <span class="tour-previous inactive">Previous</span>
+          <span class="tour-counter">
+            <span class="tour-counter-current">1</span> of <span class="tour-counter-total">3</span>
+          </span>
+          <span class="tour-next">Next</span>
+        </div>
+      </div>
+      
+      <div id="tour-step1" class="tour-step first active">
+        <h4>See what's happening today</h4>
+        <p>See all the great new plays happening all across the country, then see their journeys around the USA.</p>
+      </div>
+      
+      <div id="tour-step2" class="tour-step">
+        <h4>Explore the map</h4>
+        <p>Get a whole new understanding of the #newplay sector. Search plays, artists, and organizations to learn how it all fits together historically.</p>
+      </div>
+      
+      <div id="tour-step3" class="tour-step last">
+        <h4>Put your work on the map</h4>
+        <p>Create an account to add events, artist profiles, or organizations for yourself and for others. It only works if everybody pitches in.</p>
+        <p><a id="tour-create-account" href="participate/user/register">Create Account</a></p>
+        
+        <div id="tour-signin">
+          Already have an account? <a href="participate/user/login">Sign in</a>
+        </div>
+      </div>
+      
+      <div id="tour-exit">
+        <span>Exit Tour</span>
+      </div>
+      
+    </div><!-- / #tour -->
+    <div id="tour-overlay"></div>
+
+    <!-- Failure Message -->
+    <div id="failure-message">
+      <div id="failure-message-header">
+
+        <h3>Quick, pull the curtain!<h3>
+
+        <div id="failure-message-step1" class="failure-message-step first active">
+          <h4>It looks like we forgot a line</h4>
+          <p>Something is wrong and we can't load the map right now. You can try reloading the map, and if you are still having trouble call the New Play Map emergency hotline at: <span class="phone-number">(617) 800-9-MAP</span></p>
+        </div>
+    </div><!-- / #failure message -->
+
 
     <!-- Le javascript
     ================================================== -->
@@ -476,6 +643,7 @@
     <script src="assets/js/bootstrap-typeahead.js"></script>
     <script src="js/jquery.tmpl.min.js"></script>
     <script src="js/jquery.hoverintent.minified.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script> -->
     <script src="js/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
     <script src="js/jquery.qtip-1.0.0-rc3.min.js"></script>

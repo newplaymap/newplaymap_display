@@ -2,8 +2,8 @@
 include('../../authentication/newplaymap_authentication.php');
 connectMongo(false);
 
-$organizations_collection = $m->newplaymap->organizations;
-$artists_collection = $m->newplaymap->artists;
+$organizations_collection = $m->$mongo_database->organizations;
+$artists_collection = $m->$mongo_database->artists;
 
 $ensemble = ($_GET['ensemble_collective'] == 'Ensemble / Collective') ? 'Ensemble / Collective' : null;
 
