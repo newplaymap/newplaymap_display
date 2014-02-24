@@ -5,14 +5,18 @@
   */
 
 /* General styles */
+  html {
+    height: 100%;
+  }
 
   body {
+    height: 100%;
     font-size: 16px;
     line-height: 21px;
     font-family: Avenir, Arial, sans-serif;
     color: #231f20;
   }
-  
+
   /* override html-reset.css:53 */
   body, caption, th, td, input, textarea, select, option, legend, fieldset {
     font-family: Candara, Arial, sans-serif;
@@ -21,6 +25,19 @@
   a {
     color: #BF202E;
   }
+
+/* Map */
+  #map-container,
+  .container-fluid {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #map {
+    position: absolute;
+  }
+
 
 /* Header */
 
@@ -32,7 +49,7 @@
     bottom: 28px;
     left: 0;
   }
-  
+
   #name-and-slogan #site-name {
     font-size: 24px;
     font-weight: normal;
@@ -45,36 +62,36 @@
   #name-and-slogan #site-name strong {
     font-weight: normal; /* override strong tag that gets injected */
   }
-  
+
     html.cufon-active #name-and-slogan {
       font-size: 28px;
     }
 
 /* Top right links */
-  
+
   .top-right-links-container {
     position: absolute;
     top: 18px;
     right: 0;
     text-align: right;
   }
-  
+
   .top-right-links-container .welcome,
   .top-right-links-container .my-account {
     padding-right: 1em;
   }
 
 /* Header Add Buttons */
-  
+
   /* Hide when javascript is available */
   #block-add_button-0 {
     display: none;
   }
-  
+
   #block-views--exp-organizations-panel_pane_1 {
     display: none;
   }
-  
+
   #block-invite-0 {
     display: none;
   }
@@ -86,30 +103,30 @@
     margin-left: 25%;
     text-align: center;
     margin-top: 18px;
-  }  
-  
+  }
+
       /* Universal Add Button List */
-      
+
       ul#add-button-list {
         margin: 0;
         padding: 0;
       }
-      
+
       ul#add-button-list,
       ul#add-button-list li {
         list-style: none;
       }
-      
+
       ul#add-button-list li {
         margin: 0;
         padding: 7px 13px;
         border-bottom: 1px dashed #CCCCCC;
       }
-      
+
       ul#add-button-list li.last {
         border-bottom: 0;
       }
-      
+
 /* Embed Badge */
 
   #embed-badge-block {
@@ -122,12 +139,12 @@
   #share-link-block form {
     display: none;
   }
-  
+
   /* Nicer styling for the form elements */
   #embed-badge-show {
     font-size: 0.8em;
   }
-  
+
   #embed-badge-block form input,
   #share-link-block form input {
     width: 100%;
@@ -137,20 +154,20 @@
   #edit-contact-email-wrapper {
     display: none;
   }
-  
+
   table#invites {
     width: 100%;
   }
-  
+
   form#invite-form {
     padding: 7px 13px;
   }
-  
+
   form#invite-form .form-item .description {
     font-size: 12px;
     line-height: 16px;
   }
-      
+
 /* Related Events */
   .views-field-field-partner-org-nid {
     font-size: 0.9em;
@@ -161,12 +178,12 @@
   #skip-to-nav {
     float: left;
   }
-  
+
   #skip-to-nav a:link,
   #skip-to-nav a:visited {
     color: black; /* whatever color the background is */
   }
-  
+
   #skip-to-nav a:active,
   #skip-to-nav a:focus {
     color: white; /* contrasting color to background */
@@ -178,17 +195,17 @@
   #edit-title {
     font-size: 2em;
   }
-  
+
   a,
   a:link {
     text-decoration: none;
   }
-  
+
   a:hover,
   a:active {
     text-decoration: underline;
   }
-  
+
 
 /* Layout */
 
@@ -197,7 +214,7 @@
   .with-navbar #sidebar-secondary {
     margin-top: 1.5em;
   }
-  
+
   #header,
   .navbar-inner {
     position: absolute;
@@ -210,23 +227,23 @@
     box-shadow: none;
   }
 
-  
+
   #page {
     width: 100%;
     margin-top: 60px
   }
-  
+
   #main-wrapper {
     position: static; /* Override Zen so that absolute #navigation works */
   }
-  
+
   .not-front #footer {
     display: none;
   }
 
-  
+
   /* Full width front page */
-  
+
   .front.no-sidebars #page-wrapper {
     width: 100%;
   }
@@ -247,19 +264,19 @@
   }
 
 /* Misc styles */
-  
+
   /* Nicer style on the node edit / add forms */
   input#edit-title {
     width: 100%;
   }
-  
+
   /* New throbber on title autocomplete fields */
   /* Overrides system.css */
   htmlinput#edit-title.form-autocomplete {
     background-image: url(../images/spinner-32x32-on-white.gif);
     background-position: 100% -100px;
   }
-  
+
     htmlinput#edit-title.form-autocomplete.throbbing {
       background-position: 99% 2px;
     }
@@ -284,7 +301,7 @@
     font-family: Candara, Arial, sans-serif;
     background: #6f84c2 url(../images/button-sprite.png) 0 0 no-repeat;
   }
-  
+
       /* Button :hover state */
       .edit-button:hover,
       #header-blocks a#add_button:hover,
@@ -299,7 +316,7 @@
         background-position: -217px 0;
         text-decoration: none;
       }
-      
+
       /* Button :active state */
       .edit-button:active,
       #header-blocks a#add_button:active,
@@ -325,24 +342,24 @@
     border-radius: 3px;
     -moz-border-radius: 3px;
   }
-  
+
   /* Edit custom title autocomplete */
-  
+
   /* Make the autocomplete references inline */
   #edit-title-custom-autocomplete .reference-autocomplete {
     display: inline;
   }
-  
+
   #edit-title-custom-autocomplete ul {
     padding-left: 0; /* override html-reset.css */
   }
-  
+
   /* Don't need bullets when we got buttons */
   #edit-title-custom-autocomplete ul,
   #edit-title-custom-autocomplete ul li {
     list-style: none;
   }
-    
+
     /* Put in some padding to give this list some breathing room */
     #edit-title-custom-autocomplete ul li {
       margin-bottom: 7px;
@@ -383,25 +400,25 @@
 }
 
 /* Home */
-  
+
   /* Content Header */
   .front #content {
     width: 66%;
   }
-  
+
   .front #content .messages {
     margin-left: 55px;
   }
-  
-  
-  
+
+
+
   /* Messages close box */
-  
+
   .messages {
     position: relative;
     padding-right: 25px; /* override messages.css */
   }
-  
+
   a.newplay-close-box {
     position: absolute;
     top: 5px;
@@ -412,24 +429,24 @@
     background: url(../images/ui/close-red.png) top center no-repeat;
     text-indent: -10000em;
   }
-  
+
     /* Active state */
     a.newplay-close-box:active {
       background-image: url(../images/ui/close-red-active.png);
     }
-    
+
   /* Credit */
-  
+
   .olControlAttribution,
   .front #footer-message {
     font-size: 12px;
     color: #666;
   }
-  
+
   .olControlScaleLine {
     bottom: 28px;
   }
-  
+
   .front #footer {
     position: absolute;
     bottom: 5px;
@@ -443,11 +460,11 @@
 /* Module fixes */
 
   /* Admin Menu */
-  
+
   body.admin-menu {
-    background-position: 17% 21px; 
+    background-position: 17% 21px;
   }
-  
+
   body.admin-menu #header {
     height: 60px;
     position: absolute;
@@ -455,37 +472,37 @@
     left: 28px;
     right: 28px;
   }
-  
+
   body.admin-menu #page {
     margin-top: 81px;
   }
-  
+
   body.admin-menu #navigation {
     top: 54px;
   }
-  
+
   /* @TODO: find the module where this layout code should go and put this there */
   body.admin-menu.front .openlayers_map_fullscreen {
     top: 81px;
   }
-  
+
   /* @TODO: find the module where this layout code should go and put this there */
   body .openlayers_map_fullscreen {
     border-top: 1px solid #DFE2F5;
   }
-  
-      
 
-  
+
+
+
   body.admin-menu.front #panel-default-overlay,
   body.admin-menu.front .popup-container {
     top: 81px;
   }
 
-  
-  
+
+
   /* Views */
-  
+
     div.view div.views-admin-links ul.links li,
     .admin-links ul.links li,
     div.panel-pane div.admin-links li {
@@ -493,15 +510,15 @@
       margin: 0;
       padding: 0;
     }
-    
+
     div.view div.views-admin-links ul.links {
       margin: 0;
     }
-    
+
     div.view {
       position: relative;
     }
-    
+
     div.view div.views-admin-links,
     .admin-links {
       margin-top: 0;
@@ -509,16 +526,16 @@
       right: 0;
       text-align: right;
     }
-    
+
     div.view div.views-admin-links ul.links li a {
       padding: 5px;
     }
-    
+
     .admin-links ul.links li a,
-    div.view div.admin-links-hover a, 
+    div.view div.admin-links-hover a,
     div.view div.admin-links:hover a,
     .views-admin-links ul.links li a,
-    div.view div.views-admin-links-hover a, 
+    div.view div.views-admin-links-hover a,
     div.view div.views-admin-links:hover a,
     div.panel-pane div.admin-links li a {
       color: white;
@@ -527,89 +544,89 @@
 /* Overlay */
 
   /* General styles */
-  
+
   .overlay {
     height: auto !important;
   }
-  
+
   .panel-overlay {
 /*    overflow: hidden;*/
   }
-  
+
   .panel-overlay.clear-block::after {
     display: none;
   }
-  
+
   .panel-overlay .panel-col-top,
-  .panel-overlay .panel-col-bottom { 
-    width: 100%; 
+  .panel-overlay .panel-col-bottom {
+    width: 100%;
     clear: both;
   }
 
   .panel-overlay .panel-col-top .inside {
   }
-  
+
   /* @TODO: figure out if this does anything anymore */
-  .panel-overlay .panel-col-first { 
-    float: left; 
+  .panel-overlay .panel-col-first {
+    float: left;
     width: 25%;
   }
 
   /* @TODO: figure out if this does anything anymore */
-  .panel-overlay .panel-col .inside { 
+  .panel-overlay .panel-col .inside {
     margin: 0 .5em 1em .5em;
   }
 
   /* @TODO: figure out if this does anything anymore */
-  .panel-overlay .panel-col { 
-    float: left; 
-    width: 25%; 
+  .panel-overlay .panel-col {
+    float: left;
+    width: 25%;
   }
 
-  .panel-overlay .panel-col .inside { 
+  .panel-overlay .panel-col .inside {
     margin: 0 .5em 1em .5em;
   }
-  
+
   /* @TODO: figure out if this does anything anymore */
-  .panel-overlay .panel-col-last { 
-    float: left; 
-    width: 45%; 
+  .panel-overlay .panel-col-last {
+    float: left;
+    width: 45%;
   }
-  
+
   /* @TODO: figure out if this does anything anymore */
-  .panel-overlay .panel-col-last .inside { 
+  .panel-overlay .panel-col-last .inside {
     margin: 0 0 1em .5em;
   }
-  
+
   .panel-overlay .panel-separator {
     margin: 0 0 1em 0;
   }
-  
+
   /* Make Organization info labels more discernable */
   .panel-overlay .view-organization-info label {
     font-weight: bold;
   }
-  
+
   /* Display buttons as blocks */
   .popup-container .overlay .pane-edit-link ul li a,
   .popup-container .overlay .pane-event ul li a,
   .popup-container .overlay #feed_button {
     display: block;
   }
-  
+
   /* Main area */
-  
-    
+
+
   /* Content Sections */
   #panel-container {
     overflow: auto;
   }
-  
+
   .panel-overlay .additional-info {
     display: none; /* prevent flash on page load */
     clear: both; /* make sure it clears any evil floats */
   }
-  
+
   .panel-overlay .additional-info h2.additional-info-title,
   h2.journey-header {
     font-size: 1.3em;
@@ -620,28 +637,28 @@
     width: 350px;
     margin-left: -10px;
     padding-left: 20px;
-    
+
   }
-  
+
   .panel-overlay .additional-info .ui-icon {
     float: left;
   }
-  
+
   .panel-overlay .additional-info {
-    
+
   }
-  
+
     .panel-overlay .additional-info .ui-accordion-header {
       cursor: pointer;
       margin-bottom: 20px;
     }
-        
+
       .additional-info .view-events ol li,
       ol.events li {
         margin-bottom: 10px;
         padding: 10px;
       }
-        
+
         .additional-info .view-events ol li.active,
         ol.events li.active {
           background-color: #fff;
@@ -652,15 +669,15 @@
           font-size: 80%;
         }
   /* Feeds */
-  
+
   .panel-overlay #pane-feeds-video.pane-feeds-panel-pane {
     height: 320px;
   }
-  
+
   .panel-overlay #pane-feeds-photo.pane-feeds-panel-pane {
     height: 320px;
   }
-  
+
   .panel-overlay #pane-feeds-blog-twitter.pane-feeds-panel-pane {
     height: 150px;
   }
@@ -673,14 +690,14 @@
     font-size: 13px;
     padding: 7px 0 0 0;
   }
-  
+
   /* Loading image */
   .loading-wrapper {
     padding: 30px;
     text-align: center;
   }
-  
-  
+
+
 /* Links in Overlays & Bubble */
 
 #panel-default-overlay a,
@@ -702,7 +719,7 @@
     font-weight: bold;
     line-height: 1.2em;
   }
-    
+
   /* date styled to fade backward a bit */
   .popup-container-bubble .date-display-start,
   .popup-container-bubble .date-display-separator,
@@ -712,7 +729,7 @@
     font-size: 10px;
     letter-spacing: 0.1em;
     color: #999999;
-  }  
+  }
 
 
 /* Results */
@@ -746,7 +763,7 @@ h2.overlay-title {
 #panel-default-overlay ul.overlay-filter-headers li {
   list-style: none;
   padding-bottom: 5px;
-  cursor: pointer; 
+  cursor: pointer;
   font-size: 18px;
 }
 
@@ -759,13 +776,13 @@ h2.overlay-title {
   background-repeat: no-repeat; /* apply to all buttons */
   text-decoration: none;
 }
-  
+
   /* hover state */
   #panel-default-overlay ul.overlay-filter-headers li a:hover {
     background-color: #393E56;
     color: #FFFFFF;
   }
-  
+
   /* selected state */
   #panel-default-overlay ul.overlay-filter-headers li.active a,
   #panel-default-overlay ul.overlay-filter-headers li.active a:hover,
@@ -773,7 +790,7 @@ h2.overlay-title {
     background-color: #6f84c2;
     color: #FFFFFF;
   }
-  
+
 
   /* events icon */
   #panel-default-overlay ul.overlay-filter-headers li#filter-results-events-title a {
@@ -784,25 +801,25 @@ h2.overlay-title {
   #panel-default-overlay ul.overlay-filter-headers li#filter-results-organizations-title a {
     background-image: url(../images/explore-icon-org.png);
   }
-  
+
   /* artists icon */
   #panel-default-overlay ul.overlay-filter-headers li#filter-results-artists-title a {
     background-image: url(../images/explore-icon-artist.png);
   }
-  
+
   /* play icon */
   #panel-default-overlay ul.overlay-filter-headers li#filter-results-plays-title a {
     background-image: url(../images/explore-icon-play.png);
   }
-  
-  
+
+
   /* Show Today: General Listings */
-    
+
     /* RSS feed icon */
     #panel-default-overlay .feed-icon {
       float: right;
     }
-  
+
     /* padding on all "today" listings */
     #panel-default-overlay .today-listing .item-list ul li,
     #panel-default-overlay .filter-results-listing .item-list ul li {
@@ -810,7 +827,7 @@ h2.overlay-title {
       overflow: auto;
       width: inherit;
     }
-    
+
      /* more prominent title */
     #panel-default-overlay #today-events .views-field-field-related-play-nid .field-content,
     #panel-default-overlay #filter-results-events .views-field-field-related-play-nid .field-content,
@@ -820,7 +837,7 @@ h2.overlay-title {
       font-weight: bold;
       overflow: hidden;
     }
-    
+
     /* position avatar */
     #panel-default-overlay #today-organizations .views-field-field-org-logo-fid,
     #panel-default-overlay #filter-results-organizations .views-field-field-org-logo-fid,
@@ -830,20 +847,20 @@ h2.overlay-title {
       margin-left: -45px;
       padding-top: 3px;
     }
-    
+
     /* hide listings by default */
     #panel-default-overlay .filter-results-listing {
       display: none;
     }
-  
+
     /* Show Today: Events Listing */
-    
+
       /* inject icon to the left of event listing */
       #panel-default-overlay #today-events .item-list ul li,
       #panel-default-overlay #filter-results-events .item-list ul li {
         background: transparent url(../images/icon-listing-event.png) 10px 5px no-repeat;
       }
-      
+
       /* byline and artist name on same line */
       #panel-default-overlay #today-events .views-field-field-artist-nid label,
       #panel-default-overlay #filter-results-events .views-field-field-artist-nid label,
@@ -853,7 +870,7 @@ h2.overlay-title {
       #panel-default-overlay #filter-results-plays .views-field-field-artist-nid .field-content {
         display: inline;
       }
-      
+
       /* City and state on the same line */
       #panel-default-overlay #today-events .views-field-city,
       #panel-default-overlay #today-events .views-field-province,
@@ -861,7 +878,7 @@ h2.overlay-title {
       #panel-default-overlay #filter-results-events .views-field-province {
         display: inline;
       }
-     
+
       /* Date styled to fade backward a bit */
       #panel-default-overlay #today-events .views-field-field-event-date-value .field-content,
       #panel-default-overlay #filter-results-events .views-field-field-event-date-value .field-content {
@@ -870,9 +887,9 @@ h2.overlay-title {
         letter-spacing: 0.1em;
         color: #999999;
       }
-      
+
     /* Show Today: Org listings */
-    
+
       /* org type label on the same line as list */
       #panel-default-overlay #today-organizations .views-field-field-org-type-nid div.field-content,
       #panel-default-overlay #filter-results-organizations .views-field-field-org-type-nid div.field-content {
@@ -880,15 +897,15 @@ h2.overlay-title {
       }
 
     /* Show Today: Play listings */
-      
+
       /* inject icon to the left of play listing */
       #panel-default-overlay #today-plays .item-list ul li,
       #panel-default-overlay #filter-results-plays .item-list ul li {
         background: transparent url(../images/icon-listing-play.png) 10px 2px no-repeat;
       }
-      
-    
-    
+
+
+
 
 /* Open Layers */
 /* @TODO: Review this entire block and integrate with Overlay section above */
@@ -935,7 +952,7 @@ h2.overlay-title {
   margin: 1em 0 0 0;
   }
 
-/* (temporary fix) 
+/* (temporary fix)
  .additional-info in the map has an opaque background
  because the accordion doesn't increase .node-content height
  with transparency, the two competing backgrounds look funny
@@ -958,7 +975,7 @@ h2.overlay-title {
   right: 0;
   margin: 10px 5px 0 0;
   }
-  
+
 .openlayers-views-map #popup .olPopupCloseBox:active {
   background: url("../openlayers/img/close-active.png") no-repeat;
   }
@@ -984,15 +1001,15 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
 .popup-container .overlay .inside {
   padding: 8px 10px 10px 10px;
   }
-  
+
   /* Overlay Title */
-  
+
     /* remove bottom padding and margin on overlay title inside div */
     .popup-container .overlay .panel-overlay-title .inside {
       padding-bottom: 0px;
       margin-bottom: 0px;
     }
-    
+
     .popup-container .overlay .pane-node-title {
       font-size: 21px;
       color: #FFFFFF;
@@ -1000,7 +1017,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
       padding-bottom: 7px;
       padding-right: 85px; /* make room for Edit link */
     }
-    
+
     /* Overlay: Avatars */
     .popup-container .overlay .pane-field-org-logo,
     .popup-container .overlay .pane-field-artist-photo {
@@ -1008,11 +1025,11 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
       padding-top: 14px;
       padding-right: 14px;
     }
-    
+
     /* Overlay: Location */
     .popup-container .overlay .pane-field-location {
     }
-  
+
   /* Edit link */
   .popup-container .overlay .pane-edit-link {
     position: absolute;
@@ -1034,49 +1051,49 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
       float: left;
       width: 66%;
     }
-    
-    
+
+
     .popup-container .overlay  .panel-overlay-links {
       float: left;
       width: 32%;
       clear: none;
     }
-    
+
     /* Links section */
-    
+
     .popup-container .overlay .panel-overlay-links .panel-region-separator {
       padding-bottom: 6px;
     }
-    
+
     .popup-container .overlay .panel-overlay-links .pane-facebook-like a {
       display: block;
-      background: url(../images/facebook-like.png) top left no-repeat;  
+      background: url(../images/facebook-like.png) top left no-repeat;
       width: 55px;
       height: 20px;
       text-indent: -10000em;
     }
-    
+
     .popup-container .overlay .panel-overlay-links a#share-link-show {
       display: block;
       background: url(../images/icon-link.png) 0 0 no-repeat;
       padding-left: 20px;
       padding-top: 1px;
     }
-    
+
     .popup-container .overlay .pane-event,
     .popup-container .overlay #feed_button {
       font-size: 13px;
     }
-    
+
     .popup-container .overlay .pane-event {
     }
-    
+
     .popup-container .overlay .pane-event ul li a,
     .popup-container .overlay #feed_button {
       padding: 4px 0;
       text-align: center;
     }
-    
+
     .popup-container .overlay #feed_button {
     }
 
@@ -1101,7 +1118,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   cursor: pointer;
   right: 400px;
   top: 75px;
-  bottom: 15px;  
+  bottom: 15px;
   width: auto;
   display: block;
   border-top-left-radius: 7px;
@@ -1117,7 +1134,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   body.admin-menu #explore-filters-tab a {
     top: 96px;
   }
-  
+
   #explore-filters-tab .label {
     font-size: 11px;
   }
@@ -1130,7 +1147,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   background: rgba(50, 50, 50, .95);
   top: 75px;
   bottom: 15px;
-  right: 400px;  
+  right: 400px;
   width: 350px;
   overflow-y: auto;
   border-top-left-radius: 7px;
@@ -1140,7 +1157,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   body.admin-menu #explore-filters {
     top: 96px;
   }
-  
+
   #explore-filters h2.overlay-title {
     padding: 5px 10px 5px 10px;
     margin-bottom: 0;
@@ -1157,48 +1174,48 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   right: 0;
   margin: 7px 0 0 0;
 }
-  
+
 
   #explore-filters form {
     overflow-y: hidden;
     overflow-x: hidden;
     margin-right: 13px;
   }
-  
+
   #explore-filters form .auto-populate {
     display: none;
   }
-  
+
     #explore-filters form .views-exposed-widgets {
       padding-top: 8px;
     }
-  
+
     #explore-filters form .views-exposed-widget {
       width: 92%;
       clear: both;
       padding: 0 13px 3px 13px;
       overflow: hidden; /* clearfix */
     }
-    
+
     #explore-filters form .views-exposed-widget:last-child {
       border-bottom: none;
     }
-    
+
     #explore-filters form .views-exposed-widget label {
       font-size: 13px;
     }
-    
+
     #explore-filters form .views-exposed-widget label,
     #explore-filters form .views-exposed-widget label+.views-widget {
       display: block;
       float: left;
       width: 50%;
     }
-    
+
     #explore-filters form .views-exposed-widget .views-widget .form-item select {
       width: 100%;
     }
-    
+
     /* override forms.css:21 */
     #explore-filters form .views-exposed-widget .form-item #edit-date-min-wrapper label,
     #explore-filters form .views-exposed-widget .form-item #edit-date-max-wrapper label {
@@ -1209,35 +1226,35 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
       width: 100%;
       padding: 0;
     }
-    
+
     #explore-filters form .views-exposed-widget .form-item #edit-date-min-wrapper .description,
     #explore-filters form .views-exposed-widget .form-item #edit-date-max-wrapper .description {
       white-space: nowrap;
     }
-    
+
     #explore-filters form .views-exposed-widget .form-item .date-clear-block {
       clear: none;
       float: left;
       width: 33%;
     }
-    
+
     #explore-filters form .views-exposed-widget .form-item .date-clear-block input {
       width: 60%;
     }
-    
+
     /* Position the apply filters area */
 
     #explore-filters form .views-exposed-widget:last-child {
       padding-top: 8px;
     }
 
-    
+
     #explore-filters form input#edit-submit-organizations {
       margin-top: 0;
       font-size: 14px;
       font-weight: bold;
     }
-  
+
   #explore-filters form #filter_reset {
     font-size: 13px;
     margin-left: 10px;
@@ -1245,11 +1262,11 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   }
 
 /* Explore: Section titles */
-  
+
   #explore-filters form .views-exposed-widget label[for="edit-state"] {
     color: #FFFFFF;
   }
-  
+
   #explore-filters form .views-exposed-widget label[for="edit-play"],
   #explore-filters form .views-exposed-widget label[for="edit-theater"],
   #explore-filters form .views-exposed-widget label[for="edit-artist"] {
@@ -1262,25 +1279,25 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
     width: 100%;
     color: #FFFFFF;
   }
-  
+
   #explore-filters form .views-exposed-widget label[for="edit-play"]+.views-widget,
   #explore-filters form .views-exposed-widget label[for="edit-theater"]+.views-widget,
   #explore-filters form .views-exposed-widget label[for="edit-artist"]+.views-widget {
     width: 100%;
   }
-  
+
   #explore-filters form .views-exposed-widget label[for="edit-theater"] {
     background-image: url(../images/explore-icon-org.png);
   }
-  
+
   #explore-filters form .views-exposed-widget label[for="edit-play"] {
     background-image: url(../images/explore-icon-event.png);
   }
-  
+
   #explore-filters form .views-exposed-widget label[for="edit-artist"] {
     background-image: url(../images/explore-icon-artist.png);
   }
-  
+
 
 /* Explore: State */
 
@@ -1296,7 +1313,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
   font-weight: normal;
 }
 
-  
+
   /* layout with label on the left for pulldowns */
   #explore-filters form .views-exposed-widget label[for="edit-budget"],
   #explore-filters form .views-exposed-widget label[for="edit-budget"]+.views-widget,
@@ -1308,7 +1325,7 @@ div#content-area > div.panel-1col-with-feeds > div#feeds-wrapper {
     float: left;
     width: 50%;
   }
-  
+
 /* Explore: Artists */
 
   #explore-filters form .views-exposed-widget label[for="edit-ensemble"] {
