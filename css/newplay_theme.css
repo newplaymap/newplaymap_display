@@ -38,6 +38,11 @@
     position: absolute;
   }
 
+  #map canvas {
+    top: 0;
+    left: 0;
+  }
+
 
 /* Header */
 
