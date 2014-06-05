@@ -11,30 +11,30 @@ newPlayMap.updatePanel = function(marker, data) {
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
 /*   feature.template = marker.getAttribute("template"); */
-  
-  
+
+
   featureData = newPlayMap.loadDataObject(feature);
 
   // Load event data into the template.
   newPlayMap.panelTemplate(featureData);
 
   // Add interaction to event listings in the new content
-  // @TODO: Not only plays use this template. 
+  // @TODO: Not only plays use this template.
   //        Either be more specific or make sure it applies universally
   var container = $('#panel-container .journey');
   newPlayMap.resultsListProcess(container);
-  
+
   // Set up share links
   newPlayMap.formatLinksBubble($('#share-links'), 'share-links-show');
   $('#share-links-show').click(function() {
     newPlayMap.shareInteraction();
     newPlayMap.embedInteraction();
   });
-  
+
   // Make all links listen for address changes.
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
-  
+
   // If the panel has been updated, assume that the filter value is no longer relevant and clear it
   newPlayMap.filters.reset();
 };
@@ -49,8 +49,8 @@ newPlayMap.updateBubble = function(marker, data) {
   feature.marker_id = marker.getAttribute("marker_id");
   feature.dataName = marker.getAttribute("dataName");
 /*   feature.template = marker.getAttribute("template"); */
-  
-  
+
+
   featureData = newPlayMap.loadDataObject(feature);
 
   // hard coded for events for now. @TODO: Figure out chach's way of using featureData.title and templates
@@ -66,18 +66,20 @@ newPlayMap.updateBubble = function(marker, data) {
       var title = featureData.properties.name;
     break;
   }
-  bubble = new MM.Follower(map, new MM.Location(featureData['geometry']['coordinates'][1], featureData['geometry']['coordinates'][0]), title);
+
+  // Comment out bubble for now since it's behaving badly
+  // bubble = new MM.Follower(map, new MM.Location(featureData['geometry']['coordinates'][1], featureData['geometry']['coordinates'][0]), title);
 
   // Load event data into the template.
   // newPlayMap.panelTemplate(featureData);
 
 
   // Add interaction to event listings in the new content
-  // @TODO: Not only plays use this template. 
+  // @TODO: Not only plays use this template.
   //        Either be more specific or make sure it applies universally
   // var container = $('#panel-container .journey');
   // newPlayMap.resultsListProcess(container);
-  // 
+  //
   // Make all links listen for address changes.
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
@@ -109,7 +111,7 @@ newPlayMap.loadDataObject = function(featureLookup) {
 
 newPlayMap.panelTemplates = function() {
 
-  // setupPanelTemplates on load. 
+  // setupPanelTemplates on load.
   // do this once only.
   // Loads the markup from when the page loads before it is overwritten.
   var container;
@@ -178,7 +180,7 @@ newPlayMap.loadResults = function(features, vars) {
   var template = "results-template";
   var container, containerEmpty, resultsEmpty;
   containerEmpty = $('#panel-container .content');
-  
+
   // Play type should load results into events list
   if (resultType == 'play') {
     resultType = 'event';
@@ -189,7 +191,7 @@ newPlayMap.loadResults = function(features, vars) {
   container = $('#panel-container .results-container-' + resultType + '.' + type);
   container.empty();
   // console.log(features.length);
-  
+
   if (typeof vars.resultsTitle != 'undefined') {
     $('#results-header').text(vars.resultsTitle);
   }
@@ -209,7 +211,7 @@ newPlayMap.loadResults = function(features, vars) {
         city: feature["properties"]["city"],
         state: feature["properties"]["state"]
       };
-      $.extend(result, feature);  
+      $.extend(result, feature);
 
       $('#' + template).tmpl(result)
         // .appendTo(container);
@@ -219,7 +221,7 @@ newPlayMap.loadResults = function(features, vars) {
         newPlayMap.resultsListProcess($('#panel-container .results-container-' + resultType));
       }
   }
-  
+
   if (len > 0) {
     // Rewrite results header
     var resultsType = features[0]["properties"]["content_type"];
@@ -242,7 +244,7 @@ newPlayMap.loadResults = function(features, vars) {
           $(this).addClass('more-results');
         }
       });
-      
+
       $('#panel-container .results-container-' + resultType + ' ol.results li.more-results').hide();
 
       if ($('#panel-container .results-container-' + resultType + ' .show-more-results').length == 0) {
@@ -276,7 +278,7 @@ newPlayMap.layout.clearPanelContent = function() {
   // Also clear out all share qtips
   $('.qtip').has('.share-link').remove();
 }
- 
+
 /*
  * Helper function to clear out different results listing
  *
@@ -297,7 +299,7 @@ newPlayMap.layout.clearResults = function(type) {
 }
 
 /*
- * Wrapper function to clear all results and panel content 
+ * Wrapper function to clear all results and panel content
  */
 newPlayMap.layout.clearEntirePanel = function() {
   newPlayMap.layout.clearPanelContent();
@@ -331,9 +333,9 @@ newPlayMap.setResultsTitle = function(resultsType, resultsCount, totalCount) {
   $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' .results-title h2')
     .attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results-title')
     .text(resultsCount + ' ' + resultsType + resultsPlural);
-    
+
   $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' .results-title .results-total-count').text(totalCountText);
-  
+
   $('#panel-container .results-container-' + resultsType.replace(' ', '-').toLowerCase() + ' ol.results').attr('id', resultsType.replace(' ', '-').toLowerCase() + 's-results');
 }
 
