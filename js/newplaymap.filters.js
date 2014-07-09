@@ -42,7 +42,7 @@ newPlayMap.filters.organizations = function(data) {
   if (data.city_state !== undefined) {
     pathQuery = "city_state=" + data.special_interests;
   }
-  
+
   if (data.path !== undefined) {
     var loadProfile = true;
   }
@@ -68,7 +68,7 @@ newPlayMap.filters.organizations = function(data) {
     icon: "icons/organization.png",
     callback: newPlayMap.loadOrganizationFilter
   });
-  
+
   // Run this after main filter call
   if (data.path !== undefined) {
     var loadProfile = true;
@@ -133,7 +133,7 @@ newPlayMap.filters.playJourney = function(data) {
   var pathQuery = "";
 
   newPlayMap.layout.clearEntirePanel();
-  
+
   if (data.play_title !== undefined) {
     pathQuery = "play_title=" +  data.play_title;
   }
@@ -144,7 +144,7 @@ newPlayMap.filters.playJourney = function(data) {
 
   // Load related organizations
   newPlayMap.filters.organizations({related_play_path: data.path});
-  
+
   newPlayMap.loadAPICall({
     data: data,
     zoomLevel: newPlayMap.defaultZoom,
@@ -165,7 +165,7 @@ newPlayMap.filters.playJourney = function(data) {
     grouping_field: "related_play_id",
     callback: newPlayMap.loadJourney
   });
-  
+
   // @TODO: Trigger address change if appropriate (searching for play name)
   //        This is also the time to load the profile
 };
@@ -174,7 +174,7 @@ newPlayMap.filters.playJourney = function(data) {
 newPlayMap.filters.plays = function(data) {
   var pathQuery = "";
   var loadProfile = false;
-  
+
   // Clear panel, results, and pins
   newPlayMap.layout.clearEntirePanel();
   newPlayMap.data.clearAllLayers();
@@ -198,7 +198,7 @@ newPlayMap.filters.plays = function(data) {
     icon: "icons/play.png",
     grouping_field: "related_play_id"
   });
-  
+
   // @TODO: Trigger address change if appropriate (searching for play name)
   //        This is also the time to load the profile
 };
@@ -220,7 +220,7 @@ newPlayMap.filters.artists = function(data) {
   if (data.city_state !== undefined) {
     pathQuery = "city_state=" +  data.artist_name;
   }
-  
+
   if (data.path !== undefined) {
     loadProfile = true;
 
@@ -255,8 +255,8 @@ newPlayMap.filters.artists = function(data) {
     grouping_field: "artist_id",
     callback: newPlayMap.loadArtistFilter
   });
-  
-  // @TODO: Trigger address change if appropriate (searching for artist name). 
+
+  // @TODO: Trigger address change if appropriate (searching for artist name).
   //        This is also the time to load the profile
 }
 
@@ -374,12 +374,12 @@ newPlayMap.filters.setupFilters = function() {
     newPlayMap.filters.reset(this);
     return false;
   });
-  
+
   $('.event-date-field').hide();
   $('.event-to-date-field').hide();
 
   var minDate = moment("September 9, 2000");
-  var maxDate = moment("May 6, 2012")
+  var maxDate = moment().add('years', 2);
   var rangeMilliseconds = maxDate.diff(minDate);
   var rangeDays = moment.duration(rangeMilliseconds).asDays();
 
@@ -390,7 +390,7 @@ newPlayMap.filters.setupFilters = function() {
         range: true,
         min: 0,
         max: rangeDays,
-        values: [2000, 3000],
+        values: [0, 0],
         slide: function(event, ui) {
           var formattedMinDate = moment(minDate).add('days', ui.values[0]).format('MMMM D, YYYY'),
               formattedMaxDate = moment(minDate).add('days', ui.values[1]).format('MMMM D, YYYY');
@@ -453,7 +453,7 @@ newPlayMap.filters.reset = function(exception) {
 newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
   // Add this call to the loading stack
   var dataName = '';
-  
+
   if (settings.url) {
     var urlComponents = settings.url.split('?');
   }
@@ -468,13 +468,13 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
 
   if ($('#loading-feedback').length > 0) {
     $('#loading-feedback').show()
-  } 
+  }
   else {
     $('<div></div>')
       .attr('id', 'loading-feedback')
       .appendTo('body');
   }
-  
+
   // Set a timer in case things break. Each time this gets called clear the previous timout functions.
   clearTimeout(newPlayMap.loadingStackError);
   newPlayMap.loadingStackError = setTimeout(function() {
@@ -486,7 +486,7 @@ newPlayMap.filters.loadingFeedback = function(jqXHR, settings) {
  * Function to give users feedback that filter results are done loading
  */
 newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
-  // @TODO: Remove this when the play vs. playJourney is cleared up. 
+  // @TODO: Remove this when the play vs. playJourney is cleared up.
   // -- This is necessary for the loading stack to clear properly.
   if (dataName == 'play') {
     var dataName = 'journey';
@@ -507,7 +507,7 @@ newPlayMap.filters.loadingCompleteFeedback = function(dataName, callback) {
 
     // Hide error message just in case it fired already on a slow day
     $('#failure-message').hide();
-    
+
     // Clear error message timer
     clearTimeout(newPlayMap.loadingStackError);
 
@@ -580,7 +580,7 @@ newPlayMap.filters.setOrganizationsIndex = function(data) {
   );
 
   newPlayMap.filters.loadingCompleteFeedback('organizations_index');
-  
+
 }
 
 /*
@@ -760,7 +760,7 @@ newPlayMap.filters.showAll = function(type) {
   var displayType = newPlayMap.toTitleCase(pluralType.substring(0, pluralType.length-1));
   var template = "show-all-template";
   var container;
-  
+
   newPlayMap.layout.clearEntirePanel();
 
   container = $('#panel-container .results-container-' + singularType + ' ol.results');
@@ -772,37 +772,37 @@ newPlayMap.filters.showAll = function(type) {
   newPlayMap.setResultsTitle(displayType, len);
 
   for (var i = 0; i < len; i++) {
-  
+
     var item = {
       title: jsonDataSearch[type][i]['label'],
       path: jsonDataSearch[type][i]['path']
     };
-  
+
     $('#' + template).tmpl(item)
       .appendTo(container);
   }
-  
+
   // Remove loading feedback
   newPlayMap.filters.loadingCompleteFeedback('all_' + type);
 
   newPlayMap.processAddressLinks('internal-address');
   $('.internal-address').address();
-  
+
   // $(container).find('a').click(function() {
   //   var title = $(this).text();
   //   switch(type) {
   //     case 'plays':
   //       newPlayMap.filters.playJourney({play_title: title});
   //     break;
-  //     
+  //
   //     case 'organizations':
   //       newPlayMap.filters.organizations({organization_name: title});
   //     break;
-  //     
+  //
   //     case 'artists':
   //       newPlayMap.filters.artists({artist_name: title});
   //     break;
   //   }
   // });
-  
+
 }

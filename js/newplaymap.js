@@ -595,7 +595,7 @@ newPlayMap.tourStart = function() {
   $('.tour-step.first').addClass('active').show();
   // Add the arrows for the first slide
   newPlayMap.setTourArrows();
-  $.cookie('newplaymap_tour', true);
+  $.cookie('newplaymap_tour', true, {expires: 91});
 }
 
 newPlayMap.tourStop = function() {
