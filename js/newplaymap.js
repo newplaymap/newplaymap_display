@@ -27,19 +27,19 @@ window.onload = function() {
 newPlayMap.loadMap = function(callback){
   // Load map tiles.
   //newPlayMap.loadWax();
-  // for map debugging: 
+  // for map debugging:
    newPlayMap.initMapSimple();
 };
 
 newPlayMap.alterHomepage = function() {
 /*   $('div#panel-container div#panel div.content').hide(); */
-  
+
   newPlayMap.formatLinksBubble($('#block-add_button-0'), 'add_button');
-  
+
   // Set up some links to trigger default content
   $('.reset-map').click(function() {
     newPlayMap.loadDefaultContent();
-    
+
     // Close Filters
     $('#filter-container:visible').slideUp();
   });
@@ -71,7 +71,7 @@ newPlayMap.initMap = function(tj) {
     ]);
   var zoomer = wax.mm.zoomer(map)
   zoomer.appendTo('map');
-  
+
   //map.setCenterZoom(new MM.Location(37.811530, -110.2666097), 3);
 
   // Load interactive behavior.
@@ -122,27 +122,23 @@ newPlayMap.initMapSimple = function() {
 
 newPlayMap.recenterMap = function(map) {
   // Find appropriate zoom level
-  newPlayMap.defaultZoom = 3;
+  newPlayMap.defaultZoom = 2;
 
   var defaultZoom = newPlayMap.defaultZoom,
-      defaultLat = 50.811530,
-      defaultLon = -90.2666097;
-  
+      defaultLat = 25.8620,
+      defaultLon = 67.4684;
+
   if (window.outerWidth > 1900) {
-    defaultLat = 40.811530;
-    defaultZoom = 5;
+    defaultZoom = 2.5;
   }
   else if (window.outerWidth > 1000) {
-    defaultLat = 40.811530;
-    defaultLon = -80.2666097;
-    defaultZoom = 4;
+    // Use defaults
   }
   else {
-    defaultLat = 40.811530;
-    defaultLon = -65.2666097;
-    defaultZoom = 3;
+    defaultLon = 94.1871;
+    defaultZoom = 1;
   }
-  
+
   map.setCenterZoom(new MM.Location(defaultLat, defaultLon), defaultZoom);
 }
 
@@ -168,18 +164,18 @@ newPlayMap.processFilters = function() {
   newPlayMap.filters.setupFilters();
 
   $('#filters form').tabs();
-  
+
   $('#filters-hide span').click(function() {
     $('#filter-container').slideUp();
   });
 
   $('#explore-plays .show-all-link').click(function() {
     newPlayMap.filters.showAll('plays');
-  });  
+  });
 
   $('#explore-organizations .show-all-link').click(function() {
     newPlayMap.filters.showAll('organizations');
-  });  
+  });
 
   $('#explore-artists .show-all-link').click(function() {
     newPlayMap.filters.showAll('artists');
@@ -201,7 +197,7 @@ newPlayMap.loadData = function() {
     //   dataPath: 'api/organizations.php',
     //   icon: "icons/organization.png",
     //   grouping_field: "organization_id",
-    //   callback: newPlayMap.loadOrganization 
+    //   callback: newPlayMap.loadOrganization
     // });
     // newPlayMap.loadJSONFile({
     //   path: 'api/artists.php',
@@ -219,7 +215,7 @@ newPlayMap.loadData = function() {
     // }
     // );
     // newPlayMap.loadJSONFile({
-    //     path: 'api/events.php', 
+    //     path: 'api/events.php',
     //     type: "event",
     //     template: "event",
     //     layer: "layer-events",
@@ -227,14 +223,14 @@ newPlayMap.loadData = function() {
     //     label: "related_theater", // field which will be used in label
     //     title: "play_title",
     //     dataName: "events",
-    //     dataPath: 'api/events.php', 
+    //     dataPath: 'api/events.php',
     //     icon: "icons/event.png",
     //     grouping_field: "event_id",
     //     related_play_id: "related_play_id",
     //     callback: newPlayMap.loadEvent
     //   }
     // );
-    
+
     // Get path from browser and load content.
     newPlayMap.loadPageRouter();
 };
@@ -255,7 +251,7 @@ newPlayMap.setWelcomeLinks = function() {
 }
 
 
-newPlayMap.loadPageRouter = function() { 
+newPlayMap.loadPageRouter = function() {
   // Listen for address.
   $.address.change(function(event) {
     newPlayMap.browserEvents.push(event);
@@ -352,7 +348,7 @@ newPlayMap.loadPageRouter = function() {
         newPlayMap.loadDefaultContent();
       }
     }
-    
+
     return false;
   });
 
@@ -378,7 +374,7 @@ newPlayMap.loadDefaultContent = function() {
   var formattedDate = $.datepicker.formatDate('MM dd, yy', today);
   // console.log('default');
   var todayHeader = "What's Happening Today";
-  
+
   // Clear out any panel content
   newPlayMap.layout.clearPanelContent();
 
@@ -409,7 +405,7 @@ newPlayMap.hasContentBeenLoaded = function() {
 
 /**
  * Function to format qtip links
- * 
+ *
  * element is a jquery object
  */
 newPlayMap.formatLinksBubble = function(element, newId, width) {
@@ -452,9 +448,9 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
       }
       },
       show: 'click',
-      hide: { 
+      hide: {
        when: 'unfocus',
-       fixed: false 
+       fixed: false
       },
 
       style: {
@@ -477,11 +473,11 @@ newPlayMap.formatLinksBubble = function(element, newId, width) {
       }
 
     });
-    
+
     element.addClass('links-processed');
     element.hide();
     // element.remove();
-    
+
   }
 }
 
@@ -579,7 +575,7 @@ newPlayMap.tourInteraction = function() {
       }
     }
   });
-  
+
   $('#tour-controls .tour-previous').click(function() {
     if ($(this).hasClass('inactive') == false) {
       // If this isn't the first step...
@@ -623,7 +619,7 @@ newPlayMap.setTourControlsStatus = function() {
   else {
     $('#tour-controls .inactive').removeClass('inactive');
   }
-  
+
   // Set the number
   var currentSlideNumber = $('.tour-step.active').attr('id').replace('tour-step', '');
   $('#tour-controls .tour-counter .tour-counter-current').text(currentSlideNumber);
@@ -708,7 +704,7 @@ newPlayMap.setTourArrows = function() {
 
     target = $('#add_button').offset();
     arrowImageOffset = 107;
-    
+
     newPlayMap.tour.step3Timer = setTimeout(function() {
       clearArrows();
       $('<div></div>').addClass('tour-arrows up').appendTo('body').css({
