@@ -252,15 +252,15 @@ ul#panel-content-links {
     font-weight: bold;
     margin-right: 10px;
   }
-    
+
     ul#panel-content-links li a {
       text-decoration: none;
     }
-    
+
     ul#panel-content-links li a:hover {
       text-decoration: underline;
     }
-  
+
   ul#panel-content-links li.panel-add-link a,
   ul#panel-content-links li#panel-share-link a {
     background-color: #BF202E;
@@ -271,51 +271,51 @@ ul#panel-content-links {
     padding: 6px 10px 6px 25px;
     box-shadow: 1px 1px 2px 0px #000000;
   }
-  
+
   ul#panel-content-links li.panel-add-link a {
     background-image: url(../images/action-add.png);
   }
-  
+
   ul#panel-content-links li#panel-share-link a {
     background-image: url(../images/action-share.png);
     background-position: 14% 45%;
     padding-left: 28px;
   }
-  
+
     ul#panel-content-links li.panel-add-link a:hover,
     ul#panel-content-links li#panel-share-link a:hover {
       text-decoration: none;
       background-color: #830B1B;
     }
-    
+
     ul#panel-content-links li.panel-add-link a:active,
     ul#panel-content-links li#panel-share-link a:active {
       text-decoration: none;
       background-color: #000000;
       box-shadow: none;
     }
-    
+
     /* Move button over when clicked */
     ul#panel-content-links li.panel-add-link:active,
     ul#panel-content-links li#panel-share-link:active {
       margin-left: 2px;
       margin-right: 8px;
     }
-    
+
     ul#panel-content-links li#panel-edit-link {
       float: right;
       margin-right: 0;
     }
-    
+
       ul#panel-content-links li#panel-edit-link a {
         padding-left: 18px;
         background: url(../images/action-edit.png) 0 1px no-repeat;
       }
-    
+
       ul#panel-content-links li#panel-edit-link a:hover {
         background-position: 0 -49px;
       }
-      
+
       ul#panel-content-links li#panel-edit-link a:active {
         background-position: 0 -99px;
       }
@@ -328,16 +328,16 @@ ul#share-links-list {
   ul#share-links-list li {
     margin-bottom: 5px;
   }
-  
+
   ul#share-links-list li form {
     margin: 0;
   }
-  
+
   ul#share-links-list a {
     background: no-repeat left center;
     padding-left: 22px;
   }
-  
+
     ul#share-links-list a#share-facebook {
       background-image: url(../images/share-icon-facebook.png);
     }
@@ -349,7 +349,7 @@ ul#share-links-list {
     ul#share-links-list a.share-link {
       background-image: url(../images/share-icon-link.png);
     }
-    
+
     ul#share-links-list #share-code {
       display: none;
       width: 180px;
@@ -359,17 +359,17 @@ ul#share-links-list {
       background-image: url(../images/share-icon-badge.png);
       background-position: 3% 50%;
     }
-    
+
     ul#share-links-list #embed-code {
       display: none;
       width: 180px;
     }
-    
+
       ul#share-links-list input {
         width: 100%;
       }
 
-  
+
 #panel-container article.panel-content-info {
   clear: both;
   padding-top: 15px;
@@ -393,17 +393,17 @@ ul#share-links-list {
       font-weight: bold;
       color: #999999;
     }
-    
+
     #panel-container article.panel-content-info .panel-delete-link a {
       color: #666;
       background-position: right -50px;
     }
-    
+
     #panel-container article.panel-content-info .panel-delete-link a:hover {
       background-position: right -100px;
       color: #333333;
     }
-    
+
     #panel-container article.panel-content-info .panel-delete-link a:active {
       background-position: right -150px;
       color: #000000;
@@ -591,7 +591,7 @@ ul.ui-autocomplete {
 #filters #explore-plays .ui-widget-content {
   border: 2px solid #EEEEEE;
 }
-  
+
 #filters #explore-plays .ui-corner-all {
   border-radius: 6px;
   -moz-border-radius: 6px;
@@ -633,13 +633,13 @@ ul.ui-autocomplete {
   line-height: 21px;
   position: relative;
 }
-  
+
   #panel-container .results-container ol li.active,
   #panel-container .results-container ol.results li.active {
     background-color: #fff;
     border-radius: 5px 5px 5px 5px;
   }
-  
+
   #panel-container .results-container ol.results div.results-item-image-wrapper {
     width: 33px;
     float: left;
@@ -661,12 +661,12 @@ ul.ui-autocomplete {
     background-repeat: no-repeat;
     background-position: 12px 10px;
   }
-  
+
     #panel-container .results-container ol#events-results .partner-organizations {
       font-size: 0.9em;
       line-height: 20px;
     }
-  
+
       #panel-container .results-container ol#events-results .partner-organizations ul {
         margin: 0;
       }
@@ -674,7 +674,7 @@ ul.ui-autocomplete {
         #panel-container .results-container ol#events-results .partner-organizations ul li {
           list-style: none;
         }
-  
+
   #panel-container .results-container ol#plays-results > li {
     background-image: url("../images/listing-icon-play-single.png");
     background-repeat: no-repeat;
@@ -691,7 +691,7 @@ ul.ui-autocomplete {
   #panel-container .results-container ol.results p {
     font-size: 0.8em;
   }
-  
+
   #panel-container .results-container ol.results .event-type,
   #panel-container .results-container ol.results .date,
   #panel-container .results-container ol.results .organization-type {
@@ -700,14 +700,14 @@ ul.ui-autocomplete {
     margin-right: 70px; /* make room for edit link */
   }
 
-  
+
   #panel-container .results-container ol.results .results-item-title {
     font-size: 1em;
     font-weight: bold;
     margin-right: 70px; /* make room for edit link */
     display: block;
   }
-  
+
   #panel-container .results-container ol.results .results-edit-link {
     display: none;
   }
@@ -718,18 +718,18 @@ ul.ui-autocomplete {
       top: 5px;
       right: 8px;
     }
-    
+
       #panel-container .results-container ol.results li.active .results-edit-link a {
         background: url("../images/action-edit.png") no-repeat 0 1px;
         padding-left: 18px;
         font-size: 0.8em;
         font-weight: bold;
       }
-      
+
       #panel-container .results-container ol.results li.active .results-edit-link a:hover {
         background-position: 0 -49px;
       }
-      
+
       #panel-container .results-container ol.results li.active .results-edit-link a:active {
         background-position: 0 -99px;
       }
@@ -764,21 +764,21 @@ ul.ui-autocomplete {
         background-position: right -150px;
         color: #000000;
       }
-  
+
   #panel-container .results-container .results-title {
     background-color: #F1EDE6;
     padding-left: 15px;
   }
-  
+
     #panel-container .results-container .results-title h2 {
       padding-left: 40px;
     }
-    
+
       #panel-container .results-container .results-title h2#generative-artists-results-title,
       #panel-container .results-container .results-title h2#artists-results-title {
         background: url("../images/results-artists-icon.png") no-repeat 0 center;
       }
-      
+
       #panel-container .results-container .results-title h2#events-results-title {
         background: url("../images/results-events-icon.png") no-repeat 4px center;
       }
@@ -786,11 +786,11 @@ ul.ui-autocomplete {
       #panel-container .results-container .results-title h2#plays-results-title {
         background: url("../images/listing-icon-play.png") no-repeat 4px center;
       }
-      
+
       #panel-container .results-container .results-title h2#organizations-results-title {
         background: url("../images/results-orgs-icon.png") no-repeat 3px center;
       }
-      
+
   #panel-container .results-container .show-more-results {
     cursor: pointer;
     text-transform: uppercase;
@@ -813,6 +813,10 @@ ul.ui-autocomplete {
 /* core stuff here */
 
 /* Header styles */
+.container-fluid {
+  padding-right: 20px;
+}
+
 /* Header buttons */
 /* Additional default button style in Misc styles */
 #header-bar {
@@ -821,10 +825,10 @@ ul.ui-autocomplete {
 
   #header-links {
     font-size: 0.86em;
-    width: 390px;
+    width: 425px;
     float: left;
   }
-  
+
   #header-links .nav {
     width: 75%;
     margin: 0; /* override bootstrap */
@@ -836,24 +840,24 @@ ul.ui-autocomplete {
       color: #FFFFFF;
       padding: 0 5px;
     }
-  
+
       #header-links a:hover {
         color: #000000;
       }
-    
+
       .navbar .nav .active > a,
       .navbar .nav .active > a:hover {
         background-color: transparent;
       }
-    
+
       .navbar .nav > li > a {
         text-shadow: none; /* override bootstrap */
       }
-      
+
       .navbar-inner {
         filter: none; /* override bootstrap IE9 */
       }
-          
+
     #header-links .brand {
       margin-left: 0; /* override bootstrap.css */
       text-transform: uppercase;
@@ -862,15 +866,15 @@ ul.ui-autocomplete {
       font-weight: bold;
       padding-top: 2px;
     }
-    
+
       #header-links a.brand {
         text-decoration: none;
       }
-    
+
     #header-links .map-logo {
       background: url(../images/map-white-on-red.png) no-repeat;
       display: block;
-      width: 79px;
+      width: 104px;
       height: 50px;
       float: left;
       text-indent: -500px;
@@ -882,7 +886,7 @@ ul.ui-autocomplete {
     float: left;
     margin-top: 6px;
   }
-  
+
     #header-buttons {
       margin: auto;
     }
@@ -894,12 +898,12 @@ ul.ui-autocomplete {
         margin-right: 10px;
         box-shadow: 1px 1px 2px 0px #660000;
       }
-      
+
       #header-buttons li:hover {
         background-color: #F6F0E6;
         box-shadow: 1px 1px 2px 0px #000000;
       }
-      
+
       #header-buttons li:active {
         background-color: #000;
         margin-left: 2px;
@@ -922,7 +926,7 @@ ul.ui-autocomplete {
           font-family: 'Avenir', Helvetica, Arial, sans-serif;
           font-weight: bold;
         }
-        
+
         #header-buttons a#add_button:hover,
         #header-buttons a#filter_button:hover,
         #header-buttons a#invite_button:hover,
@@ -930,7 +934,7 @@ ul.ui-autocomplete {
         #header-buttons a#reset-button:hover {
           color: #000;
         }
-        
+
         #header-buttons a#add_button:active,
         #header-buttons a#filter_button:active,
         #header-buttons a#invite_button:active,
@@ -948,17 +952,17 @@ ul.ui-autocomplete {
           background-repeat: no-repeat;
         }
 
-        #header-buttons a#add_button span { 
+        #header-buttons a#add_button span {
           padding-left: 20px;
           background-image: url(../images/header-icon-add.png);
           background-position: 0 4px;
         }
-  
-          #header-buttons a#add_button:hover span { 
+
+          #header-buttons a#add_button:hover span {
             background-position: 0 -46px;
           }
-          
-          #header-buttons a#add_button:active span { 
+
+          #header-buttons a#add_button:active span {
             background-position: 0 -96px;
           }
 
@@ -966,11 +970,11 @@ ul.ui-autocomplete {
           background-image: url(../images/header-icon-invite.png);
           background-position: 0 3px;
         }
-        
+
           #header-buttons a#invite_button:hover span {
             background-position: 0 -47px;
           }
-          
+
           #header-buttons a#invite_button:active span {
             background-position: 0 -97px;
           }
@@ -980,26 +984,26 @@ ul.ui-autocomplete {
           background-image: url(../images/header-icon-explore.png);
           background-position: 0 1px;
         }
-  
+
           #header-buttons a#explore-filters-button:hover span {
             background-position: 0 -49px;
           }
-          
+
           #header-buttons a#explore-filters-button:active span {
             background-position: 0 -99px;
           }
-          
-        #header-buttons a#reset-button span { 
+
+        #header-buttons a#reset-button span {
           padding-left: 20px;
           background-image: url(../images/header-icon-reset.png);
           background-position: 0 3px;
         }
-  
-          #header-buttons a#reset-button:hover span { 
+
+          #header-buttons a#reset-button:hover span {
             background-position: 0 -47px;
           }
-          
-          #header-buttons a#reset-button:active span { 
+
+          #header-buttons a#reset-button:active span {
             background-position: 0 -97px;
           }
 
@@ -1011,7 +1015,7 @@ ul.ui-autocomplete {
     color: #FFFFFF;
     text-decoration: underline;
   }
-  
+
   #header-register .welcome, #header-register .my-account {
     padding-right: 1em;
   }
@@ -1057,7 +1061,7 @@ ul.ui-autocomplete {
     display: block;
     float: left;
   }
-  
+
   #tour #tour-controls .tour-previous,
   #tour #tour-controls .tour-next {
     width: 12px;
@@ -1068,28 +1072,28 @@ ul.ui-autocomplete {
     cursor: pointer;
     margin-top: 6px;
   }
-  
+
   #tour #tour-controls .tour-previous.inactive,
   #tour #tour-controls .tour-next.inactive {
     cursor: default;
   }
-  
+
   #tour #tour-controls .tour-previous.inactive,
   #tour #tour-controls .tour-next.inactive {
     cursor: default;
   }
-  
+
   #tour #tour-controls .tour-previous {
     background: url(../images/tour-control-previous-all.png) no-repeat;
     background-position: 0 0;
     margin-right: 10px;
   }
-  
+
   #tour #tour-controls .tour-next {
     background: url(../images/tour-control-next-all.png) top left no-repeat;
     margin-left: 10px;
   }
-  
+
   #tour #tour-controls .tour-previous.inactive,
   #tour #tour-controls .tour-previous.inactive:hover,
   #tour #tour-controls .tour-previous.inactive:active,
@@ -1098,12 +1102,12 @@ ul.ui-autocomplete {
   #tour #tour-controls .tour-next.inactive:active {
     background-position: 0 -28px;
   }
-    
+
     #tour #tour-controls .tour-previous:hover,
     #tour #tour-controls .tour-next:hover {
       background-position: 0 -14px;
     }
-    
+
     #tour #tour-controls .tour-previous:active,
     #tour #tour-controls .tour-next:active {
       background-position: 0 -42px;
@@ -1158,7 +1162,7 @@ ul.ui-autocomplete {
     color: #830B1B;
     text-decoration: underline;
   }
-  
+
   #tour #tour-exit:active {
     background-position: right -100px;
     color: black;
@@ -1179,7 +1183,7 @@ ul.ui-autocomplete {
     text-decoration: none;
     background-color: #830B1B;
   }
-  
+
   #tour #tour-create-account:active {
     text-decoration: none;
     background-color: #000;
