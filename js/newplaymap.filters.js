@@ -378,7 +378,7 @@ newPlayMap.filters.setupFilters = function() {
   $('.event-date-field').hide();
   $('.event-to-date-field').hide();
 
-  var minDate = moment("September 9, 2000");
+  var minDate = moment("January 1, 1995");
   var maxDate = moment().add('years', 2);
   var rangeMilliseconds = maxDate.diff(minDate);
   var rangeDays = moment.duration(rangeMilliseconds).asDays();
